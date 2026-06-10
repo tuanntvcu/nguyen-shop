@@ -132,7 +132,7 @@
         "menu_trigger": "hover",
         "show_sperator_line": true,
         "enable_transparent_header": true,
-        "transparent_header_color": "#000000",
+        "transparent_header_color": "#FFFFFF",
         "logo_mobile_position": "center",
         "show_social_media_icons": true,
         "enable_language_selector": true,
