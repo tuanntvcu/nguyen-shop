@@ -113,21 +113,21 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "primary_accent": "#e85d2a",
-          "border": "#d8d6d0",
-          "text": "#111111",
+          "primary_accent": "#ff5a1f",
+          "border": "#d7d2c8",
+          "text": "#121212",
           "background": "#ffffff",
-          "secondary_background": "#f4f1ea",
-          "button": "#111111",
+          "secondary_background": "#f6f2ea",
+          "button": "#ff5a1f",
           "button_label": "#ffffff",
-          "secondary_button": "#f4f1ea",
-          "secondary_button_border": "#111111",
-          "secondary_button_label": "#111111",
-          "button_hover": "#e85d2a",
+          "secondary_button": "#123026",
+          "secondary_button_border": "#123026",
+          "secondary_button_label": "#ffffff",
+          "button_hover": "#0b1f1a",
           "button_label_hover": "#ffffff",
-          "form_field": "#f7f7f4",
-          "form_field_label": "#111111",
-          "product_price_sale": "#d63a2f"
+          "form_field": "#ffffff",
+          "form_field_label": "#121212",
+          "product_price_sale": "#d92d20"
         }
       },
       "scheme-2": {
