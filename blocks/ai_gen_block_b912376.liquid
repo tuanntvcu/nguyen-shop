@@ -1,0 +1,875 @@
+{% doc %}
+  @prompt
+    Crea una sección de producto personalizable para una tienda online, con las siguientes características:
+    
+    Debe incluir una imagen destacada del producto con la posibilidad de cambiarla dinámicamente.
+    
+    A la derecha o debajo de la imagen, debe haber un bloque de hasta 8 elementos colapsables (acordeones).
+    
+    Cada colapsable debe tener:
+    
+    Un título personalizable.
+    
+    Contenido en formato rich text (debe permitir negritas, listas, enlaces, etc.).
+    
+    El contenido debe poder extraerse desde los metafields del producto, por ejemplo: product.metafields.custom.faq_1_content.
+    
+    La estructura debe ser responsive y visualmente limpia.
+    
+    Usa buenas prácticas para accesibilidad y rendimiento.
+    
+    El código debe ser compatible con Shopify y sus estándares (como Liquid, si aplica).
+    
+    Estiliza los colapsables de forma moderna, con íconos o animaciones suaves al abrir/cerrar., Falta agregarle también un titulo a la sección... Encima de todos los desplegables... Este titulo debo poder colocar el texto que quiera y ademas controlar tamaño y colores... 
+    
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-accordion-{{ ai_gen_id }} {
+    display: grid;
+    gap: 32px;
+    max-width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-product-accordion-{{ ai_gen_id }} {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .ai-product-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-product-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    object-fit: cover;
+  }
+
+  .ai-product-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-product-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-accordion-section-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.title_bottom_spacing }}px;
+  }
+
+  .ai-section-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.section_title_size }}px;
+    font-weight: {{ block.settings.section_title_weight }};
+    color: {{ block.settings.section_title_color }};
+    margin: 0;
+    text-align: {{ block.settings.section_title_alignment }};
+    line-height: 1.3;
+  }
+
+  .ai-accordion-container-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.accordion_spacing }}px;
+  }
+
+  .ai-accordion-item-{{ ai_gen_id }} {
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.accordion_border_radius }}px;
+    overflow: hidden;
+    background-color: {{ block.settings.accordion_bg_color }};
+  }
+
+  .ai-accordion-header-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.accordion_padding }}px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: {{ block.settings.title_font_size }}px;
+    font-weight: {{ block.settings.title_font_weight }};
+    color: {{ block.settings.title_color }};
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-accordion-header-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.header_hover_color }};
+  }
+
+  .ai-accordion-header-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.focus_color }};
+    outline-offset: -2px;
+  }
+
+  .ai-accordion-icon-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    color: {{ block.settings.icon_color }};
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+
+  .ai-accordion-header-{{ ai_gen_id }}[aria-expanded="true"] .ai-accordion-icon-{{ ai_gen_id }} {
+    transform: rotate(180deg);
+  }
+
+  .ai-accordion-content-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    background-color: {{ block.settings.content_bg_color }};
+  }
+
+  .ai-accordion-content-{{ ai_gen_id }}.active {
+    max-height: 1000px;
+    padding: {{ block.settings.accordion_padding }}px;
+    padding-top: 0;
+  }
+
+  .ai-accordion-text-{{ ai_gen_id }} {
+    color: {{ block.settings.content_color }};
+    font-size: {{ block.settings.content_font_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-accordion-text-{{ ai_gen_id }} p {
+    margin: 0 0 16px 0;
+  }
+
+  .ai-accordion-text-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-accordion-text-{{ ai_gen_id }} ul,
+  .ai-accordion-text-{{ ai_gen_id }} ol {
+    margin: 0 0 16px 20px;
+    padding: 0;
+  }
+
+  .ai-accordion-text-{{ ai_gen_id }} li {
+    margin-bottom: 8px;
+  }
+
+  .ai-accordion-text-{{ ai_gen_id }} a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+  }
+
+  .ai-accordion-text-{{ ai_gen_id }} a:hover {
+    opacity: 0.8;
+  }
+
+  .ai-accordion-text-{{ ai_gen_id }} strong {
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-section-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.section_title_size | times: 0.85 }}px;
+      text-align: {{ block.settings.section_title_alignment_mobile }};
+    }
+
+    .ai-accordion-header-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_font_size | times: 0.9 }}px;
+      padding: {{ block.settings.accordion_padding | times: 0.8 }}px;
+    }
+
+    .ai-accordion-content-{{ ai_gen_id }}.active {
+      padding: {{ block.settings.accordion_padding | times: 0.8 }}px;
+      padding-top: 0;
+    }
+
+    .ai-accordion-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.content_font_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<product-accordion-{{ ai_gen_id }}
+  class="ai-product-accordion-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-product-image-wrapper-{{ ai_gen_id }}">
+    {% if block.settings.product_image %}
+      <img
+        src="{{ block.settings.product_image | image_url: width: 800 }}"
+        alt="{{ block.settings.product_image.alt | escape }}"
+        class="ai-product-image-{{ ai_gen_id }}"
+        loading="lazy"
+        width="{{ block.settings.product_image.width }}"
+        height="{{ block.settings.product_image.height }}"
+      >
+    {% else %}
+      <div class="ai-product-image-placeholder-{{ ai_gen_id }}">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="ai-accordion-section-{{ ai_gen_id }}">
+    {% if block.settings.section_title != blank %}
+      <h2 class="ai-section-title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+    {% endif %}
+
+    <div class="ai-accordion-container-{{ ai_gen_id }}">
+      {% for i in (1..8) %}
+        {% liquid
+          assign accordion_enabled_key = 'accordion_' | append: i | append: '_enabled'
+          assign accordion_title_key = 'accordion_' | append: i | append: '_title'
+          assign accordion_content_key = 'accordion_' | append: i | append: '_content'
+          assign accordion_metafield_key = 'accordion_' | append: i | append: '_use_metafield'
+          assign accordion_metafield_namespace_key = 'accordion_' | append: i | append: '_metafield_namespace'
+          assign accordion_metafield_key_name = 'accordion_' | append: i | append: '_metafield_key'
+
+          assign accordion_enabled = block.settings[accordion_enabled_key]
+          assign accordion_title = block.settings[accordion_title_key]
+          assign accordion_content = block.settings[accordion_content_key]
+          assign use_metafield = block.settings[accordion_metafield_key]
+          assign metafield_namespace = block.settings[accordion_metafield_namespace_key]
+          assign metafield_key = block.settings[accordion_metafield_key_name]
+
+          assign final_content = accordion_content
+          if use_metafield and metafield_namespace != blank and metafield_key != blank and product
+            assign metafield_content = product.metafields[metafield_namespace][metafield_key]
+            if metafield_content != blank
+              assign final_content = metafield_content
+            endif
+          endif
+        %}
+
+        {% if accordion_enabled and accordion_title != blank and final_content != blank %}
+          <div class="ai-accordion-item-{{ ai_gen_id }}">
+            <button
+              class="ai-accordion-header-{{ ai_gen_id }}"
+              aria-expanded="false"
+              aria-controls="ai-accordion-content-{{ ai_gen_id }}-{{ i }}"
+              data-accordion-trigger="{{ i }}"
+            >
+              <span>{{ accordion_title }}</span>
+              <svg
+                class="ai-accordion-icon-{{ ai_gen_id }}"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6,9 12,15 18,9"></polyline>
+              </svg>
+            </button>
+            <div
+              class="ai-accordion-content-{{ ai_gen_id }}"
+              id="ai-accordion-content-{{ ai_gen_id }}-{{ i }}"
+              data-accordion-content="{{ i }}"
+            >
+              <div class="ai-accordion-text-{{ ai_gen_id }}">
+                {{ final_content }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</product-accordion-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductAccordion{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.accordionTriggers = this.querySelectorAll('[data-accordion-trigger]');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.accordionTriggers.forEach((trigger) => {
+          trigger.addEventListener('click', (e) => {
+            this.toggleAccordion(e.target.closest('[data-accordion-trigger]'));
+          });
+
+          trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.toggleAccordion(trigger);
+            }
+          });
+        });
+      }
+
+      toggleAccordion(trigger) {
+        const accordionId = trigger.getAttribute('data-accordion-trigger');
+        const content = this.querySelector(`[data-accordion-content="${accordionId}"]`);
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+          trigger.setAttribute('aria-expanded', 'false');
+          content.classList.remove('active');
+        } else {
+          trigger.setAttribute('aria-expanded', 'true');
+          content.classList.add('active');
+        }
+      }
+    }
+
+    customElements.define('product-accordion-{{ ai_gen_id }}', ProductAccordion{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product Accordion",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "Información del producto"
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title font size",
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "section_title_weight",
+      "label": "Title font weight",
+      "options": [
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi Bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "section_title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "section_title_alignment",
+      "label": "Title alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "section_title_alignment_mobile",
+      "label": "Title alignment on mobile",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "title_bottom_spacing",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Space below title",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Accordion Style"
+    },
+    {
+      "type": "range",
+      "id": "accordion_spacing",
+      "min": 4,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing between accordions",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "accordion_padding",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Accordion padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "accordion_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Accordion border radius",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "accordion_bg_color",
+      "label": "Accordion background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color",
+      "label": "Content background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "header_hover_color",
+      "label": "Header hover color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "focus_color",
+      "label": "Focus outline color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Accordion title font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Accordion title font weight",
+      "options": [
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi Bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Accordion title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Content font size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "header",
+      "content": "Accordion 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_1_enabled",
+      "label": "Enable accordion 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "accordion_1_title",
+      "label": "Title",
+      "default": "Descripción del producto"
+    },
+    {
+      "type": "richtext",
+      "id": "accordion_1_content",
+      "label": "Content",
+      "default": "<p>Describe las características principales de tu producto aquí.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_1_use_metafield",
+      "label": "Use product metafield for content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_1_metafield_namespace",
+      "label": "Metafield namespace",
+      "placeholder": "custom"
+    },
+    {
+      "type": "text",
+      "id": "accordion_1_metafield_key",
+      "label": "Metafield key",
+      "placeholder": "description"
+    },
+    {
+      "type": "header",
+      "content": "Accordion 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_2_enabled",
+      "label": "Enable accordion 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "accordion_2_title",
+      "label": "Title",
+      "default": "Especificaciones técnicas"
+    },
+    {
+      "type": "richtext",
+      "id": "accordion_2_content",
+      "label": "Content",
+      "default": "<p>Incluye las especificaciones técnicas del producto.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_2_use_metafield",
+      "label": "Use product metafield for content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_2_metafield_namespace",
+      "label": "Metafield namespace",
+      "placeholder": "custom"
+    },
+    {
+      "type": "text",
+      "id": "accordion_2_metafield_key",
+      "label": "Metafield key",
+      "placeholder": "specifications"
+    },
+    {
+      "type": "header",
+      "content": "Accordion 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_3_enabled",
+      "label": "Enable accordion 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "accordion_3_title",
+      "label": "Title",
+      "default": "Envío y devoluciones"
+    },
+    {
+      "type": "richtext",
+      "id": "accordion_3_content",
+      "label": "Content",
+      "default": "<p>Información sobre envío y política de devoluciones.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_3_use_metafield",
+      "label": "Use product metafield for content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_3_metafield_namespace",
+      "label": "Metafield namespace",
+      "placeholder": "custom"
+    },
+    {
+      "type": "text",
+      "id": "accordion_3_metafield_key",
+      "label": "Metafield key",
+      "placeholder": "shipping_returns"
+    },
+    {
+      "type": "header",
+      "content": "Accordion 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_4_enabled",
+      "label": "Enable accordion 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_4_title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "accordion_4_content",
+      "label": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_4_use_metafield",
+      "label": "Use product metafield for content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_4_metafield_namespace",
+      "label": "Metafield namespace",
+      "placeholder": "custom"
+    },
+    {
+      "type": "text",
+      "id": "accordion_4_metafield_key",
+      "label": "Metafield key"
+    },
+    {
+      "type": "header",
+      "content": "Accordion 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_5_enabled",
+      "label": "Enable accordion 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_5_title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "accordion_5_content",
+      "label": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_5_use_metafield",
+      "label": "Use product metafield for content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_5_metafield_namespace",
+      "label": "Metafield namespace",
+      "placeholder": "custom"
+    },
+    {
+      "type": "text",
+      "id": "accordion_5_metafield_key",
+      "label": "Metafield key"
+    },
+    {
+      "type": "header",
+      "content": "Accordion 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_6_enabled",
+      "label": "Enable accordion 6",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_6_title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "accordion_6_content",
+      "label": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_6_use_metafield",
+      "label": "Use product metafield for content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_6_metafield_namespace",
+      "label": "Metafield namespace",
+      "placeholder": "custom"
+    },
+    {
+      "type": "text",
+      "id": "accordion_6_metafield_key",
+      "label": "Metafield key"
+    },
+    {
+      "type": "header",
+      "content": "Accordion 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_7_enabled",
+      "label": "Enable accordion 7",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_7_title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "accordion_7_content",
+      "label": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_7_use_metafield",
+      "label": "Use product metafield for content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_7_metafield_namespace",
+      "label": "Metafield namespace",
+      "placeholder": "custom"
+    },
+    {
+      "type": "text",
+      "id": "accordion_7_metafield_key",
+      "label": "Metafield key"
+    },
+    {
+      "type": "header",
+      "content": "Accordion 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_8_enabled",
+      "label": "Enable accordion 8",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_8_title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "accordion_8_content",
+      "label": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "accordion_8_use_metafield",
+      "label": "Use product metafield for content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accordion_8_metafield_namespace",
+      "label": "Metafield namespace",
+      "placeholder": "custom"
+    },
+    {
+      "type": "text",
+      "id": "accordion_8_metafield_key",
+      "label": "Metafield key"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Accordion"
+    }
+  ]
+}
+{% endschema %}

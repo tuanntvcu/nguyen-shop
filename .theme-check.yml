@@ -1,0 +1,11 @@
+root: .
+
+ignore:
+  - node_modules/*
+
+MatchingTranslations:
+  enabled: false
+TemplateLength:
+  enabled: false
+ValidJSON:
+  enabled: false

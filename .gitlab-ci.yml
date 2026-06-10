@@ -1,0 +1,95 @@
+stages:
+  - sync_code
+  - lint_check
+  - commit_check
+
+git_pull:
+  tags:
+    - docker
+  image: jacob169/alpine:latest
+  stage: sync_code
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'schedule' && $REMOTE_URL && $REMOTE_BRANCH && $ACCESS_TOKEN
+      variables:
+        TARGET_BRANCH: '$REMOTE_BRANCH'
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_PROTECTED == 'true' && $REMOTE_URL && $ACCESS_TOKEN
+      variables:
+        TARGET_BRANCH: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME'
+  before_script:
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git config --global checkout.defaultRemote origin
+  script:
+    - echo "Target branch $TARGET_BRANCH"
+    - export CONTINUE_FLAG=true
+    - git remote remove reforigin || true
+    - git remote add reforigin ${REMOTE_URL}
+    - git fetch reforigin
+    - git branch | grep -v ^* | xargs git branch -D || true
+    - git switch --force --track reforigin/${TARGET_BRANCH} || export CONTINUE_FLAG=false
+    - |
+      echo "Start sync code"
+      if [ "$CONTINUE_FLAG" == "true" ]; then
+        git checkout -B reforigin_${TARGET_BRANCH}
+        git push "https://${CI_REGISTRY_USER}:${ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" "reforigin_${TARGET_BRANCH}" --force
+        echo "Created new ref origin branch: reforigin_${TARGET_BRANCH}"
+        git branch -D ${TARGET_BRANCH} || true
+        git fetch origin
+        git switch --force --track origin/${TARGET_BRANCH}
+        git merge reforigin_${TARGET_BRANCH}
+        git push "https://${CI_REGISTRY_USER}:${ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" "HEAD:${TARGET_BRANCH}"
+        echo "Process done"
+      else
+        echo "Stop running"
+      fi
+prettier:
+  tags:
+    - docker
+  image: jacob169/shopifycli:latest
+  stage: lint_check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_PROTECTED == 'true'
+      exists:
+        - .prettierrc.json
+  script:
+    - npx prettier -c "{assets,config,layout,locales,sections,snippets,templates}/**/*.{css,js,json}" || exit_code=$?
+    - if [ $exit_code == 2 ]; then echo "Prettier check failed"; exit 2; fi;
+
+check_commit_msg:
+  stage: commit_check
+  tags:
+    - docker
+  image: jacob169/shopifycli:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_PROTECTED == 'true'
+      exists:
+        - commitlint.config.js
+  script:
+    - npx commitlint --from $CI_MERGE_REQUEST_DIFF_BASE_SHA --to $CI_COMMIT_SHA
+
+check_commit_author:
+  stage: commit_check
+  tags:
+    - docker
+  image: jacob169/shopifycli:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_PROTECTED == 'true'
+      exists:
+        - COMMIT_AUTHOR
+  script:
+    - |
+      echo "Check commit author"
+      echo "Step 1/2"
+      LIST_AUTHOR="$(npx git-raw-commits --from $CI_MERGE_REQUEST_DIFF_BASE_SHA --to $CI_COMMIT_SHA --pretty=format:"%ae")"
+      while IFS= read -r commitline; do
+          if [[ "$commitline" == *@rock.et ]]; then
+              echo "Valid commit from $commitline"
+          else
+              echo "This commit is not allowed $commitline"
+              echo "Only emails with domain 'rock.et' are allowed."
+              exit 1
+          fi
+      done <<< "$LIST_AUTHOR"
+      echo "Done"
+      exit 0;
+  allow_failure: true
