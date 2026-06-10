@@ -16,15 +16,16 @@
           "type": "slide",
           "settings": {
             "color_scheme": "scheme-1",
+            "background": "shopify://shop_images/ChatGPT_Image_Jun_10_2026_05_36_02_PM.png",
             "image_overlay_opacity": 0,
-            "content_position": "middle-left",
+            "content_position": "middle-center",
             "text_alignment": "center",
-            "title": "Image slide",
+            "title": "",
             "heading_size": "hd1",
-            "subheading": "Add a tagline",
+            "subheading": "",
             "description": "",
             "description_size": "text-base",
-            "button_label": "Button label",
+            "button_label": "SHOW NOW",
             "button_link": "",
             "button_style": "btn--primary"
           }
@@ -35,13 +36,13 @@
       ],
       "settings": {
         "container": "full",
-        "layout": "centered",
-        "slide_height": "adapt",
+        "layout": "standard",
+        "slide_height": "large",
         "show_dots": true,
         "autoplay": true,
         "autoplay_delay": 5,
         "controls_position": "below",
-        "show_text_below": true,
+        "show_text_below": false,
         "text_alignment_mobile": "center",
         "accessibility_info": "Slideshow about our brand"
       }
