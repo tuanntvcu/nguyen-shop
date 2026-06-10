@@ -130,7 +130,7 @@
         "header_layout": "left-center",
         "sticky_header": "on-scroll-up",
         "menu_trigger": "hover",
-        "show_sperator_line": true,
+        "show_sperator_line": false,
         "enable_transparent_header": true,
         "transparent_header_color": "#FFFFFF",
         "logo_mobile_position": "center",
