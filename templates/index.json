@@ -239,8 +239,8 @@
         "color_scheme": "",
         "layout": "standard",
         "subheading": "",
-        "heading": "Collections",
-        "heading_size": "h1",
+        "heading": "SHOP BY CATEGORY",
+        "heading_size": "h3",
         "heading_highlight_style": "none",
         "description": "",
         "text_size": "text-base",
@@ -256,8 +256,8 @@
         "enable_slider": true,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 50,
-        "padding_bottom": 50,
+        "padding_top": 40,
+        "padding_bottom": 40,
         "show_section_divider": false,
         "divider_width": "fixed"
       }
