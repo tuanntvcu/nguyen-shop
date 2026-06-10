@@ -182,7 +182,7 @@
         "swipe_on_mobile": true,
         "padding_top": 40,
         "padding_bottom": 40,
-        "show_section_divider": false,
+        "show_section_divider": true,
         "divider_width": "full"
       }
     }
