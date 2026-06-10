@@ -158,82 +158,6 @@
     },
     "collection_list_3a7bMi": {
       "type": "collection-list",
-      "blocks": {
-        "featured_collection_7BLxRt": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_xn6Eyy": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_DaVMUK": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_3cgDY7": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_7iAzEE": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_XbWXJY": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_g7A3xq": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        },
-        "featured_collection_tYWAT8": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": ""
-          }
-        }
-      },
-      "block_order": [
-        "featured_collection_7BLxRt",
-        "featured_collection_xn6Eyy",
-        "featured_collection_DaVMUK",
-        "featured_collection_3cgDY7",
-        "featured_collection_7iAzEE",
-        "featured_collection_XbWXJY",
-        "featured_collection_g7A3xq",
-        "featured_collection_tYWAT8"
-      ],
       "name": "t:sections.collection-list.name",
       "settings": {
         "color_scheme": "",
@@ -245,8 +169,8 @@
         "description": "",
         "text_size": "text-base",
         "card_color_inherited": false,
-        "show_product_count": true,
-        "show_icon": true,
+        "show_product_count": false,
+        "show_icon": false,
         "card_style": "",
         "card_image_ratio": "adapt",
         "content_alignment": "left",
