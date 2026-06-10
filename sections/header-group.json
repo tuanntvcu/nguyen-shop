@@ -1,44 +1,103 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "announcement_bar_P4MRmx": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_bar_wjU7D9": {
+          "type": "announcement_bar",
+          "settings": {
+            "text": "30-DAY EASY RETURNS",
+            "link": ""
+          }
+        },
+        "announcement_bar_yELyjf": {
+          "type": "announcement_bar",
+          "settings": {
+            "text": "FREE SHIPPING ON ORDERS OVER $69",
+            "link": ""
+          }
+        },
+        "announcement_bar_9gLqAn": {
+          "type": "announcement_bar",
+          "settings": {
+            "text": "24/7 CUSTOMER SUPPORT",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_bar_wjU7D9",
+        "announcement_bar_yELyjf",
+        "announcement_bar_9gLqAn"
+      ],
+      "disabled": true,
+      "name": "t:sections.announcement-bar.name",
+      "settings": {
+        "color_scheme": "scheme-inverse",
+        "content_width": 30,
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
     "scrolling_promotion_KhdTdc": {
       "type": "scrolling-promotion",
       "blocks": {
         "text_niHbzP": {
           "type": "text",
           "settings": {
-            "text": "TELL CUSTOMERS ABOUT A PROMOTION",
+            "text": "FREE SHIPPING",
             "text_link": "",
             "text_size": "text-base",
             "font_weight": "font-heading",
             "font_style": "normal",
             "letter_spacing": 0,
-            "text_style": "normal"
+            "text_opacity": 100,
+            "text_style": "normal",
+            "use_custom_color": false,
+            "custom_color": "#000000"
           }
         },
         "text_t3BcT4": {
           "type": "text",
           "settings": {
-            "text": "TELL CUSTOMERS ABOUT A PROMOTION",
+            "text": "30-DAY EASY RETURNS",
             "text_link": "",
             "text_size": "text-base",
             "font_weight": "font-heading",
             "font_style": "normal",
             "letter_spacing": 0,
-            "text_style": "normal"
+            "text_opacity": 100,
+            "text_style": "normal",
+            "use_custom_color": false,
+            "custom_color": "#000000"
           }
         },
         "text_QCAxbn": {
           "type": "text",
           "settings": {
-            "text": "TELL CUSTOMERS ABOUT A PROMOTION",
+            "text": "24/7 CUSTOMER SUPPORT",
             "text_link": "",
             "text_size": "text-base",
             "font_weight": "font-heading",
             "font_style": "normal",
             "letter_spacing": 0,
-            "text_style": "normal"
+            "text_opacity": 100,
+            "text_style": "normal",
+            "use_custom_color": false,
+            "custom_color": "#000000"
           }
         }
       },
@@ -52,21 +111,25 @@
         "vertical_alignment": "center",
         "direction": "left",
         "pause_on_hover": false,
-        "show_divider": false,
         "speed": 0.5,
         "h_spacing": 60,
         "v_spacing": 0,
         "padding_top": 12,
-        "padding_bottom": 12
+        "padding_bottom": 12,
+        "show_divider": false,
+        "divider_layout": "vertical"
       }
     },
     "header": {
       "type": "header",
       "settings": {
+        "container": "fixed",
         "color_scheme": "scheme-1",
+        "menu": "main-menu",
         "menu_mobile": "",
         "header_layout": "left-center",
         "sticky_header": "always",
+        "menu_trigger": "click",
         "show_sperator_line": true,
         "enable_transparent_header": false,
         "transparent_header_color": "#ffffff",
@@ -80,6 +143,7 @@
     }
   },
   "order": [
+    "announcement_bar_P4MRmx",
     "scrolling_promotion_KhdTdc",
     "header"
   ]
