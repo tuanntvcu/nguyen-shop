@@ -233,11 +233,45 @@
         "show_section_divider": true,
         "divider_width": "full"
       }
+    },
+    "featured_collection_ViiJ3L": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "header_layout": "vertical",
+        "heading": "Featured collection",
+        "heading_size": "h1",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "",
+        "text_size": "text-base",
+        "show_collection_description": false,
+        "collection": "sunglasses",
+        "limit": 8,
+        "columns": 4,
+        "column_gap": "medium",
+        "row_gap": "inherit",
+        "grid_layout": "standard",
+        "enable_slider": true,
+        "controls_position": "inside",
+        "pcard_image_ratio": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "show_all_button_on_top": false,
+        "button_label": "",
+        "button_style": "btn--primary",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "show_section_divider": false,
+        "divider_width": "fixed"
+      }
     }
   },
   "order": [
     "slideshow_q3U4Jn",
     "multicolumn_djyXPT",
-    "collection_list_3a7bMi"
+    "collection_list_3a7bMi",
+    "featured_collection_ViiJ3L"
   ]
 }
