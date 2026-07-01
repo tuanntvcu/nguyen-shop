@@ -325,7 +325,7 @@
           "settings": {
             "image": "shopify://shop_images/501d244a-3a86-4d38-a1a3-660b6d662482.png",
             "heading": "Before",
-            "color_scheme": ""
+            "color_scheme": "scheme-1"
           }
         },
         "image_V8tTV6": {
@@ -333,7 +333,7 @@
           "settings": {
             "image": "shopify://shop_images/1855328b-340e-4583-899b-6a0fa8cfd383.png",
             "heading": "After",
-            "color_scheme": ""
+            "color_scheme": "scheme-1"
           }
         }
       },
@@ -344,7 +344,7 @@
       "name": "t:sections.image-comparison.presets.name",
       "settings": {
         "container": "fixed",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "header_layout": "vertical",
         "heading": "SEE THE DIFFERENCE",
         "heading_size": "h3",
@@ -357,8 +357,8 @@
         "button_style": "btn--primary",
         "direction": "horizontal",
         "image_height": "adapt",
-        "image_heading_style": "plain",
-        "product": "",
+        "image_heading_style": "badge",
+        "product": "fashion-vintage-square-polarized-sunglasses-men-women-driving-fishing-luxury-brand-designer-sun-glasses-drivers-eyewear-uv400",
         "padding_top": 20,
         "padding_bottom": 20,
         "show_section_divider": false,
