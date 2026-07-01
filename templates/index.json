@@ -402,6 +402,36 @@
     "collapsible_tabs_VX3kFF": {
       "type": "collapsible-tabs",
       "blocks": {
+        "heading_WkEF7g": {
+          "type": "heading",
+          "settings": {
+            "heading": "FAQ",
+            "heading_size": "h3",
+            "sub_heading": ""
+          }
+        },
+        "image_card_j8tGF9": {
+          "type": "image_card",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "desktop_image_position": "left",
+            "image_width": 50,
+            "alignment": "center",
+            "image_ratio": "adapt",
+            "image_overlay_opacity": 0,
+            "heading": "Image card",
+            "heading_size": "h1",
+            "subheading": "",
+            "description": "<p>Combine images with text and a stand-out offer</p>",
+            "button_label": "Button label",
+            "button_style": "btn--primary",
+            "content_position": "bottom-center",
+            "content_alignment": "center",
+            "content_spacing": "medium",
+            "card_link": "",
+            "order_first": false
+          }
+        },
         "collapsible_item_xGFhM8": {
           "type": "collapsible_item",
           "settings": {
@@ -448,6 +478,8 @@
         }
       },
       "block_order": [
+        "heading_WkEF7g",
+        "image_card_j8tGF9",
         "collapsible_item_xGFhM8",
         "collapsible_item_NWnAYw",
         "collapsible_item_4NERAJ",
@@ -457,8 +489,8 @@
       "settings": {
         "container": "fixed",
         "color_scheme": "",
-        "header_layout": "standing-column",
-        "heading": "FAQ",
+        "header_layout": "vertical",
+        "heading": "",
         "heading_size": "h3",
         "heading_highlight_style": "none",
         "subheading": "",
