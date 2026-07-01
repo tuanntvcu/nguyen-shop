@@ -364,6 +364,56 @@
         "show_section_divider": false,
         "divider_width": "fixed"
       }
+    },
+    "products_bundle_J8KCFz": {
+      "type": "products-bundle",
+      "blocks": {
+        "product_NYVLq7": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "color_scheme": "",
+            "horizontal_position": 30,
+            "vertical_position": 32
+          }
+        },
+        "product_KgUTXk": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "color_scheme": "",
+            "horizontal_position": 38,
+            "vertical_position": 60
+          }
+        },
+        "product_nTCHtA": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "color_scheme": "",
+            "horizontal_position": 65,
+            "vertical_position": 45
+          }
+        }
+      },
+      "block_order": [
+        "product_NYVLq7",
+        "product_KgUTXk",
+        "product_nTCHtA"
+      ],
+      "name": "t:sections.products-bundle.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "BUILD YOUR FISHING SETUP",
+        "heading_size": "h3",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "<p>Shop our most recommended gear combinations</p>",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "show_section_divider": false,
+        "divider_width": "fixed"
+      }
     }
   },
   "order": [
@@ -372,6 +422,7 @@
     "collection_list_3a7bMi",
     "featured_collection_ViiJ3L",
     "image_with_text_Uhz444",
-    "image_comparison_d8UCmb"
+    "image_comparison_d8UCmb",
+    "products_bundle_J8KCFz"
   ]
 }
