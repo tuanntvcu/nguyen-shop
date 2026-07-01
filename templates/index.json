@@ -371,28 +371,28 @@
         "product_NYVLq7": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "biutifu-traveller-spinning-casting-fuji-lure-mini-rock-fishing-rod-1-8-2-1-2-4-2-7-3-0m-carbon-baitcasting-phishger-fast-5-42g",
             "color_scheme": "",
-            "horizontal_position": 30,
-            "vertical_position": 32
+            "horizontal_position": 20,
+            "vertical_position": 62
           }
         },
         "product_KgUTXk": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "carry-bag-for-bait-boat-water-repellent-fishing-boat-storage-bag",
             "color_scheme": "",
-            "horizontal_position": 38,
-            "vertical_position": 60
+            "horizontal_position": 43,
+            "vertical_position": 5
           }
         },
         "product_nTCHtA": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "fashion-vintage-square-polarized-sunglasses-men-women-driving-fishing-luxury-brand-designer-sun-glasses-drivers-eyewear-uv400",
             "color_scheme": "",
             "horizontal_position": 65,
-            "vertical_position": 45
+            "vertical_position": 67
           }
         }
       },
@@ -404,6 +404,7 @@
       "name": "t:sections.products-bundle.name",
       "settings": {
         "color_scheme": "",
+        "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_54_26_PM.png",
         "heading": "BUILD YOUR FISHING SETUP",
         "heading_size": "h3",
         "heading_highlight_style": "none",
