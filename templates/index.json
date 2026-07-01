@@ -144,8 +144,8 @@
         "column_gap": "medium",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 50,
-        "padding_bottom": 50,
+        "padding_top": 20,
+        "padding_bottom": 20,
         "show_section_divider": false,
         "divider_width": "full"
       }
@@ -228,8 +228,8 @@
         "enable_slider": true,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 40,
-        "padding_bottom": 40,
+        "padding_top": 20,
+        "padding_bottom": 20,
         "show_section_divider": true,
         "divider_width": "full"
       }
@@ -261,8 +261,58 @@
         "show_all_button_on_top": false,
         "button_label": "",
         "button_style": "btn--primary",
-        "padding_top": 50,
-        "padding_bottom": 50,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "show_section_divider": false,
+        "divider_width": "fixed"
+      }
+    },
+    "image_with_text_Uhz444": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_HUrwKb": {
+          "type": "heading",
+          "settings": {
+            "heading": "GEAR DESIGNED FOR EVERY CAST",
+            "heading_size": "h3",
+            "heading_highlight_style": "none"
+          }
+        },
+        "text_YzVLbC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From sunrise to last light, our gear is built to help you fish longer, find more, and enjoy every moment on the water.</p>",
+            "text_size": "text-lg"
+          }
+        },
+        "button_39Gfkf": {
+          "type": "button",
+          "settings": {
+            "button_label": "EXPLORE COLLECTIONS",
+            "button_link": "shopify://collections/bags-and-storage-copy",
+            "button_style": "btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HUrwKb",
+        "text_YzVLbC",
+        "button_39Gfkf"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png",
+        "image_height": "adapt",
+        "layout": "text_first",
+        "desktop_content_position": "center",
+        "desktop_content_alignment": "left",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "mobile_content_alignment": "left",
+        "padding_top": 20,
+        "padding_bottom": 20,
         "show_section_divider": false,
         "divider_width": "fixed"
       }
@@ -272,6 +322,7 @@
     "slideshow_q3U4Jn",
     "multicolumn_djyXPT",
     "collection_list_3a7bMi",
-    "featured_collection_ViiJ3L"
+    "featured_collection_ViiJ3L",
+    "image_with_text_Uhz444"
   ]
 }
