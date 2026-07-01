@@ -410,29 +410,6 @@
             "sub_heading": ""
           }
         },
-        "image_card_j8tGF9": {
-          "type": "image_card",
-          "settings": {
-            "color_scheme": "scheme-1",
-            "desktop_image_position": "left",
-            "image_width": 50,
-            "alignment": "center",
-            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png",
-            "image_ratio": "4/3",
-            "image_overlay_opacity": 0,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "description": "",
-            "button_label": "",
-            "button_style": "btn--primary",
-            "content_position": "bottom-center",
-            "content_alignment": "center",
-            "content_spacing": "medium",
-            "card_link": "",
-            "order_first": false
-          }
-        },
         "collapsible_item_xGFhM8": {
           "type": "collapsible_item",
           "settings": {
@@ -476,15 +453,38 @@
             "page": "",
             "open": false
           }
+        },
+        "image_card_j8tGF9": {
+          "type": "image_card",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "desktop_image_position": "left",
+            "image_width": 50,
+            "alignment": "center",
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png",
+            "image_ratio": "4/3",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "description": "",
+            "button_label": "",
+            "button_style": "btn--primary",
+            "content_position": "bottom-center",
+            "content_alignment": "center",
+            "content_spacing": "medium",
+            "card_link": "",
+            "order_first": false
+          }
         }
       },
       "block_order": [
         "heading_WkEF7g",
-        "image_card_j8tGF9",
         "collapsible_item_xGFhM8",
         "collapsible_item_NWnAYw",
         "collapsible_item_4NERAJ",
-        "collapsible_item_KYDKge"
+        "collapsible_item_KYDKge",
+        "image_card_j8tGF9"
       ],
       "name": "t:sections.collapsible-tabs.presets.name",
       "settings": {
@@ -500,8 +500,8 @@
         "button_label": "",
         "button_link": "",
         "button_style": "btn--primary",
-        "column_gap": "large",
-        "row_gap": "inherit",
+        "column_gap": "small",
+        "row_gap": "small",
         "item_style": "standard",
         "item_color_scheme": "",
         "item_heading_font": "heading",
