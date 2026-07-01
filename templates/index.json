@@ -316,6 +316,52 @@
         "show_section_divider": false,
         "divider_width": "fixed"
       }
+    },
+    "image_comparison_d8UCmb": {
+      "type": "image-comparison",
+      "blocks": {
+        "image_PEepb8": {
+          "type": "image",
+          "settings": {
+            "heading": "Before",
+            "color_scheme": ""
+          }
+        },
+        "image_V8tTV6": {
+          "type": "image",
+          "settings": {
+            "heading": "After",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_PEepb8",
+        "image_V8tTV6"
+      ],
+      "name": "t:sections.image-comparison.presets.name",
+      "settings": {
+        "container": "fixed",
+        "color_scheme": "",
+        "header_layout": "vertical",
+        "heading": "SEE THE DIFFERENCE",
+        "heading_size": "h3",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "<p>Our polarized lenses cut glare and reveal what's beneath the surface</p>",
+        "description_size": "text-base",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "btn--primary",
+        "direction": "horizontal",
+        "image_height": "adapt",
+        "image_heading_style": "plain",
+        "product": "",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "show_section_divider": false,
+        "divider_width": "fixed"
+      }
     }
   },
   "order": [
@@ -323,6 +369,7 @@
     "multicolumn_djyXPT",
     "collection_list_3a7bMi",
     "featured_collection_ViiJ3L",
-    "image_with_text_Uhz444"
+    "image_with_text_Uhz444",
+    "image_comparison_d8UCmb"
   ]
 }
