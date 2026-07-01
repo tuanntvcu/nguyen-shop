@@ -239,9 +239,9 @@
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
         "color_scheme": "",
-        "header_layout": "vertical",
-        "heading": "Featured collection",
-        "heading_size": "h1",
+        "header_layout": "horizontal",
+        "heading": "BEST SELLERS",
+        "heading_size": "h3",
         "heading_highlight_style": "none",
         "subheading": "",
         "description": "",
