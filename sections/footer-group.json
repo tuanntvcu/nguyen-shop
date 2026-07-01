@@ -11,6 +11,30 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "newsletter_Er8cjT": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "layout": "vertical",
+        "heading": "JOIN THE CREW",
+        "heading_size": "h3",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "<p>Subscrible to get special offters, free giveaways, and once-in-a-lifetime deals.</p>",
+        "text_size": "text-base",
+        "alignment": "center",
+        "design": "design-1",
+        "form_width": 500,
+        "newsletter_term": "<p>By subscribing you agree to the <a href=\"#\">Terms of Use</a> & <a href=\"#\">Privacy Policy.</a></p>",
+        "newsletter_term_size": "text-base",
+        "button_style": "btn--primary",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "show_section_divider": false,
+        "divider_width": "fixed"
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -20,7 +44,7 @@
             "block_width": 40,
             "heading": "SIGN UP AND SAVE",
             "heading_size": "h2",
-            "newsletter_description": "<p>Subscrible to get special offters, free giveaways, and deals</p>",
+            "newsletter_description": "<p>Subscrible to get special offters, free giveaways, and once-in-a-lifetime deals.</p>",
             "newsletter_term": "<p>By subscribing you agree to the <a href=\"#\">Terms of Use</a> & <a href=\"#\">Privacy Policy.</a></p>",
             "newsletter_text_alignment": "left",
             "form_width": 465,
@@ -136,6 +160,7 @@
     }
   },
   "order": [
+    "newsletter_Er8cjT",
     "footer",
     "mobile_sticky_bar_aYhgJK"
   ]
