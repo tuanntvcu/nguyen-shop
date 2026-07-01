@@ -16,7 +16,6 @@
           "type": "slide",
           "settings": {
             "color_scheme": "scheme-1",
-            "background": "shopify://shop_images/ChatGPT_Image_Jun_10_2026_05_36_02_PM.png",
             "image_overlay_opacity": 0,
             "content_position": "middle-center",
             "text_alignment": "center",
@@ -34,7 +33,6 @@
           "type": "slide",
           "settings": {
             "color_scheme": "scheme-1",
-            "background": "shopify://shop_images/ChatGPT_Image_Jun_10_2026_05_33_28_PM.png",
             "image_overlay_opacity": 0,
             "content_position": "middle-center",
             "text_alignment": "center",
@@ -72,7 +70,6 @@
         "column_9ppj6p": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/5110703.png",
             "image_width": "medium",
             "title": "Premium Quality",
             "heading_size": "h4",
@@ -87,7 +84,6 @@
         "column_4zgf6P": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/5110703.png",
             "image_width": "medium",
             "title": "Built For Anglers",
             "heading_size": "h4",
@@ -102,7 +98,6 @@
         "column_dwfNic": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/5110703.png",
             "image_width": "medium",
             "title": "Fast & Free Shipping",
             "heading_size": "h4",
@@ -117,7 +112,6 @@
         "column_p7JYpx": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/5110703.png",
             "image_width": "medium",
             "title": "Secure Checkout",
             "heading_size": "h4",
@@ -158,6 +152,60 @@
     },
     "collection_list_3a7bMi": {
       "type": "collection-list",
+      "blocks": {
+        "featured_collection_yTFjWR": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "sunglasses",
+            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
+            "title": "",
+            "description": ""
+          }
+        },
+        "featured_collection_NYxdzK": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "sunglasses",
+            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
+            "title": "",
+            "description": ""
+          }
+        },
+        "featured_collection_p9wF6a": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "sunglasses",
+            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
+            "title": "",
+            "description": ""
+          }
+        },
+        "featured_collection_7bGNng": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "sunglasses",
+            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
+            "title": "",
+            "description": ""
+          }
+        },
+        "featured_collection_44DTpA": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "sunglasses",
+            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
+            "title": "",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_yTFjWR",
+        "featured_collection_NYxdzK",
+        "featured_collection_p9wF6a",
+        "featured_collection_7bGNng",
+        "featured_collection_44DTpA"
+      ],
       "name": "t:sections.collection-list.name",
       "settings": {
         "color_scheme": "",
@@ -170,11 +218,11 @@
         "text_size": "text-base",
         "card_color_inherited": false,
         "show_product_count": false,
-        "show_icon": false,
+        "show_icon": true,
         "card_style": "",
         "card_image_ratio": "adapt",
         "content_alignment": "left",
-        "columns_desktop": 4,
+        "columns_desktop": 5,
         "column_gap": "medium",
         "row_gap": "medium",
         "enable_slider": true,
