@@ -1,0 +1,72 @@
+{{ 'section-altaeron-home.css' | asset_url | stylesheet_tag }}
+
+<section class="altaeron-mobile-sticky" data-section-id="{{ section.id }}">
+  <a
+    class="altaeron-mobile-sticky__link"
+    {% if section.settings.link != blank %}
+      href="{{ section.settings.link }}"
+    {% else %}
+      role="link" aria-disabled="true"
+    {% endif %}
+  >
+    <span class="altaeron-mobile-sticky__image">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 160
+          | image_tag:
+            loading: 'lazy',
+            widths: '80, 120, 160',
+            sizes: '56px'
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg altaeron-placeholder' }}
+      {%- endif -%}
+    </span>
+    <span class="altaeron-mobile-sticky__copy">
+      <span>{{ section.settings.label }}</span>
+      <strong>{{ section.settings.price }}</strong>
+    </span>
+    <span class="altaeron-mobile-sticky__cart">{%- render 'icon-cart' -%}</span>
+  </a>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron sticky CTA",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "SHOP POLARIZED SUNGLASSES"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "$69.99"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Altaeron sticky CTA"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,139 @@
+{{ 'section-altaeron-home.css' | asset_url | stylesheet_tag }}
+
+<section class="altaeron-section altaeron-reviews" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    <div class="altaeron-reviews__header">
+      <h2 class="altaeron-heading altaeron-heading--section">{{ section.settings.heading }}</h2>
+      {%- if section.settings.link_label != blank -%}
+        <a
+          class="altaeron-reviews__link"
+          {% if section.settings.link != blank %}
+            href="{{ section.settings.link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+        >
+          {{ section.settings.link_label }} ->
+        </a>
+      {%- endif -%}
+    </div>
+    <div class="altaeron-reviews__grid">
+      {%- for block in section.blocks -%}
+        <article class="altaeron-review" {{ block.shopify_attributes }}>
+          <div>
+            <div class="altaeron-stars" aria-label="{{ block.settings.rating }} out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="altaeron-review__quote">"{{ block.settings.quote }}"</p>
+            <p class="altaeron-review__meta">
+              <strong>{{ block.settings.name }}</strong>
+              {{ block.settings.location }}
+            </p>
+          </div>
+          <div class="altaeron-review__image">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 360
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '180, 240, 360',
+                  sizes: '100px'
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg altaeron-placeholder' }}
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron reviews",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 8,
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "REAL REVIEWS FROM REAL ANGLERS"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "VIEW ALL REVIEWS"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "These sunglasses are a game changer. I can see fish I never saw before."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Jake M."
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Florida"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Altaeron reviews",
+      "blocks": [
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

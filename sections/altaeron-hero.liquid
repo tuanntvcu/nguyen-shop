@@ -1,0 +1,151 @@
+{{ 'section-altaeron-home.css' | asset_url | stylesheet_tag }}
+
+<section class="altaeron-section altaeron-hero" data-section-id="{{ section.id }}">
+  <div class="altaeron-hero__media" aria-hidden="true">
+    {%- if section.settings.image != blank -%}
+      <picture>
+        {%- if section.settings.mobile_image != blank -%}
+          <source
+            media="(max-width: 767px)"
+            srcset="{{ section.settings.mobile_image | image_url: width: 800 }} 800w, {{ section.settings.mobile_image | image_url: width: 1200 }} 1200w"
+          >
+        {%- endif -%}
+        {{
+          section.settings.image
+          | image_url: width: 2400
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '750, 1100, 1500, 1800, 2200, 2400',
+            sizes: '100vw'
+        }}
+      </picture>
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg altaeron-placeholder' }}
+    {%- endif -%}
+  </div>
+  <div class="altaeron-hero__overlay"></div>
+  <div class="page-width altaeron-hero__inner">
+    <div class="altaeron-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="altaeron-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        {%- liquid
+          assign hero_heading = section.settings.heading | escape | newline_to_br
+          assign hero_heading = hero_heading | replace: 'SMARTER.', '<em>SMARTER.</em>'
+        -%}
+        <h1 class="altaeron-heading">{{ hero_heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="altaeron-text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      <div class="altaeron-hero__buttons">
+        {%- if section.settings.primary_label != blank -%}
+          <a
+            class="altaeron-button altaeron-button--primary"
+            {% if section.settings.primary_link != blank %}
+              href="{{ section.settings.primary_link }}"
+            {% else %}
+              role="link" aria-disabled="true"
+            {% endif %}
+          >
+            {{ section.settings.primary_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_label != blank -%}
+          <a
+            class="altaeron-button altaeron-button--secondary"
+            {% if section.settings.secondary_link != blank %}
+              href="{{ section.settings.secondary_link }}"
+            {% else %}
+              role="link" aria-disabled="true"
+            {% endif %}
+          >
+            {{ section.settings.secondary_label }}
+          </a>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.proof_text != blank -%}
+        <div class="altaeron-hero__proof">
+          <span class="altaeron-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span>{{ section.settings.proof_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron hero",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile hero image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "POLARIZED OPTICS."
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SEE DEEPER.\nFISH SMARTER."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>High-performance polarized eyewear and fishing gear built to give you the advantage when it matters most.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "SHOP POLARIZED SUNGLASSES"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "EXPLORE FISH FINDERS"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "proof_text",
+      "label": "Proof text",
+      "default": "TRUSTED BY 50,000+ ANGLERS"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Altaeron hero"
+    }
+  ]
+}
+{% endschema %}

@@ -9,219 +9,191 @@
  */
 {
   "sections": {
-    "slideshow_q3U4Jn": {
-      "type": "slideshow",
+    "altaeron_hero": {
+      "type": "altaeron-hero",
+      "settings": {
+        "image": "shopify://shop_images/ChatGPT_Image_Jun_10_2026_05_33_28_PM.png",
+        "mobile_image": "",
+        "eyebrow": "POLARIZED OPTICS.",
+        "heading": "SEE DEEPER.\nFISH SMARTER.",
+        "text": "<p>High-performance polarized eyewear and fishing gear built to give you the advantage when it matters most.</p>",
+        "primary_label": "SHOP POLARIZED SUNGLASSES",
+        "primary_link": "shopify://collections/sunglasses",
+        "secondary_label": "EXPLORE FISH FINDERS",
+        "secondary_link": "",
+        "proof_text": "TRUSTED BY 50,000+ ANGLERS"
+      }
+    },
+    "altaeron_trust_bar": {
+      "type": "altaeron-trust-bar",
       "blocks": {
-        "slide_JhU8hg": {
-          "type": "slide",
+        "trust_shipping": {
+          "type": "benefit",
           "settings": {
-            "color_scheme": "scheme-inverse",
-            "background": "shopify://shop_images/ChatGPT_Image_Jun_10_2026_05_33_28_PM.png",
-            "image_overlay_opacity": 0,
-            "content_position": "middle-left",
-            "text_alignment": "left",
-            "title": "SEE CLEAR",
-            "heading_size": "hd1",
-            "subheading": "",
-            "description": "",
-            "description_size": "text-base",
-            "button_label": "SHOW NOW",
-            "button_link": "",
-            "button_style": "btn--primary"
+            "title": "FREE SHIPPING",
+            "text": "On orders over $79."
+          }
+        },
+        "trust_returns": {
+          "type": "benefit",
+          "settings": {
+            "title": "30-DAY RETURNS",
+            "text": "Easy, no hassle."
+          }
+        },
+        "trust_warranty": {
+          "type": "benefit",
+          "settings": {
+            "title": "1-YEAR WARRANTY",
+            "text": "We've got you covered."
+          }
+        },
+        "trust_checkout": {
+          "type": "benefit",
+          "settings": {
+            "title": "SECURE CHECKOUT",
+            "text": "Safe & encrypted."
+          }
+        },
+        "trust_anglers": {
+          "type": "benefit",
+          "settings": {
+            "title": "TRUSTED BY",
+            "text": "50,000+ anglers."
           }
         }
       },
       "block_order": [
-        "slide_JhU8hg"
+        "trust_shipping",
+        "trust_returns",
+        "trust_warranty",
+        "trust_checkout",
+        "trust_anglers"
       ],
       "settings": {
-        "container": "full",
-        "layout": "standard",
-        "slide_height": "large",
-        "show_dots": true,
-        "autoplay": true,
-        "autoplay_delay": 5,
-        "controls_position": "below",
-        "show_text_below": false,
-        "text_alignment_mobile": "center",
-        "accessibility_info": "Slideshow about our brand"
+        "visibility": "all",
+        "mobile_heading": "TRUSTED BY 50,000+ ANGLERS"
       }
     },
-    "multicolumn_djyXPT": {
-      "type": "multicolumn",
+    "altaeron_trust_mobile_footer": {
+      "type": "altaeron-trust-bar",
       "blocks": {
-        "column_9ppj6p": {
-          "type": "column",
+        "trust_mobile_shipping": {
+          "type": "benefit",
           "settings": {
-            "image_width": "medium",
-            "title": "Premium Quality",
-            "heading_size": "h4",
-            "text": "<p>Tested for real performance</p>",
-            "text_size": "text-base",
-            "button_label": "",
-            "button_style": "btn--underline",
-            "button_link": "",
-            "mobile_layout": "inherit"
+            "title": "FREE SHIPPING",
+            "text": "On orders over $79."
           }
         },
-        "column_4zgf6P": {
-          "type": "column",
+        "trust_mobile_returns": {
+          "type": "benefit",
           "settings": {
-            "image_width": "medium",
-            "title": "Built For Anglers",
-            "heading_size": "h4",
-            "text": "<p>Gear trusted by fishermen</p>",
-            "text_size": "text-base",
-            "button_label": "",
-            "button_style": "btn--underline",
-            "button_link": "",
-            "mobile_layout": "inherit"
+            "title": "30-DAY RETURNS",
+            "text": "Easy, no hassle."
           }
         },
-        "column_dwfNic": {
-          "type": "column",
+        "trust_mobile_warranty": {
+          "type": "benefit",
           "settings": {
-            "image_width": "medium",
-            "title": "Fast & Free Shipping",
-            "heading_size": "h4",
-            "text": "<p>On orders over $69</p>",
-            "text_size": "text-base",
-            "button_label": "",
-            "button_style": "btn--underline",
-            "button_link": "",
-            "mobile_layout": "inherit"
+            "title": "1-YEAR WARRANTY",
+            "text": "We've got you covered."
           }
         },
-        "column_p7JYpx": {
-          "type": "column",
+        "trust_mobile_checkout": {
+          "type": "benefit",
           "settings": {
-            "image_width": "medium",
-            "title": "Secure Checkout",
-            "heading_size": "h4",
-            "text": "<p>100% safe & secure</p>",
-            "text_size": "text-base",
-            "button_label": "",
-            "button_style": "btn--underline",
-            "button_link": "",
-            "mobile_layout": "inherit"
+            "title": "SECURE CHECKOUT",
+            "text": "Safe & encrypted."
+          }
+        },
+        "trust_mobile_anglers": {
+          "type": "benefit",
+          "settings": {
+            "title": "50,000+ ANGLERS",
+            "text": "Join our community"
           }
         }
       },
       "block_order": [
-        "column_9ppj6p",
-        "column_4zgf6P",
-        "column_dwfNic",
-        "column_p7JYpx"
+        "trust_mobile_shipping",
+        "trust_mobile_returns",
+        "trust_mobile_warranty",
+        "trust_mobile_checkout",
+        "trust_mobile_anglers"
       ],
-      "name": "t:sections.multicolumn.presets.name",
       "settings": {
-        "color_scheme": "",
-        "heading": "",
-        "heading_size": "h1",
-        "heading_highlight_style": "none",
-        "subheading": "",
-        "description": "",
-        "text_size": "text-base",
-        "column_alignment": "center",
-        "columns_desktop": 4,
-        "column_gap": "medium",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "show_section_divider": false,
-        "divider_width": "full"
+        "visibility": "mobile",
+        "mobile_heading": ""
       }
     },
-    "collection_list_3a7bMi": {
-      "type": "collection-list",
+    "altaeron_categories": {
+      "type": "altaeron-category-cards",
       "blocks": {
-        "featured_collection_yTFjWR": {
-          "type": "featured_collection",
+        "category_sunglasses": {
+          "type": "category",
           "settings": {
-            "collection": "sunglasses",
             "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
-            "title": "",
-            "description": ""
+            "title": "POLARIZED SUNGLASSES",
+            "text": "Clarity you can feel.",
+            "cta": "SHOP NOW",
+            "link": "shopify://collections/sunglasses"
           }
         },
-        "featured_collection_NYxdzK": {
-          "type": "featured_collection",
+        "category_fish_finders": {
+          "type": "category",
           "settings": {
-            "collection": "sunglasses",
-            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_54_26_PM.png",
+            "title": "FISH FINDERS",
+            "text": "Find fish. Every time.",
+            "cta": "SHOP NOW",
+            "link": ""
           }
         },
-        "featured_collection_p9wF6a": {
-          "type": "featured_collection",
+        "category_bags": {
+          "type": "category",
           "settings": {
-            "collection": "sunglasses",
-            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png",
+            "title": "WATERPROOF BAGS",
+            "text": "Built for adventure.",
+            "cta": "SHOP NOW",
+            "link": ""
           }
         },
-        "featured_collection_7bGNng": {
-          "type": "featured_collection",
+        "category_tools": {
+          "type": "category",
           "settings": {
-            "collection": "sunglasses",
-            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_54_26_PM.png",
+            "title": "FISHING TOOLS",
+            "text": "Precision you can trust.",
+            "cta": "SHOP NOW",
+            "link": ""
           }
         },
-        "featured_collection_44DTpA": {
-          "type": "featured_collection",
+        "category_apparel": {
+          "type": "category",
           "settings": {
-            "collection": "sunglasses",
-            "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png",
+            "title": "APPAREL",
+            "text": "Performance gear.",
+            "cta": "SHOP NOW",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "featured_collection_yTFjWR",
-        "featured_collection_NYxdzK",
-        "featured_collection_p9wF6a",
-        "featured_collection_7bGNng",
-        "featured_collection_44DTpA"
+        "category_sunglasses",
+        "category_fish_finders",
+        "category_bags",
+        "category_tools",
+        "category_apparel"
       ],
-      "name": "t:sections.collection-list.name",
-      "settings": {
-        "color_scheme": "",
-        "layout": "standard",
-        "subheading": "",
-        "heading": "SHOP BY CATEGORY",
-        "heading_size": "h3",
-        "heading_highlight_style": "none",
-        "description": "",
-        "text_size": "text-base",
-        "card_color_inherited": false,
-        "show_product_count": false,
-        "show_icon": true,
-        "card_style": "",
-        "card_image_ratio": "adapt",
-        "content_alignment": "left",
-        "columns_desktop": 5,
-        "column_gap": "medium",
-        "row_gap": "medium",
-        "enable_slider": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "show_section_divider": true,
-        "divider_width": "full"
-      }
+      "settings": {}
     },
-    "featured_collection_ViiJ3L": {
+    "featured_collection_best_sellers": {
       "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
+      "name": "Best sellers",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-inverse",
         "header_layout": "horizontal",
         "heading": "BEST SELLERS",
         "heading_size": "h3",
@@ -232,296 +204,241 @@
         "show_collection_description": false,
         "collection": "sunglasses",
         "limit": 8,
-        "columns": 4,
-        "column_gap": "medium",
+        "columns": 5,
+        "column_gap": "small",
         "row_gap": "inherit",
         "grid_layout": "standard",
         "enable_slider": true,
         "controls_position": "inside",
-        "pcard_image_ratio": "",
+        "pcard_image_ratio": "4/3",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "show_all_button_on_top": false,
-        "button_label": "",
-        "button_style": "btn--primary",
-        "padding_top": 20,
-        "padding_bottom": 20,
+        "show_all_button_on_top": true,
+        "button_label": "VIEW ALL PRODUCTS",
+        "button_style": "btn--underline",
+        "padding_top": 24,
+        "padding_bottom": 28,
         "show_section_divider": false,
         "divider_width": "fixed"
       }
     },
-    "image_with_text_Uhz444": {
-      "type": "image-with-text",
+    "altaeron_story": {
+      "type": "altaeron-story",
       "blocks": {
-        "heading_HUrwKb": {
-          "type": "heading",
+        "story_quality": {
+          "type": "feature",
           "settings": {
-            "heading": "GEAR DESIGNED FOR EVERY CAST",
-            "heading_size": "h3",
-            "heading_highlight_style": "none"
+            "title": "PREMIUM QUALITY",
+            "text": "Top-tier materials."
           }
         },
-        "text_YzVLbC": {
-          "type": "text",
+        "story_tested": {
+          "type": "feature",
           "settings": {
-            "text": "<p>From sunrise to last light, our gear is built to help you fish longer, find more, and enjoy every moment on the water.</p>",
-            "text_size": "text-lg"
+            "title": "FIELD TESTED",
+            "text": "Proven in real conditions."
           }
         },
-        "button_39Gfkf": {
-          "type": "button",
+        "story_last": {
+          "type": "feature",
           "settings": {
-            "button_label": "EXPLORE COLLECTIONS",
-            "button_link": "shopify://collections/bags-and-storage-copy",
-            "button_style": "btn--primary"
+            "title": "BUILT TO LAST",
+            "text": "Gear you can trust."
           }
         }
       },
       "block_order": [
-        "heading_HUrwKb",
-        "text_YzVLbC",
-        "button_39Gfkf"
+        "story_quality",
+        "story_tested",
+        "story_last"
       ],
-      "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "section_color_scheme": "",
-        "color_scheme": "",
         "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png",
-        "image_height": "adapt",
-        "layout": "text_first",
-        "desktop_content_position": "center",
-        "desktop_content_alignment": "left",
-        "enable_parallax": false,
-        "parallax_direction": "vertical",
-        "mobile_content_alignment": "left",
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "show_section_divider": false,
-        "divider_width": "fixed"
+        "eyebrow": "OUR PROMISE",
+        "heading": "BUILT FOR ANGLERS.\nDRIVEN BY ADVENTURE.",
+        "text": "<p>At Altaeron, we believe the best gear doesn't just perform - it disappears. So you can stay focused on what matters most.</p>",
+        "button_label": "LEARN MORE",
+        "button_link": ""
       }
     },
-    "image_comparison_d8UCmb": {
-      "type": "image-comparison",
+    "altaeron_technology": {
+      "type": "altaeron-technology",
       "blocks": {
-        "image_PEepb8": {
+        "tech_clarity": {
+          "type": "tech",
+          "settings": {
+            "title": "HD CLARITY",
+            "text": "High definition"
+          }
+        },
+        "tech_uv": {
+          "type": "tech",
+          "settings": {
+            "title": "UV400",
+            "text": "Full protection"
+          }
+        },
+        "tech_glare": {
+          "type": "tech",
+          "settings": {
+            "title": "ANTI-GLARE",
+            "text": "Comfort in bright light"
+          }
+        },
+        "tech_shatter": {
+          "type": "tech",
+          "settings": {
+            "title": "SHATTERPROOF",
+            "text": "Built to last"
+          }
+        }
+      },
+      "block_order": [
+        "tech_clarity",
+        "tech_uv",
+        "tech_glare",
+        "tech_shatter"
+      ],
+      "settings": {
+        "eyebrow": "POLARIZED LENS TECHNOLOGY",
+        "heading": "ENGINEERED LIGHT.\nNOT JUST DARK.",
+        "text": "<p>Our multi-layer TAC lenses cut glare, enhance contrast, and reveal what others miss.</p>",
+        "button_label": "LEARN MORE",
+        "button_link": "",
+        "image": "shopify://shop_images/1855328b-340e-4583-899b-6a0fa8cfd383.png",
+        "badge": "WITH ALTAERON"
+      }
+    },
+    "altaeron_reviews": {
+      "type": "altaeron-reviews",
+      "blocks": {
+        "review_jake": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "These sunglasses are a game changer. I can see fish I never saw before.",
+            "name": "Jake M.",
+            "location": "Florida",
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png"
+          }
+        },
+        "review_chris": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Crystal clear vision and super comfortable all day long.",
+            "name": "Chris L.",
+            "location": "Texas",
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_54_26_PM.png"
+          }
+        },
+        "review_derek": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "My fish finder is dialed in perfectly. Worth every penny.",
+            "name": "Derek P.",
+            "location": "California",
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png"
+          }
+        },
+        "review_mark": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Best tackle backpack I've owned. Built tough and waterproof.",
+            "name": "Mark R.",
+            "location": "Alabama",
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_54_26_PM.png"
+          }
+        }
+      },
+      "block_order": [
+        "review_jake",
+        "review_chris",
+        "review_derek",
+        "review_mark"
+      ],
+      "settings": {
+        "heading": "REAL REVIEWS FROM REAL ANGLERS",
+        "link_label": "VIEW ALL REVIEWS",
+        "link": ""
+      }
+    },
+    "altaeron_community": {
+      "type": "altaeron-community",
+      "blocks": {
+        "community_1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/501d244a-3a86-4d38-a1a3-660b6d662482.png",
-            "heading": "Before",
-            "color_scheme": "scheme-1"
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png"
           }
         },
-        "image_V8tTV6": {
+        "community_2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/1855328b-340e-4583-899b-6a0fa8cfd383.png",
-            "heading": "After",
-            "color_scheme": "scheme-1"
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_54_26_PM.png"
+          }
+        },
+        "community_3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/501d244a-3a86-4d38-a1a3-660b6d662482.png"
+          }
+        },
+        "community_4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1855328b-340e-4583-899b-6a0fa8cfd383.png"
           }
         }
       },
       "block_order": [
-        "image_PEepb8",
-        "image_V8tTV6"
+        "community_1",
+        "community_2",
+        "community_3",
+        "community_4"
       ],
-      "name": "t:sections.image-comparison.presets.name",
       "settings": {
-        "container": "fixed",
-        "color_scheme": "scheme-1",
-        "header_layout": "vertical",
-        "heading": "SEE THE DIFFERENCE",
-        "heading_size": "h3",
-        "heading_highlight_style": "none",
-        "subheading": "",
-        "description": "<p>Our polarized lenses cut glare and reveal what's beneath the surface</p>",
-        "description_size": "text-base",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "btn--primary",
-        "direction": "horizontal",
-        "image_height": "adapt",
-        "image_heading_style": "badge",
-        "product": "fashion-vintage-square-polarized-sunglasses-men-women-driving-fishing-luxury-brand-designer-sun-glasses-drivers-eyewear-uv400",
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "show_section_divider": false,
-        "divider_width": "fixed"
+        "eyebrow": "JOIN OUR COMMUNITY",
+        "heading": "50,000+ ANGLERS WORLDWIDE.\nONE COMMUNITY.",
+        "text": "<p>Share your catches. Get featured. Be part of the Altaeron crew.</p>",
+        "button_label": "FOLLOW @ALTAERONFISHING",
+        "button_link": ""
       }
     },
-    "products_bundle_J8KCFz": {
-      "type": "products-bundle",
-      "blocks": {
-        "product_NYVLq7": {
-          "type": "product",
-          "settings": {
-            "product": "biutifu-traveller-spinning-casting-fuji-lure-mini-rock-fishing-rod-1-8-2-1-2-4-2-7-3-0m-carbon-baitcasting-phishger-fast-5-42g",
-            "color_scheme": "",
-            "horizontal_position": 20,
-            "vertical_position": 62
-          }
-        },
-        "product_KgUTXk": {
-          "type": "product",
-          "settings": {
-            "product": "carry-bag-for-bait-boat-water-repellent-fishing-boat-storage-bag",
-            "color_scheme": "",
-            "horizontal_position": 43,
-            "vertical_position": 5
-          }
-        },
-        "product_nTCHtA": {
-          "type": "product",
-          "settings": {
-            "product": "fashion-vintage-square-polarized-sunglasses-men-women-driving-fishing-luxury-brand-designer-sun-glasses-drivers-eyewear-uv400",
-            "color_scheme": "",
-            "horizontal_position": 65,
-            "vertical_position": 67
-          }
-        }
-      },
-      "block_order": [
-        "product_NYVLq7",
-        "product_KgUTXk",
-        "product_nTCHtA"
-      ],
-      "name": "t:sections.products-bundle.name",
+    "altaeron_newsletter": {
+      "type": "altaeron-newsletter",
       "settings": {
-        "color_scheme": "",
-        "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_54_26_PM.png",
-        "heading": "BUILD YOUR FISHING SETUP",
-        "heading_size": "h3",
-        "heading_highlight_style": "none",
-        "subheading": "",
-        "description": "<p>Shop our most recommended gear combinations</p>",
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "show_section_divider": false,
-        "divider_width": "fixed"
+        "eyebrow": "JOIN THE ADVENTURE",
+        "heading": "JOIN THE ALTAERON CREW",
+        "text": "<p>Exclusive deals, new product launches, fishing tips, and more.</p>",
+        "placeholder": "Enter your email address",
+        "button_label": "JOIN NOW",
+        "note": "No spam. Unsubscribe anytime."
       }
     },
-    "collapsible_tabs_VX3kFF": {
-      "type": "collapsible-tabs",
-      "blocks": {
-        "heading_WkEF7g": {
-          "type": "heading",
-          "settings": {
-            "heading": "FAQ",
-            "heading_size": "h3",
-            "sub_heading": ""
-          }
-        },
-        "collapsible_item_xGFhM8": {
-          "type": "collapsible_item",
-          "settings": {
-            "icon": "none",
-            "heading": "What is your shipping policy?",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "custom_liquid": "",
-            "page": "",
-            "open": false
-          }
-        },
-        "collapsible_item_NWnAYw": {
-          "type": "collapsible_item",
-          "settings": {
-            "icon": "none",
-            "heading": "How long does delivery take?",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "custom_liquid": "",
-            "page": "",
-            "open": false
-          }
-        },
-        "collapsible_item_4NERAJ": {
-          "type": "collapsible_item",
-          "settings": {
-            "icon": "none",
-            "heading": "What is your return policy?",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "custom_liquid": "",
-            "page": "",
-            "open": false
-          }
-        },
-        "collapsible_item_KYDKge": {
-          "type": "collapsible_item",
-          "settings": {
-            "icon": "none",
-            "heading": "Do you ship internationally?",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "custom_liquid": "",
-            "page": "",
-            "open": false
-          }
-        },
-        "image_card_j8tGF9": {
-          "type": "image_card",
-          "settings": {
-            "color_scheme": "scheme-1",
-            "desktop_image_position": "left",
-            "image_width": 50,
-            "alignment": "center",
-            "image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png",
-            "image_ratio": "4/3",
-            "image_overlay_opacity": 0,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "description": "",
-            "button_label": "",
-            "button_style": "btn--primary",
-            "content_position": "bottom-center",
-            "content_alignment": "center",
-            "content_spacing": "medium",
-            "card_link": "",
-            "order_first": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_WkEF7g",
-        "collapsible_item_xGFhM8",
-        "collapsible_item_NWnAYw",
-        "collapsible_item_4NERAJ",
-        "collapsible_item_KYDKge",
-        "image_card_j8tGF9"
-      ],
-      "name": "t:sections.collapsible-tabs.presets.name",
+    "altaeron_mobile_sticky_cta": {
+      "type": "altaeron-mobile-sticky-cta",
       "settings": {
-        "container": "fixed",
-        "color_scheme": "",
-        "header_layout": "vertical",
-        "heading": "",
-        "heading_size": "h3",
-        "heading_highlight_style": "none",
-        "subheading": "",
-        "description": "",
-        "text_size": "text-base",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "btn--primary",
-        "column_gap": "small",
-        "row_gap": "small",
-        "item_style": "standard",
-        "item_color_scheme": "",
-        "item_heading_font": "heading",
-        "item_heading_size": "h4",
-        "item_icon_size": "extra-large",
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "show_section_divider": false,
-        "divider_width": "fixed"
+        "image": "shopify://shop_images/Sf33b4481a67c486295550bda582ce076G.webp",
+        "label": "SHOP POLARIZED SUNGLASSES",
+        "price": "$69.99",
+        "link": "shopify://collections/sunglasses"
       }
     }
   },
   "order": [
-    "slideshow_q3U4Jn",
-    "multicolumn_djyXPT",
-    "collection_list_3a7bMi",
-    "featured_collection_ViiJ3L",
-    "image_with_text_Uhz444",
-    "image_comparison_d8UCmb",
-    "products_bundle_J8KCFz",
-    "collapsible_tabs_VX3kFF"
+    "altaeron_hero",
+    "altaeron_trust_bar",
+    "altaeron_categories",
+    "featured_collection_best_sellers",
+    "altaeron_story",
+    "altaeron_technology",
+    "altaeron_reviews",
+    "altaeron_community",
+    "altaeron_newsletter",
+    "altaeron_trust_mobile_footer",
+    "altaeron_mobile_sticky_cta"
   ]
 }
