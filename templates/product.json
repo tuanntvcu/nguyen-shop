@@ -1,704 +1,116 @@
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
+ * This file may be updated by the Shopify theme editor.
  * ------------------------------------------------------------
  */
 {
   "sections": {
-    "breadcrumbs": {
-      "type": "breadcrumbs",
-      "settings": {
-        "text_alignment": "start"
-      }
-    },
     "main": {
-      "type": "main-product",
+      "type": "altaeron-product",
       "blocks": {
-        "badges": {
-          "type": "badges",
-          "settings": {
-            "show_soldout_badge": true,
-            "show_sale_badge": true,
-            "sale_badge_type": "percentage"
-          }
-        },
-        "title": {
-          "type": "title",
-          "settings": {
-            "heading_size": "h1"
-          }
-        },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
-        "inventory": {
-          "type": "inventory",
-          "settings": {
-            "text_style": "body",
-            "inventory_threshold": 20,
-            "show_inventory_quantity": true
-          }
-        },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_type": "color_swatch",
-            "size_title": "Size",
-            "size_chart_from_page": ""
-          }
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_quantity_selector": true,
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
-        },
-        "icon_with_text": {
-          "type": "icon-with-text",
-          "settings": {
-            "layout": "horizontal",
-            "title_font": "body",
-            "title_size": "text-base",
-            "icon_1": "package",
-            "heading_1": "Orders over $50 ship free",
-            "icon_2": "currency-circle-dollar",
-            "heading_2": "30 day returns",
-            "icon_3": "star-four",
-            "heading_3": ""
-          }
-        },
-        "pickup_availability": {
-          "type": "pickup_availability",
-          "settings": {}
-        },
-        "complementary": {
-          "type": "complementary",
-          "settings": {
-            "block_heading": "Pairs well with",
-            "make_collapsible_row": false,
-            "icon": "tag",
-            "product_list_limit": 4,
-            "products_per_page": 1,
-            "image_ratio": "adapt",
-            "enable_quick_add": true
-          }
-        },
-        "collapsible-row-1": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Collapsible tab heading",
-            "icon": "none",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "page": "",
-            "default_open": false
-          }
-        },
-        "collapsible-row-2": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Collapsible tab heading",
-            "icon": "none",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "page": "",
-            "default_open": false
-          }
-        },
-        "collapsible-row-3": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Collapsible tab heading",
-            "icon": "none",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "page": "",
-            "default_open": false
-          }
-        },
-        "addons": {
-          "type": "addons",
-          "settings": {
-            "show_share": true,
-            "show_ask_question": true
-          }
-        }
+        "feature_polarized": { "type": "feature", "settings": { "icon": "sun", "text": "100% Polarized TAC Lenses" } },
+        "feature_uv": { "type": "feature", "settings": { "icon": "sun", "text": "UV400 Protection" } },
+        "feature_scratch": { "type": "feature", "settings": { "icon": "scratch", "text": "Scratch Resistant Coating" } },
+        "feature_hydro": { "type": "feature", "settings": { "icon": "drop", "text": "Hydrophobic Coating" } },
+        "feature_light": { "type": "feature", "settings": { "icon": "feather", "text": "Lightweight & Durable" } },
+        "feature_comfort": { "type": "feature", "settings": { "icon": "shield", "text": "All-Day Comfort" } },
+
+        "benefit_color": { "type": "benefit", "settings": { "symbol": "◉", "title": "True color", "text": "Enhanced contrast" } },
+        "benefit_strain": { "type": "benefit", "settings": { "symbol": "◌", "title": "Reduce eye strain", "text": "Fish longer, feel better" } },
+        "benefit_impact": { "type": "benefit", "settings": { "symbol": "✥", "title": "Impact resistant", "text": "Built to last" } },
+        "benefit_water": { "type": "benefit", "settings": { "symbol": "♧", "title": "Water & oil repellent", "text": "Easy to clean" } },
+        "benefit_light": { "type": "benefit", "settings": { "symbol": "⌁", "title": "Lightweight design", "text": "All-day comfort" } },
+
+        "layer_one": { "type": "lens_layer", "settings": { "title": "Oleophobic coating", "text": "Repels smudges and oils" } },
+        "layer_two": { "type": "lens_layer", "settings": { "title": "Hydrophobic coating", "text": "Repels water and grime" } },
+        "layer_three": { "type": "lens_layer", "settings": { "title": "Polarized TAC lens", "text": "Blocks glare and enhances clarity" } },
+        "layer_four": { "type": "lens_layer", "settings": { "title": "UV400 protection layer", "text": "100% UVA/UVB protection" } },
+        "layer_five": { "type": "lens_layer", "settings": { "title": "Scratch-resistant coating", "text": "Long-lasting durability" } },
+
+        "case_fresh": { "type": "use_case", "settings": { "title": "Freshwater Fishing", "text": "See beneath the surface" } },
+        "case_offshore": { "type": "use_case", "settings": { "title": "Offshore Fishing", "text": "Reduce glare on open water" } },
+        "case_kayak": { "type": "use_case", "settings": { "title": "Kayak Fishing", "text": "Perfect for long days" } },
+        "case_sun": { "type": "use_case", "settings": { "title": "Bright Sun Conditions", "text": "Reduce eye fatigue" } },
+        "case_low": { "type": "use_case", "settings": { "title": "Low Light / Cloudy", "text": "Enhance contrast" } },
+
+        "compare_polarized": { "type": "comparison_row", "settings": { "feature": "100% Polarized TAC Lenses", "show_product_price": false, "brand_1": "✓", "brand_2": "✓", "brand_3": "✓", "brand_4": "×" } },
+        "compare_uv": { "type": "comparison_row", "settings": { "feature": "UV400 Protection", "show_product_price": false, "brand_1": "✓", "brand_2": "✓", "brand_3": "✓", "brand_4": "×" } },
+        "compare_hydro": { "type": "comparison_row", "settings": { "feature": "Hydrophobic Coating", "show_product_price": false, "brand_1": "✓", "brand_2": "✓", "brand_3": "✓", "brand_4": "×" } },
+        "compare_scratch": { "type": "comparison_row", "settings": { "feature": "Scratch Resistant", "show_product_price": false, "brand_1": "✓", "brand_2": "✓", "brand_3": "✓", "brand_4": "×" } },
+        "compare_weight": { "type": "comparison_row", "settings": { "feature": "Lightweight & Comfortable", "show_product_price": false, "brand_1": "✓", "brand_2": "✓", "brand_3": "✓", "brand_4": "×" } },
+        "compare_case": { "type": "comparison_row", "settings": { "feature": "Premium Case & Accessories", "show_product_price": false, "brand_1": "✓", "brand_2": "✓", "brand_3": "×", "brand_4": "×" } },
+        "compare_price": { "type": "comparison_row", "settings": { "feature": "Price", "show_product_price": true, "brand_1": "", "brand_2": "$219+", "brand_3": "$180+", "brand_4": "$20–$40" } },
+
+        "review_chris": { "type": "review", "settings": { "rating": 5, "quote": "Crystal clear vision and super comfortable all day long. Worth every penny!", "name": "Chris L.", "location": "Texas", "verified": true } },
+        "review_derek": { "type": "review", "settings": { "rating": 5, "quote": "Helped me spot fish in places I couldn't before. Game changer on the water!", "name": "Derek P.", "location": "Florida", "verified": true } },
+        "review_mark": { "type": "review", "settings": { "rating": 5, "quote": "Cuts glare, durable, and the best polarization I've used.", "name": "Mark R.", "location": "Alabama", "verified": true } },
+        "review_jake": { "type": "review", "settings": { "rating": 5, "quote": "Perfect for bright days. Eliminates glare and makes fishing so much better!", "name": "Jake M.", "location": "California", "verified": true } },
+        "review_tom": { "type": "review", "settings": { "rating": 5, "quote": "Amazing quality for the price. Shipping was fast too!", "name": "Tom H.", "location": "New York", "verified": true } },
+
+        "faq_polarized": { "type": "faq", "settings": { "question": "Are Altaeron sunglasses really 100% polarized?", "answer": "<p>Yes. The TAC lens construction is designed to cut reflected glare and improve visibility on the water.</p>" } },
+        "faq_difference": { "type": "faq", "settings": { "question": "What's the difference between TAC lenses and regular lenses?", "answer": "<p>TAC lenses combine multiple functional layers for polarization, UV protection, clarity, and durability.</p>" } },
+        "faq_float": { "type": "faq", "settings": { "question": "Do the sunglasses float?", "answer": "<p>No. Use a floating eyewear retainer around deep water.</p>" } },
+        "faq_included": { "type": "faq", "settings": { "question": "What's included with my purchase?", "answer": "<p>The package contents are listed with the product and may be updated by the merchant.</p>" } },
+        "faq_return": { "type": "faq", "settings": { "question": "What's your return policy?", "answer": "<p>See the store return policy for current eligibility, timing, and instructions.</p>" } }
       },
       "block_order": [
-        "badges",
-        "title",
-        "price",
-        "description",
-        "inventory",
-        "variant_picker",
-        "buy_buttons",
-        "icon_with_text",
-        "pickup_availability",
-        "complementary",
-        "collapsible-row-1",
-        "collapsible-row-2",
-        "collapsible-row-3",
-        "addons"
+        "feature_polarized", "feature_uv", "feature_scratch", "feature_hydro", "feature_light", "feature_comfort",
+        "benefit_color", "benefit_strain", "benefit_impact", "benefit_water", "benefit_light",
+        "layer_one", "layer_two", "layer_three", "layer_four", "layer_five",
+        "case_fresh", "case_offshore", "case_kayak", "case_sun", "case_low",
+        "compare_polarized", "compare_uv", "compare_hydro", "compare_scratch", "compare_weight", "compare_case", "compare_price",
+        "review_chris", "review_derek", "review_mark", "review_jake", "review_tom",
+        "faq_polarized", "faq_difference", "faq_float", "faq_included", "faq_return"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "enable_sticky_info": true,
-        "media_size": "large",
-        "gallery_layout": "vertical-carousel",
-        "mobile_thumbnails": "hide",
-        "enable_image_zoom": true,
-        "enable_video_looping": true,
-        "padding_top": 0,
-        "padding_bottom": 100
-      }
-    },
-    "testimonials_8JHr3L": {
-      "type": "testimonials",
-      "blocks": {
-        "testimonial_dhi3Xf": {
-          "type": "testimonial",
-          "settings": {
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-            "author": "Author's name",
-            "bio": "",
-            "icon": "none"
-          }
-        },
-        "testimonial_D7Mq7i": {
-          "type": "testimonial",
-          "settings": {
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-            "author": "Author's name",
-            "bio": "",
-            "icon": "none"
-          }
-        },
-        "testimonial_33tAjm": {
-          "type": "testimonial",
-          "settings": {
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-            "author": "Author's name",
-            "bio": "",
-            "icon": "none"
-          }
-        },
-        "testimonial_dDRMwy": {
-          "type": "testimonial",
-          "settings": {
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-            "author": "Author's name",
-            "bio": "",
-            "icon": "none"
-          }
-        },
-        "testimonial_RgfDDw": {
-          "type": "testimonial",
-          "settings": {
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-            "author": "Author's name",
-            "bio": "",
-            "icon": "none"
-          }
-        },
-        "testimonial_abi6JN": {
-          "type": "testimonial",
-          "settings": {
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-            "author": "Author's name",
-            "bio": "",
-            "icon": "none"
-          }
-        },
-        "testimonial_FqARUL": {
-          "type": "testimonial",
-          "settings": {
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-            "author": "Author's name",
-            "bio": "",
-            "icon": "none"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_dhi3Xf",
-        "testimonial_D7Mq7i",
-        "testimonial_33tAjm",
-        "testimonial_dDRMwy",
-        "testimonial_RgfDDw",
-        "testimonial_abi6JN"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "heading": "Testimonials",
-        "heading_size": "h2",
-        "subheading": "",
-        "description": "",
-        "text_size": "text-base",
-        "card_color_scheme": "",
-        "card_layout": "1",
-        "columns_desktop": 4,
-        "column_gap": "medium",
-        "enable_slider": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 100,
-        "padding_bottom": 100,
-        "show_section_divider": false,
-        "divider_width": "fixed"
-      }
-    },
-    "feature_list_cW3d9c": {
-      "type": "feature-list",
-      "blocks": {
-        "feature_item_VbCwL3": {
-          "type": "feature_item",
-          "settings": {
-            "icon": "check",
-            "text": "Feature item"
-          }
-        },
-        "feature_item_NzxQGa": {
-          "type": "feature_item",
-          "settings": {
-            "icon": "check",
-            "text": "Feature item"
-          }
-        },
-        "feature_item_yyNV9A": {
-          "type": "feature_item",
-          "settings": {
-            "icon": "check",
-            "text": "Feature item"
-          }
-        },
-        "feature_item_gBgLft": {
-          "type": "feature_item",
-          "settings": {
-            "icon": "check",
-            "text": "Feature item"
-          }
-        },
-        "feature_item_R8A8eX": {
-          "type": "feature_item",
-          "settings": {
-            "icon": "check",
-            "text": "Feature item"
-          }
-        }
-      },
-      "block_order": [
-        "feature_item_VbCwL3",
-        "feature_item_NzxQGa",
-        "feature_item_yyNV9A",
-        "feature_item_gBgLft",
-        "feature_item_R8A8eX"
-      ],
-      "settings": {
-        "color_scheme": "scheme-7",
-        "subheading": "",
-        "heading": "",
-        "heading_size": "h2",
-        "description": "",
-        "text_size": "text-base",
-        "item_alignment": "center",
-        "icon_size": "extra-medium",
-        "swipe_on_mobile": true,
-        "padding_top": 100,
-        "padding_bottom": 0,
-        "show_section_divider": false,
-        "divider_width": "fixed"
-      }
-    },
-    "rich_text_7rBwdd": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_cUbnWW": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        }
-      },
-      "block_order": [
-        "heading_cUbnWW"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "content_alignment": "center",
-        "padding_top": 60,
-        "padding_bottom": 0,
-        "show_section_divider": false,
-        "divider_width": "fixed"
-      }
-    },
-    "image_with_text_MgddA8": {
-      "type": "image-with-text",
-      "blocks": {
-        "subheading_XLgqVJ": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Add a tagline"
-          }
-        },
-        "heading_J7mctK": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text_A3Dahr": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_size": "text-lg"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_XLgqVJ",
-        "heading_J7mctK",
-        "text_A3Dahr"
-      ],
-      "settings": {
-        "section_color_scheme": "",
-        "color_scheme": "scheme-2",
-        "image_height": "adapt",
-        "layout": "text_first",
-        "desktop_content_position": "center",
-        "desktop_content_alignment": "center",
-        "enable_parallax": false,
-        "parallax_direction": "vertical",
-        "mobile_content_alignment": "left",
-        "padding_top": 100,
-        "padding_bottom": 0,
-        "show_section_divider": false,
-        "divider_width": "fixed"
-      }
-    },
-    "multicolumn_Mxt4d3": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_ppme79": {
-          "type": "column",
-          "settings": {
-            "image_width": "large",
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_size": "text-base",
-            "button_label": "",
-            "button_style": "btn--underline",
-            "button_link": ""
-          }
-        },
-        "column_6eYcFq": {
-          "type": "column",
-          "settings": {
-            "image_width": "large",
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_size": "text-base",
-            "button_label": "",
-            "button_style": "btn--underline",
-            "button_link": ""
-          }
-        },
-        "column_6mMR7m": {
-          "type": "column",
-          "settings": {
-            "image_width": "large",
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_size": "text-base",
-            "button_label": "",
-            "button_style": "btn--underline",
-            "button_link": ""
-          }
-        },
-        "column_Lix6qc": {
-          "type": "column",
-          "settings": {
-            "image_width": "large",
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_size": "text-base",
-            "button_label": "",
-            "button_style": "btn--underline",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_ppme79",
-        "column_6eYcFq",
-        "column_6mMR7m",
-        "column_Lix6qc"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "heading": "",
-        "heading_size": "h1",
-        "subheading": "",
-        "description": "",
-        "text_size": "text-base",
-        "column_alignment": "center",
-        "columns_desktop": 4,
-        "column_gap": "large",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "show_section_divider": false,
-        "divider_width": "fixed"
-      }
-    },
-    "collapsible_tabs_phAkEE": {
-      "type": "collapsible-tabs",
-      "blocks": {
-        "collapsible_item_eFemDY": {
-          "type": "collapsible_item",
-          "settings": {
-            "icon": "none",
-            "heading": "Collapsible tab heading",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "custom_liquid": "",
-            "page": "",
-            "open": true
-          }
-        },
-        "collapsible_item_RQ3WzW": {
-          "type": "collapsible_item",
-          "settings": {
-            "icon": "none",
-            "heading": "Collapsible tab heading",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "custom_liquid": "",
-            "page": "",
-            "open": false
-          }
-        },
-        "collapsible_item_aKpRFm": {
-          "type": "collapsible_item",
-          "settings": {
-            "icon": "none",
-            "heading": "Collapsible tab heading",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "custom_liquid": "",
-            "page": "",
-            "open": false
-          }
-        },
-        "collapsible_item_3c4PkF": {
-          "type": "collapsible_item",
-          "settings": {
-            "icon": "none",
-            "heading": "Collapsible tab heading",
-            "content": "<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.</p>",
-            "custom_liquid": "",
-            "page": "",
-            "open": false
-          }
-        }
-      },
-      "block_order": [
-        "collapsible_item_eFemDY",
-        "collapsible_item_RQ3WzW",
-        "collapsible_item_aKpRFm",
-        "collapsible_item_3c4PkF"
-      ],
-      "settings": {
-        "container": "narrow",
-        "color_scheme": "",
-        "header_layout": "vertical",
-        "heading": "Collapsible tabs",
-        "heading_size": "h1",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "btn--primary",
-        "column_gap": "large",
-        "row_gap": "inherit",
-        "item_style": "standard",
-        "item_color_scheme": "",
-        "item_heading_font": "heading",
-        "item_heading_size": "h4",
-        "padding_top": 96,
-        "padding_bottom": 100,
-        "show_section_divider": true,
-        "divider_width": "fixed"
-      }
-    },
-    "scrolling_promotion_WAekUk": {
-      "type": "scrolling-promotion",
-      "blocks": {
-        "text_P4JyaD": {
-          "type": "text",
-          "settings": {
-            "text": "Tell customers about a promotion",
-            "text_link": "",
-            "text_size": "h1",
-            "font_weight": "font-heading",
-            "font_style": "normal",
-            "letter_spacing": 0,
-            "text_style": "normal"
-          }
-        },
-        "html_XAthVt": {
-          "type": "html",
-          "settings": {
-            "html": "<div class=\"flex items-center\"><div style=\"display: block;width: 6.4rem;height: 1px; background: #000\"> </div></div>"
-          }
-        },
-        "text_QpjN3F": {
-          "type": "text",
-          "settings": {
-            "text": "Tell customers about a promotion",
-            "text_link": "",
-            "text_size": "h1",
-            "font_weight": "font-heading",
-            "font_style": "normal",
-            "letter_spacing": 0,
-            "text_style": "normal"
-          }
-        },
-        "html_ADnizU": {
-          "type": "html",
-          "settings": {
-            "html": "<div class=\"flex items-center\"><div style=\"display: block;width: 6.4rem;height: 1px; background: #000\"> </div></div>"
-          }
-        },
-        "text_WiAYMn": {
-          "type": "text",
-          "settings": {
-            "text": "Tell customers about a promotion",
-            "text_link": "",
-            "text_size": "h1",
-            "font_weight": "font-heading",
-            "font_style": "normal",
-            "letter_spacing": 0,
-            "text_style": "normal"
-          }
-        },
-        "html_4bNp7y": {
-          "type": "html",
-          "settings": {
-            "html": "<div class=\"flex items-center\"><div style=\"display: block;width: 6.4rem;height: 1px; background: #000\"> </div></div>"
-          }
-        }
-      },
-      "block_order": [
-        "text_P4JyaD",
-        "html_XAthVt",
-        "text_QpjN3F",
-        "html_ADnizU",
-        "text_WiAYMn",
-        "html_4bNp7y"
-      ],
-      "settings": {
-        "color_scheme": "scheme-6",
-        "vertical_alignment": "center",
-        "direction": "left",
-        "pause_on_hover": true,
-        "speed": 0.5,
-        "h_spacing": 30,
-        "v_spacing": 0,
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "show_divider": false,
-        "divider_layout": "vertical"
-      }
-    },
-    "video_with_text_rRVqrq": {
-      "type": "video-with-text",
-      "blocks": {
-        "subheading_MCECPj": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Add a tagline"
-          }
-        },
-        "heading_kpxn8L": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text_UVPHCm": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an video to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_size": "text-lg"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_MCECPj",
-        "heading_kpxn8L",
-        "text_UVPHCm"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_ratio": "1/1",
-        "description": "",
-        "enable_video_autoplay": true,
-        "enable_video_looping": true,
-        "video_placement": "first",
-        "enable_parallax": false,
-        "parallax_direction": "vertical",
-        "text_alignment": "center",
-        "padding_top": 100,
-        "padding_bottom": 100,
-        "show_section_divider": false,
-        "divider_width": "full"
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "subheading": "",
-        "description": "",
-        "limit": 6,
-        "columns": 4,
-        "column_gap": "extra-small",
-        "row_gap": "inherit",
-        "enable_slider": true,
-        "pcard_image_ratio": "",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 0,
-        "padding_bottom": 100,
-        "show_section_divider": false,
-        "divider_width": "fixed"
+        "badge": "",
+        "hero_image": "",
+        "show_dynamic_checkout": true,
+        "rating": 5,
+        "review_count": 5,
+        "reviews_link": "",
+        "low_stock_threshold": 5,
+        "social_proof_text": "",
+        "social_proof_subtext": "",
+        "dispatch_message": "",
+        "dispatch_subtext": "",
+        "trust_1_title": "Free shipping",
+        "trust_1_text": "On qualifying orders.",
+        "trust_2_title": "30-day returns",
+        "trust_2_text": "Easy, no hassle.",
+        "trust_3_title": "1-year warranty",
+        "trust_3_text": "We've got you covered.",
+        "trust_4_title": "Secure checkout",
+        "trust_4_text": "Safe and encrypted.",
+        "comparison_before_image": "",
+        "comparison_after_image": "",
+        "comparison_position": 50,
+        "comparison_before_label": "Without polarization",
+        "comparison_before_text": "Glare hides details.\nYou miss what's below.",
+        "comparison_before_alt": "Underwater view without polarization",
+        "comparison_after_label": "With Altaeron",
+        "comparison_after_text": "Clarity reveals everything.\nYou see more. You catch more.",
+        "comparison_after_alt": "Clear underwater view with polarization",
+        "engineering_eyebrow": "Pro-grade lens technology",
+        "engineering_heading": "Engineered\nfor anglers",
+        "engineering_text": "Every detail is designed to help you perform better on the water.",
+        "use_cases_heading": "Built for every adventure",
+        "cases_image": "",
+        "comparison_heading": "Altaeron vs. the competition",
+        "comparison_brand_1": "Altaeron",
+        "comparison_brand_2": "Costa Del Mar",
+        "comparison_brand_3": "Oakley",
+        "comparison_brand_4": "Typical Amazon glasses",
+        "reviews_heading": "Real reviews from real anglers",
+        "bundle_heading": "Frequently bought together",
+        "bundle_product_1": "sun-glass-copy",
+        "bundle_product_2": "sun-glass-copy-copy",
+        "bundle_product_3": "sun-glass-copy-copy-copy",
+        "final_image": "",
+        "faq_heading": "FAQ"
       }
     }
   },
-  "order": [
-    "breadcrumbs",
-    "main",
-    "testimonials_8JHr3L",
-    "feature_list_cW3d9c",
-    "rich_text_7rBwdd",
-    "image_with_text_MgddA8",
-    "multicolumn_Mxt4d3",
-    "collapsible_tabs_phAkEE",
-    "scrolling_promotion_WAekUk",
-    "video_with_text_rRVqrq",
-    "related-products"
-  ]
+  "order": ["main"]
 }

@@ -2,15 +2,18 @@
 
 <section class="altaeron-section altaeron-community" data-section-id="{{ section.id }}">
   <div class="page-width altaeron-community__inner">
-    <div>
+    <div class="altaeron-community__intro">
       {%- if section.settings.eyebrow != blank -%}
         <p class="altaeron-eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <h2 class="altaeron-heading altaeron-heading--section">{{ section.settings.heading | escape | newline_to_br }}</h2>
-      {%- endif -%}
       {%- if section.settings.text != blank -%}
         <div class="altaeron-text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- render 'social-icons', class: 'altaeron-community__social', size: 'large' -%}
+    </div>
+    <div class="altaeron-community__main">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="altaeron-heading altaeron-heading--section">{{ section.settings.heading | escape | newline_to_br }}</h2>
       {%- endif -%}
       {%- if section.settings.button_label != blank -%}
         <div class="altaeron-community__actions">

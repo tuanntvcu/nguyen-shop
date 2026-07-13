@@ -1,0 +1,244 @@
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign compare_at_price = variant.compare_at_price
+  assign price = variant.price
+  assign on_sale = false
+  if compare_at_price > price
+    assign on_sale = true
+  endif
+
+  assign badge = product.metafields.custom.badge.value | default: ''
+  assign product_tagline = product.metafields.custom.tagline.value | default: product.metafields.custom.best_for.value
+  assign subtitle = product.metafields.custom.subtitle.value | default: product.metafields.custom.lens_color.value
+  assign rating = product.metafields.custom.rating.value | default: product.metafields.reviews.rating.value.rating
+  assign review_count = product.metafields.custom.review_count.value | default: product.metafields.reviews.rating_count.value
+  assign quick_view_modal_id = 'AltaeronQuickView-' | append: product.id | append: '-' | append: section.id
+  assign product_form_id = 'AltaeronProductCardForm-' | append: section.id | append: '-' | append: product.id
+  assign can_quick_add = false
+  if product.has_only_default_variant or product.options.size == 1
+    assign can_quick_add = true
+  endif
+
+  assign first_media = product.featured_media.preview_image | default: product.featured_image
+  assign second_image = product.images[1]
+  assign color_option_index = -1
+  assign swatch_trigger = settings.color_swatch_trigger | downcase
+
+  for option in product.options_with_values
+    assign option_name = option.name | downcase
+    if swatch_trigger contains option_name or option_name contains 'color' or option_name contains 'colour' or option_name contains 'lens'
+      assign color_option_index = forloop.index0
+      break
+    endif
+  endfor
+
+  if color_option_index == -1 and product.options.size == 1 and product.options.first != 'Title'
+    assign color_option_index = 0
+  endif
+-%}
+
+<article class="altaeron-product-card" data-ac-product-card>
+  <a class="altaeron-product-card__image" href="{{ variant.url | default: product.url }}" data-ac-card-link>
+    {%- if product.available == false -%}
+      <span class="altaeron-product-card__badge altaeron-product-card__badge--sold-out">
+        {{ 'products.product.sold_out' | t }}
+      </span>
+    {%- elsif on_sale -%}
+      <span class="altaeron-product-card__badge altaeron-product-card__badge--sale">
+        {{ 'products.product.on_sale' | t }}
+      </span>
+    {%- elsif badge != blank -%}
+      <span class="altaeron-product-card__badge altaeron-product-card__badge--{{ badge | handleize }}">
+        {{ badge }}
+      </span>
+    {%- endif -%}
+
+    {%- if first_media != blank -%}
+      {{
+        first_media
+        | image_url: width: 720
+        | image_tag:
+          loading: 'lazy',
+          widths: '320, 480, 640, 720',
+          sizes: '(max-width: 767px) 46vw, 22vw',
+          class: 'altaeron-product-card__main-image'
+      }}
+      {%- if second_image != blank -%}
+        {{
+          second_image
+          | image_url: width: 720
+          | image_tag:
+            loading: 'lazy',
+            widths: '320, 480, 640, 720',
+            sizes: '(max-width: 767px) 46vw, 22vw',
+            class: 'altaeron-product-card__hover-image'
+        }}
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg altaeron-collection__placeholder' }}
+    {%- endif -%}
+  </a>
+
+  <div class="altaeron-product-card__content">
+    {%- if rating != blank -%}
+      <div class="altaeron-product-card__rating">
+        <span aria-label="{{ rating }} out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <b>{{ rating }}</b>
+        {%- if review_count != blank -%}<em>({{ review_count }})</em>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <h2><a href="{{ variant.url | default: product.url }}" data-ac-card-link>{{ product.title }}</a></h2>
+    {%- if subtitle != blank and subtitle != 'Default Title' -%}
+      <p>{{ subtitle }}</p>
+    {%- elsif variant.title != blank and variant.title != 'Default Title' -%}
+      <p data-ac-variant-title>{{ variant.title }}</p>
+    {%- endif -%}
+    {%- if product_tagline != blank -%}
+      <span class="altaeron-product-card__tag">{{ product_tagline }}</span>
+    {%- endif -%}
+
+    {%- if color_option_index != -1 and product.variants.size > 1 -%}
+      <div class="altaeron-product-card__swatches" aria-label="Available options">
+        {%- liquid
+          assign seen_values = '|'
+          assign swatch_count = 0
+        -%}
+        {%- for swatch_variant in product.variants -%}
+          {%- liquid
+            assign swatch_value = swatch_variant.options[color_option_index]
+            assign swatch_token = '|' | append: swatch_value | handleize | append: '|'
+          -%}
+          {%- unless seen_values contains swatch_token -%}
+            {%- liquid
+              assign seen_values = seen_values | append: swatch_value | handleize | append: '|'
+              assign swatch_count = swatch_count | plus: 1
+              assign swatch_image = swatch_variant.featured_image | default: first_media
+              assign swatch_color = swatch_value | handle
+              if swatch_value contains 'Blue'
+                assign swatch_color = '#0d73bd'
+              elsif swatch_value contains 'Green'
+                assign swatch_color = '#0aa36f'
+              elsif swatch_value contains 'Brown'
+                assign swatch_color = '#8a552c'
+              elsif swatch_value contains 'Amber'
+                assign swatch_color = '#ff9f1c'
+              elsif swatch_value contains 'Gray' or swatch_value contains 'Grey'
+                assign swatch_color = '#69727d'
+              elsif swatch_value contains 'Black'
+                assign swatch_color = '#101820'
+              endif
+            -%}
+            {%- if swatch_count <= 4 -%}
+              <button
+                class="altaeron-product-card__swatch{% if swatch_variant.id == variant.id %} is-active{% endif %}"
+                type="button"
+                style="--swatch: {{ swatch_color }};"
+                aria-label="{{ swatch_value | escape }}"
+                data-ac-swatch
+                data-variant-id="{{ swatch_variant.id }}"
+                data-variant-url="{{ swatch_variant.url }}"
+                data-variant-title="{{ swatch_variant.title | escape }}"
+                data-variant-price="{{ swatch_variant.price | money }}"
+                data-variant-compare="{% if swatch_variant.compare_at_price > swatch_variant.price %}{{ swatch_variant.compare_at_price | money }}{% endif %}"
+                data-variant-available="{{ swatch_variant.available }}"
+                {% if swatch_image != blank %}data-variant-image="{{ swatch_image | image_url: width: 720 }}"{% endif %}
+              ></button>
+            {%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
+        {%- if swatch_count > 4 -%}
+          <a href="{{ product.url }}" class="altaeron-product-card__more-swatches">+{{ swatch_count | minus: 4 }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.shipping_message != blank and product.available -%}
+      <div class="altaeron-product-card__ship">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.7"/><circle cx="18" cy="18" r="1.7"/>
+        </svg>
+        {{ section.settings.shipping_message }}
+      </div>
+    {%- endif -%}
+
+    <div class="altaeron-product-card__buy">
+      <div class="altaeron-product-card__price">
+        {%- if on_sale -%}
+          <s data-ac-compare-price>{{ compare_at_price | money }}</s>
+        {%- endif -%}
+        <strong data-ac-price>{{ price | money }}</strong>
+      </div>
+      {%- if can_quick_add -%}
+        {%- form 'product',
+          product,
+          id: product_form_id,
+          class: 'altaeron-product-card__form',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form',
+          is: 'product-form'
+        -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ variant.id }}"
+            class="product-variant-id"
+            data-ac-variant-input
+            {% unless variant.available %}disabled{% endunless %}
+          >
+          <button
+            type="submit"
+            name="add"
+            data-ac-add-button
+            data-add-text="{{ 'products.product.add_to_cart' | t | escape }}"
+            data-sold-text="{{ 'products.product.sold_out' | t | escape }}"
+            {% unless variant.available %}disabled{% endunless %}
+          >
+            <span data-ac-add-text>
+              {%- if variant.available -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </span>
+            {% render 'loading-spinner' %}
+          </button>
+          <div class="product-form__error-message blocks-radius-md alert alert--error" role="alert" hidden></div>
+        {%- endform -%}
+      {%- else -%}
+        <button
+          type="button"
+          class="altaeron-product-card__choose"
+          aria-controls="{{ quick_view_modal_id }}"
+          aria-haspopup="dialog"
+        >
+          {{ 'products.product.choose_options' | t }}
+        </button>
+      {%- endif -%}
+    </div>
+
+    <div class="altaeron-product-card__actions">
+      {%- if section.settings.enable_quick_view -%}
+        <button
+          type="button"
+          aria-controls="{{ quick_view_modal_id }}"
+          aria-haspopup="dialog"
+          aria-label="{{ 'products.product.quick_view' | t }}: {{ product.title | escape }}"
+        >
+          <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2.25 12s3.5-6.25 9.75-6.25S21.75 12 21.75 12 18.25 18.25 12 18.25 2.25 12 2.25 12Z"/>
+            <circle cx="12" cy="12" r="2.75"/>
+          </svg>
+          <span>{{ 'products.product.quick_view' | t }}</span>
+        </button>
+      {%- endif -%}
+      <a href="{{ variant.url | default: product.url }}" data-ac-card-link>
+        View details
+      </a>
+    </div>
+  </div>
+
+  {%- if section.settings.enable_quick_view or can_quick_add == false -%}
+    {% render 'quick-view-modal', modal_id: quick_view_modal_id, product: product %}
+  {%- endif -%}
+</article>

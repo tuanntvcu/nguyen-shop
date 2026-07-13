@@ -28,6 +28,18 @@
             {%- endif -%}
           </span>
           <span class="altaeron-category__content">
+            {%- if block.settings.icon != blank -%}
+              <span class="altaeron-category__icon">
+                {{
+                  block.settings.icon
+                  | image_url: width: 96
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '48, 72, 96',
+                    alt: block.settings.title
+                }}
+              </span>
+            {%- endif -%}
             <span class="altaeron-category__title">{{ block.settings.title }}</span>
             <span class="altaeron-category__text">{{ block.settings.text }}</span>
             <span class="altaeron-category__cta">{{ block.settings.cta }}</span>
@@ -56,6 +68,11 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
         },
         {
           "type": "text",

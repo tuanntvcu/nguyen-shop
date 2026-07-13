@@ -182,7 +182,10 @@
         {%- endif -%}
       {%- endif -%}
     {%- else -%}
-      {{ shop.name }}
+      <span class="altaeron-header-lockup" aria-label="Altaeron">
+        <span class="altaeron-header-lockup__mark" aria-hidden="true"></span>
+        <span class="altaeron-header-lockup__word">ALTAERON</span>
+      </span>
     {%- endif -%}
   </a>
   {%- if request.page_type == 'index' -%}

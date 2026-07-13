@@ -251,7 +251,12 @@
                           </div>
                         {%- endif -%}
                         <div class="footer-newsletter__form">
-                          {% render 'newsletter-form', custom_id: block.id %}
+                          {% render 'newsletter-form',
+                            custom_id: block.id,
+                            design: 'design-2',
+                            button_label: 'JOIN NOW',
+                            button_style: 'btn--primary'
+                          %}
                         </div>
                         {%- if block.settings.newsletter_term != blank -%}
                           <div class="footer-newsletter__term text-sm rte">{{ block.settings.newsletter_term }}</div>

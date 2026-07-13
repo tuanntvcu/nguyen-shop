@@ -1,0 +1,424 @@
+{{ 'section-altaeron-collection.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'altaeron-collection.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign hero_image = section.settings.hero_image
+  assign collection_title = section.settings.heading | default: collection.title
+  assign collection_text = section.settings.text | default: collection.description
+  assign active_values_count = 0
+
+  for filter in collection.filters
+    assign active_values_count = active_values_count | plus: filter.active_values.size
+    if filter.type == 'price_range'
+      if filter.min_value.value != blank or filter.max_value.value != blank
+        assign active_values_count = active_values_count | plus: 1
+      endif
+    endif
+  endfor
+
+  if collection.filters.size > 0
+    assign has_filters = true
+  else
+    assign has_filters = false
+  endif
+
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+-%}
+
+<section class="altaeron-collection" data-altaeron-collection data-section-id="{{ section.id }}">
+  <div class="altaeron-collection__hero">
+    <div class="altaeron-collection__hero-media" aria-hidden="true">
+      {%- if hero_image != blank -%}
+        {{
+          hero_image
+          | image_url: width: 2200
+          | image_tag:
+            loading: 'eager',
+            widths: '750, 1100, 1500, 1800, 2200',
+            sizes: '100vw'
+        }}
+      {%- else -%}
+        <img
+          src="{{ 'altaeron-product-hero.png' | asset_url }}"
+          alt=""
+          loading="eager"
+          width="1792"
+          height="1024"
+        >
+      {%- endif -%}
+    </div>
+    <div class="altaeron-collection__hero-overlay"></div>
+
+    <div class="page-width altaeron-collection__hero-inner">
+      <div class="altaeron-collection__hero-copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="altaeron-collection__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="altaeron-collection__heading">{{ collection_title }}</h1>
+        {%- if collection_text != blank -%}
+          <div class="altaeron-collection__text">{{ collection_text }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="altaeron-collection__features">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'hero_feature' -%}
+            <div class="altaeron-collection__feature" {{ block.shopify_attributes }}>
+              <span class="altaeron-collection__icon">
+                {%- if block.settings.icon != blank -%}
+                  {{ block.settings.icon | image_url: width: 96 | image_tag: loading: 'lazy', widths: '48, 72, 96', alt: block.settings.title }}
+                {%- else -%}
+                  {%- render 'icon-check' -%}
+                {%- endif -%}
+              </span>
+              <span>
+                <strong>{{ block.settings.title }}</strong>
+                <small>{{ block.settings.text }}</small>
+              </span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="altaeron-collection__mobile-controls">
+        {%- if has_filters -%}
+          <button class="altaeron-collection__filter-toggle" type="button" data-ac-open-panel="filters">
+            FILTER & SORT
+          </button>
+        {%- endif -%}
+        <a class="altaeron-collection__mobile-count" href="#ProductGridContainer">
+          <facet-count>{{ collection.products_count }} PRODUCTS</facet-count>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    <div class="page-width altaeron-collection__body{% unless has_filters %} altaeron-collection__body--full{% endunless %}" id="ProductGridWrapper">
+      {%- if has_filters -%}
+        <aside
+          class="altaeron-collection__filters"
+          id="FacetFiltersContainer"
+          data-ac-panel="filters"
+          aria-hidden="true"
+        >
+          <div class="altaeron-collection__filters-head">
+            <button type="button" data-ac-close-panel>&larr; HIDE FILTERS</button>
+            <a href="{{ collection.url }}" is="facet-remove">Clear all</a>
+          </div>
+          {%- render 'facets', context: 'vertical', results: collection, show_sort_by: false -%}
+        </aside>
+      {%- endif -%}
+
+      <div class="altaeron-collection__main">
+        <div class="altaeron-collection__toolbar">
+          <div data-facet-loading>
+            {%- render 'loading-spinner' -%}
+            <p id="ProductCount" role="status">
+              <facet-count>{{ collection.products_count }} PRODUCTS</facet-count>
+            </p>
+          </div>
+
+          <div class="altaeron-collection__active">
+            <span>Active filters:</span>
+            {%- render 'facets-active', results: collection -%}
+          </div>
+
+          <div class="altaeron-collection__sort" id="SortByContainer">
+            <label for="SortBy-{{ section.id }}">SORT BY:</label>
+            <div class="altaeron-collection__select">
+              <select
+                id="SortBy-{{ section.id }}"
+                name="sort_by"
+                is="facet-short"
+                aria-describedby="a11y-refresh-page-message"
+              >
+                {%- for option in collection.sort_options -%}
+                  <option value="{{ option.value | escape }}" {% if option.value == sort_by %}selected{% endif %}>
+                    {{ option.name | escape }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          </div>
+
+          <div class="altaeron-collection__view" aria-label="Products per row">
+            <span>VIEW:</span>
+            <button type="button" data-ac-view-button="2" aria-label="2 columns" aria-pressed="false">2</button>
+            <button type="button" data-ac-view-button="3" aria-label="3 columns" aria-pressed="false">3</button>
+            <button class="is-active" type="button" data-ac-view-button="4" aria-label="4 columns" aria-pressed="true">4</button>
+          </div>
+        </div>
+
+        <div id="ProductGridContainer">
+          {%- if collection.products.size == 0 -%}
+            <div class="altaeron-collection__empty">
+              {%- if collection.all_products_count > 0 -%}
+                <p>{{ 'collections.general.no_results' | t }}</p>
+                <a href="{{ collection.url }}" is="facet-remove">{{ 'products.facets.clear_all' | t }}</a>
+              {%- else -%}
+                <p>{{ 'collections.general.empty' | t }}</p>
+                <a href="{{ routes.all_products_collection_url }}">{{ 'collections.general.continue_shopping' | t }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <grid-list class="altaeron-collection__grid products-list" id="ProductsList" data-ac-grid data-ac-view="4">
+            {%- for product in collection.products -%}
+              <div class="card altaeron-product-card-shell">
+                {%- render 'altaeron-collection-product-card', product: product, section: section -%}
+              </div>
+            {%- endfor -%}
+          </grid-list>
+
+          {%- if paginate.pages > 1 -%}
+            <div class="altaeron-collection__load pagination">
+              {%- if paginate.next -%}
+                <button
+                  action="{{ shop.url }}{{ paginate.next.url }}"
+                  type="load_more"
+                  is="load-more-button"
+                >
+                  <span>LOAD MORE PRODUCTS</span>
+                  {%- render 'loading-spinner' -%}
+                </button>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="page-width altaeron-collection__promise">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'promise' -%}
+          <div class="altaeron-collection__promise-item" {{ block.shopify_attributes }}>
+            <span class="altaeron-collection__icon">
+              {%- if block.settings.icon != blank -%}
+                {{ block.settings.icon | image_url: width: 96 | image_tag: loading: 'lazy', widths: '48, 72, 96', alt: block.settings.title }}
+              {%- else -%}
+                {%- render 'icon-check' -%}
+              {%- endif -%}
+            </span>
+            <span>
+              <strong>{{ block.settings.title }}</strong>
+              <small>{{ block.settings.text }}</small>
+            </span>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endpaginate -%}
+
+  <div class="page-width altaeron-collection__promo-grid">
+    {%- if section.settings.cta_heading != blank -%}
+      <div class="altaeron-collection__promo">
+        <h2>{{ section.settings.cta_heading | escape | newline_to_br }}</h2>
+        {%- if section.settings.cta_text != blank -%}<p>{{ section.settings.cta_text }}</p>{%- endif -%}
+        {%- if section.settings.cta_link != blank and section.settings.cta_button != blank -%}
+          <a href="{{ section.settings.cta_link }}">{{ section.settings.cta_button }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.compare_heading != blank -%}
+      <div class="altaeron-collection__promo altaeron-collection__promo--compare">
+        <h2>{{ section.settings.compare_heading }}</h2>
+        {%- if section.settings.compare_text != blank -%}<p>{{ section.settings.compare_text }}</p>{%- endif -%}
+        <span class="altaeron-collection__lens-art" aria-hidden="true"></span>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.reviews_heading != blank -%}
+      <div class="altaeron-collection__promo altaeron-collection__promo--reviews">
+        <h2>{{ section.settings.reviews_heading }}</h2>
+        {%- if section.settings.reviews_text != blank -%}<p>{{ section.settings.reviews_text }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="altaeron-collection__sort-panel" data-ac-panel="sort" aria-hidden="true">
+    <div class="altaeron-collection__filters-head">
+      <button type="button" data-ac-close-panel>&larr; HIDE SORT</button>
+    </div>
+    <div id="SortByContainerMobile">
+      <label for="SortByMobile-{{ section.id }}">SORT BY</label>
+      <select id="SortByMobile-{{ section.id }}" name="sort_by" is="facet-short">
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value | escape }}" {% if option.value == sort_by %}selected{% endif %}>
+            {{ option.name | escape }}
+          </option>
+        {%- endfor -%}
+      </select>
+    </div>
+  </div>
+
+  <div class="altaeron-collection__panel-overlay" data-ac-close-panel></div>
+
+  <div class="altaeron-collection__mobile-bar">
+    {%- if has_filters -%}
+      <button type="button" data-ac-open-panel="filters">FILTER</button>
+    {%- endif -%}
+    <button type="button" data-ac-open-panel="sort">SORT</button>
+    <a href="#ProductGridContainer"><facet-count>{{ collection.products_count }}</facet-count><small>PRODUCTS</small></a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron collection",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Engineered for anglers who demand clarity. See deeper. Fish smarter.</p>"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 36,
+      "step": 1,
+      "default": 28
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_view",
+      "label": "Enable quick view",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_message",
+      "label": "Shipping message on product cards"
+    },
+    {
+      "type": "text",
+      "id": "expand_filter_groups",
+      "label": "Expanded filter groups",
+      "info": "Comma-separated Shopify filter labels. Example: Availability, Price, Color"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "NOT SURE WHICH LENS?"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Take our 1-minute quiz and find your perfect match."
+    },
+    {
+      "type": "text",
+      "id": "cta_button",
+      "label": "CTA button",
+      "default": "FIND YOUR LENS"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "text",
+      "id": "compare_heading",
+      "label": "Compare heading",
+      "default": "COMPARE LENSES"
+    },
+    {
+      "type": "text",
+      "id": "compare_text",
+      "label": "Compare text",
+      "default": "See the difference. Choose the clarity you need."
+    },
+    {
+      "type": "text",
+      "id": "reviews_heading",
+      "label": "Reviews heading",
+      "default": "REAL ANGLERS. REAL REVIEWS."
+    },
+    {
+      "type": "text",
+      "id": "reviews_text",
+      "label": "Reviews text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_feature",
+      "name": "Hero feature",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "HD CLARITY"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "High definition vision"
+        }
+      ]
+    },
+    {
+      "type": "promise",
+      "name": "Promise item",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FREE SHIPPING"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "On orders over $79."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Altaeron collection"
+    }
+  ]
+}
+{% endschema %}

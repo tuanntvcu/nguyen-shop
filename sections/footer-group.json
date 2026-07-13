@@ -17,7 +17,7 @@
         "image_text_F3FNhx": {
           "type": "image_text",
           "settings": {
-            "block_width": 28,
+            "block_width": 24,
             "heading": "ALTAERON",
             "heading_size": "h4",
             "image_width": 150,
@@ -28,10 +28,23 @@
             "show_divider": false
           }
         },
+        "newsletter_altaeron_crew": {
+          "type": "newsletter",
+          "settings": {
+            "block_width": 36,
+            "heading": "JOIN THE ALTAERON CREW",
+            "heading_size": "h4",
+            "newsletter_description": "<p>Exclusive deals, new product launches, fishing tips, and more.</p>",
+            "newsletter_term": "<p>No spam. Unsubscribe anytime.</p>",
+            "newsletter_text_alignment": "left",
+            "form_width": 520,
+            "order_first": false
+          }
+        },
         "menu_DEKGYP": {
           "type": "menu",
           "settings": {
-            "block_width": 18,
+            "block_width": 10,
             "heading": "Shop",
             "heading_size": "h4",
             "menu": "footer",
@@ -42,7 +55,7 @@
         "menu_4eCrBB": {
           "type": "menu",
           "settings": {
-            "block_width": 18,
+            "block_width": 10,
             "heading": "Support",
             "heading_size": "h4",
             "menu": "footer",
@@ -53,7 +66,7 @@
         "menu_company": {
           "type": "menu",
           "settings": {
-            "block_width": 18,
+            "block_width": 10,
             "heading": "Company",
             "heading_size": "h4",
             "menu": "footer",
@@ -64,7 +77,7 @@
         "menu_resources": {
           "type": "menu",
           "settings": {
-            "block_width": 18,
+            "block_width": 10,
             "heading": "Resources",
             "heading_size": "h4",
             "menu": "footer",
@@ -75,6 +88,7 @@
       },
       "block_order": [
         "image_text_F3FNhx",
+        "newsletter_altaeron_crew",
         "menu_DEKGYP",
         "menu_4eCrBB",
         "menu_company",
@@ -82,6 +96,10 @@
       ],
       "custom_css": [
         ".footer__wrapper {background: #020b12;}",
+        ".footer-newsletter .footer-block__heading {font-size: 1.8rem; line-height: 1.1;}",
+        ".footer-newsletter__description {max-width: 38rem;}",
+        ".footer-newsletter__form {margin-top: 1.4rem;}",
+        ".footer-newsletter__term {margin-top: .8rem; opacity: .7;}",
         ".form-control {--color-border: var(--color-field);}"
       ],
       "settings": {

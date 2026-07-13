@@ -9,7 +9,19 @@
       {%- for block in section.blocks -%}
         <div class="altaeron-trust__item" {{ block.shopify_attributes }}>
           <span class="altaeron-icon">
-            {%- render 'icon-check' -%}
+            {%- if block.settings.icon != blank -%}
+              {{
+                block.settings.icon
+                | image_url: width: 96
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '48, 72, 96',
+                  class: 'altaeron-icon__image',
+                  alt: block.settings.title
+              }}
+            {%- else -%}
+              {%- render 'icon-check' -%}
+            {%- endif -%}
           </span>
           <div>
             <p class="altaeron-trust__title">{{ block.settings.title }}</p>
@@ -35,6 +47,11 @@
       "type": "benefit",
       "name": "Benefit",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
         {
           "type": "text",
           "id": "title",
