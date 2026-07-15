@@ -29,21 +29,7 @@
       <div class="altaeron-tech-grid">
         {%- for block in section.blocks -%}
           <div class="altaeron-tech" {{ block.shopify_attributes }}>
-            <span class="altaeron-icon">
-              {%- if block.settings.icon != blank -%}
-                {{
-                  block.settings.icon
-                  | image_url: width: 96
-                  | image_tag:
-                    loading: 'lazy',
-                    widths: '48, 72, 96',
-                    class: 'altaeron-icon__image',
-                    alt: block.settings.title
-                }}
-              {%- else -%}
-                {%- render 'icon-check' -%}
-              {%- endif -%}
-            </span>
+            <span class="altaeron-icon">{%- render 'icon-check' -%}</span>
             <div>
               <p class="altaeron-tech__title">{{ block.settings.title }}</p>
               <p class="altaeron-tech__text">{{ block.settings.text }}</p>
@@ -52,77 +38,25 @@
         {%- endfor -%}
       </div>
     </div>
-    <div class="altaeron-tech-section__media" data-altaeron-compare style="--position: 52%;">
-      <div class="altaeron-compare">
-        <div class="altaeron-compare__image altaeron-compare__image--before">
-          {%- if section.settings.before_image != blank -%}
-            {{
-              section.settings.before_image
-              | image_url: width: 1400
-              | image_tag:
-                loading: 'lazy',
-                widths: '600, 900, 1200, 1400',
-                sizes: '(max-width: 989px) 100vw, 58vw'
-            }}
-          {%- elsif section.settings.image != blank -%}
-            {{
-              section.settings.image
-              | image_url: width: 1400
-              | image_tag:
-                loading: 'lazy',
-                widths: '600, 900, 1200, 1400',
-                sizes: '(max-width: 989px) 100vw, 58vw'
-            }}
-          {%- else -%}
-            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg altaeron-placeholder' }}
-          {%- endif -%}
-        </div>
-        <div class="altaeron-compare__image altaeron-compare__image--after">
-          {%- if section.settings.after_image != blank -%}
-            {{
-              section.settings.after_image
-              | image_url: width: 1400
-              | image_tag:
-                loading: 'lazy',
-                widths: '600, 900, 1200, 1400',
-                sizes: '(max-width: 989px) 100vw, 58vw'
-            }}
-          {%- elsif section.settings.image != blank -%}
-            {{
-              section.settings.image
-              | image_url: width: 1400
-              | image_tag:
-                loading: 'lazy',
-                widths: '600, 900, 1200, 1400',
-                sizes: '(max-width: 989px) 100vw, 58vw'
-            }}
-          {%- else -%}
-            {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg altaeron-placeholder' }}
-          {%- endif -%}
-        </div>
-        <span class="altaeron-compare__divider" aria-hidden="true"></span>
-        <span class="altaeron-compare__handle" aria-hidden="true"></span>
-        <input class="altaeron-compare__range" type="range" min="0" max="100" value="52" aria-label="Compare lens clarity">
-        <span class="altaeron-compare__label altaeron-compare__label--before">{{ section.settings.before_label }}</span>
-        <span class="altaeron-compare__label altaeron-compare__label--after">{{ section.settings.after_label }}</span>
-      </div>
+    <div class="altaeron-tech-section__media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1400
+          | image_tag:
+            loading: 'lazy',
+            widths: '600, 900, 1200, 1400',
+            sizes: '(max-width: 989px) 100vw, 55vw'
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg altaeron-placeholder' }}
+      {%- endif -%}
+      {%- if section.settings.badge != blank -%}
+        <span class="altaeron-tech-section__badge">{{ section.settings.badge }}</span>
+      {%- endif -%}
     </div>
   </div>
 </section>
-
-<script>
-  (() => {
-    const section = document.currentScript.previousElementSibling;
-    if (!section) return;
-    section.querySelectorAll('[data-altaeron-compare]').forEach((compare) => {
-      const range = compare.querySelector('.altaeron-compare__range');
-      if (!range) return;
-      const sync = () => compare.style.setProperty('--position', `${range.value}%`);
-      range.addEventListener('input', sync);
-      sync();
-    });
-  })();
-</script>
 
 {% schema %}
 {
@@ -166,28 +100,12 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Fallback image"
-    },
-    {
-      "type": "image_picker",
-      "id": "before_image",
-      "label": "Before image"
-    },
-    {
-      "type": "image_picker",
-      "id": "after_image",
-      "label": "After image"
+      "label": "Image"
     },
     {
       "type": "text",
-      "id": "before_label",
-      "label": "Before label",
-      "default": "WITHOUT ALTAERON"
-    },
-    {
-      "type": "text",
-      "id": "after_label",
-      "label": "After label",
+      "id": "badge",
+      "label": "Image badge",
       "default": "WITH ALTAERON"
     }
   ],
@@ -196,11 +114,6 @@
       "type": "tech",
       "name": "Tech point",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "icon",
-          "label": "Icon"
-        },
         {
           "type": "text",
           "id": "title",

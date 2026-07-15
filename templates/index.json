@@ -306,10 +306,7 @@
         "button_label": "LEARN MORE",
         "button_link": "",
         "image": "shopify://shop_images/1855328b-340e-4583-899b-6a0fa8cfd383.png",
-        "before_image": "shopify://shop_images/ChatGPT_Image_Jul_1_2026_02_14_59_PM.png",
-        "after_image": "shopify://shop_images/1855328b-340e-4583-899b-6a0fa8cfd383.png",
-        "before_label": "WITHOUT ALTAERON",
-        "after_label": "WITH ALTAERON"
+        "badge": "WITH ALTAERON"
       }
     },
     "altaeron_reviews": {
@@ -367,7 +364,7 @@
         "link_label": "VIEW ALL REVIEWS",
         "link": ""
       }
-    },  
+    },
     "altaeron_community": {
       "type": "altaeron-community",
       "blocks": {
@@ -410,6 +407,17 @@
         "button_link": ""
       }
     },
+    "altaeron_newsletter": {
+      "type": "altaeron-newsletter",
+      "settings": {
+        "eyebrow": "JOIN THE ADVENTURE",
+        "heading": "JOIN THE ALTAERON CREW",
+        "text": "<p>Exclusive deals, new product launches, fishing tips, and more.</p>",
+        "placeholder": "Enter your email address",
+        "button_label": "JOIN NOW",
+        "note": "No spam. Unsubscribe anytime."
+      }
+    },
     "altaeron_mobile_sticky_cta": {
       "type": "altaeron-mobile-sticky-cta",
       "settings": {
@@ -429,6 +437,7 @@
     "altaeron_technology",
     "altaeron_reviews",
     "altaeron_community",
+    "altaeron_newsletter",
     "altaeron_trust_mobile_footer",
     "altaeron_mobile_sticky_cta"
   ]
