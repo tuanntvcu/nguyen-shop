@@ -21,6 +21,7 @@
                 <div class="announcement-bar__content rte text-center">
               {%- endif -%}
               {%- if block.settings.text != blank -%}
+                {%- if block.settings.icon != 'none' -%}{% render 'altaeron-icon', name: block.settings.icon, class: 'announcement-bar__icon' %}{%- endif -%}
                 <p class="announcement-bar__text">{{ block.settings.text }}</p>
               {%- endif -%}
               {%- if block.settings.link != blank -%}
@@ -162,6 +163,19 @@
           "id": "text",
           "label": "t:sections.all.text.label",
           "default": "Welcome to our store"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {"value":"none","label":"None"},
+            {"value":"shipping","label":"Shipping"},
+            {"value":"spark","label":"Spark"},
+            {"value":"shield","label":"Shield"},
+            {"value":"returns","label":"Returns"}
+          ],
+          "default": "none"
         },
         {
           "type": "url",

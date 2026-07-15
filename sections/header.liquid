@@ -99,11 +99,7 @@
     </div>
   {%- endif -%}
 
-  {%- if request.page_type == 'index' -%}
-    <h1 class="header__logo flex justify-center z-1">
-  {%- else -%}
-    <div class="header__logo flex justify-center z-1">
-  {%- endif -%}
+  <div class="header__logo flex justify-center z-1">
   <a
     href="{{ routes.root_url }}"
     class="h3 relative flex{% unless settings.logo %} header__logo--text{% else %} header__logo--image{% endunless %}"
@@ -185,11 +181,7 @@
       {{ shop.name }}
     {%- endif -%}
   </a>
-  {%- if request.page_type == 'index' -%}
-    </h1>
-  {%- else -%}
-    </div>
-  {%- endif -%}
+  </div>
 
   {%- if section.settings.menu != blank -%}
     {%- if header_layout == 'center-split' -%}

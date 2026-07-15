@@ -1,0 +1,24 @@
+{%- comment -%}Uses real product data while preserving a compact exhibition-card treatment.{%- endcomment -%}
+<article class="altaeron-world-card">
+  <a href="{{ product.url }}" class="altaeron-world-card__link">
+    <div class="altaeron-world-card__media">
+      {%- if product.featured_media -%}
+        {{ product.featured_media.preview_image
+          | image_url: width: 720
+          | image_tag:
+            loading: 'lazy',
+            widths: '180, 240, 360, 540, 720',
+            sizes: '(max-width: 767px) 96px, 22vw',
+            alt: product.featured_media.alt | default: product.title
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="altaeron-world-card__content">
+      <h3>{{ product.title | escape }}</h3>
+      {% render 'price', product: product %}
+    </div>
+    <span class="altaeron-world-card__arrow" aria-hidden="true">→</span>
+  </a>
+</article>

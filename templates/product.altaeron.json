@@ -1,0 +1,115 @@
+{
+  "sections": {
+    "main": {
+      "type": "altaeron-product-experience",
+      "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_type": "shopify_swatch",
+            "button_style": "standard",
+            "button_size": 40,
+            "size_title": "Size",
+            "size_chart_from_page": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "pickup": {
+          "type": "pickup_availability",
+          "settings": {}
+        }
+      },
+      "block_order": ["variant_picker", "buy_buttons", "pickup"],
+      "settings": {
+        "background": "#050809",
+        "text_color": "#f4f0e8",
+        "muted_color": "#9a9b98",
+        "accent_color": "#f3a316",
+        "enable_ambient_motion": true,
+        "sticky_chapters": true,
+        "sticky_buy_bar": true,
+        "enable_image_zoom": true,
+        "media_size": "large",
+        "enable_video_looping": false,
+        "mobile_thumbnails": "show",
+        "show_rating": true,
+        "story_cta": "Watch the story",
+        "legend_eyebrow": "A world where",
+        "craft_eyebrow": "The craft",
+        "craft_heading": "From Nature. Through Hand. Into Light.",
+        "details_eyebrow": "Details",
+        "details_heading": "Every Detail Tells A Story.",
+        "choose_eyebrow": "Choose your world",
+        "choose_heading": "Create Your World",
+        "size_guide_label": "Size guide",
+        "show_trust": true,
+        "trust_1_label": "",
+        "trust_1_text": "",
+        "trust_2_label": "",
+        "trust_2_text": "",
+        "trust_3_label": "",
+        "trust_3_text": "",
+        "trust_4_label": "",
+        "trust_4_text": ""
+      }
+    },
+    "aftercare": {
+      "type": "altaeron-product-aftercare",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "show_packaging": true,
+        "show_homes": true,
+        "show_stories": true,
+        "background": "#050809",
+        "text_color": "#f4f0e8",
+        "muted_color": "#9a9b98",
+        "accent_color": "#f3a316",
+        "packaging_eyebrow": "Bring it home",
+        "packaging_heading": "Bring A World Home.",
+        "homes_eyebrow": "Homes of Altaeron",
+        "homes_heading": "See How It Lives In Real Homes.",
+        "stories_eyebrow": "Stories from dreamers",
+        "stories_heading": "More Than A Product. A Piece Of Another World."
+      }
+    },
+    "guide": {
+      "type": "altaeron-product-guide",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "show_section": true,
+        "background": "#050809",
+        "text_color": "#f4f0e8",
+        "muted_color": "#9a9b98",
+        "accent_color": "#f3a316",
+        "eyebrow": "Keeper's guide",
+        "heading": "Everything You Need To Know.",
+        "open_first": true,
+        "one_open": true
+      }
+    },
+    "other_worlds": {
+      "type": "altaeron-other-worlds",
+      "settings": {
+        "show_section": true,
+        "background": "#050809",
+        "text_color": "#f4f0e8",
+        "muted_color": "#9a9b98",
+        "accent_color": "#f3a316",
+        "eyebrow": "Other worlds await",
+        "heading": "Other Worlds Await.",
+        "limit": 4
+      }
+    }
+  },
+  "order": ["main", "aftercare", "guide", "other_worlds"]
+}

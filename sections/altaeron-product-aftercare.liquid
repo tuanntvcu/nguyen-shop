@@ -1,0 +1,116 @@
+{%- liquid
+  assign packaging_image = product.metafields.custom.packaging_image.value
+  assign packaging_heading = product.metafields.custom.packaging_heading.value
+  assign packaging_content = product.metafields.custom.packaging_content
+  assign lifestyle_gallery = product.metafields.custom.lifestyle_gallery.value
+  assign featured_review = product.metafields.custom.featured_review.value | default: product.metafields.custom.story_card.value
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count.value
+  assign has_packaging = false
+  if packaging_image != blank or packaging_heading != blank or packaging_content != blank
+    assign has_packaging = true
+  endif
+  assign has_stories = false
+  if featured_review != blank or rating != blank or section.blocks.size > 0
+    assign has_stories = true
+  endif
+-%}
+
+{{ 'altaeron-product.css' | asset_url | stylesheet_tag }}
+
+<div class="altaeron-aftercare altaeron-surface" style="--altaeron-bg: {{ section.settings.background }}; --altaeron-text: {{ section.settings.text_color }}; --altaeron-accent: {{ section.settings.accent_color }}; --altaeron-muted: {{ section.settings.muted_color }};">
+  {%- if section.settings.show_packaging and has_packaging -%}
+    <section id="altaeron-bring-home" class="altaeron-packaging altaeron-chapter" data-altaeron-chapter="Bring It Home" aria-labelledby="AltaeronPackagingTitle-{{ section.id }}">
+      <div class="altaeron-packaging__copy">
+        <p class="altaeron-kicker">05 / {{ section.settings.packaging_eyebrow | escape }}</p>
+        <h2 id="AltaeronPackagingTitle-{{ section.id }}">{{ packaging_heading | default: section.settings.packaging_heading | escape }}</h2>
+        {%- if packaging_content != blank -%}<div class="altaeron-rte">{{ packaging_content | metafield_tag }}</div>{%- endif -%}
+      </div>
+      {%- if packaging_image != blank -%}
+        <div class="altaeron-packaging__media">
+          {{ packaging_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1280, 1600, 1800', sizes: '(max-width: 767px) 100vw, 64vw', alt: packaging_image.alt }}
+        </div>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
+
+  {%- if section.settings.show_homes and lifestyle_gallery != blank -%}
+    <section id="altaeron-homes" class="altaeron-homes altaeron-chapter" data-altaeron-chapter="Homes of Altaeron" aria-labelledby="AltaeronHomesTitle-{{ section.id }}">
+      <header class="altaeron-section-heading">
+        <p class="altaeron-kicker">06 / {{ section.settings.homes_eyebrow | escape }}</p>
+        <h2 id="AltaeronHomesTitle-{{ section.id }}">{{ section.settings.homes_heading | escape }}</h2>
+      </header>
+      <div class="altaeron-homes__rail" role="region" aria-label="{{ section.settings.homes_heading | escape }}">
+        {%- for lifestyle_image in lifestyle_gallery limit: 10 -%}
+          <figure class="altaeron-homes__item">
+            {{ lifestyle_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '360, 540, 720, 960, 1200, 1400', sizes: '(max-width: 767px) 82vw, 32vw', alt: lifestyle_image.alt }}
+            {%- if lifestyle_image.alt != blank -%}<figcaption>{{ lifestyle_image.alt | escape }}</figcaption>{%- endif -%}
+          </figure>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- if section.settings.show_stories and has_stories -%}
+    <section id="altaeron-stories" class="altaeron-stories altaeron-chapter" data-altaeron-chapter="Stories From Dreamers" aria-labelledby="AltaeronStoriesTitle-{{ section.id }}">
+      <header class="altaeron-section-heading">
+        <p class="altaeron-kicker">07 / {{ section.settings.stories_eyebrow | escape }}</p>
+        <h2 id="AltaeronStoriesTitle-{{ section.id }}">{{ section.settings.stories_heading | escape }}</h2>
+        {%- if rating != blank and rating_count > 0 -%}
+          <div class="altaeron-rating altaeron-rating--large" aria-label="{{ rating.rating }} out of {{ rating.scale_max }} stars, {{ rating_count }} reviews">
+            <span aria-hidden="true">★★★★★</span><small>{{ rating.rating }} ({{ rating_count }})</small>
+          </div>
+        {%- endif -%}
+      </header>
+
+      {%- if featured_review != blank -%}
+        <article class="altaeron-featured-story">
+          <div class="altaeron-featured-story__author">
+            {%- if featured_review.avatar.value != blank -%}
+              {{ featured_review.avatar.value | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 90, 120', sizes: '48px', alt: featured_review.customer_name.value }}
+            {%- endif -%}
+            <p><strong>{{ featured_review.customer_name.value | escape }}</strong>{% if featured_review.customer_location.value != blank %}<small>{{ featured_review.customer_location.value | escape }}</small>{% endif %}</p>
+          </div>
+          <blockquote>“{{ featured_review.quote.value | escape }}”</blockquote>
+          {%- if featured_review.images.value != blank -%}
+            <div class="altaeron-featured-story__images">
+              {%- for story_image in featured_review.images.value limit: 4 -%}
+                {{ story_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '180, 240, 360, 480, 640', sizes: '(max-width: 767px) 30vw, 14vw', alt: story_image.alt }}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </article>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        <div class="altaeron-review-app" {{ block.shopify_attributes }}>{% render block %}</div>
+      {%- endfor -%}
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Altaeron story & reviews",
+  "tag": "section",
+  "class": "altaeron-template-section",
+  "enabled_on": { "templates": ["product"] },
+  "blocks": [{ "type": "@app" }],
+  "settings": [
+    { "type": "checkbox", "id": "show_packaging", "label": "Show packaging", "default": true },
+    { "type": "checkbox", "id": "show_homes", "label": "Show lifestyle gallery", "default": true },
+    { "type": "checkbox", "id": "show_stories", "label": "Show stories and reviews", "default": true },
+    { "type": "color", "id": "background", "label": "Background", "default": "#050809" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#f4f0e8" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#9a9b98" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#f3a316" },
+    { "type": "text", "id": "packaging_eyebrow", "label": "Packaging eyebrow", "default": "Bring it home" },
+    { "type": "text", "id": "packaging_heading", "label": "Packaging fallback heading", "default": "Bring A World Home." },
+    { "type": "text", "id": "homes_eyebrow", "label": "Lifestyle eyebrow", "default": "Homes of Altaeron" },
+    { "type": "text", "id": "homes_heading", "label": "Lifestyle heading", "default": "See How It Lives In Real Homes." },
+    { "type": "text", "id": "stories_eyebrow", "label": "Review eyebrow", "default": "Stories from dreamers" },
+    { "type": "text", "id": "stories_heading", "label": "Review heading", "default": "More Than A Product. A Piece Of Another World." }
+  ],
+  "presets": [{ "name": "Altaeron story & reviews" }]
+}
+{% endschema %}

@@ -17,21 +17,24 @@
         "announcement_bar_wjU7D9": {
           "type": "announcement_bar",
           "settings": {
-            "text": "30-DAY EASY RETURNS",
+            "text": "FREE SHIPPING OVER $99",
+            "icon": "shipping",
             "link": ""
           }
         },
         "announcement_bar_yELyjf": {
           "type": "announcement_bar",
           "settings": {
-            "text": "FREE SHIPPING ON ORDERS OVER $69",
+            "text": "HANDCRAFTED WORLDS · TIMELESS LIGHT",
+            "icon": "spark",
             "link": ""
           }
         },
         "announcement_bar_9gLqAn": {
           "type": "announcement_bar",
           "settings": {
-            "text": "24/7 CUSTOMER SUPPORT",
+            "text": "1 YEAR WARRANTY",
+            "icon": "shield",
             "link": ""
           }
         }
@@ -41,7 +44,7 @@
         "announcement_bar_yELyjf",
         "announcement_bar_9gLqAn"
       ],
-      "disabled": true,
+      "disabled": false,
       "name": "t:sections.announcement-bar.name",
       "settings": {
         "color_scheme": "scheme-inverse",
@@ -106,6 +109,7 @@
         "text_t3BcT4",
         "text_QCAxbn"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-inverse",
         "vertical_alignment": "center",
@@ -124,19 +128,19 @@
       "type": "header",
       "settings": {
         "container": "fixed",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-inverse",
         "menu": "main-menu",
         "menu_mobile": "main-menu",
         "header_layout": "left-center",
         "sticky_header": "on-scroll-up",
         "menu_trigger": "hover",
         "show_sperator_line": false,
-        "enable_transparent_header": false,
+        "enable_transparent_header": true,
         "transparent_header_color": "#ffffff",
         "logo_mobile_position": "center",
         "show_social_media_icons": true,
-        "enable_language_selector": true,
-        "enable_country_selector": true,
+        "enable_language_selector": false,
+        "enable_country_selector": false,
         "padding_top": 20,
         "padding_bottom": 20
       }

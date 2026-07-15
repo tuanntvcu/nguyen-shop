@@ -15,7 +15,7 @@
     "color_badge_hot": "#000000",
     "color_badge_new": "#67785d",
     "color_badge_soldout": "#a5a4ab",
-    "color_cart_bubble": "#000000",
+    "color_cart_bubble": "#d99622",
     "type_body_font": "dm_sans_n4",
     "body_font_weight_bolder": "700",
     "body_font_size": 15,
@@ -113,20 +113,20 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "primary_accent": "#d98a2b",
-          "border": "#e3e6e3",
-          "text": "#111827",
-          "background": "#ffffff",
-          "secondary_background": "#f5f3ef",
-          "button": "#d98a2b",
-          "button_label": "#ffffff",
-          "secondary_button": "#ffffff",
-          "secondary_button_border": "#1f2f2b",
-          "secondary_button_label": "#1f2f2b",
-          "button_hover": "#1f2f2b",
+          "primary_accent": "#d99622",
+          "border": "#292a27",
+          "text": "#f4f0e8",
+          "background": "#030606",
+          "secondary_background": "#080b0b",
+          "button": "#d99622",
+          "button_label": "#050505",
+          "secondary_button": "#030606",
+          "secondary_button_border": "#d99622",
+          "secondary_button_label": "#f4f0e8",
+          "button_hover": "#e8b958",
           "button_label_hover": "#ffffff",
-          "form_field": "#f6f6f3",
-          "form_field_label": "#111827",
+          "form_field": "#080b0b",
+          "form_field_label": "#f4f0e8",
           "product_price_sale": "#c2412d"
         }
       },
@@ -189,8 +189,8 @@
       },
       "scheme-inverse": {
         "settings": {
-          "primary_accent": "#d63a2f",
-          "border": "#ffffff",
+          "primary_accent": "#d99622",
+          "border": "#292a27",
           "text": "#ffffff",
           "background": "#000000",
           "secondary_background": "#000000",

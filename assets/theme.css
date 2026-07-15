@@ -6227,6 +6227,43 @@ body:not(.header-pinned) .header-scrolled .header {
   margin-top: 12px;
 }
 
+.announcement-bar__content {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.announcement-bar__icon {
+  color: rgb(var(--color-primary-accent));
+  fill: none;
+  height: 16px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.4;
+  width: 16px;
+}
+
+.altaeron-brand {
+  align-items: center;
+  display: inline-flex;
+  gap: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+.altaeron-brand svg {
+  flex: 0 0 auto;
+  height: 38px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.2;
+  width: 38px;
+}
+.altaeron-brand--footer {
+  font-size: 12px;
+}
+
 .footer-newsletter {
   width: var(--form-width);
   max-width: 100%;

@@ -1,0 +1,565 @@
+{{ 'section-altaeron-exhibition.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'altaeron-exhibition.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign hero_title = section.settings.hero_heading | default: 'We Preserve Worlds In Resin.'
+  assign hero_words = hero_title | split: ' '
+  assign process_blocks = section.blocks | where: 'type', 'process'
+  assign collection_blocks = section.blocks | where: 'type', 'collection'
+  assign product_blocks = section.blocks | where: 'type', 'product'
+  assign testimonial_blocks = section.blocks | where: 'type', 'testimonial'
+  assign gallery_blocks = section.blocks | where: 'type', 'gallery'
+  assign story_blocks = section.blocks | where: 'type', 'story'
+-%}
+
+<section
+  id="Altaeron-{{ section.id }}"
+  class="altaeron"
+  data-altaeron
+  data-cart-url="{{ routes.cart_url }}.js"
+  style="--altaeron-accent: {{ section.settings.accent_color }}; --altaeron-bg: {{ section.settings.background_color }}; --altaeron-text: {{ section.settings.text_color }};"
+>
+  <div class="altaeron__hero" id="altaeron-hero">
+    <div class="altaeron__mobile-masthead" aria-label="{{ section.settings.brand_name | default: shop.name | escape }}">
+      <button type="button" data-menu-trigger aria-label="{{ 'accessibility.menu_drawer' | t }}">{% render 'altaeron-icon', name: 'menu' %}</button>
+      <a class="altaeron__mobile-brand" href="{{ routes.root_url }}">
+        <svg viewBox="0 0 42 42" fill="none" aria-hidden="true"><circle cx="21" cy="21" r="19"/><path d="m8 28 10-15 5 8 3-5 8 12M13 27l5-7 4 5 4-3 4 5"/></svg>
+        <span>{{ section.settings.brand_name | default: shop.name | escape }}</span>
+      </a>
+      <button type="button" data-cart-trigger aria-label="{{ 'general.cart.cart_count' | t: count: cart.item_count | escape }}">{% render 'altaeron-icon', name: 'cart' %}<span class="altaeron__mobile-count">{{ cart.item_count }}</span></button>
+    </div>
+    <div class="altaeron__hero-media" aria-hidden="true">
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 2000, 2400', sizes: '100vw', loading: 'eager', preload: true, class: 'altaeron__hero-image' }}
+      {%- else -%}
+        <img class="altaeron__hero-image" src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" fetchpriority="high">
+      {%- endif -%}
+      <span class="altaeron__hero-vignette"></span>
+      <span class="altaeron__glow"></span>
+      <span class="altaeron__particles" data-particles></span>
+    </div>
+
+    <div class="altaeron__hero-content altaeron__shell" data-reveal="hero">
+      {%- if section.settings.hero_eyebrow != blank -%}<p class="altaeron__eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
+      <h1 class="altaeron__hero-title">
+        {%- for word in hero_words -%}
+          <span{% if forloop.last %} class="altaeron__accent"{% endif %}>{{ word | escape }}{% unless forloop.last %} {% endunless %}</span>
+        {%- endfor -%}
+      </h1>
+      {%- if section.settings.hero_text != blank -%}<div class="altaeron__lede rte">{{ section.settings.hero_text }}</div>{%- endif -%}
+      <div class="altaeron__hero-actions">
+        {%- if section.settings.hero_button_label != blank -%}
+          <a class="altaeron__button altaeron__button--primary" href="{{ section.settings.hero_button_link | default: '#altaeron-collections' }}">{{ section.settings.hero_button_label | escape }} <span aria-hidden="true">→</span></a>
+        {%- endif -%}
+        {%- if section.settings.video_label != blank -%}
+          <button class="altaeron__play" type="button"{% if section.settings.video_url != blank %} data-video-open{% else %} data-scroll-target="#altaeron-story"{% endif %}>
+            <span class="altaeron__play-icon" aria-hidden="true">▶</span>{% if section.settings.video_url != blank %}{{ section.settings.video_label | escape }}{% else %}{{ section.settings.video_fallback_label | escape }}{% endif %}
+          </button>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.settings.show_hero_rating -%}
+      <a class="altaeron__hero-rating" href="{{ section.settings.reviews_link | default: '#altaeron-reviews' }}" aria-label="{{ section.settings.review_score | escape }}, {{ section.settings.review_source | escape }}">
+        <span class="altaeron__stars" style="--rating-percent: {{ section.settings.review_stars | times: 20 }}%" aria-hidden="true">★★★★★</span>
+        <strong>{{ section.settings.review_score | escape }}</strong>
+        <small>{{ section.settings.review_source | escape }}</small>
+      </a>
+    {%- endif -%}
+
+    <div class="altaeron__hero-features altaeron__shell" aria-label="{{ section.settings.features_label | escape }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature' and block.settings.placement == 'hero' -%}
+          <div class="altaeron__feature" {{ block.shopify_attributes }}>
+            {% render 'altaeron-icon', name: block.settings.icon %}
+            <span><strong>{{ block.settings.heading | escape }}</strong>{% if block.settings.text != blank %}<small>{{ block.settings.text | escape }}</small>{% endif %}</span>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <a class="altaeron__scroll-cue" href="#altaeron-story">{{ section.settings.scroll_label | escape }}<span></span></a>
+  </div>
+
+  <div class="altaeron__stats" aria-label="{{ section.settings.stats_label | escape }}">
+    <div><strong>{{ section.settings.stat_1_value | escape }}</strong><span>{{ section.settings.stat_1_label | escape }}</span></div>
+    <div><strong>{{ section.settings.stat_2_value | escape }}</strong><span>{{ section.settings.stat_2_label | escape }}</span></div>
+    <div><strong>{{ section.settings.stat_3_value | escape }}</strong><span>{{ section.settings.stat_3_label | escape }}</span></div>
+    <div><strong>{{ section.settings.stat_4_value | escape }}</strong><span>{{ section.settings.stat_4_label | escape }}</span></div>
+  </div>
+
+  <article class="altaeron__story" id="altaeron-story" data-story data-chapter-order="{{ section.settings.order_story }}" aria-label="{{ section.settings.story_eyebrow | escape }}">
+    <div class="altaeron__story-slides">
+      <div class="altaeron__story-slide is-active" data-story-slide role="group" aria-roledescription="slide" aria-label="1 {{ 'general.slider.of' | t }} {{ story_blocks.size | plus: 1 }}">
+        <div class="altaeron__story-media">
+          {%- if section.settings.story_image != blank -%}
+            {{ section.settings.story_image | image_url: width: 1800 | image_tag: widths: '550, 900, 1200, 1800', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy' }}
+          {%- else -%}
+            <img src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="altaeron__story-copy">
+          <p class="altaeron__eyebrow">{{ section.settings.story_eyebrow | escape }}</p>
+          <div class="altaeron__heading">{{ section.settings.story_heading }}</div>
+          <div class="rte">{{ section.settings.story_text }}</div>
+          {%- if section.settings.story_button_label != blank -%}<a class="altaeron__text-link" href="{{ section.settings.story_button_link | default: '#altaeron-process' }}">{{ section.settings.story_button_label | escape }} <span aria-hidden="true">→</span></a>{%- endif -%}
+          {%- if section.settings.story_mobile_button_label != blank -%}<button class="altaeron__play altaeron__story-mobile-cta" type="button"{% if section.settings.video_url != blank %} data-video-open{% else %} data-scroll-target="#altaeron-process"{% endif %}><span class="altaeron__play-icon" aria-hidden="true">▶</span>{% if section.settings.video_url != blank %}{{ section.settings.story_mobile_button_label | escape }}{% else %}{{ section.settings.story_mobile_fallback_label | escape }}{% endif %}</button>{%- endif -%}
+        </div>
+      </div>
+      {%- for block in story_blocks -%}
+        <div class="altaeron__story-slide" data-story-slide role="group" aria-roledescription="slide" aria-label="{{ forloop.index | plus: 1 }} {{ 'general.slider.of' | t }} {{ story_blocks.size | plus: 1 }}" aria-hidden="true" {{ block.shopify_attributes }}>
+          <div class="altaeron__story-media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1800 | image_tag: widths: '550, 900, 1200, 1800', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy' }}
+            {%- elsif forloop.index == 1 -%}
+              <img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+            {%- elsif forloop.index == 2 -%}
+              <img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+            {%- else -%}
+              <img src="{{ 'altaeron-cinematic.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="altaeron__story-copy">
+            <p class="altaeron__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+            <div class="altaeron__heading">{{ block.settings.heading }}</div>
+            <div class="rte">{{ block.settings.text }}</div>
+            {%- if block.settings.button_label != blank -%}<a class="altaeron__text-link" href="{{ block.settings.button_link | default: '#altaeron-process' }}">{{ block.settings.button_label | escape }} <span aria-hidden="true">→</span></a>{%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="altaeron__story-nav" aria-label="{{ 'general.slider.name' | t }}">
+      <button class="is-active" type="button" data-story-nav="0" aria-label="{{ 'sections.slideshow.load_slide' | t }} 1" aria-current="true">01</button>
+      {%- for block in story_blocks -%}<button type="button" data-story-nav="{{ forloop.index }}" aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index | plus: 1 }}">{{ forloop.index | plus: 1 | prepend: '0' | slice: -2, 2 }}</button>{%- endfor -%}
+    </div>
+  </article>
+
+  <section class="altaeron__process altaeron__shell" id="altaeron-process" data-reveal data-chapter-order="{{ section.settings.order_process }}">
+    <header class="altaeron__section-head altaeron__section-head--side">
+      <div><p class="altaeron__eyebrow">{{ section.settings.process_eyebrow | escape }}</p><div class="altaeron__heading">{{ section.settings.process_heading }}</div></div>
+      {%- if section.settings.process_link_label != blank -%}<a class="altaeron__text-link" href="{{ section.settings.process_link | default: routes.collections_url }}">{{ section.settings.process_link_label | escape }} <span aria-hidden="true">→</span></a>{%- endif -%}
+    </header>
+    <div class="altaeron__process-timeline" data-process-timeline aria-label="{{ section.settings.process_eyebrow | escape }}">
+      {%- for block in process_blocks -%}
+        <button class="{% if forloop.first %}is-active{% endif %}" type="button" data-process-nav="{{ forloop.index0 }}" aria-label="{{ block.settings.heading | escape }}"{% if forloop.first %} aria-current="step"{% endif %}>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</button>
+      {%- endfor -%}
+      <span aria-hidden="true"><i></i></span>
+    </div>
+    <div class="altaeron__process-track" data-slider data-slider-name="process" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.process_eyebrow | escape }}" tabindex="0">
+      {%- assign process_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'process' -%}
+          {%- assign process_index = process_index | plus: 1 -%}
+          <article class="altaeron__process-card" data-slide role="group" aria-roledescription="slide" aria-label="{{ process_index }} {{ 'general.slider.of' | t }} {{ process_blocks.size }}" {{ block.shopify_attributes }}>
+            <div class="altaeron__process-image">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 700 | image_tag: widths: '300, 500, 700', sizes: '(min-width: 900px) 16vw, 72vw', loading: 'lazy' }}
+              {%- elsif process_index == 1 -%}
+                <img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+              {%- elsif process_index == 2 -%}
+                <img src="{{ 'altaeron-concept.webp' | asset_url }}" width="1200" height="800" alt="" loading="lazy">
+              {%- elsif process_index == 3 -%}
+                <img src="{{ 'altaeron-craft.webp' | asset_url }}" width="1200" height="800" alt="" loading="lazy">
+              {%- elsif process_index == 4 -%}
+                <img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+              {%- elsif process_index == 5 -%}
+                <img src="{{ 'altaeron-cinematic.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+              {%- else -%}
+                <img src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" loading="lazy">
+              {%- endif -%}
+            </div>
+            <span class="altaeron__number">{{ process_index | prepend: '0' | slice: -2, 2 }}</span>
+            <h3>{{ block.settings.heading | escape }}</h3>
+            <p>{{ block.settings.text | escape }}</p>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <a class="altaeron__process-more" href="#altaeron-collections" aria-label="{{ section.settings.collections_eyebrow | escape }}">→</a>
+  </section>
+
+  <section class="altaeron__collections altaeron__shell" id="altaeron-collections" data-reveal data-chapter-order="{{ section.settings.order_collections }}">
+    <header class="altaeron__section-head">
+      <p class="altaeron__eyebrow">{{ section.settings.collections_eyebrow | escape }}</p>
+      <div class="altaeron__heading">{{ section.settings.collections_heading }}</div>
+      {%- if section.settings.collections_link_label != blank -%}<a class="altaeron__text-link" href="{{ section.settings.collections_link | default: routes.collections_url }}">{{ section.settings.collections_link_label | escape }} <span aria-hidden="true">→</span></a>{%- endif -%}
+    </header>
+    <div class="altaeron__collection-carousel">
+    <div class="altaeron__collection-track" data-slider data-slider-name="collections" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.collections_eyebrow | escape }}" tabindex="0">
+      {%- assign collection_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'collection' -%}
+          {%- assign collection_index = collection_index | plus: 1 -%}
+          {%- assign card_collection = block.settings.collection -%}
+          {%- if card_collection == blank -%}
+            {%- for fallback_collection in collections -%}
+              {%- if forloop.index == collection_index -%}{%- assign card_collection = fallback_collection -%}{%- break -%}{%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {%- if card_collection != blank or request.design_mode -%}
+          {%- assign card_link = block.settings.link | default: card_collection.url | default: routes.collections_url -%}
+          <a class="altaeron__collection-card" href="{{ card_link }}" data-slide role="group" aria-roledescription="slide" aria-label="{{ collection_index }} {{ 'general.slider.of' | t }} {{ collection_blocks.size }}" {{ block.shopify_attributes }}>
+            <div class="altaeron__collection-image">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1100 | image_tag: widths: '400, 700, 900, 1100', sizes: '(min-width: 900px) 25vw, 78vw', loading: 'lazy' }}
+              {%- elsif card_collection.featured_image != blank -%}
+                {{ card_collection.featured_image | image_url: width: 1100 | image_tag: widths: '400, 700, 900, 1100', sizes: '(min-width: 900px) 25vw, 78vw', loading: 'lazy' }}
+              {%- elsif collection_index == 1 -%}
+                <img src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" loading="lazy">
+              {%- elsif collection_index == 2 -%}
+                <img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+              {%- elsif collection_index == 3 -%}
+                <img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+              {%- else -%}
+                <img src="{{ 'altaeron-home.webp' | asset_url }}" width="971" height="1620" alt="" loading="lazy">
+              {%- endif -%}
+            </div>
+            <div class="altaeron__collection-copy">
+              <h3>{% if block.settings.collection != blank %}{{ block.settings.heading | default: card_collection.title | escape }}{% elsif card_collection != blank %}{{ card_collection.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}</h3>
+              {%- if block.settings.collection != blank and block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- elsif card_collection.description != blank -%}<p>{{ card_collection.description | strip_html | truncate: 64 | escape }}</p>{%- endif -%}
+              <span aria-hidden="true">↗</span>
+            </div>
+          </a>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="altaeron__slider-ui" data-slider-ui="collections"><button type="button" data-prev aria-label="{{ 'general.slider.previous_slide' | t }}">←</button><div data-dots></div><button type="button" data-next aria-label="{{ 'general.slider.next_slide' | t }}">→</button></div>
+    </div>
+  </section>
+
+  <section class="altaeron__products altaeron__shell" id="altaeron-products" data-reveal data-chapter-order="{{ section.settings.order_products }}">
+    <header class="altaeron__section-head altaeron__section-head--horizontal">
+      <div><p class="altaeron__eyebrow">{{ section.settings.products_eyebrow | escape }}</p><div class="altaeron__heading visually-hidden">{{ section.settings.products_heading }}</div></div>
+      {%- if section.settings.products_link_label != blank -%}<a class="altaeron__text-link" href="{{ section.settings.products_link | default: routes.all_products_collection_url }}">{{ section.settings.products_link_label | escape }} <span aria-hidden="true">→</span></a>{%- endif -%}
+    </header>
+    <div class="altaeron__product-carousel">
+    <div class="altaeron__product-track" data-slider data-slider-name="products" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.products_eyebrow | escape }}" tabindex="0">
+      {%- assign product_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'product' -%}
+          {%- assign product_index = product_index | plus: 1 -%}
+          {%- assign card_product = block.settings.product -%}
+          {%- if card_product == blank -%}
+            {%- assign product_offset = product_index | minus: 1 -%}
+            {%- assign card_product = collections.all.products[product_offset] -%}
+          {%- endif -%}
+          {%- if card_product != blank or request.design_mode -%}
+          <article class="altaeron__product-card" data-slide role="group" aria-roledescription="slide" aria-label="{{ product_index }} {{ 'general.slider.of' | t }} {{ product_blocks.size }}" {{ block.shopify_attributes }}>
+            <a class="altaeron__product-image" href="{{ card_product.url | default: routes.all_products_collection_url }}" aria-label="{% if card_product != blank %}{{ card_product.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', loading: 'lazy' }}
+              {%- elsif card_product.featured_image != blank -%}
+                {{ card_product.featured_image | image_url: width: 900 | image_tag: widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', loading: 'lazy' }}
+              {%- elsif product_index == 2 -%}
+                <img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+              {%- elsif product_index == 3 -%}
+                <img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+              {%- else -%}
+                <img src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" loading="lazy">
+              {%- endif -%}
+              {%- if block.settings.badge != blank and block.settings.product != blank or block.settings.badge != blank and request.design_mode -%}<span class="altaeron__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+            </a>
+            <div class="altaeron__product-copy">
+              <h3><a href="{{ card_product.url | default: routes.all_products_collection_url }}">{% if block.settings.product != blank %}{{ block.settings.heading | default: card_product.title | escape }}{% elsif card_product != blank %}{{ card_product.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}</a></h3>
+              {%- if block.settings.product != blank or request.design_mode -%}<div class="altaeron__rating"><span class="visually-hidden">{{ block.settings.stars }} {{ section.settings.rating_accessibility_suffix | escape }}</span><span class="altaeron__stars" style="--rating-percent: {{ block.settings.stars | times: 20 }}%" aria-hidden="true">★★★★★</span><small>{{ block.settings.rating | escape }}</small></div>{%- endif -%}
+              <div class="altaeron__price">
+                {%- if card_product != blank -%}<strong>{{ card_product.price | money }}</strong>{% if card_product.compare_at_price > card_product.price %}<s>{{ card_product.compare_at_price | money }}</s>{% endif %}
+                {%- else -%}<strong>{{ block.settings.price | escape }}</strong>{% if block.settings.compare_price != blank %}<s>{{ block.settings.compare_price | escape }}</s>{% endif %}{%- endif -%}
+              </div>
+              {%- if card_product != blank and card_product.available and card_product.has_only_default_variant -%}
+                <form method="post" action="{{ routes.cart_add_url }}" class="altaeron__quick-add" data-quick-add data-success="{{ 'general.cart.item_added' | t | escape }}" data-error="{{ 'sections.cart.cart_error' | t | escape }}">
+                  <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" aria-label="{{ 'products.product.add_to_cart' | t }}: {{ card_product.title | escape }}">{% render 'altaeron-icon', name: 'cart' %}<span>{{ section.settings.add_to_cart_label | escape }}</span></button>
+                  <p role="status" aria-live="polite"></p>
+                </form>
+              {%- elsif card_product != blank and card_product.available -%}
+                <a class="altaeron__quick-add altaeron__quick-add-link" href="{{ card_product.url }}" aria-label="{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}">{% render 'altaeron-icon', name: 'cart' %}</a>
+              {%- endif -%}
+            </div>
+          </article>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="altaeron__slider-ui" data-slider-ui="products"><button type="button" data-prev aria-label="{{ 'general.slider.previous_slide' | t }}">←</button><div data-dots></div><button type="button" data-next aria-label="{{ 'general.slider.next_slide' | t }}">→</button></div>
+    </div>
+  </section>
+
+  <div class="altaeron__services altaeron__services--mobile altaeron__shell" aria-label="{{ section.settings.services_label | escape }}" data-reveal data-chapter-order="{{ section.settings.order_services }}">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'feature' and block.settings.placement == 'service' -%}
+        <div class="altaeron__service" {{ block.shopify_attributes }}>
+          {% render 'altaeron-icon', name: block.settings.icon %}
+          <span><strong>{{ block.settings.heading | escape }}</strong><small>{{ block.settings.text | escape }}</small></span>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <section class="altaeron__reviews altaeron__shell" id="altaeron-reviews" data-reveal data-chapter-order="{{ section.settings.order_reviews }}">
+    <header class="altaeron__rating-summary">
+      <p class="altaeron__eyebrow">{{ section.settings.reviews_eyebrow | escape }}</p>
+      <strong>{{ section.settings.review_score | escape }}</strong>
+      <span class="visually-hidden">{{ section.settings.review_stars }} {{ section.settings.rating_accessibility_suffix | escape }}</span>
+      <span class="altaeron__stars" style="--rating-percent: {{ section.settings.review_stars | times: 20 }}%" aria-hidden="true">★★★★★</span>
+      <small>{{ section.settings.review_source | escape }}</small>
+      {%- if section.settings.reviews_link_label != blank -%}
+        {%- if section.settings.reviews_link != blank -%}<a class="altaeron__button altaeron__button--primary" href="{{ section.settings.reviews_link }}">{{ section.settings.reviews_link_label | escape }}</a>
+        {%- else -%}<button class="altaeron__button altaeron__button--primary" type="button" data-reviews-open>{{ section.settings.reviews_link_label | escape }}</button>{%- endif -%}
+      {%- endif -%}
+    </header>
+    <div class="altaeron__review-track" data-slider data-slider-name="reviews" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.reviews_eyebrow | escape }}" tabindex="0">
+      {%- assign testimonial_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'testimonial' -%}
+          {%- assign testimonial_index = testimonial_index | plus: 1 -%}
+          <figure class="altaeron__review" data-slide role="group" aria-roledescription="slide" aria-label="{{ testimonial_index }} {{ 'general.slider.of' | t }} {{ testimonial_blocks.size }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 700 | image_tag: widths: '360, 520, 700', sizes: '(min-width: 900px) 28vw, 88vw', loading: 'lazy' }}
+            {%- elsif testimonial_index == 2 -%}<img src="{{ 'altaeron-moon-home.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+            {%- elsif testimonial_index == 3 -%}<img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+            {%- elsif testimonial_index == 4 -%}<img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+            {%- else -%}<img src="{{ 'altaeron-home.webp' | asset_url }}" width="971" height="1620" alt="" loading="lazy">{%- endif -%}
+            <figcaption><blockquote>{{ block.settings.quote }}</blockquote><cite>{{ block.settings.author | escape }}{% if block.settings.location != blank %}<small>{{ block.settings.location | escape }}</small>{% endif %}</cite></figcaption>
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="altaeron__slider-ui" data-slider-ui="reviews"><button type="button" data-prev aria-label="{{ 'general.slider.previous_slide' | t }}">←</button><div data-dots></div><button type="button" data-next aria-label="{{ 'general.slider.next_slide' | t }}">→</button></div>
+  </section>
+
+  {%- if section.settings.reviews_link == blank and section.settings.reviews_link_label != blank -%}
+    <dialog class="altaeron__reviews-dialog" data-reviews-dialog aria-labelledby="AltaeronReviewsTitle-{{ section.id }}">
+      <button class="altaeron__dialog-close" type="button" data-reviews-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
+      <h2 id="AltaeronReviewsTitle-{{ section.id }}">{{ section.settings.reviews_eyebrow | escape }}</h2>
+      <div class="altaeron__reviews-dialog-grid">
+        {%- for block in testimonial_blocks -%}
+          <figure><blockquote>{{ block.settings.quote }}</blockquote><figcaption>{{ block.settings.author | escape }}{% if block.settings.location != blank %}<small>{{ block.settings.location | escape }}</small>{% endif %}</figcaption></figure>
+        {%- endfor -%}
+      </div>
+    </dialog>
+  {%- endif -%}
+
+  <section class="altaeron__homes" id="altaeron-homes" data-reveal data-chapter-order="{{ section.settings.order_homes }}">
+    <div class="altaeron__homes-lead">
+      {%- if section.settings.homes_lead_image != blank -%}{{ section.settings.homes_lead_image | image_url: width: 1400 | image_tag: widths: '520, 800, 1100, 1400', sizes: '(min-width: 990px) 1px, 100vw', loading: 'lazy' }}{%- else -%}<img src="{{ 'altaeron-home.webp' | asset_url }}" width="971" height="1620" alt="" loading="lazy">{%- endif -%}
+    </div>
+    <header class="altaeron__shell altaeron__section-head"><p class="altaeron__eyebrow">{{ section.settings.homes_eyebrow | escape }}</p><div class="altaeron__heading">{{ section.settings.homes_heading }}</div></header>
+    <div class="altaeron__homes-track" data-slider data-slider-name="homes" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.homes_eyebrow | escape }}" tabindex="0">
+      {%- assign gallery_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'gallery' -%}
+          {%- assign gallery_index = gallery_index | plus: 1 -%}
+          <figure data-slide role="group" aria-roledescription="slide" aria-label="{{ gallery_index }} {{ 'general.slider.of' | t }} {{ gallery_blocks.size }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 1200 | image_tag: widths: '520, 800, 1000, 1200', sizes: '(min-width: 900px) 38vw, 82vw', loading: 'lazy' }}
+            {%- elsif gallery_index == 1 -%}<img src="{{ 'altaeron-moon-home.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+            {%- elsif gallery_index == 2 -%}<img src="{{ 'altaeron-home.webp' | asset_url }}" width="971" height="1620" alt="" loading="lazy">
+            {%- elsif gallery_index == 3 -%}<img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+            {%- else -%}<img src="{{ 'altaeron-cinematic.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">{%- endif -%}
+            {%- if block.settings.caption != blank -%}<figcaption>{{ block.settings.caption | escape }}</figcaption>{%- endif -%}
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="altaeron__slider-ui" data-slider-ui="homes"><button type="button" data-prev aria-label="{{ 'general.slider.previous_slide' | t }}">←</button><div data-dots></div><button type="button" data-next aria-label="{{ 'general.slider.next_slide' | t }}">→</button></div>
+  </section>
+
+  <section class="altaeron__cinematic" data-reveal="slow" data-chapter-order="{{ section.settings.order_cinematic }}">
+    <div class="altaeron__cinematic-media">
+      {%- if section.settings.cinematic_image != blank -%}{{ section.settings.cinematic_image | image_url: width: 2000 | image_tag: widths: '700, 1100, 1500, 2000', sizes: '100vw', loading: 'lazy' }}{%- else -%}<img src="{{ 'altaeron-cinematic.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">{%- endif -%}
+    </div>
+    <div class="altaeron__cinematic-copy"><div class="altaeron__heading">{{ section.settings.cinematic_heading }}</div>{%- if section.settings.cinematic_button_label != blank -%}<button class="altaeron__play" type="button"{% if section.settings.video_url != blank %} data-video-open{% else %} data-scroll-target="#altaeron-process"{% endif %}><span class="altaeron__play-icon" aria-hidden="true">▶</span>{% if section.settings.video_url != blank %}{{ section.settings.cinematic_button_label | escape }}{% else %}{{ section.settings.cinematic_fallback_label | escape }}{% endif %}</button>{%- endif -%}</div>
+  </section>
+
+  <section class="altaeron__newsletter altaeron__shell" data-reveal data-chapter-order="{{ section.settings.order_newsletter }}">
+    <div><div class="altaeron__heading">{{ section.settings.newsletter_heading }}</div><p>{{ section.settings.newsletter_text | escape }}</p></div>
+    {%- form 'customer', class: 'altaeron__newsletter-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="visually-hidden" for="AltaeronEmail-{{ section.id }}">{{ section.settings.email_label | escape }}</label>
+      <input id="AltaeronEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" placeholder="{{ section.settings.email_placeholder | escape }}" required>
+      <button type="submit" class="altaeron__button altaeron__button--primary">{{ section.settings.newsletter_button | escape }}</button>
+      {%- if form.posted_successfully? -%}<p class="altaeron__form-message" role="status">{{ section.settings.newsletter_success | escape }}</p>{%- endif -%}
+      {%- if form.errors -%}<div class="altaeron__form-message" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+    {%- endform -%}
+  </section>
+
+  <div class="altaeron__services altaeron__services--desktop altaeron__shell" aria-label="{{ section.settings.services_label | escape }}">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'feature' and block.settings.placement == 'service' -%}
+        <div class="altaeron__service">
+          {% render 'altaeron-icon', name: block.settings.icon %}
+          <span><strong>{{ block.settings.heading | escape }}</strong><small>{{ block.settings.text | escape }}</small></span>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <nav class="altaeron__mobile-nav" aria-label="{{ section.settings.mobile_nav_label | escape }}">
+    <a href="{{ routes.all_products_collection_url }}">{% render 'altaeron-icon', name: section.settings.nav_shop_icon %}<span>{{ section.settings.nav_shop | escape }}</span></a>
+    <a href="#altaeron-collections">{% render 'altaeron-icon', name: section.settings.nav_collections_icon %}<span>{{ section.settings.nav_collections | escape }}</span></a>
+    <a href="#altaeron-story">{% render 'altaeron-icon', name: section.settings.nav_story_icon %}<span>{{ section.settings.nav_story | escape }}</span></a>
+    <button type="button" data-search-trigger>{% render 'altaeron-icon', name: section.settings.nav_search_icon %}<span>{{ section.settings.nav_search | escape }}</span></button>
+  </nav>
+
+  {%- if section.settings.video_url != blank -%}
+    <dialog class="altaeron__video-dialog" data-video-dialog>
+      <button type="button" data-video-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
+      <div class="altaeron__video-frame">
+        {%- if section.settings.video_url.type == 'youtube' -%}<iframe data-video-frame title="{{ section.settings.video_label | escape }}" src="https://www.youtube-nocookie.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        {%- elsif section.settings.video_url.type == 'vimeo' -%}<iframe data-video-frame title="{{ section.settings.video_label | escape }}" src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>{%- endif -%}
+      </div>
+    </dialog>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron exhibition",
+  "tag": "section",
+  "class": "section-altaeron-exhibition",
+  "max_blocks": 50,
+  "settings": [
+    {"type":"header","content":"Art direction"},
+    {"type":"color","id":"background_color","label":"Background","default":"#030606"},
+    {"type":"color","id":"text_color","label":"Text","default":"#f4f0e8"},
+    {"type":"color","id":"accent_color","label":"Amber accent","default":"#d99622"},
+    {"type":"header","content":"Chapter order"},
+    {"type":"range","id":"order_story","label":"Story","min":1,"max":9,"step":1,"default":1},
+    {"type":"range","id":"order_process","label":"Process","min":1,"max":9,"step":1,"default":2},
+    {"type":"range","id":"order_collections","label":"Collections","min":1,"max":9,"step":1,"default":3},
+    {"type":"range","id":"order_products","label":"Products","min":1,"max":9,"step":1,"default":4},
+    {"type":"range","id":"order_services","label":"Services","min":1,"max":9,"step":1,"default":5},
+    {"type":"range","id":"order_reviews","label":"Reviews","min":1,"max":9,"step":1,"default":6},
+    {"type":"range","id":"order_homes","label":"Homes","min":1,"max":9,"step":1,"default":7},
+    {"type":"range","id":"order_cinematic","label":"Cinematic","min":1,"max":9,"step":1,"default":8},
+    {"type":"range","id":"order_newsletter","label":"Newsletter","min":1,"max":9,"step":1,"default":9},
+    {"type":"header","content":"Hero"},
+    {"type":"text","id":"brand_name","label":"Mobile brand name","default":"ALTAERON"},
+    {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"NOT JUST A LAMP."},
+    {"type":"text","id":"hero_heading","label":"Heading","default":"We Preserve Worlds In Resin."},
+    {"type":"richtext","id":"hero_text","label":"Text","default":"<p>Every Altaeron lamp is a handcrafted universe, capturing nature, fantasy, and light in perfect harmony.</p>"},
+    {"type":"text","id":"hero_button_label","label":"Primary button","default":"EXPLORE COLLECTIONS"},
+    {"type":"url","id":"hero_button_link","label":"Primary button link"},
+    {"type":"text","id":"video_label","label":"Video button","default":"WATCH THE MAGIC"},
+    {"type":"text","id":"video_fallback_label","label":"Button when video is empty","default":"DISCOVER THE STORY"},
+    {"type":"video_url","id":"video_url","label":"YouTube or Vimeo video","accept":["youtube","vimeo"]},
+    {"type":"checkbox","id":"show_hero_rating","label":"Show hero rating badge","default":true},
+    {"type":"text","id":"features_label","label":"Feature list label","default":"Why choose Altaeron"},
+    {"type":"text","id":"scroll_label","label":"Mobile scroll prompt","default":"SCROLL TO DISCOVER"},
+    {"type":"header","content":"Stats"},
+    {"type":"text","id":"stats_label","label":"Stats label","default":"Altaeron at a glance"},
+    {"type":"text","id":"stat_1_value","label":"Stat 1 value","default":"30,000+"},
+    {"type":"text","id":"stat_1_label","label":"Stat 1 label","default":"Happy Customers"},
+    {"type":"text","id":"stat_2_value","label":"Stat 2 value","default":"100%"},
+    {"type":"text","id":"stat_2_label","label":"Stat 2 label","default":"Secure Payment"},
+    {"type":"text","id":"stat_3_value","label":"Stat 3 value","default":"Lifetime"},
+    {"type":"text","id":"stat_3_label","label":"Stat 3 label","default":"Resin Warranty"},
+    {"type":"text","id":"stat_4_value","label":"Stat 4 value","default":"24/7"},
+    {"type":"text","id":"stat_4_label","label":"Stat 4 label","default":"Customer Support"},
+    {"type":"header","content":"Story"},
+    {"type":"image_picker","id":"story_image","label":"Story image"},
+    {"type":"text","id":"story_eyebrow","label":"Eyebrow","default":"MASTERPIECE IN EVERY DETAIL"},
+    {"type":"richtext","id":"story_heading","label":"Heading","default":"<h2>One Lamp.<br>A Universe <em>Within.</em></h2>"},
+    {"type":"richtext","id":"story_text","label":"Text","default":"<p>From a drop of resin to a timeless world, crafted with patience, passion, and precision.</p>"},
+    {"type":"text","id":"story_button_label","label":"Button","default":"DISCOVER THE ART"},
+    {"type":"url","id":"story_button_link","label":"Button link"},
+    {"type":"text","id":"story_mobile_button_label","label":"Mobile story button","default":"WATCH STORY"},
+    {"type":"text","id":"story_mobile_fallback_label","label":"Mobile button when video is empty","default":"DISCOVER THE CRAFT"},
+    {"type":"header","content":"Process and collections"},
+    {"type":"text","id":"process_eyebrow","label":"Process eyebrow","default":"THE ART OF CREATION"},
+    {"type":"richtext","id":"process_heading","label":"Process heading","default":"<h2>72 Hours. Countless Details.<br>Infinite Worlds.</h2>"},
+    {"type":"text","id":"process_link_label","label":"Process link","default":"VIEW ALL COLLECTIONS"},
+    {"type":"url","id":"process_link","label":"Process link URL"},
+    {"type":"text","id":"collections_eyebrow","label":"Collections eyebrow","default":"EXPLORE OUR COLLECTIONS"},
+    {"type":"richtext","id":"collections_heading","label":"Collections heading","default":"<h2>Find The World That<br>Speaks To You.</h2>"},
+    {"type":"text","id":"collections_link_label","label":"Collections link","default":"VIEW ALL COLLECTIONS"},
+    {"type":"url","id":"collections_link","label":"Collections link URL"},
+    {"type":"header","content":"Products and reviews"},
+    {"type":"text","id":"products_eyebrow","label":"Products eyebrow","default":"BEST SELLERS"},
+    {"type":"richtext","id":"products_heading","label":"Products heading","default":"<h2>Worlds Most Loved.</h2>"},
+    {"type":"text","id":"products_link_label","label":"Products link","default":"VIEW ALL PRODUCTS"},
+    {"type":"url","id":"products_link","label":"Products link URL"},
+    {"type":"text","id":"add_to_cart_label","label":"Quick add label","default":"Add to cart"},
+    {"type":"text","id":"services_label","label":"Services label","default":"Service promises"},
+    {"type":"text","id":"reviews_eyebrow","label":"Reviews eyebrow","default":"LOVED BY THOUSANDS"},
+    {"type":"text","id":"review_score","label":"Review score","default":"4.9/5"},
+    {"type":"range","id":"review_stars","label":"Review stars","min":0,"max":5,"step":0.1,"default":4.9},
+    {"type":"text","id":"rating_accessibility_suffix","label":"Rating accessibility text","default":"out of 5 stars"},
+    {"type":"text","id":"review_source","label":"Review source","default":"From 2,500+ Reviews"},
+    {"type":"text","id":"reviews_link_label","label":"Reviews button","default":"VIEW ALL REVIEWS"},
+    {"type":"url","id":"reviews_link","label":"Reviews link"},
+    {"type":"header","content":"Homes and closing"},
+    {"type":"text","id":"homes_eyebrow","label":"Homes eyebrow","default":"HOMES OF ALTAERON"},
+    {"type":"richtext","id":"homes_heading","label":"Homes heading","default":"<h2>Real Spaces.<br>Real Stories.</h2>"},
+    {"type":"image_picker","id":"homes_lead_image","label":"Homes lead image"},
+    {"type":"image_picker","id":"cinematic_image","label":"Cinematic image"},
+    {"type":"richtext","id":"cinematic_heading","label":"Cinematic heading","default":"<h2>LIGHT THAT BRINGS<br>WORLDS TO LIFE</h2>"},
+    {"type":"text","id":"cinematic_button_label","label":"Cinematic button","default":"WATCH THE CRAFT"},
+    {"type":"text","id":"cinematic_fallback_label","label":"Cinematic button when video is empty","default":"DISCOVER THE CRAFT"},
+    {"type":"richtext","id":"newsletter_heading","label":"Newsletter heading","default":"<h2>Bring A World <em>Home.</em></h2>"},
+    {"type":"text","id":"newsletter_text","label":"Newsletter text","default":"Get 10% OFF your first order and discover new creations."},
+    {"type":"text","id":"email_label","label":"Email field label","default":"Email address"},
+    {"type":"text","id":"email_placeholder","label":"Email placeholder","default":"Enter your email"},
+    {"type":"text","id":"newsletter_button","label":"Newsletter button","default":"GET 10% OFF"},
+    {"type":"text","id":"newsletter_success","label":"Success message","default":"Welcome to our world."},
+    {"type":"header","content":"Mobile navigation"},
+    {"type":"text","id":"mobile_nav_label","label":"Navigation label","default":"Homepage shortcuts"},
+    {"type":"text","id":"nav_shop","label":"Shop label","default":"SHOP"},
+    {"type":"select","id":"nav_shop_icon","label":"Shop icon","options":[{"value":"shipping","label":"Shipping"},{"value":"cart","label":"Cart"},{"value":"spark","label":"Spark"}],"default":"shipping"},
+    {"type":"text","id":"nav_collections","label":"Collections label","default":"COLLECTIONS"},
+    {"type":"select","id":"nav_collections_icon","label":"Collections icon","options":[{"value":"grid","label":"Grid"},{"value":"spark","label":"Spark"},{"value":"globe","label":"Globe"}],"default":"grid"},
+    {"type":"text","id":"nav_story","label":"Story label","default":"STORY"},
+    {"type":"select","id":"nav_story_icon","label":"Story icon","options":[{"value":"story","label":"Story"},{"value":"spark","label":"Spark"}],"default":"story"},
+    {"type":"text","id":"nav_search","label":"Search label","default":"SEARCH"},
+    {"type":"select","id":"nav_search_icon","label":"Search icon","options":[{"value":"search","label":"Search"},{"value":"spark","label":"Spark"}],"default":"search"}
+  ],
+  "blocks": [
+    {"type":"feature","name":"Promise","settings":[{"type":"select","id":"placement","label":"Placement","options":[{"value":"hero","label":"Hero"},{"value":"service","label":"Services"}],"default":"hero"},{"type":"select","id":"icon","label":"Icon","options":[{"value":"spark","label":"Spark"},{"value":"shipping","label":"Shipping"},{"value":"shield","label":"Shield"},{"value":"globe","label":"Globe"},{"value":"lock","label":"Lock"},{"value":"returns","label":"Returns"}],"default":"spark"},{"type":"text","id":"heading","label":"Heading","default":"Individually Handmade"},{"type":"text","id":"text","label":"Supporting text","default":"Crafted with care"}]},
+    {"type":"story","name":"Story slide","limit":3,"settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"A WORLD CAPTURED IN LIGHT"},{"type":"richtext","id":"heading","label":"Heading","default":"<h2>Nature. Memory.<br><em>Preserved.</em></h2>"},{"type":"richtext","id":"text","label":"Text","default":"<p>Each chapter reveals another perspective on the worlds we preserve.</p>"},{"type":"text","id":"button_label","label":"Button label","default":"EXPLORE THE STORY"},{"type":"url","id":"button_link","label":"Button link"}]},
+    {"type":"process","name":"Process step","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"heading","label":"Heading","default":"Inspiration"},{"type":"text","id":"text","label":"Text","default":"Every world begins with a story."}]},
+    {"type":"collection","name":"Collection artwork","settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"text","id":"heading","label":"Override heading","default":"Fantasy & Dragon"},{"type":"text","id":"text","label":"Description","default":"Power. Myth. Imagination."},{"type":"url","id":"link","label":"Override link"}]},
+    {"type":"product","name":"Artwork product","settings":[{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"text","id":"heading","label":"Editor preview heading","default":"Dragon Flame Lamp"},{"type":"text","id":"price","label":"Editor preview price","default":"$129.00"},{"type":"text","id":"compare_price","label":"Editor preview compare price","default":"$169.00"},{"type":"range","id":"stars","label":"Rating stars","min":0,"max":5,"step":0.1,"default":5},{"type":"text","id":"rating","label":"Rating text","default":"(1,266)"},{"type":"text","id":"badge","label":"Badge","default":"TOP RATED"}]},
+    {"type":"testimonial","name":"Testimonial","settings":[{"type":"image_picker","id":"image","label":"Lifestyle image"},{"type":"richtext","id":"quote","label":"Quote","default":"<p>Absolutely stunning! The quality is beyond what I expected.</p>"},{"type":"text","id":"author","label":"Author","default":"James R."},{"type":"text","id":"location","label":"Location","default":"USA"}]},
+    {"type":"gallery","name":"Home gallery image","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"caption","label":"Caption","default":"A private world, glowing at home."}]}
+  ],
+  "presets": [{
+    "name":"Altaeron exhibition",
+    "blocks":[
+      {"type":"feature","settings":{"placement":"hero","icon":"spark","heading":"Individually Handmade","text":""}},
+      {"type":"feature","settings":{"placement":"hero","icon":"shield","heading":"Premium Materials","text":""}},
+      {"type":"feature","settings":{"placement":"hero","icon":"globe","heading":"Worldwide Shipping","text":""}},
+      {"type":"feature","settings":{"placement":"hero","icon":"lock","heading":"Secure Checkout","text":""}},
+      {"type":"feature","settings":{"placement":"hero","icon":"returns","heading":"30-Day Returns","text":""}},
+      {"type":"feature","settings":{"placement":"hero","icon":"shield","heading":"1 Year Warranty","text":""}},
+      {"type":"story","settings":{"eyebrow":"NATURE HELD IN TIME","heading":"<h2>Wild Places.<br><em>Preserved.</em></h2>"}},
+      {"type":"story","settings":{"eyebrow":"DEPTH IN EVERY LAYER","heading":"<h2>Oceans Made<br><em>Timeless.</em></h2>"}},
+      {"type":"story","settings":{"eyebrow":"LIGHT COMPLETES THE ART","heading":"<h2>A World<br><em>Awakened.</em></h2>"}},
+      {"type":"process","settings":{"heading":"Inspiration","text":"Every world begins with a story."}},
+      {"type":"process","settings":{"heading":"Concept","text":"Ideas take shape on paper."}},
+      {"type":"process","settings":{"heading":"Handcrafting","text":"Miniatures built with precision."}},
+      {"type":"process","settings":{"heading":"Pouring","text":"Crystal clear epoxy brings life."}},
+      {"type":"process","settings":{"heading":"Curing","text":"72 hours for perfect clarity."}},
+      {"type":"process","settings":{"heading":"Finishing","text":"Polished by hand. Perfected with passion."}},
+      {"type":"collection","settings":{"heading":"Fantasy & Dragon","text":"Power. Myth. Imagination."}},
+      {"type":"collection","settings":{"heading":"Nature & Mountains","text":"Earth. Serenity. Freedom."}},
+      {"type":"collection","settings":{"heading":"Ocean & Waves","text":"Flow. Calm. Endless."}},
+      {"type":"collection","settings":{"heading":"Cosmic & Minimal","text":"Space. Mystery. Light."}},
+      {"type":"product","settings":{"heading":"Dragon Flame Lamp","price":"$129.00","compare_price":"$169.00","rating":"(1,266)","badge":"TOP RATED"}},
+      {"type":"product","settings":{"heading":"Mountain Lake Lamp","price":"$119.00","compare_price":"$149.00","rating":"(983)","badge":""}},
+      {"type":"product","settings":{"heading":"Ocean Wave Lamp","price":"$119.00","compare_price":"$149.00","rating":"(834)","badge":""}},
+      {"type":"product","settings":{"heading":"Forest Spirit Lamp","price":"$129.00","compare_price":"$169.00","rating":"(712)","badge":""}},
+      {"type":"product","settings":{"heading":"Moonlight Lamp","price":"$109.00","compare_price":"$139.00","rating":"(845)","badge":""}},
+      {"type":"feature","settings":{"placement":"service","icon":"shipping","heading":"Free Shipping","text":"On orders over $99"}},
+      {"type":"feature","settings":{"placement":"service","icon":"returns","heading":"30-Day Returns","text":"Hassle-free returns"}},
+      {"type":"feature","settings":{"placement":"service","icon":"shield","heading":"1 Year Warranty","text":"We've got you covered"}},
+      {"type":"feature","settings":{"placement":"service","icon":"lock","heading":"Secure Payment","text":"100% protected"}},
+      {"type":"feature","settings":{"placement":"service","icon":"globe","heading":"Support 24/7","text":"We're here to help"}},
+      {"type":"testimonial","settings":{"author":"James R.","location":"USA","quote":"<p>Absolutely stunning! The quality is beyond what I expected.</p>"}},
+      {"type":"testimonial","settings":{"author":"Sophia M.","location":"Canada","quote":"<p>It's not just a lamp, it's a piece of art that brings my room to life.</p>"}},
+      {"type":"testimonial","settings":{"author":"Daniel K.","location":"Australia","quote":"<p>Fast shipping, perfect packaging, and the lamp is incredible.</p>"}},
+      {"type":"gallery"},{"type":"gallery"},{"type":"gallery"}
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,346 @@
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'product-form-' | append: section.id
+  assign legend_video = product.metafields.custom.legend_video.value
+  assign legend_image = product.metafields.custom.legend_image.value
+  assign craft_steps = product.metafields.custom.craft_steps.value
+  assign detail_gallery = product.metafields.custom.detail_gallery.value
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count.value
+  assign collection_fallback = product.collections.first
+  assign product_eyebrow = product.metafields.custom.product_eyebrow.value | default: collection_fallback.title
+  assign world_label = product.metafields.custom.world_label.value | default: product.metafields.custom.world_number.value | default: collection_fallback.title
+  assign short_story = product.metafields.custom.short_story.value
+  if short_story == blank
+    assign short_story = product.description | strip_html | truncatewords: 34
+  endif
+  assign legend_heading = product.metafields.custom.legend_heading.value | default: product.title
+  assign media_layout = 'carousel'
+  assign mobile_thumbnails = section.settings.mobile_thumbnails
+  assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+  assign has_models = product.media | where: 'media_type', 'model' | first
+-%}
+
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+{{ 'altaeron-product.css' | asset_url | stylesheet_tag }}
+{%- unless product.has_only_default_variant -%}
+  {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+{%- endunless -%}
+{%- if section.settings.enable_image_zoom -%}
+  <link rel="stylesheet" href="{{ 'photoswipe-component.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+{%- if has_models -%}
+  <link rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+{%- if product.quantity_price_breaks_configured? -%}
+  {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<product-info
+  id="MainProduct-{{ section.id }}"
+  class="altaeron-experience altaeron-surface"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="true"
+  data-url="{{ product.url }}"
+  style="--altaeron-bg: {{ section.settings.background }}; --altaeron-text: {{ section.settings.text_color }}; --altaeron-accent: {{ section.settings.accent_color }}; --altaeron-muted: {{ section.settings.muted_color }};"
+>
+  {%- if section.settings.sticky_chapters -%}
+    {% render 'altaeron-chapter-nav' %}
+  {%- endif -%}
+
+  <section id="altaeron-legend" class="altaeron-hero altaeron-chapter" data-altaeron-chapter="The Legend">
+    <div class="altaeron-hero__media">
+      {%- if product.media.size > 0 -%}
+        {% render 'product-media-gallery',
+          enable_sticky_info: false,
+          media_layout: media_layout,
+          mobile_thumbnails: mobile_thumbnails,
+          variant_images: variant_images,
+          enable_image_zoom: section.settings.enable_image_zoom
+        %}
+      {%- else -%}
+        <div class="altaeron-media-placeholder">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+      {%- endif -%}
+      {%- if section.settings.enable_ambient_motion -%}
+        <span class="altaeron-hero__glow" aria-hidden="true"></span>
+        <span class="altaeron-hero__particles" aria-hidden="true"></span>
+      {%- endif -%}
+    </div>
+
+    <div class="altaeron-hero__content">
+      {%- if world_label != blank -%}<p class="altaeron-kicker">01 / {{ world_label | escape }}</p>{%- endif -%}
+      {%- if product_eyebrow != blank -%}<p class="altaeron-eyebrow">{{ product_eyebrow | escape }}</p>{%- endif -%}
+      <h1 class="altaeron-hero__title">{{ product.title | escape }}</h1>
+      {%- if short_story != blank -%}<p class="altaeron-hero__story">{{ short_story | newline_to_br }}</p>{%- endif -%}
+
+      {%- if section.settings.show_rating and rating != blank and rating_count > 0 -%}
+        <a class="altaeron-rating" href="#altaeron-stories" aria-label="{{ rating.rating }} out of {{ rating.scale_max }} stars, {{ rating_count }} reviews">
+          <span aria-hidden="true">★★★★★</span>
+          <small>{{ rating.rating }} ({{ rating_count }})</small>
+        </a>
+      {%- endif -%}
+
+      {%- if legend_video != blank or legend_image != blank -%}
+        <a class="altaeron-story-link" href="#altaeron-lore-media">
+          <span class="altaeron-story-link__play" aria-hidden="true">▶</span>
+          {{ section.settings.story_cta | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- if product.metafields.custom.legend_content != blank or legend_video != blank or legend_image != blank -%}
+    <section class="altaeron-lore altaeron-chapter" aria-labelledby="AltaeronLoreTitle-{{ section.id }}">
+      <div class="altaeron-lore__copy">
+        <p class="altaeron-kicker">{{ section.settings.legend_eyebrow | escape }}</p>
+        <h2 id="AltaeronLoreTitle-{{ section.id }}">{{ legend_heading | escape }}</h2>
+        {%- if product.metafields.custom.legend_content != blank -%}
+          <div class="altaeron-rte">{{ product.metafields.custom.legend_content | metafield_tag }}</div>
+        {%- elsif short_story != blank -%}
+          <div class="altaeron-rte"><p>{{ short_story | newline_to_br }}</p></div>
+        {%- endif -%}
+        {%- if product.metafields.custom.legend_signature.value != blank -%}
+          <p class="altaeron-signature">{{ product.metafields.custom.legend_signature.value | escape }}</p>
+        {%- endif -%}
+      </div>
+      {%- if legend_video != blank or legend_image != blank -%}
+        <div id="altaeron-lore-media" class="altaeron-lore__media">
+          {%- if legend_video != blank -%}
+            {{ legend_video | video_tag: image_size: '1600x', controls: true, muted: true, loop: false, preload: 'metadata' }}
+          {%- else -%}
+            {{ legend_image
+              | image_url: width: 1800
+              | image_tag: loading: 'lazy', widths: '480, 720, 960, 1280, 1600, 1800', sizes: '(max-width: 767px) 100vw, 58vw', alt: legend_image.alt
+            }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
+
+  {%- if craft_steps != blank -%}
+    <section id="altaeron-craft" class="altaeron-craft altaeron-chapter" data-altaeron-chapter="The Craft" aria-labelledby="AltaeronCraftTitle-{{ section.id }}">
+      <header class="altaeron-section-heading">
+        <p class="altaeron-kicker">02 / {{ section.settings.craft_eyebrow | escape }}</p>
+        <h2 id="AltaeronCraftTitle-{{ section.id }}">{{ section.settings.craft_heading | escape }}</h2>
+      </header>
+      <ol class="altaeron-craft__rail" role="list">
+        {%- for step in craft_steps -%}
+          {%- assign step_image = step.image.value -%}
+          {%- assign step_video = step.video.value -%}
+          <li class="altaeron-craft-card" {{ step.shopify_attributes }}>
+            {%- if step_video != blank -%}
+              <div class="altaeron-craft-card__media">{{ step_video | video_tag: image_size: '900x', controls: true, muted: true, preload: 'none' }}</div>
+            {%- elsif step_image != blank -%}
+              <div class="altaeron-craft-card__media">
+                {{ step_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240, 360, 540, 720, 900', sizes: '(max-width: 767px) 96px, 20vw', alt: step.accessibility_label.value | default: step_image.alt }}
+              </div>
+            {%- endif -%}
+            <div class="altaeron-craft-card__body">
+              <span class="altaeron-craft-card__number">{{ step.number.value | default: forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <h3>{{ step.title.value | escape }}</h3>
+              {%- if step.description.value != blank -%}<p>{{ step.description.value | escape | newline_to_br }}</p>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </section>
+  {%- endif -%}
+
+  {%- assign has_detail_fallback = false -%}
+  {%- if detail_gallery == blank and product.media.size > 1 -%}{%- assign has_detail_fallback = true -%}{%- endif -%}
+  {%- if detail_gallery != blank or has_detail_fallback -%}
+    <section id="altaeron-details" class="altaeron-details altaeron-chapter" data-altaeron-chapter="Details" aria-labelledby="AltaeronDetailsTitle-{{ section.id }}">
+      <header class="altaeron-section-heading">
+        <p class="altaeron-kicker">03 / {{ section.settings.details_eyebrow | escape }}</p>
+        <h2 id="AltaeronDetailsTitle-{{ section.id }}">{{ section.settings.details_heading | escape }}</h2>
+        {%- if product.metafields.custom.artifact_details != blank -%}
+          <div class="altaeron-rte">{{ product.metafields.custom.artifact_details | metafield_tag }}</div>
+        {%- endif -%}
+      </header>
+      <div class="altaeron-details__grid">
+        {%- if detail_gallery != blank -%}
+          {%- for detail_image in detail_gallery limit: 6 -%}
+            <figure class="altaeron-details__item">
+              {{ detail_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '240, 360, 540, 720, 960, 1200, 1400', sizes: '(max-width: 767px) 50vw, 28vw', alt: detail_image.alt }}
+              {%- if detail_image.alt != blank -%}<figcaption class="visually-hidden">{{ detail_image.alt | escape }}</figcaption>{%- endif -%}
+            </figure>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for media in product.media offset: 1 limit: 6 -%}
+            {%- if media.media_type == 'image' -%}
+              <figure class="altaeron-details__item">
+                {{ media.preview_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '240, 360, 540, 720, 960, 1200, 1400', sizes: '(max-width: 767px) 50vw, 28vw', alt: media.alt }}
+              </figure>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  <section id="altaeron-choose" class="altaeron-choose altaeron-chapter" data-altaeron-chapter="Choose Your World" aria-labelledby="AltaeronChooseTitle-{{ section.id }}">
+    <div class="altaeron-choose__visual" aria-hidden="true">
+      {%- if selected_variant.featured_media -%}
+        {{ selected_variant.featured_media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1280, 1600', sizes: '(max-width: 989px) 100vw, 56vw', alt: '' }}
+      {%- elsif product.featured_media -%}
+        {{ product.featured_media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1280, 1600', sizes: '(max-width: 989px) 100vw, 56vw', alt: '' }}
+      {%- endif -%}
+    </div>
+
+    <div id="ProductInfo-{{ section.id }}" class="altaeron-purchase">
+      <p class="altaeron-kicker">04 / {{ section.settings.choose_eyebrow | escape }}</p>
+      <h2 id="AltaeronChooseTitle-{{ section.id }}">{{ section.settings.choose_heading | default: product.title | escape }}</h2>
+
+      <div id="price-{{ section.id }}" class="altaeron-purchase__price" role="status" aria-live="polite">
+        {% render 'price', product: product, use_variant: true, show_sale_badge: true, sale_badge_type: 'percentage', price_class: 'f-price--large' %}
+      </div>
+      {%- assign installment_form_id = 'product-form-installment-' | append: section.id -%}
+      {%- form 'product', product, id: installment_form_id, class: 'altaeron-installment' -%}
+        <input type="hidden" name="id" value="{{ selected_variant.id }}">
+        {{ form | payment_terms }}
+      {%- endform -%}
+
+      <div id="Inventory-{{ section.id }}" class="altaeron-inventory" role="status">
+        {%- if selected_variant.inventory_management == 'shopify' -%}
+          {%- if selected_variant.inventory_quantity > 0 -%}
+            <span class="altaeron-inventory__dot"></span>{{ 'products.product.inventory_in_stock' | t }}
+          {%- elsif selected_variant.inventory_policy == 'continue' -%}
+            <span class="altaeron-inventory__dot"></span>{{ 'products.product.inventory_out_of_stock_continue_selling' | t }}
+          {%- else -%}
+            <span class="altaeron-inventory__dot is-out"></span>{{ 'products.product.inventory_out_of_stock' | t }}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'variant_picker' -%}
+            <div class="altaeron-purchase__block altaeron-purchase__variants" {{ block.shopify_attributes }}>
+              {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id, update_url: true %}
+              {%- assign size_guide = product.metafields.custom.size_guide_page.value -%}
+              {%- if size_guide != blank -%}<a class="altaeron-size-guide" href="{{ size_guide.url }}">{{ section.settings.size_guide_label | escape }} →</a>{%- endif -%}
+            </div>
+          {%- when 'buy_buttons' -%}
+            <div class="altaeron-purchase__block" {{ block.shopify_attributes }}>
+              {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, product_id: product.id %}
+            </div>
+          {%- when 'pickup_availability' -%}
+            <div class="altaeron-purchase__block" {{ block.shopify_attributes }}>{% render 'product-pickup-availability', product: product %}</div>
+          {%- when 'custom_liquid' -%}
+            <div class="altaeron-purchase__block" {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
+          {%- when '@app' -%}
+            <div class="altaeron-purchase__block altaeron-purchase__app" {{ block.shopify_attributes }}>{% render block %}</div>
+        {%- endcase -%}
+      {%- endfor -%}
+
+      {%- if product.metafields.custom.delivery_note.value != blank -%}
+        <p class="altaeron-delivery-note">{{ product.metafields.custom.delivery_note.value | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.show_trust -%}{% render 'altaeron-trust-items' %}{%- endif -%}
+    </div>
+  </section>
+
+  {%- if section.settings.sticky_buy_bar -%}
+    <div class="altaeron-sticky-buy" data-altaeron-sticky-buy hidden>
+      <div class="altaeron-sticky-buy__price" data-altaeron-sticky-price>{{ selected_variant.price | money }}</div>
+      <div class="altaeron-sticky-buy__variant" data-altaeron-sticky-variant>{% unless product.has_only_default_variant %}{{ selected_variant.title | escape }}{% endunless %}</div>
+      <button type="button" class="altaeron-sticky-buy__button" data-altaeron-sticky-submit {% unless selected_variant.available %}disabled{% endunless %}>
+        {%- if selected_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+      </button>
+    </div>
+  {%- endif -%}
+
+  <product-recently-viewed data-product-id="{{ product.id }}" class="hidden"></product-recently-viewed>
+  <script type="application/ld+json">{{ product | structured_data }}</script>
+</product-info>
+
+<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+{%- if product.media.size > 0 -%}<script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>{%- endif -%}
+{%- if section.settings.enable_image_zoom -%}<script src="{{ 'photoswipe.js' | asset_url }}" defer="defer"></script>{%- endif -%}
+{%- if has_models -%}
+  <script type="application/json" id="ProductJSON-{{ product.id }}">{{ product.media | where: 'media_type', 'model' | json }}</script>
+  <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+{%- endif -%}
+<script src="{{ 'altaeron-product.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Altaeron product",
+  "tag": "section",
+  "class": "altaeron-template-section altaeron-template-section--main",
+  "enabled_on": { "templates": ["product"] },
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        { "type": "select", "id": "picker_type", "label": "Picker type", "options": [{ "value": "button", "label": "Buttons" }, { "value": "dropdown", "label": "Dropdown" }], "default": "button" },
+        { "type": "select", "id": "swatch_type", "label": "Swatch type", "options": [{ "value": "shopify_swatch", "label": "Shopify swatch" }, { "value": "variant_image", "label": "Variant image" }, { "value": "color_swatch", "label": "Theme color swatch" }, { "value": "text", "label": "Text" }], "default": "shopify_swatch" },
+        { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "standard", "label": "Standard" }, { "value": "circle", "label": "Circle" }, { "value": "square", "label": "Square" }], "default": "standard" },
+        { "type": "range", "id": "button_size", "label": "Swatch size", "min": 20, "max": 80, "step": 2, "default": 40, "unit": "px" },
+        { "type": "text", "id": "size_title", "label": "Size option name", "default": "Size" },
+        { "type": "page", "id": "size_chart_from_page", "label": "Global size chart fallback" }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show_quantity_selector", "label": "Show quantity selector", "default": true },
+        { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout", "default": true },
+        { "type": "checkbox", "id": "show_gift_card_recipient", "label": "Show gift-card recipient form", "default": true }
+      ]
+    },
+    { "type": "pickup_availability", "name": "Pickup availability", "limit": 1 },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [{ "type": "liquid", "id": "custom_liquid", "label": "Custom Liquid" }]
+    }
+  ],
+  "settings": [
+    { "type": "header", "content": "Presentation" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#050809" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#f4f0e8" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#9a9b98" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#f3a316" },
+    { "type": "checkbox", "id": "enable_ambient_motion", "label": "Enable ambient hero motion", "default": true },
+    { "type": "checkbox", "id": "sticky_chapters", "label": "Enable chapter navigation", "default": true },
+    { "type": "checkbox", "id": "sticky_buy_bar", "label": "Enable mobile sticky buy bar", "default": true },
+    { "type": "checkbox", "id": "enable_image_zoom", "label": "Enable image zoom", "default": true },
+    { "type": "select", "id": "media_size", "label": "Desktop media size", "options": [{ "value": "large", "label": "Large" }, { "value": "medium", "label": "Medium" }, { "value": "small", "label": "Small" }], "default": "large" },
+    { "type": "checkbox", "id": "enable_video_looping", "label": "Loop product videos", "default": false },
+    { "type": "select", "id": "mobile_thumbnails", "label": "Mobile thumbnails", "options": [{ "value": "show", "label": "Show" }, { "value": "hide", "label": "Hide" }], "default": "show" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show standard product rating", "default": true },
+    { "type": "text", "id": "story_cta", "label": "Story CTA", "default": "Watch the story" },
+    { "type": "text", "id": "legend_eyebrow", "label": "Legend eyebrow", "default": "A world where" },
+    { "type": "text", "id": "craft_eyebrow", "label": "Craft eyebrow", "default": "The craft" },
+    { "type": "text", "id": "craft_heading", "label": "Craft heading", "default": "From Nature. Through Hand. Into Light." },
+    { "type": "text", "id": "details_eyebrow", "label": "Details eyebrow", "default": "Details" },
+    { "type": "text", "id": "details_heading", "label": "Details heading", "default": "Every Detail Tells A Story." },
+    { "type": "text", "id": "choose_eyebrow", "label": "Purchase eyebrow", "default": "Choose your world" },
+    { "type": "text", "id": "choose_heading", "label": "Purchase heading", "default": "Create Your World" },
+    { "type": "text", "id": "size_guide_label", "label": "Size guide label", "default": "Size guide" },
+    { "type": "header", "content": "Trust information" },
+    { "type": "checkbox", "id": "show_trust", "label": "Show trust information", "default": true },
+    { "type": "text", "id": "trust_1_label", "label": "Trust item 1" },
+    { "type": "text", "id": "trust_1_text", "label": "Trust item 1 detail" },
+    { "type": "text", "id": "trust_2_label", "label": "Trust item 2" },
+    { "type": "text", "id": "trust_2_text", "label": "Trust item 2 detail" },
+    { "type": "text", "id": "trust_3_label", "label": "Trust item 3" },
+    { "type": "text", "id": "trust_3_text", "label": "Trust item 3 detail" },
+    { "type": "text", "id": "trust_4_label", "label": "Trust item 4" },
+    { "type": "text", "id": "trust_4_text", "label": "Trust item 4 detail" }
+  ],
+  "presets": [{ "name": "Altaeron product experience", "blocks": [{ "type": "variant_picker" }, { "type": "buy_buttons" }, { "type": "pickup_availability" }] }]
+}
+{% endschema %}

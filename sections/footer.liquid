@@ -215,6 +215,8 @@
                                   is: 'image-lazy'
                               }}
                             </div>
+                          {% elsif block.settings.show_brand_mark %}
+                            {% render 'altaeron-brand', text: shop.name, class: 'altaeron-brand--footer' %}
                           {% endif %}
                           {%- if block.settings.text != blank -%}
                             <div class="footer-image-box__text rte">
@@ -613,6 +615,12 @@
           "type": "image_picker",
           "id": "image",
           "label": "t:sections.all.image.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_brand_mark",
+          "label": "Show brand mark when image is empty",
+          "default": false
         },
         {
           "type": "range",

@@ -1,0 +1,1530 @@
+.altaeron-template-section {
+  background: #050809;
+}
+
+.altaeron-surface {
+  --altaeron-line: color-mix(in srgb, var(--altaeron-text) 13%, transparent);
+  --altaeron-panel: color-mix(in srgb, var(--altaeron-text) 3%, var(--altaeron-bg));
+  position: relative;
+  overflow: clip;
+  background:
+    radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--altaeron-accent) 6%, transparent), transparent 28rem),
+    var(--altaeron-bg);
+  color: var(--altaeron-text);
+}
+
+.altaeron-surface *,
+.altaeron-surface *::before,
+.altaeron-surface *::after {
+  box-sizing: border-box;
+}
+
+.altaeron-surface h1,
+.altaeron-surface h2,
+.altaeron-surface h3,
+.altaeron-surface p,
+.altaeron-surface figure,
+.altaeron-surface blockquote {
+  margin: 0;
+}
+
+.altaeron-surface h1,
+.altaeron-surface h2,
+.altaeron-surface h3 {
+  color: inherit;
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  letter-spacing: -0.025em;
+}
+
+.altaeron-surface a {
+  color: inherit;
+}
+
+.altaeron-surface img,
+.altaeron-surface video,
+.altaeron-surface iframe,
+.altaeron-surface model-viewer {
+  display: block;
+  width: 100%;
+}
+
+.altaeron-kicker,
+.altaeron-eyebrow {
+  color: var(--altaeron-accent);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.altaeron-section-heading h2,
+.altaeron-lore h2,
+.altaeron-purchase h2,
+.altaeron-packaging h2 {
+  max-width: 14ch;
+  font-size: clamp(3rem, 4.2vw, 6.4rem);
+  line-height: .98;
+}
+
+.altaeron-section-heading {
+  display: grid;
+  align-content: start;
+  gap: 1.4rem;
+}
+
+.altaeron-rte {
+  max-width: 58ch;
+  color: var(--altaeron-muted);
+  font-size: 1.45rem;
+  line-height: 1.65;
+}
+
+.altaeron-rte > * + * {
+  margin-top: 1em;
+}
+
+.altaeron-chapter {
+  scroll-margin-top: calc(var(--header-height, 0px) + 2rem);
+}
+
+/* Chapter navigation */
+.altaeron-chapters {
+  position: fixed;
+  z-index: 8;
+  top: max(calc(var(--header-height, 7rem) + 2rem), 9rem);
+  left: max(1.6rem, calc((100vw - 192rem) / 2 + 1.6rem));
+  width: 11rem;
+  max-height: calc(100vh - var(--header-height, 7rem) - 4rem);
+  overflow: auto;
+  opacity: 0;
+  pointer-events: none;
+  scrollbar-width: none;
+  transition: opacity .25s ease;
+}
+
+.altaeron-chapters.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.altaeron-chapters__list {
+  display: grid;
+  gap: .3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.altaeron-chapters__link {
+  position: relative;
+  display: grid;
+  grid-template-columns: .8rem 2.1rem 1fr;
+  gap: .65rem;
+  align-items: start;
+  min-height: 3.6rem;
+  padding: .55rem 0;
+  color: var(--altaeron-muted);
+  font-size: .82rem;
+  letter-spacing: .06em;
+  line-height: 1.25;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .22s ease;
+}
+
+.altaeron-chapters__link::after {
+  position: absolute;
+  top: 1.5rem;
+  bottom: -1.8rem;
+  left: .35rem;
+  width: 1px;
+  background: var(--altaeron-line);
+  content: '';
+}
+
+.altaeron-chapters__item:last-child .altaeron-chapters__link::after {
+  display: none;
+}
+
+.altaeron-chapters__dot {
+  position: relative;
+  z-index: 1;
+  width: .7rem;
+  height: .7rem;
+  margin-top: .25rem;
+  border: 1px solid var(--altaeron-muted);
+  border-radius: 50%;
+  background: var(--altaeron-bg);
+  transition: border-color .22s ease, background .22s ease, box-shadow .22s ease;
+}
+
+.altaeron-chapters__link[aria-current="true"],
+.altaeron-chapters__link:hover {
+  color: var(--altaeron-text);
+}
+
+.altaeron-chapters__link[aria-current="true"] .altaeron-chapters__number {
+  color: var(--altaeron-accent);
+}
+
+.altaeron-chapters__link[aria-current="true"] .altaeron-chapters__dot {
+  border-color: var(--altaeron-accent);
+  background: var(--altaeron-accent);
+  box-shadow: 0 0 1.2rem color-mix(in srgb, var(--altaeron-accent) 60%, transparent);
+}
+
+.altaeron-progress {
+  display: none;
+}
+
+/* Hero and native media gallery */
+.altaeron-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(34rem, .88fr);
+  min-height: min(83rem, calc(100vh - var(--header-height, 0px)));
+  margin-left: 12rem;
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-hero__media {
+  position: relative;
+  min-width: 0;
+  min-height: 68rem;
+  overflow: hidden;
+  background: #020404;
+}
+
+.altaeron-hero__media .product__media-gallery,
+.altaeron-hero__media .product__media-gallery-viewer-wrap,
+.altaeron-hero__media .product__media-gallery-viewer,
+.altaeron-hero__media .product__media-list,
+.altaeron-hero__media .product__media-item,
+.altaeron-hero__media .product__media-container,
+.altaeron-hero__media .product__media,
+.altaeron-hero__media .media-wrapper {
+  height: 100%;
+}
+
+.altaeron-hero__media .product__media-gallery-viewer {
+  border-radius: 0;
+}
+
+.altaeron-hero__media .product__media-container {
+  --aspect-ratio: auto !important;
+  border-radius: 0;
+}
+
+.altaeron-hero__media .product__media img,
+.altaeron-hero__media .product__media-container > img,
+.altaeron-hero__media .deferred-media__poster img,
+.altaeron-hero__media video,
+.altaeron-hero__media iframe,
+.altaeron-hero__media model-viewer {
+  height: 100%;
+  object-fit: cover;
+}
+
+.altaeron-hero__media .product__media-gallery-thumbails {
+  position: absolute;
+  z-index: 4;
+  right: 2.4rem;
+  bottom: 2.4rem;
+  left: 2.4rem;
+}
+
+.altaeron-hero__media .thumbnail-list {
+  justify-content: center;
+}
+
+.altaeron-hero__media .product__thumbs-item {
+  width: 6.8rem !important;
+  opacity: .75;
+}
+
+.altaeron-hero__media .product__thumbs-item.is-active,
+.altaeron-hero__media .product__thumbs-item:hover {
+  opacity: 1;
+}
+
+.altaeron-hero__media .product__thumbs-container {
+  overflow: hidden;
+  border: 1px solid var(--altaeron-line);
+  border-radius: .3rem;
+  background: #020404;
+}
+
+.altaeron-hero__media .product__thumbs-item.is-active .product__thumbs-container {
+  border-color: var(--altaeron-accent);
+}
+
+.altaeron-hero__media .slider-controls--group {
+  position: absolute;
+  z-index: 5;
+  right: 2.4rem;
+  bottom: 10rem;
+}
+
+.altaeron-hero__media .slider-controls .btn {
+  color: var(--altaeron-text);
+  background: color-mix(in srgb, var(--altaeron-bg) 72%, transparent);
+  border-color: var(--altaeron-line);
+  backdrop-filter: blur(12px);
+}
+
+.altaeron-hero__glow {
+  position: absolute;
+  z-index: 2;
+  top: 45%;
+  left: 54%;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--altaeron-accent) 18%, transparent);
+  filter: blur(8rem);
+  pointer-events: none;
+  animation: altaeron-breathe 6s ease-in-out infinite;
+}
+
+.altaeron-hero__particles {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  opacity: .34;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, var(--altaeron-accent) 0 1px, transparent 1.5px),
+    radial-gradient(circle, var(--altaeron-accent) 0 1px, transparent 1.5px);
+  background-position: 12% 18%, 73% 62%;
+  background-size: 18rem 23rem, 27rem 19rem;
+  mask-image: linear-gradient(to bottom, transparent, #000 24%, #000 78%, transparent);
+  animation: altaeron-drift 18s linear infinite;
+}
+
+@keyframes altaeron-breathe {
+  0%, 100% { opacity: .45; transform: translate(-50%, -50%) scale(.86); }
+  50% { opacity: .85; transform: translate(-50%, -50%) scale(1.12); }
+}
+
+@keyframes altaeron-drift {
+  to { background-position: 12% -5%, 73% 39%; }
+}
+
+.altaeron-hero__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.8rem;
+  padding: clamp(4rem, 7vw, 12rem) clamp(3rem, 4.5vw, 8rem);
+  border-left: 1px solid var(--altaeron-line);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--altaeron-bg) 94%, transparent), var(--altaeron-bg));
+}
+
+.altaeron-hero__title {
+  max-width: 11ch;
+  font-size: clamp(5rem, 5.4vw, 8.6rem);
+  line-height: .91;
+}
+
+.altaeron-hero__story {
+  max-width: 36rem;
+  color: var(--altaeron-muted);
+  font-size: 1.55rem;
+  line-height: 1.6;
+}
+
+.altaeron-rating {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  color: var(--altaeron-accent);
+  font-size: 1.5rem;
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+
+.altaeron-rating small {
+  color: var(--altaeron-muted);
+  font-size: 1.15rem;
+  letter-spacing: normal;
+}
+
+.altaeron-rating--large {
+  margin-top: .5rem;
+  font-size: 1.8rem;
+}
+
+.altaeron-story-link {
+  display: inline-flex;
+  gap: 1.2rem;
+  align-items: center;
+  min-height: 4.8rem;
+  color: var(--altaeron-text);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.altaeron-story-link__play {
+  display: grid;
+  place-items: center;
+  width: 4.6rem;
+  height: 4.6rem;
+  padding-left: .25rem;
+  border: 1px solid var(--altaeron-accent);
+  border-radius: 50%;
+  color: var(--altaeron-accent);
+  transition: color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.altaeron-story-link:hover .altaeron-story-link__play {
+  color: var(--altaeron-bg);
+  background: var(--altaeron-accent);
+  box-shadow: 0 0 2rem color-mix(in srgb, var(--altaeron-accent) 35%, transparent);
+}
+
+/* Lore */
+.altaeron-lore {
+  display: grid;
+  grid-template-columns: minmax(30rem, .72fr) minmax(0, 1.28fr);
+  margin-left: 12rem;
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-lore__copy {
+  display: grid;
+  align-content: center;
+  gap: 2rem;
+  min-height: 54rem;
+  padding: clamp(4rem, 6vw, 10rem);
+}
+
+.altaeron-signature {
+  color: var(--altaeron-accent);
+  font-family: cursive;
+  font-size: 2rem;
+  font-style: italic;
+}
+
+.altaeron-lore__media {
+  min-height: 54rem;
+  overflow: hidden;
+  border-left: 1px solid var(--altaeron-line);
+}
+
+.altaeron-lore__media img,
+.altaeron-lore__media video {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Craft */
+.altaeron-craft {
+  display: grid;
+  grid-template-columns: minmax(22rem, .48fr) minmax(0, 1.52fr);
+  gap: clamp(3rem, 5vw, 8rem);
+  align-items: start;
+  margin-left: 12rem;
+  padding: clamp(6rem, 8vw, 13rem) clamp(3rem, 5vw, 9rem);
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-craft__rail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(18rem, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0 0 1.2rem;
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x proximity;
+  scrollbar-color: var(--altaeron-accent) var(--altaeron-line);
+}
+
+.altaeron-craft-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--altaeron-line);
+  border-radius: .5rem;
+  background: var(--altaeron-panel);
+  scroll-snap-align: start;
+}
+
+.altaeron-craft-card__media {
+  aspect-ratio: 1.1;
+  overflow: hidden;
+  background: #020303;
+}
+
+.altaeron-craft-card__media img,
+.altaeron-craft-card__media video {
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.altaeron-craft-card:hover .altaeron-craft-card__media img {
+  transform: scale(1.035);
+}
+
+.altaeron-craft-card__body {
+  display: grid;
+  gap: .7rem;
+  padding: 1.7rem;
+}
+
+.altaeron-craft-card__number {
+  color: var(--altaeron-accent);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.altaeron-craft-card h3 {
+  font-family: var(--font-body-family);
+  font-size: 1.35rem;
+  letter-spacing: 0;
+}
+
+.altaeron-craft-card p {
+  color: var(--altaeron-muted);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+/* Macro details */
+.altaeron-details {
+  display: grid;
+  grid-template-columns: minmax(22rem, .42fr) minmax(0, 1.58fr);
+  gap: clamp(3rem, 5vw, 8rem);
+  margin-left: 12rem;
+  padding: clamp(6rem, 8vw, 13rem) clamp(3rem, 5vw, 9rem);
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-details__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(18rem, 26vw);
+  gap: 1rem;
+}
+
+.altaeron-details__item {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--altaeron-line);
+  border-radius: .5rem;
+  background: #020303;
+}
+
+.altaeron-details__item:nth-child(4n + 1) {
+  grid-row: span 2;
+}
+
+.altaeron-details__item img {
+  height: 100%;
+  object-fit: cover;
+  transition: filter .4s ease, transform .55s ease;
+}
+
+.altaeron-details__item:hover img {
+  filter: brightness(1.08);
+  transform: scale(1.025);
+}
+
+/* Purchase */
+.altaeron-choose {
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(38rem, .84fr);
+  margin-left: 12rem;
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-choose__visual {
+  min-height: 72rem;
+  overflow: hidden;
+  background: #020303;
+}
+
+.altaeron-choose__visual img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.altaeron-purchase {
+  display: grid;
+  align-content: center;
+  gap: 2rem;
+  min-width: 0;
+  padding: clamp(4rem, 6vw, 10rem);
+  border-left: 1px solid var(--altaeron-line);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--altaeron-accent) 3%, var(--altaeron-bg)), var(--altaeron-bg));
+}
+
+.altaeron-purchase__price .f-price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  color: var(--altaeron-text);
+}
+
+.altaeron-installment {
+  margin-top: -1rem;
+  color: var(--altaeron-muted);
+  font-size: 1.1rem;
+}
+
+.altaeron-purchase__price .f-price-item--sale,
+.altaeron-purchase__price .f-price__regular .f-price-item {
+  color: var(--altaeron-accent);
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.8rem, 3vw, 4.5rem);
+}
+
+.altaeron-purchase__price .f-price-item--regular s {
+  color: var(--altaeron-muted);
+  font-size: 1.5rem;
+}
+
+.altaeron-purchase__price .f-badge--sale {
+  border: 1px solid var(--altaeron-accent);
+  border-radius: .2rem;
+  color: var(--altaeron-accent);
+  background: transparent;
+  font-size: 1rem;
+}
+
+.altaeron-inventory {
+  display: flex;
+  gap: .8rem;
+  align-items: center;
+  min-height: 1.8rem;
+  color: var(--altaeron-muted);
+  font-size: 1.15rem;
+}
+
+.altaeron-inventory:empty {
+  display: none;
+}
+
+.altaeron-inventory__dot {
+  width: .7rem;
+  height: .7rem;
+  border-radius: 50%;
+  background: #7fbf65;
+  box-shadow: 0 0 .8rem color-mix(in srgb, #7fbf65 65%, transparent);
+}
+
+.altaeron-inventory__dot.is-out {
+  background: var(--altaeron-muted);
+  box-shadow: none;
+}
+
+.altaeron-purchase__block {
+  min-width: 0;
+}
+
+.altaeron-purchase .product-form__input {
+  position: relative;
+  width: 100%;
+  margin: 0 0 2rem;
+  padding: 0;
+  border: 0;
+}
+
+.altaeron-purchase .product-form__input .form__label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1rem;
+  color: var(--altaeron-text);
+  font-size: 1.05rem;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.altaeron-purchase .product-form__input .form__label [data-selected-swatch-value] {
+  color: var(--altaeron-muted);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.altaeron-purchase .product-form__input input[type="radio"] + label {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 6rem;
+  min-height: 4.2rem;
+  padding: .8rem 1.4rem;
+  border: 1px solid var(--altaeron-line);
+  border-radius: .25rem;
+  color: var(--altaeron-muted);
+  background: transparent;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: border-color .22s ease, color .22s ease, background .22s ease, box-shadow .22s ease;
+}
+
+.altaeron-purchase .product-form__input input[type="radio"]:checked + label {
+  border-color: var(--altaeron-accent);
+  color: var(--altaeron-accent);
+  background: color-mix(in srgb, var(--altaeron-accent) 7%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--altaeron-accent) 20%, transparent);
+}
+
+.altaeron-purchase .product-form__input input[type="radio"].disabled + label {
+  opacity: .36;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.altaeron-purchase .product-form__input--color input + label,
+.altaeron-purchase .product-form__input--swatch input + label {
+  min-width: var(--swatch-size);
+  min-height: var(--swatch-size);
+  padding: .3rem;
+  border-radius: 50%;
+}
+
+.altaeron-purchase .select .form-control {
+  border-color: var(--altaeron-line);
+  color: var(--altaeron-text);
+  background: var(--altaeron-panel);
+}
+
+.altaeron-size-guide {
+  display: inline-block;
+  margin-top: -1rem;
+  color: var(--altaeron-muted);
+  font-size: 1.1rem;
+  text-decoration: underline;
+  text-underline-offset: .35rem;
+}
+
+.altaeron-purchase .product-form__buttons {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.altaeron-purchase .product-form__quantity {
+  min-width: 12rem;
+}
+
+.altaeron-purchase .quantity {
+  height: 5.2rem;
+  border-color: var(--altaeron-line);
+  color: var(--altaeron-text);
+  background: transparent;
+}
+
+.altaeron-purchase .quantity__button,
+.altaeron-purchase .quantity__input {
+  color: inherit;
+}
+
+.altaeron-purchase .product-form__submit,
+.altaeron-purchase .shopify-payment-button__button,
+.altaeron-purchase .shopify-payment-button__button--unbranded {
+  min-height: 5.2rem;
+  border: 1px solid var(--altaeron-accent);
+  border-radius: .25rem;
+  color: #171005;
+  background: linear-gradient(105deg, #d68c11, #f0b344 52%, #d58a10);
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  transition: filter .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.altaeron-purchase .product-form__submit:hover:not(:disabled),
+.altaeron-purchase .shopify-payment-button__button:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 0 2rem color-mix(in srgb, var(--altaeron-accent) 25%, transparent);
+  transform: translateY(-1px);
+}
+
+.altaeron-purchase .shopify-payment-button {
+  grid-column: 1 / -1;
+}
+
+.altaeron-purchase .shopify-payment-button__button,
+.altaeron-purchase .shopify-payment-button__button--unbranded {
+  color: var(--altaeron-text) !important;
+  background: transparent !important;
+}
+
+.altaeron-delivery-note {
+  color: var(--altaeron-muted);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.altaeron-trust {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem 2.4rem;
+  margin: 1rem 0 0;
+  padding: 2.2rem 0 0;
+  border-top: 1px solid var(--altaeron-line);
+  list-style: none;
+}
+
+.altaeron-trust__item {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.altaeron-trust__icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  color: var(--altaeron-accent);
+}
+
+.altaeron-trust__icon svg {
+  width: 2.6rem;
+  height: 2.6rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.4;
+}
+
+.altaeron-trust__item strong,
+.altaeron-trust__item small {
+  display: block;
+}
+
+.altaeron-trust__item strong {
+  color: var(--altaeron-text);
+  font-size: 1.05rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.altaeron-trust__item small {
+  margin-top: .25rem;
+  color: var(--altaeron-muted);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+/* Packaging, lifestyle, stories */
+.altaeron-packaging {
+  display: grid;
+  grid-template-columns: minmax(28rem, .58fr) minmax(0, 1.42fr);
+  min-height: 48rem;
+  margin-left: 12rem;
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-packaging__copy {
+  display: grid;
+  align-content: center;
+  gap: 2rem;
+  padding: clamp(4rem, 6vw, 9rem);
+}
+
+.altaeron-packaging__media {
+  overflow: hidden;
+  border-left: 1px solid var(--altaeron-line);
+}
+
+.altaeron-packaging__media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.altaeron-homes,
+.altaeron-stories,
+.altaeron-guide,
+.altaeron-worlds {
+  display: grid;
+  grid-template-columns: minmax(24rem, .42fr) minmax(0, 1.58fr);
+  gap: clamp(3rem, 5vw, 8rem);
+  margin-left: 12rem;
+  padding: clamp(6rem, 7vw, 11rem) clamp(3rem, 5vw, 9rem);
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-homes__rail {
+  display: grid;
+  grid-auto-columns: minmax(28rem, 38%);
+  grid-auto-flow: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--altaeron-accent) var(--altaeron-line);
+}
+
+.altaeron-homes__item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--altaeron-line);
+  border-radius: .5rem;
+  scroll-snap-align: start;
+}
+
+.altaeron-homes__item img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.altaeron-homes__item figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 3rem 1.5rem 1.2rem;
+  color: var(--altaeron-text);
+  background: linear-gradient(transparent, rgba(0, 0, 0, .8));
+  font-size: 1.1rem;
+}
+
+.altaeron-featured-story {
+  display: grid;
+  gap: 2.4rem;
+  padding: clamp(2.5rem, 4vw, 5rem);
+  border: 1px solid var(--altaeron-line);
+  border-radius: .5rem;
+  background: var(--altaeron-panel);
+}
+
+.altaeron-featured-story__author {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.altaeron-featured-story__author img {
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.altaeron-featured-story__author strong,
+.altaeron-featured-story__author small {
+  display: block;
+}
+
+.altaeron-featured-story__author strong {
+  color: var(--altaeron-accent);
+}
+
+.altaeron-featured-story__author small {
+  color: var(--altaeron-muted);
+}
+
+.altaeron-featured-story blockquote {
+  max-width: 38ch;
+  font-family: var(--font-heading-family);
+  font-size: clamp(2rem, 2.6vw, 3.8rem);
+  line-height: 1.2;
+}
+
+.altaeron-featured-story__images {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .8rem;
+}
+
+.altaeron-featured-story__images img {
+  aspect-ratio: 4 / 3;
+  border-radius: .3rem;
+  object-fit: cover;
+}
+
+.altaeron-review-app {
+  grid-column: 2;
+  min-width: 0;
+}
+
+/* FAQ */
+.altaeron-faqs {
+  border-top: 1px solid var(--altaeron-line);
+}
+
+.altaeron-faq {
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-faq summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  min-height: 6.2rem;
+  padding: 1rem 0;
+  color: var(--altaeron-text);
+  font-size: 1.35rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.altaeron-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.altaeron-faq__toggle {
+  position: relative;
+  flex: 0 0 1.6rem;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.altaeron-faq__toggle::before,
+.altaeron-faq__toggle::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.2rem;
+  height: 1px;
+  background: var(--altaeron-accent);
+  content: '';
+  transform: translate(-50%, -50%);
+  transition: transform .22s ease;
+}
+
+.altaeron-faq__toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.altaeron-faq[open] .altaeron-faq__toggle::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.altaeron-faq__answer {
+  padding: 0 4rem 2.5rem 0;
+}
+
+/* Related worlds */
+.altaeron-worlds__recommendations {
+  min-width: 0;
+}
+
+.altaeron-worlds__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.altaeron-world-card {
+  min-width: 0;
+  border: 1px solid var(--altaeron-line);
+  border-radius: .4rem;
+  background: var(--altaeron-panel);
+}
+
+.altaeron-world-card__link {
+  position: relative;
+  display: grid;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.altaeron-world-card__media {
+  aspect-ratio: 1.15;
+  overflow: hidden;
+  background: #020303;
+}
+
+.altaeron-world-card__media img,
+.altaeron-world-card__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.altaeron-world-card:hover .altaeron-world-card__media img {
+  transform: scale(1.035);
+}
+
+.altaeron-world-card__content {
+  display: grid;
+  gap: .7rem;
+  padding: 1.5rem 3.6rem 1.6rem 1.5rem;
+}
+
+.altaeron-world-card h3 {
+  overflow: hidden;
+  font-family: var(--font-body-family);
+  font-size: 1.25rem;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.altaeron-world-card .f-price {
+  color: var(--altaeron-accent);
+  font-size: 1.1rem;
+}
+
+.altaeron-world-card__arrow {
+  position: absolute;
+  right: 1.4rem;
+  bottom: 1.7rem;
+  color: var(--altaeron-accent);
+}
+
+/* Mobile sticky commerce */
+.altaeron-sticky-buy {
+  position: fixed;
+  z-index: 30;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem max(1.5rem, env(safe-area-inset-right)) calc(1rem + env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
+  border-top: 1px solid var(--altaeron-line);
+  background: color-mix(in srgb, var(--altaeron-bg) 91%, transparent);
+  box-shadow: 0 -1rem 3rem rgba(0, 0, 0, .35);
+  backdrop-filter: blur(18px);
+}
+
+.altaeron-sticky-buy__price {
+  color: var(--altaeron-accent);
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+}
+
+.altaeron-sticky-buy__variant {
+  overflow: hidden;
+  color: var(--altaeron-muted);
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.altaeron-sticky-buy__button {
+  min-height: 4.6rem;
+  padding: 1rem 2rem;
+  border: 1px solid var(--altaeron-accent);
+  border-radius: .25rem;
+  color: #171005;
+  background: var(--altaeron-accent);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.altaeron-sticky-buy__button:disabled {
+  opacity: .5;
+}
+
+.altaeron-surface :focus-visible {
+  outline: 2px solid var(--altaeron-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1279px) {
+  .altaeron-chapters {
+    display: none;
+  }
+
+  .altaeron-hero,
+  .altaeron-lore,
+  .altaeron-craft,
+  .altaeron-details,
+  .altaeron-choose,
+  .altaeron-packaging,
+  .altaeron-homes,
+  .altaeron-stories,
+  .altaeron-guide,
+  .altaeron-worlds {
+    margin-left: 0;
+  }
+
+  .altaeron-hero {
+    grid-template-columns: minmax(0, 1.25fr) minmax(32rem, .75fr);
+  }
+
+  .altaeron-craft,
+  .altaeron-details,
+  .altaeron-homes,
+  .altaeron-stories,
+  .altaeron-guide,
+  .altaeron-worlds {
+    grid-template-columns: minmax(20rem, .38fr) minmax(0, 1.62fr);
+  }
+
+  .altaeron-worlds__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 989px) {
+  .altaeron-hero,
+  .altaeron-lore,
+  .altaeron-choose,
+  .altaeron-packaging {
+    grid-template-columns: 1fr;
+  }
+
+  .altaeron-hero {
+    min-height: 0;
+  }
+
+  .altaeron-hero__media {
+    min-height: 58vw;
+  }
+
+  .altaeron-hero__content,
+  .altaeron-purchase,
+  .altaeron-packaging__media,
+  .altaeron-lore__media {
+    border-left: 0;
+  }
+
+  .altaeron-lore__media,
+  .altaeron-packaging__media {
+    border-top: 1px solid var(--altaeron-line);
+  }
+
+  .altaeron-choose__visual {
+    min-height: 52vw;
+  }
+
+  .altaeron-details__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .altaeron-worlds__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .altaeron-progress {
+    position: sticky;
+    z-index: 11;
+    top: var(--header-height, 0);
+    display: grid;
+    grid-template-columns: 2.3rem minmax(0, 1fr) 2.3rem;
+    gap: 1rem;
+    align-items: center;
+    height: 4rem;
+    padding: 0 1.8rem;
+    border-bottom: 1px solid var(--altaeron-line);
+    color: var(--altaeron-muted);
+    background: color-mix(in srgb, var(--altaeron-bg) 88%, transparent);
+    font-size: .95rem;
+    backdrop-filter: blur(16px);
+  }
+
+  .altaeron-progress__current {
+    color: var(--altaeron-accent);
+  }
+
+  .altaeron-progress__rule {
+    height: 1px;
+    overflow: hidden;
+    background: var(--altaeron-line);
+  }
+
+  .altaeron-progress__rule i {
+    display: block;
+    width: 11.11%;
+    height: 100%;
+    background: var(--altaeron-accent);
+    transition: width .28s ease;
+  }
+
+  .altaeron-section-heading h2,
+  .altaeron-lore h2,
+  .altaeron-purchase h2,
+  .altaeron-packaging h2 {
+    font-size: clamp(3.3rem, 10vw, 4.6rem);
+    line-height: 1;
+  }
+
+  .altaeron-kicker,
+  .altaeron-eyebrow {
+    font-size: .95rem;
+  }
+
+  .altaeron-rte {
+    font-size: 1.3rem;
+    line-height: 1.62;
+  }
+
+  .altaeron-hero__media {
+    min-height: min(64rem, 126vw);
+  }
+
+  .altaeron-hero__media .product__media-gallery-thumbails {
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .altaeron-hero__media .product__thumbs-item {
+    width: calc((100vw - 6.2rem) / 5) !important;
+  }
+
+  .altaeron-hero__media .slider-controls--group {
+    right: 1.5rem;
+    bottom: 9.5rem;
+  }
+
+  .altaeron-hero__content {
+    gap: 1.6rem;
+    min-height: 37rem;
+    padding: 4.5rem 2.4rem 5.5rem;
+    border-top: 1px solid var(--altaeron-line);
+  }
+
+  .altaeron-hero__title {
+    max-width: none;
+    font-size: clamp(4.2rem, 13vw, 6.2rem);
+  }
+
+  .altaeron-hero__story {
+    max-width: 34rem;
+    font-size: 1.35rem;
+  }
+
+  .altaeron-lore__copy,
+  .altaeron-purchase,
+  .altaeron-packaging__copy {
+    min-height: 0;
+    padding: 5.5rem 2.4rem;
+  }
+
+  .altaeron-lore__media {
+    min-height: 76vw;
+  }
+
+  .altaeron-craft,
+  .altaeron-details,
+  .altaeron-homes,
+  .altaeron-stories,
+  .altaeron-guide,
+  .altaeron-worlds {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 5.5rem 2.4rem;
+  }
+
+  .altaeron-craft__rail {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    overflow: visible;
+  }
+
+.altaeron-craft-card {
+  position: relative;
+    display: grid;
+    grid-template-columns: 9.6rem 1fr;
+    gap: 1.6rem;
+    padding: 1.6rem 0;
+    overflow: visible;
+    border: 0;
+    border-bottom: 1px solid var(--altaeron-line);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .altaeron-craft-card::before {
+    position: absolute;
+    left: 4.8rem;
+    width: 1px;
+    height: calc(100% - 3.2rem);
+    background: var(--altaeron-line);
+    content: '';
+  }
+
+  .altaeron-craft-card__media {
+    position: relative;
+    z-index: 1;
+    width: 9.6rem;
+    height: 9.6rem;
+    border: 1px solid var(--altaeron-line);
+    border-radius: .4rem;
+  }
+
+  .altaeron-craft-card__body {
+    align-content: center;
+    padding: 0;
+  }
+
+  .altaeron-details__grid {
+    grid-auto-rows: 38vw;
+    gap: .7rem;
+  }
+
+  .altaeron-details__item:nth-child(4n + 1) {
+    grid-row: auto;
+  }
+
+  .altaeron-choose__visual {
+    min-height: 88vw;
+  }
+
+  .altaeron-purchase {
+    gap: 1.8rem;
+    border-top: 1px solid var(--altaeron-line);
+  }
+
+  .altaeron-purchase .product-form__input input[type="radio"] + label {
+    min-width: 5.2rem;
+    min-height: 4.4rem;
+  }
+
+  .altaeron-purchase .product-form__buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .altaeron-purchase .product-form__quantity {
+    width: 12rem;
+  }
+
+  .altaeron-trust {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .altaeron-packaging__media {
+    min-height: 78vw;
+  }
+
+  .altaeron-homes__rail {
+    grid-auto-columns: 84%;
+    margin-right: -2.4rem;
+    padding-right: 2.4rem;
+  }
+
+  .altaeron-stories .altaeron-section-heading,
+  .altaeron-review-app {
+    grid-column: auto;
+  }
+
+  .altaeron-featured-story {
+    padding: 2.4rem;
+  }
+
+  .altaeron-featured-story blockquote {
+    font-size: 2.4rem;
+  }
+
+  .altaeron-featured-story__images {
+    grid-template-columns: repeat(3, 1fr);
+    overflow-x: auto;
+  }
+
+  .altaeron-faq summary {
+    min-height: 7.2rem;
+    font-size: 1.3rem;
+  }
+
+  .altaeron-faq__answer {
+    padding-right: 0;
+  }
+
+  .altaeron-worlds__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .altaeron-world-card {
+    border-width: 0 0 1px;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .altaeron-world-card__link {
+    grid-template-columns: 9.6rem minmax(0, 1fr);
+    gap: 1.2rem;
+    align-items: center;
+    min-height: 11.6rem;
+    padding: 1rem 0;
+  }
+
+  .altaeron-world-card__media {
+    aspect-ratio: 1;
+    border-radius: .4rem;
+  }
+
+  .altaeron-world-card__content {
+    padding: 1rem 3.5rem 1rem 0;
+  }
+
+  .altaeron-world-card__arrow {
+    right: .5rem;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+
+  .altaeron-sticky-buy.is-visible {
+    display: grid;
+  }
+}
+
+@media (max-width: 389px) {
+  .altaeron-hero__content,
+  .altaeron-lore__copy,
+  .altaeron-purchase,
+  .altaeron-packaging__copy,
+  .altaeron-craft,
+  .altaeron-details,
+  .altaeron-homes,
+  .altaeron-stories,
+  .altaeron-guide,
+  .altaeron-worlds {
+    padding-right: 1.8rem;
+    padding-left: 1.8rem;
+  }
+
+  .altaeron-trust {
+    grid-template-columns: 1fr;
+  }
+
+  .altaeron-sticky-buy {
+    grid-template-columns: auto 1fr;
+  }
+
+  .altaeron-sticky-buy__variant {
+    display: none;
+  }
+
+  .altaeron-sticky-buy__button {
+    padding-right: 1.4rem;
+    padding-left: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .altaeron-surface *,
+  .altaeron-surface *::before,
+  .altaeron-surface *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+
+  .altaeron-hero__particles {
+    display: none;
+  }
+}

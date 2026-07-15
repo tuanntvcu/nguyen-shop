@@ -1,0 +1,27 @@
+{%- comment -%}
+  Altaeron chapter navigation. Targets may live in later template sections, so the
+  companion script resolves anchors at document level and only shows the rail
+  while the Altaeron experience is in view.
+{%- endcomment -%}
+<nav class="altaeron-chapters" aria-label="{{ 'Product chapters' | escape }}" data-altaeron-chapters>
+  <ol class="altaeron-chapters__list" role="list">
+    {%- assign chapter_labels = 'The Legend|The Craft|Details|Choose Your World|Bring It Home|Homes of Altaeron|Stories From Dreamers|Keeper’s Guide|Other Worlds Await' | split: '|' -%}
+    {%- assign chapter_ids = 'altaeron-legend|altaeron-craft|altaeron-details|altaeron-choose|altaeron-bring-home|altaeron-homes|altaeron-stories|altaeron-guide|altaeron-other-worlds' | split: '|' -%}
+    {%- for chapter_label in chapter_labels -%}
+      <li class="altaeron-chapters__item">
+        <a class="altaeron-chapters__link" href="#{{ chapter_ids[forloop.index0] }}" data-altaeron-chapter-link>
+          <span class="altaeron-chapters__dot" aria-hidden="true"></span>
+          <span class="altaeron-chapters__number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span class="altaeron-chapters__label">{{ chapter_label }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ol>
+</nav>
+
+<nav class="altaeron-progress" aria-label="Product chapter progress" data-altaeron-progress>
+  <span class="altaeron-progress__current" data-altaeron-progress-current>01</span>
+  <span class="altaeron-progress__rule" aria-hidden="true"><i data-altaeron-progress-bar></i></span>
+  <span class="altaeron-progress__total" data-altaeron-progress-total>09</span>
+  <span class="visually-hidden" aria-live="polite" data-altaeron-progress-label>The Legend</span>
+</nav>
