@@ -169,6 +169,8 @@
     const sellingPlanId = choice.value;
     input.value = sellingPlanId;
     input.disabled = !sellingPlanId;
+    const dynamicCheckout = fieldset.closest('.altaeron-purchase')?.querySelector('.shopify-payment-button');
+    if (dynamicCheckout) dynamicCheckout.hidden = Boolean(sellingPlanId);
     fieldset.querySelectorAll('.altaeron-selling-plan').forEach((option) => {
       option.classList.toggle('is-selected', option.contains(choice));
     });
