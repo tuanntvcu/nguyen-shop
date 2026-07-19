@@ -81,7 +81,7 @@
 
     state.chapters.forEach((chapter, index) => {
       const kicker = chapter.querySelector('.altaeron-kicker');
-      if (!kicker) return;
+      if (!kicker || kicker.classList.contains('altaeron-hero__chapter')) return;
       const label = kicker.textContent.replace(/^\s*\d{2}\s*\/\s*/, '').trim();
       if (label) kicker.textContent = `${String(index + 1).padStart(2, '0')} / ${label}`;
     });
@@ -128,6 +128,14 @@
     document.querySelectorAll('.altaeron-packaging').forEach((section) => {
       const expanded = mobile ? section.dataset.altaeronPackagingExpanded === 'true' : true;
       setPackagingExpanded(section, expanded);
+    });
+  };
+
+  const refreshVariantPresentation = () => {
+    document.querySelectorAll('.altaeron-purchase [data-option-name="wood-base"] label[data-option-value]').forEach((label) => {
+      label.classList.add('altaeron-wood-swatch');
+      label.setAttribute('title', label.dataset.optionValue);
+      label.setAttribute('aria-label', label.dataset.optionValue);
     });
   };
 
@@ -250,6 +258,7 @@
     refreshChapters();
     refreshVideos();
     refreshPackaging();
+    refreshVariantPresentation();
     updateStickyCommerce();
   };
 

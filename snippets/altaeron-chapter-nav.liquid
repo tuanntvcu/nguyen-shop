@@ -7,7 +7,7 @@
   <ol class="altaeron-chapters__list" role="list">
     {%- liquid
       assign story_chapter_label = 'Stories From Dreamers'
-      assign featured_story = product.metafields.custom.featured_review.value | default: product.metafields.custom.story_card.value
+      assign featured_story = product.metafields.custom.featured_review_v2.value | default: product.metafields.custom.featured_review.value | default: product.metafields.custom.story_card.value
       if featured_story.customer_name.value == 'Altaeron Studio'
         assign story_chapter_label = 'Design Journal'
       endif

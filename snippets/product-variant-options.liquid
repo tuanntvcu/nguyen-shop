@@ -158,8 +158,8 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
-      {{ value -}}
+    <label for="{{ input_id }}" data-option-value="{{ value | escape }}">
+      {%- if template.suffix == 'altaeron' and option.name == 'Size' -%}{{ value | slice: 0 }}{%- else -%}{{ value }}{%- endif -%}
       {{ label_unavailable }}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}

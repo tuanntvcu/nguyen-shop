@@ -6,7 +6,7 @@
         {{ product.featured_media.preview_image
           | image_url: width: 720
           | image_tag:
-            loading: 'lazy',
+            loading: 'eager',
             widths: '180, 240, 360, 540, 720',
             sizes: '(max-width: 767px) 96px, 22vw',
             alt: product.featured_media.alt | default: product.title

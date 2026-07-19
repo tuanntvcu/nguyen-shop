@@ -30,16 +30,11 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
-        },
-        "pickup": {
-          "type": "pickup_availability",
-          "settings": {}
         }
       },
       "block_order": [
         "variant_picker",
-        "buy_buttons",
-        "pickup"
+        "buy_buttons"
       ],
       "settings": {
         "background": "#050809",
@@ -48,7 +43,7 @@
         "accent_color": "#f3a316",
         "enable_ambient_motion": true,
         "sticky_chapters": true,
-        "sticky_buy_bar": true,
+        "sticky_buy_bar": false,
         "enable_image_zoom": true,
         "media_size": "large",
         "enable_video_looping": false,
@@ -61,8 +56,9 @@
         "details_eyebrow": "Details",
         "details_heading": "Every Detail Tells A Story.",
         "choose_eyebrow": "Choose your world",
-        "choose_heading": "Create Your World",
+        "choose_heading": "Create Your Dragon Flame",
         "size_guide_label": "Size guide",
+        "show_selling_plans": false,
         "show_trust": true,
         "trust_1_label": "Shipping options",
         "trust_1_text": "Calculated at checkout",
@@ -89,7 +85,8 @@
         "homes_eyebrow": "Homes of Altaeron",
         "homes_heading": "See How It Lives In Real Homes.",
         "stories_eyebrow": "Stories from dreamers",
-        "stories_heading": "More Than A Product. A Piece Of Another World."
+        "stories_heading": "More Than A Product. A Piece Of Another World.",
+        "stories_mobile_heading": "Stories From Dreamers."
       }
     },
     "guide": {
@@ -102,6 +99,7 @@
         "accent_color": "#f3a316",
         "eyebrow": "Keeper's guide",
         "heading": "Everything You Need To Know.",
+        "mobile_heading": "Care For Your World.",
         "open_first": true,
         "one_open": true
       }
@@ -118,12 +116,17 @@
         "heading": "Other Worlds Await.",
         "limit": 4
       }
+    },
+    "product_footer": {
+      "type": "altaeron-product-footer",
+      "settings": {}
     }
   },
   "order": [
     "main",
     "aftercare",
     "guide",
-    "other_worlds"
+    "other_worlds",
+    "product_footer"
   ]
 }

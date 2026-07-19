@@ -3,7 +3,7 @@
   assign product_form_id = 'product-form-' | append: section.id
   assign legend_video = product.metafields.custom.legend_video.value
   assign legend_image = product.metafields.custom.legend_image.value
-  assign craft_steps = product.metafields.custom.craft_steps.value
+  assign craft_steps = product.metafields.custom.craft_steps_v2.value | default: product.metafields.custom.craft_steps.value
   assign detail_gallery = product.metafields.custom.detail_gallery.value
   assign rating = product.metafields.reviews.rating.value
   assign rating_count = product.metafields.reviews.rating_count.value
@@ -73,11 +73,9 @@
     </div>
 
     <div class="altaeron-hero__content">
-      {%- if world_label != blank -%}<p class="altaeron-kicker">01 / {{ world_label | escape }}</p>{%- endif -%}
+      {%- if world_label != blank -%}<p class="altaeron-kicker altaeron-hero__chapter"><span class="altaeron-desktop-only">{{ world_label | escape }}</span><span class="altaeron-mobile-only">01 / The Legend</span></p>{%- endif -%}
       {%- if product_eyebrow != blank -%}<p class="altaeron-eyebrow">{{ product_eyebrow | escape }}</p>{%- endif -%}
       <h1 class="altaeron-hero__title">{{ product.title | escape }}</h1>
-      {%- if short_story != blank -%}<p class="altaeron-hero__story">{{ short_story | newline_to_br }}</p>{%- endif -%}
-
       {%- if section.settings.show_rating and rating != blank and rating_count > 0 -%}
         <a class="altaeron-rating" href="#altaeron-stories" aria-label="{{ rating.rating }} out of {{ rating.scale_max }} stars, {{ rating_count }} reviews">
           <span aria-hidden="true">★★★★★</span>
@@ -85,11 +83,19 @@
         </a>
       {%- endif -%}
 
+      {%- if short_story != blank -%}<p class="altaeron-hero__story">{{ short_story | newline_to_br }}</p>{%- endif -%}
+
       {%- if legend_video != blank or legend_image != blank -%}
         <a class="altaeron-story-link" href="#altaeron-lore-media">
           <span class="altaeron-story-link__play" aria-hidden="true">▶</span>
           {{ section.settings.story_cta | escape }}
         </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_trust and has_trust -%}
+        <aside class="altaeron-hero__trust" aria-label="Product assurances">
+          {% render 'altaeron-trust-items' %}
+        </aside>
       {%- endif -%}
     </div>
   </section>
@@ -239,7 +245,7 @@
           {%- when 'buy_buttons' -%}
             <div class="altaeron-purchase__block" {{ block.shopify_attributes }}>
               <div data-altaeron-selling-plan-region>
-                {%- if product.selling_plan_groups != blank and selected_variant.selling_plan_allocations != blank -%}
+              {%- if section.settings.show_selling_plans and product.selling_plan_groups != blank and selected_variant.selling_plan_allocations != blank -%}
                   <fieldset class="altaeron-selling-plans" data-altaeron-selling-plans>
                     <legend>{{ section.settings.purchase_options_label | escape }}</legend>
                     <label class="altaeron-selling-plan is-selected">
@@ -375,6 +381,7 @@
     { "type": "text", "id": "purchase_options_label", "label": "Purchase options label", "default": "Purchase options" },
     { "type": "text", "id": "one_time_purchase_label", "label": "One-time purchase label", "default": "One-time purchase" },
     { "type": "text", "id": "subscription_policy_label", "label": "Subscription policy label", "default": "Subscription policy" },
+    { "type": "checkbox", "id": "show_selling_plans", "label": "Show selling plans", "default": false },
     { "type": "header", "content": "Trust information" },
     { "type": "checkbox", "id": "show_trust", "label": "Show trust information", "default": true },
     { "type": "text", "id": "trust_1_label", "label": "Trust item 1" },

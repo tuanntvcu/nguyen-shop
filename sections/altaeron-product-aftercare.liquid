@@ -3,7 +3,7 @@
   assign packaging_heading = product.metafields.custom.packaging_heading.value
   assign packaging_content = product.metafields.custom.packaging_content
   assign lifestyle_gallery = product.metafields.custom.lifestyle_gallery.value
-  assign featured_review = product.metafields.custom.featured_review.value | default: product.metafields.custom.story_card.value
+  assign featured_review = product.metafields.custom.featured_review_v2.value | default: product.metafields.custom.featured_review.value | default: product.metafields.custom.story_card.value
   assign rating = product.metafields.reviews.rating.value
   assign rating_count = product.metafields.reviews.rating_count.value
   assign has_packaging = false
@@ -16,10 +16,7 @@
   endif
   assign stories_eyebrow = section.settings.stories_eyebrow
   assign stories_heading = section.settings.stories_heading
-  if featured_review.customer_name.value == 'Altaeron Studio'
-    assign stories_eyebrow = 'Design journal'
-    assign stories_heading = 'Behind The Dragon Flame.'
-  endif
+  assign stories_mobile_heading = section.settings.stories_mobile_heading
 -%}
 
 {{ 'altaeron-product.css' | asset_url | stylesheet_tag }}
@@ -71,7 +68,7 @@
     <section id="altaeron-stories" class="altaeron-stories altaeron-chapter" data-altaeron-chapter="{{ stories_eyebrow | escape }}" aria-labelledby="AltaeronStoriesTitle-{{ section.id }}">
       <header class="altaeron-section-heading">
         <p class="altaeron-kicker">07 / {{ stories_eyebrow | escape }}</p>
-        <h2 id="AltaeronStoriesTitle-{{ section.id }}">{{ stories_heading | escape }}</h2>
+        <h2 id="AltaeronStoriesTitle-{{ section.id }}"><span class="altaeron-desktop-only">{{ stories_heading | escape }}</span><span class="altaeron-mobile-only">{{ stories_mobile_heading | escape }}</span></h2>
         {%- if rating != blank and rating_count > 0 -%}
           <div class="altaeron-rating altaeron-rating--large" aria-label="{{ rating.rating }} out of {{ rating.scale_max }} stars, {{ rating_count }} reviews">
             <span aria-hidden="true">★★★★★</span><small>{{ rating.rating }} ({{ rating_count }})</small>
@@ -125,7 +122,8 @@
     { "type": "text", "id": "homes_eyebrow", "label": "Lifestyle eyebrow", "default": "Homes of Altaeron" },
     { "type": "text", "id": "homes_heading", "label": "Lifestyle heading", "default": "See How It Lives In Real Homes." },
     { "type": "text", "id": "stories_eyebrow", "label": "Review eyebrow", "default": "Stories from dreamers" },
-    { "type": "text", "id": "stories_heading", "label": "Review heading", "default": "More Than A Product. A Piece Of Another World." }
+    { "type": "text", "id": "stories_heading", "label": "Review heading", "default": "More Than A Product. A Piece Of Another World." },
+    { "type": "text", "id": "stories_mobile_heading", "label": "Mobile review heading", "default": "Stories From Dreamers." }
   ],
   "presets": [{ "name": "Altaeron story & reviews" }]
 }
