@@ -1,0 +1,50 @@
+{%- liquid
+  assign image_loading = loading | default: 'lazy'
+  assign image_sizes = sizes | default: '100vw'
+  assign image_widths = widths | default: '360, 540, 750, 960, 1200, 1600, 2000'
+  assign image_max_width = max_width | default: 2000
+  assign image_alt = alt | default: desktop_image.alt | default: mobile_image.alt
+-%}
+<picture class="altaeron__picture">
+  {%- if mobile_image != blank -%}
+    <source
+      media="(max-width: 749px)"
+      sizes="{{ mobile_sizes | default: '100vw' }}"
+      srcset="
+        {{ mobile_image | image_url: width: 360 }} 360w,
+        {{ mobile_image | image_url: width: 540 }} 540w,
+        {{ mobile_image | image_url: width: 750 }} 750w,
+        {{ mobile_image | image_url: width: 960 }} 960w
+      "
+      width="{{ mobile_image.width }}"
+      height="{{ mobile_image.height }}"
+    >
+  {%- elsif mobile_asset != blank -%}
+    <source media="(max-width: 749px)" srcset="{{ mobile_asset | asset_url }}">
+  {%- endif -%}
+
+  {%- if desktop_image != blank -%}
+    {{-
+      desktop_image
+      | image_url: width: image_max_width
+      | image_tag:
+        class: class,
+        widths: image_widths,
+        sizes: image_sizes,
+        loading: image_loading,
+        fetchpriority: fetchpriority,
+        preload: preload,
+        alt: image_alt
+    -}}
+  {%- else -%}
+    <img
+      {% if class != blank %}class="{{ class }}"{% endif %}
+      src="{{ desktop_asset | asset_url }}"
+      width="{{ desktop_width }}"
+      height="{{ desktop_height }}"
+      alt="{{ image_alt | escape }}"
+      loading="{{ image_loading }}"
+      {% if fetchpriority != blank %}fetchpriority="{{ fetchpriority }}"{% endif %}
+    >
+  {%- endif -%}
+</picture>
