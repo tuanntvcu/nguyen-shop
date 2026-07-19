@@ -14,6 +14,12 @@
   if featured_review != blank or rating != blank or section.blocks.size > 0
     assign has_stories = true
   endif
+  assign stories_eyebrow = section.settings.stories_eyebrow
+  assign stories_heading = section.settings.stories_heading
+  if featured_review.customer_name.value == 'Altaeron Studio'
+    assign stories_eyebrow = 'Design journal'
+    assign stories_heading = 'Behind The Dragon Flame.'
+  endif
 -%}
 
 {{ 'altaeron-product.css' | asset_url | stylesheet_tag }}
@@ -62,10 +68,10 @@
   {%- endif -%}
 
   {%- if section.settings.show_stories and has_stories -%}
-    <section id="altaeron-stories" class="altaeron-stories altaeron-chapter" data-altaeron-chapter="Stories From Dreamers" aria-labelledby="AltaeronStoriesTitle-{{ section.id }}">
+    <section id="altaeron-stories" class="altaeron-stories altaeron-chapter" data-altaeron-chapter="{{ stories_eyebrow | escape }}" aria-labelledby="AltaeronStoriesTitle-{{ section.id }}">
       <header class="altaeron-section-heading">
-        <p class="altaeron-kicker">07 / {{ section.settings.stories_eyebrow | escape }}</p>
-        <h2 id="AltaeronStoriesTitle-{{ section.id }}">{{ section.settings.stories_heading | escape }}</h2>
+        <p class="altaeron-kicker">07 / {{ stories_eyebrow | escape }}</p>
+        <h2 id="AltaeronStoriesTitle-{{ section.id }}">{{ stories_heading | escape }}</h2>
         {%- if rating != blank and rating_count > 0 -%}
           <div class="altaeron-rating altaeron-rating--large" aria-label="{{ rating.rating }} out of {{ rating.scale_max }} stars, {{ rating_count }} reviews">
             <span aria-hidden="true">★★★★★</span><small>{{ rating.rating }} ({{ rating_count }})</small>

@@ -5,7 +5,19 @@
 {%- endcomment -%}
 <nav class="altaeron-chapters" aria-label="{{ 'Product chapters' | escape }}" data-altaeron-chapters>
   <ol class="altaeron-chapters__list" role="list">
-    {%- assign chapter_labels = 'The Legend|The Craft|Details|Choose Your World|Bring It Home|Homes of Altaeron|Stories From Dreamers|Keeper’s Guide|Other Worlds Await' | split: '|' -%}
+    {%- liquid
+      assign story_chapter_label = 'Stories From Dreamers'
+      assign featured_story = product.metafields.custom.featured_review.value | default: product.metafields.custom.story_card.value
+      if featured_story.customer_name.value == 'Altaeron Studio'
+        assign story_chapter_label = 'Design Journal'
+      endif
+      capture chapter_label_source
+        echo 'The Legend|The Craft|Details|Choose Your World|Bring It Home|Homes of Altaeron|'
+        echo story_chapter_label
+        echo '|Keeper’s Guide|Other Worlds Await'
+      endcapture
+      assign chapter_labels = chapter_label_source | split: '|'
+    -%}
     {%- assign chapter_ids = 'altaeron-legend|altaeron-craft|altaeron-details|altaeron-choose|altaeron-bring-home|altaeron-homes|altaeron-stories|altaeron-guide|altaeron-other-worlds' | split: '|' -%}
     {%- for chapter_label in chapter_labels -%}
       <li class="altaeron-chapters__item">

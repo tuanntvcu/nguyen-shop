@@ -20,7 +20,7 @@
   assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
   assign has_models = product.media | where: 'media_type', 'model' | first
   assign has_trust = false
-  if section.settings.trust_1_label != blank or section.settings.trust_2_label != blank or section.settings.trust_3_label != blank or section.settings.trust_4_label != blank
+  if section.settings.trust_1_label != blank or section.settings.trust_2_label != blank or section.settings.trust_3_label != blank or section.settings.trust_4_label != blank or shop.shipping_policy.body != blank or shop.refund_policy.body != blank or pages['altaeron-limited-warranty'] != blank
     assign has_trust = true
   endif
 -%}
@@ -238,7 +238,40 @@
             </div>
           {%- when 'buy_buttons' -%}
             <div class="altaeron-purchase__block" {{ block.shopify_attributes }}>
-              {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, product_id: product.id %}
+              <div data-altaeron-selling-plan-region>
+                {%- if product.selling_plan_groups != blank and selected_variant.selling_plan_allocations != blank -%}
+                  <fieldset class="altaeron-selling-plans" data-altaeron-selling-plans>
+                    <legend>{{ section.settings.purchase_options_label | escape }}</legend>
+                    <label class="altaeron-selling-plan is-selected">
+                      <input
+                        type="radio"
+                        name="altaeron_purchase_option_{{ section.id }}"
+                        value=""
+                        data-altaeron-selling-plan-choice
+                        data-price="{{ selected_variant.price | money | escape }}"
+                        checked
+                      >
+                      <span><strong>{{ section.settings.one_time_purchase_label | escape }}</strong><small>{{ selected_variant.price | money }}</small></span>
+                    </label>
+                    {%- for allocation in selected_variant.selling_plan_allocations -%}
+                      <label class="altaeron-selling-plan">
+                        <input
+                          type="radio"
+                          name="altaeron_purchase_option_{{ section.id }}"
+                          value="{{ allocation.selling_plan.id }}"
+                          data-altaeron-selling-plan-choice
+                          data-price="{{ allocation.price | money | escape }}"
+                        >
+                        <span><strong>{{ allocation.selling_plan.name | escape }}</strong><small>{{ allocation.price | money }}</small></span>
+                      </label>
+                    {%- endfor -%}
+                    {%- if shop.subscription_policy.body != blank -%}
+                      <a class="altaeron-selling-plans__policy" href="{{ shop.subscription_policy.url }}">{{ section.settings.subscription_policy_label | escape }} →</a>
+                    {%- endif -%}
+                  </fieldset>
+                {%- endif -%}
+              </div>
+              {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, product_id: product.id, enable_selling_plan: true %}
             </div>
           {%- when 'pickup_availability' -%}
             <div class="altaeron-purchase__block" {{ block.shopify_attributes }}>{% render 'product-pickup-availability', product: product %}</div>
@@ -339,6 +372,9 @@
     { "type": "text", "id": "choose_eyebrow", "label": "Purchase eyebrow", "default": "Choose your world" },
     { "type": "text", "id": "choose_heading", "label": "Purchase heading", "default": "Create Your World" },
     { "type": "text", "id": "size_guide_label", "label": "Size guide label", "default": "Size guide" },
+    { "type": "text", "id": "purchase_options_label", "label": "Purchase options label", "default": "Purchase options" },
+    { "type": "text", "id": "one_time_purchase_label", "label": "One-time purchase label", "default": "One-time purchase" },
+    { "type": "text", "id": "subscription_policy_label", "label": "Subscription policy label", "default": "Subscription policy" },
     { "type": "header", "content": "Trust information" },
     { "type": "checkbox", "id": "show_trust", "label": "Show trust information", "default": true },
     { "type": "text", "id": "trust_1_label", "label": "Trust item 1" },

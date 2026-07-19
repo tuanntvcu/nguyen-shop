@@ -1,12 +1,36 @@
-{%- comment -%}Global merchant-editable trust claims. Empty entries are omitted.{%- endcomment -%}
+{%- comment -%}Merchant settings win; verified store policies provide safe fallbacks.{%- endcomment -%}
 {%- assign trust_icons = 'shipping|returns|payment|warranty' | split: '|' -%}
-{%- if section.settings.trust_1_label != blank or section.settings.trust_2_label != blank or section.settings.trust_3_label != blank or section.settings.trust_4_label != blank -%}
 <ul class="altaeron-trust" role="list">
   {%- for index in (1..4) -%}
     {%- capture label_key -%}trust_{{ index }}_label{%- endcapture -%}
     {%- capture text_key -%}trust_{{ index }}_text{%- endcapture -%}
     {%- assign trust_label = section.settings[label_key] -%}
     {%- assign trust_text = section.settings[text_key] -%}
+    {%- assign trust_url = blank -%}
+    {%- case forloop.index -%}
+      {%- when 1 -%}
+        {%- if shop.shipping_policy.body != blank -%}
+          {%- assign trust_url = shop.shipping_policy.url -%}
+          {%- if trust_label == blank -%}{%- assign trust_label = 'Shipping options' -%}{%- endif -%}
+          {%- if trust_text == blank -%}{%- assign trust_text = 'Calculated at checkout' -%}{%- endif -%}
+        {%- endif -%}
+      {%- when 2 -%}
+        {%- if shop.refund_policy.body != blank -%}
+          {%- assign trust_url = shop.refund_policy.url -%}
+          {%- if trust_label == blank -%}{%- assign trust_label = '30-day returns' -%}{%- endif -%}
+          {%- if trust_text == blank -%}{%- assign trust_text = 'See return policy' -%}{%- endif -%}
+        {%- endif -%}
+      {%- when 3 -%}
+        {%- if trust_label == blank -%}{%- assign trust_label = 'Secure checkout' -%}{%- endif -%}
+        {%- if trust_text == blank -%}{%- assign trust_text = 'Shopify powered' -%}{%- endif -%}
+      {%- when 4 -%}
+        {%- assign warranty_page = pages['altaeron-limited-warranty'] -%}
+        {%- if warranty_page != blank -%}
+          {%- assign trust_url = warranty_page.url -%}
+          {%- if trust_label == blank -%}{%- assign trust_label = '1-year warranty' -%}{%- endif -%}
+          {%- if trust_text == blank -%}{%- assign trust_text = 'Limited coverage' -%}{%- endif -%}
+        {%- endif -%}
+    {%- endcase -%}
     {%- if trust_label != blank -%}
       <li class="altaeron-trust__item">
         <span class="altaeron-trust__icon" aria-hidden="true" data-icon="{{ trust_icons[forloop.index0] }}">
@@ -21,9 +45,10 @@
               <svg viewBox="0 0 24 24"><path d="m12 3 2.3 2 3-.2.7 3 2.5 1.7-1.2 2.8 1.2 2.8-2.5 1.7-.7 3-3-.2-2.3 2-2.3-2-3 .2-.7-3-2.5-1.7 1.2-2.8-1.2-2.8L6 7.8l.7-3 3 .2z"/><path d="m9 12 2 2 4-4"/></svg>
           {%- endcase -%}
         </span>
-        <span><strong>{{ trust_label | escape }}</strong>{% if trust_text != blank %}<small>{{ trust_text | escape }}</small>{% endif %}</span>
+        {%- if trust_url != blank -%}<a class="altaeron-trust__link" href="{{ trust_url }}">{%- else -%}<span>{%- endif -%}
+          <strong>{{ trust_label | escape }}</strong>{% if trust_text != blank %}<small>{{ trust_text | escape }}</small>{% endif %}
+        {%- if trust_url != blank -%}</a>{%- else -%}</span>{%- endif -%}
       </li>
     {%- endif -%}
   {%- endfor -%}
 </ul>
-{%- endif -%}

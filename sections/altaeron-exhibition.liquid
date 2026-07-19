@@ -58,11 +58,7 @@
       <button type="button" data-cart-trigger aria-label="{{ 'general.cart.cart_count' | t: count: cart.item_count | escape }}">{% render 'altaeron-icon', name: 'cart' %}<span class="altaeron__mobile-count">{{ cart.item_count }}</span></button>
     </div>
     <div class="altaeron__hero-media" aria-hidden="true">
-      {%- if section.settings.hero_image != blank -%}
-        {{ section.settings.hero_image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 2000, 2400', sizes: '100vw', loading: 'eager', preload: true, class: 'altaeron__hero-image' }}
-      {%- else -%}
-        <img class="altaeron__hero-image" src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" fetchpriority="high">
-      {%- endif -%}
+      {% render 'altaeron-responsive-image', desktop_image: section.settings.hero_image, mobile_image: section.settings.hero_image_mobile, desktop_asset: 'altaeron-hero.webp', mobile_asset: 'altaeron-hero-mobile.webp', desktop_width: 1672, desktop_height: 942, max_width: 2400, widths: '750, 1100, 1500, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', preload: true, class: 'altaeron__hero-image', alt: '' %}
       <span class="altaeron__hero-vignette"></span>
       <span class="altaeron__glow"></span>
       <span class="altaeron__particles" data-particles></span>
@@ -120,11 +116,7 @@
     <div class="altaeron__story-slides">
       <div class="altaeron__story-slide is-active" data-story-slide role="group" aria-roledescription="slide" aria-label="1 {{ 'general.slider.of' | t }} {{ story_blocks.size | plus: 1 }}">
         <div class="altaeron__story-media">
-          {%- if section.settings.story_image != blank -%}
-            {{ section.settings.story_image | image_url: width: 1800 | image_tag: widths: '550, 900, 1200, 1800', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy' }}
-          {%- else -%}
-            <img src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" loading="lazy">
-          {%- endif -%}
+          {% render 'altaeron-responsive-image', desktop_image: section.settings.story_image, mobile_image: section.settings.story_image_mobile, desktop_asset: 'altaeron-hero.webp', mobile_asset: 'altaeron-hero-mobile.webp', desktop_width: 1672, desktop_height: 942, max_width: 1800, widths: '550, 900, 1200, 1800', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy', alt: '' %}
         </div>
         <div class="altaeron__story-copy">
           <p class="altaeron__eyebrow">{{ section.settings.story_eyebrow | escape }}</p>
@@ -138,13 +130,13 @@
         <div class="altaeron__story-slide" data-story-slide role="group" aria-roledescription="slide" aria-label="{{ forloop.index | plus: 1 }} {{ 'general.slider.of' | t }} {{ story_blocks.size | plus: 1 }}" aria-hidden="true" {{ block.shopify_attributes }}>
           <div class="altaeron__story-media">
             {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 1800 | image_tag: widths: '550, 900, 1200, 1800', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy' }}
+              {% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 1800, widths: '550, 900, 1200, 1800', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy' %}
             {%- elsif forloop.index == 1 -%}
-              <img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+              {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-alpine.webp', mobile_asset: 'altaeron-alpine-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
             {%- elsif forloop.index == 2 -%}
-              <img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+              {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-ocean.webp', mobile_asset: 'altaeron-ocean-mobile.webp', desktop_width: 1200, desktop_height: 1200, loading: 'lazy', alt: '' %}
             {%- else -%}
-              <img src="{{ 'altaeron-cinematic.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+              {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-cinematic.webp', mobile_asset: 'altaeron-cinematic-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
             {%- endif -%}
           </div>
           <div class="altaeron__story-copy">
@@ -181,19 +173,19 @@
           <article class="altaeron__process-card" data-slide role="group" aria-roledescription="slide" aria-label="{{ process_index }} {{ 'general.slider.of' | t }} {{ process_blocks.size }}" {{ block.shopify_attributes }}>
             <div class="altaeron__process-image">
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 700 | image_tag: widths: '300, 500, 700', sizes: '(min-width: 900px) 16vw, 72vw', loading: 'lazy' }}
+                {% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 700, widths: '300, 500, 700', sizes: '(min-width: 900px) 16vw, 72vw', mobile_sizes: '45vw', loading: 'lazy' %}
               {%- elsif process_index == 1 -%}
-                <img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-alpine.webp', mobile_asset: 'altaeron-alpine-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
               {%- elsif process_index == 2 -%}
-                <img src="{{ 'altaeron-concept.webp' | asset_url }}" width="1200" height="800" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-concept.webp', mobile_asset: 'altaeron-concept-mobile.webp', desktop_width: 1200, desktop_height: 800, loading: 'lazy', alt: '' %}
               {%- elsif process_index == 3 -%}
-                <img src="{{ 'altaeron-craft.webp' | asset_url }}" width="1200" height="800" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-craft.webp', mobile_asset: 'altaeron-craft-mobile.webp', desktop_width: 1200, desktop_height: 800, loading: 'lazy', alt: '' %}
               {%- elsif process_index == 4 -%}
-                <img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-ocean.webp', mobile_asset: 'altaeron-ocean-mobile.webp', desktop_width: 1200, desktop_height: 1200, loading: 'lazy', alt: '' %}
               {%- elsif process_index == 5 -%}
-                <img src="{{ 'altaeron-cinematic.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-cinematic.webp', mobile_asset: 'altaeron-cinematic-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
               {%- else -%}
-                <img src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-hero.webp', mobile_asset: 'altaeron-hero-mobile.webp', desktop_width: 1672, desktop_height: 942, loading: 'lazy', alt: '' %}
               {%- endif -%}
             </div>
             <span class="altaeron__number">{{ process_index | prepend: '0' | slice: -2, 2 }}</span>
@@ -225,19 +217,19 @@
           <a class="altaeron__collection-card" href="{{ card_link }}" data-slide role="group" aria-roledescription="slide" aria-label="{{ collection_index }} {{ 'general.slider.of' | t }} {{ collection_slide_count }}" {{ block.shopify_attributes }}>
             <div class="altaeron__collection-image">
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 1100 | image_tag: widths: '400, 700, 900, 1100', sizes: '(min-width: 900px) 25vw, 78vw', loading: 'lazy' }}
+                {% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 1100, widths: '400, 700, 900, 1100', sizes: '(min-width: 900px) 25vw, 78vw', mobile_sizes: '78vw', loading: 'lazy' %}
               {%- elsif card_collection.featured_image != blank -%}
-                {{ card_collection.featured_image | image_url: width: 1100 | image_tag: widths: '400, 700, 900, 1100', sizes: '(min-width: 900px) 25vw, 78vw', loading: 'lazy' }}
+                {% render 'altaeron-responsive-image', desktop_image: card_collection.featured_image, mobile_image: block.settings.image_mobile, max_width: 1100, widths: '400, 700, 900, 1100', sizes: '(min-width: 900px) 25vw, 78vw', mobile_sizes: '78vw', loading: 'lazy' %}
               {%- elsif card_collection != blank -%}
                 {{ 'collection-1' | placeholder_svg_tag: 'altaeron__placeholder' }}
               {%- elsif collection_index == 1 -%}
-                <img src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-hero.webp', mobile_asset: 'altaeron-hero-mobile.webp', desktop_width: 1672, desktop_height: 942, loading: 'lazy', alt: '' %}
               {%- elsif collection_index == 2 -%}
-                <img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-alpine.webp', mobile_asset: 'altaeron-alpine-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
               {%- elsif collection_index == 3 -%}
-                <img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-ocean.webp', mobile_asset: 'altaeron-ocean-mobile.webp', desktop_width: 1200, desktop_height: 1200, loading: 'lazy', alt: '' %}
               {%- else -%}
-                <img src="{{ 'altaeron-home.webp' | asset_url }}" width="971" height="1620" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-home.webp', mobile_asset: 'altaeron-home-mobile.webp', desktop_width: 971, desktop_height: 1620, loading: 'lazy', alt: '' %}
               {%- endif -%}
             </div>
             <div class="altaeron__collection-copy">
@@ -275,17 +267,17 @@
           <article class="altaeron__product-card" data-slide role="group" aria-roledescription="slide" aria-label="{{ product_index }} {{ 'general.slider.of' | t }} {{ product_slide_count }}" {{ block.shopify_attributes }}>
             <a class="altaeron__product-image" href="{{ card_product.url | default: routes.all_products_collection_url }}" aria-label="{% if card_product != blank %}{{ card_product.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}">
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 900 | image_tag: widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', loading: 'lazy' }}
+                {% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 900, widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', mobile_sizes: '(max-width: 749px) 38vw, 82vw', loading: 'lazy' %}
               {%- elsif card_product.featured_image != blank -%}
-                {{ card_product.featured_image | image_url: width: 900 | image_tag: widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', loading: 'lazy' }}
+                {% render 'altaeron-responsive-image', desktop_image: card_product.featured_image, mobile_image: block.settings.image_mobile, max_width: 900, widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', mobile_sizes: '(max-width: 749px) 38vw, 82vw', loading: 'lazy' %}
               {%- elsif card_product != blank -%}
                 {{ 'product-1' | placeholder_svg_tag: 'altaeron__placeholder' }}
               {%- elsif product_index == 2 -%}
-                <img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-alpine.webp', mobile_asset: 'altaeron-alpine-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
               {%- elsif product_index == 3 -%}
-                <img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-ocean.webp', mobile_asset: 'altaeron-ocean-mobile.webp', desktop_width: 1200, desktop_height: 1200, loading: 'lazy', alt: '' %}
               {%- else -%}
-                <img src="{{ 'altaeron-hero.webp' | asset_url }}" width="1672" height="942" alt="" loading="lazy">
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-hero.webp', mobile_asset: 'altaeron-hero-mobile.webp', desktop_width: 1672, desktop_height: 942, loading: 'lazy', alt: '' %}
               {%- endif -%}
               {%- if card_product != blank and card_product.available == false -%}<span class="altaeron__badge">{{ 'products.product.sold_out' | t }}</span>
               {%- elsif request.design_mode and block.settings.badge != blank -%}<span class="altaeron__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
@@ -358,11 +350,11 @@
         {%- if block.type == 'testimonial' -%}
           {%- assign testimonial_index = testimonial_index | plus: 1 -%}
           <figure class="altaeron__review" data-slide role="group" aria-roledescription="slide" aria-label="{{ testimonial_index }} {{ 'general.slider.of' | t }} {{ testimonial_blocks.size }}" {{ block.shopify_attributes }}>
-            {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 700 | image_tag: widths: '360, 520, 700', sizes: '(min-width: 900px) 28vw, 88vw', loading: 'lazy' }}
-            {%- elsif testimonial_index == 2 -%}<img src="{{ 'altaeron-moon-home.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
-            {%- elsif testimonial_index == 3 -%}<img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">
-            {%- elsif testimonial_index == 4 -%}<img src="{{ 'altaeron-ocean.webp' | asset_url }}" width="1200" height="1200" alt="" loading="lazy">
-            {%- else -%}<img src="{{ 'altaeron-home.webp' | asset_url }}" width="971" height="1620" alt="" loading="lazy">{%- endif -%}
+            {%- if block.settings.image != blank -%}{% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 700, widths: '360, 520, 700', sizes: '(min-width: 900px) 28vw, 88vw', mobile_sizes: '88vw', loading: 'lazy' %}
+            {%- elsif testimonial_index == 2 -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-moon-home.webp', mobile_asset: 'altaeron-moon-home-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
+            {%- elsif testimonial_index == 3 -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-alpine.webp', mobile_asset: 'altaeron-alpine-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
+            {%- elsif testimonial_index == 4 -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-ocean.webp', mobile_asset: 'altaeron-ocean-mobile.webp', desktop_width: 1200, desktop_height: 1200, loading: 'lazy', alt: '' %}
+            {%- else -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-home.webp', mobile_asset: 'altaeron-home-mobile.webp', desktop_width: 971, desktop_height: 1620, loading: 'lazy', alt: '' %}{%- endif -%}
             <figcaption><blockquote>{{ block.settings.quote }}</blockquote><cite>{{ block.settings.author | escape }}{% if block.settings.location != blank %}<small>{{ block.settings.location | escape }}</small>{% endif %}</cite></figcaption>
           </figure>
         {%- endif -%}
@@ -380,7 +372,7 @@
 
   <section class="altaeron__homes" id="altaeron-homes" data-reveal data-chapter-order="{{ section.settings.order_homes }}">
     <div class="altaeron__homes-lead">
-      {%- if section.settings.homes_lead_image != blank -%}{{ section.settings.homes_lead_image | image_url: width: 1400 | image_tag: widths: '520, 800, 1100, 1400', sizes: '(min-width: 990px) 1px, 100vw', loading: 'lazy' }}{%- else -%}<img src="{{ 'altaeron-home.webp' | asset_url }}" width="971" height="1620" alt="" loading="lazy">{%- endif -%}
+      {% render 'altaeron-responsive-image', desktop_image: section.settings.homes_lead_image, mobile_image: section.settings.homes_lead_image_mobile, desktop_asset: 'altaeron-home.webp', mobile_asset: 'altaeron-home-mobile.webp', desktop_width: 971, desktop_height: 1620, max_width: 1400, widths: '520, 800, 1100, 1400', sizes: '(min-width: 990px) 1px, 100vw', loading: 'lazy', alt: '' %}
     </div>
     <header class="altaeron__shell altaeron__section-head"><p class="altaeron__eyebrow">{{ section.settings.homes_eyebrow | escape }}</p><div class="altaeron__heading">{{ section.settings.homes_heading }}</div></header>
     <div class="altaeron__homes-track" data-slider data-slider-name="homes" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.homes_eyebrow | escape }}" tabindex="0">
@@ -390,11 +382,11 @@
           {%- assign gallery_index = gallery_index | plus: 1 -%}
           {%- assign gallery_alt = block.settings.image.alt | default: block.settings.caption -%}
           <figure data-slide role="group" aria-roledescription="slide" aria-label="{{ gallery_index }} {{ 'general.slider.of' | t }} {{ gallery_blocks.size }}" {{ block.shopify_attributes }}>
-            {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 1200 | image_tag: widths: '520, 800, 1000, 1200', sizes: '(min-width: 900px) 38vw, 82vw', loading: 'lazy', alt: gallery_alt }}
-            {%- elsif gallery_index == 1 -%}<img src="{{ 'altaeron-moon-home.webp' | asset_url }}" width="1122" height="1402" alt="{{ block.settings.caption | escape }}" loading="lazy">
-            {%- elsif gallery_index == 2 -%}<img src="{{ 'altaeron-home.webp' | asset_url }}" width="971" height="1620" alt="{{ block.settings.caption | escape }}" loading="lazy">
-            {%- elsif gallery_index == 3 -%}<img src="{{ 'altaeron-alpine.webp' | asset_url }}" width="1122" height="1402" alt="{{ block.settings.caption | escape }}" loading="lazy">
-            {%- else -%}<img src="{{ 'altaeron-cinematic.webp' | asset_url }}" width="1122" height="1402" alt="{{ block.settings.caption | escape }}" loading="lazy">{%- endif -%}
+            {%- if block.settings.image != blank -%}{% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 1200, widths: '520, 800, 1000, 1200', sizes: '(min-width: 900px) 38vw, 82vw', mobile_sizes: '82vw', loading: 'lazy', alt: gallery_alt %}
+            {%- elsif gallery_index == 1 -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-moon-home.webp', mobile_asset: 'altaeron-moon-home-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: block.settings.caption %}
+            {%- elsif gallery_index == 2 -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-home.webp', mobile_asset: 'altaeron-home-mobile.webp', desktop_width: 971, desktop_height: 1620, loading: 'lazy', alt: block.settings.caption %}
+            {%- elsif gallery_index == 3 -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-alpine.webp', mobile_asset: 'altaeron-alpine-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: block.settings.caption %}
+            {%- else -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-cinematic.webp', mobile_asset: 'altaeron-cinematic-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: block.settings.caption %}{%- endif -%}
             {%- if block.settings.caption != blank -%}<figcaption>{{ block.settings.caption | escape }}</figcaption>{%- endif -%}
           </figure>
         {%- endif -%}
@@ -405,7 +397,7 @@
 
   <section class="altaeron__cinematic" data-reveal="slow" data-chapter-order="{{ section.settings.order_cinematic }}">
     <div class="altaeron__cinematic-media">
-      {%- if section.settings.cinematic_image != blank -%}{{ section.settings.cinematic_image | image_url: width: 2000 | image_tag: widths: '700, 1100, 1500, 2000', sizes: '100vw', loading: 'lazy' }}{%- else -%}<img src="{{ 'altaeron-cinematic.webp' | asset_url }}" width="1122" height="1402" alt="" loading="lazy">{%- endif -%}
+      {% render 'altaeron-responsive-image', desktop_image: section.settings.cinematic_image, mobile_image: section.settings.cinematic_image_mobile, desktop_asset: 'altaeron-cinematic.webp', mobile_asset: 'altaeron-cinematic-mobile.webp', desktop_width: 1122, desktop_height: 1402, max_width: 2000, widths: '700, 1100, 1500, 2000', sizes: '100vw', loading: 'lazy', alt: '' %}
     </div>
     <div class="altaeron__cinematic-copy"><div class="altaeron__heading">{{ section.settings.cinematic_heading }}</div>{%- if section.settings.cinematic_button_label != blank -%}<button class="altaeron__play" type="button"{% if section.settings.video_url != blank %} data-video-open{% else %} data-scroll-target="#altaeron-process"{% endif %}><span class="altaeron__play-icon" aria-hidden="true">▶</span>{% if section.settings.video_url != blank %}{{ section.settings.cinematic_button_label | escape }}{% else %}{{ section.settings.cinematic_fallback_label | escape }}{% endif %}</button>{%- endif -%}</div>
   </section>
@@ -475,6 +467,7 @@
     {"type":"header","content":"Hero"},
     {"type":"text","id":"brand_name","label":"Mobile brand name","default":"ALTAERON"},
     {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"image_picker","id":"hero_image_mobile","label":"Hero image - mobile"},
     {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"NOT JUST A LAMP."},
     {"type":"text","id":"hero_heading","label":"Heading","default":"We Preserve Worlds In Resin."},
     {"type":"range","id":"hero_desktop_break_after","label":"Desktop heading line break after word","min":0,"max":8,"step":1,"default":2},
@@ -482,7 +475,7 @@
     {"type":"text","id":"hero_button_label","label":"Primary button","default":"EXPLORE COLLECTIONS"},
     {"type":"url","id":"hero_button_link","label":"Primary button link"},
     {"type":"text","id":"video_label","label":"Video button","default":"WATCH THE MAGIC"},
-    {"type":"text","id":"video_fallback_label","label":"Button when video is empty","default":"DISCOVER THE STORY"},
+    {"type":"text","id":"video_fallback_label","label":"Button when video is empty","default":"WATCH THE MAGIC"},
     {"type":"video_url","id":"video_url","label":"YouTube or Vimeo video","accept":["youtube","vimeo"]},
     {"type":"checkbox","id":"show_hero_rating","label":"Show merchant-verified hero rating badge","default":false},
     {"type":"text","id":"features_label","label":"Feature list label","default":"Why choose Altaeron"},
@@ -500,15 +493,16 @@
     {"type":"text","id":"stat_4_label","label":"Stat 4 label","default":"Customer Support"},
     {"type":"header","content":"Story"},
     {"type":"image_picker","id":"story_image","label":"Story image"},
+    {"type":"image_picker","id":"story_image_mobile","label":"Story image - mobile"},
     {"type":"text","id":"story_eyebrow","label":"Eyebrow","default":"MASTERPIECE IN EVERY DETAIL"},
     {"type":"richtext","id":"story_heading","label":"Heading","default":"<h2>One Lamp.<br>A Universe <em>Within.</em></h2>"},
     {"type":"richtext","id":"story_text","label":"Text","default":"<p>From a drop of resin to a timeless world, crafted with patience, passion, and precision.</p>"},
     {"type":"text","id":"story_button_label","label":"Button","default":"DISCOVER THE ART"},
     {"type":"url","id":"story_button_link","label":"Button link"},
     {"type":"text","id":"story_mobile_button_label","label":"Mobile story button","default":"WATCH STORY"},
-    {"type":"text","id":"story_mobile_fallback_label","label":"Mobile button when video is empty","default":"DISCOVER THE CRAFT"},
+    {"type":"text","id":"story_mobile_fallback_label","label":"Mobile button when video is empty","default":"WATCH STORY"},
     {"type":"header","content":"Process and collections"},
-    {"type":"text","id":"process_eyebrow","label":"Process eyebrow","default":"THE ART OF CREATION"},
+    {"type":"text","id":"process_eyebrow","label":"Process eyebrow","default":"THE JOURNEY OF CREATION"},
     {"type":"richtext","id":"process_heading","label":"Process heading","default":"<h2>72 Hours. Countless Details.<br>Infinite Worlds.</h2>"},
     {"type":"text","id":"process_link_label","label":"Process link","default":"VIEW ALL COLLECTIONS"},
     {"type":"url","id":"process_link","label":"Process link URL"},
@@ -525,7 +519,7 @@
     {"type":"text","id":"services_label","label":"Services label","default":"Service promises"},
     {"type":"checkbox","id":"show_review_summary","label":"Show merchant-verified store review summary","default":false},
     {"type":"checkbox","id":"show_editorial_testimonials","label":"Show merchant-managed editorial testimonials","default":false},
-    {"type":"text","id":"reviews_eyebrow","label":"Reviews eyebrow","default":"CUSTOMER STORIES"},
+    {"type":"text","id":"reviews_eyebrow","label":"Reviews eyebrow","default":"LOVED BY THOUSANDS"},
     {"type":"text","id":"review_score","label":"Review score","default":"4.9/5"},
     {"type":"range","id":"review_stars","label":"Review stars","min":0,"max":5,"step":0.1,"default":4.9},
     {"type":"text","id":"rating_accessibility_suffix","label":"Rating accessibility text","default":"out of 5 stars"},
@@ -537,7 +531,9 @@
     {"type":"text","id":"homes_eyebrow","label":"Homes eyebrow","default":"HOMES OF ALTAERON"},
     {"type":"richtext","id":"homes_heading","label":"Homes heading","default":"<h2>Real Spaces.<br>Real Stories.</h2>"},
     {"type":"image_picker","id":"homes_lead_image","label":"Homes lead image"},
+    {"type":"image_picker","id":"homes_lead_image_mobile","label":"Homes lead image - mobile"},
     {"type":"image_picker","id":"cinematic_image","label":"Cinematic image"},
+    {"type":"image_picker","id":"cinematic_image_mobile","label":"Cinematic image - mobile"},
     {"type":"richtext","id":"cinematic_heading","label":"Cinematic heading","default":"<h2>LIGHT THAT BRINGS<br>WORLDS TO LIFE</h2>"},
     {"type":"text","id":"cinematic_button_label","label":"Cinematic button","default":"WATCH THE CRAFT"},
     {"type":"text","id":"cinematic_fallback_label","label":"Cinematic button when video is empty","default":"DISCOVER THE CRAFT"},
@@ -561,12 +557,12 @@
   "blocks": [
     {"type":"@app"},
     {"type":"feature","name":"Promise","settings":[{"type":"select","id":"placement","label":"Placement","options":[{"value":"hero","label":"Hero"},{"value":"service","label":"Services"}],"default":"hero"},{"type":"select","id":"icon","label":"Icon","options":[{"value":"spark","label":"Spark"},{"value":"shipping","label":"Shipping"},{"value":"shield","label":"Shield"},{"value":"globe","label":"Globe"},{"value":"lock","label":"Lock"},{"value":"returns","label":"Returns"}],"default":"spark"},{"type":"text","id":"heading","label":"Heading","default":"Individually Handmade"},{"type":"text","id":"text","label":"Supporting text","default":"Crafted with care"}]},
-    {"type":"story","name":"Story slide","limit":3,"settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"A WORLD CAPTURED IN LIGHT"},{"type":"richtext","id":"heading","label":"Heading","default":"<h2>Nature. Memory.<br><em>Preserved.</em></h2>"},{"type":"richtext","id":"text","label":"Text","default":"<p>Each chapter reveals another perspective on the worlds we preserve.</p>"},{"type":"text","id":"button_label","label":"Button label","default":"EXPLORE THE STORY"},{"type":"url","id":"button_link","label":"Button link"}]},
-    {"type":"process","name":"Process step","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"heading","label":"Heading","default":"Inspiration"},{"type":"text","id":"text","label":"Text","default":"Every world begins with a story."}]},
-    {"type":"collection","name":"Collection artwork","settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"text","id":"heading","label":"Editor preview heading","default":"Fantasy & Dragon"},{"type":"text","id":"text","label":"Description","default":"Power. Myth. Imagination."},{"type":"url","id":"link","label":"Override link"}]},
-    {"type":"product","name":"Artwork product","settings":[{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"text","id":"heading","label":"Editor preview heading","default":"Dragon Flame Lamp"},{"type":"text","id":"price","label":"Editor preview price","default":"$129.00"},{"type":"text","id":"compare_price","label":"Editor preview compare price","default":"$169.00"},{"type":"range","id":"stars","label":"Editor preview rating stars","min":0,"max":5,"step":0.1,"default":5},{"type":"text","id":"rating","label":"Editor preview rating text","default":"(1,266)"},{"type":"text","id":"badge","label":"Editor preview badge","default":"TOP RATED"}]},
-    {"type":"testimonial","name":"Testimonial","settings":[{"type":"image_picker","id":"image","label":"Lifestyle image"},{"type":"richtext","id":"quote","label":"Quote","default":"<p>Absolutely stunning! The quality is beyond what I expected.</p>"},{"type":"text","id":"author","label":"Author","default":"James R."},{"type":"text","id":"location","label":"Location","default":"USA"}]},
-    {"type":"gallery","name":"Home gallery image","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"caption","label":"Caption","default":"A private world, glowing at home."}]}
+    {"type":"story","name":"Story slide","limit":3,"settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"image_picker","id":"image_mobile","label":"Image - mobile"},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"A WORLD CAPTURED IN LIGHT"},{"type":"richtext","id":"heading","label":"Heading","default":"<h2>Nature. Memory.<br><em>Preserved.</em></h2>"},{"type":"richtext","id":"text","label":"Text","default":"<p>Each chapter reveals another perspective on the worlds we preserve.</p>"},{"type":"text","id":"button_label","label":"Button label","default":"EXPLORE THE STORY"},{"type":"url","id":"button_link","label":"Button link"}]},
+    {"type":"process","name":"Process step","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"image_picker","id":"image_mobile","label":"Image - mobile"},{"type":"text","id":"heading","label":"Heading","default":"Inspiration"},{"type":"text","id":"text","label":"Text","default":"Every world begins with a story."}]},
+    {"type":"collection","name":"Collection artwork","settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"image_picker","id":"image_mobile","label":"Override image - mobile"},{"type":"text","id":"heading","label":"Editor preview heading","default":"Fantasy & Dragon"},{"type":"text","id":"text","label":"Description","default":"Power. Myth. Imagination."},{"type":"url","id":"link","label":"Override link"}]},
+    {"type":"product","name":"Artwork product","settings":[{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"image_picker","id":"image_mobile","label":"Override image - mobile"},{"type":"text","id":"heading","label":"Editor preview heading","default":"Dragon Flame Lamp"},{"type":"text","id":"price","label":"Editor preview price","default":"$129.00"},{"type":"text","id":"compare_price","label":"Editor preview compare price","default":"$169.00"},{"type":"range","id":"stars","label":"Editor preview rating stars","min":0,"max":5,"step":0.1,"default":5},{"type":"text","id":"rating","label":"Editor preview rating text","default":"(1,266)"},{"type":"text","id":"badge","label":"Editor preview badge","default":"TOP RATED"}]},
+    {"type":"testimonial","name":"Testimonial","settings":[{"type":"image_picker","id":"image","label":"Lifestyle image"},{"type":"image_picker","id":"image_mobile","label":"Lifestyle image - mobile"},{"type":"richtext","id":"quote","label":"Quote","default":"<p>Absolutely stunning! The quality is beyond what I expected.</p>"},{"type":"text","id":"author","label":"Author","default":"James R."},{"type":"text","id":"location","label":"Location","default":"USA"}]},
+    {"type":"gallery","name":"Home gallery image","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"image_picker","id":"image_mobile","label":"Image - mobile"},{"type":"text","id":"caption","label":"Caption","default":"A private world, glowing at home."}]}
   ],
   "presets": [{
     "name":"Altaeron exhibition",

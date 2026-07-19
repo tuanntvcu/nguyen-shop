@@ -58,6 +58,9 @@
         {% endif %}
         class="product-variant-id"
       >
+      {%- if enable_selling_plan -%}
+        <input type="hidden" name="selling_plan" value="" data-altaeron-selling-plan-input disabled>
+      {%- endif -%}
       {%- liquid
         assign check_against_inventory = true
         if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'

@@ -162,6 +162,40 @@
     image.src = url.toString();
   };
 
+  const updateSellingPlan = (choice) => {
+    const fieldset = choice.closest('[data-altaeron-selling-plans]');
+    const input = fieldset?.closest('.altaeron-purchase')?.querySelector('[data-altaeron-selling-plan-input]');
+    if (!fieldset || !input) return;
+    const sellingPlanId = choice.value;
+    input.value = sellingPlanId;
+    input.disabled = !sellingPlanId;
+    fieldset.querySelectorAll('.altaeron-selling-plan').forEach((option) => {
+      option.classList.toggle('is-selected', option.contains(choice));
+    });
+    const stickyPrice = document.querySelector('[data-altaeron-sticky-price]');
+    if (stickyPrice && choice.dataset.price) stickyPrice.textContent = choice.dataset.price;
+  };
+
+  const refreshSellingPlans = (event) => {
+    const sourceRegion = event?.data?.html?.querySelector?.('[data-altaeron-selling-plan-region]');
+    const destinationRegion = document.querySelector('[data-altaeron-selling-plan-region]');
+    if (!sourceRegion || !destinationRegion) return;
+
+    const planInput = destinationRegion.closest('.altaeron-purchase')?.querySelector('[data-altaeron-selling-plan-input]');
+    const selectedPlanId = planInput && !planInput.disabled ? planInput.value : '';
+    destinationRegion.innerHTML = sourceRegion.innerHTML;
+
+    const choices = Array.from(destinationRegion.querySelectorAll('[data-altaeron-selling-plan-choice]'));
+    const nextChoice = choices.find((choice) => choice.value === selectedPlanId) || choices.find((choice) => choice.value === '');
+    if (nextChoice) {
+      nextChoice.checked = true;
+      updateSellingPlan(nextChoice);
+    } else if (planInput) {
+      planInput.value = '';
+      planInput.disabled = true;
+    }
+  };
+
   const handleClick = (event) => {
     const packagingToggle = event.target.closest('[data-altaeron-packaging-toggle]');
     if (packagingToggle) {
@@ -193,6 +227,10 @@
     }
   };
 
+  const handleChange = (event) => {
+    if (event.target.matches?.('[data-altaeron-selling-plan-choice]')) updateSellingPlan(event.target);
+  };
+
   const handleFaqToggle = (event) => {
     const opened = event.target;
     if (opened.matches?.('cart-drawer, menu-drawer, search-drawer, quick-view-modal')) requestFixedUpdate();
@@ -219,13 +257,20 @@
   };
 
   document.addEventListener('click', handleClick);
+  document.addEventListener('change', handleChange);
   document.addEventListener('toggle', handleFaqToggle, true);
   document.addEventListener('variant:changed', (event) => {
     requestAnimationFrame(() => {
       updateStickyCommerce(event.detail?.variant);
       updateVariantVisual(event.detail?.variant);
+      const selectedPlan = document.querySelector('[data-altaeron-selling-plan-choice]:checked');
+      if (selectedPlan) updateSellingPlan(selectedPlan);
     });
   });
+
+  if (window.ScaloraTheme?.pubsub) {
+    window.ScaloraTheme.pubsub.subscribe(window.ScaloraTheme.pubsub.PUB_SUB_EVENTS.variantChange, refreshSellingPlans);
+  }
   document.addEventListener('shopify:section:load', refresh);
   document.addEventListener('shopify:section:unload', refresh);
   document.addEventListener('keyup', requestFixedUpdate);
