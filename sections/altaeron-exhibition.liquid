@@ -116,7 +116,7 @@
     <div class="altaeron__story-slides">
       <div class="altaeron__story-slide is-active" data-story-slide role="group" aria-roledescription="slide" aria-label="1 {{ 'general.slider.of' | t }} {{ story_blocks.size | plus: 1 }}">
         <div class="altaeron__story-media">
-          {% render 'altaeron-responsive-image', desktop_image: section.settings.story_image, mobile_image: section.settings.story_image_mobile, desktop_asset: 'altaeron-hero.webp', mobile_asset: 'altaeron-hero-mobile.webp', desktop_width: 1672, desktop_height: 942, max_width: 1800, widths: '550, 900, 1200, 1800', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy', alt: '' %}
+          {% render 'altaeron-responsive-image', desktop_image: section.settings.story_image, mobile_image: section.settings.story_image_mobile, desktop_asset: section.settings.story_image_asset, mobile_asset: section.settings.story_image_asset, desktop_width: 1536, desktop_height: 1024, max_width: 1800, widths: '550, 900, 1200, 1800', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy', alt: '' %}
         </div>
         <div class="altaeron__story-copy">
           <p class="altaeron__eyebrow">{{ section.settings.story_eyebrow | escape }}</p>
@@ -195,7 +195,7 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
-    <a class="altaeron__process-more" href="{{ collections_destination }}" aria-label="{{ section.settings.collections_eyebrow | escape }}">→</a>
+    <button class="altaeron__process-more" type="button" data-process-next aria-label="{{ 'general.slider.next_slide' | t }}">→</button>
   </section>
 
   {%- if has_collections or request.design_mode -%}
@@ -494,6 +494,7 @@
     {"type":"header","content":"Story"},
     {"type":"image_picker","id":"story_image","label":"Story image"},
     {"type":"image_picker","id":"story_image_mobile","label":"Story image - mobile"},
+    {"type":"text","id":"story_image_asset","label":"Story theme asset filename","default":"altaeron-story-within.png"},
     {"type":"text","id":"story_eyebrow","label":"Eyebrow","default":"MASTERPIECE IN EVERY DETAIL"},
     {"type":"richtext","id":"story_heading","label":"Heading","default":"<h2>One Lamp.<br>A Universe <em>Within.</em></h2>"},
     {"type":"richtext","id":"story_text","label":"Text","default":"<p>From a drop of resin to a timeless world, crafted with patience, passion, and precision.</p>"},
