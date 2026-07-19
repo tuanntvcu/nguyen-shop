@@ -268,6 +268,10 @@
             <a class="altaeron__product-image" href="{{ card_product.url | default: routes.all_products_collection_url }}" aria-label="{% if card_product != blank %}{{ card_product.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}">
               {%- if block.settings.image != blank -%}
                 {% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 900, widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', mobile_sizes: '(max-width: 749px) 38vw, 82vw', loading: 'lazy' %}
+              {%- elsif card_product.handle == 'forest-spirit-lamp' -%}
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-forest-spirit.webp', mobile_asset: 'altaeron-forest-spirit.webp', desktop_width: 1536, desktop_height: 1024, loading: 'lazy', alt: card_product.title %}
+              {%- elsif card_product.handle == 'moonlight-lamp' -%}
+                {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-moonlight.webp', mobile_asset: 'altaeron-moonlight.webp', desktop_width: 1536, desktop_height: 1024, loading: 'lazy', alt: card_product.title %}
               {%- elsif card_product.featured_image != blank -%}
                 {% render 'altaeron-responsive-image', desktop_image: card_product.featured_image, mobile_image: block.settings.image_mobile, max_width: 900, widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', mobile_sizes: '(max-width: 749px) 38vw, 82vw', loading: 'lazy' %}
               {%- elsif card_product != blank -%}
@@ -280,7 +284,7 @@
                 {% render 'altaeron-responsive-image', desktop_asset: 'altaeron-hero.webp', mobile_asset: 'altaeron-hero-mobile.webp', desktop_width: 1672, desktop_height: 942, loading: 'lazy', alt: '' %}
               {%- endif -%}
               {%- if card_product != blank and card_product.available == false -%}<span class="altaeron__badge">{{ 'products.product.sold_out' | t }}</span>
-              {%- elsif request.design_mode and block.settings.badge != blank -%}<span class="altaeron__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+              {%- elsif block.settings.badge != blank -%}<span class="altaeron__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
             </a>
             <div class="altaeron__product-copy">
               <h3><a href="{{ card_product.url | default: routes.all_products_collection_url }}">{% if card_product != blank %}{{ card_product.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}</a></h3>
@@ -290,7 +294,7 @@
                   <span class="altaeron__stars" style="--rating-percent: {{ product_rating.rating | times: 100.0 | divided_by: product_rating.scale_max }}%" aria-hidden="true">★★★★★</span>
                   <small>({{ product_rating_count }})</small>
                 </div>
-              {%- elsif request.design_mode -%}
+              {%- elsif block.settings.rating != blank and block.settings.stars > 0 -%}
                 <div class="altaeron__rating"><span class="visually-hidden">{{ block.settings.stars }} {{ section.settings.rating_accessibility_suffix | escape }}</span><span class="altaeron__stars" style="--rating-percent: {{ block.settings.stars | times: 20 }}%" aria-hidden="true">★★★★★</span><small>{{ block.settings.rating | escape }}</small></div>
               {%- endif -%}
               <div class="altaeron__price">
@@ -321,7 +325,7 @@
   <div class="altaeron__services altaeron__services--mobile altaeron__shell" role="list" aria-label="{{ section.settings.services_label | escape }}" data-reveal data-chapter-order="{{ section.settings.order_services }}">
     {%- for block in section.blocks -%}
       {%- if block.type == 'feature' and block.settings.placement == 'service' -%}
-        <div class="altaeron__service" role="listitem" {{ block.shopify_attributes }}>
+        <div class="altaeron__service altaeron__service--{{ block.settings.icon }}" role="listitem" {{ block.shopify_attributes }}>
           {% render 'altaeron-icon', name: block.settings.icon %}
           <span><strong>{{ block.settings.heading | escape }}</strong><small>{{ block.settings.text | escape }}</small></span>
         </div>
@@ -340,6 +344,8 @@
       <small>{{ section.settings.review_source | escape }}</small>
       {%- if section.settings.reviews_link_label != blank and section.settings.reviews_link != blank -%}
         <a class="altaeron__button altaeron__button--primary" href="{{ section.settings.reviews_link }}">{{ section.settings.reviews_link_label | escape }}</a>
+      {%- elsif section.settings.reviews_link_label != blank and testimonial_blocks.size > 0 -%}
+        <button class="altaeron__button altaeron__button--primary" type="button" data-reviews-open>{{ section.settings.reviews_link_label | escape }}</button>
       {%- endif -%}
     </header>
     {%- endif -%}
@@ -366,6 +372,17 @@
       <div class="altaeron__reviews-app">
         {%- for block in app_blocks -%}<div {{ block.shopify_attributes }}>{% render block %}</div>{%- endfor -%}
       </div>
+    {%- endif -%}
+    {%- if testimonial_blocks.size > 0 -%}
+      <dialog class="altaeron__reviews-dialog" data-reviews-dialog aria-labelledby="AltaeronReviewsTitle-{{ section.id }}">
+        <button class="altaeron__dialog-close" type="button" data-reviews-close aria-label="{{ 'accessibility.close' | t }}">×</button>
+        <h2 id="AltaeronReviewsTitle-{{ section.id }}">{{ section.settings.reviews_eyebrow | escape }}</h2>
+        <div class="altaeron__reviews-dialog-grid">
+          {%- for block in testimonial_blocks -%}
+            <figure><blockquote>{{ block.settings.quote }}</blockquote><figcaption>{{ block.settings.author | escape }}{% if block.settings.location != blank %}<small>{{ block.settings.location | escape }}</small>{% endif %}</figcaption></figure>
+          {%- endfor -%}
+        </div>
+      </dialog>
     {%- endif -%}
   </section>
   {%- endif -%}
@@ -403,7 +420,8 @@
   </section>
 
   <section class="altaeron__newsletter altaeron__shell" data-reveal data-chapter-order="{{ section.settings.order_newsletter }}">
-    <div><div class="altaeron__heading">{{ section.settings.newsletter_heading }}</div><p>{{ section.settings.newsletter_text | escape }}</p></div>
+    <div class="altaeron__newsletter-copy altaeron__newsletter-copy--mobile"><div class="altaeron__heading">{{ section.settings.newsletter_heading }}</div><p>{{ section.settings.newsletter_text | escape }}</p></div>
+    <div class="altaeron__newsletter-copy altaeron__newsletter-copy--desktop"><div class="altaeron__heading">{{ section.settings.newsletter_heading_desktop }}</div><p>{{ section.settings.newsletter_text_desktop | escape }}</p></div>
     {%- form 'customer', class: 'altaeron__newsletter-form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       <label class="visually-hidden" for="AltaeronEmail-{{ section.id }}">{{ section.settings.email_label | escape }}</label>
@@ -417,7 +435,7 @@
   <div class="altaeron__services altaeron__services--desktop altaeron__shell" role="list" aria-label="{{ section.settings.services_label | escape }}">
     {%- for block in section.blocks -%}
       {%- if block.type == 'feature' and block.settings.placement == 'service' -%}
-        <div class="altaeron__service" role="listitem">
+        <div class="altaeron__service altaeron__service--{{ block.settings.icon }}" role="listitem">
           {% render 'altaeron-icon', name: block.settings.icon %}
           <span><strong>{{ block.settings.heading | escape }}</strong><small>{{ block.settings.text | escape }}</small></span>
         </div>
@@ -540,6 +558,8 @@
     {"type":"text","id":"cinematic_fallback_label","label":"Cinematic button when video is empty","default":"DISCOVER THE CRAFT"},
     {"type":"richtext","id":"newsletter_heading","label":"Newsletter heading","default":"<h2>Bring A World <em>Home.</em></h2>"},
     {"type":"text","id":"newsletter_text","label":"Newsletter text","default":"Get 10% OFF your first order and discover new creations."},
+    {"type":"richtext","id":"newsletter_heading_desktop","label":"Newsletter heading - desktop","default":"<h2>Bring Magic Into Your Space.</h2>"},
+    {"type":"text","id":"newsletter_text_desktop","label":"Newsletter text - desktop","default":"Join our community and get 10% OFF your first order."},
     {"type":"text","id":"email_label","label":"Email field label","default":"Email address"},
     {"type":"text","id":"email_placeholder","label":"Email placeholder","default":"Enter your email"},
     {"type":"text","id":"newsletter_button","label":"Newsletter button","default":"GET 10% OFF"},

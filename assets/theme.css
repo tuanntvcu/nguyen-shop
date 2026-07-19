@@ -6234,7 +6234,8 @@ body:not(.header-pinned) .header-scrolled .header {
   justify-content: center;
 }
 .announcement-bar__icon {
-  color: rgb(var(--color-primary-accent));
+  color: rgb(var(--color-primary));
+  flex: 0 0 auto;
   fill: none;
   height: 16px;
   stroke: currentColor;

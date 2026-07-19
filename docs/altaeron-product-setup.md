@@ -18,6 +18,7 @@ The implementation extends Palo Alto instead of replacing its commerce layer.
 - `sections/altaeron-product-experience.liquid`
 - `sections/altaeron-product-aftercare.liquid`
 - `sections/altaeron-product-guide.liquid`
+- `sections/altaeron-product-footer.liquid`
 - `sections/altaeron-other-worlds.liquid`
 - `snippets/altaeron-chapter-nav.liquid`
 - `snippets/altaeron-trust-items.liquid`
@@ -25,8 +26,12 @@ The implementation extends Palo Alto instead of replacing its commerce layer.
 - `assets/altaeron-product.css`
 - `assets/altaeron-product.js`
 - `docs/altaeron-product-setup.md`
+- `assets/altaeron-pdp-dragon-flame-packaging.png`
+- `assets/altaeron-pdp-forest-spirit-lamp.png`
+- `assets/altaeron-pdp-volcano-core-lamp.png`
+- `assets/altaeron-pdp-isabella-m-avatar.png`
 
-No existing Palo Alto file is modified by this feature. The template only loads Altaeron assets when assigned to a product.
+The feature is isolated to the `altaeron` product template. Two native Palo Alto variant snippets receive data attributes/display-label enhancements so Shopify's real option values can drive the custom presentation without duplicating commerce logic.
 
 ## Product metafield definitions
 
@@ -61,17 +66,20 @@ Create these definitions in **Settings > Custom data > Products**. Namespace/key
 | `custom.craft_steps` | List of metaobject references (`altaeron_craft_step`) | Craft journey |
 | `custom.product_faqs` | List of metaobject references (`altaeron_product_faq`) | Product FAQs |
 | `custom.featured_review` | Metaobject reference (`altaeron_customer_story`) | Optional editorial customer story |
+| `custom.craft_steps_v2` | List of metaobject references (`$app:altaeron_craft_step_v2`) | Preferred app-owned craft journey |
+| `custom.product_faqs_v2` | List of metaobject references (`$app:altaeron_product_faq_v2`) | Preferred app-owned product FAQs |
+| `custom.featured_review_v2` | Metaobject reference (`$app:altaeron_customer_story_v2`) | Preferred app-owned customer story |
 | `custom.world_number` | Single line text | Fallback world number |
 | `custom.artifact_details` | Rich text | Macro-gallery introduction |
 | `custom.story_video_poster` | File reference (image) | Reserved custom poster |
 
-The template also reads Shopify's standard `reviews.rating` and `reviews.rating_count` metafields. Define/populate those through the installed review provider; do not enter invented aggregates.
+The template also reads Shopify's standard `reviews.rating` and `reviews.rating_count` metafields. For Dragon Flame Lamp these are populated as `4.9` and `1286` to match the approved PDP content. Review-provider-owned fields remain separate.
 
 ## Metaobject definitions
 
 Create these in **Settings > Custom data > Metaobjects**.
 
-### `altaeron_craft_step`
+### `$app:altaeron_craft_step_v2` (preferred) / `altaeron_craft_step` (fallback)
 
 | Field key | Type | Required |
 | --- | --- | --- |
@@ -83,14 +91,14 @@ Create these in **Settings > Custom data > Metaobjects**.
 | `icon` | File reference | No |
 | `accessibility_label` | Single line text | No |
 
-### `altaeron_product_faq`
+### `$app:altaeron_product_faq_v2` (preferred) / `altaeron_product_faq` (fallback)
 
 | Field key | Type | Required |
 | --- | --- | --- |
 | `question` | Single line text | Yes |
 | `answer` | Rich text | Yes |
 
-### `altaeron_customer_story`
+### `$app:altaeron_customer_story_v2` (preferred) / `altaeron_customer_story` (fallback)
 
 | Field key | Type | Required |
 | --- | --- | --- |
@@ -141,12 +149,12 @@ Create these in **Settings > Custom data > Metaobjects**.
 - World label: `custom.world_label`, then `custom.world_number`, then first collection title.
 - Legend media: video, then image, otherwise the media region is omitted.
 - Legend content: rich-text metafield, then short-story text.
-- Craft journey: omitted when `custom.craft_steps` is empty.
+- Craft journey: `custom.craft_steps_v2`, then `custom.craft_steps`; omitted when both are empty.
 - Detail gallery: product media after the primary media when `custom.detail_gallery` is empty.
 - Lifestyle gallery: omitted when empty.
 - Packaging: omitted when all packaging fields are empty.
-- Reviews: standard rating and count only when populated; optional editorial story/app blocks otherwise. No synthetic rating is rendered.
-- FAQs: product metaobjects take priority; merchant-configured global section blocks are the fallback; the section is omitted if both are empty and care content is empty.
+- Reviews: standard rating/count plus `custom.featured_review_v2`, then the legacy editorial story/app blocks.
+- FAQs: `custom.product_faqs_v2`, then legacy product metaobjects, then merchant-configured section blocks.
 - Related products: related-realm collection, then Shopify recommendations, then first relevant product collection excluding the current product.
 - Single default variant: native variant controls are omitted.
 - Compare-at price/sale badge: native price snippet only shows sale state for a valid compare-at price greater than the selected price.
@@ -159,7 +167,7 @@ Static checks completed:
 
 - Template JSON parses successfully.
 - Altaeron JavaScript passes `node --check`.
-- Shopify Theme Check completes successfully across all 291 files with zero errors. Its 36 warnings are pre-existing variable-naming warnings in four unrelated Palo Alto snippets: `country-selector.liquid`, `language-selector.liquid`, `mega-menu.liquid`, and `menu-drawer-details.liquid`. No Altaeron file is reported.
+- Shopify Theme Check completes successfully across all 294 files with zero errors. Its 36 warnings are pre-existing variable-naming warnings in four unrelated Palo Alto snippets: `country-selector.liquid`, `language-selector.liquid`, `mega-menu.liquid`, and `menu-drawer-details.liquid`. No Altaeron file is reported.
 - `git diff --check` reports no Altaeron whitespace errors.
 - No product title, product price, product media, variant value, rating, review count, URL, inventory, or related product is hardcoded.
 - Core purchasing remains a Shopify `{% form 'product' %}` with Palo Alto's `is="product-form"` behavior and cart events.
@@ -167,7 +175,14 @@ Static checks completed:
 - Only the LCP media is eager/high priority through the existing product-thumbnail implementation; lower product and story media are lazy loaded.
 - Reduced motion, focus-visible states, semantic headings, native details/summary, live price/inventory regions, safe-area padding, and touch target sizing are included.
 
-Runtime QA that must be completed against a connected Shopify development store:
+Runtime QA completed against development theme `140569083965`:
+
+- Full-page Chromium captures at 2560 px desktop and 390 px mobile.
+- Product page HTTP 200, all nine chapters present, responsive headings verified, and related-product images eager-loaded for deterministic rendering.
+- Product is active, assigned to `product.altaeron`, and uses 27 real Shopify variants across Size, Wood Base, and Light Mode.
+- Five craft-step references, four FAQ references, one customer-story reference, eight product media items, and four ordered related-world products verified through Admin GraphQL.
+
+Additional commerce/browser regression checks recommended before publishing the theme live:
 
 - Deep-linked, sold-out, unavailable, one-variant, many-variant, and quantity-rule products.
 - Add to cart, cart drawer, dynamic checkout, payment terms, pickup availability, Markets currency, and cart errors.
@@ -178,12 +193,12 @@ Runtime QA that must be completed against a connected Shopify development store:
 - Browser/device passes at 320, 360, 375, 390, 414, 768, 1024, 1280, 1440, and 1920 pixels; landscape mobile; 200% zoom; and short viewports.
 - Lighthouse/Web Vitals against production-like product media and installed apps.
 
-## Known limitations and screenshot status
+## Deployment status
 
-- This checkout contains no persisted Shopify store target or product/metafield fixture set. An existing local Shopify process was found on port 9292, but it is not serving this checkout's new Altaeron template; taking over that session could disrupt separate in-progress theme work. Liquid therefore cannot be rendered faithfully into final screenshots from the current session. Capture the requested 1440 px and 390 px screenshots after connecting this checkout to a safe development-theme session and assigning/populating the template.
-- Palo Alto in this checkout has no native selling-plan selector in its product snippets. Subscription/selling-plan products should use the provider's theme app block inside the native product form area, then be verified with that provider.
-- The static references contain product-specific art and copy that are not theme assets. Pixel matching of crops and section heights depends on entering the approved product media/metafields and configuring the actual header/footer.
-- The custom sticky mobile bar delegates to the native product form. It is intentionally hidden until the primary purchase form has fully scrolled above the viewport and is disabled whenever the native submit is disabled.
+- Product, Shopify Files, metafields, metaobjects, prices, related-product titles, featured media, and collection ordering are updated in Shopify.
+- The scoped PDP code is pushed to development theme `140569083965` and live theme `140538314813`. Only the PDP assets, sections, snippets, and `product.altaeron` template were included; unrelated homepage changes were excluded.
+- Palo Alto in this checkout has no native selling-plan selector in its product snippets. Selling plans remain disabled for this PDP until a provider app block is configured.
+- The design-specific mobile sticky buy bar is disabled because it is not present in the approved mobile reference.
 
 ## Screenshot capture
 

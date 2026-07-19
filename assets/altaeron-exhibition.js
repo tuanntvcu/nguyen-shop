@@ -165,6 +165,7 @@
       const slides = Array.from(processTrack.querySelectorAll('[data-slide]'));
       const controls = Array.from(processTimeline.querySelectorAll('[data-process-nav]'));
       const progress = processTimeline.querySelector(':scope > span');
+      const nextButton = root.querySelector('[data-process-next]');
       const updateProcess = (activeIndex) => {
         controls.forEach((control, index) => {
           const active = activeIndex === index;
@@ -173,10 +174,29 @@
         });
         if (progress) progress.style.setProperty('--process-progress', `${slides.length > 1 ? activeIndex / (slides.length - 1) * 100 : 100}%`);
       };
+      const getScrollIndex = () => {
+        const trackLeft = processTrack.getBoundingClientRect().left;
+        let activeIndex = 0;
+        let nearest = Infinity;
+        slides.forEach((slide, index) => {
+          const distance = Math.abs(slide.getBoundingClientRect().left - trackLeft);
+          if (distance < nearest) { nearest = distance; activeIndex = index; }
+        });
+        return activeIndex;
+      };
+      const scrollToProcess = (index) => {
+        const slide = slides[index];
+        if (!slide) return;
+        const trackLeft = processTrack.getBoundingClientRect().left;
+        const targetLeft = processTrack.scrollLeft + slide.getBoundingClientRect().left - trackLeft;
+        processTrack.scrollTo({ left: targetLeft, behavior: motionOK ? 'smooth' : 'auto' });
+        updateProcess(index);
+      };
       controls.forEach((control, index) => control.addEventListener('click', () => {
         slides[index]?.scrollIntoView({ behavior: motionOK ? 'smooth' : 'auto', block: 'nearest', inline: 'center' });
         updateProcess(index);
       }));
+      nextButton?.addEventListener('click', () => scrollToProcess(Math.min(getScrollIndex() + 1, slides.length - 1)));
       let processFrame = false;
       processTrack.addEventListener('scroll', () => {
         if (processFrame) return;
@@ -190,9 +210,11 @@
             if (distance < nearest) { nearest = distance; active = index; }
           });
           updateProcess(active);
+          if (nextButton) nextButton.disabled = processTrack.scrollLeft >= processTrack.scrollWidth - processTrack.clientWidth - 2;
           processFrame = false;
         });
       }, { passive: true });
+      if (nextButton) nextButton.disabled = slides.length < 2 || processTrack.scrollWidth <= processTrack.clientWidth + 2;
       updateProcess(0);
     }
 
@@ -229,6 +251,20 @@
     videoDialog?.querySelector('[data-video-close]')?.addEventListener('click', closeVideo);
     videoDialog?.addEventListener('click', (event) => { if (event.target === videoDialog) closeVideo(); });
     videoDialog?.addEventListener('close', finishVideoClose);
+
+    const reviewsDialog = root.querySelector('[data-reviews-dialog]');
+    const closeReviews = () => {
+      if (!reviewsDialog) return;
+      if (typeof reviewsDialog.close === 'function') reviewsDialog.close();
+      else reviewsDialog.removeAttribute('open');
+    };
+    root.querySelector('[data-reviews-open]')?.addEventListener('click', () => {
+      if (!reviewsDialog) return;
+      if (typeof reviewsDialog.showModal === 'function') reviewsDialog.showModal();
+      else reviewsDialog.setAttribute('open', '');
+    });
+    reviewsDialog?.querySelector('[data-reviews-close]')?.addEventListener('click', closeReviews);
+    reviewsDialog?.addEventListener('click', (event) => { if (event.target === reviewsDialog) closeReviews(); });
 
     root.querySelectorAll('[data-scroll-target]').forEach((button) => button.addEventListener('click', () => {
       root.querySelector(button.dataset.scrollTarget)?.scrollIntoView({ behavior: motionOK ? 'smooth' : 'auto' });
