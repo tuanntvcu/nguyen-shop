@@ -12,427 +12,66 @@
     "altaeron_exhibition": {
       "type": "altaeron-exhibition",
       "blocks": {
-        "hero_handmade": {
-          "type": "feature",
-          "settings": {
-            "placement": "hero",
-            "icon": "spark",
-            "heading": "Individually Handmade",
-            "text": ""
-          }
-        },
-        "hero_materials": {
-          "type": "feature",
-          "settings": {
-            "placement": "hero",
-            "icon": "shield",
-            "heading": "Premium Materials",
-            "text": ""
-          }
-        },
-        "hero_shipping": {
-          "type": "feature",
-          "settings": {
-            "placement": "hero",
-            "icon": "globe",
-            "heading": "Worldwide Shipping",
-            "text": ""
-          }
-        },
-        "hero_checkout": {
-          "type": "feature",
-          "settings": {
-            "placement": "hero",
-            "icon": "lock",
-            "heading": "Secure Checkout",
-            "text": ""
-          }
-        },
-        "hero_returns": {
-          "type": "feature",
-          "settings": {
-            "placement": "hero",
-            "icon": "returns",
-            "heading": "30-Day Returns",
-            "text": ""
-          }
-        },
-        "hero_warranty": {
-          "type": "feature",
-          "settings": {
-            "placement": "hero",
-            "icon": "shield",
-            "heading": "1 Year Warranty",
-            "text": ""
-          }
-        },
-        "story_2": {
-          "type": "story",
-          "settings": {
-            "eyebrow": "NATURE HELD IN TIME",
-            "heading": "<h2>Wild Places.<br><em>Preserved.</em></h2>",
-            "text": "<p>Mountain light, still water, and the quiet of another world.</p>",
-            "button_label": "EXPLORE NATURE"
-          }
-        },
-        "story_3": {
-          "type": "story",
-          "settings": {
-            "eyebrow": "DEPTH IN EVERY LAYER",
-            "heading": "<h2>Oceans Made<br><em>Timeless.</em></h2>",
-            "text": "<p>Every translucent layer is poured and finished by hand.</p>",
-            "button_label": "DISCOVER THE CRAFT"
-          }
-        },
-        "story_4": {
-          "type": "story",
-          "settings": {
-            "eyebrow": "LIGHT COMPLETES THE ART",
-            "heading": "<h2>A World<br><em>Awakened.</em></h2>",
-            "text": "<p>Warm light reveals details that remain hidden during the day.</p>",
-            "button_label": "WATCH THE CRAFT"
-          }
-        },
-        "process_1": {
-          "type": "process",
-          "settings": {
-            "heading": "Inspiration",
-            "text": "Every world begins with a story."
-          }
-        },
-        "process_2": {
-          "type": "process",
-          "settings": {
-            "heading": "Concept",
-            "text": "Ideas take shape on paper."
-          }
-        },
-        "process_3": {
-          "type": "process",
-          "settings": {
-            "heading": "Handcrafting",
-            "text": "Miniatures built with precision."
-          }
-        },
-        "process_4": {
-          "type": "process",
-          "settings": {
-            "heading": "Pouring",
-            "text": "Crystal clear epoxy brings life."
-          }
-        },
-        "process_5": {
-          "type": "process",
-          "settings": {
-            "heading": "Curing",
-            "text": "72 hours for perfect clarity."
-          }
-        },
-        "process_6": {
-          "type": "process",
-          "settings": {
-            "heading": "Finishing",
-            "text": "Polished by hand. Perfected with passion."
-          }
-        },
-        "collection_1": {
-          "type": "collection",
-          "settings": {
-            "collection": "fantasy-dragon",
-            "heading": "Fantasy & Dragon",
-            "text": "Power. Myth. Imagination."
-          }
-        },
-        "collection_2": {
-          "type": "collection",
-          "settings": {
-            "collection": "nature-mountains",
-            "heading": "Nature & Mountains",
-            "text": "Earth. Serenity. Freedom."
-          }
-        },
-        "collection_3": {
-          "type": "collection",
-          "settings": {
-            "collection": "ocean-waves",
-            "heading": "Ocean & Waves",
-            "text": "Flow. Calm. Endless."
-          }
-        },
-        "collection_4": {
-          "type": "collection",
-          "settings": {
-            "collection": "cosmic-minimal",
-            "heading": "Cosmic & Minimal",
-            "text": "Space. Mystery. Light."
-          }
-        },
-        "product_1": {
-          "type": "product",
-          "settings": {
-            "product": "dragon-flame-lamp",
-            "heading": "Dragon Flame Lamp",
-            "price": "$129.00",
-            "compare_price": "$169.00",
-            "rating": "(1,266)",
-            "badge": "TOP RATED"
-          }
-        },
-        "product_2": {
-          "type": "product",
-          "settings": {
-            "product": "mountain-lake-lamp",
-            "heading": "Mountain Lake Lamp",
-            "price": "$119.00",
-            "compare_price": "$149.00",
-            "rating": "(983)",
-            "badge": ""
-          }
-        },
-        "product_3": {
-          "type": "product",
-          "settings": {
-            "product": "ocean-wave-lamp",
-            "heading": "Ocean Wave Lamp",
-            "price": "$119.00",
-            "compare_price": "$149.00",
-            "rating": "(834)",
-            "badge": ""
-          }
-        },
-        "product_4": {
-          "type": "product",
-          "settings": {
-            "product": "forest-spirit-lamp",
-            "heading": "Forest Spirit Lamp",
-            "price": "$129.00",
-            "compare_price": "$169.00",
-            "rating": "(712)",
-            "badge": ""
-          }
-        },
-        "product_5": {
-          "type": "product",
-          "settings": {
-            "product": "moonlight-lamp",
-            "heading": "Moonlight Lamp",
-            "price": "$109.00",
-            "compare_price": "$139.00",
-            "rating": "(845)",
-            "badge": ""
-          }
-        },
-        "service_shipping": {
-          "type": "feature",
-          "settings": {
-            "placement": "service",
-            "icon": "shipping",
-            "heading": "Free Shipping",
-            "text": "On orders over $99"
-          }
-        },
-        "service_returns": {
-          "type": "feature",
-          "settings": {
-            "placement": "service",
-            "icon": "returns",
-            "heading": "30-Day Returns",
-            "text": "Hassle-free returns"
-          }
-        },
-        "service_warranty": {
-          "type": "feature",
-          "settings": {
-            "placement": "service",
-            "icon": "shield",
-            "heading": "1 Year Warranty",
-            "text": "We've got you covered"
-          }
-        },
-        "service_payment": {
-          "type": "feature",
-          "settings": {
-            "placement": "service",
-            "icon": "lock",
-            "heading": "Secure Payment",
-            "text": "100% protected"
-          }
-        },
-        "service_support": {
-          "type": "feature",
-          "settings": {
-            "placement": "service",
-            "icon": "globe",
-            "heading": "Support 24/7",
-            "text": "We're here to help"
-          }
-        },
-        "review_1": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "<p>Absolutely stunning! The quality is beyond what I expected.</p>",
-            "author": "James R.",
-            "location": "USA"
-          }
-        },
-        "review_2": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "<p>It's not just a lamp, it's a piece of art that brings my room to life.</p>",
-            "author": "Sophia M.",
-            "location": "Canada"
-          }
-        },
-        "review_3": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "<p>Fast shipping, perfect packaging, and the lamp is incredible.</p>",
-            "author": "Daniel K.",
-            "location": "Australia"
-          }
-        },
-        "review_4": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "<p>The details are insane. You can feel the passion in every piece.</p>",
-            "author": "Emily T.",
-            "location": "UK"
-          }
-        },
-        "home_1": {
-          "type": "gallery",
-          "settings": {
-            "caption": "Warm light for quiet evenings."
-          }
-        },
-        "home_2": {
-          "type": "gallery",
-          "settings": {
-            "caption": "A private world, glowing at home."
-          }
-        },
-        "home_3": {
-          "type": "gallery",
-          "settings": {
-            "caption": "Handcrafted atmosphere."
-          }
-        }
+        "hero_handmade": {"type":"feature","settings":{"placement":"hero","icon":"spark","heading":"Individually Handmade","text":""}},
+        "hero_materials": {"type":"feature","settings":{"placement":"hero","icon":"shield","heading":"Premium Materials","text":""}},
+        "hero_shipping": {"type":"feature","settings":{"placement":"hero","icon":"globe","heading":"Worldwide Shipping","text":""}},
+        "hero_checkout": {"type":"feature","settings":{"placement":"hero","icon":"lock","heading":"Secure Checkout","text":""}},
+        "hero_returns": {"type":"feature","settings":{"placement":"hero","icon":"returns","heading":"30-Day Returns","text":""}},
+        "hero_warranty": {"type":"feature","settings":{"placement":"hero","icon":"shield","heading":"1 Year Warranty","text":""}},
+        "story_2": {"type":"story","settings":{"eyebrow":"NATURE HELD IN TIME","heading":"<h2>Wild Places.<br><em>Preserved.</em></h2>","text":"<p>Mountain light, still water, and the quiet of another world.</p>","button_label":"EXPLORE NATURE"}},
+        "story_3": {"type":"story","settings":{"eyebrow":"DEPTH IN EVERY LAYER","heading":"<h2>Oceans Made<br><em>Timeless.</em></h2>","text":"<p>Every translucent layer is poured and finished by hand.</p>","button_label":"DISCOVER THE CRAFT"}},
+        "story_4": {"type":"story","settings":{"eyebrow":"LIGHT COMPLETES THE ART","heading":"<h2>A World<br><em>Awakened.</em></h2>","text":"<p>Warm light reveals details that remain hidden during the day.</p>","button_label":"WATCH THE CRAFT"}},
+        "process_1": {"type":"process","settings":{"heading":"Inspiration","text":"Every world begins with a story."}},
+        "process_2": {"type":"process","settings":{"heading":"Concept","text":"Ideas take shape on paper."}},
+        "process_3": {"type":"process","settings":{"heading":"Handcrafting","text":"Miniatures built with precision."}},
+        "process_4": {"type":"process","settings":{"heading":"Pouring","text":"Crystal clear epoxy brings life."}},
+        "process_5": {"type":"process","settings":{"heading":"Curing","text":"72 hours for perfect clarity."}},
+        "process_6": {"type":"process","settings":{"heading":"Finishing","text":"Polished by hand. Perfected with passion."}},
+        "collection_1": {"type":"collection","settings":{"collection":"fantasy-dragon","heading":"Fantasy & Dragon","text":"Power. Myth. Imagination."}},
+        "collection_2": {"type":"collection","settings":{"collection":"nature-mountains","heading":"Nature & Mountains","text":"Earth. Serenity. Freedom."}},
+        "collection_3": {"type":"collection","settings":{"collection":"ocean-waves","heading":"Ocean & Waves","text":"Flow. Calm. Endless."}},
+        "collection_4": {"type":"collection","settings":{"collection":"cosmic-minimal","heading":"Cosmic & Minimal","text":"Space. Mystery. Light."}},
+        "product_1": {"type":"product","settings":{"product":"dragon-flame-lamp","heading":"Dragon Flame Lamp","price":"$129.00","compare_price":"$169.00","rating":"(1,266)","badge":"TOP RATED"}},
+        "product_2": {"type":"product","settings":{"product":"mountain-lake-lamp","heading":"Mountain Lake Lamp","price":"$119.00","compare_price":"$149.00","rating":"(983)","badge":""}},
+        "product_3": {"type":"product","settings":{"product":"ocean-wave-lamp","heading":"Ocean Wave Lamp","price":"$119.00","compare_price":"$149.00","rating":"(834)","badge":""}},
+        "product_4": {"type":"product","settings":{"product":"forest-spirit-lamp","heading":"Forest Spirit Lamp","price":"$129.00","compare_price":"$169.00","rating":"(712)","badge":""}},
+        "product_5": {"type":"product","settings":{"product":"moonlight-lamp","heading":"Moonlight Lamp","price":"$109.00","compare_price":"$139.00","rating":"(845)","badge":""}},
+        "service_shipping": {"type":"feature","settings":{"placement":"service","icon":"shipping","heading":"Free Shipping","text":"On orders over $99"}},
+        "service_returns": {"type":"feature","settings":{"placement":"service","icon":"returns","heading":"30-Day Returns","text":"Hassle-free returns"}},
+        "service_warranty": {"type":"feature","settings":{"placement":"service","icon":"shield","heading":"1 Year Warranty","text":"We've got you covered"}},
+        "service_payment": {"type":"feature","settings":{"placement":"service","icon":"lock","heading":"Secure Payment","text":"100% protected"}},
+        "service_support": {"type":"feature","settings":{"placement":"service","icon":"globe","heading":"Support 24/7","text":"We're here to help"}},
+        "review_1": {"type":"testimonial","settings":{"quote":"<p>Absolutely stunning! The quality is beyond what I expected.</p>","author":"James R.","location":"USA"}},
+        "review_2": {"type":"testimonial","settings":{"quote":"<p>It's not just a lamp, it's a piece of art that brings my room to life.</p>","author":"Sophia M.","location":"Canada"}},
+        "review_3": {"type":"testimonial","settings":{"quote":"<p>Fast shipping, perfect packaging, and the lamp is incredible.</p>","author":"Daniel K.","location":"Australia"}},
+        "review_4": {"type":"testimonial","settings":{"quote":"<p>The details are insane. You can feel the passion in every piece.</p>","author":"Emily T.","location":"UK"}},
+        "home_1": {"type":"gallery","settings":{"caption":"Warm light for quiet evenings."}},
+        "home_2": {"type":"gallery","settings":{"caption":"A private world, glowing at home."}},
+        "home_3": {"type":"gallery","settings":{"caption":"Handcrafted atmosphere."}}
       },
       "block_order": [
-        "hero_handmade",
-        "hero_materials",
-        "hero_shipping",
-        "hero_checkout",
-        "hero_returns",
-        "hero_warranty",
-        "story_2",
-        "story_3",
-        "story_4",
-        "process_1",
-        "process_2",
-        "process_3",
-        "process_4",
-        "process_5",
-        "process_6",
-        "collection_1",
-        "collection_2",
-        "collection_3",
-        "collection_4",
-        "product_1",
-        "product_2",
-        "product_3",
-        "product_4",
-        "product_5",
-        "service_shipping",
-        "service_returns",
-        "service_warranty",
-        "service_payment",
-        "service_support",
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_4",
-        "home_1",
-        "home_2",
-        "home_3"
+        "hero_handmade","hero_materials","hero_shipping","hero_checkout","hero_returns","hero_warranty",
+        "story_2","story_3","story_4",
+        "process_1","process_2","process_3","process_4","process_5","process_6",
+        "collection_1","collection_2","collection_3","collection_4",
+        "product_1","product_2","product_3","product_4","product_5",
+        "service_shipping","service_returns","service_warranty","service_payment","service_support",
+        "review_1","review_2","review_3","review_4","home_1","home_2","home_3"
       ],
       "settings": {
-        "background_color": "#030606",
-        "text_color": "#f4f0e8",
-        "accent_color": "#d99622",
-        "order_story": 1,
-        "order_process": 2,
-        "order_collections": 3,
-        "order_products": 4,
-        "order_services": 5,
-        "order_reviews": 6,
-        "order_homes": 7,
-        "order_cinematic": 8,
-        "order_newsletter": 9,
-        "brand_name": "ALTAERON",
-        "hero_eyebrow": "NOT JUST A LAMP.",
-        "hero_heading": "We Preserve Worlds In Resin.",
-        "hero_desktop_break_after": 2,
-        "hero_text": "<p>Every Altaeron lamp is a handcrafted universe, capturing nature, fantasy, and light in perfect harmony.</p>",
-        "hero_button_label": "EXPLORE COLLECTIONS",
-        "video_label": "WATCH THE MAGIC",
-        "video_fallback_label": "WATCH THE MAGIC",
-        "show_hero_rating": false,
-        "features_label": "Why choose Altaeron",
-        "scroll_label": "SCROLL TO DISCOVER",
-        "show_stats": false,
-        "stats_label": "Altaeron at a glance",
-        "stat_1_value": "30,000+",
-        "stat_1_label": "Happy Customers",
-        "stat_2_value": "100%",
-        "stat_2_label": "Secure Payment",
-        "stat_3_value": "1 Year",
-        "stat_3_label": "Warranty",
-        "stat_4_value": "24/7",
-        "stat_4_label": "Customer Support",
-        "story_eyebrow": "MASTERPIECE IN EVERY DETAIL",
-        "story_heading": "<h2>One Lamp.<br>A Universe <em>Within.</em></h2>",
-        "story_text": "<p>From a drop of resin to a timeless world, crafted with patience, passion, and precision.</p>",
-        "story_button_label": "DISCOVER THE ART",
-        "story_mobile_button_label": "WATCH STORY",
-        "story_mobile_fallback_label": "WATCH STORY",
-        "process_eyebrow": "THE JOURNEY OF CREATION",
-        "process_heading": "<h2>72 Hours. Countless Details.<br>Infinite Worlds.</h2>",
-        "process_link_label": "VIEW ALL COLLECTIONS",
-        "collections_eyebrow": "EXPLORE OUR COLLECTIONS",
-        "collections_heading": "<h2>Find The World That<br>Speaks To You.</h2>",
-        "collections_link_label": "VIEW ALL COLLECTIONS",
-        "products_eyebrow": "BEST SELLERS",
-        "products_heading": "<h2>Worlds Most Loved.</h2>",
-        "products_link_label": "VIEW ALL",
-        "add_to_cart_label": "Add to cart",
-        "services_label": "Service promises",
-        "show_review_summary": false,
-        "show_editorial_testimonials": false,
-        "reviews_eyebrow": "LOVED BY THOUSANDS",
-        "review_score": "4.9/5",
-        "review_stars": 4.9,
-        "review_source": "From verified reviews",
-        "reviews_link_label": "VIEW ALL REVIEWS",
-        "homes_eyebrow": "HOMES OF ALTAERON",
-        "homes_heading": "<h2>Real Spaces.<br>Real Stories.</h2>",
-        "cinematic_heading": "<h2>LIGHT THAT BRINGS<br>WORLDS TO LIFE</h2>",
-        "cinematic_button_label": "WATCH THE CRAFT",
-        "newsletter_heading": "<h2>Bring A World <em>Home.</em></h2>",
-        "newsletter_text": "Get 10% OFF your first order and discover new creations.",
-        "email_label": "Email address",
-        "email_placeholder": "Enter your email",
-        "newsletter_button": "GET 10% OFF",
-        "newsletter_success": "Welcome to our world. Use code WELCOME10 at checkout.",
-        "mobile_nav_label": "Homepage shortcuts",
-        "nav_shop": "SHOP",
-        "nav_collections": "COLLECTIONS",
-        "nav_story": "STORY",
-        "nav_search": "SEARCH"
+        "background_color":"#030606","text_color":"#f4f0e8","accent_color":"#d99622","order_story":1,"order_process":2,"order_collections":3,"order_products":4,"order_services":5,"order_reviews":6,"order_homes":7,"order_cinematic":8,"order_newsletter":9,"show_stats":false,"show_review_summary":false,"show_editorial_testimonials":false,
+        "brand_name":"ALTAERON","hero_eyebrow":"NOT JUST A LAMP.","hero_heading":"We Preserve Worlds In Resin.","hero_desktop_break_after":2,"hero_text":"<p>Every Altaeron lamp is a handcrafted universe, capturing nature, fantasy, and light in perfect harmony.</p>","hero_button_label":"EXPLORE COLLECTIONS","video_label":"WATCH THE MAGIC","video_fallback_label":"WATCH THE MAGIC","show_hero_rating":false,"features_label":"Why choose Altaeron","scroll_label":"SCROLL TO DISCOVER",
+        "stats_label":"Altaeron at a glance","stat_1_value":"30,000+","stat_1_label":"Happy Customers","stat_2_value":"100%","stat_2_label":"Secure Payment","stat_3_value":"1 Year","stat_3_label":"Warranty","stat_4_value":"24/7","stat_4_label":"Customer Support",
+        "story_image_asset":"altaeron-story-within.png","story_eyebrow":"MASTERPIECE IN EVERY DETAIL","story_heading":"<h2>One Lamp.<br>A Universe <em>Within.</em></h2>","story_text":"<p>From a drop of resin to a timeless world, crafted with patience, passion, and precision.</p>","story_button_label":"DISCOVER THE ART","story_mobile_button_label":"WATCH STORY","story_mobile_fallback_label":"WATCH STORY",
+        "process_eyebrow":"THE JOURNEY OF CREATION","process_heading":"<h2>72 Hours. Countless Details.<br>Infinite Worlds.</h2>","process_link_label":"VIEW ALL COLLECTIONS",
+        "collections_eyebrow":"EXPLORE OUR COLLECTIONS","collections_heading":"<h2>Find The World That<br>Speaks To You.</h2>","collections_link_label":"VIEW ALL COLLECTIONS",
+        "products_eyebrow":"BEST SELLERS","products_heading":"<h2>Worlds Most Loved.</h2>","products_link_label":"VIEW ALL","add_to_cart_label":"Add to cart","services_label":"Service promises",
+        "reviews_eyebrow":"LOVED BY THOUSANDS","review_score":"4.9/5","review_stars":4.9,"review_source":"From verified reviews","reviews_link_label":"VIEW ALL REVIEWS",
+        "homes_eyebrow":"HOMES OF ALTAERON","homes_heading":"<h2>Real Spaces.<br>Real Stories.</h2>","cinematic_heading":"<h2>LIGHT THAT BRINGS<br>WORLDS TO LIFE</h2>","cinematic_button_label":"WATCH THE CRAFT",
+        "newsletter_heading":"<h2>Bring A World <em>Home.</em></h2>","newsletter_text":"Get 10% OFF your first order and discover new creations.","email_label":"Email address","email_placeholder":"Enter your email","newsletter_button":"GET 10% OFF","newsletter_success":"Welcome to our world. Use code WELCOME10 at checkout.",
+        "mobile_nav_label":"Homepage shortcuts","nav_shop":"SHOP","nav_collections":"COLLECTIONS","nav_story":"STORY","nav_search":"SEARCH"
       }
     }
   },
-  "order": [
-    "altaeron_exhibition"
-  ]
+  "order": ["altaeron_exhibition"]
 }
