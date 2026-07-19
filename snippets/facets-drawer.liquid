@@ -49,7 +49,7 @@
         <div class="drawer__body flex-grow v-scrollable" id="FacetFiltersContainer">
           {%- if enable_sorting -%}
             <div class="flex items-center gap-3 md:hidden facet-short-drawer" id="SortByContainerMobile">
-              {%- render 'facet-short', results: results, label_class: 'h4' -%}
+              {%- render 'facet-short', results: results, label_class: 'h4', id: 'SortByMobile' -%}
             </div>
           {%- endif -%}
           {%- render 'facets', context: 'drawer', results: results -%}

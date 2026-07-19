@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "altaeron_exhibition": {
@@ -18,15 +27,15 @@
         "process_4": {"type":"process","settings":{"heading":"Pouring","text":"Crystal clear epoxy brings life."}},
         "process_5": {"type":"process","settings":{"heading":"Curing","text":"72 hours for perfect clarity."}},
         "process_6": {"type":"process","settings":{"heading":"Finishing","text":"Polished by hand. Perfected with passion."}},
-        "collection_1": {"type":"collection","settings":{"heading":"Fantasy & Dragon","text":"Power. Myth. Imagination."}},
-        "collection_2": {"type":"collection","settings":{"heading":"Nature & Mountains","text":"Earth. Serenity. Freedom."}},
-        "collection_3": {"type":"collection","settings":{"heading":"Ocean & Waves","text":"Flow. Calm. Endless."}},
-        "collection_4": {"type":"collection","settings":{"heading":"Cosmic & Minimal","text":"Space. Mystery. Light."}},
-        "product_1": {"type":"product","settings":{"heading":"Dragon Flame Lamp","price":"$129.00","compare_price":"$169.00","rating":"(1,266)","badge":"TOP RATED"}},
-        "product_2": {"type":"product","settings":{"heading":"Mountain Lake Lamp","price":"$119.00","compare_price":"$149.00","rating":"(983)","badge":""}},
-        "product_3": {"type":"product","settings":{"heading":"Ocean Wave Lamp","price":"$119.00","compare_price":"$149.00","rating":"(834)","badge":""}},
-        "product_4": {"type":"product","settings":{"heading":"Forest Spirit Lamp","price":"$129.00","compare_price":"$169.00","rating":"(712)","badge":""}},
-        "product_5": {"type":"product","settings":{"heading":"Moonlight Lamp","price":"$109.00","compare_price":"$139.00","rating":"(845)","badge":""}},
+        "collection_1": {"type":"collection","settings":{"collection":"fantasy-dragon","heading":"Fantasy & Dragon","text":"Power. Myth. Imagination."}},
+        "collection_2": {"type":"collection","settings":{"collection":"nature-mountains","heading":"Nature & Mountains","text":"Earth. Serenity. Freedom."}},
+        "collection_3": {"type":"collection","settings":{"collection":"ocean-waves","heading":"Ocean & Waves","text":"Flow. Calm. Endless."}},
+        "collection_4": {"type":"collection","settings":{"collection":"cosmic-minimal","heading":"Cosmic & Minimal","text":"Space. Mystery. Light."}},
+        "product_1": {"type":"product","settings":{"product":"dragon-flame-lamp","heading":"Dragon Flame Lamp","price":"$129.00","compare_price":"$169.00","rating":"(1,266)","badge":"TOP RATED"}},
+        "product_2": {"type":"product","settings":{"product":"mountain-lake-lamp","heading":"Mountain Lake Lamp","price":"$119.00","compare_price":"$149.00","rating":"(983)","badge":""}},
+        "product_3": {"type":"product","settings":{"product":"ocean-wave-lamp","heading":"Ocean Wave Lamp","price":"$119.00","compare_price":"$149.00","rating":"(834)","badge":""}},
+        "product_4": {"type":"product","settings":{"product":"forest-spirit-lamp","heading":"Forest Spirit Lamp","price":"$129.00","compare_price":"$169.00","rating":"(712)","badge":""}},
+        "product_5": {"type":"product","settings":{"product":"moonlight-lamp","heading":"Moonlight Lamp","price":"$109.00","compare_price":"$139.00","rating":"(845)","badge":""}},
         "service_shipping": {"type":"feature","settings":{"placement":"service","icon":"shipping","heading":"Free Shipping","text":"On orders over $99"}},
         "service_returns": {"type":"feature","settings":{"placement":"service","icon":"returns","heading":"30-Day Returns","text":"Hassle-free returns"}},
         "service_warranty": {"type":"feature","settings":{"placement":"service","icon":"shield","heading":"1 Year Warranty","text":"We've got you covered"}},
@@ -50,16 +59,16 @@
         "review_1","review_2","review_3","review_4","home_1","home_2","home_3"
       ],
       "settings": {
-        "background_color":"#030606","text_color":"#f4f0e8","accent_color":"#d99622","order_story":1,"order_process":2,"order_collections":3,"order_products":4,"order_services":5,"order_reviews":6,"order_homes":7,"order_cinematic":8,"order_newsletter":9,
-        "brand_name":"ALTAERON","hero_eyebrow":"NOT JUST A LAMP.","hero_heading":"We Preserve Worlds In Resin.","hero_text":"<p>Every Altaeron lamp is a handcrafted universe, capturing nature, fantasy, and light in perfect harmony.</p>","hero_button_label":"EXPLORE COLLECTIONS","video_label":"WATCH THE MAGIC","show_hero_rating":true,"features_label":"Why choose Altaeron","scroll_label":"SCROLL TO DISCOVER",
-        "stats_label":"Altaeron at a glance","stat_1_value":"30,000+","stat_1_label":"Happy Customers","stat_2_value":"100%","stat_2_label":"Secure Payment","stat_3_value":"Lifetime","stat_3_label":"Resin Warranty","stat_4_value":"24/7","stat_4_label":"Customer Support",
+        "background_color":"#030606","text_color":"#f4f0e8","accent_color":"#d99622","order_story":1,"order_process":2,"order_collections":3,"order_products":4,"order_services":5,"order_reviews":6,"order_homes":7,"order_cinematic":8,"order_newsletter":9,"show_stats":false,"show_review_summary":false,"show_editorial_testimonials":false,
+        "brand_name":"ALTAERON","hero_eyebrow":"NOT JUST A LAMP.","hero_heading":"We Preserve Worlds In Resin.","hero_desktop_break_after":2,"hero_text":"<p>Every Altaeron lamp is a handcrafted universe, capturing nature, fantasy, and light in perfect harmony.</p>","hero_button_label":"EXPLORE COLLECTIONS","video_label":"WATCH THE MAGIC","show_hero_rating":false,"features_label":"Why choose Altaeron","scroll_label":"SCROLL TO DISCOVER",
+        "stats_label":"Altaeron at a glance","stat_1_value":"30,000+","stat_1_label":"Happy Customers","stat_2_value":"100%","stat_2_label":"Secure Payment","stat_3_value":"1 Year","stat_3_label":"Warranty","stat_4_value":"24/7","stat_4_label":"Customer Support",
         "story_eyebrow":"MASTERPIECE IN EVERY DETAIL","story_heading":"<h2>One Lamp.<br>A Universe <em>Within.</em></h2>","story_text":"<p>From a drop of resin to a timeless world, crafted with patience, passion, and precision.</p>","story_button_label":"DISCOVER THE ART",
         "process_eyebrow":"THE ART OF CREATION","process_heading":"<h2>72 Hours. Countless Details.<br>Infinite Worlds.</h2>","process_link_label":"VIEW ALL COLLECTIONS",
         "collections_eyebrow":"EXPLORE OUR COLLECTIONS","collections_heading":"<h2>Find The World That<br>Speaks To You.</h2>","collections_link_label":"VIEW ALL COLLECTIONS",
         "products_eyebrow":"BEST SELLERS","products_heading":"<h2>Worlds Most Loved.</h2>","products_link_label":"VIEW ALL PRODUCTS","add_to_cart_label":"Add to cart","services_label":"Service promises",
-        "reviews_eyebrow":"LOVED BY THOUSANDS","review_score":"4.9/5","review_stars":4.9,"review_source":"From 2,500+ Reviews","reviews_link_label":"VIEW ALL REVIEWS",
+        "reviews_eyebrow":"CUSTOMER STORIES","review_score":"4.9/5","review_stars":4.9,"review_source":"From verified reviews","reviews_link_label":"VIEW ALL REVIEWS",
         "homes_eyebrow":"HOMES OF ALTAERON","homes_heading":"<h2>Real Spaces.<br>Real Stories.</h2>","cinematic_heading":"<h2>LIGHT THAT BRINGS<br>WORLDS TO LIFE</h2>","cinematic_button_label":"WATCH THE CRAFT",
-        "newsletter_heading":"<h2>Bring A World <em>Home.</em></h2>","newsletter_text":"Get 10% OFF your first order and discover new creations.","email_label":"Email address","email_placeholder":"Enter your email","newsletter_button":"GET 10% OFF","newsletter_success":"Welcome to our world.",
+        "newsletter_heading":"<h2>Bring A World <em>Home.</em></h2>","newsletter_text":"Get 10% OFF your first order and discover new creations.","email_label":"Email address","email_placeholder":"Enter your email","newsletter_button":"GET 10% OFF","newsletter_success":"Welcome to our world. Use code WELCOME10 at checkout.",
         "mobile_nav_label":"Homepage shortcuts","nav_shop":"SHOP","nav_collections":"COLLECTIONS","nav_story":"STORY","nav_search":"SEARCH"
       }
     }

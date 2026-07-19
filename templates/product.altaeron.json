@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -27,7 +36,11 @@
           "settings": {}
         }
       },
-      "block_order": ["variant_picker", "buy_buttons", "pickup"],
+      "block_order": [
+        "variant_picker",
+        "buy_buttons",
+        "pickup"
+      ],
       "settings": {
         "background": "#050809",
         "text_color": "#f4f0e8",
@@ -51,20 +64,18 @@
         "choose_heading": "Create Your World",
         "size_guide_label": "Size guide",
         "show_trust": true,
-        "trust_1_label": "",
-        "trust_1_text": "",
-        "trust_2_label": "",
-        "trust_2_text": "",
-        "trust_3_label": "",
-        "trust_3_text": "",
-        "trust_4_label": "",
-        "trust_4_text": ""
+        "trust_1_label": "Premium materials",
+        "trust_1_text": "Crystal-clear resin",
+        "trust_2_label": "Handmade",
+        "trust_2_text": "By artisans",
+        "trust_3_label": "Worldwide shipping",
+        "trust_3_text": "Free over $99",
+        "trust_4_label": "1 year warranty",
+        "trust_4_text": "We've got you covered"
       }
     },
     "aftercare": {
       "type": "altaeron-product-aftercare",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "show_packaging": true,
         "show_homes": true,
@@ -83,8 +94,6 @@
     },
     "guide": {
       "type": "altaeron-product-guide",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "show_section": true,
         "background": "#050809",
@@ -111,5 +120,10 @@
       }
     }
   },
-  "order": ["main", "aftercare", "guide", "other_worlds"]
+  "order": [
+    "main",
+    "aftercare",
+    "guide",
+    "other_worlds"
+  ]
 }

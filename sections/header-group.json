@@ -44,12 +44,12 @@
         "announcement_bar_yELyjf",
         "announcement_bar_9gLqAn"
       ],
-      "disabled": false,
       "name": "t:sections.announcement-bar.name",
       "settings": {
         "color_scheme": "scheme-inverse",
         "content_width": 30,
-        "autoplay": true,
+        "autoplay": false,
+        "desktop_static": true,
         "autoplay_speed": 5,
         "padding_top": 12,
         "padding_bottom": 12

@@ -1,7 +1,13 @@
+{%- liquid
+  assign static_desktop = section.settings.desktop_static
+  if request.page_type == 'index' and section.blocks.size == 3
+    assign static_desktop = true
+  endif
+-%}
 <div
   data-section-index="{{ section.index }}"
-  class="announcement-bar color-{{ section.settings.color_scheme }} page-width section--padding"
-  style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+  class="announcement-bar{% if static_desktop %} announcement-bar--static-desktop{% endif %} color-{{ section.settings.color_scheme }} page-width section--padding"
+  style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;--announcement-columns: {{ section.blocks.size }};"
 >
   <announcement-bar
     class="swiper announcement-bar__wrapper block"
@@ -68,21 +74,23 @@
     </div>
     {%- if section.blocks.size > 1 -%}
       <div class="slider-controls">
-        <div
+        <button
+          type="button"
           class="swiper-button swiper-button-prev swiper-button--blank"
           name="previous"
           aria-label="{{ 'general.slider.previous_slide' | t }}"
         >
           {%- render 'icon-slider-prev', size: 'small' -%}
-        </div>
+        </button>
         <div class="swiper-pagination"></div>
-        <div
+        <button
+          type="button"
           class="swiper-button swiper-button-next swiper-button--blank"
           name="next"
           aria-label="{{ 'general.slider.next_slide' | t }}"
         >
           {%- render 'icon-slider-next', size: 'small' -%}
-        </div>
+        </button>
       </div>
     {%- endif -%}
   </announcement-bar>
@@ -117,6 +125,12 @@
       "id": "autoplay",
       "label": "t:sections.announcement-bar.settings.auto_rotate.label",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_static",
+      "label": "Show all messages in columns on desktop",
+      "default": false
     },
     {
       "type": "range",

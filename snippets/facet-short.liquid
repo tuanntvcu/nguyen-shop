@@ -1,4 +1,5 @@
-<label for="SortBy" class="text-nowrap {{ label_class }}">
+{%- assign sort_id = id | default: 'SortBy' -%}
+<label for="{{ sort_id }}" class="text-nowrap {{ label_class }}">
   {{- 'products.facets.sort_by_label' | t -}}
 </label>
 <div class="select w-auto facet-short flex items-center gap-2 flex-grow">
@@ -6,7 +7,7 @@
   <select
     name="sort_by"
     class="form-control form-control--select"
-    id="SortBy"
+    id="{{ sort_id }}"
     aria-describedby="a11y-refresh-page-message"
     is="facet-short"
   >

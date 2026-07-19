@@ -2,6 +2,14 @@
   background: #050809;
 }
 
+body.altaeron .announcement-bar-section {
+  display: none;
+}
+
+body.altaeron:has(cart-drawer[open], menu-drawer[open], search-drawer[open], quick-view-modal[open], .pswp--open) .altaeron-sticky-buy {
+  display: none !important;
+}
+
 .altaeron-surface {
   --altaeron-line: color-mix(in srgb, var(--altaeron-text) 13%, transparent);
   --altaeron-panel: color-mix(in srgb, var(--altaeron-text) 3%, var(--altaeron-bg));
@@ -65,7 +73,7 @@
 .altaeron-purchase h2,
 .altaeron-packaging h2 {
   max-width: 14ch;
-  font-size: clamp(3rem, 4.2vw, 6.4rem);
+  font-size: clamp(3rem, 3.2vw, 4.8rem);
   line-height: .98;
 }
 
@@ -184,7 +192,7 @@
 .altaeron-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.42fr) minmax(34rem, .88fr);
-  min-height: min(83rem, calc(100vh - var(--header-height, 0px)));
+  min-height: min(60rem, calc(100vh - var(--header-height, 0px)));
   margin-left: 12rem;
   border-bottom: 1px solid var(--altaeron-line);
 }
@@ -192,7 +200,7 @@
 .altaeron-hero__media {
   position: relative;
   min-width: 0;
-  min-height: 68rem;
+  min-height: 60rem;
   overflow: hidden;
   background: #020404;
 }
@@ -320,15 +328,15 @@
   justify-content: center;
   align-items: flex-start;
   gap: 1.8rem;
-  padding: clamp(4rem, 7vw, 12rem) clamp(3rem, 4.5vw, 8rem);
+  padding: clamp(3rem, 4vw, 5rem);
   border-left: 1px solid var(--altaeron-line);
   background: linear-gradient(135deg, color-mix(in srgb, var(--altaeron-bg) 94%, transparent), var(--altaeron-bg));
 }
 
 .altaeron-hero__title {
   max-width: 11ch;
-  font-size: clamp(5rem, 5.4vw, 8.6rem);
-  line-height: .91;
+  font-size: clamp(4.4rem, 4vw, 6rem);
+  line-height: .94;
 }
 
 .altaeron-hero__story {
@@ -402,8 +410,8 @@
   display: grid;
   align-content: center;
   gap: 2rem;
-  min-height: 54rem;
-  padding: clamp(4rem, 6vw, 10rem);
+  min-height: 42rem;
+  padding: clamp(3rem, 4vw, 5rem);
 }
 
 .altaeron-signature {
@@ -414,7 +422,8 @@
 }
 
 .altaeron-lore__media {
-  min-height: 54rem;
+  min-height: 42rem;
+  height: 42rem;
   overflow: hidden;
   border-left: 1px solid var(--altaeron-line);
 }
@@ -432,7 +441,7 @@
   gap: clamp(3rem, 5vw, 8rem);
   align-items: start;
   margin-left: 12rem;
-  padding: clamp(6rem, 8vw, 13rem) clamp(3rem, 5vw, 9rem);
+  padding: 4rem clamp(3rem, 4vw, 5rem);
   border-bottom: 1px solid var(--altaeron-line);
 }
 
@@ -504,14 +513,14 @@
   grid-template-columns: minmax(22rem, .42fr) minmax(0, 1.58fr);
   gap: clamp(3rem, 5vw, 8rem);
   margin-left: 12rem;
-  padding: clamp(6rem, 8vw, 13rem) clamp(3rem, 5vw, 9rem);
+  padding: 4rem clamp(3rem, 4vw, 5rem);
   border-bottom: 1px solid var(--altaeron-line);
 }
 
 .altaeron-details__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(18rem, 26vw);
+  grid-auto-rows: clamp(15rem, 16vw, 22rem);
   gap: 1rem;
 }
 
@@ -547,7 +556,7 @@
 }
 
 .altaeron-choose__visual {
-  min-height: 72rem;
+  min-height: 56rem;
   overflow: hidden;
   background: #020303;
 }
@@ -562,7 +571,7 @@
   align-content: center;
   gap: 2rem;
   min-width: 0;
-  padding: clamp(4rem, 6vw, 10rem);
+  padding: clamp(3rem, 4vw, 5rem);
   border-left: 1px solid var(--altaeron-line);
   background: linear-gradient(145deg, color-mix(in srgb, var(--altaeron-accent) 3%, var(--altaeron-bg)), var(--altaeron-bg));
 }
@@ -778,6 +787,19 @@
   list-style: none;
 }
 
+.altaeron-trust-band {
+  margin-left: 12rem;
+  padding: 3rem clamp(3rem, 4vw, 5rem);
+  border-bottom: 1px solid var(--altaeron-line);
+}
+
+.altaeron-trust-band .altaeron-trust {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+}
+
 .altaeron-trust__item {
   display: grid;
   grid-template-columns: 3rem 1fr;
@@ -826,7 +848,7 @@
 .altaeron-packaging {
   display: grid;
   grid-template-columns: minmax(28rem, .58fr) minmax(0, 1.42fr);
-  min-height: 48rem;
+  height: 40rem;
   margin-left: 12rem;
   border-bottom: 1px solid var(--altaeron-line);
 }
@@ -835,15 +857,27 @@
   display: grid;
   align-content: center;
   gap: 2rem;
-  padding: clamp(4rem, 6vw, 9rem);
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: clamp(3rem, 4vw, 5rem);
+}
+
+.altaeron-packaging__copy > * {
+  grid-column: 1;
+}
+
+.altaeron-packaging__toggle {
+  display: none;
 }
 
 .altaeron-packaging__media {
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
   border-left: 1px solid var(--altaeron-line);
 }
 
 .altaeron-packaging__media img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
 }
@@ -856,7 +890,7 @@
   grid-template-columns: minmax(24rem, .42fr) minmax(0, 1.58fr);
   gap: clamp(3rem, 5vw, 8rem);
   margin-left: 12rem;
-  padding: clamp(6rem, 7vw, 11rem) clamp(3rem, 5vw, 9rem);
+  padding: 4rem clamp(3rem, 4vw, 5rem);
   border-bottom: 1px solid var(--altaeron-line);
 }
 
@@ -899,7 +933,7 @@
 .altaeron-featured-story {
   display: grid;
   gap: 2.4rem;
-  padding: clamp(2.5rem, 4vw, 5rem);
+  padding: 3rem;
   border: 1px solid var(--altaeron-line);
   border-radius: .5rem;
   background: var(--altaeron-panel);
@@ -1155,6 +1189,10 @@
     margin-left: 0;
   }
 
+  .altaeron-trust-band {
+    margin-left: 0;
+  }
+
   .altaeron-hero {
     grid-template-columns: minmax(0, 1.25fr) minmax(32rem, .75fr);
   }
@@ -1254,7 +1292,7 @@
   .altaeron-lore h2,
   .altaeron-purchase h2,
   .altaeron-packaging h2 {
-    font-size: clamp(3.3rem, 10vw, 4.6rem);
+    font-size: clamp(3rem, 8.2vw, 3.8rem);
     line-height: 1;
   }
 
@@ -1269,7 +1307,7 @@
   }
 
   .altaeron-hero__media {
-    min-height: min(64rem, 126vw);
+    min-height: min(48rem, 110vw);
   }
 
   .altaeron-hero__media .product__media-gallery-thumbails {
@@ -1288,15 +1326,15 @@
   }
 
   .altaeron-hero__content {
-    gap: 1.6rem;
-    min-height: 37rem;
-    padding: 4.5rem 2.4rem 5.5rem;
+    gap: 1.4rem;
+    min-height: 0;
+    padding: 3rem 2.4rem 3.5rem;
     border-top: 1px solid var(--altaeron-line);
   }
 
   .altaeron-hero__title {
     max-width: none;
-    font-size: clamp(4.2rem, 13vw, 6.2rem);
+    font-size: clamp(3.2rem, 8.7vw, 3.6rem);
   }
 
   .altaeron-hero__story {
@@ -1308,11 +1346,12 @@
   .altaeron-purchase,
   .altaeron-packaging__copy {
     min-height: 0;
-    padding: 5.5rem 2.4rem;
+    padding: 3.5rem 2.4rem;
   }
 
   .altaeron-lore__media {
-    min-height: 76vw;
+    min-height: 60vw;
+    height: 60vw;
   }
 
   .altaeron-craft,
@@ -1322,8 +1361,8 @@
   .altaeron-guide,
   .altaeron-worlds {
     grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 5.5rem 2.4rem;
+    gap: 2.4rem;
+    padding: 3.5rem 2.4rem;
   }
 
   .altaeron-craft__rail {
@@ -1337,7 +1376,7 @@
 .altaeron-craft-card {
   position: relative;
     display: grid;
-    grid-template-columns: 9.6rem 1fr;
+    grid-template-columns: 8.4rem 1fr;
     gap: 1.6rem;
     padding: 1.6rem 0;
     overflow: visible;
@@ -1349,7 +1388,7 @@
 
   .altaeron-craft-card::before {
     position: absolute;
-    left: 4.8rem;
+    left: 4.2rem;
     width: 1px;
     height: calc(100% - 3.2rem);
     background: var(--altaeron-line);
@@ -1359,8 +1398,8 @@
   .altaeron-craft-card__media {
     position: relative;
     z-index: 1;
-    width: 9.6rem;
-    height: 9.6rem;
+    width: 8.4rem;
+    height: 8.4rem;
     border: 1px solid var(--altaeron-line);
     border-radius: .4rem;
   }
@@ -1371,7 +1410,7 @@
   }
 
   .altaeron-details__grid {
-    grid-auto-rows: 38vw;
+    grid-auto-rows: 34vw;
     gap: .7rem;
   }
 
@@ -1380,7 +1419,7 @@
   }
 
   .altaeron-choose__visual {
-    min-height: 88vw;
+    display: none;
   }
 
   .altaeron-purchase {
@@ -1405,8 +1444,61 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .altaeron-trust-band {
+    padding: 3.5rem 2.4rem;
+  }
+
+  .altaeron-trust-band .altaeron-trust {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .altaeron-packaging {
+    height: auto;
+  }
+
+  .altaeron-packaging__copy {
+    grid-template-columns: minmax(0, 1fr) 3.6rem;
+    gap: 1rem;
+  }
+
+  .altaeron-packaging__toggle {
+    position: relative;
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 3.6rem;
+    height: 3.6rem;
+    padding: 0;
+    border: 0;
+    color: var(--altaeron-accent);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .altaeron-packaging__toggle span[aria-hidden]::before,
+  .altaeron-packaging__toggle span[aria-hidden]::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.4rem;
+    height: 1px;
+    background: currentColor;
+    content: '';
+    transform: translate(-50%, -50%);
+  }
+
+  .altaeron-packaging__toggle span[aria-hidden]::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform .2s ease;
+  }
+
+  .altaeron-packaging__toggle[aria-expanded='true'] span[aria-hidden]::after {
+    transform: translate(-50%, -50%);
+  }
+
   .altaeron-packaging__media {
-    min-height: 78vw;
+    min-height: 62vw;
+    height: 62vw;
   }
 
   .altaeron-homes__rail {
@@ -1498,6 +1590,10 @@
 
   .altaeron-trust {
     grid-template-columns: 1fr;
+  }
+
+  .altaeron-trust-band .altaeron-trust {
+    grid-template-columns: 1fr 1fr;
   }
 
   .altaeron-sticky-buy {

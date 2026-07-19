@@ -1,1 +1,70 @@
-{"sections":{"breadcrumbs_Gxg9wp":{"type":"breadcrumbs","settings":{"text_alignment":"start"}},"rich_text_ajVGiK":{"type":"rich-text","blocks":{"heading_dr6ctY":{"type":"heading","settings":{"heading":"{{ collection.title }}","heading_size":"h2","heading_highlight_style":"none"}},"text_z86ijT":{"type":"text","settings":{"text":"{{ collection.description }}","text_size":"text-base"}}},"block_order":["heading_dr6ctY","text_z86ijT"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"","content_alignment":"left","padding_top":50,"padding_bottom":50,"show_section_divider":false,"divider_width":"fixed"}},"banner":{"type":"main-collection-banner","blocks":{"collection_info_zUNyKV":{"type":"collection_info","settings":{"heading_size":"hd2","heading_tag":"h1","show_description":true,"padding_top":0,"padding_bottom":0}}},"block_order":["collection_info_zUNyKV"],"disabled":true,"custom_css":[],"settings":{"color_scheme":"scheme-1","image_overlay_opacity":0,"image_position":"left","image_height":"extra-small","text_alignment":"left","enable_parallax":true,"parallax_direction":"vertical","image_height_mobile":"auto","padding_top":38,"padding_bottom":60}},"custom_content_RecVe9":{"type":"custom-content","blocks":{"image_card_3BJ74T":{"type":"image_card","settings":{"color_scheme":"scheme-inverse","image_ratio":"adapt","image_overlay_opacity":30,"heading":"Collection's name","heading_size":"h4","heading_highlight_style":"none","subheading":"","description":"","button_label":"","button_style":"btn--primary","content_position":"middle-center","content_alignment":"center","content_spacing":"small","card_link":"","color_scheme_mobile":"","show_text_below":true,"content_alignment_mobile":"left","width":"20%","alignment":"center","block_custom_class":""}},"image_card_GRXz6y":{"type":"image_card","settings":{"color_scheme":"scheme-inverse","image_ratio":"adapt","image_overlay_opacity":30,"heading":"Collection's name","heading_size":"h4","heading_highlight_style":"none","subheading":"","description":"","button_label":"","button_style":"btn--primary","content_position":"middle-center","content_alignment":"center","content_spacing":"small","card_link":"","color_scheme_mobile":"","show_text_below":true,"content_alignment_mobile":"left","width":"20%","alignment":"center","block_custom_class":""}},"image_card_BAAmnt":{"type":"image_card","settings":{"color_scheme":"scheme-inverse","image_ratio":"adapt","image_overlay_opacity":30,"heading":"Collection's name","heading_size":"h4","heading_highlight_style":"none","subheading":"","description":"","button_label":"","button_style":"btn--primary","content_position":"middle-center","content_alignment":"center","content_spacing":"small","card_link":"","color_scheme_mobile":"","show_text_below":true,"content_alignment_mobile":"left","width":"20%","alignment":"center","block_custom_class":""}},"image_card_EA8TmL":{"type":"image_card","settings":{"color_scheme":"scheme-inverse","image_ratio":"adapt","image_overlay_opacity":30,"heading":"Collection's name","heading_size":"h4","heading_highlight_style":"none","subheading":"","description":"","button_label":"","button_style":"btn--primary","content_position":"middle-center","content_alignment":"center","content_spacing":"small","card_link":"","color_scheme_mobile":"","show_text_below":true,"content_alignment_mobile":"left","width":"20%","alignment":"center","block_custom_class":""}},"image_card_Cab8TR":{"type":"image_card","settings":{"color_scheme":"scheme-inverse","image_ratio":"adapt","image_overlay_opacity":30,"heading":"Collection's name","heading_size":"h4","heading_highlight_style":"none","subheading":"","description":"","button_label":"","button_style":"btn--primary","content_position":"middle-center","content_alignment":"center","content_spacing":"small","card_link":"","color_scheme_mobile":"","show_text_below":true,"content_alignment_mobile":"left","width":"20%","alignment":"center","block_custom_class":""}}},"block_order":["image_card_3BJ74T","image_card_GRXz6y","image_card_BAAmnt","image_card_EA8TmL","image_card_Cab8TR"],"custom_css":[".card-media {--padding-y-mobile: 1.2rem;}","@media (max-width: 767px) {.card-media--mobile-content-below .bg-overlay {display: none !important; }}"],"settings":{"container":"fixed","color_scheme":"","enable_sticky_column":false,"heading":"","heading_size":"h1","heading_highlight_style":"none","subheading":"","description":"","column_gap":"extra-small","row_gap":"none","swipe_on_mobile":true,"columns_mobile":"2","padding_top":0,"padding_bottom":40,"show_section_divider":false,"divider_width":"fixed"}},"product-grid":{"type":"main-collection-product-grid","custom_css":[],"settings":{"color_scheme":"","products_per_page":25,"columns_desktop":4,"grid_layout":"metro","pagination":"infinite","enable_color_swatch":true,"enable_filtering":true,"filter_type":"drawer","enable_sorting":true,"expand_filter_groups":"Availability, Price, Color, Size, Product type","columns_mobile":"2","padding_top":40,"padding_bottom":100,"show_section_divider":true,"divider_width":"fixed"}},"collapsible_tabs_ziPWdF":{"type":"collapsible-tabs","blocks":{"collapsible_item_mg6cA3":{"type":"collapsible_item","settings":{"icon":"none","heading":"Collapsible tab heading","content":"<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.<\/p>","custom_liquid":"","page":"","open":false}},"collapsible_item_QAzUMJ":{"type":"collapsible_item","settings":{"icon":"none","heading":"Collapsible tab heading","content":"<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.<\/p>","custom_liquid":"","page":"","open":false}},"collapsible_item_AN9LgV":{"type":"collapsible_item","settings":{"icon":"none","heading":"Collapsible tab heading","content":"<p>Fill in the text content of the collapsible item here. You can provide details and explanation for the question here.<\/p>","custom_liquid":"","page":"","open":false}}},"block_order":["collapsible_item_mg6cA3","collapsible_item_QAzUMJ","collapsible_item_AN9LgV"],"name":"t:sections.collapsible-tabs.presets.name","settings":{"container":"fixed","color_scheme":"","header_layout":"vertical","heading":"Sillas de comedor","heading_size":"h1","heading_highlight_style":"none","subheading":"","description":"","text_size":"text-base","button_label":"","button_link":"","button_style":"btn--primary","column_gap":"large","row_gap":"inherit","item_style":"standard","item_color_scheme":"","item_heading_font":"heading","item_heading_size":"h4","item_icon_size":"extra-large","padding_top":50,"padding_bottom":50,"show_section_divider":false,"divider_width":"fixed"}}},"order":["breadcrumbs_Gxg9wp","rich_text_ajVGiK","banner","custom_content_RecVe9","product-grid","collapsible_tabs_ziPWdF"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs_Gxg9wp": {
+      "type": "breadcrumbs",
+      "settings": {
+        "text_alignment": "start"
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "blocks": {
+        "collection_info_zUNyKV": {
+          "type": "collection_info",
+          "settings": {
+            "heading_size": "hd2",
+            "heading_tag": "h1",
+            "show_description": true,
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": ["collection_info_zUNyKV"],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_overlay_opacity": 30,
+        "image_position": "left",
+        "image_height": "small",
+        "text_alignment": "left",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "image_height_mobile": "small",
+        "padding_top": 38,
+        "padding_bottom": 60
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "",
+        "products_per_page": 24,
+        "columns_desktop": 4,
+        "grid_layout": "metro",
+        "pagination": "infinite",
+        "enable_color_swatch": true,
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "expand_filter_groups": "Availability, Price, Color, Size, Product type",
+        "columns_mobile": "2",
+        "padding_top": 40,
+        "padding_bottom": 100,
+        "show_section_divider": true,
+        "divider_width": "fixed"
+      }
+    }
+  },
+  "order": ["breadcrumbs_Gxg9wp", "banner", "product-grid"]
+}

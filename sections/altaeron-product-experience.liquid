@@ -49,10 +49,6 @@
   data-url="{{ product.url }}"
   style="--altaeron-bg: {{ section.settings.background }}; --altaeron-text: {{ section.settings.text_color }}; --altaeron-accent: {{ section.settings.accent_color }}; --altaeron-muted: {{ section.settings.muted_color }};"
 >
-  {%- if section.settings.sticky_chapters -%}
-    {% render 'altaeron-chapter-nav' %}
-  {%- endif -%}
-
   <section id="altaeron-legend" class="altaeron-hero altaeron-chapter" data-altaeron-chapter="The Legend">
     <div class="altaeron-hero__media">
       {%- if product.media.size > 0 -%}
@@ -93,6 +89,10 @@
       {%- endif -%}
     </div>
   </section>
+
+  {%- if section.settings.sticky_chapters -%}
+    {% render 'altaeron-chapter-nav' %}
+  {%- endif -%}
 
   {%- if product.metafields.custom.legend_content != blank or legend_video != blank or legend_image != blank -%}
     <section class="altaeron-lore altaeron-chapter" aria-labelledby="AltaeronLoreTitle-{{ section.id }}">
@@ -184,6 +184,12 @@
     </section>
   {%- endif -%}
 
+  {%- if section.settings.show_trust -%}
+    <aside class="altaeron-trust-band" aria-label="Product assurances">
+      {% render 'altaeron-trust-items' %}
+    </aside>
+  {%- endif -%}
+
   <section id="altaeron-choose" class="altaeron-choose altaeron-chapter" data-altaeron-chapter="Choose Your World" aria-labelledby="AltaeronChooseTitle-{{ section.id }}">
     <div class="altaeron-choose__visual" aria-hidden="true">
       {%- if selected_variant.featured_media -%}
@@ -242,7 +248,6 @@
       {%- if product.metafields.custom.delivery_note.value != blank -%}
         <p class="altaeron-delivery-note">{{ product.metafields.custom.delivery_note.value | escape }}</p>
       {%- endif -%}
-      {%- if section.settings.show_trust -%}{% render 'altaeron-trust-items' %}{%- endif -%}
     </div>
   </section>
 
@@ -261,8 +266,8 @@
 </product-info>
 
 <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
-{%- if product.media.size > 0 -%}<script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>{%- endif -%}
 {%- if section.settings.enable_image_zoom -%}<script src="{{ 'photoswipe.js' | asset_url }}" defer="defer"></script>{%- endif -%}
+{%- if product.media.size > 0 -%}<script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>{%- endif -%}
 {%- if has_models -%}
   <script type="application/json" id="ProductJSON-{{ product.id }}">{{ product.media | where: 'media_type', 'model' | json }}</script>
   <script src="{{ 'product-model.js' | asset_url }}" defer></script>

@@ -6243,6 +6243,26 @@ body:not(.header-pinned) .header-scrolled .header {
   stroke-width: 1.4;
   width: 16px;
 }
+@media (min-width: 990px) {
+  .announcement-bar--static-desktop announcement-bar {
+    max-width: 100%;
+    overflow: visible;
+    width: 100%;
+  }
+  .announcement-bar--static-desktop .swiper-wrapper {
+    display: grid;
+    grid-template-columns: repeat(var(--announcement-columns), minmax(0, 1fr));
+    transform: none!important;
+  }
+  .announcement-bar--static-desktop .swiper-slide {
+    margin: 0!important;
+    width: auto!important;
+  }
+  .announcement-bar--static-desktop .swiper-slide-duplicate,
+  .announcement-bar--static-desktop .slider-controls {
+    display: none!important;
+  }
+}
 
 .altaeron-brand {
   align-items: center;
@@ -6263,6 +6283,10 @@ body:not(.header-pinned) .header-scrolled .header {
 .altaeron-brand--footer {
   font-size: 12px;
 }
+.altaeron-brand--header {
+  font-size: 12px;
+  white-space: nowrap;
+}
 
 .footer-newsletter {
   width: var(--form-width);
@@ -6279,6 +6303,28 @@ body:not(.header-pinned) .header-scrolled .header {
 }
 .footer-newsletter.text-center {
   margin-inline: auto;
+}
+
+/* Footer content must remain readable before scroll-triggered motion initializes. */
+.footer motion-element {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+.footer .form-control {
+  color: rgb(var(--color-foreground));
+}
+.footer .form-control::placeholder {
+  color: rgba(var(--color-foreground), .68);
+}
+
+/* Sale prices use the Altaeron gold on the dark collection background. */
+.f-price--on-sale .f-price-item--sale {
+  color: #d99622;
+}
+.f-badge--sale {
+  background-color: #d99622;
+  color: #050505;
 }
 
 @media (min-width: 768px) {
