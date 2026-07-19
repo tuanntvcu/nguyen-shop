@@ -18,9 +18,15 @@
     state.activeIndex = Math.max(0, index);
     const activeChapter = state.chapters[state.activeIndex];
     const links = document.querySelectorAll('[data-altaeron-chapter-link]');
+    let visibleChapterNumber = 0;
     links.forEach((link) => {
       const target = document.querySelector(link.hash);
       link.closest('.altaeron-chapters__item')?.toggleAttribute('hidden', !target);
+      if (target) {
+        visibleChapterNumber += 1;
+        const number = link.querySelector('.altaeron-chapters__number');
+        if (number) number.textContent = String(visibleChapterNumber).padStart(2, '0');
+      }
       if (activeChapter && link.hash === `#${activeChapter.id}`) {
         link.setAttribute('aria-current', 'true');
       }
@@ -56,8 +62,10 @@
       const hasPassedForm = purchaseRect.bottom < 0;
       const experienceRemaining = !lastRect || lastRect.bottom > 0;
       const mobile = window.matchMedia('(max-width: 767px)').matches;
+      const overlayOpen = Boolean(document.querySelector('cart-drawer[open], menu-drawer[open], search-drawer[open], quick-view-modal[open], .pswp--open'));
+      const designMode = document.body.classList.contains('shopify-design-mode');
       sticky.hidden = false;
-      sticky.classList.toggle('is-visible', mobile && hasPassedForm && experienceRemaining);
+      sticky.classList.toggle('is-visible', mobile && hasPassedForm && experienceRemaining && !overlayOpen && !designMode);
     }
   };
 
@@ -70,6 +78,13 @@
     state.chapterObserver?.disconnect();
     state.chapters = Array.from(document.querySelectorAll('[data-altaeron-chapter]'));
     if (!state.chapters.length) return;
+
+    state.chapters.forEach((chapter, index) => {
+      const kicker = chapter.querySelector('.altaeron-kicker');
+      if (!kicker) return;
+      const label = kicker.textContent.replace(/^\s*\d{2}\s*\/\s*/, '').trim();
+      if (label) kicker.textContent = `${String(index + 1).padStart(2, '0')} / ${label}`;
+    });
 
     state.chapterObserver = new IntersectionObserver(
       (entries) => {
@@ -100,6 +115,22 @@
     videos.forEach((video) => state.videoObserver.observe(video));
   };
 
+  const setPackagingExpanded = (section, expanded) => {
+    const toggle = section.querySelector('[data-altaeron-packaging-toggle]');
+    toggle?.setAttribute('aria-expanded', String(expanded));
+    section.querySelectorAll('[data-altaeron-packaging-content]').forEach((content) => {
+      content.hidden = !expanded;
+    });
+  };
+
+  const refreshPackaging = () => {
+    const mobile = window.matchMedia('(max-width: 767px)').matches;
+    document.querySelectorAll('.altaeron-packaging').forEach((section) => {
+      const expanded = mobile ? section.dataset.altaeronPackagingExpanded === 'true' : true;
+      setPackagingExpanded(section, expanded);
+    });
+  };
+
   const updateStickyCommerce = (variant) => {
     const sticky = document.querySelector('[data-altaeron-sticky-buy]');
     if (!sticky) return;
@@ -120,7 +151,28 @@
     }
   };
 
+  const updateVariantVisual = (variant) => {
+    const image = document.querySelector('[data-altaeron-variant-visual] img');
+    const source = variant?.featured_media?.preview_image?.src;
+    if (!image || !source) return;
+    const url = new URL(source, window.location.origin);
+    url.searchParams.set('width', '1600');
+    image.removeAttribute('srcset');
+    image.removeAttribute('sizes');
+    image.src = url.toString();
+  };
+
   const handleClick = (event) => {
+    const packagingToggle = event.target.closest('[data-altaeron-packaging-toggle]');
+    if (packagingToggle) {
+      const section = packagingToggle.closest('.altaeron-packaging');
+      if (!section) return;
+      const expanded = packagingToggle.getAttribute('aria-expanded') !== 'true';
+      section.dataset.altaeronPackagingExpanded = String(expanded);
+      setPackagingExpanded(section, expanded);
+      return;
+    }
+
     const chapterLink = event.target.closest('[data-altaeron-chapter-link]');
     if (chapterLink) {
       const target = document.querySelector(chapterLink.hash);
@@ -143,6 +195,7 @@
 
   const handleFaqToggle = (event) => {
     const opened = event.target;
+    if (opened.matches?.('cart-drawer, menu-drawer, search-drawer, quick-view-modal')) requestFixedUpdate();
     if (!(opened instanceof HTMLDetailsElement) || !opened.matches('.altaeron-faq')) return;
     opened.querySelector(':scope > summary')?.setAttribute('aria-expanded', String(opened.open));
     if (!opened.open) return;
@@ -156,18 +209,28 @@
   const refresh = () => {
     refreshChapters();
     refreshVideos();
+    refreshPackaging();
     updateStickyCommerce();
+  };
+
+  const handleResize = () => {
+    requestFixedUpdate();
+    refreshPackaging();
   };
 
   document.addEventListener('click', handleClick);
   document.addEventListener('toggle', handleFaqToggle, true);
   document.addEventListener('variant:changed', (event) => {
-    requestAnimationFrame(() => updateStickyCommerce(event.detail?.variant));
+    requestAnimationFrame(() => {
+      updateStickyCommerce(event.detail?.variant);
+      updateVariantVisual(event.detail?.variant);
+    });
   });
   document.addEventListener('shopify:section:load', refresh);
   document.addEventListener('shopify:section:unload', refresh);
+  document.addEventListener('keyup', requestFixedUpdate);
   window.addEventListener('scroll', requestFixedUpdate, { passive: true });
-  window.addEventListener('resize', requestFixedUpdate, { passive: true });
+  window.addEventListener('resize', handleResize, { passive: true });
 
   window.AltaeronProductExperience = { refresh };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', refresh, { once: true });

@@ -121,7 +121,7 @@
 
     {% sections 'overlay-group' %}
     {%- liquid
-      if template.name == 'product'
+      if template.name == 'product' and template.suffix != 'altaeron'
         section 'sticky-atc-bar'
       endif
       if settings.enable_back_to_top

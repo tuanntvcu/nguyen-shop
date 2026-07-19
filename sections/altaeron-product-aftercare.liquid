@@ -24,10 +24,20 @@
       <div class="altaeron-packaging__copy">
         <p class="altaeron-kicker">05 / {{ section.settings.packaging_eyebrow | escape }}</p>
         <h2 id="AltaeronPackagingTitle-{{ section.id }}">{{ packaging_heading | default: section.settings.packaging_heading | escape }}</h2>
-        {%- if packaging_content != blank -%}<div class="altaeron-rte">{{ packaging_content | metafield_tag }}</div>{%- endif -%}
+        <button
+          type="button"
+          class="altaeron-packaging__toggle"
+          aria-expanded="true"
+          aria-controls="AltaeronPackagingCopy-{{ section.id }} AltaeronPackagingMedia-{{ section.id }}"
+          data-altaeron-packaging-toggle
+        >
+          <span class="visually-hidden">Toggle packaging details</span>
+          <span aria-hidden="true"></span>
+        </button>
+        {%- if packaging_content != blank -%}<div id="AltaeronPackagingCopy-{{ section.id }}" class="altaeron-rte" data-altaeron-packaging-content>{{ packaging_content | metafield_tag }}</div>{%- endif -%}
       </div>
       {%- if packaging_image != blank -%}
-        <div class="altaeron-packaging__media">
+        <div id="AltaeronPackagingMedia-{{ section.id }}" class="altaeron-packaging__media" data-altaeron-packaging-content>
           {{ packaging_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1280, 1600, 1800', sizes: '(max-width: 767px) 100vw, 64vw', alt: packaging_image.alt }}
         </div>
       {%- endif -%}
@@ -40,7 +50,7 @@
         <p class="altaeron-kicker">06 / {{ section.settings.homes_eyebrow | escape }}</p>
         <h2 id="AltaeronHomesTitle-{{ section.id }}">{{ section.settings.homes_heading | escape }}</h2>
       </header>
-      <div class="altaeron-homes__rail" role="region" aria-label="{{ section.settings.homes_heading | escape }}">
+      <div class="altaeron-homes__rail" role="region" aria-label="{{ section.settings.homes_heading | escape }}" tabindex="0">
         {%- for lifestyle_image in lifestyle_gallery limit: 10 -%}
           <figure class="altaeron-homes__item">
             {{ lifestyle_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '360, 540, 720, 960, 1200, 1400', sizes: '(max-width: 767px) 82vw, 32vw', alt: lifestyle_image.alt }}

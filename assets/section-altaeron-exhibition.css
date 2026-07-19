@@ -18,6 +18,7 @@
 .altaeron button, .altaeron input { font: inherit; }
 .altaeron button { color: inherit; }
 .altaeron img { display: block; height: 100%; object-fit: cover; width: 100%; }
+.altaeron svg.altaeron__placeholder { background: rgba(255,255,255,.035); color: rgba(255,255,255,.18); display: block; height: 100%; width: 100%; }
 .altaeron h2 { font: 400 clamp(34px, 10vw, 54px)/1.08 var(--ae-serif); letter-spacing: -.025em; }
 .altaeron h2 em { color: var(--altaeron-accent); font-style: normal; }
 .altaeron h3 { font: 400 21px/1.2 var(--ae-serif); }
@@ -27,9 +28,11 @@
 .altaeron__text-link { align-items: center; color: var(--altaeron-accent)!important; display: inline-flex; font-size: 11px; font-weight: 600; gap: 12px; letter-spacing: .08em; padding-block: 10px; text-transform: uppercase; }
 .altaeron__text-link span { font-size: 16px; transition: transform .35s cubic-bezier(.2,.7,.2,1); }
 .altaeron__text-link:hover span { transform: translateX(5px); }
-.altaeron__button { align-items: center; border: 1px solid var(--altaeron-accent); border-radius: 3px; display: inline-flex; font-size: 12px; font-weight: 650; justify-content: center; letter-spacing: .02em; min-height: 52px; padding: 14px 24px; text-transform: uppercase; transition: box-shadow .4s ease, transform .4s cubic-bezier(.2,.7,.2,1), background .3s; }
+.altaeron__button { align-items: center; border: 1px solid var(--altaeron-accent); border-radius: 3px; display: inline-flex; font-size: 12px; font-weight: 650; gap: 12px; justify-content: center; letter-spacing: .02em; min-height: 52px; padding: 14px 24px; text-transform: uppercase; transition: box-shadow .4s ease, transform .4s cubic-bezier(.2,.7,.2,1), background .3s; }
 .altaeron__button--primary { background: linear-gradient(105deg, #c78319, #e5ae4c); color: #080704!important; }
 .altaeron__button:hover { box-shadow: 0 12px 38px rgba(217,150,34,.27); transform: translateY(-3px); }
+.altaeron__button:active { box-shadow: 0 5px 18px rgba(217,150,34,.2); transform: translateY(-1px); }
+.altaeron :is(button,[role="button"])[aria-busy="true"], .altaeron button:disabled { cursor: wait; opacity: .62; pointer-events: none; }
 .altaeron__button:focus-visible, .altaeron button:focus-visible, .altaeron a:focus-visible, .altaeron input:focus-visible { outline: 2px solid #f4b94e; outline-offset: 3px; }
 
 .altaeron__hero { display: flex; flex-direction: column; min-height: max(850px, 100svh); overflow: hidden; padding-bottom: 124px; position: relative; }
@@ -47,6 +50,7 @@
 .altaeron__particle { animation: ae-particle var(--duration) linear infinite; background: #f1a52d; border-radius: 999px; box-shadow: 0 0 8px #e68518; height: var(--size); left: var(--left); opacity: 0; position: absolute; top: 70%; width: var(--size); }
 .altaeron__hero-content { margin-top: auto; padding-bottom: 28px; padding-top: 330px; position: relative; z-index: 2; }
 .altaeron__hero-title { font: 400 clamp(46px, 13vw, 68px)/.98 var(--ae-serif); letter-spacing: -.035em; margin-top: 18px!important; max-width: 620px; }
+.altaeron__hero-desktop-break { display: none; }
 .altaeron__lede { color: rgba(255,255,255,.84); font-size: 15px; margin-top: 24px; max-width: 430px; }
 .altaeron__lede p { margin: 0; }
 .altaeron__hero-actions { display: grid; gap: 12px; margin-top: 30px; max-width: 430px; }
@@ -63,6 +67,7 @@
 .altaeron__stats { display: none; }
 
 .altaeron__story { border-block: 1px solid var(--ae-border-soft); min-height: 680px; overflow: hidden; position: relative; }
+.altaeron__story { touch-action: pan-y; }
 .altaeron__story-slides { min-height: 680px; position: relative; }
 .altaeron__story-slide { inset: 0; opacity: 0; pointer-events: none; position: absolute; transition: opacity .65s ease, transform .8s cubic-bezier(.2,.7,.2,1); transform: translateX(18px); }
 .altaeron__story-slide.is-active { opacity: 1; pointer-events: auto; transform: none; z-index: 1; }
@@ -89,6 +94,7 @@
 .altaeron__number { color: var(--altaeron-accent); display: block; font: 400 31px/1 var(--ae-serif); margin-top: 20px; }
 .altaeron__process-card h3 { margin-top: 12px; }
 .altaeron__process-card p { color: var(--ae-muted); font-size: 13px; margin-top: 9px; }
+.altaeron :is(.altaeron__process-card,.altaeron__collection-copy,.altaeron__product-copy,.altaeron__review figcaption) { min-width: 0; overflow-wrap: anywhere; }
 .altaeron__process-timeline { display: grid; grid-template-columns: repeat(6,1fr); margin: 26px 0 34px; position: relative; }
 .altaeron__process-timeline > span { background: rgba(255,255,255,.19); bottom: -14px; height: 2px; left: 5px; position: absolute; right: 5px; }
 .altaeron__process-timeline > span i { background: linear-gradient(90deg,var(--altaeron-accent),#f2b44a); display: block; height: 100%; transition: width .45s ease; width: var(--process-progress,0%); }
@@ -118,21 +124,26 @@
 .altaeron__badge { border: 1px solid var(--altaeron-accent); border-radius: 4px; color: var(--altaeron-accent); font-size: 9px; left: 12px; letter-spacing: .05em; padding: 4px 7px; position: absolute; top: 12px; }
 .altaeron__product-copy { min-height: 155px; padding: 16px 64px 18px 16px; position: relative; }
 .altaeron__product-copy h3 { font-family: var(--font-body-family, Arial, sans-serif); font-size: 18px; }
+.altaeron__product-copy h3 a { display: -webkit-box; min-height: 2.4em; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .altaeron__rating { align-items: center; color: var(--altaeron-accent); display: flex; font-size: 13px; gap: 8px; letter-spacing: .1em; margin-top: 8px; }
 .altaeron__rating small { color: var(--ae-muted); letter-spacing: 0; }
 .altaeron__price { align-items: center; display: flex; gap: 10px; margin-top: 4px; }
 .altaeron__price strong { color: var(--altaeron-accent); font-size: 17px; }
-.altaeron__price s { color: rgba(255,255,255,.42); }
+.altaeron__price s { color: rgba(255,255,255,.62); }
 .altaeron__quick-add { bottom: 16px; position: absolute; right: 14px; }
 .altaeron__quick-add button { align-items: center; background: transparent; border: 1px solid var(--altaeron-accent); border-radius: 50%; cursor: pointer; display: flex; height: 42px; justify-content: center; padding: 10px; transition: background .3s, color .3s; width: 42px; }
 .altaeron__quick-add button:hover { background: var(--altaeron-accent); color: #050505; }
+.altaeron__quick-add button:active { transform: scale(.94); }
 .altaeron__quick-add-link { align-items: center; border: 1px solid var(--altaeron-accent); border-radius: 50%; display: flex; height: 42px; justify-content: center; padding: 10px; transition: background .3s, color .3s; width: 42px; }
 .altaeron__quick-add-link:hover { background: var(--altaeron-accent); color: #050505; }
 .altaeron__quick-add button span { display: none; }
 .altaeron__quick-add p { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
 .altaeron-icon { fill: none; height: 23px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.35; width: 23px; }
 .altaeron__slider-ui { align-items: center; display: flex; gap: 14px; justify-content: center; margin-top: 24px; }
+.altaeron__slider-ui[hidden] { display: none !important; }
 .altaeron__slider-ui button { align-items: center; background: transparent; border: 1px solid var(--ae-border); border-radius: 50%; cursor: pointer; display: flex; height: 38px; justify-content: center; width: 38px; }
+.altaeron__slider-ui > button:active { background: rgba(217,150,34,.13); transform: scale(.94); }
+.altaeron__slider-ui > button:disabled { cursor: default; opacity: .28; }
 .altaeron__slider-ui [data-dots] { display: flex; gap: 10px; }
 .altaeron__slider-ui [data-dots] button { background: rgba(255,255,255,.24); border: 0; border-radius: 50%; display: block; height: 8px; min-height: 0; padding: 0; transition: background .25s, transform .25s; width: 8px; }
 .altaeron__slider-ui [data-dots] button.is-active { background: var(--altaeron-accent); transform: scale(1.15); }
@@ -156,6 +167,7 @@
   .altaeron__product-card:not(:first-child) .altaeron__product-image { aspect-ratio: auto; min-height: 166px; }
   .altaeron__product-card:not(:first-child) .altaeron__product-copy { align-self: center; min-height: 0; }
   .altaeron__products .altaeron__slider-ui { display: none; }
+  .altaeron__slider-ui > button { height: 44px; width: 44px; }
   .altaeron__services .altaeron__service:nth-child(n+4) { display: none; }
 }
 
@@ -168,6 +180,8 @@
 .altaeron__service small { color: var(--ae-muted); font-size: 9px; margin-top: 5px; }
 
 .altaeron__reviews { display: grid; gap: 30px; }
+.altaeron__reviews--without-summary { grid-template-columns: 1fr; }
+.altaeron__reviews-app { grid-column: 1 / -1; min-width: 0; }
 .altaeron__rating-summary { text-align: center; }
 .altaeron__rating-summary > strong { color: var(--altaeron-accent); display: block; font: 400 64px/1 var(--ae-serif); margin-top: 16px; }
 .altaeron__rating-summary > .altaeron__stars { display: block; font-size: 20px; letter-spacing: .18em; margin-top: 8px; }
@@ -208,29 +222,33 @@
 .altaeron__newsletter p { color: var(--ae-muted); margin-top: 12px; }
 .altaeron__newsletter-form { display: grid; gap: 10px; margin-top: 28px; }
 .altaeron__newsletter-form input { background: transparent; border: 1px solid var(--ae-border-soft); border-radius: 4px; color: #fff; min-height: 52px; padding: 12px 16px; width: 100%; }
-.altaeron__newsletter-form input::placeholder { color: rgba(255,255,255,.42); }
+.altaeron__newsletter-form input::placeholder { color: rgba(255,255,255,.68); }
 .altaeron__form-message { grid-column: 1/-1; font-size: 12px; }
 
 .altaeron__mobile-nav { backdrop-filter: blur(16px); background: rgba(3,6,6,.92); border: 1px solid var(--ae-border-soft); border-radius: 12px 12px 0 0; bottom: 0; display: grid; grid-template-columns: repeat(4,1fr); left: 8px; padding: 11px 5px max(10px, env(safe-area-inset-bottom)); position: fixed; right: 8px; z-index: 18; }
-.altaeron__mobile-nav :is(a,button) { align-items: center; background: transparent; border: 0; display: flex; flex-direction: column; font-size: 8px; gap: 5px; justify-content: center; padding: 0; }
+.altaeron__mobile-nav { opacity: 1; transition: opacity .18s ease, transform .18s ease, visibility .18s; }
+.altaeron__mobile-nav :is(a,button) { align-items: center; background: transparent; border: 0; display: flex; flex-direction: column; font-size: 8px; gap: 5px; justify-content: center; min-height: 44px; min-width: 44px; padding: 0; }
 .altaeron__mobile-nav .altaeron-icon { height: 21px; width: 21px; }
-.altaeron__mobile-nav :is(a,button):first-child { color: var(--altaeron-accent); }
+.altaeron__mobile-nav :is(a,button).is-active { color: var(--altaeron-accent); }
+.altaeron__mobile-nav.is-hidden, .modal-show .altaeron__mobile-nav, .modal-showing .altaeron__mobile-nav, .altaeron.is-native-modal-open .altaeron__mobile-nav, .altaeron.is-keyboard-open .altaeron__mobile-nav { opacity: 0; pointer-events: none; transform: translateY(calc(100% + 20px)); visibility: hidden; }
 
 .altaeron__video-dialog { background: #020303; border: 1px solid var(--ae-border); border-radius: 8px; color: #fff; max-width: 1100px; padding: 46px 10px 10px; width: min(92vw,1100px); }
 .altaeron__video-dialog::backdrop { backdrop-filter: blur(7px); background: rgba(0,0,0,.85); }
 .altaeron__video-dialog > button { background: transparent; border: 0; cursor: pointer; font-size: 32px; position: absolute; right: 12px; top: 3px; }
 .altaeron__video-frame { aspect-ratio: 16/9; }
 .altaeron__video-frame iframe { border: 0; height: 100%; width: 100%; }
+.altaeron-modal-open { overflow: hidden; }
 
-[data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .85s ease, transform 1s cubic-bezier(.2,.7,.2,1); }
-[data-reveal="slow"] { transform: translateY(12px) scale(1.015); transition-duration: 1.25s; }
-[data-reveal].is-visible { opacity: 1; transform: none; }
+.altaeron[data-altaeron-ready="true"] [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .85s ease, transform 1s cubic-bezier(.2,.7,.2,1); }
+.altaeron[data-altaeron-ready="true"] [data-reveal="slow"] { transform: translateY(12px) scale(1.015); transition-duration: 1.25s; }
+.altaeron[data-altaeron-ready="true"] [data-reveal].is-visible { opacity: 1; transform: none; }
 
 @media (min-width: 750px) {
   .altaeron__hero-actions { display: flex; max-width: none; }
   .altaeron__hero-actions .altaeron__button { min-width: 210px; }
   .altaeron__hero-actions .altaeron__play { border: 0; }
   .altaeron__reviews { grid-template-columns: 280px minmax(0,1fr); }
+  .altaeron__reviews--without-summary { grid-template-columns: 1fr; }
   .altaeron__reviews .altaeron__slider-ui { grid-column: 2; }
   .altaeron__reviews-dialog-grid { grid-template-columns: repeat(2,1fr); }
 }
@@ -245,6 +263,7 @@
   .altaeron__hero-vignette { background: linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.56) 31%, transparent 62%), linear-gradient(0deg, #030606 0%, transparent 20%); }
   .altaeron__hero-content { margin: auto 0; padding-bottom: 135px; padding-top: 150px; }
   .altaeron__hero-title { font-size: clamp(56px,5.2vw,86px); line-height: .98; max-width: 670px; }
+  .altaeron__hero-desktop-break { display: block; }
   .altaeron__lede { max-width: 380px; }
   .altaeron__hero-features { bottom: 25px; display: flex; gap: 32px; left: 0; position: absolute; z-index: 2; }
   .altaeron__hero-rating { align-items: center; border: 1px solid var(--altaeron-accent); border-radius: 50%; display: flex; flex-direction: column; height: 116px; justify-content: center; position: absolute; right: 5vw; text-align: center; top: 43%; transform: translateY(-50%); width: 116px; z-index: 2; }
@@ -280,10 +299,12 @@
   .altaeron__process, .altaeron__collections, .altaeron__products, .altaeron__reviews { padding-block: 64px; }
   .altaeron__process { display: grid; gap: 24px; grid-template-columns: 250px minmax(0,1fr); }
   .altaeron__process .altaeron__section-head { align-self: center; margin: 0; }
+  .altaeron__process .altaeron__section-head--side { display: block; }
+  .altaeron__process .altaeron__section-head h2 { font-size: 27px; line-height: 1.08; }
   .altaeron__process-timeline { display: none; }
   .altaeron__process-more { align-items: center; align-self: center; border: 1px solid var(--altaeron-accent); border-radius: 50%; display: flex; grid-column: 2; grid-row: 1; height: 40px; justify-content: center; justify-self: end; margin-right: -46px; width: 40px; z-index: 2; }
   .altaeron__section-head--side { align-items: end; display: flex; justify-content: space-between; }
-  .altaeron__process-track { display: grid; gap: 12px; grid-template-columns: repeat(6,1fr); margin: 0; overflow: visible; padding: 0; }
+  .altaeron__process-track { display: grid; gap: 12px; grid-column: 2; grid-row: 1; grid-template-columns: repeat(6,1fr); margin: 0; overflow: visible; padding: 0; }
   .altaeron__process-card { min-width: 0; padding: 0 0 16px; }
   .altaeron__process-card { display: block; min-height: 0; }
   .altaeron__process-image { border-radius: 8px 8px 0 0; height: 145px; }
@@ -323,6 +344,7 @@
   .altaeron__service { flex-direction: row; justify-content: center; text-align: left; }
   .altaeron__service strong { font-size: 11px; }
   .altaeron__reviews { grid-template-columns: 220px minmax(0,1fr); }
+  .altaeron__reviews--without-summary { grid-template-columns: 1fr; }
   .altaeron__rating-summary { text-align: left; }
   .altaeron__rating-summary > strong { font-size: 44px; }
   .altaeron__rating-summary > .altaeron__stars { font-size: 14px; }
@@ -344,11 +366,12 @@
   .altaeron__product-card { flex-basis: calc((100% - 48px)/5); }
   .altaeron__review-track { grid-template-columns: repeat(4,1fr); }
   .altaeron__reviews { grid-template-columns: 220px minmax(0,1fr); }
+  .altaeron__reviews--without-summary { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .altaeron *, .altaeron *::before, .altaeron *::after { animation-duration: .01ms!important; animation-iteration-count: 1!important; scroll-behavior: auto!important; transition-duration: .01ms!important; }
-  [data-reveal] { opacity: 1; transform: none; }
+  .altaeron[data-altaeron-ready="true"] [data-reveal] { opacity: 1; transform: none; }
 }
 
 @keyframes ae-breathe { 0%,100% { opacity: .45; transform: scale(.98); } 50% { opacity: 1; transform: scale(1.04); } }

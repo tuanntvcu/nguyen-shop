@@ -1,9 +1,14 @@
 (() => {
+  if (window.AltaeronExhibition?.initAll) {
+    window.AltaeronExhibition.initAll();
+    return;
+  }
+
   const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function initAltaeron(root) {
     if (!root || root.dataset.altaeronReady === 'true') return;
-    root.dataset.altaeronReady = 'true';
+    const cleanups = [];
 
     const chapterMarker = root.querySelector('.altaeron__services--desktop') || root.querySelector('.altaeron__mobile-nav');
     const chapters = Array.from(root.querySelectorAll('[data-chapter-order]'));
@@ -29,6 +34,7 @@
       particleHost.appendChild(fragment);
     }
 
+    root.dataset.altaeronReady = 'true';
     const revealItems = root.querySelectorAll('[data-reveal]');
     if (!motionOK || !('IntersectionObserver' in window)) {
       revealItems.forEach((item) => item.classList.add('is-visible'));
@@ -41,6 +47,7 @@
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
       revealItems.forEach((item) => observer.observe(item));
+      cleanups.push(() => observer.disconnect());
       const heroContent = root.querySelector('[data-reveal="hero"]');
       if (heroContent) requestAnimationFrame(() => heroContent.classList.add('is-visible'));
     }
@@ -52,6 +59,10 @@
       const slides = Array.from(track.querySelectorAll('[data-slide]'));
       const dotsHost = controls.querySelector('[data-dots]');
       if (!slides.length || !dotsHost) return;
+      const previous = controls.querySelector('[data-prev]');
+      const next = controls.querySelector('[data-next]');
+
+      controls.hidden = slides.length < 2;
 
       const dots = slides.map((slide, index) => {
         const dot = document.createElement('button');
@@ -76,6 +87,8 @@
           dot.classList.toggle('is-active', index === activeIndex);
           dot.toggleAttribute('aria-current', index === activeIndex);
         });
+        if (previous) previous.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
       };
 
       let scheduled = false;
@@ -84,33 +97,55 @@
         scheduled = true;
         requestAnimationFrame(() => { updateDots(); scheduled = false; });
       }, { passive: true });
-      controls.querySelector('[data-prev]')?.addEventListener('click', () => track.scrollBy({ left: -track.clientWidth * .84, behavior: motionOK ? 'smooth' : 'auto' }));
-      controls.querySelector('[data-next]')?.addEventListener('click', () => track.scrollBy({ left: track.clientWidth * .84, behavior: motionOK ? 'smooth' : 'auto' }));
+      previous?.addEventListener('click', () => track.scrollBy({ left: -track.clientWidth * .84, behavior: motionOK ? 'smooth' : 'auto' }));
+      next?.addEventListener('click', () => track.scrollBy({ left: track.clientWidth * .84, behavior: motionOK ? 'smooth' : 'auto' }));
       track.addEventListener('keydown', (event) => {
         if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
         event.preventDefault();
         track.scrollBy({ left: (event.key === 'ArrowRight' ? 1 : -1) * track.clientWidth * .84, behavior: motionOK ? 'smooth' : 'auto' });
       });
+      updateDots();
     });
 
     const story = root.querySelector('[data-story]');
     if (story) {
       const slides = Array.from(story.querySelectorAll('[data-story-slide]'));
       const controls = Array.from(story.querySelectorAll('[data-story-nav]'));
+      let activeIndex = 0;
       const showStory = (index) => {
+        activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
         slides.forEach((slide, slideIndex) => {
-          const active = slideIndex === index;
+          const active = slideIndex === activeIndex;
           slide.classList.toggle('is-active', active);
           slide.setAttribute('aria-hidden', active ? 'false' : 'true');
           slide.inert = !active;
         });
         controls.forEach((control, controlIndex) => {
-          const active = controlIndex === index;
+          const active = controlIndex === activeIndex;
           control.classList.toggle('is-active', active);
           control.toggleAttribute('aria-current', active);
         });
       };
       controls.forEach((control, index) => control.addEventListener('click', () => showStory(index)));
+      story.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        showStory((activeIndex + (event.key === 'ArrowRight' ? 1 : -1) + slides.length) % slides.length);
+      });
+      let touchStart = null;
+      story.addEventListener('touchstart', (event) => {
+        const touch = event.changedTouches[0];
+        touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
+      }, { passive: true });
+      story.addEventListener('touchend', (event) => {
+        if (!touchStart) return;
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStart.x;
+        const deltaY = touch.clientY - touchStart.y;
+        touchStart = null;
+        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+        showStory((activeIndex + (deltaX < 0 ? 1 : -1) + slides.length) % slides.length);
+      }, { passive: true });
       root.addEventListener('shopify:block:select', (event) => {
         const selectedSlide = event.target.closest?.('[data-story-slide]');
         const selectedIndex = slides.indexOf(selectedSlide);
@@ -162,45 +197,108 @@
     }
 
     const videoDialog = root.querySelector('[data-video-dialog]');
+    let videoTrigger = null;
+    const finishVideoClose = () => {
+      if (!videoDialog) return;
+      const frame = videoDialog.querySelector('[data-video-frame]');
+      frame?.removeAttribute('src');
+      root.classList.remove('is-native-modal-open');
+      document.documentElement.classList.remove('altaeron-modal-open');
+      videoTrigger?.focus({ preventScroll: true });
+      videoTrigger = null;
+    };
     root.querySelectorAll('[data-video-open]').forEach((button) => button.addEventListener('click', () => {
       if (!videoDialog) return;
+      root.querySelectorAll('dialog[open]').forEach((dialog) => { if (dialog !== videoDialog) dialog.close?.(); });
+      videoTrigger = button;
+      const frame = videoDialog.querySelector('[data-video-frame]');
+      if (frame?.dataset.src && !frame.hasAttribute('src')) frame.src = frame.dataset.src;
+      root.classList.add('is-native-modal-open');
+      document.documentElement.classList.add('altaeron-modal-open');
       if (typeof videoDialog.showModal === 'function') videoDialog.showModal();
       else videoDialog.setAttribute('open', '');
     }));
     const closeVideo = () => {
       if (!videoDialog) return;
       if (typeof videoDialog.close === 'function') videoDialog.close();
-      else videoDialog.removeAttribute('open');
-      const frame = videoDialog.querySelector('[data-video-frame]');
-      if (frame) frame.src = frame.src;
+      else {
+        videoDialog.removeAttribute('open');
+        finishVideoClose();
+      }
     };
     videoDialog?.querySelector('[data-video-close]')?.addEventListener('click', closeVideo);
     videoDialog?.addEventListener('click', (event) => { if (event.target === videoDialog) closeVideo(); });
-    videoDialog?.addEventListener('close', () => {
-      const frame = videoDialog.querySelector('[data-video-frame]');
-      if (frame) frame.src = frame.src;
-    });
-
-    const reviewsDialog = root.querySelector('[data-reviews-dialog]');
-    root.querySelector('[data-reviews-open]')?.addEventListener('click', () => reviewsDialog?.showModal?.());
-    reviewsDialog?.querySelector('[data-reviews-close]')?.addEventListener('click', () => reviewsDialog.close());
-    reviewsDialog?.addEventListener('click', (event) => { if (event.target === reviewsDialog) reviewsDialog.close(); });
+    videoDialog?.addEventListener('close', finishVideoClose);
 
     root.querySelectorAll('[data-scroll-target]').forEach((button) => button.addEventListener('click', () => {
       root.querySelector(button.dataset.scrollTarget)?.scrollIntoView({ behavior: motionOK ? 'smooth' : 'auto' });
     }));
 
-    root.querySelector('[data-search-trigger]')?.addEventListener('click', () => {
-      document.querySelector('.search-drawer-button')?.click();
-    });
-    root.querySelector('[data-menu-trigger]')?.addEventListener('click', () => document.querySelector('.menu-drawer-button')?.click());
-    root.querySelector('[data-cart-trigger]')?.addEventListener('click', () => document.querySelector('.cart-drawer-button')?.click());
+    const openThemeDrawer = (selector, fallbackSelector, trigger) => {
+      const drawer = document.querySelector(selector);
+      document.querySelectorAll('menu-drawer[open], search-drawer[open], cart-drawer[open]').forEach((openDrawer) => {
+        if (openDrawer !== drawer) openDrawer.hide?.();
+      });
+      if (typeof drawer?.show === 'function') drawer.show(trigger);
+      else document.querySelector(fallbackSelector)?.click();
+    };
+    root.querySelector('[data-search-trigger]')?.addEventListener('click', (event) => openThemeDrawer('#SearchDrawer', '.search-drawer-button', event.currentTarget));
+    root.querySelector('[data-menu-trigger]')?.addEventListener('click', (event) => openThemeDrawer('#MenuDrawer', '.menu-drawer-button', event.currentTarget));
+    root.querySelector('[data-cart-trigger]')?.addEventListener('click', (event) => openThemeDrawer('cart-drawer', '.cart-drawer-button', event.currentTarget));
+
+    const mobileNav = root.querySelector('.altaeron__mobile-nav');
+    const newsletter = root.querySelector('.altaeron__newsletter');
+    const footer = document.querySelector('footer, .footer');
+    if (mobileNav && 'IntersectionObserver' in window) {
+      const navItems = new Map(Array.from(mobileNav.querySelectorAll('[data-mobile-nav-item]')).map((item) => [item.dataset.mobileNavItem, item]));
+      const activateNavItem = (key) => navItems.forEach((item, itemKey) => {
+        const active = itemKey === key;
+        item.classList.toggle('is-active', active);
+        item.toggleAttribute('aria-current', active);
+      });
+      const sectionKeys = [
+        [root.querySelector('#altaeron-hero'), 'shop'],
+        [root.querySelector('#altaeron-story'), 'story'],
+        [root.querySelector('#altaeron-process'), 'story'],
+        [root.querySelector('#altaeron-collections'), 'collections'],
+        [root.querySelector('#altaeron-products'), 'shop']
+      ].filter(([section]) => section);
+      const sectionObserver = new IntersectionObserver((entries) => {
+        const current = entries.find((entry) => entry.isIntersecting);
+        if (current) activateNavItem(sectionKeys.find(([section]) => section === current.target)?.[1]);
+      }, { rootMargin: '-38% 0px -56% 0px', threshold: 0 });
+      sectionKeys.forEach(([section]) => sectionObserver.observe(section));
+      cleanups.push(() => sectionObserver.disconnect());
+
+      const navBlockers = [newsletter, footer].filter(Boolean);
+      const blockerState = new Map(navBlockers.map((item) => [item, false]));
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => blockerState.set(entry.target, entry.isIntersecting));
+        mobileNav.classList.toggle('is-hidden', Array.from(blockerState.values()).some(Boolean));
+      }, { threshold: 0.01 });
+      navBlockers.forEach((item) => navObserver.observe(item));
+      cleanups.push(() => navObserver.disconnect());
+    }
+
+    root.addEventListener('focusin', (event) => root.classList.toggle('is-keyboard-open', event.target.matches('input, textarea, select')));
+    root.addEventListener('focusout', () => window.setTimeout(() => {
+      root.classList.toggle('is-keyboard-open', root.contains(document.activeElement) && document.activeElement.matches('input, textarea, select'));
+    }, 0));
+
+    root.querySelectorAll('.altaeron__newsletter-form').forEach((form) => form.addEventListener('submit', () => {
+      if (!form.checkValidity()) return;
+      const button = form.querySelector('button[type="submit"]');
+      if (!button) return;
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+    }));
 
     root.querySelectorAll('[data-quick-add]').forEach((form) => form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const button = form.querySelector('button');
       const status = form.querySelector('[role="status"]');
       if (!button || button.disabled) return;
+      if (status) status.textContent = '';
       button.disabled = true;
       button.setAttribute('aria-busy', 'true');
       try {
@@ -230,10 +328,17 @@
         button.removeAttribute('aria-busy');
       }
     }));
+
+    root.altaeronCleanup = () => {
+      cleanups.forEach((cleanup) => cleanup());
+      document.documentElement.classList.remove('altaeron-modal-open');
+    };
   }
 
   const initAll = (scope = document) => scope.querySelectorAll('[data-altaeron]').forEach(initAltaeron);
+  window.AltaeronExhibition = { initAll };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initAll());
   else initAll();
   document.addEventListener('shopify:section:load', (event) => initAll(event.target));
+  document.addEventListener('shopify:section:unload', (event) => event.target.querySelectorAll('[data-altaeron]').forEach((root) => root.altaeronCleanup?.()));
 })();

@@ -17,7 +17,7 @@
         "image_text_F3FNhx": {
           "type": "image_text",
           "settings": {
-            "block_width": 25,
+            "block_width": 20,
             "heading": "",
             "heading_size": "h4",
             "image_width": 150,
@@ -32,10 +32,10 @@
         "menu_DEKGYP": {
           "type": "menu",
           "settings": {
-            "block_width": 17,
+            "block_width": 10,
             "heading": "Shop",
             "heading_size": "h4",
-            "menu": "footer",
+            "menu": "footer-shop",
             "open_default": false,
             "show_divider": false
           }
@@ -43,10 +43,10 @@
         "menu_4eCrBB": {
           "type": "menu",
           "settings": {
-            "block_width": 17,
+            "block_width": 10,
             "heading": "Support",
             "heading_size": "h4",
-            "menu": "footer",
+            "menu": "footer-support",
             "open_default": false,
             "show_divider": false
           }
@@ -54,10 +54,10 @@
         "menu_company": {
           "type": "menu",
           "settings": {
-            "block_width": 17,
+            "block_width": 10,
             "heading": "Company",
             "heading_size": "h4",
-            "menu": "main-menu",
+            "menu": "footer-company",
             "open_default": false,
             "show_divider": false
           }
@@ -65,25 +65,30 @@
         "menu_help_info": {
           "type": "menu",
           "settings": {
-            "block_width": 17,
+            "block_width": 10,
             "heading": "Help & Info",
             "heading_size": "h4",
-            "menu": "footer",
+            "menu": "footer-help-info",
             "open_default": false,
             "show_divider": false
           }
+        },
+        "newsletter_altaeron": {
+          "type": "newsletter",
+          "settings": {
+            "block_width": 25,
+            "heading": "Join The Altaeron Universe",
+            "heading_size": "h3",
+            "newsletter_description": "<p>Stories. New worlds. Early access.</p>",
+            "newsletter_term": "",
+            "newsletter_text_alignment": "left",
+            "form_width": 450,
+            "order_first": true
+          }
         }
       },
-      "block_order": [
-        "image_text_F3FNhx",
-        "menu_DEKGYP",
-        "menu_4eCrBB",
-        "menu_company",
-        "menu_help_info"
-      ],
-      "custom_css": [
-        ".form-control {--color-border: var(--color-field);}"
-      ],
+      "block_order": ["image_text_F3FNhx", "menu_DEKGYP", "menu_4eCrBB", "menu_company", "menu_help_info", "newsletter_altaeron"],
+      "custom_css": [".form-control {--color-border: var(--color-field);}"],
       "settings": {
         "color_scheme": "scheme-inverse",
         "enable_follow_on_shop": true,
@@ -133,21 +138,12 @@
           }
         }
       },
-      "block_order": [
-        "home_AP8mmy",
-        "search_n3h4zT",
-        "cart_gnnwxQ",
-        "products_eYYkE8",
-        "link_mJ6QMc"
-      ],
+      "block_order": ["home_AP8mmy", "search_n3h4zT", "cart_gnnwxQ", "products_eYYkE8", "link_mJ6QMc"],
       "settings": {
         "enable_sticky_bar": false,
         "show_text": true
       }
     }
   },
-  "order": [
-    "footer",
-    "mobile_sticky_bar_aYhgJK"
-  ]
+  "order": ["footer", "mobile_sticky_bar_aYhgJK"]
 }
