@@ -136,7 +136,7 @@
   {%- if craft_steps != blank -%}
     <section id="altaeron-craft" class="altaeron-craft altaeron-chapter" data-altaeron-chapter="The Craft" aria-labelledby="AltaeronCraftTitle-{{ section.id }}">
       <header class="altaeron-section-heading">
-        <p class="altaeron-kicker">02 / {{ section.settings.craft_eyebrow | escape }}</p>
+        <p class="altaeron-kicker">03 / {{ section.settings.craft_eyebrow | escape }}</p>
         <h2 id="AltaeronCraftTitle-{{ section.id }}">{{ section.settings.craft_heading | escape }}</h2>
       </header>
       <ol class="altaeron-craft__rail" role="list">
@@ -167,7 +167,7 @@
   {%- if detail_gallery != blank or has_detail_fallback -%}
     <section id="altaeron-details" class="altaeron-details altaeron-chapter" data-altaeron-chapter="Details" aria-labelledby="AltaeronDetailsTitle-{{ section.id }}">
       <header class="altaeron-section-heading">
-        <p class="altaeron-kicker">03 / {{ section.settings.details_eyebrow | escape }}</p>
+        <p class="altaeron-kicker">04 / {{ section.settings.details_eyebrow | escape }}</p>
         <h2 id="AltaeronDetailsTitle-{{ section.id }}">{{ section.settings.details_heading | escape }}</h2>
         {%- if product.metafields.custom.artifact_details != blank -%}
           <div class="altaeron-rte">{{ product.metafields.custom.artifact_details | metafield_tag }}</div>
@@ -210,7 +210,7 @@
     </div>
 
     <div id="ProductInfo-{{ section.id }}" class="altaeron-purchase">
-      <p class="altaeron-kicker">04 / {{ section.settings.choose_eyebrow | escape }}</p>
+      <p class="altaeron-kicker">02 / {{ section.settings.choose_eyebrow | escape }}</p>
       <h2 id="AltaeronChooseTitle-{{ section.id }}">{{ section.settings.choose_heading | default: product.title | escape }}</h2>
 
       <div id="price-{{ section.id }}" class="altaeron-purchase__price" role="status" aria-live="polite">
@@ -384,13 +384,13 @@
     { "type": "checkbox", "id": "show_selling_plans", "label": "Show selling plans", "default": false },
     { "type": "header", "content": "Trust information" },
     { "type": "checkbox", "id": "show_trust", "label": "Show trust information", "default": true },
-    { "type": "text", "id": "trust_1_label", "label": "Trust item 1" },
+    { "type": "text", "id": "trust_1_label", "label": "Trust item 1", "default": "Handmade By Artisans" },
     { "type": "text", "id": "trust_1_text", "label": "Trust item 1 detail" },
-    { "type": "text", "id": "trust_2_label", "label": "Trust item 2" },
+    { "type": "text", "id": "trust_2_label", "label": "Trust item 2", "default": "Premium Materials" },
     { "type": "text", "id": "trust_2_text", "label": "Trust item 2 detail" },
-    { "type": "text", "id": "trust_3_label", "label": "Trust item 3" },
+    { "type": "text", "id": "trust_3_label", "label": "Trust item 3", "default": "Worldwide Shipping" },
     { "type": "text", "id": "trust_3_text", "label": "Trust item 3 detail" },
-    { "type": "text", "id": "trust_4_label", "label": "Trust item 4" },
+    { "type": "text", "id": "trust_4_label", "label": "Trust item 4", "default": "1 Year Warranty" },
     { "type": "text", "id": "trust_4_text", "label": "Trust item 4 detail" }
   ],
   "presets": [{ "name": "Altaeron product experience", "blocks": [{ "type": "variant_picker" }, { "type": "buy_buttons" }, { "type": "pickup_availability" }] }]

@@ -10,6 +10,8 @@
     chapters: [],
     activeIndex: 0,
     frame: null,
+    navigatingIndex: null,
+    navigationEndTimer: null,
   };
 
   const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -43,8 +45,32 @@
     if (label && state.chapters[state.activeIndex]) label.textContent = state.chapters[state.activeIndex].dataset.altaeronChapter;
   };
 
+  const updateChapterFromPosition = () => {
+    if (!state.chapters.length || state.navigatingIndex !== null) return;
+
+    const scrollMargin = parseFloat(getComputedStyle(state.chapters[0]).scrollMarginTop) || 0;
+    const activationPoint = Math.max(window.innerHeight * 0.24, scrollMargin + 1);
+    let index = 0;
+    state.chapters.forEach((chapter, chapterIndex) => {
+      if (chapter.getBoundingClientRect().top <= activationPoint) index = chapterIndex;
+    });
+
+    if (index !== state.activeIndex) updateChapterUI(index);
+  };
+
+  const scheduleNavigationEnd = () => {
+    if (state.navigatingIndex === null) return;
+    clearTimeout(state.navigationEndTimer);
+    state.navigationEndTimer = setTimeout(() => {
+      state.navigatingIndex = null;
+      state.navigationEndTimer = null;
+      updateChapterFromPosition();
+    }, 180);
+  };
+
   const updateFixedUI = () => {
     state.frame = null;
+    updateChapterFromPosition();
     const chapterNav = document.querySelector('[data-altaeron-chapters]');
     const first = state.chapters[0];
     const last = state.chapters[state.chapters.length - 1];
@@ -76,6 +102,13 @@
 
   const refreshChapters = () => {
     state.chapterObserver?.disconnect();
+
+    const chooseChapter = document.querySelector('#altaeron-choose');
+    const chapterAfterChoose = document.querySelector('#altaeron-craft') || document.querySelector('#altaeron-details');
+    if (chooseChapter && chapterAfterChoose && chooseChapter.nextElementSibling !== chapterAfterChoose) {
+      chapterAfterChoose.before(chooseChapter);
+    }
+
     state.chapters = Array.from(document.querySelectorAll('[data-altaeron-chapter]'));
     if (!state.chapters.length) return;
 
@@ -87,14 +120,7 @@
     });
 
     state.chapterObserver = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top));
-        if (!visible.length) return;
-        const index = state.chapters.indexOf(visible[0].target);
-        if (index >= 0) updateChapterUI(index);
-      },
+      () => updateChapterFromPosition(),
       { rootMargin: '-18% 0px -64% 0px', threshold: [0, 0.01] }
     );
 
@@ -222,7 +248,13 @@
       const target = document.querySelector(chapterLink.hash);
       if (!target) return;
       event.preventDefault();
+      const index = state.chapters.indexOf(target);
+      if (index >= 0) {
+        state.navigatingIndex = index;
+        updateChapterUI(index);
+      }
       target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+      scheduleNavigationEnd();
       const url = new URL(window.location.href);
       url.hash = chapterLink.hash;
       history.replaceState(null, '', url);
@@ -285,7 +317,10 @@
   document.addEventListener('shopify:section:load', refresh);
   document.addEventListener('shopify:section:unload', refresh);
   document.addEventListener('keyup', requestFixedUpdate);
-  window.addEventListener('scroll', requestFixedUpdate, { passive: true });
+  window.addEventListener('scroll', () => {
+    requestFixedUpdate();
+    scheduleNavigationEnd();
+  }, { passive: true });
   window.addEventListener('resize', handleResize, { passive: true });
 
   window.AltaeronProductExperience = { refresh };

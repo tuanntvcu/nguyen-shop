@@ -11,6 +11,7 @@
   assign gallery_blocks = section.blocks | where: 'type', 'gallery'
   assign story_blocks = section.blocks | where: 'type', 'story'
   assign app_blocks = section.blocks | where: 'type', '@app'
+  assign newsletter_image_asset = section.settings.newsletter_image_asset | default: 'altaeron-alpine.webp'
   assign has_collections = false
   assign has_products = false
   assign collection_slide_count = 0
@@ -419,7 +420,7 @@
     <div class="altaeron__cinematic-copy"><div class="altaeron__heading">{{ section.settings.cinematic_heading }}</div>{%- if section.settings.cinematic_button_label != blank -%}<button class="altaeron__play" type="button"{% if section.settings.video_url != blank %} data-video-open{% else %} data-scroll-target="#altaeron-process"{% endif %}><span class="altaeron__play-icon" aria-hidden="true">▶</span>{% if section.settings.video_url != blank %}{{ section.settings.cinematic_button_label | escape }}{% else %}{{ section.settings.cinematic_fallback_label | escape }}{% endif %}</button>{%- endif -%}</div>
   </section>
 
-  <section class="altaeron__newsletter altaeron__shell" data-reveal data-chapter-order="{{ section.settings.order_newsletter }}">
+  <section class="altaeron__newsletter" data-reveal data-chapter-order="{{ section.settings.order_newsletter }}">
     <div class="altaeron__newsletter-copy altaeron__newsletter-copy--mobile"><div class="altaeron__heading">{{ section.settings.newsletter_heading }}</div><p>{{ section.settings.newsletter_text | escape }}</p></div>
     <div class="altaeron__newsletter-copy altaeron__newsletter-copy--desktop"><div class="altaeron__heading">{{ section.settings.newsletter_heading_desktop }}</div><p>{{ section.settings.newsletter_text_desktop | escape }}</p></div>
     {%- form 'customer', class: 'altaeron__newsletter-form' -%}
@@ -430,6 +431,9 @@
       {%- if form.posted_successfully? -%}<p class="altaeron__form-message" role="status">{{ section.settings.newsletter_success | escape }}</p>{%- endif -%}
       {%- if form.errors -%}<div class="altaeron__form-message" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
     {%- endform -%}
+    <div class="altaeron__newsletter-media" aria-hidden="true">
+      {% render 'altaeron-responsive-image', desktop_image: section.settings.newsletter_image, desktop_asset: newsletter_image_asset, desktop_width: 1122, desktop_height: 1402, max_width: 1200, widths: '480, 720, 960, 1200', sizes: '(min-width: 990px) 30vw, 0px', loading: 'lazy', alt: '' %}
+    </div>
   </section>
 
   <div class="altaeron__services altaeron__services--desktop altaeron__shell" role="list" aria-label="{{ section.settings.services_label | escape }}">
@@ -560,6 +564,8 @@
     {"type":"text","id":"newsletter_text","label":"Newsletter text","default":"Get 10% OFF your first order and discover new creations."},
     {"type":"richtext","id":"newsletter_heading_desktop","label":"Newsletter heading - desktop","default":"<h2>Bring Magic Into Your Space.</h2>"},
     {"type":"text","id":"newsletter_text_desktop","label":"Newsletter text - desktop","default":"Join our community and get 10% OFF your first order."},
+    {"type":"text","id":"newsletter_image_asset","label":"Newsletter theme asset filename","default":"altaeron-alpine.webp"},
+    {"type":"image_picker","id":"newsletter_image","label":"Newsletter image - desktop"},
     {"type":"text","id":"email_label","label":"Email field label","default":"Email address"},
     {"type":"text","id":"email_placeholder","label":"Email placeholder","default":"Enter your email"},
     {"type":"text","id":"newsletter_button","label":"Newsletter button","default":"GET 10% OFF"},

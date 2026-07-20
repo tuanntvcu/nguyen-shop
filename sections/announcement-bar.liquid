@@ -1,24 +1,25 @@
+<script src="{{ 'scrolling-promotion.js' | asset_url }}" defer="defer"></script>
 {%- liquid
-  assign static_desktop = section.settings.desktop_static
-  if request.page_type == 'index' and section.blocks.size == 3
-    assign static_desktop = true
+  assign marquee_tag = 'div'
+  if section.settings.autoplay and section.blocks.size > 0
+    assign marquee_tag = 'scrolling-promotion'
   endif
+
+  assign marquee_duration = section.settings.autoplay_speed | times: section.blocks.size
 -%}
 <div
   data-section-index="{{ section.index }}"
-  class="announcement-bar{% if static_desktop %} announcement-bar--static-desktop{% endif %} color-{{ section.settings.color_scheme }} page-width section--padding"
-  style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;--announcement-columns: {{ section.blocks.size }};"
+  class="announcement-bar color-{{ section.settings.color_scheme }} page-width section--padding"
+  style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;--duration: {{ marquee_duration }}s;"
 >
-  <announcement-bar
-    class="swiper announcement-bar__wrapper block"
-    {% if section.settings.autoplay %}
-      autoplay autoplay-speed="{{ section.settings.autoplay_speed }}"
-    {% endif %}
+  <{{ marquee_tag }}
+    class="announcement-bar__wrapper announcement-bar__marquee scrolling-promotion scrolling-promotion--left"
+    data-pause-on-hover
     style="--content-width: {{ section.settings.content_width }}%;"
   >
-    <div class="swiper-wrapper items-center">
+    <div class="promotion announcement-bar__track">
       {%- for block in section.blocks -%}
-        <div class="swiper-slide" {{ block.shopify_attributes }}>
+        <div class="announcement-bar__item" {{ block.shopify_attributes }}>
           {%- case block.type -%}
             {%- when 'announcement_bar' -%}
               {%- if block.settings.link != blank -%}
@@ -72,28 +73,7 @@
         </div>
       {%- endfor -%}
     </div>
-    {%- if section.blocks.size > 1 -%}
-      <div class="slider-controls">
-        <button
-          type="button"
-          class="swiper-button swiper-button-prev swiper-button--blank"
-          name="previous"
-          aria-label="{{ 'general.slider.previous_slide' | t }}"
-        >
-          {%- render 'icon-slider-prev', size: 'small' -%}
-        </button>
-        <div class="swiper-pagination"></div>
-        <button
-          type="button"
-          class="swiper-button swiper-button-next swiper-button--blank"
-          name="next"
-          aria-label="{{ 'general.slider.next_slide' | t }}"
-        >
-          {%- render 'icon-slider-next', size: 'small' -%}
-        </button>
-      </div>
-    {%- endif -%}
-  </announcement-bar>
+  </{{ marquee_tag }}>
 </div>
 {% schema %}
 {
@@ -118,19 +98,13 @@
       "max": 100,
       "unit": "%",
       "step": 1,
-      "default": 30
+      "default": 100
     },
     {
       "type": "checkbox",
       "id": "autoplay",
       "label": "t:sections.announcement-bar.settings.auto_rotate.label",
       "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "desktop_static",
-      "label": "Show all messages in columns on desktop",
-      "default": false
     },
     {
       "type": "range",

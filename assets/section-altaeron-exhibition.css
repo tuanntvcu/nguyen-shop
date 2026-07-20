@@ -230,13 +230,14 @@
 .altaeron__cinematic-copy h2 { font-size: 34px; text-transform: uppercase; }
 .altaeron__cinematic-copy .altaeron__play { margin-top: 22px; }
 
-.altaeron__newsletter { border-top: 1px solid var(--ae-border-soft); padding-block: 60px 85px; text-align: center; }
-.altaeron__newsletter h2 { font-size: 38px; }
-.altaeron__newsletter p { color: var(--ae-muted); margin-top: 12px; }
+.altaeron__newsletter { border-block: 1px solid var(--ae-border-soft); min-height: min(117vw,460px); padding: 46px 28px 50px; position: relative; text-align: left; }
+.altaeron__newsletter h2 { font-size: 38px; line-height: 1.02; max-width: 280px; }
+.altaeron__newsletter p { color: var(--ae-muted); font-size: 12px; line-height: 1.5; margin-top: 14px; max-width: 285px; }
 .altaeron__newsletter-copy--desktop { display: none; }
-.altaeron__newsletter-form { display: grid; gap: 10px; margin-top: 28px; }
+.altaeron__newsletter-form { display: grid; gap: 10px; margin-top: 30px; }
 .altaeron__newsletter-form input { background: transparent; border: 1px solid var(--ae-border-soft); border-radius: 4px; color: #fff; min-height: 52px; padding: 12px 16px; width: 100%; }
 .altaeron__newsletter-form input::placeholder { color: rgba(255,255,255,.68); }
+.altaeron__newsletter-media { display: none; }
 .altaeron__form-message { grid-column: 1/-1; font-size: 12px; }
 
 .altaeron__mobile-nav { backdrop-filter: blur(16px); background: rgba(3,6,6,.92); border: 1px solid var(--ae-border-soft); border-radius: 12px 12px 0 0; bottom: 0; display: grid; grid-template-columns: repeat(4,1fr); left: 8px; padding: 11px 5px max(10px, env(safe-area-inset-bottom)); position: fixed; right: 8px; z-index: 18; }
@@ -374,11 +375,17 @@
   .altaeron__reviews .altaeron__slider-ui { display: none; }
   .altaeron__homes { display: none; }
   .altaeron__cinematic { display: none; }
-  .altaeron__newsletter { align-items: center; display: grid; gap: 50px; grid-template-columns: 1fr 1.4fr; padding-block: 35px; text-align: left; }
-  .altaeron__newsletter h2 { font-size: 34px; }
+  .altaeron__newsletter { align-items: start; display: grid; gap: clamp(24px,3.2vw,52px); grid-template-columns: minmax(210px,.95fr) minmax(340px,1.15fr) minmax(250px,.85fr); min-height: 176px; overflow: hidden; padding: 32px 0 32px max(50px,calc((100vw - 1500px)/2 + 50px)); }
+  .altaeron__newsletter h2 { font-size: clamp(25px,2vw,34px); line-height: 1.08; max-width: none; white-space: nowrap; }
+  .altaeron__newsletter p { font-size: 11px; margin-top: 8px; max-width: none; }
   .altaeron__newsletter-copy--mobile { display: none; }
-  .altaeron__newsletter-copy--desktop { display: block; }
-  .altaeron__newsletter-form { grid-template-columns: 1fr 210px; margin: 0; }
+  .altaeron__newsletter-copy--desktop { display: block; position: relative; z-index: 2; }
+  .altaeron__newsletter-form { grid-template-columns: minmax(180px,1fr) minmax(155px,170px); margin: 0; position: relative; z-index: 2; }
+  .altaeron__newsletter-form input, .altaeron__newsletter-form .altaeron__button { min-height: 50px; }
+  .altaeron__newsletter-media { align-self: stretch; display: block; margin-block: -32px; min-height: 176px; overflow: hidden; position: relative; }
+  .altaeron__newsletter-media .altaeron__picture { inset: 0; position: absolute; }
+  .altaeron__newsletter-media::before { background: linear-gradient(90deg,#030606 0%,rgba(3,6,6,.78) 22%,transparent 62%); content: ''; inset: 0; pointer-events: none; position: absolute; z-index: 1; }
+  .altaeron__newsletter-media img { object-position: center 43%; transform: scale(1.04); }
   .altaeron__mobile-nav { display: none; }
 }
 

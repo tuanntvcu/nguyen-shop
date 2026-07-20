@@ -1,0 +1,328 @@
+.altaeron-site-footer {
+  --altaeron-footer-bg: #050809;
+  --altaeron-footer-line: rgba(255, 255, 255, .08);
+  --altaeron-footer-text: #f4f0e8;
+  --altaeron-footer-muted: #a3a5a3;
+  --altaeron-footer-gold: #d99622;
+  position: relative;
+  z-index: 40;
+  overflow: hidden;
+  border-top: 1px solid var(--altaeron-footer-line);
+  color: var(--altaeron-footer-text);
+  background: var(--altaeron-footer-bg);
+  font-family: var(--font-body-family);
+}
+
+.altaeron-site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.altaeron-site-footer__grid {
+  display: grid;
+  grid-template-columns: 27rem 23.6rem 23rem 20rem minmax(36rem, 1fr);
+  min-height: 12.2rem;
+  padding-left: max(4rem, calc((100vw - 132.4rem) / 2));
+}
+
+.altaeron-site-footer__brand,
+.altaeron-site-footer__menu {
+  min-width: 0;
+  padding-top: 1.7rem;
+  padding-bottom: .7rem;
+}
+
+.altaeron-site-footer__brand-link {
+  display: inline-flex;
+}
+
+.altaeron-site-footer .altaeron-brand {
+  gap: 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  line-height: 1;
+}
+
+.altaeron-site-footer .altaeron-brand svg {
+  width: 3rem;
+  height: 3rem;
+  stroke-width: 1.1;
+}
+
+.altaeron-site-footer__brand > p {
+  max-width: 14rem;
+  margin: .5rem 0 0;
+  color: var(--altaeron-footer-muted);
+  font-size: .82rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.altaeron-site-footer .altaeron-site-footer__socials {
+  justify-content: flex-start;
+  gap: 1.1rem;
+  margin: .55rem 0 0;
+}
+
+.altaeron-site-footer__socials .social__link {
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--altaeron-footer-text);
+  transition: color .2s ease;
+}
+
+.altaeron-site-footer__socials svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.altaeron-site-footer__socials .social__link:hover,
+.altaeron-site-footer__menu a:hover {
+  color: var(--altaeron-footer-gold);
+}
+
+.altaeron-site-footer__menu {
+  border: 0;
+}
+
+.altaeron-site-footer__menu summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  color: var(--altaeron-footer-text);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  line-height: 1.2;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.altaeron-site-footer__menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.altaeron-site-footer__menu ul {
+  margin: .95rem 0 0;
+}
+
+.altaeron-site-footer__menu li + li {
+  margin-top: .25rem;
+}
+
+.altaeron-site-footer__menu li {
+  line-height: 0;
+}
+
+.altaeron-site-footer__menu a {
+  display: inline-block;
+  color: var(--altaeron-footer-muted);
+  font-size: .82rem;
+  font-weight: 400;
+  line-height: 1.38;
+  transition: color .2s ease;
+}
+
+.altaeron-site-footer__toggle {
+  display: none;
+}
+
+.altaeron-site-footer__story {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  overflow: hidden;
+  background: #080c0f var(--altaeron-footer-story-image) 64% 55% / cover no-repeat;
+}
+
+.altaeron-site-footer__story::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: '';
+  background:
+    linear-gradient(90deg, #070a0c 0%, rgba(7, 10, 12, .94) 24%, rgba(7, 10, 12, .55) 55%, rgba(5, 8, 9, .24) 100%),
+    rgba(4, 10, 14, .56);
+  backdrop-filter: grayscale(1);
+}
+
+.altaeron-site-footer__story-copy {
+  width: 17rem;
+  padding: 1.4rem 0 1rem 2.1rem;
+}
+
+.altaeron-site-footer__quote {
+  display: block;
+  height: 1.4rem;
+  color: var(--altaeron-footer-gold);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.altaeron-site-footer__story h2 {
+  margin: .15rem 0 0;
+  color: var(--altaeron-footer-gold);
+  font-family: var(--font-heading-family);
+  font-size: 1.35rem;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.08;
+}
+
+.altaeron-site-footer__story p {
+  margin: .65rem 0 0;
+  color: var(--altaeron-footer-text);
+  font-size: .82rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+@media (min-width: 1100px) {
+  .altaeron-site-footer__menu > :not(summary) {
+    display: block;
+  }
+
+  .altaeron-site-footer__menu summary {
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 1099.98px) {
+  .altaeron-site-footer__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 0 3.2rem;
+  }
+
+  .altaeron-site-footer__brand {
+    grid-column: 1 / -1;
+    padding: 3.2rem 0 2.4rem;
+  }
+
+  .altaeron-site-footer__brand > p {
+    max-width: 36rem;
+    font-size: 1.2rem;
+  }
+
+  .altaeron-site-footer__menu {
+    padding: 0 2rem 3.2rem 0;
+  }
+
+  .altaeron-site-footer__menu summary,
+  .altaeron-site-footer__menu a {
+    font-size: 1.1rem;
+  }
+
+  .altaeron-site-footer__story {
+    grid-column: 1 / -1;
+    min-height: 18rem;
+    margin: 0 -3.2rem;
+    background-position: 60% 54%;
+  }
+
+  .altaeron-site-footer__story-copy {
+    width: 24rem;
+    padding: 3rem 0 2.4rem 3.2rem;
+  }
+
+  .altaeron-site-footer__story h2 {
+    font-size: 2rem;
+  }
+
+  .altaeron-site-footer__story p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .altaeron-site-footer__grid {
+    display: block;
+    padding: 0 2.4rem;
+  }
+
+  .altaeron-site-footer__brand {
+    padding: 3rem 0 2.4rem;
+  }
+
+  .altaeron-site-footer .altaeron-brand {
+    font-size: 1.2rem;
+  }
+
+  .altaeron-site-footer .altaeron-brand svg {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+
+  .altaeron-site-footer__brand > p {
+    max-width: 29rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .altaeron-site-footer .altaeron-site-footer__socials {
+    gap: 2rem;
+    margin-top: 1.6rem;
+  }
+
+  .altaeron-site-footer__socials .social__link,
+  .altaeron-site-footer__socials svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .altaeron-site-footer__menu {
+    padding: 0;
+    border-top: 1px solid var(--altaeron-footer-line);
+  }
+
+  .altaeron-site-footer__menu summary {
+    min-height: 5.2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .altaeron-site-footer__menu ul {
+    margin: 0;
+    padding: 0 0 2rem;
+  }
+
+  .altaeron-site-footer__menu li + li {
+    margin-top: .7rem;
+  }
+
+  .altaeron-site-footer__menu a {
+    font-size: 1.2rem;
+  }
+
+  .altaeron-site-footer__toggle {
+    display: inline-block;
+    color: var(--altaeron-footer-muted);
+    font-size: 1.8rem;
+    font-weight: 300;
+    transition: transform .2s ease;
+  }
+
+  .altaeron-site-footer__menu[open] .altaeron-site-footer__toggle {
+    transform: rotate(45deg);
+  }
+
+  .altaeron-site-footer__story {
+    min-height: 18rem;
+    margin: 0 -2.4rem;
+  }
+
+  .altaeron-site-footer__story-copy {
+    padding-left: 2.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .altaeron-site-footer * {
+    transition-duration: .01ms !important;
+  }
+}

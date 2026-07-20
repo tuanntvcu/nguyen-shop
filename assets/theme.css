@@ -6233,35 +6233,42 @@ body:not(.header-pinned) .header-scrolled .header {
   gap: 8px;
   justify-content: center;
 }
-.announcement-bar__icon {
+.announcement-bar__marquee {
+  margin-inline: auto;
+  max-width: var(--content-width, 100%);
+  width: 100%;
+}
+.announcement-bar__track {
+  align-items: center;
+}
+.announcement-bar__item {
+  flex: 0 0 auto;
+  padding: 0 4rem;
+}
+.announcement-bar__item .announcement-bar__content {
+  padding-inline: 0;
+  white-space: nowrap;
+}
+.announcement-bar__item .announcement-bar__icon {
   color: rgb(var(--color-primary));
   flex: 0 0 auto;
   fill: none;
   height: 16px;
+  max-width: none;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.4;
   width: 16px;
 }
-@media (min-width: 990px) {
-  .announcement-bar--static-desktop announcement-bar {
-    max-width: 100%;
-    overflow: visible;
-    width: 100%;
+@media (max-width: 767.98px) {
+  .announcement-bar__item {
+    padding-inline: 2.4rem;
   }
-  .announcement-bar--static-desktop .swiper-wrapper {
-    display: grid;
-    grid-template-columns: repeat(var(--announcement-columns), minmax(0, 1fr));
-    transform: none!important;
-  }
-  .announcement-bar--static-desktop .swiper-slide {
-    margin: 0!important;
-    width: auto!important;
-  }
-  .announcement-bar--static-desktop .swiper-slide-duplicate,
-  .announcement-bar--static-desktop .slider-controls {
-    display: none!important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .announcement-bar__marquee {
+    overflow-x: auto;
   }
 }
 

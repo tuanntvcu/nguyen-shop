@@ -18,7 +18,6 @@ The implementation extends Palo Alto instead of replacing its commerce layer.
 - `sections/altaeron-product-experience.liquid`
 - `sections/altaeron-product-aftercare.liquid`
 - `sections/altaeron-product-guide.liquid`
-- `sections/altaeron-product-footer.liquid`
 - `sections/altaeron-other-worlds.liquid`
 - `snippets/altaeron-chapter-nav.liquid`
 - `snippets/altaeron-trust-items.liquid`
@@ -31,7 +30,7 @@ The implementation extends Palo Alto instead of replacing its commerce layer.
 - `assets/altaeron-pdp-volcano-core-lamp.png`
 - `assets/altaeron-pdp-isabella-m-avatar.png`
 
-The feature is isolated to the `altaeron` product template. Two native Palo Alto variant snippets receive data attributes/display-label enhancements so Shopify's real option values can drive the custom presentation without duplicating commerce logic.
+The feature is isolated to the `altaeron` product template. It uses the same global `sections/footer.liquid` as every other storefront page. Two native Palo Alto variant snippets receive data attributes/display-label enhancements so Shopify's real option values can drive the custom presentation without duplicating commerce logic.
 
 ## Product metafield definitions
 

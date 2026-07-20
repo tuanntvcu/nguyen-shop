@@ -1,5 +1,5 @@
 {%- comment -%}Merchant settings win; verified store policies provide safe fallbacks.{%- endcomment -%}
-{%- assign trust_icons = 'shipping|returns|payment|warranty' | split: '|' -%}
+{%- assign trust_icons = 'craft|shield|globe|lock' | split: '|' -%}
 <ul class="altaeron-trust" role="list">
   {%- for index in (1..4) -%}
     {%- capture label_key -%}trust_{{ index }}_label{%- endcapture -%}
@@ -9,25 +9,27 @@
     {%- assign trust_url = blank -%}
     {%- case forloop.index -%}
       {%- when 1 -%}
-        {%- if shop.shipping_policy.body != blank -%}
+        {%- if trust_label == blank and shop.shipping_policy.body != blank -%}
           {%- assign trust_url = shop.shipping_policy.url -%}
-          {%- if trust_label == blank -%}{%- assign trust_label = 'Shipping options' -%}{%- endif -%}
+          {%- assign trust_label = 'Shipping options' -%}
           {%- if trust_text == blank -%}{%- assign trust_text = 'Calculated at checkout' -%}{%- endif -%}
         {%- endif -%}
       {%- when 2 -%}
-        {%- if shop.refund_policy.body != blank -%}
+        {%- if trust_label == blank and shop.refund_policy.body != blank -%}
           {%- assign trust_url = shop.refund_policy.url -%}
-          {%- if trust_label == blank -%}{%- assign trust_label = '30-day returns' -%}{%- endif -%}
+          {%- assign trust_label = '30-day returns' -%}
           {%- if trust_text == blank -%}{%- assign trust_text = 'See return policy' -%}{%- endif -%}
         {%- endif -%}
       {%- when 3 -%}
-        {%- if trust_label == blank -%}{%- assign trust_label = 'Secure checkout' -%}{%- endif -%}
-        {%- if trust_text == blank -%}{%- assign trust_text = 'Shopify powered' -%}{%- endif -%}
+        {%- if trust_label == blank -%}
+          {%- assign trust_label = 'Secure checkout' -%}
+          {%- if trust_text == blank -%}{%- assign trust_text = 'Shopify powered' -%}{%- endif -%}
+        {%- endif -%}
       {%- when 4 -%}
         {%- assign warranty_page = pages['altaeron-limited-warranty'] -%}
-        {%- if warranty_page != blank -%}
+        {%- if trust_label == blank and warranty_page != blank -%}
           {%- assign trust_url = warranty_page.url -%}
-          {%- if trust_label == blank -%}{%- assign trust_label = '1-year warranty' -%}{%- endif -%}
+          {%- assign trust_label = '1-year warranty' -%}
           {%- if trust_text == blank -%}{%- assign trust_text = 'Limited coverage' -%}{%- endif -%}
         {%- endif -%}
     {%- endcase -%}
@@ -36,13 +38,13 @@
         <span class="altaeron-trust__icon" aria-hidden="true" data-icon="{{ trust_icons[forloop.index0] }}">
           {%- case forloop.index -%}
             {%- when 1 -%}
-              <svg viewBox="0 0 24 24"><path d="M3 6h11v11H3zM14 10h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="m3 8 4-5h10l4 5-9 13L3 8Z"/><path d="M3 8h18M7 3l2 5 3 13 3-13 2-5"/></svg>
             {%- when 2 -%}
-              <svg viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 1 8M4 9V4m0 5h5"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.6-2.9 8.3-7 10-4.1-1.7-7-5.4-7-10V6l7-3Z"/><path d="m9 12 2 2 4-5"/></svg>
             {%- when 3 -%}
-              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18m-5 5h2"/></svg>
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.3 2.5 3.5 5.5 3.5 9S14.3 18.5 12 21M12 3c-2.3 2.5-3.5 5.5-3.5 9S9.7 18.5 12 21"/></svg>
             {%- else -%}
-              <svg viewBox="0 0 24 24"><path d="m12 3 2.3 2 3-.2.7 3 2.5 1.7-1.2 2.8 1.2 2.8-2.5 1.7-.7 3-3-.2-2.3 2-2.3-2-3 .2-.7-3-2.5-1.7 1.2-2.8-1.2-2.8L6 7.8l.7-3 3 .2z"/><path d="m9 12 2 2 4-4"/></svg>
+              <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg>
           {%- endcase -%}
         </span>
         {%- if trust_url != blank -%}<a class="altaeron-trust__link" href="{{ trust_url }}">{%- else -%}<span>{%- endif -%}

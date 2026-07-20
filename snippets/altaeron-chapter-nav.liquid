@@ -12,13 +12,13 @@
         assign story_chapter_label = 'Design Journal'
       endif
       capture chapter_label_source
-        echo 'The Legend|The Craft|Details|Choose Your World|Bring It Home|Homes of Altaeron|'
+        echo 'The Legend|Choose Your World|The Craft|Details|Bring It Home|Homes of Altaeron|'
         echo story_chapter_label
         echo '|Keeper’s Guide|Other Worlds Await'
       endcapture
       assign chapter_labels = chapter_label_source | split: '|'
     -%}
-    {%- assign chapter_ids = 'altaeron-legend|altaeron-craft|altaeron-details|altaeron-choose|altaeron-bring-home|altaeron-homes|altaeron-stories|altaeron-guide|altaeron-other-worlds' | split: '|' -%}
+    {%- assign chapter_ids = 'altaeron-legend|altaeron-choose|altaeron-craft|altaeron-details|altaeron-bring-home|altaeron-homes|altaeron-stories|altaeron-guide|altaeron-other-worlds' | split: '|' -%}
     {%- for chapter_label in chapter_labels -%}
       <li class="altaeron-chapters__item">
         <a class="altaeron-chapters__link" href="#{{ chapter_ids[forloop.index0] }}" data-altaeron-chapter-link>

@@ -1336,7 +1336,7 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
   .altaeron-progress {
     position: sticky;
     z-index: 11;
-    top: var(--header-height, 0);
+    top: 0;
     display: grid;
     grid-template-columns: 2.3rem minmax(0, 1fr) 2.3rem;
     gap: 1rem;
@@ -1348,6 +1348,10 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
     background: color-mix(in srgb, var(--altaeron-bg) 88%, transparent);
     font-size: .95rem;
     backdrop-filter: blur(16px);
+  }
+
+  body.header-pinned .altaeron-progress {
+    top: var(--header-height, 0px);
   }
 
   .altaeron-progress__current {
@@ -1711,8 +1715,7 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
   display: none;
 }
 
-body.altaeron .announcement-bar-section,
-body.altaeron .shopify-section-group-footer-group {
+body.altaeron .announcement-bar-section {
   display: none;
 }
 
@@ -1727,29 +1730,61 @@ body.altaeron .header__wrapper {
 
 .altaeron-hero__trust {
   width: 100%;
-  margin-top: 1rem;
+  margin-top: .6rem;
 }
 
 .altaeron-hero__trust .altaeron-trust {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  padding-top: 1.6rem;
+  gap: 0;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .altaeron-hero__trust .altaeron-trust__item {
-  grid-template-columns: 2.4rem minmax(0, 1fr);
-  gap: .6rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  justify-content: flex-start;
+  min-width: 0;
+  min-height: 4.8rem;
+  padding: 0 .8rem;
+  text-align: center;
+}
+
+.altaeron-hero__trust .altaeron-trust__item + .altaeron-trust__item::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: var(--altaeron-line);
+  content: '';
 }
 
 .altaeron-hero__trust .altaeron-trust__icon,
 .altaeron-hero__trust .altaeron-trust__icon svg {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2rem;
+  height: 2rem;
 }
 
-.altaeron-hero__trust .altaeron-trust__item strong,
-.altaeron-hero__trust .altaeron-trust__item small {
+.altaeron-hero__trust .altaeron-trust__item > :not(.altaeron-trust__icon) {
+  width: 100%;
+}
+
+.altaeron-hero__trust .altaeron-trust__item strong {
+  max-width: 10ch;
+  margin: 0 auto;
   font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.altaeron-hero__trust .altaeron-trust__item small {
+  display: none;
 }
 
 .altaeron-featured-story__verified {
@@ -1774,121 +1809,6 @@ body.altaeron .header__wrapper {
 .altaeron-wood-swatch[data-option-value='Walnut'] { background: #3b2112 !important; }
 .altaeron-wood-swatch[data-option-value='Ash'] { background: #b98b5a !important; }
 .altaeron-wood-swatch[data-option-value='Oak'] { background: #735039 !important; }
-
-.altaeron-product-footer {
-  border-top: 1px solid var(--altaeron-line);
-}
-
-.altaeron-product-footer__trust {
-  display: none;
-}
-
-.altaeron-product-footer__main {
-  display: grid;
-  grid-template-columns: 17rem minmax(0, 1fr) 26rem;
-  gap: 4rem;
-  padding: 3rem 4rem 2.5rem;
-}
-
-.altaeron-product-footer__brand,
-.altaeron-product-footer__newsletter {
-  display: grid;
-  align-content: start;
-  gap: 1.2rem;
-}
-
-.altaeron-product-footer__brand p,
-.altaeron-product-footer__newsletter p {
-  color: var(--altaeron-muted);
-  font-size: 1.05rem;
-}
-
-.altaeron-product-footer__socials {
-  display: flex;
-  gap: 1.4rem;
-  align-items: center;
-}
-
-.altaeron-product-footer__socials a {
-  display: grid;
-  place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-}
-
-.altaeron-product-footer__socials svg {
-  width: 1.6rem;
-  height: 1.6rem;
-}
-
-.altaeron-product-footer__links {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 2.4rem;
-}
-
-.altaeron-product-footer__links details:nth-child(2),
-.altaeron-product-footer__links details:nth-child(5) {
-  display: none;
-}
-
-.altaeron-product-footer__links summary {
-  color: var(--altaeron-text);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: .05em;
-  list-style: none;
-  text-transform: uppercase;
-}
-
-.altaeron-product-footer__links summary span {
-  display: none;
-}
-
-.altaeron-product-footer__links details:not([open]) > :not(summary) {
-  display: block;
-}
-
-.altaeron-product-footer__links a {
-  margin-top: .7rem;
-  color: var(--altaeron-muted);
-  font-size: .92rem;
-  text-decoration: none;
-}
-
-.altaeron-product-footer__newsletter h2 {
-  font-size: 2rem;
-  line-height: 1.05;
-}
-
-.altaeron-product-footer__newsletter .newsletter-form__field-wrapper {
-  max-width: none;
-}
-
-.altaeron-product-footer__newsletter .form-control {
-  border-color: var(--altaeron-line);
-  color: var(--altaeron-text);
-  background: transparent;
-}
-
-.altaeron-product-footer__newsletter .newsletter-form__button {
-  color: #171005;
-  background: var(--altaeron-accent);
-}
-
-.altaeron-product-footer__legal {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 1.4rem 4rem;
-  border-top: 1px solid var(--altaeron-line);
-  color: var(--altaeron-muted);
-}
-
-.altaeron-product-footer__legal div {
-  display: flex;
-  gap: 2rem;
-}
 
 @media (min-width: 1280px) {
   .altaeron-hero {
@@ -2170,90 +2090,4 @@ body.altaeron .header__wrapper {
     min-height: 6rem;
   }
 
-  .altaeron-product-footer__trust {
-    display: block;
-    padding: 3.5rem 2.4rem;
-    border-bottom: 1px solid var(--altaeron-line);
-  }
-
-  .altaeron-product-footer__trust .altaeron-trust {
-    grid-template-columns: 1fr;
-    gap: 2.4rem;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  .altaeron-product-footer__main {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-  }
-
-  .altaeron-product-footer__newsletter {
-    order: 1;
-    gap: 1.2rem;
-    padding: 3.5rem 2.4rem;
-    background: color-mix(in srgb, var(--altaeron-text) 4%, var(--altaeron-bg));
-  }
-
-  .altaeron-product-footer__newsletter h2 {
-    font-size: 2.5rem;
-  }
-
-  .altaeron-product-footer__brand {
-    order: 2;
-    gap: 1.6rem;
-    padding: 3.2rem 2.4rem 2.4rem;
-  }
-
-  .altaeron-product-footer__links {
-    order: 3;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding: 0 2.4rem 2rem;
-  }
-
-  .altaeron-product-footer__links details:nth-child(2),
-  .altaeron-product-footer__links details:nth-child(5) {
-    display: block;
-  }
-
-  .altaeron-product-footer__links details {
-    border-top: 1px solid var(--altaeron-line);
-  }
-
-  .altaeron-product-footer__links summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 5.6rem;
-    cursor: pointer;
-  }
-
-  .altaeron-product-footer__links summary span {
-    display: inline;
-    color: var(--altaeron-muted);
-    font-size: 1.8rem;
-  }
-
-  .altaeron-product-footer__links details:not([open]) > :not(summary) {
-    display: none;
-  }
-
-  .altaeron-product-footer__links a {
-    margin: 0 0 1rem;
-  }
-
-  .altaeron-product-footer__legal {
-    display: block;
-    padding: 2.4rem;
-    text-align: center;
-  }
-
-  .altaeron-product-footer__legal div {
-    display: none;
-  }
 }

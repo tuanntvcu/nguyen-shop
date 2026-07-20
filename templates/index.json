@@ -423,6 +423,7 @@
         "newsletter_text": "Get 10% OFF your first order and discover new creations.",
         "newsletter_heading_desktop": "<h2>Bring Magic Into Your Space.</h2>",
         "newsletter_text_desktop": "Join our community and get 10% OFF your first order.",
+        "newsletter_image_asset": "altaeron-alpine.webp",
         "email_label": "Email address",
         "email_placeholder": "Enter your email",
         "newsletter_button": "GET 10% OFF",
