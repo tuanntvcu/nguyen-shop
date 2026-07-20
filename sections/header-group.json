@@ -44,7 +44,6 @@
         "announcement_bar_yELyjf",
         "announcement_bar_9gLqAn"
       ],
-      "disabled": false,
       "name": "t:sections.announcement-bar.name",
       "settings": {
         "color_scheme": "scheme-inverse",

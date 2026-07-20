@@ -14,13 +14,7 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "show_social": true,
-        "brand_text": "We preserve worlds in resin, handcrafted lamps that blend nature, fantasy, and light into timeless masterpieces.",
-        "shop_menu": "footer-shop",
-        "support_menu": "footer-support",
-        "company_menu": "footer-company",
-        "story_heading": "Every Light\nHolds A Story.",
-        "story_text": "Thank you for being\npart of ours."
+        "show_social": true
       }
     },
     "mobile_sticky_bar_aYhgJK": {
@@ -60,12 +54,21 @@
           }
         }
       },
-      "block_order": ["home_AP8mmy", "search_n3h4zT", "cart_gnnwxQ", "products_eYYkE8", "link_mJ6QMc"],
+      "block_order": [
+        "home_AP8mmy",
+        "search_n3h4zT",
+        "cart_gnnwxQ",
+        "products_eYYkE8",
+        "link_mJ6QMc"
+      ],
       "settings": {
         "enable_sticky_bar": false,
         "show_text": true
       }
     }
   },
-  "order": ["footer", "mobile_sticky_bar_aYhgJK"]
+  "order": [
+    "footer",
+    "mobile_sticky_bar_aYhgJK"
+  ]
 }
