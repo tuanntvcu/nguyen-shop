@@ -157,6 +157,12 @@
 @media (max-width: 989px) {
   .announcement-bar-section { display: none; }
   .header-section > header { display: none; }
+  .altaeron__hero-rating { align-items: center; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); background: rgba(3,6,6,.42); border: 1px solid var(--altaeron-accent); border-radius: 50%; display: flex; flex-direction: column; height: 84px; justify-content: center; left: 28px; position: absolute; text-align: center; top: 104px; width: 84px; z-index: 4; }
+  .altaeron__hero-rating::after { border: 1px solid rgba(217,150,34,.34); border-radius: inherit; content: ''; inset: 4px; position: absolute; }
+  .altaeron__hero-rating > * { position: relative; z-index: 1; }
+  .altaeron__hero-rating > span { color: var(--altaeron-accent); font-size: 7px; letter-spacing: .08em; line-height: 1; }
+  .altaeron__hero-rating strong { color: var(--altaeron-accent); font: 400 18px/1.15 var(--ae-serif); }
+  .altaeron__hero-rating small { color: var(--ae-muted); font-size: 6px; line-height: 1.2; max-width: 58px; }
   .altaeron__process-card { display: grid; grid-template-columns: 41% 59%; grid-template-rows: auto auto 1fr; min-height: 245px; padding: 0; }
   .altaeron__process-image { border-radius: 0 8px 8px 0; grid-column: 2; grid-row: 1 / 4; height: 100%; }
   .altaeron__process-card .altaeron__number { align-self: end; grid-column: 1; grid-row: 1; margin: 22px 16px 0; }
