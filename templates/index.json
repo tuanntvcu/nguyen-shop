@@ -72,7 +72,8 @@
             "eyebrow": "NATURE HELD IN TIME",
             "heading": "<h2>Wild Places.<br><em>Preserved.</em></h2>",
             "text": "<p>Mountain light, still water, and the quiet of another world.</p>",
-            "button_label": "EXPLORE NATURE"
+            "button_label": "EXPLORE NATURE",
+            "button_link": ""
           }
         },
         "story_3": {
@@ -81,7 +82,8 @@
             "eyebrow": "DEPTH IN EVERY LAYER",
             "heading": "<h2>Oceans Made<br><em>Timeless.</em></h2>",
             "text": "<p>Every translucent layer is poured and finished by hand.</p>",
-            "button_label": "DISCOVER THE CRAFT"
+            "button_label": "DISCOVER THE CRAFT",
+            "button_link": ""
           }
         },
         "story_4": {
@@ -90,7 +92,8 @@
             "eyebrow": "LIGHT COMPLETES THE ART",
             "heading": "<h2>A World<br><em>Awakened.</em></h2>",
             "text": "<p>Warm light reveals details that remain hidden during the day.</p>",
-            "button_label": "WATCH THE CRAFT"
+            "button_label": "WATCH THE CRAFT",
+            "button_link": ""
           }
         },
         "process_1": {
@@ -140,7 +143,8 @@
           "settings": {
             "collection": "fantasy-dragon",
             "heading": "Fantasy & Dragon",
-            "text": "Power. Myth. Imagination."
+            "text": "Power. Myth. Imagination.",
+            "link": ""
           }
         },
         "collection_2": {
@@ -148,7 +152,8 @@
           "settings": {
             "collection": "nature-mountains",
             "heading": "Nature & Mountains",
-            "text": "Earth. Serenity. Freedom."
+            "text": "Earth. Serenity. Freedom.",
+            "link": ""
           }
         },
         "collection_3": {
@@ -156,7 +161,8 @@
           "settings": {
             "collection": "ocean-waves",
             "heading": "Ocean & Waves",
-            "text": "Flow. Calm. Endless."
+            "text": "Flow. Calm. Endless.",
+            "link": ""
           }
         },
         "collection_4": {
@@ -164,7 +170,8 @@
           "settings": {
             "collection": "cosmic-minimal",
             "heading": "Cosmic & Minimal",
-            "text": "Space. Mystery. Light."
+            "text": "Space. Mystery. Light.",
+            "link": ""
           }
         },
         "product_1": {
@@ -174,6 +181,7 @@
             "heading": "Dragon Flame Lamp",
             "price": "$129.00",
             "compare_price": "$169.00",
+            "stars": 5,
             "rating": "(1,266)",
             "badge": "TOP RATED"
           }
@@ -185,6 +193,7 @@
             "heading": "Mountain Lake Lamp",
             "price": "$119.00",
             "compare_price": "$149.00",
+            "stars": 5,
             "rating": "(983)",
             "badge": ""
           }
@@ -196,6 +205,7 @@
             "heading": "Ocean Wave Lamp",
             "price": "$119.00",
             "compare_price": "$149.00",
+            "stars": 5,
             "rating": "(834)",
             "badge": ""
           }
@@ -207,6 +217,7 @@
             "heading": "Forest Spirit Lamp",
             "price": "$129.00",
             "compare_price": "$169.00",
+            "stars": 5,
             "rating": "(712)",
             "badge": ""
           }
@@ -218,6 +229,7 @@
             "heading": "Moonlight Lamp",
             "price": "$109.00",
             "compare_price": "$139.00",
+            "stars": 5,
             "rating": "(845)",
             "badge": ""
           }
@@ -375,8 +387,10 @@
         "hero_desktop_break_after": 2,
         "hero_text": "<p>Every Altaeron lamp is a handcrafted universe, capturing nature, fantasy, and light in perfect harmony.</p>",
         "hero_button_label": "EXPLORE COLLECTIONS",
+        "hero_button_link": "",
         "video_label": "WATCH THE MAGIC",
         "video_fallback_label": "WATCH THE MAGIC",
+        "video_url": "",
         "show_hero_rating": true,
         "features_label": "Why choose Altaeron",
         "scroll_label": "SCROLL TO DISCOVER",
@@ -392,20 +406,24 @@
         "stat_4_label": "Customer Support",
         "story_image_asset": "altaeron-story-within.png",
         "story_eyebrow": "MASTERPIECE IN EVERY DETAIL",
-        "story_heading": "<h2>One Lamp.<br>A Universe <em>Within.</em></h2>",
+        "story_heading": "<h2>One Lamp.<br/>A Universe <em>Within.</em></h2>",
         "story_text": "<p>From a drop of resin to a timeless world, crafted with patience, passion, and precision.</p>",
         "story_button_label": "DISCOVER THE ART",
+        "story_button_link": "",
         "story_mobile_button_label": "WATCH STORY",
         "story_mobile_fallback_label": "WATCH STORY",
         "process_eyebrow": "THE JOURNEY OF CREATION",
-        "process_heading": "<h2>72 Hours. Countless Details.<br>Infinite Worlds.</h2>",
+        "process_heading": "<h2>72 Hours. Countless Details.<br/>Infinite Worlds.</h2>",
         "process_link_label": "VIEW ALL COLLECTIONS",
+        "process_link": "",
         "collections_eyebrow": "EXPLORE OUR COLLECTIONS",
-        "collections_heading": "<h2>Find The World That<br>Speaks To You.</h2>",
+        "collections_heading": "<h2>Find The World That<br/>Speaks To You.</h2>",
         "collections_link_label": "VIEW ALL COLLECTIONS",
+        "collections_link": "",
         "products_eyebrow": "BEST SELLERS",
         "products_heading": "<h2>Worlds Most Loved.</h2>",
         "products_link_label": "VIEW ALL",
+        "products_link": "",
         "add_to_cart_label": "Add to cart",
         "services_label": "Service promises",
         "show_review_summary": true,
@@ -413,26 +431,34 @@
         "reviews_eyebrow": "LOVED BY THOUSANDS",
         "review_score": "4.9/5",
         "review_stars": 4.9,
+        "rating_accessibility_suffix": "out of 5 stars",
+        "reviews_count_label": "reviews",
         "review_source": "From 2,500+ Reviews",
         "reviews_link_label": "VIEW ALL REVIEWS",
+        "reviews_link": "",
         "homes_eyebrow": "HOMES OF ALTAERON",
-        "homes_heading": "<h2>Real Spaces.<br>Real Stories.</h2>",
-        "cinematic_heading": "<h2>LIGHT THAT BRINGS<br>WORLDS TO LIFE</h2>",
+        "homes_heading": "<h2>Real Spaces.<br/>Real Stories.</h2>",
+        "cinematic_heading": "<h2>LIGHT THAT BRINGS<br/>WORLDS TO LIFE</h2>",
         "cinematic_button_label": "WATCH THE CRAFT",
+        "cinematic_fallback_label": "DISCOVER THE CRAFT",
         "newsletter_heading": "<h2>Bring A World <em>Home.</em></h2>",
-        "newsletter_text": "Get 10% OFF your first order and discover new creations.",
+        "newsletter_text": "Get 5% OFF your first order and discover new creations.",
         "newsletter_heading_desktop": "<h2>Bring Magic Into Your Space.</h2>",
-        "newsletter_text_desktop": "Join our community and get 10% OFF your first order.",
+        "newsletter_text_desktop": "Join our community and get 5% OFF your first order.",
         "newsletter_image_asset": "altaeron-alpine.webp",
         "email_label": "Email address",
         "email_placeholder": "Enter your email",
-        "newsletter_button": "GET 10% OFF",
-        "newsletter_success": "Welcome to our world. Use code WELCOME10 at checkout.",
+        "newsletter_button": "GET 5% OFF",
+        "newsletter_success": "Welcome to our world. Use code WELCOME at checkout.",
         "mobile_nav_label": "Homepage shortcuts",
         "nav_shop": "SHOP",
+        "nav_shop_icon": "shipping",
         "nav_collections": "COLLECTIONS",
+        "nav_collections_icon": "grid",
         "nav_story": "STORY",
-        "nav_search": "SEARCH"
+        "nav_story_icon": "story",
+        "nav_search": "SEARCH",
+        "nav_search_icon": "search"
       }
     }
   },
