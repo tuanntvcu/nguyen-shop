@@ -50,6 +50,7 @@
         },
         "hero_returns": {
           "type": "feature",
+          "disabled": true,
           "settings": {
             "placement": "hero",
             "icon": "returns",
@@ -245,6 +246,7 @@
         },
         "service_returns": {
           "type": "feature",
+          "disabled": true,
           "settings": {
             "placement": "service",
             "icon": "returns",
