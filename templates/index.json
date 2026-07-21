@@ -177,7 +177,7 @@
         "product_1": {
           "type": "product",
           "settings": {
-            "product": "dragon-flame-lamp",
+            "product": "dragon-flame",
             "heading": "Dragon Flame Lamp",
             "price": "$129.00",
             "compare_price": "$169.00",
@@ -213,7 +213,7 @@
         "product_4": {
           "type": "product",
           "settings": {
-            "product": "forest-spirit-lamp",
+            "product": "verdant-oracle",
             "heading": "Forest Spirit Lamp",
             "price": "$129.00",
             "compare_price": "$169.00",
