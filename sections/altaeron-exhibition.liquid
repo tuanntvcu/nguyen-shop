@@ -10,12 +10,20 @@
   assign testimonial_blocks = section.blocks | where: 'type', 'testimonial'
   assign gallery_blocks = section.blocks | where: 'type', 'gallery'
   assign story_blocks = section.blocks | where: 'type', 'story'
+  assign social_proof_blocks = section.blocks | where: 'type', 'social_proof'
   assign app_blocks = section.blocks | where: 'type', '@app'
   assign newsletter_image_asset = section.settings.newsletter_image_asset | default: 'altaeron-alpine.webp'
+  assign sticky_product = section.settings.sticky_product
+  assign sticky_variant = sticky_product.selected_or_first_available_variant
+  assign sticky_form_id = 'AltaeronStickyProductForm-' | append: section.id
+  assign sticky_rating = sticky_product.metafields.reviews.rating.value
+  assign sticky_rating_count = sticky_product.metafields.reviews.rating_count.value | default: 0
   assign has_collections = false
   assign has_products = false
   assign collection_slide_count = 0
   assign product_slide_count = 0
+  assign service_count = 0
+  assign social_proof_count = 0
 
   for block in collection_blocks
     if block.settings.collection != blank
@@ -30,6 +38,25 @@
       assign product_slide_count = product_slide_count | plus: 1
     endif
   endfor
+
+  for block in section.blocks
+    if block.type == 'feature' and block.settings.placement == 'service'
+      assign service_count = service_count | plus: 1
+    elsif block.type == 'social_proof' and block.settings.customer_label != blank
+      if block.settings.product != blank or block.settings.product_label != blank
+        assign social_proof_count = social_proof_count | plus: 1
+      endif
+    endif
+  endfor
+
+  assign usp_mobile_layout = section.settings.usp_mobile_layout
+  if usp_mobile_layout == 'auto'
+    if service_count <= 4
+      assign usp_mobile_layout = 'grid'
+    else
+      assign usp_mobile_layout = 'scroll'
+    endif
+  endif
 
   if request.design_mode
     assign collection_slide_count = collection_blocks.size
@@ -47,9 +74,14 @@
   class="altaeron"
   data-altaeron
   data-cart-url="{{ routes.cart_url }}.js"
-  style="--altaeron-accent: {{ section.settings.accent_color }}; --altaeron-bg: {{ section.settings.background_color }}; --altaeron-text: {{ section.settings.text_color }};"
+  data-card-animations="{{ section.settings.enable_card_reveals }}"
+  data-button-shimmer="{{ section.settings.enable_button_shimmer }}"
+  data-journey-mobile="{{ section.settings.journey_mobile_layout }}"
+  data-usp-layout="{{ usp_mobile_layout }}"
+  data-usp-count="{{ service_count }}"
+  style="--altaeron-accent: {{ section.settings.accent_color }}; --altaeron-bg: {{ section.settings.background_color }}; --altaeron-text: {{ section.settings.text_color }}; --ae-mobile-collection-ratio: {{ section.settings.collection_mobile_aspect_ratio | divided_by: 100.0 }};"
 >
-  <div class="altaeron__hero" id="altaeron-hero">
+  <div class="altaeron__hero" id="altaeron-hero" data-ambient-visual>
     <div class="altaeron__mobile-masthead" role="navigation" aria-label="{{ section.settings.brand_name | default: shop.name | escape }}">
       <button type="button" data-menu-trigger aria-label="{{ 'accessibility.menu_drawer' | t }}">{% render 'altaeron-icon', name: 'menu' %}</button>
       <a class="altaeron__mobile-brand" href="{{ routes.root_url }}">
@@ -62,7 +94,7 @@
       {% render 'altaeron-responsive-image', desktop_image: section.settings.hero_image, mobile_image: section.settings.hero_image_mobile, desktop_asset: 'altaeron-hero.webp', mobile_asset: 'altaeron-hero-mobile.webp', desktop_width: 1672, desktop_height: 942, max_width: 2400, widths: '750, 1100, 1500, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', preload: true, class: 'altaeron__hero-image', alt: '' %}
       <span class="altaeron__hero-vignette"></span>
       <span class="altaeron__glow"></span>
-      <span class="altaeron__particles" data-particles></span>
+      {%- if section.settings.enable_ambient_particles -%}<span class="altaeron__particles" data-particles></span>{%- endif -%}
     </div>
 
     <div class="altaeron__hero-content altaeron__shell" data-reveal="hero">
@@ -171,7 +203,7 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'process' -%}
           {%- assign process_index = process_index | plus: 1 -%}
-          <article class="altaeron__process-card" data-slide role="group" aria-roledescription="slide" aria-label="{{ process_index }} {{ 'general.slider.of' | t }} {{ process_blocks.size }}" {{ block.shopify_attributes }}>
+          <article class="altaeron__process-card" data-slide data-card-reveal role="group" aria-roledescription="slide" aria-label="{{ process_index }} {{ 'general.slider.of' | t }} {{ process_blocks.size }}" {{ block.shopify_attributes }}>
             <div class="altaeron__process-image">
               {%- if block.settings.image != blank -%}
                 {% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 700, widths: '300, 500, 700', sizes: '(min-width: 900px) 16vw, 72vw', mobile_sizes: '45vw', loading: 'lazy' %}
@@ -192,6 +224,7 @@
             <span class="altaeron__number">{{ process_index | prepend: '0' | slice: -2, 2 }}</span>
             <h3>{{ block.settings.heading | escape }}</h3>
             <p>{{ block.settings.text | escape }}</p>
+            {%- if block.settings.duration != blank -%}<small class="altaeron__process-duration">{{ block.settings.duration | escape }}</small>{%- endif -%}
           </article>
         {%- endif -%}
       {%- endfor -%}
@@ -215,7 +248,7 @@
           {%- if card_collection != blank or request.design_mode -%}
           {%- assign collection_index = collection_index | plus: 1 -%}
           {%- assign card_link = block.settings.link | default: card_collection.url | default: routes.collections_url -%}
-          <a class="altaeron__collection-card" href="{{ card_link }}" data-slide role="group" aria-roledescription="slide" aria-label="{{ collection_index }} {{ 'general.slider.of' | t }} {{ collection_slide_count }}" {{ block.shopify_attributes }}>
+          <a class="altaeron__collection-card" href="{{ card_link }}" data-slide data-card-reveal role="group" aria-roledescription="slide" aria-label="{{ collection_index }} {{ 'general.slider.of' | t }} {{ collection_slide_count }}" {{ block.shopify_attributes }}>
             <div class="altaeron__collection-image">
               {%- if block.settings.image != blank -%}
                 {% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 1100, widths: '400, 700, 900, 1100', sizes: '(min-width: 900px) 25vw, 78vw', mobile_sizes: '78vw', loading: 'lazy' %}
@@ -270,7 +303,7 @@
           {%- assign judgeme_rating = card_product.metafields.reviews.rating.value -%}
           {%- assign judgeme_rating_count = card_product.metafields.reviews.rating_count.value | default: 0 -%}
           {%- assign quick_variant = card_product.selected_or_first_available_variant -%}
-          <article class="altaeron__product-card" data-slide role="group" aria-roledescription="slide" aria-label="{{ product_index }} {{ 'general.slider.of' | t }} {{ product_slide_count }}" {{ block.shopify_attributes }}>
+          <article class="altaeron__product-card" data-slide data-card-reveal role="group" aria-roledescription="slide" aria-label="{{ product_index }} {{ 'general.slider.of' | t }} {{ product_slide_count }}" {{ block.shopify_attributes }}>
             <a class="altaeron__product-image" href="{{ card_product.url | default: routes.all_products_collection_url }}" aria-label="{% if card_product != blank %}{{ card_product.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}">
               {%- if block.settings.image != blank -%}
                 {% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 900, widths: '360, 560, 720, 900', sizes: '(min-width: 900px) 20vw, 82vw', mobile_sizes: '(max-width: 749px) 38vw, 82vw', loading: 'lazy' %}
@@ -328,10 +361,10 @@
   </section>
   {%- endif -%}
 
-  <div class="altaeron__services altaeron__services--mobile altaeron__shell" role="list" aria-label="{{ section.settings.services_label | escape }}" data-reveal data-chapter-order="{{ section.settings.order_services }}">
+  <div class="altaeron__services altaeron__services--mobile altaeron__services--{{ usp_mobile_layout }} altaeron__shell" role="list" aria-label="{{ section.settings.services_label | escape }}" data-reveal data-chapter-order="{{ section.settings.order_services }}">
     {%- for block in section.blocks -%}
       {%- if block.type == 'feature' and block.settings.placement == 'service' -%}
-        <div class="altaeron__service altaeron__service--{{ block.settings.icon }}" role="listitem" {{ block.shopify_attributes }}>
+        <div class="altaeron__service altaeron__service--{{ block.settings.icon }}" role="listitem" data-card-reveal {{ block.shopify_attributes }}>
           {% render 'altaeron-icon', name: block.settings.icon %}
           <span><strong>{{ block.settings.heading | escape }}</strong><small>{{ block.settings.text | escape }}</small></span>
         </div>
@@ -361,7 +394,7 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'testimonial' -%}
           {%- assign testimonial_index = testimonial_index | plus: 1 -%}
-          <figure class="altaeron__review" data-slide role="group" aria-roledescription="slide" aria-label="{{ testimonial_index }} {{ 'general.slider.of' | t }} {{ testimonial_blocks.size }}" {{ block.shopify_attributes }}>
+          <figure class="altaeron__review" data-slide data-card-reveal role="group" aria-roledescription="slide" aria-label="{{ testimonial_index }} {{ 'general.slider.of' | t }} {{ testimonial_blocks.size }}" {{ block.shopify_attributes }}>
             {%- if block.settings.image != blank -%}{% render 'altaeron-responsive-image', desktop_image: block.settings.image, mobile_image: block.settings.image_mobile, max_width: 700, widths: '360, 520, 700', sizes: '(min-width: 900px) 28vw, 88vw', mobile_sizes: '88vw', loading: 'lazy' %}
             {%- elsif testimonial_index == 2 -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-moon-home.webp', mobile_asset: 'altaeron-moon-home-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
             {%- elsif testimonial_index == 3 -%}{% render 'altaeron-responsive-image', desktop_asset: 'altaeron-alpine.webp', mobile_asset: 'altaeron-alpine-mobile.webp', desktop_width: 1122, desktop_height: 1402, loading: 'lazy', alt: '' %}
@@ -452,6 +485,87 @@
     {%- endfor -%}
   </div>
 
+  {%- if section.settings.enable_mobile_sticky_cta and sticky_product != blank -%}
+    <aside class="altaeron__sticky-product" data-sticky-product hidden aria-label="{{ sticky_product.title | escape }}">
+      <div class="altaeron__sticky-product-inner">
+        {%- if section.settings.sticky_show_thumbnail and sticky_product.featured_image != blank -%}
+          <a class="altaeron__sticky-thumb" href="{{ sticky_product.url }}" tabindex="-1" aria-hidden="true">
+            {{ sticky_product.featured_image | image_url: width: 144 | image_tag: loading: 'lazy', widths: '72, 108, 144', sizes: '52px', alt: '' }}
+          </a>
+        {%- endif -%}
+        <div class="altaeron__sticky-copy">
+          <a href="{{ sticky_product.url }}"><strong>{{ sticky_product.title | escape }}</strong></a>
+          {%- if section.settings.sticky_show_rating and sticky_rating != blank and sticky_rating_count > 0 -%}
+            <div class="altaeron__sticky-rating">
+              <span class="visually-hidden">{{ sticky_rating.rating }} {{ section.settings.rating_accessibility_suffix | escape }}, {{ sticky_rating_count }} {{ section.settings.reviews_count_label | escape }}</span>
+              <span class="altaeron__stars" style="--rating-percent: {{ sticky_rating.rating | times: 100.0 | divided_by: sticky_rating.scale_max }}%" aria-hidden="true">â˜…â˜…â˜…â˜…â˜…</span>
+              <small>{{ sticky_rating.rating | round: 1 }}</small>
+            </div>
+          {%- endif -%}
+          <div class="altaeron__sticky-price">
+            <strong>{{ sticky_variant.price | money }}</strong>
+            {%- if sticky_variant.compare_at_price > sticky_variant.price -%}<s>{{ sticky_variant.compare_at_price | money }}</s>{%- endif -%}
+          </div>
+        </div>
+        {%- if sticky_product.available == false or sticky_variant == blank or sticky_variant.available == false -%}
+          <button class="altaeron__button altaeron__button--primary altaeron__sticky-action" type="button" disabled>{{ 'products.product.sold_out' | t }}</button>
+        {%- elsif sticky_product.has_only_default_variant -%}
+          {%- form 'product', sticky_product, id: sticky_form_id, class: 'altaeron__sticky-form', is: 'product-form', data-type: 'add-to-cart-form', data-product-id: sticky_product.id -%}
+            <input type="hidden" name="id" value="{{ sticky_variant.id }}" class="product-variant-id">
+            <input type="hidden" name="quantity" value="1">
+            <button
+              class="altaeron__button altaeron__button--primary altaeron__sticky-action"
+              type="submit"
+              aria-label="{{ 'products.product.add_to_cart' | t }}: {{ sticky_product.title | escape }}"
+              data-default-label="{{ section.settings.sticky_add_to_cart_label | escape }}"
+              data-loading-label="{{ section.settings.sticky_loading_label | escape }}"
+              data-success-label="{{ section.settings.sticky_success_label | escape }}"
+            >{{ section.settings.sticky_add_to_cart_label | escape }}</button>
+            <p class="altaeron__sticky-status product-form__error-message" role="status" aria-live="polite" hidden></p>
+          {%- endform -%}
+        {%- else -%}
+          <a class="altaeron__button altaeron__button--primary altaeron__sticky-action" href="{{ sticky_product.url }}" aria-label="{{ 'products.product.choose_product_options' | t: product_name: sticky_product.title | escape }}">{{ section.settings.sticky_choose_options_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </aside>
+  {%- endif -%}
+
+  {%- if section.settings.enable_social_proof and social_proof_count > 0 -%}
+    <aside
+      class="altaeron__social-proof"
+      data-social-proof
+      data-delay="{{ section.settings.social_proof_delay | times: 1000 }}"
+      data-duration="{{ section.settings.social_proof_duration | times: 1000 }}"
+      data-interval="{{ section.settings.social_proof_interval | times: 1000 }}"
+      data-maximum="{{ section.settings.social_proof_maximum }}"
+      hidden
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div class="altaeron__social-proof-current" data-social-proof-current></div>
+      <button class="altaeron__social-proof-close" type="button" data-social-proof-close aria-label="{{ 'accessibility.close' | t }}">&times;</button>
+      <div class="altaeron__social-proof-messages" data-social-proof-messages hidden>
+        {%- for block in social_proof_blocks -%}
+          {%- assign proof_product = block.settings.product -%}
+          {%- assign proof_product_label = block.settings.product_label | default: proof_product.title -%}
+          {%- if block.settings.customer_label != blank and proof_product_label != blank -%}
+            {%- assign proof_link = block.settings.link | default: proof_product.url -%}
+            <div class="altaeron__social-proof-message" data-social-proof-message {{ block.shopify_attributes }}>
+              {%- if proof_link != blank -%}<a href="{{ proof_link | escape }}">{%- else -%}<div>{%- endif -%}
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '54px', alt: proof_product_label }}
+                {%- elsif proof_product.featured_image != blank -%}
+                  {{ proof_product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '54px', alt: proof_product_label }}
+                {%- endif -%}
+                <p><strong>{{ block.settings.customer_label | escape }}</strong>{% if block.settings.location != blank %} from {{ block.settings.location | escape }}{% endif %} {{ block.settings.activity_text | escape }} <span>{{ proof_product_label | escape }}</span>{% if block.settings.time_label != blank %} {{ block.settings.time_label | escape }}{% endif %}.</p>
+              {%- if proof_link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </aside>
+  {%- endif -%}
+
   <nav class="altaeron__mobile-nav" aria-label="{{ section.settings.mobile_nav_label | escape }}" data-mobile-nav>
     <a class="is-active" href="{{ routes.all_products_collection_url }}" data-mobile-nav-item="shop" aria-current="page">{% render 'altaeron-icon', name: section.settings.nav_shop_icon %}<span>{{ section.settings.nav_shop | escape }}</span></a>
     <a href="{{ collections_destination }}" data-mobile-nav-item="collections">{% render 'altaeron-icon', name: section.settings.nav_collections_icon %}<span>{{ section.settings.nav_collections | escape }}</span></a>
@@ -481,6 +595,9 @@
     {"type":"color","id":"background_color","label":"Background","default":"#030606"},
     {"type":"color","id":"text_color","label":"Text","default":"#f4f0e8"},
     {"type":"color","id":"accent_color","label":"Amber accent","default":"#d99622"},
+    {"type":"checkbox","id":"enable_ambient_particles","label":"Enable ambient particles","default":true},
+    {"type":"checkbox","id":"enable_card_reveals","label":"Enable card reveal animations","default":true},
+    {"type":"checkbox","id":"enable_button_shimmer","label":"Enable button shimmer","default":true},
     {"type":"header","content":"Chapter order"},
     {"type":"range","id":"order_story","label":"Story","min":1,"max":9,"step":1,"default":1},
     {"type":"range","id":"order_process","label":"Process","min":1,"max":9,"step":1,"default":2},
@@ -534,10 +651,12 @@
     {"type":"richtext","id":"process_heading","label":"Process heading","default":"<h2>72 Hours. Countless Details.<br>Infinite Worlds.</h2>"},
     {"type":"text","id":"process_link_label","label":"Process link","default":"VIEW ALL COLLECTIONS"},
     {"type":"url","id":"process_link","label":"Process link URL"},
+    {"type":"select","id":"journey_mobile_layout","label":"Journey mobile layout","options":[{"value":"vertical","label":"Vertical story"},{"value":"carousel","label":"Card carousel"}],"default":"vertical"},
     {"type":"text","id":"collections_eyebrow","label":"Collections eyebrow","default":"EXPLORE OUR COLLECTIONS"},
     {"type":"richtext","id":"collections_heading","label":"Collections heading","default":"<h2>Find The World That<br>Speaks To You.</h2>"},
     {"type":"text","id":"collections_link_label","label":"Collections link","default":"VIEW ALL COLLECTIONS"},
     {"type":"url","id":"collections_link","label":"Collections link URL"},
+    {"type":"range","id":"collection_mobile_aspect_ratio","label":"Collection mobile image width-to-height ratio","min":70,"max":90,"step":1,"unit":"%","default":75},
     {"type":"header","content":"Products and reviews"},
     {"type":"text","id":"products_eyebrow","label":"Products eyebrow","default":"BEST SELLERS"},
     {"type":"richtext","id":"products_heading","label":"Products heading","default":"<h2>Worlds Most Loved.</h2>"},
@@ -545,6 +664,7 @@
     {"type":"url","id":"products_link","label":"Products link URL"},
     {"type":"text","id":"add_to_cart_label","label":"Quick add label","default":"Add to cart"},
     {"type":"text","id":"services_label","label":"Services label","default":"Service promises"},
+    {"type":"select","id":"usp_mobile_layout","label":"USP mobile layout","options":[{"value":"auto","label":"Automatic"},{"value":"grid","label":"Two-column grid"},{"value":"scroll","label":"Horizontal cards"},{"value":"stack","label":"Stacked rows"}],"default":"auto"},
     {"type":"checkbox","id":"show_review_summary","label":"Show merchant-verified store review summary","default":false},
     {"type":"checkbox","id":"show_editorial_testimonials","label":"Show merchant-managed editorial testimonials","default":false},
     {"type":"text","id":"reviews_eyebrow","label":"Reviews eyebrow","default":"LOVED BY THOUSANDS"},
@@ -575,6 +695,22 @@
     {"type":"text","id":"email_placeholder","label":"Email placeholder","default":"Enter your email"},
     {"type":"text","id":"newsletter_button","label":"Newsletter button","default":"GET 10% OFF"},
     {"type":"text","id":"newsletter_success","label":"Success message","default":"Welcome to our world."},
+    {"type":"header","content":"Mobile sticky product CTA"},
+    {"type":"checkbox","id":"enable_mobile_sticky_cta","label":"Enable mobile sticky CTA","default":false},
+    {"type":"product","id":"sticky_product","label":"Sticky CTA featured product"},
+    {"type":"checkbox","id":"sticky_show_rating","label":"Show product rating","default":true},
+    {"type":"checkbox","id":"sticky_show_thumbnail","label":"Show product thumbnail","default":true},
+    {"type":"text","id":"sticky_add_to_cart_label","label":"Add to cart label","default":"Add to cart"},
+    {"type":"text","id":"sticky_choose_options_label","label":"Choose options label","default":"Choose options"},
+    {"type":"text","id":"sticky_loading_label","label":"Loading label","default":"Adding..."},
+    {"type":"text","id":"sticky_success_label","label":"Success label","default":"Added"},
+    {"type":"header","content":"Social proof messages"},
+    {"type":"paragraph","content":"Only configured, merchant-approved activity messages are shown. No notification appears when no Social proof message blocks are configured."},
+    {"type":"checkbox","id":"enable_social_proof","label":"Enable social-proof notifications","default":false},
+    {"type":"range","id":"social_proof_delay","label":"First notification delay","min":12,"max":18,"step":1,"unit":"s","default":15},
+    {"type":"range","id":"social_proof_duration","label":"Display duration","min":5,"max":7,"step":1,"unit":"s","default":6},
+    {"type":"range","id":"social_proof_interval","label":"Time between notifications","min":25,"max":40,"step":1,"unit":"s","default":32},
+    {"type":"range","id":"social_proof_maximum","label":"Maximum per session","min":1,"max":3,"step":1,"default":2},
     {"type":"header","content":"Mobile navigation"},
     {"type":"text","id":"mobile_nav_label","label":"Navigation label","default":"Homepage shortcuts"},
     {"type":"text","id":"nav_shop","label":"Shop label","default":"SHOP"},
@@ -590,10 +726,11 @@
     {"type":"@app"},
     {"type":"feature","name":"Promise","settings":[{"type":"select","id":"placement","label":"Placement","options":[{"value":"hero","label":"Hero"},{"value":"service","label":"Services"}],"default":"hero"},{"type":"select","id":"icon","label":"Icon","options":[{"value":"spark","label":"Spark"},{"value":"shipping","label":"Shipping"},{"value":"shield","label":"Shield"},{"value":"globe","label":"Globe"},{"value":"lock","label":"Lock"},{"value":"returns","label":"Returns"}],"default":"spark"},{"type":"text","id":"heading","label":"Heading","default":"Individually Handmade"},{"type":"text","id":"text","label":"Supporting text","default":"Crafted with care"}]},
     {"type":"story","name":"Story slide","limit":3,"settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"image_picker","id":"image_mobile","label":"Image - mobile"},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"A WORLD CAPTURED IN LIGHT"},{"type":"richtext","id":"heading","label":"Heading","default":"<h2>Nature. Memory.<br><em>Preserved.</em></h2>"},{"type":"richtext","id":"text","label":"Text","default":"<p>Each chapter reveals another perspective on the worlds we preserve.</p>"},{"type":"text","id":"button_label","label":"Button label","default":"EXPLORE THE STORY"},{"type":"url","id":"button_link","label":"Button link"}]},
-    {"type":"process","name":"Process step","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"image_picker","id":"image_mobile","label":"Image - mobile"},{"type":"text","id":"heading","label":"Heading","default":"Inspiration"},{"type":"text","id":"text","label":"Text","default":"Every world begins with a story."}]},
+    {"type":"process","name":"Process step","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"image_picker","id":"image_mobile","label":"Image - mobile"},{"type":"text","id":"heading","label":"Heading","default":"Inspiration"},{"type":"text","id":"text","label":"Text","default":"Every world begins with a story."},{"type":"text","id":"duration","label":"Optional duration or supporting label"}]},
     {"type":"collection","name":"Collection artwork","settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"image_picker","id":"image_mobile","label":"Override image - mobile"},{"type":"text","id":"heading","label":"Editor preview heading","default":"Fantasy & Dragon"},{"type":"text","id":"text","label":"Description","default":"Power. Myth. Imagination."},{"type":"url","id":"link","label":"Override link"}]},
     {"type":"product","name":"Artwork product","settings":[{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"image_picker","id":"image_mobile","label":"Override image - mobile"},{"type":"text","id":"heading","label":"Editor preview heading","default":"Dragon Flame Lamp"},{"type":"text","id":"price","label":"Editor preview price","default":"$129.00"},{"type":"text","id":"compare_price","label":"Editor preview compare price","default":"$169.00"},{"type":"range","id":"stars","label":"Editor preview rating stars","min":0,"max":5,"step":0.1,"default":5},{"type":"text","id":"rating","label":"Editor preview rating text","default":"(1,266)"},{"type":"text","id":"badge","label":"Editor preview badge","default":"TOP RATED"}]},
     {"type":"testimonial","name":"Testimonial","settings":[{"type":"image_picker","id":"image","label":"Lifestyle image"},{"type":"image_picker","id":"image_mobile","label":"Lifestyle image - mobile"},{"type":"richtext","id":"quote","label":"Quote","default":"<p>Absolutely stunning! The quality is beyond what I expected.</p>"},{"type":"text","id":"author","label":"Author","default":"James R."},{"type":"text","id":"location","label":"Location","default":"USA"}]},
+    {"type":"social_proof","name":"Social proof message","limit":8,"settings":[{"type":"paragraph","content":"Enter only verified or approved activity. This theme never invents customer or purchase data."},{"type":"text","id":"customer_label","label":"Customer first name or anonymized label"},{"type":"text","id":"location","label":"General location"},{"type":"text","id":"activity_text","label":"Activity phrase","default":"purchased"},{"type":"product","id":"product","label":"Product"},{"type":"text","id":"product_label","label":"Product label override"},{"type":"text","id":"time_label","label":"Time label"},{"type":"image_picker","id":"image","label":"Optional product image"},{"type":"url","id":"link","label":"Optional product link override"}]},
     {"type":"gallery","name":"Home gallery image","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"image_picker","id":"image_mobile","label":"Image - mobile"},{"type":"text","id":"caption","label":"Caption","default":"A private world, glowing at home."}]}
   ],
   "presets": [{

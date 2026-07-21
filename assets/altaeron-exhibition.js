@@ -19,22 +19,34 @@
     }
 
     const particleHost = root.querySelector('[data-particles]');
-    if (particleHost && motionOK) {
+    if (particleHost && motionOK && !particleHost.childElementCount) {
       const fragment = document.createDocumentFragment();
-      for (let index = 0; index < 18; index += 1) {
+      const particleCount = window.matchMedia('(max-width: 749px)').matches ? 10 : 14;
+      for (let index = 0; index < particleCount; index += 1) {
         const particle = document.createElement('i');
         particle.className = 'altaeron__particle';
         particle.style.setProperty('--left', `${38 + Math.random() * 58}%`);
-        particle.style.setProperty('--size', `${1 + Math.random() * 3}px`);
-        particle.style.setProperty('--duration', `${5 + Math.random() * 7}s`);
-        particle.style.setProperty('--drift', `${-55 + Math.random() * 110}px`);
-        particle.style.animationDelay = `${Math.random() * -10}s`;
+        particle.style.setProperty('--size', `${1 + Math.random() * 2}px`);
+        particle.style.setProperty('--duration', `${14 + Math.random() * 10}s`);
+        particle.style.setProperty('--drift', `${-38 + Math.random() * 76}px`);
+        particle.style.animationDelay = `${Math.random() * -18}s`;
         fragment.appendChild(particle);
       }
       particleHost.appendChild(fragment);
     }
 
     root.dataset.altaeronReady = 'true';
+    const ambientVisuals = root.querySelectorAll('[data-ambient-visual]');
+    if (!motionOK || !('IntersectionObserver' in window)) {
+      ambientVisuals.forEach((item) => item.classList.toggle('is-ambient-active', motionOK));
+    } else {
+      const ambientObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => entry.target.classList.toggle('is-ambient-active', entry.isIntersecting));
+      }, { rootMargin: '80px 0px', threshold: 0.01 });
+      ambientVisuals.forEach((item) => ambientObserver.observe(item));
+      cleanups.push(() => ambientObserver.disconnect());
+    }
+
     const revealItems = root.querySelectorAll('[data-reveal]');
     if (!motionOK || !('IntersectionObserver' in window)) {
       revealItems.forEach((item) => item.classList.add('is-visible'));
@@ -50,6 +62,34 @@
       cleanups.push(() => observer.disconnect());
       const heroContent = root.querySelector('[data-reveal="hero"]');
       if (heroContent) requestAnimationFrame(() => heroContent.classList.add('is-visible'));
+    }
+
+    const cardRevealItems = root.querySelectorAll('[data-card-reveal]');
+    if (!motionOK || root.dataset.cardAnimations !== 'true' || !('IntersectionObserver' in window)) {
+      cardRevealItems.forEach((item) => item.classList.add('is-card-revealed'));
+    } else {
+      const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-card-revealed');
+          cardObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -5% 0px', threshold: 0.1 });
+      cardRevealItems.forEach((item) => cardObserver.observe(item));
+      cleanups.push(() => cardObserver.disconnect());
+    }
+
+    const shimmerButtons = root.querySelectorAll('.altaeron__button--primary');
+    if (motionOK && root.dataset.buttonShimmer === 'true' && 'IntersectionObserver' in window) {
+      const shimmerObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-shimmer-ready');
+          shimmerObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.45 });
+      shimmerButtons.forEach((button) => shimmerObserver.observe(button));
+      cleanups.push(() => shimmerObserver.disconnect());
     }
 
     root.querySelectorAll('[data-slider]').forEach((track) => {
@@ -163,6 +203,23 @@
     const processTimeline = root.querySelector('[data-process-timeline]');
     if (processTrack && processTimeline) {
       const slides = Array.from(processTrack.querySelectorAll('[data-slide]'));
+      const mobileJourneyQuery = window.matchMedia('(max-width: 749px)');
+      const syncJourneySemantics = () => {
+        const isVertical = mobileJourneyQuery.matches && root.dataset.journeyMobile === 'vertical';
+        processTrack.setAttribute('role', isVertical ? 'list' : 'region');
+        if (isVertical) processTrack.removeAttribute('tabindex');
+        else processTrack.setAttribute('tabindex', '0');
+        if (isVertical) processTrack.removeAttribute('aria-roledescription');
+        else processTrack.setAttribute('aria-roledescription', 'carousel');
+        slides.forEach((slide) => {
+          slide.setAttribute('role', isVertical ? 'listitem' : 'group');
+          if (isVertical) slide.removeAttribute('aria-roledescription');
+          else slide.setAttribute('aria-roledescription', 'slide');
+        });
+      };
+      mobileJourneyQuery.addEventListener?.('change', syncJourneySemantics);
+      cleanups.push(() => mobileJourneyQuery.removeEventListener?.('change', syncJourneySemantics));
+      syncJourneySemantics();
       const controls = Array.from(processTimeline.querySelectorAll('[data-process-nav]'));
       const progress = processTimeline.querySelector(':scope > span');
       const nextButton = root.querySelector('[data-process-next]');
@@ -316,9 +373,224 @@
       cleanups.push(() => navObserver.disconnect());
     }
 
-    root.addEventListener('focusin', (event) => root.classList.toggle('is-keyboard-open', event.target.matches('input, textarea, select')));
+    const mobileFixedQuery = window.matchMedia('(max-width: 749px)');
+    const stickyProduct = root.querySelector('[data-sticky-product]');
+    const socialProof = root.querySelector('[data-social-proof]');
+    const hero = root.querySelector('#altaeron-hero');
+    const overlaySelectors = [
+      'cart-drawer[open]',
+      'menu-drawer[open]',
+      'search-drawer[open]',
+      'quick-view-modal[open]',
+      'dialog[open]',
+      '.modal-show',
+      '.modal-showing',
+      '.cookie-banner:not([hidden])',
+      '[data-cookie-banner]:not([hidden])',
+      '#shopify-pc__banner:not([hidden])'
+    ].join(',');
+    const isBlockingOverlayOpen = () => Array.from(document.querySelectorAll(overlaySelectors)).some((element) => {
+      if (element.hasAttribute('open') || element.classList.contains('modal-show') || element.classList.contains('modal-showing')) return true;
+      const style = window.getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity || 1) > 0 && rect.width > 0 && rect.height > 0;
+    });
+    const isInViewport = (element) => {
+      if (!element) return false;
+      const rect = element.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    };
+    let fixedFrame = 0;
+    const updateFixedComponents = () => {
+      fixedFrame = 0;
+      const mobile = mobileFixedQuery.matches;
+      const contentBlocked = mobile && (isInViewport(newsletter) || isInViewport(footer));
+      const overlayBlocked = mobile && isBlockingOverlayOpen();
+      const heroPassed = mobile && hero && hero.getBoundingClientRect().bottom <= 0;
+      const showSticky = Boolean(stickyProduct && heroPassed && !contentBlocked && !overlayBlocked && !root.classList.contains('is-keyboard-open'));
+
+      root.classList.toggle('is-content-blocked', contentBlocked);
+      root.classList.toggle('is-overlay-blocked', overlayBlocked);
+      root.classList.toggle('is-sticky-visible', showSticky);
+      stickyProduct?.classList.toggle('is-visible', showSticky);
+      stickyProduct?.setAttribute('aria-hidden', showSticky ? 'false' : 'true');
+      if (stickyProduct) stickyProduct.inert = !showSticky;
+
+      if (mobileNav) {
+        mobileNav.classList.toggle('is-purchase-obscured', showSticky);
+        mobileNav.inert = showSticky;
+        if (showSticky) mobileNav.setAttribute('aria-hidden', 'true');
+        else mobileNav.removeAttribute('aria-hidden');
+      }
+      root.altaeronProofBlockerUpdate?.();
+    };
+    const requestFixedUpdate = () => {
+      if (fixedFrame) return;
+      fixedFrame = requestAnimationFrame(updateFixedComponents);
+    };
+
+    if (stickyProduct) {
+      stickyProduct.hidden = false;
+      stickyProduct.setAttribute('aria-hidden', 'true');
+      stickyProduct.inert = true;
+    }
+    window.addEventListener('scroll', requestFixedUpdate, { passive: true });
+    window.addEventListener('resize', requestFixedUpdate, { passive: true });
+    document.addEventListener('visibilitychange', requestFixedUpdate);
+    mobileFixedQuery.addEventListener?.('change', requestFixedUpdate);
+    const fixedSafetyInterval = window.setInterval(() => {
+      if (!document.hidden && mobileFixedQuery.matches) requestFixedUpdate();
+    }, 900);
+    cleanups.push(() => {
+      window.removeEventListener('scroll', requestFixedUpdate);
+      window.removeEventListener('resize', requestFixedUpdate);
+      document.removeEventListener('visibilitychange', requestFixedUpdate);
+      mobileFixedQuery.removeEventListener?.('change', requestFixedUpdate);
+      window.clearInterval(fixedSafetyInterval);
+      if (fixedFrame) cancelAnimationFrame(fixedFrame);
+    });
+
+    const stickyForm = stickyProduct?.querySelector('form[is="product-form"]');
+    const stickyButton = stickyForm?.querySelector('[type="submit"]');
+    let stickySubmitting = false;
+    let stickyResetTimer = 0;
+    const setStickyButtonState = (state) => {
+      if (!stickyButton) return;
+      const labels = {
+        default: stickyButton.dataset.defaultLabel,
+        loading: stickyButton.dataset.loadingLabel,
+        success: stickyButton.dataset.successLabel
+      };
+      stickyButton.textContent = labels[state] || labels.default;
+      stickyButton.toggleAttribute('aria-busy', state === 'loading');
+    };
+    const resetStickyButton = (delay = 0) => {
+      window.clearTimeout(stickyResetTimer);
+      stickyResetTimer = window.setTimeout(() => {
+        stickySubmitting = false;
+        setStickyButtonState('default');
+      }, delay);
+    };
+    const handleStickySubmit = () => {
+      if (stickySubmitting) return;
+      stickySubmitting = true;
+      setStickyButtonState('loading');
+    };
+    const handleStickySuccess = () => {
+      if (!stickySubmitting) return;
+      setStickyButtonState('success');
+      resetStickyButton(1600);
+    };
+    const handleStickyError = () => {
+      if (!stickySubmitting) return;
+      resetStickyButton(2200);
+    };
+    stickyForm?.addEventListener('submit', handleStickySubmit);
+    document.addEventListener('product-ajax:added', handleStickySuccess);
+    document.addEventListener('product-ajax:error', handleStickyError);
+    cleanups.push(() => {
+      stickyForm?.removeEventListener('submit', handleStickySubmit);
+      document.removeEventListener('product-ajax:added', handleStickySuccess);
+      document.removeEventListener('product-ajax:error', handleStickyError);
+      window.clearTimeout(stickyResetTimer);
+    });
+
+    if (socialProof) {
+      const messageHost = socialProof.querySelector('[data-social-proof-current]');
+      const messages = Array.from(socialProof.querySelectorAll('[data-social-proof-message]'));
+      const closeButton = socialProof.querySelector('[data-social-proof-close]');
+      const storageKey = `altaeron-social-proof:${root.id}`;
+      const maximum = Math.max(1, Number(socialProof.dataset.maximum) || 2);
+      const delay = Math.max(12000, Number(socialProof.dataset.delay) || 15000);
+      const duration = Math.max(5000, Number(socialProof.dataset.duration) || 6000);
+      const interval = Math.max(25000, Number(socialProof.dataset.interval) || 32000);
+      let proofState = { shown: 0, index: 0, closed: false };
+      let proofTimer = 0;
+      let proofDeadline = 0;
+      let proofRemaining = 0;
+      let proofCallback = null;
+
+      try {
+        proofState = { ...proofState, ...JSON.parse(sessionStorage.getItem(storageKey) || '{}') };
+      } catch (_error) {
+        proofState = { shown: 0, index: 0, closed: false };
+      }
+      const saveProofState = () => {
+        try { sessionStorage.setItem(storageKey, JSON.stringify(proofState)); } catch (_error) { /* Storage can be unavailable. */ }
+      };
+      const clearProofTimer = () => {
+        window.clearTimeout(proofTimer);
+        proofTimer = 0;
+      };
+      const setProofTimer = (callback, wait) => {
+        clearProofTimer();
+        proofCallback = callback;
+        proofRemaining = wait;
+        proofDeadline = Date.now() + wait;
+        if (!document.hidden) proofTimer = window.setTimeout(callback, wait);
+      };
+      const proofIsBlocked = () => !mobileFixedQuery.matches || root.classList.contains('is-content-blocked') || root.classList.contains('is-overlay-blocked') || root.classList.contains('is-keyboard-open');
+      const hideProof = (scheduleNext = true) => {
+        socialProof.classList.remove('is-visible');
+        if (scheduleNext && !proofState.closed && proofState.shown < maximum) setProofTimer(showProof, interval);
+      };
+      const showProof = () => {
+        if (proofState.closed || proofState.shown >= maximum || !messages.length) return;
+        if (proofIsBlocked()) {
+          setProofTimer(showProof, 3000);
+          return;
+        }
+        const message = messages[proofState.index % messages.length];
+        if (!message || !messageHost) return;
+        messageHost.replaceChildren(...Array.from(message.childNodes).map((node) => node.cloneNode(true)));
+        proofState.index = (proofState.index + 1) % messages.length;
+        proofState.shown += 1;
+        saveProofState();
+        socialProof.classList.add('is-visible');
+        setProofTimer(() => hideProof(true), duration);
+      };
+      const closeProof = () => {
+        proofState.closed = true;
+        saveProofState();
+        clearProofTimer();
+        socialProof.classList.remove('is-visible');
+        socialProof.hidden = true;
+      };
+      const handleProofVisibility = () => {
+        if (document.hidden) {
+          if (proofTimer) proofRemaining = Math.max(0, proofDeadline - Date.now());
+          clearProofTimer();
+        } else if (proofCallback && proofRemaining >= 0 && !proofState.closed && proofState.shown <= maximum) {
+          setProofTimer(proofCallback, proofRemaining);
+        }
+      };
+
+      root.altaeronProofBlockerUpdate = () => {
+        if (socialProof.classList.contains('is-visible') && proofIsBlocked()) hideProof(true);
+      };
+      closeButton?.addEventListener('click', closeProof);
+      document.addEventListener('visibilitychange', handleProofVisibility);
+      if (!proofState.closed && proofState.shown < maximum && messages.length) {
+        socialProof.hidden = false;
+        setProofTimer(showProof, delay);
+      }
+      cleanups.push(() => {
+        clearProofTimer();
+        closeButton?.removeEventListener('click', closeProof);
+        document.removeEventListener('visibilitychange', handleProofVisibility);
+        delete root.altaeronProofBlockerUpdate;
+      });
+    }
+
+    requestFixedUpdate();
+
+    root.addEventListener('focusin', (event) => {
+      root.classList.toggle('is-keyboard-open', event.target.matches('input, textarea, select'));
+      requestFixedUpdate();
+    });
     root.addEventListener('focusout', () => window.setTimeout(() => {
       root.classList.toggle('is-keyboard-open', root.contains(document.activeElement) && document.activeElement.matches('input, textarea, select'));
+      requestFixedUpdate();
     }, 0));
 
     root.querySelectorAll('.altaeron__newsletter-form').forEach((form) => form.addEventListener('submit', () => {
@@ -365,9 +637,14 @@
       }
     }));
 
+    root.altaeronEditorSelect = () => {
+      root.querySelectorAll('[data-reveal]').forEach((item) => item.classList.add('is-visible'));
+      requestFixedUpdate();
+    };
     root.altaeronCleanup = () => {
       cleanups.forEach((cleanup) => cleanup());
       document.documentElement.classList.remove('altaeron-modal-open');
+      delete root.altaeronEditorSelect;
     };
   }
 
@@ -377,4 +654,8 @@
   else initAll();
   document.addEventListener('shopify:section:load', (event) => initAll(event.target));
   document.addEventListener('shopify:section:unload', (event) => event.target.querySelectorAll('[data-altaeron]').forEach((root) => root.altaeronCleanup?.()));
+  document.addEventListener('shopify:section:select', (event) => {
+    initAll(event.target);
+    event.target.querySelectorAll('[data-altaeron]').forEach((root) => root.altaeronEditorSelect?.());
+  });
 })();
