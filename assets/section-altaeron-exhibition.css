@@ -179,14 +179,14 @@
 @media (max-width: 749px) {
   .altaeron__process-card {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto auto 180px;
+    grid-template-rows: auto auto auto 240px;
     min-height: 0;
   }
   .altaeron__process-image {
     border-radius: 0 0 8px 8px;
     grid-column: 1;
     grid-row: 4;
-    height: 180px;
+    height: 240px;
   }
   .altaeron__process-card .altaeron__number {
     align-self: auto;
