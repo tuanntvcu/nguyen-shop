@@ -14,7 +14,10 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "show_social": true
+        "show_social": true,
+        "shop_menu": "footer-shop",
+        "support_menu": "footer-support",
+        "company_menu": "footer-company"
       }
     },
     "mobile_sticky_bar_aYhgJK": {

@@ -60,7 +60,6 @@ Create these definitions in **Settings > Custom data > Products**. Namespace/key
 | `custom.related_realm` | Collection reference | Primary related-product source |
 | `custom.light_modes` | List of single line text | Optional editorial mode labels; commerce selectors still come from variants |
 | `custom.light_mode_descriptions` | JSON or list of `altaeron_light_mode` references | Optional supporting mode content |
-| `custom.size_guide_page` | Page reference | Product-specific size-guide link |
 | `custom.delivery_note` | Single line text | Product-specific factual delivery note |
 | `custom.craft_steps` | List of metaobject references (`altaeron_craft_step`) | Craft journey |
 | `custom.product_faqs` | List of metaobject references (`altaeron_product_faq`) | Product FAQs |
@@ -72,7 +71,15 @@ Create these definitions in **Settings > Custom data > Products**. Namespace/key
 | `custom.artifact_details` | Rich text | Macro-gallery introduction |
 | `custom.story_video_poster` | File reference (image) | Reserved custom poster |
 
-The template also reads Shopify's standard `reviews.rating` and `reviews.rating_count` metafields. For Dragon Flame Lamp these are populated as `4.9` and `1286` to match the approved PDP content. Review-provider-owned fields remain separate.
+### Variant metafield definition
+
+Create this definition in **Settings > Custom data > Variants**.
+
+| Namespace and key | Shopify type | Use |
+| --- | --- | --- |
+| `custom.size` | Single line text | Overall dimensions (`W x D x H`) shown in the product size-guide modal |
+
+The template reads Judge.me's live average rating and published review count from the Shopify standard metafields `reviews.rating` and `reviews.rating_count`. Judge.me populates and keeps these fields in sync; do not enter placeholder values for live products. The theme renders that data with Altaeron's own star markup and styling.
 
 ## Metaobject definitions
 
@@ -127,11 +134,12 @@ Create these in **Settings > Custom data > Metaobjects**.
 2. Create craft-step, FAQ, and optional customer-story entries.
 3. Open each product and populate only the applicable fields. Empty optional fields collapse cleanly.
 4. Configure actual product options and variants for Size, Base/Material/Finish, Light Mode, or any other merchant terminology. The template does not assume fixed option names.
-5. Add swatches through Shopify category/native swatch data, or configure Palo Alto's global swatch mapping. Variant-image and text fallbacks remain available in the section settings.
-6. Add product images, Shopify videos, external videos, or 3D models to the normal Shopify product media area.
-7. In the theme editor, open a product using the Altaeron template and configure global labels, colors, trust statements, motion, thumbnails, zoom, dynamic checkout, and app blocks.
-8. Add the installed review app's product widget as an app block inside **Altaeron story & reviews**. Add any rating badge app block to **Altaeron product** if the provider requires it.
-9. Enter shipping, returns, and warranty trust claims only after confirming the store policies. They intentionally default to blank.
+5. Add each variant's **Altaeron overall dimensions** value, for example `18 x 12 x 24 cm`. The PDP builds its size-guide modal table directly from the product's variants.
+6. Add swatches through Shopify category/native swatch data, or configure Palo Alto's global swatch mapping. Variant-image and text fallbacks remain available in the section settings.
+7. Add product images, Shopify videos, external videos, or 3D models to the normal Shopify product media area.
+8. In the theme editor, open a product using the Altaeron template and configure global labels, colors, trust statements, motion, thumbnails, zoom, dynamic checkout, and app blocks.
+9. Add the installed review app's product widget as an app block inside **Altaeron story & reviews**. Add any rating badge app block to **Altaeron product** if the provider requires it.
+10. Enter shipping, returns, and warranty trust claims only after confirming the store policies. They intentionally default to blank.
 
 ## Assigning the template
 

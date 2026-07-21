@@ -262,8 +262,13 @@
           {%- assign card_product = block.settings.product -%}
           {%- if card_product != blank or request.design_mode -%}
           {%- assign product_index = product_index | plus: 1 -%}
-          {%- assign product_rating = card_product.metafields.reviews.rating.value -%}
-          {%- assign product_rating_count = card_product.metafields.reviews.rating_count.value | default: 0 -%}
+          {%- comment -%}
+            Judge.me syncs its live average and published review count to Shopify's
+            standard reviews metafields. Keep the data provider separate from this
+            section's custom star markup and styling.
+          {%- endcomment -%}
+          {%- assign judgeme_rating = card_product.metafields.reviews.rating.value -%}
+          {%- assign judgeme_rating_count = card_product.metafields.reviews.rating_count.value | default: 0 -%}
           {%- assign quick_variant = card_product.selected_or_first_available_variant -%}
           <article class="altaeron__product-card" data-slide role="group" aria-roledescription="slide" aria-label="{{ product_index }} {{ 'general.slider.of' | t }} {{ product_slide_count }}" {{ block.shopify_attributes }}>
             <a class="altaeron__product-image" href="{{ card_product.url | default: routes.all_products_collection_url }}" aria-label="{% if card_product != blank %}{{ card_product.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}">
@@ -289,13 +294,13 @@
             </a>
             <div class="altaeron__product-copy">
               <h3><a href="{{ card_product.url | default: routes.all_products_collection_url }}">{% if card_product != blank %}{{ card_product.title | escape }}{% else %}{{ block.settings.heading | escape }}{% endif %}</a></h3>
-              {%- if product_rating != blank and product_rating_count > 0 -%}
+              {%- if card_product != blank and judgeme_rating != blank and judgeme_rating_count > 0 -%}
                 <div class="altaeron__rating">
-                  <span class="visually-hidden">{{ product_rating.rating }} {{ section.settings.rating_accessibility_suffix | escape }}, {{ product_rating_count }} {{ section.settings.reviews_count_label | escape }}</span>
-                  <span class="altaeron__stars" style="--rating-percent: {{ product_rating.rating | times: 100.0 | divided_by: product_rating.scale_max }}%" aria-hidden="true">★★★★★</span>
-                  <small>({{ product_rating_count }})</small>
+                  <span class="visually-hidden">{{ judgeme_rating.rating }} {{ section.settings.rating_accessibility_suffix | escape }}, {{ judgeme_rating_count }} {{ section.settings.reviews_count_label | escape }}</span>
+                  <span class="altaeron__stars" style="--rating-percent: {{ judgeme_rating.rating | times: 100.0 | divided_by: judgeme_rating.scale_max }}%" aria-hidden="true">★★★★★</span>
+                  <small>({{ judgeme_rating_count }})</small>
                 </div>
-              {%- elsif block.settings.rating != blank and block.settings.stars > 0 -%}
+              {%- elsif card_product == blank and request.design_mode and block.settings.rating != blank and block.settings.stars > 0 -%}
                 <div class="altaeron__rating"><span class="visually-hidden">{{ block.settings.stars }} {{ section.settings.rating_accessibility_suffix | escape }}</span><span class="altaeron__stars" style="--rating-percent: {{ block.settings.stars | times: 20 }}%" aria-hidden="true">★★★★★</span><small>{{ block.settings.rating | escape }}</small></div>
               {%- endif -%}
               <div class="altaeron__price">

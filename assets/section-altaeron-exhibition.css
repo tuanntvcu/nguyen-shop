@@ -176,6 +176,36 @@
   .altaeron__services .altaeron__service:nth-child(n+4) { display: none; }
 }
 
+@media (max-width: 749px) {
+  .altaeron__process-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto 180px;
+    min-height: 0;
+  }
+  .altaeron__process-image {
+    border-radius: 0 0 8px 8px;
+    grid-column: 1;
+    grid-row: 4;
+    height: 180px;
+  }
+  .altaeron__process-card .altaeron__number {
+    align-self: auto;
+    grid-column: 1;
+    grid-row: 1;
+    margin: 20px 18px 0;
+  }
+  .altaeron__process-card h3 {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 10px 18px 0;
+  }
+  .altaeron__process-card p {
+    grid-column: 1;
+    grid-row: 3;
+    margin: 8px 18px 18px;
+  }
+}
+
 @media (min-width: 750px) and (max-width: 989px) {
   .altaeron__hero-features { bottom: 24px; display: grid; gap: 10px; grid-template-columns: repeat(6,minmax(0,1fr)); left: 0; position: absolute; z-index: 2; }
   .altaeron__feature { font-size: clamp(7px,.85vw,9px); gap: 6px; white-space: nowrap; }

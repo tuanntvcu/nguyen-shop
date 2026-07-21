@@ -13,6 +13,31 @@
   assign menu_mobile = section.settings.menu_mobile
   assign logo_mobile_position = section.settings.logo_mobile_position
   assign enable_transparent_header = section.settings.enable_transparent_header
+  assign logo = settings.logo
+  assign logo_mobile = settings.logo_mobile
+  assign logo_transparent = settings.logo_transparent
+  assign logo_transparent_mobile = settings.logo_transparent_mobile
+
+  if logo_mobile == blank
+    assign logo_mobile = logo
+  endif
+
+  if logo == blank
+    assign logo = logo_mobile
+  endif
+
+  if logo_transparent == blank
+    assign logo_transparent = logo
+  endif
+
+  if logo_transparent_mobile == blank
+    if logo_mobile != blank
+      assign logo_transparent_mobile = logo_mobile
+    else
+      assign logo_transparent_mobile = logo_transparent
+    endif
+  endif
+
   assign classes = 'header section--padding grid items-center' | append: ' header--' | append: header_layout
   assign classes = classes | append: ' color-' | append: section.settings.color_scheme
   assign classes = classes | append: ' header-mobile--' | append: logo_mobile_position
@@ -102,36 +127,15 @@
   <div class="header__logo flex justify-center z-1">
   <a
     href="{{ routes.root_url }}"
-    class="h3 relative flex{% unless settings.logo %} header__logo--text{% else %} header__logo--image{% endunless %}"
+    class="h3 relative flex{% unless logo %} header__logo--text{% else %} header__logo--image{% endunless %}"
   >
-    {%- if settings.logo != blank -%}
+    {%- if logo != blank -%}
       {%- liquid
-        assign logo = settings.logo
         assign logo_width = settings.logo_width
         assign logo_width_2x = settings.logo_width | times: 2
 
-        assign logo_mobile = settings.logo_mobile
         assign logo_width_mobile = settings.logo_width_mobile
         assign logo_width_mobile_2x = settings.logo_width_mobile | times: 2
-
-        assign logo_transparent = settings.logo_transparent
-        assign logo_transparent_mobile = settings.logo_transparent_mobile
-
-        if logo_mobile == blank
-          assign logo_mobile = logo
-        endif
-
-        if logo_transparent == blank
-          assign logo_transparent = logo
-        endif
-
-        if logo_transparent_mobile == blank
-          if logo_transparent == blank
-            assign logo_transparent_mobile = logo_mobile
-          else
-            assign logo_transparent_mobile = logo_transparent
-          endif
-        endif
       -%}
       {%- if logo_mobile -%}
         <img

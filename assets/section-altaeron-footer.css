@@ -36,6 +36,23 @@
   display: inline-flex;
 }
 
+.altaeron-site-footer__brand-link picture {
+  display: block;
+}
+
+.altaeron-site-footer__logo {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: var(--altaeron-footer-logo-width-mobile);
+}
+
+@media (min-width: 768px) {
+  .altaeron-site-footer__logo {
+    width: var(--altaeron-footer-logo-width);
+  }
+}
+
 .altaeron-site-footer .altaeron-brand {
   gap: 1.2rem;
   font-size: 1rem;

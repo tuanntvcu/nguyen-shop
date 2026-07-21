@@ -718,11 +718,117 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
 
 .altaeron-size-guide {
   display: inline-block;
+  appearance: none;
   margin-top: -1rem;
+  padding: 0;
+  border: 0;
   color: var(--altaeron-muted);
+  background: transparent;
+  font-family: inherit;
   font-size: 1.1rem;
   text-decoration: underline;
   text-underline-offset: .35rem;
+  cursor: pointer;
+}
+
+.altaeron-size-guide:hover {
+  color: var(--altaeron-accent);
+}
+
+.altaeron-size-guide-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: var(--altaeron-text);
+  background: transparent;
+}
+
+.altaeron-size-guide-modal .fixed-overlay {
+  background: rgba(0, 0, 0, .76);
+  backdrop-filter: blur(.6rem);
+}
+
+.altaeron-size-guide-modal .drawer__inner {
+  border: 1px solid var(--altaeron-line);
+  color: var(--altaeron-text);
+  background:
+    radial-gradient(circle at 85% 0, color-mix(in srgb, var(--altaeron-accent) 8%, transparent), transparent 23rem),
+    var(--altaeron-bg);
+  box-shadow: 0 2.4rem 8rem rgba(0, 0, 0, .5);
+}
+
+.altaeron-size-guide-modal .drawer__close-btn {
+  color: var(--altaeron-text);
+}
+
+.altaeron-size-guide-modal__content {
+  display: grid;
+  gap: 3rem;
+}
+
+.altaeron-size-guide-modal__header {
+  display: grid;
+  gap: 1.2rem;
+  padding-right: 4rem;
+}
+
+.altaeron-size-guide-modal__header h2 {
+  max-width: 48rem;
+  font-size: clamp(3rem, 5vw, 5.2rem);
+  line-height: .98;
+}
+
+.altaeron-size-guide-modal__header > p:last-child {
+  max-width: 57rem;
+  color: var(--altaeron-muted);
+  font-size: 1.35rem;
+  line-height: 1.65;
+}
+
+.altaeron-size-guide-modal__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--altaeron-line);
+  border-radius: .3rem;
+}
+
+.altaeron-size-guide-modal__table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  color: var(--altaeron-text);
+  background: color-mix(in srgb, var(--altaeron-panel) 86%, transparent);
+}
+
+.altaeron-size-guide-modal__table :is(th, td) {
+  padding: 1.7rem 2rem;
+  border-bottom: 1px solid var(--altaeron-line);
+  text-align: left;
+}
+
+.altaeron-size-guide-modal__table thead th {
+  color: var(--altaeron-muted);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.altaeron-size-guide-modal__table tbody th {
+  width: 30%;
+  color: var(--altaeron-accent);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.altaeron-size-guide-modal__table tbody td {
+  font-size: 1.35rem;
+}
+
+.altaeron-size-guide-modal__table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
 }
 
 .altaeron-selling-plans {
@@ -979,10 +1085,31 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
   grid-auto-columns: minmax(28rem, 38%);
   grid-auto-flow: column;
   gap: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: .8rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-color: var(--altaeron-accent) var(--altaeron-line);
+  scrollbar-width: thin;
+}
+
+.altaeron-homes__rail::-webkit-scrollbar {
+  height: .5rem;
+}
+
+.altaeron-homes__rail::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: var(--altaeron-line);
+}
+
+.altaeron-homes__rail::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--altaeron-accent);
+}
+
+.altaeron-homes__rail::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .altaeron-homes__item {
@@ -1333,6 +1460,39 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
 }
 
 @media (max-width: 767px) {
+  .altaeron-size-guide-modal {
+    padding: 1rem;
+  }
+
+  .altaeron-size-guide-modal .drawer__body {
+    padding: 2.4rem 1.6rem 1.6rem;
+  }
+
+  .altaeron-size-guide-modal__content {
+    gap: 2.2rem;
+  }
+
+  .altaeron-size-guide-modal__header {
+    gap: 1rem;
+  }
+
+  .altaeron-size-guide-modal__header h2 {
+    font-size: 3.4rem;
+  }
+
+  .altaeron-size-guide-modal__table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .altaeron-size-guide-modal__table :is(th, td) {
+    padding: 1.4rem 1.2rem;
+  }
+
+  .altaeron-size-guide-modal__table tbody th {
+    width: 34%;
+  }
+
   .altaeron-progress {
     position: sticky;
     z-index: 11;
@@ -1853,8 +2013,8 @@ body.altaeron .header__wrapper {
 
   .altaeron-lore__copy,
   .altaeron-lore__media {
-    min-height: 34rem;
-    height: 34rem;
+    min-height: 42rem;
+    height: 42rem;
   }
 
   .altaeron-craft,
@@ -1935,8 +2095,8 @@ body.altaeron .header__wrapper {
 
   .altaeron-packaging {
     grid-template-columns: 32rem minmax(0, 1fr);
-    min-height: 32rem;
-    height: 32rem;
+    min-height: 40rem;
+    height: 40rem;
   }
 
   .altaeron-packaging__copy {
@@ -1978,8 +2138,14 @@ body.altaeron .header__wrapper {
     grid-auto-columns: 28%;
   }
 
+  .altaeron-homes {
+    min-height: 30rem;
+    align-items: center;
+    padding-block: 4.5rem;
+  }
+
   .altaeron-homes__item {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 2;
   }
 
   .altaeron-featured-story {

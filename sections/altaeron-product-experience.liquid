@@ -1,6 +1,7 @@
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant
   assign product_form_id = 'product-form-' | append: section.id
+  assign size_guide_modal_id = 'AltaeronSizeGuide-' | append: section.id
   assign legend_video = product.metafields.custom.legend_video.value
   assign legend_image = product.metafields.custom.legend_image.value
   assign craft_steps = product.metafields.custom.craft_steps_v2.value | default: product.metafields.custom.craft_steps.value
@@ -239,8 +240,16 @@
           {%- when 'variant_picker' -%}
             <div class="altaeron-purchase__block altaeron-purchase__variants" {{ block.shopify_attributes }}>
               {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id, update_url: true %}
-              {%- assign size_guide = product.metafields.custom.size_guide_page.value -%}
-              {%- if size_guide != blank -%}<a class="altaeron-size-guide" href="{{ size_guide.url }}">{{ section.settings.size_guide_label | escape }} →</a>{%- endif -%}
+              {%- unless product.has_only_default_variant -%}
+                <button
+                  type="button"
+                  class="altaeron-size-guide"
+                  aria-controls="{{ size_guide_modal_id }}"
+                  aria-haspopup="dialog"
+                >
+                  {{ section.settings.size_guide_label | escape }} →
+                </button>
+              {%- endunless -%}
             </div>
           {%- when 'buy_buttons' -%}
             <div class="altaeron-purchase__block" {{ block.shopify_attributes }}>
@@ -307,6 +316,66 @@
   <product-recently-viewed data-product-id="{{ product.id }}" class="hidden"></product-recently-viewed>
   <script type="application/ld+json">{{ product | structured_data }}</script>
 </product-info>
+
+{%- unless product.has_only_default_variant -%}
+  <basic-modal
+    id="{{ size_guide_modal_id }}"
+    class="altaeron-size-guide-modal altaeron-surface drawer modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="{{ size_guide_modal_id }}-Title"
+    hidden
+    style="--altaeron-bg: {{ section.settings.background }}; --altaeron-text: {{ section.settings.text_color }}; --altaeron-accent: {{ section.settings.accent_color }}; --altaeron-muted: {{ section.settings.muted_color }}; --modal-width: 72rem;"
+  >
+    <div class="fixed-overlay" aria-controls="{{ size_guide_modal_id }}"></div>
+    <div class="drawer__inner">
+      <button
+        type="button"
+        class="drawer__close-btn"
+        aria-controls="{{ size_guide_modal_id }}"
+        aria-label="{{ 'accessibility.close' | t }}"
+      >
+        {% render 'icon-close' %}
+      </button>
+      <div class="drawer__body v-scrollable">
+        <div class="altaeron-size-guide-modal__content">
+          <header class="altaeron-size-guide-modal__header">
+            <p class="altaeron-kicker">{{ section.settings.size_guide_label | escape }}</p>
+            <h2 id="{{ size_guide_modal_id }}-Title">{{ section.settings.size_guide_heading | escape }}</h2>
+            {%- if section.settings.size_guide_intro != blank -%}
+              <p>{{ section.settings.size_guide_intro | escape }}</p>
+            {%- endif -%}
+          </header>
+
+          <div class="altaeron-size-guide-modal__table-wrap">
+            <table class="altaeron-size-guide-modal__table">
+              <thead>
+                <tr>
+                  <th scope="col">Size</th>
+                  <th scope="col">Overall dimensions (W × D × H)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for variant in product.variants -%}
+                  <tr>
+                    <th scope="row">{{ variant.title | escape }}</th>
+                    <td>
+                      {%- if variant.metafields.custom.size.value != blank -%}
+                        {{ variant.metafields.custom.size.value | escape }}
+                      {%- else -%}
+                        <span aria-label="Not provided">—</span>
+                      {%- endif -%}
+                    </td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </basic-modal>
+{%- endunless -%}
 
 <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
 {%- if section.settings.enable_image_zoom -%}<script src="{{ 'photoswipe.js' | asset_url }}" defer="defer"></script>{%- endif -%}
@@ -378,6 +447,8 @@
     { "type": "text", "id": "choose_eyebrow", "label": "Purchase eyebrow", "default": "Choose your world" },
     { "type": "text", "id": "choose_heading", "label": "Purchase heading", "default": "Create Your World" },
     { "type": "text", "id": "size_guide_label", "label": "Size guide label", "default": "Size guide" },
+    { "type": "text", "id": "size_guide_heading", "label": "Size guide heading", "default": "Choose the scale of your world" },
+    { "type": "textarea", "id": "size_guide_intro", "label": "Size guide introduction", "default": "Use the measurements below to plan shelf, desk or bedside placement. Measurements include the illuminated resin artwork and wooden display base." },
     { "type": "text", "id": "purchase_options_label", "label": "Purchase options label", "default": "Purchase options" },
     { "type": "text", "id": "one_time_purchase_label", "label": "One-time purchase label", "default": "One-time purchase" },
     { "type": "text", "id": "subscription_policy_label", "label": "Subscription policy label", "default": "Subscription policy" },
