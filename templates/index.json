@@ -99,42 +99,42 @@
         "process_1": {
           "type": "process",
           "settings": {
-            "heading": "Inspiration",
+            "heading": "Inspired By Legends",
             "text": "Every world begins with a story."
           }
         },
         "process_2": {
           "type": "process",
           "settings": {
-            "heading": "Concept",
+            "heading": "World Sketching",
             "text": "Ideas take shape on paper."
           }
         },
         "process_3": {
           "type": "process",
           "settings": {
-            "heading": "Handcrafting",
+            "heading": "Hand Sculpting",
             "text": "Miniatures built with precision."
           }
         },
         "process_4": {
           "type": "process",
           "settings": {
-            "heading": "Pouring",
+            "heading": "Crystal Casting",
             "text": "Crystal clear epoxy brings life."
           }
         },
         "process_5": {
           "type": "process",
           "settings": {
-            "heading": "Curing",
+            "heading": "72-Hour Curing",
             "text": "72 hours for perfect clarity."
           }
         },
         "process_6": {
           "type": "process",
           "settings": {
-            "heading": "Finishing",
+            "heading": "Final Polishing",
             "text": "Polished by hand. Perfected with passion."
           }
         },
