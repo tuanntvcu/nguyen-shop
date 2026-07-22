@@ -62,7 +62,8 @@
           media_layout: media_layout,
           mobile_thumbnails: mobile_thumbnails,
           variant_images: variant_images,
-          enable_image_zoom: section.settings.enable_image_zoom
+          enable_image_zoom: section.settings.enable_image_zoom,
+          random_initial_media: true
         %}
       {%- else -%}
         <div class="altaeron-media-placeholder">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
@@ -250,6 +251,7 @@
                   {{ section.settings.size_guide_label | escape }} →
                 </button>
               {%- endunless -%}
+              {% render 'product-specifications', product: product, class: 'product-specifications--altaeron' %}
             </div>
           {%- when 'buy_buttons' -%}
             <div class="altaeron-purchase__block" {{ block.shopify_attributes }}>
@@ -304,13 +306,13 @@
   </section>
 
   {%- if section.settings.sticky_buy_bar -%}
-    <div class="altaeron-sticky-buy" data-altaeron-sticky-buy hidden>
-      <div class="altaeron-sticky-buy__price" data-altaeron-sticky-price>{{ selected_variant.price | money }}</div>
-      <div class="altaeron-sticky-buy__variant" data-altaeron-sticky-variant>{% unless product.has_only_default_variant %}{{ selected_variant.title | escape }}{% endunless %}</div>
-      <button type="button" class="altaeron-sticky-buy__button" data-altaeron-sticky-submit {% unless selected_variant.available %}disabled{% endunless %}>
-        {%- if selected_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
-      </button>
-    </div>
+    {% render 'mobile-product-sticky-atc',
+      product: product,
+      section: section,
+      variant: selected_variant,
+      class: 'mobile-product-sticky-atc--altaeron',
+      observe_selector: '.altaeron-purchase'
+    %}
   {%- endif -%}
 
   <product-recently-viewed data-product-id="{{ product.id }}" class="hidden"></product-recently-viewed>
@@ -378,6 +380,7 @@
 {%- endunless -%}
 
 <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+{%- if section.settings.sticky_buy_bar -%}<script src="{{ 'mobile-product-sticky-atc.js' | asset_url }}" defer="defer"></script>{%- endif -%}
 {%- if section.settings.enable_image_zoom -%}<script src="{{ 'photoswipe.js' | asset_url }}" defer="defer"></script>{%- endif -%}
 {%- if product.media.size > 0 -%}<script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>{%- endif -%}
 {%- if has_models -%}

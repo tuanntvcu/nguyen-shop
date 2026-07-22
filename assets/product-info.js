@@ -49,7 +49,7 @@ if (!customElements.get('product-info')) {
 
         this.currentVariant = this.getSelectedVariant(this);
         if (this.currentVariant) {
-          this.updateMedia(this.currentVariant);
+          this.updateMedia(this.currentVariant, { initial: true });
         }
       }
 
@@ -264,14 +264,14 @@ if (!customElements.get('product-info')) {
           });
       }
 
-      updateMedia(variant) {
+      updateMedia(variant, options = {}) {
         const productMedia = this.querySelector(`[id^="MediaGallery-${this.dataset.section}"]`);
         if (!productMedia) return; // Early return if productMedia is not found
 
         const setActiveMedia = () => {
           if (typeof productMedia.setActiveMedia === 'function') {
             productMedia.init();
-            productMedia.setActiveMedia(variant);
+            productMedia.setActiveMedia(variant, options);
             return true; // Indicate success
           }
           return false; // Indicate failure

@@ -14,6 +14,7 @@ if (!customElements.get('media-gallery')) {
 
         this.sliderInstance = false;
         this.thumbsInstance = false;
+        this.randomInitialMediaApplied = false;
       }
 
       connectedCallback() {
@@ -27,6 +28,7 @@ if (!customElements.get('media-gallery')) {
         this.enableDesktopSlider = this.dataset.enableDesktopSlider === 'true';
         this.enableMobileThumbnails = this.dataset.enableMobileThumbnails === 'true';
         this.enableImageZoom = this.dataset.enableImageZoom === 'true';
+        this.randomInitialMedia = this.dataset.randomInitialMedia === 'true';
         this.setSliderOptions();
 
         const mql = window.matchMedia(ScaloraTheme.config.mediaQueryMobile);
@@ -127,6 +129,7 @@ if (!customElements.get('media-gallery')) {
           this.handleSlideChange();
 
           this.sliderInstance.slider.init();
+          this.setRandomInitialMedia();
         }
       }
 
@@ -326,7 +329,41 @@ if (!customElements.get('media-gallery')) {
         if (deferredMedia) deferredMedia.loadContent(false);
       }
 
-      setActiveMedia(variant) {
+      setRandomInitialMedia() {
+        if (!this.shouldSetRandomInitialMedia() || !this.sliderInstance?.slider) return;
+
+        const imageMedias = [
+          ...this.querySelectorAll('.product__media-item:not(.swiper-slide-duplicate)[data-media-type="image"]'),
+        ];
+        if (imageMedias.length < 2) return;
+
+        const randomMedia = imageMedias[Math.floor(Math.random() * imageMedias.length)];
+        const slideIndex = Number(randomMedia.dataset.mediaIndex);
+        if (Number.isNaN(slideIndex)) return;
+
+        this.randomInitialMediaApplied = true;
+        this.sliderInstance.slider.slideToLoop(slideIndex, 0);
+      }
+
+      shouldSetRandomInitialMedia() {
+        return (
+          this.randomInitialMedia &&
+          !this.randomInitialMediaApplied &&
+          !this.onlyImage &&
+          !new URLSearchParams(window.location.search).has('variant')
+        );
+      }
+
+      shouldPreserveRandomInitialMedia(options = {}) {
+        return (
+          options.initial === true &&
+          this.randomInitialMediaApplied &&
+          !new URLSearchParams(window.location.search).has('variant')
+        );
+      }
+
+      setActiveMedia(variant, options = {}) {
+        if (this.shouldPreserveRandomInitialMedia(options)) return;
         if (!variant || !variant.hasOwnProperty('featured_media') || !variant.featured_media) return;
 
         if (this.sliderInstance.slider) {

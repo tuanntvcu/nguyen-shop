@@ -61,6 +61,7 @@ Create these definitions in **Settings > Custom data > Products**. Namespace/key
 | `custom.light_modes` | List of single line text | Optional editorial mode labels; commerce selectors still come from variants |
 | `custom.light_mode_descriptions` | JSON or list of `altaeron_light_mode` references | Optional supporting mode content |
 | `custom.delivery_note` | Single line text | Product-specific factual delivery note |
+| `custom.product_specifications` | List of single line text | Compact buy-box bullet list below Size Guide |
 | `custom.craft_steps` | List of metaobject references (`altaeron_craft_step`) | Craft journey |
 | `custom.product_faqs` | List of metaobject references (`altaeron_product_faq`) | Product FAQs |
 | `custom.featured_review` | Metaobject reference (`altaeron_customer_story`) | Optional editorial customer story |

@@ -152,7 +152,7 @@
   const refreshPackaging = () => {
     const mobile = window.matchMedia('(max-width: 767px)').matches;
     document.querySelectorAll('.altaeron-packaging').forEach((section) => {
-      const expanded = mobile ? section.dataset.altaeronPackagingExpanded === 'true' : true;
+      const expanded = mobile ? section.dataset.altaeronPackagingExpanded !== 'false' : true;
       setPackagingExpanded(section, expanded);
     });
   };
@@ -208,7 +208,7 @@
     fieldset.querySelectorAll('.altaeron-selling-plan').forEach((option) => {
       option.classList.toggle('is-selected', option.contains(choice));
     });
-    const stickyPrice = document.querySelector('[data-altaeron-sticky-price]');
+    const stickyPrice = document.querySelector('[data-altaeron-sticky-price], [data-sticky-price]');
     if (stickyPrice && choice.dataset.price) stickyPrice.textContent = choice.dataset.price;
   };
 

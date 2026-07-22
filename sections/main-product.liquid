@@ -67,6 +67,9 @@
   {%- endif -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+  {%- if section.settings.enable_mobile_sticky_add_to_cart != false -%}
+    <script src="{{ 'mobile-product-sticky-atc.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="product flex flex-wrap {{ product_class }}">
@@ -85,6 +88,9 @@
       {% render 'product-information-blocks', enable_sticky_info: enable_sticky_info, update_browser_history: true %}
     </motion-element>
   </div>
+  {%- if section.settings.enable_mobile_sticky_add_to_cart != false -%}
+    {% render 'mobile-product-sticky-atc', product: product, section: section %}
+  {%- endif -%}
   <product-recently-viewed data-product-id="{{ product.id }}" class="hidden"></product-recently-viewed>
   {%- if enable_image_zoom -%}
     <script src="{{ 'photoswipe.js' | asset_url }}" defer="defer"></script>
@@ -1391,6 +1397,12 @@
       "id": "enable_sticky_info",
       "default": true,
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_sticky_add_to_cart",
+      "default": true,
+      "label": "Enable mobile sticky add to cart"
     },
     {
       "type": "header",

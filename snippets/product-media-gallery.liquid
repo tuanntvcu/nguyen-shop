@@ -4,6 +4,7 @@
   Accepts:
   - product: {Object} Product liquid object
   - variant_images: {Array} Product images associated with a variant
+  - random_initial_media: {Boolean} Select a random product image on initial desktop load
 
   Usage:
   {% render 'product-media-gallery' %}
@@ -58,6 +59,7 @@
   data-enable-image-zoom="{{ enable_image_zoom }}"
   data-enable-desktop-slider="{{ enable_desktop_slider }}"
   data-enable-mobile-thumbnails="{{ enable_mobile_thumbnails }}"
+  data-random-initial-media="{{ random_initial_media | default: false }}"
   data-media-item-gap="{{ media_item_gap }}"
   style="--media-item-gap: {{ media_item_gap }}px"
 >

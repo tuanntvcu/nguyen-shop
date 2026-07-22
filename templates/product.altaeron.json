@@ -43,7 +43,7 @@
         "accent_color": "#f3a316",
         "enable_ambient_motion": true,
         "sticky_chapters": true,
-        "sticky_buy_bar": false,
+        "sticky_buy_bar": true,
         "enable_image_zoom": true,
         "media_size": "large",
         "enable_video_looping": false,

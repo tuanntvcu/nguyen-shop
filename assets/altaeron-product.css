@@ -417,7 +417,7 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
   display: grid;
   align-content: center;
   gap: 2rem;
-  min-height: 42rem;
+  min-height: 52rem;
   padding: clamp(3rem, 4vw, 5rem);
 }
 
@@ -429,8 +429,8 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
 }
 
 .altaeron-lore__media {
-  min-height: 42rem;
-  height: 42rem;
+  min-height: 52rem;
+  height: 52rem;
   overflow: hidden;
   border-left: 1px solid var(--altaeron-line);
 }
@@ -733,6 +733,31 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
 
 .altaeron-size-guide:hover {
   color: var(--altaeron-accent);
+}
+
+.product-specifications--altaeron {
+  margin-top: 1.4rem;
+  color: color-mix(in srgb, var(--altaeron-text) 82%, transparent);
+}
+
+.product-specifications--altaeron .product-specifications__title {
+  color: var(--altaeron-text);
+  font-size: 1.15rem;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.product-specifications--altaeron .product-specifications__list {
+  color: color-mix(in srgb, var(--altaeron-text) 84%, transparent);
+  font-size: 1.3rem;
+}
+
+.product-specifications--altaeron .product-specifications__list li::marker {
+  color: var(--altaeron-accent);
+}
+
+.mobile-product-sticky-atc--altaeron {
+  box-shadow: 0 -1rem 3rem rgba(0, 0, 0, .35);
 }
 
 .altaeron-size-guide-modal {
@@ -2011,10 +2036,13 @@ body.altaeron .header__wrapper {
     margin-left: 11.5rem;
   }
 
-  .altaeron-lore__copy,
+  .altaeron-lore__copy {
+    min-height: 58rem;
+  }
+
   .altaeron-lore__media {
-    min-height: 42rem;
-    height: 42rem;
+    min-height: 58rem;
+    height: 58rem;
   }
 
   .altaeron-craft,

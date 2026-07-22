@@ -1,0 +1,14 @@
+{%- liquid
+  assign product_specifications = product.metafields.custom.product_specifications.value
+-%}
+
+{%- if product_specifications != blank -%}
+  <div class="product-specifications{% if class != blank %} {{ class }}{% endif %}">
+    <p class="product-specifications__title">Product Specifications</p>
+    <ul class="product-specifications__list">
+      {%- for specification in product_specifications -%}
+        <li>{{ specification | escape }}</li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
