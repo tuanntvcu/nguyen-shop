@@ -200,7 +200,7 @@
         "product_2": {
           "type": "product",
           "settings": {
-            "product": "mountain-lake-lamp",
+            "product": "nocturne-flight",
             "heading": "Mountain Lake Lamp",
             "price": "$119.00",
             "compare_price": "$149.00",
@@ -212,7 +212,7 @@
         "product_3": {
           "type": "product",
           "settings": {
-            "product": "ocean-wave-lamp",
+            "product": "citadel-ember",
             "heading": "Ocean Wave Lamp",
             "price": "$119.00",
             "compare_price": "$149.00",
@@ -236,13 +236,25 @@
         "product_5": {
           "type": "product",
           "settings": {
-            "product": "moonlight-lamp",
+            "product": "azure-vanguard",
             "heading": "Moonlight Lamp",
             "price": "$109.00",
             "compare_price": "$139.00",
             "stars": 5,
             "rating": "(845)",
             "badge": ""
+          }
+        },
+        "product_ERpx7x": {
+          "type": "product",
+          "settings": {
+            "product": "shadow-sovereign",
+            "heading": "Dragon Flame Lamp",
+            "price": "$129.00",
+            "compare_price": "$169.00",
+            "stars": 5,
+            "rating": "(1,266)",
+            "badge": "TOP RATED"
           }
         },
         "service_shipping": {
@@ -367,6 +379,7 @@
         "product_3",
         "product_4",
         "product_5",
+        "product_ERpx7x",
         "service_shipping",
         "service_returns",
         "service_warranty",
