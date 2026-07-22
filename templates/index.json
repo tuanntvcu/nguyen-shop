@@ -376,6 +376,42 @@
             "time_label": "42 minutes ago",
             "link": ""
           }
+        },
+        "social_proof_ynp4Nh": {
+          "type": "social_proof",
+          "settings": {
+            "customer_label": "Daniel",
+            "location": "Ontario, Canada",
+            "activity_text": "purchased",
+            "product": "citadel-ember",
+            "product_label": "",
+            "time_label": "1 hour ago",
+            "link": ""
+          }
+        },
+        "social_proof_TNDqkR": {
+          "type": "social_proof",
+          "settings": {
+            "customer_label": "Michael",
+            "location": "Sydney, Australia",
+            "activity_text": "purchased",
+            "product": "azure-vanguard",
+            "product_label": "",
+            "time_label": "2 hours ago",
+            "link": ""
+          }
+        },
+        "social_proof_QC9XtM": {
+          "type": "social_proof",
+          "settings": {
+            "customer_label": "Sarah",
+            "location": "New York, USA",
+            "activity_text": "purchased",
+            "product": "the-hollow-claim",
+            "product_label": "",
+            "time_label": "2 hours ago",
+            "link": ""
+          }
         }
       },
       "block_order": [
@@ -417,7 +453,10 @@
         "home_2",
         "home_3",
         "social_proof_VkpRzd",
-        "social_proof_ng4Tiz"
+        "social_proof_ng4Tiz",
+        "social_proof_ynp4Nh",
+        "social_proof_TNDqkR",
+        "social_proof_QC9XtM"
       ],
       "settings": {
         "background_color": "#030606",
