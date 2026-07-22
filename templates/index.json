@@ -352,6 +352,30 @@
           "settings": {
             "caption": "Handcrafted atmosphere."
           }
+        },
+        "social_proof_VkpRzd": {
+          "type": "social_proof",
+          "settings": {
+            "customer_label": "James",
+            "location": "Texas, USA",
+            "activity_text": "purchased",
+            "product": "shadow-sovereign",
+            "product_label": "",
+            "time_label": "18 minutes ago",
+            "link": ""
+          }
+        },
+        "social_proof_ng4Tiz": {
+          "type": "social_proof",
+          "settings": {
+            "customer_label": "Emily",
+            "location": "California, USA",
+            "activity_text": "purchased",
+            "product": "nocturne-flight",
+            "product_label": "",
+            "time_label": "42 minutes ago",
+            "link": ""
+          }
         }
       },
       "block_order": [
@@ -391,7 +415,9 @@
         "review_4",
         "home_1",
         "home_2",
-        "home_3"
+        "home_3",
+        "social_proof_VkpRzd",
+        "social_proof_ng4Tiz"
       ],
       "settings": {
         "background_color": "#030606",
