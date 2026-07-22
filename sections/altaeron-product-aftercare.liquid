@@ -6,12 +6,16 @@
   assign featured_review = product.metafields.custom.featured_review_v2.value | default: product.metafields.custom.featured_review.value | default: product.metafields.custom.story_card.value
   assign rating = product.metafields.reviews.rating.value
   assign rating_count = product.metafields.reviews.rating_count.value
+  assign show_editorial_story = section.settings.show_editorial_story
+  assign show_judgeme_widget = section.settings.show_judgeme_widget
   assign has_packaging = false
   if packaging_image != blank or packaging_heading != blank or packaging_content != blank
     assign has_packaging = true
   endif
   assign has_stories = false
-  if featured_review != blank or rating != blank or section.blocks.size > 0
+  if rating != blank or section.blocks.size > 0 or show_judgeme_widget or request.design_mode
+    assign has_stories = true
+  elsif show_editorial_story and featured_review != blank
     assign has_stories = true
   endif
   assign stories_eyebrow = section.settings.stories_eyebrow
@@ -76,7 +80,21 @@
         {%- endif -%}
       </header>
 
-      {%- if featured_review != blank -%}
+      {%- if show_judgeme_widget -%}
+        <article class="altaeron-featured-story altaeron-judgeme-spotlight" data-altaeron-judgeme-spotlight hidden>
+          <div class="altaeron-featured-story__author">
+            <span class="altaeron-featured-story__avatar" data-altaeron-review-initials aria-hidden="true"></span>
+            <p><strong data-altaeron-review-author></strong><small data-altaeron-review-meta></small></p>
+          </div>
+          <blockquote data-altaeron-review-body></blockquote>
+          <div class="altaeron-featured-story__images" data-altaeron-review-images hidden></div>
+        </article>
+        <div class="altaeron-judgeme" data-altaeron-judgeme>
+          {%- render 'altaeron-judgeme-product-reviews' -%}
+        </div>
+      {%- endif -%}
+
+      {%- if show_editorial_story and featured_review != blank -%}
         <article class="altaeron-featured-story">
           <div class="altaeron-featured-story__author">
             {%- if featured_review.avatar.value != blank -%}
@@ -123,7 +141,9 @@
     { "type": "text", "id": "homes_heading", "label": "Lifestyle heading", "default": "See How It Lives In Real Homes." },
     { "type": "text", "id": "stories_eyebrow", "label": "Review eyebrow", "default": "Stories from dreamers" },
     { "type": "text", "id": "stories_heading", "label": "Review heading", "default": "More Than A Product. A Piece Of Another World." },
-    { "type": "text", "id": "stories_mobile_heading", "label": "Mobile review heading", "default": "Stories From Dreamers." }
+    { "type": "text", "id": "stories_mobile_heading", "label": "Mobile review heading", "default": "Stories From Dreamers." },
+    { "type": "checkbox", "id": "show_judgeme_widget", "label": "Show Judge.me product reviews", "default": true },
+    { "type": "checkbox", "id": "show_editorial_story", "label": "Show editorial story fallback", "default": false }
   ],
   "presets": [{ "name": "Altaeron story & reviews" }]
 }

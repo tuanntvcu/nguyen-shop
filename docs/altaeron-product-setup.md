@@ -64,10 +64,10 @@ Create these definitions in **Settings > Custom data > Products**. Namespace/key
 | `custom.product_specifications` | List of single line text | Compact buy-box bullet list below Size Guide |
 | `custom.craft_steps` | List of metaobject references (`altaeron_craft_step`) | Craft journey |
 | `custom.product_faqs` | List of metaobject references (`altaeron_product_faq`) | Product FAQs |
-| `custom.featured_review` | Metaobject reference (`altaeron_customer_story`) | Optional editorial customer story |
+| `custom.featured_review` | Metaobject reference (`altaeron_customer_story`) | Optional editorial customer story fallback |
 | `custom.craft_steps_v2` | List of metaobject references (`$app:altaeron_craft_step_v2`) | Preferred app-owned craft journey |
 | `custom.product_faqs_v2` | List of metaobject references (`$app:altaeron_product_faq_v2`) | Preferred app-owned product FAQs |
-| `custom.featured_review_v2` | Metaobject reference (`$app:altaeron_customer_story_v2`) | Preferred app-owned customer story |
+| `custom.featured_review_v2` | Metaobject reference (`$app:altaeron_customer_story_v2`) | Preferred app-owned customer story fallback |
 | `custom.world_number` | Single line text | Fallback world number |
 | `custom.artifact_details` | Rich text | Macro-gallery introduction |
 | `custom.story_video_poster` | File reference (image) | Reserved custom poster |
@@ -80,7 +80,7 @@ Create this definition in **Settings > Custom data > Variants**.
 | --- | --- | --- |
 | `custom.size` | Single line text | Overall dimensions (`W x D x H`) shown in the product size-guide modal |
 
-The template reads Judge.me's live average rating and published review count from the Shopify standard metafields `reviews.rating` and `reviews.rating_count`. Judge.me populates and keeps these fields in sync; do not enter placeholder values for live products. The theme renders that data with Altaeron's own star markup and styling.
+The template reads Judge.me's live average rating and published review count from the Shopify standard metafields `reviews.rating` and `reviews.rating_count`. Judge.me populates and keeps these fields in sync; do not enter placeholder values for live products. The theme renders that data with Altaeron's own star markup and styling. The story/reviews section renders Judge.me's live product Review Widget by default, then restyles the first published review into Altaeron's featured-story card when Judge.me has review content available.
 
 ## Metaobject definitions
 
@@ -139,7 +139,7 @@ Create these in **Settings > Custom data > Metaobjects**.
 6. Add swatches through Shopify category/native swatch data, or configure Palo Alto's global swatch mapping. Variant-image and text fallbacks remain available in the section settings.
 7. Add product images, Shopify videos, external videos, or 3D models to the normal Shopify product media area.
 8. In the theme editor, open a product using the Altaeron template and configure global labels, colors, trust statements, motion, thumbnails, zoom, dynamic checkout, and app blocks.
-9. Add the installed review app's product widget as an app block inside **Altaeron story & reviews**. Add any rating badge app block to **Altaeron product** if the provider requires it.
+9. Enable the Judge.me app embed. The **Altaeron story & reviews** section renders the Judge.me product Review Widget by default; turn off **Show Judge.me product reviews** only if you prefer to use a manually added app block instead. Add any rating badge app block to **Altaeron product** if the provider requires it.
 10. Enter shipping, returns, and warranty trust claims only after confirming the store policies. They intentionally default to blank.
 
 ## Assigning the template
@@ -161,7 +161,7 @@ Create these in **Settings > Custom data > Metaobjects**.
 - Detail gallery: product media after the primary media when `custom.detail_gallery` is empty.
 - Lifestyle gallery: omitted when empty.
 - Packaging: omitted when all packaging fields are empty.
-- Reviews: standard rating/count plus `custom.featured_review_v2`, then the legacy editorial story/app blocks.
+- Reviews: standard rating/count plus a Judge.me-powered featured-story spotlight, optional editorial story fallback, then legacy app blocks.
 - FAQs: `custom.product_faqs_v2`, then legacy product metaobjects, then merchant-configured section blocks.
 - Related products: related-realm collection, then Shopify recommendations, then first relevant product collection excluding the current product.
 - Single default variant: native variant controls are omitted.

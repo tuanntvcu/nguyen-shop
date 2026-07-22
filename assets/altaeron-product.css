@@ -1184,6 +1184,18 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
   object-fit: cover;
 }
 
+.altaeron-featured-story__avatar {
+  display: grid;
+  place-items: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  border: 1px solid rgba(243, 163, 22, .36);
+  border-radius: 50%;
+  background: rgba(243, 163, 22, .12);
+  color: var(--altaeron-accent);
+  font-weight: 700;
+}
+
 .altaeron-featured-story__author strong,
 .altaeron-featured-story__author small {
   display: block;
@@ -1216,9 +1228,59 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
   object-fit: cover;
 }
 
-.altaeron-review-app {
+.altaeron-review-app,
+.altaeron-judgeme {
   grid-column: 2;
   min-width: 0;
+}
+
+.altaeron-judgeme {
+  padding: 3rem;
+  border: 1px solid var(--altaeron-line);
+  border-radius: .5rem;
+  background: var(--altaeron-panel);
+  color: var(--altaeron-text);
+}
+
+.altaeron-judgeme .jdgm-rev-widg {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.altaeron-judgeme .jdgm-rev-widg__title,
+.altaeron-judgeme .jdgm-rev__author,
+.altaeron-judgeme .jdgm-rev__title {
+  color: var(--altaeron-text);
+}
+
+.altaeron-judgeme .jdgm-rev__body,
+.altaeron-judgeme .jdgm-rev__timestamp,
+.altaeron-judgeme .jdgm-rev-widg__summary-text {
+  color: var(--altaeron-muted);
+}
+
+.altaeron-judgeme .jdgm-star,
+.altaeron-judgeme .jdgm-prev-badge__stars {
+  color: var(--altaeron-accent);
+}
+
+.altaeron-judgeme .jdgm-write-rev-link,
+.altaeron-judgeme .jdgm-submit-rev {
+  border-color: var(--altaeron-accent);
+  background: var(--altaeron-accent);
+  color: #050809;
+}
+
+.altaeron-judgeme .jdgm-rev {
+  border-color: var(--altaeron-line);
+}
+
+.altaeron-judgeme[hidden],
+.altaeron-judgeme-spotlight[hidden] {
+  display: none;
 }
 
 /* FAQ */
@@ -1778,11 +1840,16 @@ body.altaeron .footer-block--newsletter .newsletter-form__button {
   }
 
   .altaeron-stories .altaeron-section-heading,
+  .altaeron-judgeme,
   .altaeron-review-app {
     grid-column: auto;
   }
 
   .altaeron-featured-story {
+    padding: 2.4rem;
+  }
+
+  .altaeron-judgeme {
     padding: 2.4rem;
   }
 

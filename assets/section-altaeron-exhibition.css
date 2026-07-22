@@ -156,7 +156,17 @@
 .altaeron__slider-ui [data-dots] button { background: rgba(255,255,255,.24); border: 0; border-radius: 50%; display: block; height: 8px; min-height: 0; padding: 0; transition: background .25s, transform .25s; width: 8px; }
 .altaeron__slider-ui [data-dots] button.is-active { background: var(--altaeron-accent); transform: scale(1.15); }
 .altaeron__stars { background: linear-gradient(90deg,var(--altaeron-accent) var(--rating-percent),rgba(255,255,255,.24) var(--rating-percent)); -webkit-background-clip: text; background-clip: text; color: transparent!important; display: inline-block; }
-.altaeron__sticky-product, .altaeron__social-proof { display: none; }
+.altaeron__sticky-product { display: none; }
+.altaeron__social-proof { -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); background: rgba(7,10,10,.95); border: 1px solid var(--ae-border-soft); border-top-color: rgba(217,150,34,.62); border-radius: 8px; bottom: 28px; box-shadow: 0 18px 45px rgba(0,0,0,.42); display: block; left: 28px; max-width: min(390px, calc(100vw - 56px)); opacity: 0; padding: 10px 44px 10px 10px; pointer-events: none; position: fixed; transform: translateY(12px); transition: bottom .3s ease, opacity .3s ease, transform .35s cubic-bezier(.2,.7,.2,1), visibility .3s; visibility: hidden; width: 390px; z-index: 27; }
+.altaeron__social-proof.is-visible { opacity: 1; pointer-events: auto; transform: none; visibility: visible; }
+.altaeron__social-proof-current > :is(a,div) { align-items: center; color: inherit; display: grid; gap: 11px; grid-template-columns: auto minmax(0,1fr); min-height: 54px; text-decoration: none; }
+.altaeron__social-proof-current img { border-radius: 5px; height: 54px; object-fit: cover; width: 54px; }
+.altaeron__social-proof-current p { color: rgba(244,240,232,.82); font-size: 12px; line-height: 1.45; }
+.altaeron__social-proof-current p strong { color: #fff; font-weight: 600; }
+.altaeron__social-proof-current p span { color: var(--altaeron-accent); }
+.altaeron__social-proof-close { align-items: center; background: transparent; border: 0; color: var(--ae-muted); cursor: pointer; display: flex; font-size: 22px; height: 44px; justify-content: center; padding: 0; position: absolute; right: 2px; top: 2px; width: 44px; }
+.altaeron__social-proof-messages { display: none; }
+.altaeron.is-overlay-blocked .altaeron__social-proof { opacity: 0; pointer-events: none; transform: translateY(12px); visibility: hidden; }
 
 @media (max-width: 989px) {
   .announcement-bar-section { display: none; }
@@ -248,7 +258,7 @@
   .altaeron.is-overlay-blocked .altaeron__sticky-product,
   .altaeron.is-keyboard-open .altaeron__sticky-product { opacity: 0; pointer-events: none; transform: translateY(105%); visibility: hidden; }
 
-  .altaeron__social-proof { -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); background: rgba(7,10,10,.95); border: 1px solid var(--ae-border-soft); border-top-color: rgba(217,150,34,.62); border-radius: 8px; bottom: calc(90px + env(safe-area-inset-bottom)); box-shadow: 0 18px 45px rgba(0,0,0,.42); display: block; left: 12px; margin-inline: auto; max-width: 390px; opacity: 0; padding: 10px 44px 10px 10px; pointer-events: none; position: fixed; right: 12px; transform: translateY(12px); transition: bottom .3s ease, opacity .3s ease, transform .35s cubic-bezier(.2,.7,.2,1), visibility .3s; visibility: hidden; z-index: 27; }
+  .altaeron__social-proof { -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); background: rgba(7,10,10,.95); border: 1px solid var(--ae-border-soft); border-top-color: rgba(217,150,34,.62); border-radius: 8px; bottom: calc(90px + env(safe-area-inset-bottom)); box-shadow: 0 18px 45px rgba(0,0,0,.42); display: block; left: 12px; margin-inline: auto; max-width: 390px; opacity: 0; padding: 10px 44px 10px 10px; pointer-events: none; position: fixed; right: 12px; transform: translateY(12px); transition: bottom .3s ease, opacity .3s ease, transform .35s cubic-bezier(.2,.7,.2,1), visibility .3s; visibility: hidden; width: auto; z-index: 27; }
   .altaeron.is-sticky-visible .altaeron__social-proof { bottom: calc(100px + env(safe-area-inset-bottom)); }
   .altaeron__social-proof.is-visible { opacity: 1; pointer-events: auto; transform: none; visibility: visible; }
   .altaeron__social-proof-current > :is(a,div) { align-items: center; color: inherit; display: grid; gap: 11px; grid-template-columns: auto minmax(0,1fr); min-height: 54px; text-decoration: none; }

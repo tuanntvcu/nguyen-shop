@@ -529,7 +529,7 @@
         proofDeadline = Date.now() + wait;
         if (!document.hidden) proofTimer = window.setTimeout(callback, wait);
       };
-      const proofIsBlocked = () => !mobileFixedQuery.matches || root.classList.contains('is-content-blocked') || root.classList.contains('is-overlay-blocked') || root.classList.contains('is-keyboard-open');
+      const proofIsBlocked = () => isBlockingOverlayOpen() || (mobileFixedQuery.matches && (root.classList.contains('is-content-blocked') || root.classList.contains('is-keyboard-open')));
       const hideProof = (scheduleNext = true) => {
         socialProof.classList.remove('is-visible');
         if (scheduleNext && !proofState.closed && proofState.shown < maximum) setProofTimer(showProof, interval);

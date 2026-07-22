@@ -12,6 +12,7 @@
     frame: null,
     navigatingIndex: null,
     navigationEndTimer: null,
+    judgemeObservers: [],
   };
 
   const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -165,6 +166,87 @@
     });
   };
 
+  const normalizeText = (value) => value?.replace(/\s+/g, ' ').trim() || '';
+
+  const getReviewText = (root, selectors) => {
+    for (const selector of selectors) {
+      const value = normalizeText(root.querySelector(selector)?.textContent);
+      if (value) return value;
+    }
+    return '';
+  };
+
+  const getImageSource = (node) => {
+    if (!node) return '';
+    const image = node.matches?.('img') ? node : node.querySelector?.('img');
+    const src = image?.currentSrc || image?.src || image?.dataset?.src || node.dataset?.src || '';
+    if (src) return src;
+    const background = getComputedStyle(node).backgroundImage;
+    return background?.startsWith('url(') ? background.slice(4, -1).replace(/^["']|["']$/g, '') : '';
+  };
+
+  const populateJudgemeSpotlight = (source, spotlight) => {
+    const review = Array.from(source.querySelectorAll('.jdgm-rev')).find((item) => {
+      return getReviewText(item, ['.jdgm-rev__body', '.jdgm-rev__title']);
+    });
+    if (!review) return false;
+
+    const author = getReviewText(review, ['.jdgm-rev__author', '[data-reviewer-name]']) || 'Verified customer';
+    const body = getReviewText(review, ['.jdgm-rev__body', '.jdgm-rev__title']);
+    const meta = getReviewText(review, ['.jdgm-rev__buyer-badge', '.jdgm-rev__verified-badge', '.jdgm-rev__timestamp']) || 'Verified Buyer';
+    const authorTarget = spotlight.querySelector('[data-altaeron-review-author]');
+    const bodyTarget = spotlight.querySelector('[data-altaeron-review-body]');
+    const metaTarget = spotlight.querySelector('[data-altaeron-review-meta]');
+    const initialsTarget = spotlight.querySelector('[data-altaeron-review-initials]');
+    const imagesTarget = spotlight.querySelector('[data-altaeron-review-images]');
+
+    if (authorTarget) authorTarget.textContent = author;
+    if (bodyTarget) bodyTarget.textContent = `"${body}"`;
+    if (metaTarget) metaTarget.textContent = meta;
+    if (initialsTarget) initialsTarget.textContent = author.charAt(0).toUpperCase();
+
+    if (imagesTarget) {
+      imagesTarget.replaceChildren();
+      const seen = new Set();
+      Array.from(review.querySelectorAll('.jdgm-rev__pics img, .jdgm-rev__pic-img, .jdgm-rev__pic-link img')).forEach((node) => {
+        const src = getImageSource(node);
+        if (!src || seen.has(src) || seen.size >= 4) return;
+        seen.add(src);
+        const image = document.createElement('img');
+        image.src = src;
+        image.alt = '';
+        image.loading = 'lazy';
+        imagesTarget.append(image);
+      });
+      imagesTarget.hidden = seen.size === 0;
+    }
+
+    spotlight.hidden = false;
+    source.hidden = true;
+    source.setAttribute('aria-hidden', 'true');
+    return true;
+  };
+
+  const refreshJudgemeSpotlights = () => {
+    state.judgemeObservers.forEach((observer) => observer.disconnect());
+    state.judgemeObservers = [];
+
+    document.querySelectorAll('[data-altaeron-judgeme]').forEach((source) => {
+      const spotlight = source.closest('.altaeron-stories')?.querySelector('[data-altaeron-judgeme-spotlight]');
+      if (!spotlight) return;
+
+      const sync = () => {
+        if (populateJudgemeSpotlight(source, spotlight)) {
+          observer.disconnect();
+        }
+      };
+      const observer = new MutationObserver(sync);
+      observer.observe(source, { childList: true, subtree: true });
+      state.judgemeObservers.push(observer);
+      sync();
+    });
+  };
+
   const updateStickyCommerce = (variant) => {
     const sticky = document.querySelector('[data-altaeron-sticky-buy]');
     if (!sticky) return;
@@ -291,6 +373,7 @@
     refreshVideos();
     refreshPackaging();
     refreshVariantPresentation();
+    refreshJudgemeSpotlights();
     updateStickyCommerce();
   };
 

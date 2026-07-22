@@ -27,10 +27,10 @@ if (!customElements.get('product-recommendations')) {
               this.innerHTML = recommendations.innerHTML;
             }
 
-            if (recommendations.querySelector('.product-card')) {
+            if (recommendations && recommendations.querySelector('.product-card, .altaeron-world-card')) {
               this.dispatchEvent(new CustomEvent('recommendations:loaded'));
             } else {
-              if (recommendations.classList.contains('complementary-products')) {
+              if (recommendations && recommendations.classList.contains('complementary-products')) {
                 this.closest('.product__block').remove();
               } else {
                 this.closest('.shopify-section').remove();
