@@ -501,7 +501,7 @@
       const closeButton = socialProof.querySelector('[data-social-proof-close]');
       const storageKey = `altaeron-social-proof:${root.id}`;
       const maximum = Math.max(1, Number(socialProof.dataset.maximum) || 2);
-      const delay = Math.max(12000, Number(socialProof.dataset.delay) || 15000);
+      const delay = Math.max(1000, Number(socialProof.dataset.delay) || 15000);
       const duration = Math.max(5000, Number(socialProof.dataset.duration) || 6000);
       const interval = Math.max(25000, Number(socialProof.dataset.interval) || 32000);
       let proofState = { shown: 0, index: 0, closed: false };

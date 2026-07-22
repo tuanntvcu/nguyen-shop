@@ -555,7 +555,7 @@
         "sticky_loading_label": "Adding...",
         "sticky_success_label": "Added",
         "enable_social_proof": true,
-        "social_proof_delay": 12,
+        "social_proof_delay": 1,
         "social_proof_duration": 7,
         "social_proof_interval": 25,
         "social_proof_maximum": 3,
