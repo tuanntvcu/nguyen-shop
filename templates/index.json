@@ -100,6 +100,8 @@
         "process_1": {
           "type": "process",
           "settings": {
+            "image": "shopify://shop_images/d9c0d8da-a6f9-40cd-97f7-046c6436a90b.png",
+            "image_mobile": "shopify://shop_images/d9c0d8da-a6f9-40cd-97f7-046c6436a90b.png",
             "heading": "Inspired By Legends",
             "text": "Every world begins with a story.",
             "duration": ""
