@@ -268,12 +268,11 @@
         },
         "service_returns": {
           "type": "feature",
-          "disabled": true,
           "settings": {
             "placement": "service",
             "icon": "returns",
-            "heading": "30-Day Returns",
-            "text": "Hassle-free returns"
+            "heading": "Handcrafted Over 72 Hours",
+            "text": "Every piece made by hand"
           }
         },
         "service_warranty": {
