@@ -14,10 +14,13 @@
     "footer": {
       "type": "footer",
       "settings": {
+        "brand_text": "We preserve worlds in resin, handcrafted lamps that blend nature, fantasy, and light into timeless masterpieces.",
         "show_social": true,
         "shop_menu": "footer-shop",
         "support_menu": "footer-support",
-        "company_menu": "footer-company"
+        "company_menu": "footer-help-info",
+        "story_heading": "Every Light\nHolds A Story.",
+        "story_text": "Thank you for being\npart of ours."
       }
     },
     "mobile_sticky_bar_aYhgJK": {
