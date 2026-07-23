@@ -81,7 +81,15 @@
       </header>
 
       {%- if show_judgeme_widget -%}
-        <div class="altaeron-stories__slider" data-altaeron-judgeme-spotlight hidden>
+        <div class="altaeron-stories__slider" data-altaeron-judgeme-spotlight data-altaeron-review-slider hidden>
+          <div class="altaeron-stories__controls" data-altaeron-review-controls hidden>
+            <button type="button" class="altaeron-stories__control altaeron-stories__control--prev" data-altaeron-review-slide="prev" aria-label="Previous reviews">
+              <span aria-hidden="true"></span>
+            </button>
+            <button type="button" class="altaeron-stories__control altaeron-stories__control--next" data-altaeron-review-slide="next" aria-label="Next reviews">
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
           <div
             class="altaeron-stories__track"
             data-altaeron-review-track
@@ -90,7 +98,7 @@
             tabindex="0"
           ></div>
         </div>
-        <div class="altaeron-judgeme" data-altaeron-judgeme>
+        <div class="altaeron-judgeme" data-altaeron-judgeme data-product-id="{{ product.id }}">
           {%- render 'altaeron-judgeme-product-reviews' -%}
         </div>
       {%- endif -%}

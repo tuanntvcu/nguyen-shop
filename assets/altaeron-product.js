@@ -166,7 +166,15 @@
     });
   };
 
-  const normalizeText = (value) => value?.replace(/\s+/g, ' ').trim() || '';
+  const normalizeText = (value) => (value === null || value === undefined ? '' : String(value)).replace(/\s+/g, ' ').trim();
+
+  const stripHtml = (value) => {
+    const text = normalizeText(value);
+    if (!text) return '';
+    const template = document.createElement('template');
+    template.innerHTML = text;
+    return normalizeText(template.content.textContent || text);
+  };
 
   const getReviewText = (root, selectors) => {
     for (const selector of selectors) {
@@ -185,6 +193,106 @@
     return background?.startsWith('url(') ? background.slice(4, -1).replace(/^["']|["']$/g, '') : '';
   };
 
+  const getObjectText = (object, keys) => {
+    for (const key of keys) {
+      const value = object?.[key];
+      if (typeof value === 'string' || typeof value === 'number') {
+        const text = stripHtml(value);
+        if (text) return text;
+      }
+    }
+    return '';
+  };
+
+  const collectImageSources = (value, seen = new Set()) => {
+    if (!value || seen.size >= 4) return Array.from(seen);
+    if (typeof value === 'string') {
+      if (/^https?:\/\//.test(value) || value.startsWith('//')) seen.add(value);
+      return Array.from(seen);
+    }
+    if (Array.isArray(value)) {
+      value.forEach((item) => collectImageSources(item, seen));
+      return Array.from(seen);
+    }
+    if (typeof value === 'object') {
+      ['url', 'src', 'image_url', 'imageUrl', 'original_url', 'originalUrl', 'thumbnail', 'thumb_url'].forEach((key) => {
+        collectImageSources(value[key], seen);
+      });
+    }
+    return Array.from(seen);
+  };
+
+  const getJudgemeEmbeddedData = (source) => {
+    const productId = source.dataset.productId || source.querySelector('[data-product-id]')?.dataset.productId || source.querySelector('[data-id]')?.dataset.id;
+    const reviewWidget = window.jdgm?.data?.reviewWidget;
+    return productId && reviewWidget ? reviewWidget[productId] || reviewWidget[Number(productId)] : null;
+  };
+
+  const getJudgemeDataReview = (review) => {
+    if (!review || typeof review !== 'object' || Array.isArray(review)) return null;
+
+    const title = getObjectText(review, ['title', 'review_title', 'reviewTitle']);
+    const body = getObjectText(review, ['body', 'review_body', 'reviewBody', 'content', 'comment', 'description', 'message', 'review']);
+    const quote = title && body && title !== body ? `${title}. ${body}` : body || title;
+    if (!quote) return null;
+
+    const verified = review.verified_buyer || review.verifiedBuyer || review.is_verified || review.isVerified;
+    const date = getObjectText(review, ['created_at', 'createdAt', 'date', 'review_date', 'reviewDate']);
+    const meta = verified ? 'Verified Buyer' : date || 'Verified Buyer';
+    const images = [
+      ...collectImageSources(review.pictures),
+      ...collectImageSources(review.images),
+      ...collectImageSources(review.pics),
+      ...collectImageSources(review.review_images),
+      ...collectImageSources(review.attachments),
+    ].slice(0, 4);
+
+    return {
+      author: getObjectText(review, ['reviewer_name', 'reviewerName', 'name', 'author', 'user_name', 'display_name']) || 'Verified customer',
+      body: quote,
+      meta,
+      images,
+    };
+  };
+
+  const getJudgemeDataReviews = (source) => {
+    const data = getJudgemeEmbeddedData(source);
+    if (!data) return [];
+
+    const reviews = [];
+    const visited = new WeakSet();
+    const walk = (value) => {
+      if (!value) return;
+      if (typeof value === 'string') {
+        if (value.includes('jdgm-rev')) {
+          const template = document.createElement('template');
+          template.innerHTML = value;
+          template.content.querySelectorAll('.jdgm-rev').forEach((review) => {
+            const parsed = getJudgemeReviewData(review);
+            if (parsed) reviews.push(parsed);
+          });
+        }
+        return;
+      }
+      if (typeof value !== 'object') return;
+      if (visited.has(value)) return;
+      visited.add(value);
+
+      const parsed = getJudgemeDataReview(value);
+      if (parsed) reviews.push(parsed);
+
+      if (Array.isArray(value)) {
+        value.forEach(walk);
+        return;
+      }
+
+      Object.values(value).forEach(walk);
+    };
+
+    walk(data);
+    return reviews;
+  };
+
   const getJudgemeReviewData = (review) => {
     const body = getReviewText(review, ['.jdgm-rev__body', '.jdgm-rev__title']);
     if (!body) return null;
@@ -201,6 +309,16 @@
       meta: getReviewText(review, ['.jdgm-rev__buyer-badge', '.jdgm-rev__verified-badge', '.jdgm-rev__timestamp']) || 'Verified Buyer',
       images: Array.from(seen),
     };
+  };
+
+  const dedupeReviews = (reviews) => {
+    const seen = new Set();
+    return reviews.filter((review) => {
+      const key = `${review.author}|${review.body}`.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   };
 
   const createReviewCard = ({ author, body, meta, images }) => {
@@ -244,20 +362,46 @@
     return card;
   };
 
+  const updateReviewControls = (slider) => {
+    const track = slider.querySelector('[data-altaeron-review-track]');
+    const controls = slider.querySelector('[data-altaeron-review-controls]');
+    if (!track || !controls) return;
+
+    const canScroll = track.scrollWidth - track.clientWidth > 4;
+    controls.hidden = !canScroll;
+    const previous = controls.querySelector('[data-altaeron-review-slide="prev"]');
+    const next = controls.querySelector('[data-altaeron-review-slide="next"]');
+    if (!canScroll || !previous || !next) return;
+
+    previous.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+  };
+
+  const bindReviewSlider = (slider) => {
+    const track = slider.querySelector('[data-altaeron-review-track]');
+    if (!track || track.dataset.altaeronReviewBound === 'true') return;
+    track.dataset.altaeronReviewBound = 'true';
+    track.addEventListener('scroll', () => updateReviewControls(slider), { passive: true });
+  };
+
   const populateJudgemeSpotlight = (source, spotlight) => {
     const track = spotlight.querySelector('[data-altaeron-review-track]');
     if (!track) return false;
 
-    const reviews = Array.from(source.querySelectorAll('.jdgm-rev'))
+    const reviews = dedupeReviews([
+      ...getJudgemeDataReviews(source),
+      ...Array.from(source.querySelectorAll('.jdgm-rev'))
       .map(getJudgemeReviewData)
-      .filter(Boolean)
-      .slice(0, 12);
+      .filter(Boolean),
+    ]).slice(0, 48);
     if (!reviews.length) return false;
 
     track.replaceChildren(...reviews.map(createReviewCard));
+    bindReviewSlider(spotlight);
     spotlight.hidden = false;
-    source.hidden = true;
+    source.classList.add('altaeron-judgeme--source');
     source.setAttribute('aria-hidden', 'true');
+    requestAnimationFrame(() => updateReviewControls(spotlight));
     return true;
   };
 
@@ -270,9 +414,7 @@
       if (!spotlight) return;
 
       const sync = () => {
-        if (populateJudgemeSpotlight(source, spotlight)) {
-          observer.disconnect();
-        }
+        populateJudgemeSpotlight(source, spotlight);
       };
       const observer = new MutationObserver(sync);
       observer.observe(source, { childList: true, subtree: true });
@@ -377,6 +519,20 @@
       return;
     }
 
+    const reviewSlide = event.target.closest('[data-altaeron-review-slide]');
+    if (reviewSlide) {
+      const slider = reviewSlide.closest('[data-altaeron-review-slider]');
+      const track = slider?.querySelector('[data-altaeron-review-track]');
+      if (!track) return;
+      const direction = reviewSlide.dataset.altaeronReviewSlide === 'prev' ? -1 : 1;
+      track.scrollBy({
+        left: direction * track.clientWidth,
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+      });
+      requestAnimationFrame(() => updateReviewControls(slider));
+      return;
+    }
+
     const stickyButton = event.target.closest('[data-altaeron-sticky-submit]');
     if (stickyButton) {
       const form = document.querySelector('.altaeron-purchase form[is="product-form"]');
@@ -414,6 +570,7 @@
   const handleResize = () => {
     requestFixedUpdate();
     refreshPackaging();
+    document.querySelectorAll('[data-altaeron-review-slider]').forEach(updateReviewControls);
   };
 
   document.addEventListener('click', handleClick);
