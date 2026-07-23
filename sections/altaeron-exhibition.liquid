@@ -498,7 +498,7 @@
           {%- if section.settings.sticky_show_rating and sticky_rating != blank and sticky_rating_count > 0 -%}
             <div class="altaeron__sticky-rating">
               <span class="visually-hidden">{{ sticky_rating.rating }} {{ section.settings.rating_accessibility_suffix | escape }}, {{ sticky_rating_count }} {{ section.settings.reviews_count_label | escape }}</span>
-              <span class="altaeron__stars" style="--rating-percent: {{ sticky_rating.rating | times: 100.0 | divided_by: sticky_rating.scale_max }}%" aria-hidden="true">â˜…â˜…â˜…â˜…â˜…</span>
+              <span class="altaeron__stars" style="--rating-percent: {{ sticky_rating.rating | times: 100.0 | divided_by: sticky_rating.scale_max }}%" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
               <small>{{ sticky_rating.rating | round: 1 }}</small>
             </div>
           {%- endif -%}
@@ -760,7 +760,7 @@
       {"type":"product","settings":{"heading":"Ocean Wave Lamp","price":"$119.00","compare_price":"$149.00","rating":"(834)","badge":""}},
       {"type":"product","settings":{"heading":"Forest Spirit Lamp","price":"$129.00","compare_price":"$169.00","rating":"(712)","badge":""}},
       {"type":"product","settings":{"heading":"Moonlight Lamp","price":"$109.00","compare_price":"$139.00","rating":"(845)","badge":""}},
-      {"type":"feature","settings":{"placement":"service","icon":"shipping","heading":"Free Shipping","text":"On orders over $99"}},
+      {"type":"feature","settings":{"placement":"service","icon":"shipping","heading":"Free Shipping","text":"On orders over $59"}},
       {"type":"feature","settings":{"placement":"service","icon":"returns","heading":"30-Day Returns","text":"Hassle-free returns"}},
       {"type":"feature","settings":{"placement":"service","icon":"shield","heading":"1 Year Warranty","text":"We've got you covered"}},
       {"type":"feature","settings":{"placement":"service","icon":"lock","heading":"Secure Payment","text":"100% protected"}},

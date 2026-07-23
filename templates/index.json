@@ -263,7 +263,7 @@
             "placement": "service",
             "icon": "shipping",
             "heading": "Free Shipping",
-            "text": "On orders over $99"
+            "text": "On orders over $59"
           }
         },
         "service_returns": {
