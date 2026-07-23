@@ -185,42 +185,76 @@
     return background?.startsWith('url(') ? background.slice(4, -1).replace(/^["']|["']$/g, '') : '';
   };
 
-  const populateJudgemeSpotlight = (source, spotlight) => {
-    const review = Array.from(source.querySelectorAll('.jdgm-rev')).find((item) => {
-      return getReviewText(item, ['.jdgm-rev__body', '.jdgm-rev__title']);
-    });
-    if (!review) return false;
-
-    const author = getReviewText(review, ['.jdgm-rev__author', '[data-reviewer-name]']) || 'Verified customer';
+  const getJudgemeReviewData = (review) => {
     const body = getReviewText(review, ['.jdgm-rev__body', '.jdgm-rev__title']);
-    const meta = getReviewText(review, ['.jdgm-rev__buyer-badge', '.jdgm-rev__verified-badge', '.jdgm-rev__timestamp']) || 'Verified Buyer';
-    const authorTarget = spotlight.querySelector('[data-altaeron-review-author]');
-    const bodyTarget = spotlight.querySelector('[data-altaeron-review-body]');
-    const metaTarget = spotlight.querySelector('[data-altaeron-review-meta]');
-    const initialsTarget = spotlight.querySelector('[data-altaeron-review-initials]');
-    const imagesTarget = spotlight.querySelector('[data-altaeron-review-images]');
+    if (!body) return null;
 
-    if (authorTarget) authorTarget.textContent = author;
-    if (bodyTarget) bodyTarget.textContent = `"${body}"`;
-    if (metaTarget) metaTarget.textContent = meta;
-    if (initialsTarget) initialsTarget.textContent = author.charAt(0).toUpperCase();
+    const seen = new Set();
+    Array.from(review.querySelectorAll('.jdgm-rev__pics img, .jdgm-rev__pic-img, .jdgm-rev__pic-link img')).forEach((node) => {
+      const src = getImageSource(node);
+      if (src && seen.size < 4) seen.add(src);
+    });
 
-    if (imagesTarget) {
-      imagesTarget.replaceChildren();
-      const seen = new Set();
-      Array.from(review.querySelectorAll('.jdgm-rev__pics img, .jdgm-rev__pic-img, .jdgm-rev__pic-link img')).forEach((node) => {
-        const src = getImageSource(node);
-        if (!src || seen.has(src) || seen.size >= 4) return;
-        seen.add(src);
+    return {
+      author: getReviewText(review, ['.jdgm-rev__author', '[data-reviewer-name]']) || 'Verified customer',
+      body,
+      meta: getReviewText(review, ['.jdgm-rev__buyer-badge', '.jdgm-rev__verified-badge', '.jdgm-rev__timestamp']) || 'Verified Buyer',
+      images: Array.from(seen),
+    };
+  };
+
+  const createReviewCard = ({ author, body, meta, images }) => {
+    const card = document.createElement('article');
+    card.className = 'altaeron-featured-story';
+
+    const authorWrap = document.createElement('div');
+    authorWrap.className = 'altaeron-featured-story__author';
+
+    const avatar = document.createElement('span');
+    avatar.className = 'altaeron-featured-story__avatar';
+    avatar.setAttribute('aria-hidden', 'true');
+    avatar.textContent = author.charAt(0).toUpperCase();
+
+    const copy = document.createElement('p');
+    const name = document.createElement('strong');
+    name.textContent = author;
+    const detail = document.createElement('small');
+    detail.textContent = meta;
+    copy.append(name, detail);
+    authorWrap.append(avatar, copy);
+
+    const quote = document.createElement('blockquote');
+    quote.textContent = `"${body}"`;
+
+    card.append(authorWrap, quote);
+
+    if (images.length) {
+      const imageWrap = document.createElement('div');
+      imageWrap.className = 'altaeron-featured-story__images';
+      images.forEach((src) => {
         const image = document.createElement('img');
         image.src = src;
         image.alt = '';
         image.loading = 'lazy';
-        imagesTarget.append(image);
+        imageWrap.append(image);
       });
-      imagesTarget.hidden = seen.size === 0;
+      card.append(imageWrap);
     }
 
+    return card;
+  };
+
+  const populateJudgemeSpotlight = (source, spotlight) => {
+    const track = spotlight.querySelector('[data-altaeron-review-track]');
+    if (!track) return false;
+
+    const reviews = Array.from(source.querySelectorAll('.jdgm-rev'))
+      .map(getJudgemeReviewData)
+      .filter(Boolean)
+      .slice(0, 12);
+    if (!reviews.length) return false;
+
+    track.replaceChildren(...reviews.map(createReviewCard));
     spotlight.hidden = false;
     source.hidden = true;
     source.setAttribute('aria-hidden', 'true');

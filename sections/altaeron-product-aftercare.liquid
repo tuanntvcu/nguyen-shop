@@ -75,42 +75,52 @@
         <h2 id="AltaeronStoriesTitle-{{ section.id }}"><span class="altaeron-desktop-only">{{ stories_heading | escape }}</span><span class="altaeron-mobile-only">{{ stories_mobile_heading | escape }}</span></h2>
         {%- if rating != blank and rating_count > 0 -%}
           <div class="altaeron-rating altaeron-rating--large" aria-label="{{ rating.rating }} out of {{ rating.scale_max }} stars, {{ rating_count }} reviews">
-            <span aria-hidden="true">★★★★★</span><small>{{ rating.rating }} ({{ rating_count }})</small>
+            <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><small>{{ rating.rating }} ({{ rating_count }})</small>
           </div>
         {%- endif -%}
       </header>
 
       {%- if show_judgeme_widget -%}
-        <article class="altaeron-featured-story altaeron-judgeme-spotlight" data-altaeron-judgeme-spotlight hidden>
-          <div class="altaeron-featured-story__author">
-            <span class="altaeron-featured-story__avatar" data-altaeron-review-initials aria-hidden="true"></span>
-            <p><strong data-altaeron-review-author></strong><small data-altaeron-review-meta></small></p>
-          </div>
-          <blockquote data-altaeron-review-body></blockquote>
-          <div class="altaeron-featured-story__images" data-altaeron-review-images hidden></div>
-        </article>
+        <div class="altaeron-stories__slider" data-altaeron-judgeme-spotlight hidden>
+          <div
+            class="altaeron-stories__track"
+            data-altaeron-review-track
+            role="region"
+            aria-label="{{ stories_mobile_heading | default: stories_heading | escape }}"
+            tabindex="0"
+          ></div>
+        </div>
         <div class="altaeron-judgeme" data-altaeron-judgeme>
           {%- render 'altaeron-judgeme-product-reviews' -%}
         </div>
       {%- endif -%}
 
       {%- if show_editorial_story and featured_review != blank -%}
-        <article class="altaeron-featured-story">
-          <div class="altaeron-featured-story__author">
-            {%- if featured_review.avatar.value != blank -%}
-              {{ featured_review.avatar.value | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 90, 120', sizes: '48px', alt: featured_review.customer_name.value }}
-            {%- endif -%}
-            <p><strong>{{ featured_review.customer_name.value | escape }}</strong>{% if featured_review.customer_location.value != blank %}<small>{{ featured_review.customer_location.value | escape }}</small>{% endif %}</p>
+        <div class="altaeron-stories__slider">
+          <div
+            class="altaeron-stories__track"
+            role="region"
+            aria-label="{{ stories_mobile_heading | default: stories_heading | escape }}"
+            tabindex="0"
+          >
+            <article class="altaeron-featured-story">
+              <div class="altaeron-featured-story__author">
+                {%- if featured_review.avatar.value != blank -%}
+                  {{ featured_review.avatar.value | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 90, 120', sizes: '48px', alt: featured_review.customer_name.value }}
+                {%- endif -%}
+                <p><strong>{{ featured_review.customer_name.value | escape }}</strong>{% if featured_review.customer_location.value != blank %}<small>{{ featured_review.customer_location.value | escape }}</small>{% endif %}</p>
+              </div>
+              <blockquote>&ldquo;{{ featured_review.quote.value | escape }}&rdquo;</blockquote>
+              {%- if featured_review.images.value != blank -%}
+                <div class="altaeron-featured-story__images">
+                  {%- for story_image in featured_review.images.value limit: 4 -%}
+                    {{ story_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '180, 240, 360, 480, 640', sizes: '(max-width: 767px) 30vw, 14vw', alt: story_image.alt }}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </article>
           </div>
-          <blockquote>“{{ featured_review.quote.value | escape }}”</blockquote>
-          {%- if featured_review.images.value != blank -%}
-            <div class="altaeron-featured-story__images">
-              {%- for story_image in featured_review.images.value limit: 4 -%}
-                {{ story_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '180, 240, 360, 480, 640', sizes: '(max-width: 767px) 30vw, 14vw', alt: story_image.alt }}
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
-        </article>
+        </div>
       {%- endif -%}
 
       {%- for block in section.blocks -%}
