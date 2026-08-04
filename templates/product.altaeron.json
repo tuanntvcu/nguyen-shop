@@ -205,7 +205,7 @@
           "settings": {
             "icon": "3",
             "title": "Premium Quality",
-            "text": "Durable, medical-grade materials."
+            "text": "Durable, comfortable materials."
           }
         }
       },
@@ -235,7 +235,7 @@
       "settings": {
         "hero_eyebrow": "ALTAERON Foot Recovery System",
         "hero_heading": "Walk without bunion pain. Every single day.",
-        "hero_copy": "<p>Adjustable toe support designed to gently guide your big toe and reduce localized pressure during your routine.</p>",
+        "hero_copy": "<p>Our adjustable corrector gently realigns your big toe and relieves pressure with every step.</p>",
         "cta_label": "Get my bunion corrector",
         "rating_text": "4.8/5 from 2,300+ customers",
         "hero_guarantee": "30-Day Comfort Guarantee",
@@ -244,7 +244,7 @@
         "hero_video": "",
         "hero_poster": "",
         "pain_eyebrow": "Tired of bunion pressure?",
-        "pain_heading": "It is not just a bump. It is holding you back.",
+        "pain_heading": "It’s not just a bump. It’s holding you back.",
         "transformation_enabled": true,
         "transform_eyebrow": "See it. Real results.",
         "transform_heading": "Adjustable support for a more comfortable routine.",
@@ -260,6 +260,9 @@
         "how_autoplay": false,
         "lifestyle_heading": "Comfortable relief for any part of your day",
         "featured_review_enabled": true,
+        "featured_review_quote": "Finally something that actually works. My pain is so much better and I can wear shoes again!",
+        "featured_review_name": "Jessica M.",
+        "featured_review_social_proof": "Join 2,300+ happy customers",
         "reviews_heading": "Real customer reviews",
         "faq_heading": "Still have questions?"
       }

@@ -18,25 +18,22 @@
           "type": "newsletter",
           "settings": {
             "block_width": 40,
-            "heading": "SIGN UP AND SAVE",
+            "heading": "JOIN 15,000+ PEOPLE",
             "heading_size": "h2",
-            "newsletter_description": "<p>Subscrible to get special offters, free giveaways, and once-in-a-lifetime deals.</p>",
-            "newsletter_term": "<p>By subscribing you agree to the <a href=\"#\">Terms of Use</a> & <a href=\"#\">Privacy Policy.</a></p>",
+            "newsletter_description": "<p>Get tips for healthier feet and exclusive offers.</p>",
+            "newsletter_term": "",
             "newsletter_text_alignment": "left",
             "form_width": 465,
             "order_first": true
           }
         },
         "image_text_F3FNhx": {
-          "type": "image_text",
+          "type": "menu",
           "settings": {
             "block_width": 25,
-            "heading": "About",
+            "heading": "SHOP",
             "heading_size": "h4",
-            "image_width": 150,
-            "text": "<p>Share store details, promotions, or brand content with your customers.</p>",
-            "button_label": "Button label",
-            "button_link": "",
+            "menu": "footer-shop",
             "open_default": false,
             "show_divider": false
           }
@@ -45,9 +42,9 @@
           "type": "menu",
           "settings": {
             "block_width": 17,
-            "heading": "Quick links",
+            "heading": "HELP",
             "heading_size": "h4",
-            "menu": "footer",
+            "menu": "footer-support",
             "open_default": false,
             "show_divider": false
           }
@@ -56,9 +53,20 @@
           "type": "menu",
           "settings": {
             "block_width": 17,
-            "heading": "Quick links",
+            "heading": "ABOUT ALTAERON",
             "heading_size": "h4",
-            "menu": "footer",
+            "menu": "footer-company",
+            "open_default": false,
+            "show_divider": false
+          }
+        },
+        "menu_legal": {
+          "type": "menu",
+          "settings": {
+            "block_width": 17,
+            "heading": "LEGAL",
+            "heading_size": "h4",
+            "menu": "footer-help-info",
             "open_default": false,
             "show_divider": false
           }
@@ -68,16 +76,17 @@
         "newsletter_3qCrWc",
         "image_text_F3FNhx",
         "menu_DEKGYP",
-        "menu_4eCrBB"
+        "menu_4eCrBB",
+        "menu_legal"
       ],
       "custom_css": [
         ".form-control {--color-border: var(--color-field);}"
       ],
       "settings": {
         "color_scheme": "scheme-1",
-        "enable_follow_on_shop": true,
+        "enable_follow_on_shop": false,
         "show_social": true,
-        "enable_country_selector": true,
+        "enable_country_selector": false,
         "enable_language_selector": false,
         "payment_enable": true,
         "footer_bottom_menu": "",
@@ -130,7 +139,7 @@
         "link_mJ6QMc"
       ],
       "settings": {
-        "enable_sticky_bar": true,
+        "enable_sticky_bar": false,
         "show_text": true
       }
     }

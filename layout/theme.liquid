@@ -92,7 +92,7 @@
   </head>
 
   <body
-    class="{{ request.page_type }}-template {{ template.suffix }} blocks-corner--{{ settings.blocks_corner_radius }}{% if request.design_mode %} shopify-design-mode{% endif %}"
+    class="{{ request.page_type }}-template {{ template.suffix }}{% if template.suffix == 'altaeron' %} altaeron-pdp-active{% endif %} blocks-corner--{{ settings.blocks_corner_radius }}{% if request.design_mode %} shopify-design-mode{% endif %}"
     data-initializing
   >
     {% comment %} Custom metafield for body tag like GTag tracking {% endcomment %}

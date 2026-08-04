@@ -162,8 +162,9 @@ if (!customElements.get('sticky-atc-bar')) {
       }
 
       setObserveTarget() {
-        this.observer.observe(this.productFormActions);
-        this.observeTarget = this.productFormActions;
+        const altaeronHeroCta = document.querySelector('.altaeron-pdp .apdp-hero__cta');
+        this.observeTarget = altaeronHeroCta || this.productFormActions;
+        this.observer.observe(this.observeTarget);
       }
 
       checkDevice(e) {

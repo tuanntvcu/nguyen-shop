@@ -1,0 +1,21 @@
+{%- liquid
+  assign rating = product.metafields.reviews.rating.value.rating
+  assign rating_count = product.metafields.reviews.rating_count.value
+  if rating == blank
+    assign rating = product.metafields.judgeme.rating.value
+  endif
+  if rating_count == blank
+    assign rating_count = product.metafields.judgeme.review_count.value
+  endif
+-%}
+<article class="ah-product">
+  <span class="ah-product__badge">BEST SELLER</span>
+  <a class="ah-product__image ah-media" {% if product %}href="{{ product.url }}"{% else %}role="link" aria-disabled="true"{% endif %} tabindex="-1">
+    {% if product.featured_image %}{{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', widths: '180, 300, 500', sizes: '(min-width: 768px) 225px, 46vw', alt: product.featured_image.alt | default: product.title }}{% else %}<div class="ah-placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>{% endif %}
+  </a>
+  <div class="ah-product__body"><h3 class="ah-product__title">{% if product %}<a href="{{ product.url }}">{{ product.title }}</a>{% else %}Select a Best Sellers collection{% endif %}</h3>
+    <div class="ah-product__rating">{% if rating != blank %}<span class="ah-stars" aria-label="{{ rating }} out of 5 stars">★★★★★</span>{% if rating_count != blank %}<span>({{ rating_count }})</span>{% endif %}{% endif %}</div>
+    <span class="ah-product__price">{% if product %}{{ product.price | money }}{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}{% else %}—{% endif %}</span>
+    {% if product %}<a class="ah-button" href="{{ product.url }}">{% if product.available %}SHOP NOW{% else %}SOLD OUT{% endif %} <span class="ah-arrow">→</span></a>{% else %}<span class="ah-button" aria-disabled="true">SHOP NOW <span class="ah-arrow">→</span></span>{% endif %}
+  </div>
+</article>

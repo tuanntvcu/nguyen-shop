@@ -3,6 +3,22 @@
   class="announcement-bar color-{{ section.settings.color_scheme }} page-width section--padding"
   style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
+  {%- if section.settings.promise_layout -%}
+    <div class="announcement-bar__promises" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'announcement_bar' and block.settings.text != blank -%}
+          <div class="announcement-bar__promise" role="listitem" {{ block.shopify_attributes }}>
+            <span class="announcement-bar__promise-icon" aria-hidden="true">
+              {%- render 'altaeron-icon', type: block.settings.icon -%}
+            </span>
+            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{%- endif -%}
+            {{ block.settings.text }}
+            {%- if block.settings.link != blank -%}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- else -%}
   <announcement-bar
     class="swiper announcement-bar__wrapper block"
     {% if section.settings.autoplay %}
@@ -85,7 +101,52 @@
       </div>
     {%- endif -%}
   </announcement-bar>
+  {%- endif -%}
 </div>
+{%- if section.settings.promise_layout -%}
+  {% style %}
+    #shopify-section-{{ section.id }} .announcement-bar {
+      padding-block: 0;
+      color: #fff;
+      background: #004b5b;
+    }
+    #shopify-section-{{ section.id }} .announcement-bar__promises {
+      display: grid;
+      grid-template-columns: repeat({{ section.blocks.size }}, minmax(0, 1fr));
+      min-height: 40px;
+      align-items: center;
+    }
+    #shopify-section-{{ section.id }} .announcement-bar__promise {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 8px 14px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    #shopify-section-{{ section.id }} .announcement-bar__promise a { color: inherit; text-decoration: none; }
+    #shopify-section-{{ section.id }} .announcement-bar__promise-icon { width: 22px; height: 22px; flex: 0 0 22px; }
+    #shopify-section-{{ section.id }} .announcement-bar__promise-icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }} .announcement-bar__promise { gap: 5px; padding-inline: 4px; font-size: 10px; }
+      #shopify-section-{{ section.id }} .announcement-bar__promise-icon { width: 19px; height: 19px; flex-basis: 19px; }
+    }
+  {% endstyle %}
+{%- endif -%}
 {% schema %}
 {
   "name": "t:sections.announcement-bar.name",
@@ -100,6 +161,12 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-inverse"
+    },
+    {
+      "type": "checkbox",
+      "id": "promise_layout",
+      "label": "Show announcements as promise columns",
+      "default": false
     },
     {
       "type": "range",
@@ -167,6 +234,16 @@
           "type": "url",
           "id": "link",
           "label": "t:sections.all.link.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shipping", "label": "Shipping truck" },
+            { "value": "shield", "label": "Shield" }
+          ],
+          "default": "shipping"
         }
       ]
     },

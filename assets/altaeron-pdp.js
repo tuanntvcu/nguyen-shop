@@ -158,6 +158,98 @@
         carousel.scrollBy({ left: direction * carousel.clientWidth * 0.8, behavior: 'smooth' });
       });
     });
+
+    const ugcSlider = root.querySelector('[data-apdp-ugc-slider]');
+    const dots = [...root.querySelectorAll('[data-apdp-ugc-dots] button')];
+    if (!ugcSlider || dots.length === 0) return;
+
+    let frame;
+    const setActiveDot = (index) => {
+      dots.forEach((dot, dotIndex) => {
+        const active = dotIndex === index;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-current', active ? 'true' : 'false');
+      });
+    };
+
+    const updateDots = () => {
+      frame = null;
+      const maxScroll = ugcSlider.scrollWidth - ugcSlider.clientWidth;
+      const progress = maxScroll > 0 ? ugcSlider.scrollLeft / maxScroll : 0;
+      setActiveDot(Math.round(progress * (dots.length - 1)));
+    };
+
+    ugcSlider.addEventListener('scroll', () => {
+      if (!frame) frame = requestAnimationFrame(updateDots);
+    }, { passive: true });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        const maxScroll = ugcSlider.scrollWidth - ugcSlider.clientWidth;
+        const left = dots.length > 1 ? maxScroll * index / (dots.length - 1) : 0;
+        ugcSlider.scrollTo({ left, behavior: 'smooth' });
+      });
+    });
+
+    updateDots();
+  };
+
+  const setupJudgeReview = (root) => {
+    const featured = root.querySelector('[data-apdp-judge-featured]');
+    const widget = root.querySelector('.apdp-reviews');
+    if (!featured || !widget) return;
+
+    const populate = () => {
+      const review = widget.querySelector('.jdgm-rev');
+      if (!review) return false;
+
+      const body = review.querySelector('.jdgm-rev__body, .jdgm-rev__body p')?.textContent.trim();
+      const author = review.querySelector('.jdgm-rev__author')?.textContent.trim();
+      if (!body || !author) return false;
+
+      const ratingElement = review.querySelector('.jdgm-rev__rating');
+      const rating = Math.max(1, Math.min(5, Math.round(Number(
+        ratingElement?.dataset.score || ratingElement?.getAttribute('data-score') || 5
+      ))));
+      featured.querySelector('[data-apdp-review-stars]').textContent = '\u2605'.repeat(rating);
+      featured.querySelector('[data-apdp-review-stars]').setAttribute('aria-label', `${rating} out of 5 stars`);
+      featured.querySelector('[data-apdp-review-body]').textContent = body;
+      featured.querySelector('[data-apdp-review-author]').textContent = `- ${author}`;
+
+      const reviewImage = review.querySelector('.jdgm-rev__pic-img, .jdgm-rev__pics img');
+      const media = featured.querySelector('.apdp-featured-review__media');
+      if (reviewImage && media) {
+        const image = reviewImage.cloneNode(true);
+        image.removeAttribute('width');
+        image.removeAttribute('height');
+        image.alt = `Customer review by ${author}`;
+        media.replaceChildren(image);
+        media.removeAttribute('role');
+        media.removeAttribute('tabindex');
+      }
+
+      featured.hidden = false;
+      return true;
+    };
+
+    if (populate()) return;
+    const observer = new MutationObserver(() => {
+      if (populate()) observer.disconnect();
+    });
+    observer.observe(widget, { childList: true, subtree: true });
+    window.setTimeout(() => observer.disconnect(), 10000);
+  };
+
+  const setupFaq = (root) => {
+    const items = [...root.querySelectorAll('.apdp-faq__item')];
+    items.forEach((item) => {
+      item.addEventListener('toggle', () => {
+        if (!item.open) return;
+        items.forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
   };
 
   const init = (root) => {
@@ -167,6 +259,8 @@
     setupVideos(root);
     setupVariantPrice(root);
     setupCarousels(root);
+    setupFaq(root);
+    setupJudgeReview(root);
   };
 
   document.addEventListener('DOMContentLoaded', () => {
