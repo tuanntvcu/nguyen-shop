@@ -1,0 +1,497 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign hero_eyebrow = product.metafields.altaeron.hero_eyebrow.value | default: section.settings.hero_eyebrow
+  assign hero_heading = product.metafields.altaeron.hero_heading.value | default: section.settings.hero_heading | default: product.title
+  assign hero_copy = product.metafields.altaeron.hero_supporting_text.value | default: section.settings.hero_copy | default: product.description | strip_html | truncate: 150
+  assign cta_label = product.metafields.altaeron.hero_cta_label.value | default: section.settings.cta_label | default: 'Add to cart'
+  assign pain_heading = product.metafields.altaeron.pain_heading.value | default: section.settings.pain_heading
+  assign how_heading = product.metafields.altaeron.how_it_works_heading.value | default: section.settings.how_heading
+  assign lifestyle_heading = product.metafields.altaeron.lifestyle_heading.value | default: section.settings.lifestyle_heading
+  assign faq_heading = product.metafields.altaeron.faq_heading.value | default: section.settings.faq_heading
+  assign judgeme_review_count = product.metafields.judgeme.review_widget_data.value.number_of_reviews | default: 0 | plus: 0
+  assign hero_media = section.settings.hero_video
+  assign temporary_video = section.settings.temporary_video
+  if hero_media == blank
+    assign hero_media = product.media | where: 'media_type', 'video' | first
+  endif
+  if hero_media == blank
+    assign hero_media = temporary_video
+  endif
+  assign hero_poster = section.settings.hero_poster | default: product.images[2] | default: product.featured_image
+  assign how_video = section.settings.how_video
+  if how_video == blank
+    assign videos = product.media | where: 'media_type', 'video'
+    assign how_video = videos[1] | default: videos[0]
+  endif
+  if how_video == blank
+    assign how_video = temporary_video
+  endif
+  assign how_poster = section.settings.how_poster | default: product.images[1] | default: hero_poster
+  if hero_poster != blank
+    assign hero_poster_url = hero_poster | image_url: width: 1800
+  endif
+  if how_poster != blank
+    assign how_poster_url = how_poster | image_url: width: 1400
+  endif
+-%}
+
+{{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'altaeron-pdp.js' | asset_url }}" defer="defer"></script>
+{{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+
+<product-info
+  id="AltaeronProduct-{{ section.id }}"
+  class="altaeron-pdp"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-url="{{ product.url }}"
+  data-update-url="true"
+>
+  <section class="apdp-hero" aria-label="{{ product.title | escape }}">
+    <div class="apdp-hero__grid">
+      <div class="apdp-hero__media">
+        {%- if hero_media != blank and hero_media.media_type == 'video' -%}
+          {{ hero_media | video_tag: loop: true, muted: true, playsinline: true, preload: 'metadata', poster: hero_poster_url, data-apdp-autoplay: true }}
+        {%- elsif hero_poster != blank -%}
+          {{ hero_poster | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '375, 550, 750, 1100, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: product.title }}
+        {%- endif -%}
+        {%- if hero_media != blank and hero_media.media_type == 'video' -%}
+          <button class="apdp-video-toggle" type="button" data-apdp-video-toggle aria-label="Unmute video">
+            <span aria-hidden="true">&#9654;</span>
+            <span data-apdp-sound-label aria-hidden="true">Auto playing</span>
+          </button>
+        {%- endif -%}
+      </div>
+
+      <div class="apdp-hero__content">
+        {%- if hero_eyebrow != blank -%}
+          <p class="apdp-eyebrow">{{ hero_eyebrow }}</p>
+        {%- endif -%}
+        <h1>{{ hero_heading | newline_to_br }}{%- if section.settings.hero_accent != blank -%}<span>{{ section.settings.hero_accent }}</span>{%- endif -%}</h1>
+        {%- if hero_copy != blank -%}
+          <div class="apdp-hero__copy rte">{{ hero_copy }}</div>
+        {%- endif -%}
+        {%- capture judgeme_badge -%}
+          {{ product.metafields.judgeme.badge }}
+        {%- endcapture -%}
+        {%- assign judgeme_badge = judgeme_badge | strip -%}
+        {%- if judgeme_review_count > 0 and judgeme_badge != blank -%}
+          <a class="apdp-rating" href="#AltaeronReviews-{{ section.id }}" aria-label="Read product reviews">
+            {{ judgeme_badge }}
+          </a>
+        {%- elsif section.settings.rating_text != blank -%}
+          <div class="apdp-rating apdp-rating--placeholder" aria-label="{{ section.settings.rating_text | escape }}">
+            <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> {{ section.settings.rating_text }}
+          </div>
+        {%- endif -%}
+        <a class="apdp-button apdp-button--primary" href="#AltaeronBuy-{{ section.id }}">{{ cta_label }} <span aria-hidden="true">-&gt;</span></a>
+        {%- if section.settings.hero_guarantee != blank -%}
+          <p class="apdp-hero__guarantee"><span aria-hidden="true">&#10003;</span> {{ section.settings.hero_guarantee }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- assign benefit_blocks = section.blocks | where: 'type', 'benefit' -%}
+  {%- if benefit_blocks.size > 0 -%}
+    <section class="apdp-benefits" aria-label="Product benefits">
+      <div class="apdp-shell apdp-benefits__grid">
+        {%- for block in benefit_blocks -%}
+          {%- if block.settings.title != blank -%}
+            <div class="apdp-benefit" {{ block.shopify_attributes }}>
+              <span class="apdp-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+              <span>{{ block.settings.title }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- assign pain_blocks = section.blocks | where: 'type', 'pain' -%}
+  {%- if pain_blocks.size > 0 -%}
+    <section class="apdp-section apdp-pain">
+      <div class="apdp-shell">
+        {%- if section.settings.pain_eyebrow != blank -%}<p class="apdp-eyebrow">{{ section.settings.pain_eyebrow }}</p>{%- endif -%}
+        {%- if pain_heading != blank -%}<h2>{{ pain_heading | newline_to_br }}</h2>{%- endif -%}
+        <div class="apdp-card-grid apdp-card-grid--4">
+          {%- for block in pain_blocks -%}
+            {%- if block.settings.title != blank -%}
+              {%- liquid
+                assign card_image = block.settings.image
+                if card_image == blank
+                  assign card_image = product.images[forloop.index0] | default: product.featured_image
+                endif
+                assign card_alt = block.settings.alt | default: card_image.alt | default: block.settings.title
+                if card_image != blank
+                  assign card_poster_url = card_image | image_url: width: 720
+                endif
+              -%}
+              <article class="apdp-card" {{ block.shopify_attributes }}>
+                {%- if card_image != blank -%}
+                  {{ card_image | image_url: width: 620 | image_tag: loading: 'lazy', widths: '180, 360, 620', sizes: '(min-width: 990px) 25vw, 50vw', alt: card_alt }}
+                {%- endif -%}
+                <h3>{{ block.settings.title }}</h3>
+                {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- if section.settings.transformation_enabled -%}
+    <section class="apdp-section apdp-transform">
+      <div class="apdp-shell">
+        {%- if section.settings.transform_eyebrow != blank -%}<p class="apdp-eyebrow">{{ section.settings.transform_eyebrow }}</p>{%- endif -%}
+        <div class="apdp-transform__grid">
+        <div class="apdp-transform__media">
+          {%- assign before_image = section.settings.before_image | default: product.images[3] | default: product.featured_image -%}
+          {%- assign after_image = section.settings.after_image | default: product.images[2] | default: product.featured_image -%}
+          {%- if before_image != blank -%}
+            <figure>
+              {{ before_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '360, 540, 720', sizes: '50vw', alt: section.settings.before_alt | default: section.settings.before_label }}
+              <figcaption>{{ section.settings.before_label }}</figcaption>
+            </figure>
+          {%- endif -%}
+          {%- if after_image != blank -%}
+            <figure>
+              {{ after_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '360, 540, 720', sizes: '50vw', alt: section.settings.after_alt | default: section.settings.after_label }}
+              <figcaption>{{ section.settings.after_label }}</figcaption>
+            </figure>
+          {%- endif -%}
+        </div>
+        <div class="apdp-transform__results" aria-label="Product highlights">
+          <p><span class="apdp-icon" aria-hidden="true">&#10003;</span> Less pain &amp; pressure</p>
+          <p><span class="apdp-icon" aria-hidden="true">&#10003;</span> Straighter big toe</p>
+          <p><span class="apdp-icon" aria-hidden="true">&#10003;</span> Better alignment &amp; balance</p>
+        </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- if how_video != blank or how_heading != blank -%}
+    <section class="apdp-section apdp-how">
+      <div class="apdp-shell">
+        {%- if how_heading != blank -%}<h2>{{ how_heading }}</h2>{%- endif -%}
+        <div class="apdp-video-card">
+          {%- if how_video != blank and how_video.media_type == 'video' -%}
+            {{ how_video | video_tag: muted: true, playsinline: true, controls: true, preload: 'none', poster: how_poster_url, data-apdp-autoplay: section.settings.how_autoplay }}
+            <button class="apdp-video-replay" type="button" data-apdp-video-replay aria-label="Play how it works video"><span aria-hidden="true">&#9654;</span></button>
+          {%- elsif how_poster != blank -%}
+            {{ how_poster | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '375, 750, 1200', sizes: '(min-width: 990px) 920px, 100vw', alt: how_heading | default: product.title }}
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- assign lifestyle_blocks = section.blocks | where: 'type', 'lifestyle' -%}
+  {%- if lifestyle_blocks.size > 0 -%}
+    <section class="apdp-section">
+      <div class="apdp-shell">
+        {%- if lifestyle_heading != blank -%}<h2 class="apdp-centered">{{ lifestyle_heading }}</h2>{%- endif -%}
+        <div class="apdp-carousel" data-apdp-carousel>
+          {%- for block in lifestyle_blocks -%}
+            {%- if block.settings.title != blank -%}
+              {%- liquid
+                assign image_index = forloop.index0 | plus: 4
+                assign card_image = block.settings.image
+                if card_image == blank
+                  assign card_image = product.images[image_index] | default: product.images[forloop.index0] | default: product.featured_image
+                endif
+                assign card_alt = block.settings.alt | default: card_image.alt | default: block.settings.title
+              -%}
+              <article class="apdp-card apdp-carousel__item" {{ block.shopify_attributes }}>
+                <div class="apdp-card__media">
+                {%- if temporary_video != blank -%}
+                  {{ temporary_video | video_tag: muted: true, playsinline: true, preload: 'metadata', poster: card_poster_url, data-apdp-autoplay: false }}
+                  <span class="apdp-play" aria-hidden="true">&#9654;</span>
+                {%- elsif card_image != blank -%}
+                  {{ card_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '260, 520, 720', sizes: '(min-width: 990px) 25vw, 78vw', alt: card_alt }}
+                {%- endif -%}
+                </div>
+                <h3>{{ block.settings.title }}</h3>
+                {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- if section.settings.featured_review_enabled -%}
+    <section class="apdp-section apdp-featured-review">
+      <div class="apdp-shell">
+        <p class="apdp-eyebrow">Loved by real people</p>
+        <div class="apdp-featured-review__grid">
+          <div class="apdp-featured-review__media">
+            {%- if temporary_video != blank -%}
+              {%- assign review_poster = product.images[4] | default: product.featured_image -%}
+              {%- assign review_poster_url = review_poster | image_url: width: 720 -%}
+              {{ temporary_video | video_tag: muted: true, playsinline: true, preload: 'metadata', poster: review_poster_url, data-apdp-autoplay: false }}
+              <span class="apdp-play" aria-hidden="true">&#9654;</span>
+            {%- else -%}
+              {{ product.images[4] | default: product.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', alt: 'Customer story' }}
+            {%- endif -%}
+          </div>
+          <blockquote>
+            <div class="apdp-stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>“Finally something that actually works. My pain is so much better and I can wear shoes again!”</p>
+            <cite>– Jessica M.</cite>
+            <small>Join 2,300+ happy customers</small>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- capture judgeme_widget -%}
+    {{ product.metafields.judgeme.widget }}
+  {%- endcapture -%}
+  {%- assign judgeme_widget = judgeme_widget | strip -%}
+  {%- if judgeme_review_count > 0 and judgeme_widget != blank -%}
+    <section id="AltaeronReviews-{{ section.id }}" class="apdp-section apdp-reviews">
+      <div class="apdp-shell">
+        <h2>{{ section.settings.reviews_heading }}</h2>
+        {{ judgeme_widget }}
+      </div>
+    </section>
+  {%- endif -%}
+
+  <section class="apdp-section apdp-faq-trust">
+    <div class="apdp-shell apdp-faq-trust__grid">
+      {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
+      {%- if faq_blocks.size > 0 -%}
+        <div>
+          {%- if faq_heading != blank -%}<h2>{{ faq_heading }}</h2>{%- endif -%}
+          <div class="apdp-faq">
+            {%- for block in faq_blocks -%}
+              {%- if block.settings.question != blank and block.settings.answer != blank -%}
+                <details class="apdp-faq__item" {{ block.shopify_attributes }}>
+                  <summary>{{ block.settings.question }}</summary>
+                  <div class="rte">{{ block.settings.answer }}</div>
+                </details>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- assign trust_blocks = section.blocks | where: 'type', 'trust' -%}
+      {%- if trust_blocks.size > 0 -%}
+        <aside class="apdp-trust" aria-label="Store promises">
+          {%- for block in trust_blocks -%}
+            {%- if block.settings.title != blank -%}
+              <div class="apdp-trust__item" {{ block.shopify_attributes }}>
+                <span class="apdp-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+                <div>
+                  <h3>{{ block.settings.title }}</h3>
+                  {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </aside>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- assign ugc_blocks = section.blocks | where: 'type', 'ugc' -%}
+  {%- if ugc_blocks.size > 0 -%}
+    <section class="apdp-section apdp-ugc">
+      <div class="apdp-shell">
+        <p class="apdp-eyebrow">See it. Real people. Real results.</p>
+        <div class="apdp-ugc__grid">
+          {%- for block in ugc_blocks -%}
+            {%- assign ugc_image = block.settings.image | default: product.images[forloop.index0] | default: product.featured_image -%}
+            {%- assign ugc_poster_url = ugc_image | image_url: width: 520 -%}
+            <article class="apdp-ugc__item" {{ block.shopify_attributes }}>
+              <div class="apdp-ugc__media">
+                {%- if temporary_video != blank -%}
+                  {{ temporary_video | video_tag: muted: true, playsinline: true, preload: 'metadata', poster: ugc_poster_url, data-apdp-autoplay: false }}
+                  <span class="apdp-play" aria-hidden="true">&#9654;</span>
+                {%- else -%}
+                  {{ ugc_image | image_url: width: 520 | image_tag: loading: 'lazy', alt: block.settings.handle }}
+                {%- endif -%}
+              </div>
+              <h3>{{ block.settings.handle }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </article>
+          {%- endfor -%}
+        </div>
+        <div class="apdp-dots" aria-hidden="true"><b></b><i></i><i></i><i></i></div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <section id="AltaeronBuy-{{ section.id }}" class="apdp-section apdp-buy">
+    <div class="apdp-shell apdp-offer">
+      <div class="apdp-offer__promise">
+        <h2>Limited time offer</h2>
+        <div><span>&#8646;</span><p><strong>Free Shipping</strong><br>On all US orders</p></div>
+        <div><span>&#10003;</span><p><strong>30-Day Guarantee</strong><br>Try risk-free</p></div>
+      </div>
+      <div class="apdp-buy__panel">
+      <div class="apdp-buy__product">
+        {%- if product.featured_image -%}
+          {{ product.featured_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 180', sizes: '90px', alt: product.title }}
+        {%- endif -%}
+        <div>
+          <h2>{{ product.title }}</h2>
+          <div class="apdp-price" data-apdp-price aria-live="polite" aria-atomic="true">
+            <span data-apdp-current-price>{{ current_variant.price | money }}</span>
+            {%- if current_variant.compare_at_price > current_variant.price -%}
+              <s data-apdp-compare-price>{{ current_variant.compare_at_price | money }}</s>
+            {%- else -%}
+              <s data-apdp-compare-price hidden></s>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      {%- assign product_form_id = 'product-form-' | append: section.id -%}
+      {%- form 'product',
+        product,
+        id: product_form_id,
+        class: 'main-product-form apdp-form',
+        data-type: 'add-to-cart-form',
+        is: 'product-form',
+        data-product-id: product.id
+      -%}
+        <div class="product-form__error-message-wrapper" role="alert" hidden>
+          <div class="product-form__error-message blocks-radius-md alert alert--error" role="alert" hidden></div>
+        </div>
+        <label class="visually-hidden" for="AltaeronVariant-{{ section.id }}">Variant</label>
+        <select id="AltaeronVariant-{{ section.id }}" name="id" class="apdp-variant-select product-variant-id" data-apdp-variant-select {% if product.has_only_default_variant %}hidden{% endif %}>
+          {%- for variant in product.variants -%}
+            <option
+              value="{{ variant.id }}"
+              data-price="{{ variant.price }}"
+              data-compare-price="{{ variant.compare_at_price | default: 0 }}"
+              data-available="{{ variant.available }}"
+              {% if variant.id == current_variant.id %}selected{% endif %}
+            >
+              {{ variant.title }}{% unless variant.available %} - {{ 'products.product.sold_out' | t }}{% endunless %}
+            </option>
+          {%- endfor -%}
+        </select>
+        <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" {% unless current_variant.available %}disabled aria-disabled="true"{% endunless %}>
+          <span>{% if current_variant.available %}{{ cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+          {% render 'loading-spinner' %}
+        </button>
+      {%- endform -%}
+        <div class="apdp-payments" aria-label="Accepted payment methods">
+          {%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" data-apdp-product-json>
+    {{ product.variants | json }}
+  </script>
+  <script type="application/ld+json">
+    {{ product | structured_data }}
+  </script>
+</product-info>
+
+{% schema %}
+{
+  "name": "Altaeron PDP",
+  "settings": [
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Comfortable toe support" },
+    { "type": "inline_richtext", "id": "hero_heading", "label": "Hero heading", "default": "Walk with less bunion pressure." },
+    { "type": "richtext", "id": "hero_copy", "label": "Hero copy", "default": "<p>Adjustable support designed to gently guide your big toe and reduce localized pressure during your routine.</p>" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Get my bunion corrector" },
+    { "type": "text", "id": "rating_text", "label": "Hero rating text", "default": "4.8/5 from 2,300+ customers" },
+    { "type": "text", "id": "hero_guarantee", "label": "Hero guarantee", "default": "30-Day Comfort Guarantee" },
+    { "type": "text", "id": "hero_accent", "label": "Hero accent line", "default": "Every single day." },
+    { "type": "video", "id": "temporary_video", "label": "Temporary video used across the PDP" },
+    { "type": "video", "id": "hero_video", "label": "Hero video" },
+    { "type": "image_picker", "id": "hero_poster", "label": "Hero poster" },
+    { "type": "text", "id": "pain_eyebrow", "label": "Pain eyebrow", "default": "Tired of bunion pressure?" },
+    { "type": "inline_richtext", "id": "pain_heading", "label": "Pain heading", "default": "It is not just a bump. It is holding you back." },
+    { "type": "checkbox", "id": "transformation_enabled", "label": "Show transformation/demo section", "default": false },
+    { "type": "text", "id": "transform_eyebrow", "label": "Transformation eyebrow", "default": "See the support in action" },
+    { "type": "inline_richtext", "id": "transform_heading", "label": "Transformation heading", "default": "Adjustable support for a more comfortable routine." },
+    { "type": "image_picker", "id": "before_image", "label": "First demo image" },
+    { "type": "text", "id": "before_label", "label": "First image label", "default": "Without support" },
+    { "type": "text", "id": "before_alt", "label": "First image alt" },
+    { "type": "image_picker", "id": "after_image", "label": "Second demo image" },
+    { "type": "text", "id": "after_label", "label": "Second image label", "default": "With adjustable support" },
+    { "type": "text", "id": "after_alt", "label": "Second image alt" },
+    { "type": "text", "id": "how_heading", "label": "How it works heading", "default": "How it works - 8 seconds" },
+    { "type": "video", "id": "how_video", "label": "How it works video" },
+    { "type": "image_picker", "id": "how_poster", "label": "How it works poster" },
+    { "type": "checkbox", "id": "how_autoplay", "label": "Autoplay how it works video in view", "default": true },
+    { "type": "inline_richtext", "id": "lifestyle_heading", "label": "Lifestyle heading", "default": "Comfortable support for your day" },
+    { "type": "checkbox", "id": "featured_review_enabled", "label": "Show featured review", "default": true },
+    { "type": "text", "id": "reviews_heading", "label": "Reviews heading", "default": "Real customer reviews" },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Still have questions?" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon text", "default": "+" },
+        { "type": "text", "id": "title", "label": "Title" }
+      ]
+    },
+    {
+      "type": "pain",
+      "name": "Pain moment",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "lifestyle",
+      "name": "Lifestyle item",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "ugc",
+      "name": "UGC item",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Poster image" },
+        { "type": "text", "id": "handle", "label": "Handle" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon text", "default": "+" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Altaeron PDP" }
+  ]
+}
+{% endschema %}

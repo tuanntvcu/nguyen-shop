@@ -44,6 +44,8 @@ if (!customElements.get('sticky-atc-bar')) {
           if (this.isUpdating) return;
           this.isUpdating = true;
 
+          this.selectedVariantId = this.select.value;
+
           this.updateQuantityInput();
 
           this.mainVariantSelects = this.mainProductInfo && this.mainProductInfo.querySelector('variant-selects');
@@ -249,6 +251,7 @@ if (!customElements.get('sticky-atc-bar')) {
           const variantInput = this.querySelector('[name="id"]');
 
           this.currentVariant = variant;
+          this.selectedVariantId = String(variant.id);
           variantInput.value = variant.id;
           this.updatePrice();
           this.updateButton(true, '', false);
