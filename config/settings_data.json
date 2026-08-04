@@ -9,10 +9,10 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/altaeron-logo-cropped.png",
-    "logo_mobile": "shopify://shop_images/altaeron-logo-cropped.png",
-    "logo_width": 270,
-    "logo_width_mobile": 180,
+    "logo": "shopify://shop_images/ChatGPT_Image_Aug_4_2026_07_32_00_PM.png",
+    "logo_width": 50,
+    "logo_mobile": "shopify://shop_images/ChatGPT_Image_Aug_4_2026_07_32_00_PM.png",
+    "logo_width_mobile": 50,
     "color_badge_sale": "#c6512c",
     "color_badge_hot": "#000000",
     "color_badge_new": "#67785d",
