@@ -777,13 +777,9 @@
         "content": "[Read How-to](https://scalora.link/zyllj1)"
       },
       {
-        "type": "range",
+        "type": "text",
         "id": "page_width",
-        "min": 1000,
-        "max": 2000,
-        "step": 10,
-        "default": 1410,
-        "unit": "px",
+        "default": "1410",
         "label": "t:settings_schema.layout.settings.page_width.label"
       },
       {

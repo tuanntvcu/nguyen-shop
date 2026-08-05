@@ -1,9 +1,17 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 <script src="{{ 'footer.js' | asset_url }}" defer="defer"></script>
+{%- if request.page_type == 'index' -%}<style>.index-template .footer,.index-template .footer a,.index-template .footer h2,.index-template .footer h3,.index-template .footer p,.index-template .footer summary,.index-template .footer summary *{color:#fff!important}</style>{%- endif -%}
 {%- liquid
   assign socials = 'facebook,instagram,youtube,tiktok,twitter,pinterest,snapchat,tumblr,vimeo'
   assign socials_arr = socials | split: ','
   assign has_social_icons = false
+  assign has_brand_block = false
+  for block in section.blocks
+    if block.type == 'image_text'
+      assign has_brand_block = true
+      break
+    endif
+  endfor
   for social in socials_arr
     assign setting_key = 'social_' | append: social | append: '_link'
     if settings[setting_key] != blank
@@ -235,6 +243,9 @@
                               </a>
                             </div>
                           {%- endif -%}
+                          {%- if section.settings.show_social and has_social_icons -%}
+                            {%- render 'social-icons', class: 'footer__brand-social', size: 'large' -%}
+                          {%- endif -%}
                         </div>
                       </{{ tag }}>
                       {%- assign motion_delay = motion_delay | plus: 50 -%}
@@ -280,7 +291,7 @@
           assign enable_language_selector = true
         endif
 
-        if section.settings.show_social and has_social_icons
+        if section.settings.show_social and has_social_icons and has_brand_block == false
           assign show_social = true
         endif
       %}
@@ -307,7 +318,7 @@
             <p class="footer__copyright-content">
               &copy; {{ 'now' | date: '%Y' }}
               <a class="link-underline" href="{{ routes.root_url }}">{{ shop.name }}</a>.
-              <span>{{ powered_by_link }}</span>
+              {%- unless request.page_type == 'index' -%}<span>{{ powered_by_link }}</span>{%- endunless -%}
             </p>
 
             {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}

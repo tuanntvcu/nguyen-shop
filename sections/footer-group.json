@@ -14,24 +14,26 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "newsletter_3qCrWc": {
-          "type": "newsletter",
+        "brand_altaeron": {
+          "type": "image_text",
           "settings": {
-            "block_width": 40,
-            "heading": "JOIN 15,000+ PEOPLE",
-            "heading_size": "h2",
-            "newsletter_description": "<p>Get tips for healthier feet and exclusive offers.</p>",
-            "newsletter_term": "",
-            "newsletter_text_alignment": "left",
-            "form_width": 465,
-            "order_first": true
+            "block_width": 27,
+            "heading": "",
+            "heading_size": "h4",
+            "image": "",
+            "image_width": 150,
+            "text": "<h2>ALTAERON</h2><p>Thoughtfully selected support for everyday foot comfort.</p>",
+            "button_label": "",
+            "button_link": "",
+            "open_default": true,
+            "show_divider": false
           }
         },
-        "image_text_F3FNhx": {
+        "shop_concern": {
           "type": "menu",
           "settings": {
-            "block_width": 25,
-            "heading": "SHOP",
+            "block_width": 18,
+            "heading": "Shop by Concern",
             "heading_size": "h4",
             "menu": "footer-shop",
             "open_default": false,
@@ -41,8 +43,8 @@
         "menu_DEKGYP": {
           "type": "menu",
           "settings": {
-            "block_width": 17,
-            "heading": "HELP",
+            "block_width": 15,
+            "heading": "Help",
             "heading_size": "h4",
             "menu": "footer-support",
             "open_default": false,
@@ -52,38 +54,41 @@
         "menu_4eCrBB": {
           "type": "menu",
           "settings": {
-            "block_width": 17,
-            "heading": "ABOUT ALTAERON",
+            "block_width": 16,
+            "heading": "Company",
             "heading_size": "h4",
             "menu": "footer-company",
             "open_default": false,
             "show_divider": false
           }
         },
-        "menu_legal": {
-          "type": "menu",
+        "customer_care": {
+          "type": "contact_information",
           "settings": {
-            "block_width": 17,
-            "heading": "LEGAL",
+            "block_width": 24,
+            "heading": "Customer Care",
             "heading_size": "h4",
-            "menu": "footer-help-info",
+            "address": "",
+            "working_hours": "",
+            "email": "tuanntvcu1994@gmail.com",
+            "phone": "",
             "open_default": false,
             "show_divider": false
           }
         }
       },
       "block_order": [
-        "newsletter_3qCrWc",
-        "image_text_F3FNhx",
+        "brand_altaeron",
+        "shop_concern",
         "menu_DEKGYP",
         "menu_4eCrBB",
-        "menu_legal"
+        "customer_care"
       ],
       "custom_css": [
         ".form-control {--color-border: var(--color-field);}"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-inverse",
         "enable_follow_on_shop": false,
         "show_social": true,
         "enable_country_selector": false,

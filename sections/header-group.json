@@ -17,23 +17,32 @@
         "announcement_bar_wjU7D9": {
           "type": "announcement_bar",
           "settings": {
-            "text": "FREE SHIPPING OVER $50",
-            "icon": "shipping",
+            "text": "Support for everyday foot comfort",
+            "icon": "heart",
             "link": ""
           }
         },
         "announcement_bar_yELyjf": {
           "type": "announcement_bar",
           "settings": {
-            "text": "30-DAY COMFORT GUARANTEE",
+            "text": "Secure checkout",
             "icon": "shield",
             "link": ""
+          }
+        },
+        "announcement_bar_tracking": {
+          "type": "announcement_bar",
+          "settings": {
+            "text": "Order tracking available",
+            "icon": "shipping",
+            "link": "/account/orders"
           }
         }
       },
       "block_order": [
         "announcement_bar_wjU7D9",
-        "announcement_bar_yELyjf"
+        "announcement_bar_yELyjf",
+        "announcement_bar_tracking"
       ],
       "name": "t:sections.announcement-bar.name",
       "settings": {
@@ -122,7 +131,7 @@
         "color_scheme": "scheme-1",
         "menu": "main-menu",
         "menu_mobile": "main-menu",
-        "header_layout": "center-split",
+        "header_layout": "left-center",
         "sticky_header": "on-scroll-up",
         "menu_trigger": "hover",
         "show_sperator_line": false,

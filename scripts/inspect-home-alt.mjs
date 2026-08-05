@@ -1,0 +1,10 @@
+import { chromium } from '../tmp/pw/node_modules/playwright/index.mjs';
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: Number(process.env.INSPECT_WIDTH || 390), height: 900 } });
+await page.goto(process.env.QA_URL || 'https://altaeron.com/?preview_theme_id=140844204093', { waitUntil: 'load', timeout: 120000 });
+await page.waitForTimeout(1800);
+const missing = await page.locator('.altaeron-home img:not([alt])').evaluateAll((images) => images.map((img) => ({ class: img.className, src: img.currentSrc || img.src, html: img.outerHTML.slice(0, 300) })));
+console.log(JSON.stringify(missing, null, 2));
+console.log(await page.locator('.footer-image-box__text h2').evaluate((element) => JSON.stringify({ color: getComputedStyle(element).color, background: getComputedStyle(element.closest('footer')).backgroundColor })));
+console.log(JSON.stringify({ footerLinks: await page.locator('.footer__top .linklist a:visible').allTextContents() }));
+await browser.close();

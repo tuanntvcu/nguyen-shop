@@ -2,109 +2,216 @@
 <script src="{{ 'altaeron-home.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
-  assign featured_product = section.settings.featured_product
-  assign hero_product = section.settings.hero_product | default: featured_product
+  assign popular_collection = section.settings.popular_collection
+  assign hero_product = section.settings.hero_product
+  if hero_product == blank and popular_collection != blank
+    assign hero_product = popular_collection.products.first
+  endif
   assign hero_image = section.settings.hero_image
   if hero_image == blank and hero_product != blank
-    assign hero_image = hero_product.featured_image
+    assign hero_image = hero_product.metafields.custom.homepage_card_image.value | default: hero_product.featured_image
   endif
-  assign best_sellers = section.settings.collection
+  assign demo_video = shop.metafields.custom.homepage_demo_video.value
 -%}
 
 <altaeron-home class="altaeron-home" data-section-id="{{ section.id }}">
-  <section class="ah-hero ah-order-hero" aria-labelledby="HeroHeading-{{ section.id }}">
+  <section class="ah-hero" aria-labelledby="HeroHeading-{{ section.id }}">
     <div class="ah-shell ah-hero__grid">
       <div class="ah-hero__copy">
-        {%- if section.settings.proof_text != blank -%}
-          <div class="ah-proof"><span class="ah-proof__faces" aria-hidden="true"><i class="ah-proof__face"></i><i class="ah-proof__face"></i><i class="ah-proof__face"></i></span>{{ section.settings.proof_text }}</div>
-        {%- endif -%}
-        <h1 id="HeroHeading-{{ section.id }}">MOVE<br>WITHOUT<em>BUNION PAIN.</em></h1>
-        <div class="ah-hero__text">{{ section.settings.hero_text }}</div>
-        {%- if section.settings.rating_text != blank -%}
-          <div class="ah-rating"><span class="ah-stars" aria-label="{{ section.settings.rating_label | escape }}">★★★★★</span><span class="ah-rating__text">{{ section.settings.rating_text }}</span></div>
-        {%- endif -%}
-        <a class="ah-button" href="{{ section.settings.hero_link | default: hero_product.url | default: routes.all_products_collection_url }}">{{ section.settings.hero_button }} <span class="ah-arrow" aria-hidden="true">→</span></a>
+        <h1 id="HeroHeading-{{ section.id }}">{{ section.settings.hero_heading | escape | newline_to_br }}</h1>
+        <div class="ah-hero__text rte">{{ section.settings.hero_text }}</div>
+        <div class="ah-actions">
+          <a class="ah-button" href="#AltaeronConcerns" data-track="hero_primary_cta_click">{{ section.settings.primary_label }}</a>
+          <a class="ah-button ah-button--secondary" href="#AltaeronQuiz-{{ section.id }}" data-track="hero_secondary_cta_click">{{ section.settings.secondary_label }}</a>
+        </div>
       </div>
       <div class="ah-hero__media ah-media">
         {%- if hero_image != blank -%}
-          {{ hero_image | image_url: width: 1100 | image_tag: widths: '375, 550, 750, 900, 1100', sizes: '(min-width: 768px) 500px, 100vw', loading: 'eager', fetchpriority: 'high', alt: hero_image.alt | default: hero_product.title }}
-        {%- else -%}<div class="ah-placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>{%- endif -%}
-      </div>
-    </div>
-    <div class="ah-shell ah-benefits" role="list">
-      {%- assign benefit_titles = 'Wear|Day & Night,Adjustable|Fit,Soft|Silicone,30-Day|Guarantee' | split: ',' -%}
-      {%- assign benefit_icons = '☾,☷,♧,✓' | split: ',' -%}
-      {%- for benefit in benefit_titles -%}
-        <div class="ah-benefit" role="listitem"><span class="ah-benefit__icon" aria-hidden="true">{{ benefit_icons[forloop.index0] }}</span><strong>{{ benefit | replace: '|', '<br>' }}</strong></div>
-      {%- endfor -%}
-    </div>
-  </section>
-
-  <section class="ah-section ah-order-best" aria-labelledby="BestSellers-{{ section.id }}">
-    <div class="ah-shell">
-      <div class="ah-section-head"><h2 class="ah-title" id="BestSellers-{{ section.id }}">🔥 BEST SELLERS</h2>{% if best_sellers != blank %}<a href="{{ best_sellers.url }}">VIEW ALL &nbsp;→</a>{% endif %}</div>
-      <button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="Previous best seller">‹</button>
-      <div class="ah-products ah-slider" data-slider tabindex="0" aria-label="Best sellers products">
-        {%- if best_sellers != blank and best_sellers.products_count > 0 -%}
-          {%- for product in best_sellers.products limit: 8 -%}{% render 'altaeron-home-product', product: product %}{%- endfor -%}
-        {%- else -%}
-          {%- for i in (1..4) -%}{% render 'altaeron-home-product', product: blank, index: i %}{%- endfor -%}
+          {{ hero_image | image_url: width: 1800 | image_tag: widths: '480, 720, 960, 1200, 1440, 1800', sizes: '(min-width: 750px) 58vw, 100vw', loading: 'eager', fetchpriority: 'high', alt: hero_product.title }}
         {%- endif -%}
       </div>
-      <button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="Next best seller">›</button>
-      <div class="ah-dots" data-slider-dots><button class="ah-dot" type="button" data-slide-index="0" aria-label="Go to product 1"></button><button class="ah-dot" type="button" data-slide-index="1" aria-label="Go to product 2"></button><button class="ah-dot" type="button" data-slide-index="2" aria-label="Go to product 3"></button><button class="ah-dot" type="button" data-slide-index="3" aria-label="Go to product 4"></button></div>
     </div>
   </section>
 
-  <section class="ah-section ah-order-pain" aria-labelledby="PainHeading-{{ section.id }}">
-    <div class="ah-shell"><p class="ah-eyebrow">RELIEF FOR WHAT SLOWS YOU DOWN</p><h2 class="ah-title" id="PainHeading-{{ section.id }}">You’re not alone.</h2>
-      <div class="ah-pain-grid">
-        {%- for block in section.blocks -%}{%- if block.type == 'pain' -%}
-          <article class="ah-pain" {{ block.shopify_attributes }}><div class="ah-pain__image ah-media">{% if block.settings.image %}{{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', widths: '180, 300, 500', sizes: '(min-width: 768px) 220px, 45vw' }}{% else %}<div class="ah-placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>{% endif %}</div><div class="ah-pain__body"><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></div></article>
+  <section class="ah-trust" aria-label="Store benefits">
+    <div class="ah-shell ah-trust__grid">
+      {%- for block in section.blocks -%}{%- if block.type == 'trust' and block.settings.text != blank -%}
+        <div class="ah-trust__item" {{ block.shopify_attributes }}>
+          <span class="ah-icon" aria-hidden="true">{% render 'altaeron-icon', type: block.settings.icon %}</span>
+          <span>{{ block.settings.text }}</span>
+        </div>
+      {%- endif -%}{%- endfor -%}
+    </div>
+  </section>
+
+  <section id="AltaeronConcerns" class="ah-section ah-concerns" aria-labelledby="ConcernHeading-{{ section.id }}">
+    <div class="ah-shell">
+      <h2 id="ConcernHeading-{{ section.id }}">{{ section.settings.concern_heading }}</h2>
+      <div class="ah-concern-grid">
+        {%- for block in section.blocks -%}{%- if block.type == 'concern' -%}
+          {%- assign concern_collection = block.settings.collection -%}
+          {%- assign concern_product = concern_collection.products.first -%}
+          {%- assign concern_image = block.settings.image | default: concern_product.metafields.custom.homepage_card_image.value | default: concern_collection.image | default: concern_product.featured_image -%}
+          {%- if concern_collection != blank -%}
+            <a class="ah-concern" href="{{ concern_collection.url }}" data-track="concern_card_click" data-concern-title="{{ concern_collection.title | escape }}" {{ block.shopify_attributes }}>
+              <div class="ah-concern__media ah-media">{% if concern_image %}{{ concern_image | image_url: width: 620 | image_tag: loading: 'lazy', widths: '220, 360, 480, 620', sizes: '(min-width: 990px) 25vw, 48vw', alt: concern_collection.title }}{% endif %}</div>
+              <div class="ah-concern__body">
+                <h3>{{ block.settings.heading | default: concern_collection.title }}</h3>
+                {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- elsif concern_collection.description != blank -%}<p>{{ concern_collection.description | strip_html | truncatewords: 12 }}</p>{%- endif -%}
+                <span>{{ section.settings.explore_label }} →</span>
+              </div>
+            </a>
+          {%- endif -%}
         {%- endif -%}{%- endfor -%}
       </div>
     </div>
   </section>
 
-  <section class="ah-section ah-order-how" aria-labelledby="HowHeading-{{ section.id }}">
-    <div class="ah-shell"><div class="ah-how"><div class="ah-how__intro"><p class="ah-eyebrow">SIMPLE. ADJUSTABLE. EFFECTIVE.</p><h2 class="ah-title" id="HowHeading-{{ section.id }}">How It Works</h2><p class="ah-how__copy">{{ section.settings.how_text }}</p>{% if section.settings.video_url != blank %}<a class="ah-watch" href="{{ section.settings.video_url }}">◉ &nbsp; WATCH VIDEO</a>{% else %}<span class="ah-watch" aria-disabled="true">◉ &nbsp; WATCH VIDEO</span>{% endif %}</div>
-      <div class="ah-video ah-media">{% if section.settings.video_poster %}{{ section.settings.video_poster | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '375, 750, 1000, 1200', sizes: '(min-width: 768px) 650px, 100vw' }}{% elsif hero_image %}{{ hero_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '375, 750, 1000, 1200', sizes: '(min-width: 768px) 650px, 100vw' }}{% else %}<div class="ah-placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>{% endif %}{% if section.settings.video_url != blank %}<a class="ah-play" href="{{ section.settings.video_url }}" aria-label="Watch how it works video">▶</a>{% else %}<span class="ah-play" aria-hidden="true">▶</span>{% endif %}</div></div>
-      <div class="ah-steps"><div class="ah-step"><span class="ah-step__number">1</span><strong>ADJUST</strong><p>Turn the knob for a perfect fit.</p></div><div class="ah-step"><span class="ah-step__number">2</span><strong>REALIGN</strong><p>Gently guides your toe into place.</p></div><div class="ah-step"><span class="ah-step__number">3</span><strong>WALK BETTER</strong><p>Less pain. More comfort. Every day.</p></div></div>
+  {%- if popular_collection != blank and popular_collection.products_count > 0 -%}
+    <section class="ah-section ah-popular" aria-labelledby="PopularHeading-{{ section.id }}">
+      <div class="ah-shell">
+        <div class="ah-section-head"><h2 id="PopularHeading-{{ section.id }}">{{ section.settings.popular_heading }}</h2><a href="{{ popular_collection.url }}">{{ section.settings.view_all_label }} →</a></div>
+        <div class="ah-carousel-wrap"><button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="Previous products">‹</button><div class="ah-products ah-slider" data-slider tabindex="0" aria-label="{{ section.settings.popular_heading | escape }}">
+          {%- for product in popular_collection.products limit: 8 -%}{% render 'altaeron-home-product', product: product %}{%- endfor -%}
+        </div><button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="Next products">›</button></div>
+        <div class="ah-dots" data-slider-dots aria-label="Product carousel pagination"></div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <section id="AltaeronQuiz-{{ section.id }}" class="ah-section ah-quiz-section" aria-labelledby="QuizHeading-{{ section.id }}">
+    <div class="ah-shell ah-quiz">
+      <div class="ah-quiz__intro"><h2 id="QuizHeading-{{ section.id }}">{{ section.settings.quiz_heading }}</h2><p>{{ section.settings.quiz_text }}</p></div>
+      <div class="ah-quiz__main" data-quiz>
+        <div class="ah-progress" aria-label="Question progress"><span class="is-active">1</span><i></i><span>2</span><i></i><span>3</span></div>
+        <fieldset class="ah-quiz__step is-active" data-quiz-step="1"><legend>{{ section.settings.quiz_question_one }}</legend><div class="ah-quiz__choices">
+          {%- for block in section.blocks -%}{%- if block.type == 'concern' and block.settings.collection != blank -%}
+            <button type="button" data-quiz-choice data-title="{{ block.settings.heading | default: block.settings.collection.title | escape }}" data-url="{{ block.settings.collection.url }}"><span class="ah-quiz__choice-icon" aria-hidden="true">{% render 'altaeron-icon', type: block.settings.quiz_icon %}</span><span>{{ block.settings.quiz_label | default: block.settings.heading | default: block.settings.collection.title }}</span></button>
+          {%- endif -%}{%- endfor -%}
+        </div></fieldset>
+        <fieldset class="ah-quiz__step" data-quiz-step="2"><legend>{{ section.settings.quiz_question_two }}</legend><div class="ah-quiz__choices ah-quiz__choices--three"><button type="button" data-quiz-choice><span>Daytime</span></button><button type="button" data-quiz-choice><span>Nighttime</span></button><button type="button" data-quiz-choice><span>Both</span></button></div><button class="ah-quiz__back" type="button" data-quiz-back>← Back</button></fieldset>
+        <fieldset class="ah-quiz__step" data-quiz-step="3"><legend>{{ section.settings.quiz_question_three }}</legend><div class="ah-quiz__choices ah-quiz__choices--three"><button type="button" data-quiz-choice><span>Gentle</span></button><button type="button" data-quiz-choice><span>Adjustable</span></button><button type="button" data-quiz-choice><span>Firm</span></button></div><button class="ah-quiz__back" type="button" data-quiz-back>← Back</button></fieldset>
+        <div class="ah-quiz__result" data-quiz-result hidden><p>{{ section.settings.quiz_result_prefix }} <strong data-quiz-result-title></strong></p><a class="ah-button" href="{{ routes.all_products_collection_url }}" data-quiz-result-link data-track="quiz_result_clicked">{{ section.settings.quiz_result_label }} →</a></div>
+        <p class="ah-quiz__disclaimer">This tool provides general product guidance and is not medical advice.</p>
+      </div>
     </div>
   </section>
 
-  <section class="ah-section ah-order-testimonials" aria-labelledby="Testimonials-{{ section.id }}"><div class="ah-shell"><p class="ah-eyebrow" id="Testimonials-{{ section.id }}">LOVED BY REAL PEOPLE</p><button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="Previous testimonial">‹</button><div class="ah-testimonials ah-slider" data-slider tabindex="0" aria-label="Customer testimonials">
-    {%- for block in section.blocks -%}{%- if block.type == 'testimonial' -%}<article class="ah-testimonial" {{ block.shopify_attributes }}><div class="ah-testimonial__image ah-media">{% if block.settings.image %}{{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '180, 300, 600', sizes: '(min-width: 768px) 300px, 46vw' }}{% else %}<div class="ah-placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>{% endif %}<span class="ah-play" aria-hidden="true">▶</span></div><div class="ah-testimonial__body"><span class="ah-stars" aria-hidden="true">★★★★★</span><blockquote>“{{ block.settings.quote }}”</blockquote><cite>– {{ block.settings.name }}</cite></div></article>{%- endif -%}{%- endfor -%}
-  </div><button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="Next testimonial">›</button><div class="ah-dots" data-slider-dots><button class="ah-dot" type="button" data-slide-index="0" aria-label="Go to testimonial 1"></button><button class="ah-dot" type="button" data-slide-index="1" aria-label="Go to testimonial 2"></button><button class="ah-dot" type="button" data-slide-index="2" aria-label="Go to testimonial 3"></button></div></div></section>
+  {%- assign demo_count = section.blocks | where: 'type', 'demonstration' | size -%}
+  {%- if demo_count > 0 -%}
+    <section class="ah-section ah-demo" aria-labelledby="DemoHeading-{{ section.id }}">
+      <div class="ah-shell"><div class="ah-centered"><h2 id="DemoHeading-{{ section.id }}">{{ section.settings.demo_heading }}</h2><p>{{ section.settings.demo_text }}</p></div>
+        <div class="ah-demo__rail ah-slider" data-slider tabindex="0">
+          {%- for block in section.blocks -%}{%- if block.type == 'demonstration' and block.settings.product != blank -%}
+            {%- assign demo_product = block.settings.product -%}{%- assign demo_poster = block.settings.poster | default: demo_product.metafields.custom.homepage_card_image.value | default: demo_product.featured_image | default: demo_video.preview_image -%}
+            <article class="ah-video-card" {{ block.shopify_attributes }}>
+              <div class="ah-video-card__media ah-media">{% if demo_poster %}{{ demo_poster | image_url: width: 600 | image_tag: loading: 'lazy', widths: '220, 360, 600', sizes: '(min-width: 990px) 20vw, 42vw', alt: block.settings.heading }}{% endif %}{% if demo_video != blank %}<button class="ah-play" type="button" aria-label="Play {{ block.settings.heading | escape }}" data-video-open data-video-title="{{ block.settings.heading | escape }}" data-track="demonstration_video_play">▶</button>{% elsif block.settings.video_url != blank %}<a class="ah-play" href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="Play {{ block.settings.heading | escape }}" data-track="demonstration_video_play">▶</a>{% endif %}</div>
+              <h3>{{ block.settings.heading | default: demo_product.title }}</h3>
+            </article>
+          {%- endif -%}{%- endfor -%}
+        </div><div class="ah-dots" data-slider-dots></div>
+        {%- if demo_video != blank -%}<dialog class="ah-video-modal" data-video-modal aria-labelledby="VideoModalTitle-{{ section.id }}"><div class="ah-video-modal__inner"><button class="ah-video-modal__close" type="button" data-video-close aria-label="Close video">×</button><h3 id="VideoModalTitle-{{ section.id }}" data-video-modal-title>{{ section.settings.demo_heading }}</h3><video controls preload="none" playsinline poster="{{ demo_video.preview_image | image_url: width: 960 }}">{% for source in demo_video.sources %}{% if source.mime_type contains 'mp4' %}<source src="{{ source.url }}" type="{{ source.mime_type }}">{% endif %}{% endfor %}</video></div></dialog>{%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
 
-  <section class="ah-section ah-order-everyday" aria-labelledby="Everyday-{{ section.id }}"><div class="ah-shell"><p class="ah-eyebrow" id="Everyday-{{ section.id }}">MADE FOR YOUR EVERYDAY</p><div class="ah-everyday">
-    {%- for block in section.blocks -%}{%- if block.type == 'everyday' -%}<article class="ah-use ah-media" {{ block.shopify_attributes }}>{% if block.settings.image %}{{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '180, 300, 600', sizes: '(min-width: 768px) 225px, 46vw' }}{% else %}<div class="ah-placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>{% endif %}<span class="ah-use__icon" aria-hidden="true">{{ block.settings.icon }}</span><strong class="ah-use__label">{{ block.settings.title }}</strong></article>{%- endif -%}{%- endfor -%}
+  <section id="altaeron-values" class="ah-section ah-values" aria-labelledby="ValuesHeading-{{ section.id }}"><div class="ah-shell"><h2 id="ValuesHeading-{{ section.id }}">{{ section.settings.values_heading }}</h2><div class="ah-values__grid">
+    {%- for block in section.blocks -%}{%- if block.type == 'value' -%}<article class="ah-value" {{ block.shopify_attributes }}><span class="ah-icon" aria-hidden="true">{% render 'altaeron-icon', type: block.settings.icon %}</span><h3>{{ block.settings.heading }}</h3><p>{{ block.settings.text }}</p></article>{%- endif -%}{%- endfor -%}
   </div></div></section>
 
-  <section class="ah-section ah-order-feature"><div class="ah-shell ah-feature-grid">
-    <article class="ah-feature"><div class="ah-feature__image ah-media">{% if featured_product.featured_image %}{{ featured_product.featured_image | image_url: width: 650 | image_tag: loading: 'lazy', widths: '220, 400, 650', sizes: '(min-width: 768px) 220px, 40vw' }}{% else %}<div class="ah-placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>{% endif %}</div><div><p class="ah-eyebrow">BEST SELLER</p><h3>{{ featured_product.title | default: 'Adjustable Bunion Corrector' }}</h3>{% if featured_product.metafields.judgeme.badge %}<div class="jdgm-widget jdgm-preview-badge">{{ featured_product.metafields.judgeme.badge }}</div>{% endif %}<ul><li>Realigns your toe</li><li>Relieves pressure</li><li>Wear day &amp; night</li></ul><div class="ah-price">{% if featured_product %}{{ featured_product.price | money }}{% endif %}</div></div><a class="ah-button" href="{{ featured_product.url | default: routes.all_products_collection_url }}">{% if featured_product.available == false %}SOLD OUT{% else %}SHOP NOW{% endif %} <span class="ah-arrow">→</span></a></article>
-    <article class="ah-guarantee"><div class="ah-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 64 76"><path d="M32 3c8 7 17 9 27 10v21c0 19-12 31-27 39C17 65 5 53 5 34V13c10-1 19-3 27-10Z"/><path d="m21 36 8 8 15-18"/></svg></div><div><h3>30-DAY<br>COMFORT GUARANTEE</h3><p>{{ section.settings.guarantee_text }}</p><a class="ah-button" href="{{ section.settings.guarantee_link | default: featured_product.url | default: routes.all_products_collection_url }}">SHOP RISK FREE <span class="ah-arrow">→</span></a></div></article>
-  </div></section>
+  {%- liquid
+    assign aggregate_review_count = 0
+    assign aggregate_review_points = 0
+    for product in popular_collection.products
+      assign aggregate_data = product.metafields.judgeme.review_widget_data.value
+      assign product_review_count = aggregate_data.number_of_reviews | default: 0 | plus: 0
+      assign product_average = aggregate_data.average_rating | default: 0 | plus: 0
+      assign product_points = product_average | times: product_review_count
+      assign aggregate_review_count = aggregate_review_count | plus: product_review_count
+      assign aggregate_review_points = aggregate_review_points | plus: product_points
+    endfor
+  -%}
+  {%- capture review_cards -%}
+    {%- assign review_count = 0 -%}
+    {%- for product in popular_collection.products -%}
+      {%- assign review_data = product.metafields.judgeme.review_widget_data.value -%}
+      {%- for review in review_data.reviews limit: 5 -%}
+        {%- liquid
+          assign review_body = review.body | strip_html
+          assign review_body_downcase = review_body | downcase
+          assign review_word_count = review_body | split: ' ' | size
+          assign review_is_negative = false
+          if review_body_downcase contains 'loose' or review_body_downcase contains 'not very comfortable' or review_body_downcase contains 'painful' or review_body_downcase contains 'short in length' or review_body_downcase contains 'haven’t try' or review_body_downcase contains "haven't try"
+            assign review_is_negative = true
+          endif
+        -%}
+        {%- if review_count < 6 and review.rating >= 4 and review_word_count >= 2 and review_is_negative == false -%}{%- assign review_count = review_count | plus: 1 -%}
+          {%- assign review_fallback = product.metafields.custom.homepage_card_image.value | default: product.featured_image -%}
+          <article class="ah-review"><a href="{{ product.url }}#judgeme_product_reviews" data-track="review_click"><div class="ah-review__media ah-media">{% if review_fallback %}{{ review_fallback | image_url: width: 520 | image_tag: loading: 'lazy', widths: '240, 360, 520', sizes: '(min-width: 990px) 33vw, 75vw', alt: product.title }}{% endif %}</div><div class="ah-review__body"><span class="ah-stars" aria-label="{{ review.rating }} out of 5 stars">★★★★★</span><blockquote>“{{ review_body | escape }}”</blockquote><cite>— {{ review.reviewer_name | escape }}</cite></div></a></article>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- if review_count > 0 -%}
+    <section id="altaeron-reviews" class="ah-section ah-reviews" aria-labelledby="ReviewsHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-centered"><h2 id="ReviewsHeading-{{ section.id }}">{{ section.settings.reviews_heading }}</h2>{% if aggregate_review_count > 0 %}{% assign aggregate_average = aggregate_review_points | divided_by: aggregate_review_count %}<p class="ah-review-summary"><span class="ah-stars" aria-hidden="true">★★★★★</span> {{ aggregate_average | round: 1 }}/5 from {{ aggregate_review_count }} reviews</p>{% endif %}</div><div class="ah-review-rail ah-slider" data-slider tabindex="0">{{ review_cards }}</div><div class="ah-dots" data-slider-dots></div></div></section>
+  {%- endif -%}
 
-  <section class="ah-section ah-order-articles{% unless section.settings.show_articles_desktop %} ah-articles-mobile-only{% endunless %}" aria-labelledby="Articles-{{ section.id }}"><div class="ah-shell"><p class="ah-eyebrow" id="Articles-{{ section.id }}">LEARN MORE</p><div class="ah-articles">
-    {%- for block in section.blocks -%}{%- if block.type == 'article' -%}{%- assign item = block.settings.article -%}<article class="ah-article" {{ block.shopify_attributes }}><div class="ah-article__image ah-media">{% if item.image %}{{ item.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '375, 550, 800', sizes: '(min-width: 768px) 300px, 100vw' }}{% else %}<div class="ah-placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>{% endif %}</div><div class="ah-article__body"><span class="ah-article__meta">{{ block.settings.eyebrow }}</span><h3>{{ item.title | default: block.settings.fallback_title }}</h3>{% if item %}<a class="ah-article__arrow" href="{{ item.url }}" aria-label="Read {{ item.title | escape }}">→</a>{% endif %}</div></article>{%- endif -%}{%- endfor -%}
+  {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
+    <section class="ah-section ah-guides" aria-labelledby="GuidesHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-section-head"><h2 id="GuidesHeading-{{ section.id }}">{{ section.settings.guides_heading }}</h2><a href="{{ section.settings.blog.url }}">{{ section.settings.view_all_label }} →</a></div><div class="ah-guide-grid">
+      {%- for article in section.settings.blog.articles limit: 3 -%}{%- assign article_cover = article.image | default: article.metafields.custom.cover_image.value -%}{%- assign article_words = article.content | strip_html | split: ' ' | size -%}{%- assign read_minutes = article_words | divided_by: 200 | plus: 1 -%}<article class="ah-guide"><a href="{{ article.url }}" data-track="article_click"><div class="ah-guide__media ah-media">{% if article_cover %}{{ article_cover | image_url: width: 620 | image_tag: loading: 'lazy', widths: '240, 400, 620', sizes: '(min-width: 750px) 33vw, 28vw', alt: article.title }}{% endif %}</div><div class="ah-guide__body"><h3>{{ article.title }}</h3><p>{{ read_minutes }} min read</p></div></a></article>{%- endfor -%}
+    </div></div></section>
+  {%- endif -%}
+
+  <section id="altaeron-faq" class="ah-section ah-faq" aria-labelledby="FaqHeading-{{ section.id }}"><div class="ah-shell"><h2 id="FaqHeading-{{ section.id }}">{{ section.settings.faq_heading }}</h2><div class="ah-faq__grid">
+    {%- for block in section.blocks -%}{%- if block.type == 'faq' and block.settings.question != blank -%}<details class="ah-faq__item" {{ block.shopify_attributes }}><summary data-track="faq_open">{{ block.settings.question }}<span aria-hidden="true">⌄</span></summary><div class="rte">{{ block.settings.answer }}</div></details>{%- endif -%}{%- endfor -%}
   </div></div></section>
+
+  <section class="ah-newsletter" aria-labelledby="NewsletterHeading-{{ section.id }}"><div class="ah-shell ah-newsletter__inner"><div><h2 id="NewsletterHeading-{{ section.id }}">{{ section.settings.newsletter_heading }}</h2><p>{{ section.settings.newsletter_text }}</p></div>{%- form 'customer', class: 'ah-newsletter__form' -%}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">Email address</label><input id="NewsletterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="{{ section.settings.newsletter_placeholder }}" required><button type="submit" data-track="newsletter_signup">{{ section.settings.newsletter_button }}</button>{%- if form.posted_successfully? -%}<p class="ah-newsletter__message" role="status">{{ 'newsletter.success' | t }}</p>{%- elsif form.errors -%}<p class="ah-newsletter__message" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}{%- endform -%}</div></section>
 </altaeron-home>
 
 {% schema %}
-{"name":"Altaeron homepage","tag":"section","class":"altaeron-home-section","settings":[
-{"type":"product","id":"hero_product","label":"Hero product fallback"},{"type":"image_picker","id":"hero_image","label":"Hero image"},{"type":"text","id":"proof_text","label":"Social proof text","default":"LOVED BY 2,300+ CUSTOMERS","info":"Editable marketing claim; confirm this count before publishing."},{"type":"richtext","id":"hero_text","label":"Hero text","default":"<p>Adjustable support that realigns your toe and relieves pressure — every step, every day.</p>"},{"type":"text","id":"rating_label","label":"Accessible rating label","default":"5 out of 5 stars"},{"type":"text","id":"rating_text","label":"Rating text","info":"Only enter real verified rating data."},{"type":"text","id":"hero_button","label":"Hero button","default":"SHOP NOW"},{"type":"url","id":"hero_link","label":"Hero link"},
-{"type":"collection","id":"collection","label":"Best sellers collection"},{"type":"richtext","id":"how_text","label":"How it works text","default":"<p>Our adjustable design gently realigns your toe and relieves pressure with every step.</p>"},{"type":"image_picker","id":"video_poster","label":"How it works poster"},{"type":"url","id":"video_url","label":"How it works video link"},
-{"type":"product","id":"featured_product","label":"Featured product"},{"type":"checkbox","id":"show_articles_desktop","label":"Show articles on desktop","default":false},{"type":"textarea","id":"guarantee_text","label":"Guarantee text","default":"Try Altaeron risk-free for 30 days. If it’s not right for you, send it back and we’ll make it right."},{"type":"url","id":"guarantee_link","label":"Guarantee link"}],
-"blocks":[
-{"type":"pain","name":"Pain point","limit":4,"settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"title","label":"Title"},{"type":"textarea","id":"text","label":"Text"}]},
-{"type":"testimonial","name":"Testimonial","limit":6,"settings":[{"type":"image_picker","id":"image","label":"Image or video poster"},{"type":"textarea","id":"quote","label":"Quote"},{"type":"text","id":"name","label":"Name and role"}]},
-{"type":"everyday","name":"Everyday use","limit":4,"settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"icon","label":"Icon character","default":"☀"},{"type":"text","id":"title","label":"Title"}]},
-{"type":"article","name":"Article","limit":3,"settings":[{"type":"article","id":"article","label":"Article"},{"type":"text","id":"eyebrow","label":"Category and read time","default":"TIPS · 5 MIN READ"},{"type":"text","id":"fallback_title","label":"Preview title","default":"Helpful foot care advice"}]}
-],"presets":[{"name":"Altaeron homepage","blocks":[
-{"type":"pain","settings":{"title":"Shoes hurt","text":"Pressure and pain make every step uncomfortable."}},{"type":"pain","settings":{"title":"Hard to walk","text":"Pain holds you back from the things you love."}},{"type":"pain","settings":{"title":"Swelling","text":"Bunions can cause swelling and inflammation."}},{"type":"pain","settings":{"title":"Can’t wear heels","text":"Bunions make it almost impossible to wear the shoes you want."}},
-{"type":"testimonial","settings":{"quote":"Finally something that actually works!","name":"Jessica, Nurse"}},{"type":"testimonial","settings":{"quote":"I can wear shoes again all day.","name":"Sarah, Teacher"}},{"type":"testimonial","settings":{"quote":"Game changer for my morning run!","name":"Emily, Runner"}},
-{"type":"everyday","settings":{"icon":"☀","title":"Morning"}},{"type":"everyday","settings":{"icon":"▣","title":"Work"}},{"type":"everyday","settings":{"icon":"♧","title":"Active"}},{"type":"everyday","settings":{"icon":"✈","title":"Travel"}},
-{"type":"article","settings":{"eyebrow":"BUNIONS · 4 MIN READ","fallback_title":"What Causes Bunions and How to Treat Them"}},{"type":"article","settings":{"eyebrow":"RELIEF · 5 MIN READ","fallback_title":"How to Relieve Foot Pain Naturally"}},{"type":"article","settings":{"eyebrow":"TIPS · 6 MIN READ","fallback_title":"Can Bunion Correctors Really Help?"}}
-]}]}
+{
+  "name": "Altaeron homepage",
+  "tag": "section",
+  "class": "altaeron-home-section",
+  "settings": [
+    {"type":"text","id":"hero_heading","label":"Hero heading","default":"Support Every Step."},
+    {"type":"richtext","id":"hero_text","label":"Hero text","default":"<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>"},
+    {"type":"product","id":"hero_product","label":"Hero product fallback"},
+    {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"text","id":"primary_label","label":"Primary button","default":"Shop by Concern"},
+    {"type":"text","id":"secondary_label","label":"Secondary button","default":"Find Your Match"},
+    {"type":"text","id":"concern_heading","label":"Concern heading","default":"Where Does It Hurt?"},
+    {"type":"text","id":"explore_label","label":"Concern link label","default":"Explore"},
+    {"type":"collection","id":"popular_collection","label":"Popular solutions collection"},
+    {"type":"text","id":"popular_heading","label":"Popular heading","default":"Most Popular Solutions"},
+    {"type":"text","id":"view_all_label","label":"View all label","default":"View all"},
+    {"type":"text","id":"quiz_heading","label":"Quiz heading","default":"Find the Right Support"},
+    {"type":"textarea","id":"quiz_text","label":"Quiz text","default":"Answer 3 quick questions and get a personalized collection recommendation."},
+    {"type":"text","id":"quiz_question_one","label":"Quiz question 1","default":"Where do you feel discomfort?"},
+    {"type":"text","id":"quiz_question_two","label":"Quiz question 2","default":"When would you use support most?"},
+    {"type":"text","id":"quiz_question_three","label":"Quiz question 3","default":"What support feel do you prefer?"},
+    {"type":"text","id":"quiz_result_prefix","label":"Quiz result prefix","default":"A useful place to start:"},
+    {"type":"text","id":"quiz_result_label","label":"Quiz result button","default":"View recommendations"},
+    {"type":"text","id":"demo_heading","label":"Demonstrations heading","default":"Real Demonstrations"},
+    {"type":"text","id":"demo_text","label":"Demonstrations text","default":"See how our products work in real life."},
+    {"type":"text","id":"values_heading","label":"Values heading","default":"Why Altaeron?"},
+    {"type":"text","id":"reviews_heading","label":"Reviews heading","default":"Loved by Real Customers"},
+    {"type":"blog","id":"blog","label":"Foot care blog"},
+    {"type":"text","id":"guides_heading","label":"Guides heading","default":"Foot Care Tips & Guides"},
+    {"type":"text","id":"faq_heading","label":"FAQ heading","default":"Frequently Asked Questions"},
+    {"type":"text","id":"newsletter_heading","label":"Newsletter heading","default":"Take Better Steps."},
+    {"type":"text","id":"newsletter_text","label":"Newsletter text","default":"Tips, guides and product updates straight to your inbox."},
+    {"type":"text","id":"newsletter_placeholder","label":"Email placeholder","default":"Your email address"},
+    {"type":"text","id":"newsletter_button","label":"Newsletter button","default":"Subscribe"}
+  ],
+  "blocks": [
+    {"type":"trust","name":"Trust item","limit":4,"settings":[{"type":"select","id":"icon","label":"Icon","options":[{"value":"community","label":"Community"},{"value":"fit","label":"Support"},{"value":"shield","label":"Shield"},{"value":"shipping","label":"Shipping"}],"default":"fit"},{"type":"text","id":"text","label":"Text"}]},
+    {"type":"concern","name":"Concern collection","limit":4,"settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"text","id":"heading","label":"Override heading"},{"type":"textarea","id":"text","label":"Short description"},{"type":"text","id":"quiz_label","label":"Quiz label"},{"type":"select","id":"quiz_icon","label":"Quiz icon","options":[{"value":"fit","label":"Foot support"},{"value":"heart","label":"Comfort"},{"value":"shield","label":"Stability"},{"value":"community","label":"Whole foot"}],"default":"fit"}]},
+    {"type":"demonstration","name":"Product demonstration","limit":8,"settings":[{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"poster","label":"Poster override"},{"type":"url","id":"video_url","label":"Video URL"},{"type":"text","id":"heading","label":"Heading"}]},
+    {"type":"value","name":"Brand value","limit":3,"settings":[{"type":"select","id":"icon","label":"Icon","options":[{"value":"fit","label":"Fit"},{"value":"shield","label":"Guidance"},{"value":"heart","label":"Comfort"}],"default":"fit"},{"type":"text","id":"heading","label":"Heading"},{"type":"textarea","id":"text","label":"Text"}]},
+    {"type":"faq","name":"FAQ","limit":10,"settings":[{"type":"text","id":"question","label":"Question"},{"type":"richtext","id":"answer","label":"Answer"}]}
+  ],
+  "presets": [{"name":"Altaeron homepage"}]
+}
 {% endschema %}

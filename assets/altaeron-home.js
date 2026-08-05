@@ -1,28 +1,141 @@
 class AltaeronHome extends HTMLElement {
   connectedCallback() {
-    if (this.dataset.ready) return;
+    if (this.dataset.ready === 'true') return;
     this.dataset.ready = 'true';
+    this.initSliders();
+    this.initQuiz();
+    this.initVideoModal();
+    this.initTracking();
+  }
+
+  initSliders() {
     this.querySelectorAll('[data-slider]').forEach((slider) => {
-      const scope = slider.closest('.ah-shell');
       const cards = [...slider.children];
-      const step = () => (cards[0]?.getBoundingClientRect().width || 0) + 12;
-      scope?.querySelector('[data-slider-prev]')?.addEventListener('click', () => slider.scrollBy({ left: -step(), behavior: 'smooth' }));
-      scope?.querySelector('[data-slider-next]')?.addEventListener('click', () => slider.scrollBy({ left: step(), behavior: 'smooth' }));
-      const dots = [...(scope?.querySelectorAll('[data-slider-dots] .ah-dot') || [])];
-      dots.forEach((dot, index) => dot.addEventListener('click', () => slider.scrollTo({ left: step() * index, behavior: 'smooth' })));
-      const updateDots = () => {
-        const index = Math.min(dots.length - 1, Math.max(0, Math.round(slider.scrollLeft / Math.max(1, step()))));
-        dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
+      const dotsHost = slider.closest('.ah-shell')?.querySelector('[data-slider-dots]');
+      if (!cards.length || !dotsHost) return;
+      const visible = () => Math.max(1, Math.round(slider.clientWidth / cards[0].getBoundingClientRect().width));
+      const pages = () => Math.max(1, cards.length - visible() + 1);
+
+      const renderDots = () => {
+        dotsHost.replaceChildren();
+        for (let index = 0; index < pages(); index += 1) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = `ah-dot${index === 0 ? ' is-active' : ''}`;
+          dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+          dot.addEventListener('click', () => cards[index]?.scrollIntoView({ behavior: this.reducedMotion ? 'auto' : 'smooth', block: 'nearest', inline: 'start' }));
+          dotsHost.append(dot);
+        }
+        dotsHost.hidden = pages() <= 1;
       };
+      const updateDots = () => {
+        const step = (cards[0]?.getBoundingClientRect().width || 1) + 16;
+        const active = Math.min(pages() - 1, Math.max(0, Math.round(slider.scrollLeft / step)));
+        dotsHost.querySelectorAll('.ah-dot').forEach((dot, index) => dot.classList.toggle('is-active', index === active));
+      };
+      renderDots();
       slider.addEventListener('scroll', updateDots, { passive: true });
-      updateDots();
       slider.addEventListener('keydown', (event) => {
-        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
         event.preventDefault();
-        if (!cards[0]) return;
-        slider.scrollBy({ left: step() * (event.key === 'ArrowRight' ? 1 : -1), behavior: 'smooth' });
+        const amount = (cards[0]?.getBoundingClientRect().width || 0) + 16;
+        slider.scrollBy({ left: event.key === 'ArrowRight' ? amount : -amount, behavior: this.reducedMotion ? 'auto' : 'smooth' });
+      });
+      const scrollOne = (direction) => slider.scrollBy({ left: direction * ((cards[0]?.getBoundingClientRect().width || 0) + 16), behavior: this.reducedMotion ? 'auto' : 'smooth' });
+      slider.parentElement?.querySelector('[data-slider-prev]')?.addEventListener('click', () => scrollOne(-1));
+      slider.parentElement?.querySelector('[data-slider-next]')?.addEventListener('click', () => scrollOne(1));
+      new ResizeObserver(renderDots).observe(slider);
+    });
+  }
+
+  initQuiz() {
+    const quiz = this.querySelector('[data-quiz]');
+    if (!quiz) return;
+    const steps = [...quiz.querySelectorAll('[data-quiz-step]')];
+    const markers = [...quiz.querySelectorAll('.ah-progress span')];
+    const result = quiz.querySelector('[data-quiz-result]');
+    let current = 0;
+    let recommendation = { title: '', url: '' };
+
+    const showStep = (index) => {
+      steps.forEach((step, stepIndex) => step.classList.toggle('is-active', stepIndex === index));
+      markers.forEach((marker, markerIndex) => marker.classList.toggle('is-active', markerIndex <= index));
+      current = index;
+      steps[current]?.querySelector('[data-quiz-choice]')?.focus();
+    };
+
+    quiz.addEventListener('click', (event) => {
+      const back = event.target.closest('[data-quiz-back]');
+      if (back) {
+        showStep(Math.max(0, current - 1));
+        return;
+      }
+      const choice = event.target.closest('[data-quiz-choice]');
+      if (!choice) return;
+      choice.parentElement?.querySelectorAll('[data-quiz-choice]').forEach((button) => button.classList.toggle('is-selected', button === choice));
+      if (current === 0) {
+        recommendation = { title: choice.dataset.title || choice.textContent.trim(), url: choice.dataset.url || '' };
+        this.track('quiz_started', { concern: recommendation.title });
+      }
+      this.track('quiz_step_completed', { step: current + 1, answer: choice.textContent.trim() });
+      window.setTimeout(() => {
+        if (current + 1 < steps.length) {
+          showStep(current + 1);
+          return;
+        }
+        steps[current]?.classList.remove('is-active');
+        result.hidden = false;
+        result.querySelector('[data-quiz-result-title]').textContent = recommendation.title;
+        const link = result.querySelector('[data-quiz-result-link]');
+        if (recommendation.url) link.href = recommendation.url;
+        link.focus();
+        this.track('quiz_completed', { concern: recommendation.title });
+        this.track('quiz_result_viewed', { concern: recommendation.title });
+      }, this.reducedMotion ? 0 : 160);
+    });
+  }
+
+  initVideoModal() {
+    const modal = this.querySelector('[data-video-modal]');
+    if (!modal) return;
+    const video = modal.querySelector('video');
+    const title = modal.querySelector('[data-video-modal-title]');
+    const close = () => {
+      video?.pause();
+      if (modal.open) modal.close();
+    };
+    this.querySelectorAll('[data-video-open]').forEach((button) => button.addEventListener('click', () => {
+      if (title) title.textContent = button.dataset.videoTitle || 'Product demonstration';
+      modal.showModal();
+      modal.querySelector('[data-video-close]')?.focus();
+    }));
+    modal.querySelector('[data-video-close]')?.addEventListener('click', close);
+    modal.addEventListener('cancel', () => video?.pause());
+    modal.addEventListener('click', (event) => { if (event.target === modal) close(); });
+  }
+
+  initTracking() {
+    this.addEventListener('click', (event) => {
+      const target = event.target.closest('[data-track]');
+      if (!target) return;
+      if (target.dataset.track === 'faq_open' && target.parentElement?.open) return;
+      this.track(target.dataset.track, {
+        label: target.textContent.trim().slice(0, 120),
+        href: target.getAttribute('href') || undefined,
       });
     });
   }
+
+  track(eventName, detail = {}) {
+    if (!eventName) return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: eventName, ...detail });
+    this.dispatchEvent(new CustomEvent('altaeron:track', { bubbles: true, detail: { event: eventName, ...detail } }));
+  }
+
+  get reducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
 }
+
 if (!customElements.get('altaeron-home')) customElements.define('altaeron-home', AltaeronHome);

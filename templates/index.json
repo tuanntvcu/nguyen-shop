@@ -12,155 +12,61 @@
     "altaeron_home": {
       "type": "altaeron-home",
       "blocks": {
-        "pain_shoes": {
-          "type": "pain",
-          "settings": {
-            "image": "",
-            "title": "Shoes hurt",
-            "text": "Pressure and pain make every step uncomfortable."
-          }
-        },
-        "pain_walk": {
-          "type": "pain",
-          "settings": {
-            "image": "",
-            "title": "Hard to walk",
-            "text": "Pain holds you back from the things you love."
-          }
-        },
-        "pain_swelling": {
-          "type": "pain",
-          "settings": {
-            "image": "",
-            "title": "Swelling",
-            "text": "Bunions can cause swelling and inflammation."
-          }
-        },
-        "pain_heels": {
-          "type": "pain",
-          "settings": {
-            "image": "",
-            "title": "Can’t wear heels",
-            "text": "Bunions make it almost impossible to wear the shoes you want."
-          }
-        },
-        "testimonial_jessica": {
-          "type": "testimonial",
-          "settings": {
-            "image": "",
-            "quote": "Finally something that actually works!",
-            "name": "Jessica, Nurse"
-          }
-        },
-        "testimonial_sarah": {
-          "type": "testimonial",
-          "settings": {
-            "image": "",
-            "quote": "I can wear shoes again all day.",
-            "name": "Sarah, Teacher"
-          }
-        },
-        "testimonial_emily": {
-          "type": "testimonial",
-          "settings": {
-            "image": "",
-            "quote": "Game changer for my morning run!",
-            "name": "Emily, Runner"
-          }
-        },
-        "use_morning": {
-          "type": "everyday",
-          "settings": {
-            "image": "",
-            "icon": "☀",
-            "title": "Morning"
-          }
-        },
-        "use_work": {
-          "type": "everyday",
-          "settings": {
-            "image": "",
-            "icon": "▣",
-            "title": "Work"
-          }
-        },
-        "use_active": {
-          "type": "everyday",
-          "settings": {
-            "image": "",
-            "icon": "♧",
-            "title": "Active"
-          }
-        },
-        "use_travel": {
-          "type": "everyday",
-          "settings": {
-            "image": "",
-            "icon": "✈",
-            "title": "Travel"
-          }
-        },
-        "article_one": {
-          "type": "article",
-          "settings": {
-            "article": "news/what-causes-bunions-and-how-to-treat-them",
-            "eyebrow": "BUNIONS · 4 MIN READ",
-            "fallback_title": "What Causes Bunions and How to Treat Them"
-          }
-        },
-        "article_two": {
-          "type": "article",
-          "settings": {
-            "article": "news/how-to-relieve-foot-pain-naturally",
-            "eyebrow": "RELIEF · 5 MIN READ",
-            "fallback_title": "How to Relieve Foot Pain Naturally"
-          }
-        },
-        "article_three": {
-          "type": "article",
-          "settings": {
-            "article": "news/can-bunion-correctors-really-help",
-            "eyebrow": "TIPS · 6 MIN READ",
-            "fallback_title": "Can Bunion Correctors Really Help?"
-          }
-        }
+        "trust_support": {"type":"trust","settings":{"icon":"fit","text":"Everyday foot support"}},
+        "trust_mobile": {"type":"trust","settings":{"icon":"heart","text":"Mobile-friendly guidance"}},
+        "trust_selected": {"type":"trust","settings":{"icon":"shield","text":"Carefully selected"}},
+        "trust_shipping": {"type":"trust","settings":{"icon":"shipping","text":"Shipping at checkout"}},
+        "concern_bunion": {"type":"concern","settings":{"collection":"bunion-toe-alignment","image":"","heading":"","text":"Adjustable support for toe alignment and everyday comfort.","quiz_label":"Toe","quiz_icon":"fit"}},
+        "concern_heel": {"type":"concern","settings":{"collection":"heel-plantar-fascia","image":"","heading":"","text":"Support options for heel and plantar fascia comfort.","quiz_label":"Heel","quiz_icon":"heart"}},
+        "concern_ankle": {"type":"concern","settings":{"collection":"ankle-support","image":"","heading":"","text":"Stabilizing support for everyday movement.","quiz_label":"Ankle","quiz_icon":"shield"}},
+        "concern_recovery": {"type":"concern","settings":{"collection":"recovery-massage","image":"","heading":"","text":"Portable tools for post-activity relaxation.","quiz_label":"Entire Foot","quiz_icon":"community"}},
+        "demo_adjust": {"type":"demonstration","settings":{"product":"adjustable-bunion-corrector","poster":"","video_url":"","heading":"How to Adjust"}},
+        "demo_day": {"type":"demonstration","settings":{"product":"day-night-bunion-corrector","poster":"","video_url":"","heading":"Daytime Use"}},
+        "demo_night": {"type":"demonstration","settings":{"product":"plantar-fasciitis-night-splint-sock","poster":"","video_url":"","heading":"Nighttime Support"}},
+        "demo_ankle": {"type":"demonstration","settings":{"product":"ankle-support-side-stabilizers","poster":"","video_url":"","heading":"Ankle Support"}},
+        "demo_recovery": {"type":"demonstration","settings":{"product":"electric-foot-hand-massager","poster":"","video_url":"","heading":"Massage & Recovery"}},
+        "value_focus": {"type":"value","settings":{"icon":"fit","heading":"Not Another Marketplace","text":"Products chosen for specific foot concerns."}},
+        "value_guidance": {"type":"value","settings":{"icon":"shield","heading":"Real Expectations","text":"Simple guidance so you know what to expect."}},
+        "value_comfort": {"type":"value","settings":{"icon":"heart","heading":"Everyday Comfort","text":"Support that fits your routine and lifestyle."}},
+        "faq_shipping": {"type":"faq","settings":{"question":"How long does shipping take?","answer":"<p>Available delivery estimates and costs are shown during checkout for your address.</p>"}},
+        "faq_fit": {"type":"faq","settings":{"question":"What if it does not fit or help?","answer":"<p>Review the product fit guidance before use. If the product is not right for you, contact support and consult the current refund policy.</p>"}},
+        "faq_choose": {"type":"faq","settings":{"question":"How should I choose the right product?","answer":"<p>Start with the area where you need support, then compare wear time, adjustability, and available variants on each product page.</p>"}},
+        "faq_safe": {"type":"faq","settings":{"question":"Is it safe to use every day?","answer":"<p>Follow the product-specific usage guidance. Stop use if pain, numbness, or irritation increases and seek professional advice when needed.</p>"}},
+        "faq_clean": {"type":"faq","settings":{"question":"How do I clean the products?","answer":"<p>Follow the care instructions shown on the product page or packaging. Keep powered products away from water unless their instructions state otherwise.</p>"}}
       },
-      "block_order": [
-        "pain_shoes",
-        "pain_walk",
-        "pain_swelling",
-        "pain_heels",
-        "testimonial_jessica",
-        "testimonial_sarah",
-        "testimonial_emily",
-        "use_morning",
-        "use_work",
-        "use_active",
-        "use_travel",
-        "article_one",
-        "article_two",
-        "article_three"
-      ],
+      "block_order": ["trust_support","trust_mobile","trust_selected","trust_shipping","concern_bunion","concern_heel","concern_ankle","concern_recovery","demo_adjust","demo_day","demo_night","demo_ankle","demo_recovery","value_focus","value_guidance","value_comfort","faq_shipping","faq_fit","faq_choose","faq_safe","faq_clean"],
       "settings": {
-        "hero_product": "adjustable-bunion-corrector",
-        "hero_image": "",
-        "proof_text": "LOVED BY 2,300+ CUSTOMERS",
-        "hero_text": "<p>Adjustable support that realigns your toe and relieves pressure — every step, every day.</p>",
-        "rating_label": "5 out of 5 stars",
-        "rating_text": "4.8/5 from 2,300+ customers",
-        "hero_button": "SHOP NOW",
-        "hero_link": "",
-        "collection": "best-sellers",
-        "how_text": "<p>Our adjustable design gently realigns your toe and relieves pressure with every step.</p>",
-        "video_poster": "",
-        "video_url": "",
-        "featured_product": "adjustable-bunion-corrector",
-        "guarantee_text": "Try Altaeron risk-free for 30 days. If it’s not right for you, send it back and we’ll make it right.",
-        "guarantee_link": ""
+        "hero_heading":"Support Every Step.",
+        "hero_text":"<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>",
+        "hero_product":"breathable-bunion-support",
+        "hero_image":"",
+        "primary_label":"Shop by Concern",
+        "secondary_label":"Find Your Match",
+        "concern_heading":"Where Does It Hurt?",
+        "explore_label":"Explore",
+        "popular_collection":"best-sellers",
+        "popular_heading":"Most Popular Solutions",
+        "view_all_label":"View all",
+        "quiz_heading":"Find the Right Support",
+        "quiz_text":"Answer 3 quick questions and get a personalized collection recommendation.",
+        "quiz_question_one":"Where do you feel discomfort?",
+        "quiz_question_two":"When would you use support most?",
+        "quiz_question_three":"What support feel do you prefer?",
+        "quiz_result_prefix":"A useful place to start:",
+        "quiz_result_label":"View recommendations",
+        "demo_heading":"Real Demonstrations",
+        "demo_text":"See how our products work in real life.",
+        "values_heading":"Why Altaeron?",
+        "reviews_heading":"Loved by Real Customers",
+        "blog":"news",
+        "guides_heading":"Foot Care Tips & Guides",
+        "faq_heading":"Frequently Asked Questions",
+        "newsletter_heading":"Take Better Steps.",
+        "newsletter_text":"Tips, guides and product updates straight to your inbox.",
+        "newsletter_placeholder":"Your email address",
+        "newsletter_button":"Subscribe"
       }
     }
   },
-  "order": [
-    "altaeron_home"
-  ]
+  "order": ["altaeron_home"]
 }
