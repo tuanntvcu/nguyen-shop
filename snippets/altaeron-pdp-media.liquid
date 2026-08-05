@@ -1,0 +1,21 @@
+{%- liquid
+  assign media_alt = media.alt | default: product.title
+  assign image_loading = loading | default: 'lazy'
+  assign image_priority = fetchpriority | default: 'auto'
+  if loading == true
+    assign image_loading = 'eager'
+  endif
+  if fetchpriority == true
+    assign image_priority = 'high'
+  endif
+-%}
+{%- case media.media_type -%}
+  {%- when 'image' -%}
+    {{ media.preview_image | image_url: width: 1600 | image_tag: loading: image_loading, fetchpriority: image_priority, widths: '320, 480, 640, 900, 1200, 1600', sizes: sizes, alt: media_alt }}
+  {%- when 'video' -%}
+    {{ media | video_tag: controls: true, preload: 'none', playsinline: true, muted: false, image_size: '1200x' }}
+  {%- when 'external_video' -%}
+    {{ media | external_video_tag: loading: 'lazy' }}
+  {%- when 'model' -%}
+    {{ media | model_viewer_tag: reveal: 'interaction', toggleable: true }}
+{%- endcase -%}

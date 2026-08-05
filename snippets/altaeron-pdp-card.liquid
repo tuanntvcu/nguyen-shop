@@ -1,0 +1,24 @@
+{%- liquid
+  assign card_title = card.title.value
+  assign card_text = card.text.value
+  assign card_image = card.image.value
+  assign card_icon = card.icon.value | default: icon | default: 'check'
+  assign card_url = card.url.value
+  assign card_label = card.link_label.value | default: 'Learn more'
+-%}
+{%- if card_title != blank or card_text != blank or card_image != blank -%}
+  <article class="apdp-content-card{% if compact %} apdp-content-card--compact{% endif %}">
+    {%- if card_image != blank -%}
+      <div class="apdp-content-card__media">
+        {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '220, 360, 540, 800', sizes: image_sizes, alt: card_image.alt | default: card_title }}
+      </div>
+    {%- else -%}
+      <span class="apdp-content-card__icon">{% render 'altaeron-pdp-icon', icon: card_icon %}</span>
+    {%- endif -%}
+    <div class="apdp-content-card__body">
+      {%- if card_title != blank -%}<h3>{{ card_title }}</h3>{%- endif -%}
+      {%- if card_text != blank -%}<p>{{ card_text }}</p>{%- endif -%}
+      {%- if card_url != blank -%}<a href="{{ card_url }}">{{ card_label }} <span aria-hidden="true">→</span></a>{%- endif -%}
+    </div>
+  </article>
+{%- endif -%}

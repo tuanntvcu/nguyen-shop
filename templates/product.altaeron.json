@@ -11,264 +11,30 @@
   "sections": {
     "altaeron_pdp": {
       "type": "altaeron-pdp",
-      "blocks": {
-        "benefit_fit": {
-          "type": "benefit",
-          "settings": {
-            "icon": "1",
-            "title": "Adjustable for a perfect fit"
-          }
-        },
-        "benefit_daily": {
-          "type": "benefit",
-          "settings": {
-            "icon": "2",
-            "title": "Wear day or night"
-          }
-        },
-        "benefit_light": {
-          "type": "benefit",
-          "settings": {
-            "icon": "3",
-            "title": "Soft, breathable & lightweight"
-          }
-        },
-        "pain_shoes": {
-          "type": "pain",
-          "settings": {
-            "image": "",
-            "alt": "",
-            "title": "Shoes rub.",
-            "text": "Every step hurts."
-          }
-        },
-        "pain_pressure": {
-          "type": "pain",
-          "settings": {
-            "image": "",
-            "alt": "",
-            "title": "Swelling",
-            "text": "that gets worse."
-          }
-        },
-        "pain_fit": {
-          "type": "pain",
-          "settings": {
-            "image": "",
-            "alt": "",
-            "title": "Hard to find",
-            "text": "shoes that fit."
-          }
-        },
-        "pain_home": {
-          "type": "pain",
-          "settings": {
-            "image": "",
-            "alt": "",
-            "title": "You take your shoes off the moment",
-            "text": "you get home."
-          }
-        },
-        "life_morning": {
-          "type": "lifestyle",
-          "settings": {
-            "image": "",
-            "alt": "",
-            "title": "Morning",
-            "text": "Start your day with less pain."
-          }
-        },
-        "life_home": {
-          "type": "lifestyle",
-          "settings": {
-            "image": "",
-            "alt": "",
-            "title": "Work",
-            "text": "Wear it under socks all day."
-          }
-        },
-        "life_routine": {
-          "type": "lifestyle",
-          "settings": {
-            "image": "",
-            "alt": "",
-            "title": "On the go",
-            "text": "Fits most shoes comfortably."
-          }
-        },
-        "ugc_walkbetter": {
-          "type": "ugc",
-          "settings": {
-            "image": "",
-            "handle": "@walkbetter",
-            "text": "Game changer! No more pain by the end of the day."
-          }
-        },
-        "ugc_sarah": {
-          "type": "ugc",
-          "settings": {
-            "image": "",
-            "handle": "@sarah.daily",
-            "text": "Finally found something that actually helps my bunion."
-          }
-        },
-        "ugc_footfreedom": {
-          "type": "ugc",
-          "settings": {
-            "image": "",
-            "handle": "@footfreedom",
-            "text": "Super easy to adjust and so comfortable!"
-          }
-        },
-        "ugc_activemom": {
-          "type": "ugc",
-          "settings": {
-            "image": "",
-            "handle": "@active.mom",
-            "text": "I can walk longer and with less pain now."
-          }
-        },
-        "faq_fit": {
-          "type": "faq",
-          "settings": {
-            "question": "Will it fit my foot?",
-            "answer": "<p>Use the product only as directed by the supplied fit guidance. If the fit feels tight, causes skin irritation, or creates discomfort, stop use and contact support.</p>"
-          }
-        },
-        "faq_results": {
-          "type": "faq",
-          "settings": {
-            "question": "When will I see results?",
-            "answer": "<p>Comfort experiences vary. Start with short wear periods and increase gradually as comfort allows. Do not use this product as a substitute for medical care.</p>"
-          }
-        },
-        "faq_shoes": {
-          "type": "faq",
-          "settings": {
-            "question": "Can I wear it in my shoes?",
-            "answer": "<p>Only wear it with footwear if the product instructions and your shoe fit allow it without pressure, numbness, rubbing, or pain.</p>"
-          }
-        },
-        "faq_night": {
-          "type": "faq",
-          "settings": {
-            "question": "Can I wear it at night?",
-            "answer": "<p>Follow the supplied usage instructions. Do not wear it overnight unless the merchant-provided directions for this product confirm that use.</p>"
-          }
-        },
-        "faq_knob": {
-          "type": "faq",
-          "settings": {
-            "question": "How tightly should I turn the knob?",
-            "answer": "<p>Use gentle tension only. Do not overtighten. Stop use if you feel pain, numbness, tingling, skin irritation, or worsening discomfort.</p>"
-          }
-        },
-        "faq_safety": {
-          "type": "faq",
-          "settings": {
-            "question": "Who should not use it?",
-            "answer": "<p>People with diabetes, neuropathy, poor circulation, severe foot injuries, or recent foot surgery should consult a qualified healthcare professional before use.</p>"
-          }
-        },
-        "faq_initial": {
-          "type": "faq",
-          "settings": {
-            "question": "How long should I wear it initially?",
-            "answer": "<p>Begin with a short wear period and increase gradually only as comfort allows. Follow the usage guide supplied with the product.</p>"
-          }
-        },
-        "faq_symptoms": {
-          "type": "faq",
-          "settings": {
-            "question": "What if I feel pain, numbness, or tingling?",
-            "answer": "<p>Stop using the corrector. Do not overtighten it or continue through pain, numbness, tingling, skin irritation, or worsening discomfort.</p>"
-          }
-        },
-        "trust_checkout": {
-          "type": "trust",
-          "settings": {
-            "icon": "+",
-            "title": "Secure Shopify checkout",
-            "text": "Checkout is processed through Shopify."
-          }
-        },
-        "trust_guide": {
-          "type": "trust",
-          "settings": {
-            "icon": "✓",
-            "title": "30-Day Comfort Guarantee",
-            "text": "Not comfy? Send it back."
-          }
-        },
-        "trust_quality": {
-          "type": "trust",
-          "settings": {
-            "icon": "3",
-            "title": "Premium Quality",
-            "text": "Durable, comfortable materials."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_fit",
-        "benefit_daily",
-        "benefit_light",
-        "pain_shoes",
-        "pain_pressure",
-        "pain_fit",
-        "pain_home",
-        "life_morning",
-        "life_home",
-        "life_routine",
-        "faq_fit",
-        "faq_results",
-        "faq_shoes",
-        "faq_night",
-        "trust_guide",
-        "trust_quality",
-        "trust_checkout",
-        "ugc_walkbetter",
-        "ugc_sarah",
-        "ugc_footfreedom",
-        "ugc_activemom"
-      ],
       "settings": {
-        "hero_eyebrow": "ALTAERON Foot Recovery System",
-        "hero_heading": "Walk without bunion pain. Every single day.",
-        "hero_copy": "<p>Our adjustable corrector gently realigns your big toe and relieves pressure with every step.</p>",
-        "cta_label": "Get my bunion corrector",
-        "rating_text": "4.8/5 from 2,300+ customers",
-        "hero_guarantee": "30-Day Comfort Guarantee",
-        "hero_accent": "Every single day.",
-        "temporary_video": "",
-        "hero_video": "",
-        "hero_poster": "",
-        "pain_eyebrow": "Tired of bunion pressure?",
-        "pain_heading": "It’s not just a bump. It’s holding you back.",
-        "transformation_enabled": true,
-        "transform_eyebrow": "See it. Real results.",
-        "transform_heading": "Adjustable support for a more comfortable routine.",
-        "before_image": "",
-        "before_label": "Before",
-        "before_alt": "",
-        "after_image": "",
-        "after_label": "After",
-        "after_alt": "",
-        "how_heading": "How it works (8 seconds)",
-        "how_video": "",
-        "how_poster": "",
-        "how_autoplay": false,
-        "lifestyle_heading": "Comfortable relief for any part of your day",
-        "featured_review_enabled": true,
-        "featured_review_quote": "Finally something that actually works. My pain is so much better and I can wear shoes again!",
-        "featured_review_name": "Jessica M.",
-        "featured_review_social_proof": "Join 2,300+ happy customers",
-        "reviews_heading": "Real customer reviews",
-        "faq_heading": "Still have questions?"
+        "identity_heading": "You might see yourself here...",
+        "price_label": "From",
+        "variant_label": "Choose your option",
+        "quantity_label": "Quantity",
+        "cta_label": "Add to cart",
+        "order_help_heading": "Questions before ordering?",
+        "order_help_text": "Check the fit notes and policies, or contact us for help.",
+        "video_eyebrow": "See the routine",
+        "reviews_heading": "Real people. Real feedback.",
+        "routine_heading": "Support your routine",
+        "values_heading": "No miracles. Just thoughtful support.",
+        "value_1_title": "Useful by design",
+        "value_1_text": "Products selected for practical daily routines.",
+        "value_2_title": "Clear information",
+        "value_2_text": "Straightforward details without miracle claims.",
+        "value_3_title": "Real feedback",
+        "value_3_text": "Review data is shown only when it exists.",
+        "value_4_title": "Support available",
+        "value_4_text": "Contact us when you need order help.",
+        "safety_heading": "Use and safety notes",
+        "faq_heading": "You ask, we answer"
       }
     }
   },
-  "order": [
-    "altaeron_pdp"
-  ]
+  "order": ["altaeron_pdp"]
 }

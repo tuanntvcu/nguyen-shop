@@ -1,274 +1,174 @@
-(function () {
-  const formatMoney = (cents) => {
-    if (window.ScaloraTheme && ScaloraTheme.Currency && ScaloraTheme.settings) {
-      return ScaloraTheme.Currency.formatMoney(cents, ScaloraTheme.settings.moneyFormat);
-    }
+(() => {
+  const SELECTOR = '.altaeron-pdp';
 
-    return (Number(cents) / 100).toLocaleString(undefined, {
-      style: 'currency',
-      currency: window.Shopify && Shopify.currency ? Shopify.currency.active : 'USD',
-    });
-  };
+  function money(cents, format) {
+    if (window.Shopify?.formatMoney) return window.Shopify.formatMoney(cents, format);
+    const currency = window.Shopify?.currency?.active || 'USD';
+    return new Intl.NumberFormat(document.documentElement.lang || 'en-US', { style: 'currency', currency }).format(Number(cents || 0) / 100);
+  }
 
-  const setupVideos = (root) => {
-    const videos = root.querySelectorAll('video');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function initGallery(root) {
+    const thumbs = [...root.querySelectorAll('[data-apdp-thumb]')];
+    const items = [...root.querySelectorAll('[data-apdp-media]')];
+    if (!thumbs.length || !items.length) return () => {};
 
-    videos.forEach((video) => {
-      if (reducedMotion) {
-        video.pause();
-        video.removeAttribute('autoplay');
-      }
-    });
-
-    const observer = 'IntersectionObserver' in window
-      ? new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              const video = entry.target;
-              const shouldAutoplay = video.dataset.apdpAutoplay === 'true';
-              if (entry.isIntersecting && entry.intersectionRatio > 0.45 && shouldAutoplay && !reducedMotion) {
-                video.play().catch(() => {});
-              } else {
-                video.pause();
-              }
-            });
-          },
-          { threshold: [0, 0.45, 0.75] }
-        )
-      : null;
-
-    videos.forEach((video) => {
-      if (observer && video.dataset.apdpAutoplay === 'true') observer.observe(video);
-    });
-
-    root.querySelectorAll('[data-apdp-video-toggle]').forEach((button) => {
-      const video = button.closest('.apdp-hero__media') && button.closest('.apdp-hero__media').querySelector('video');
-      if (!video) return;
-
-      button.addEventListener('click', () => {
-        video.muted = !video.muted;
-        button.classList.toggle('is-unmuted', !video.muted);
-        button.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
-        const label = button.querySelector('[data-apdp-sound-label]');
-        if (label) label.textContent = video.muted ? 'Sound off' : 'Sound on';
-      });
-    });
-
-    root.querySelectorAll('[data-apdp-video-replay]').forEach((button) => {
-      const video = button.closest('.apdp-video-card')?.querySelector('video');
-      if (!video) return;
-
-      button.addEventListener('click', () => {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-        button.closest('.apdp-video-card')?.classList.add('is-playing');
-      });
-      video.addEventListener('pause', () => button.closest('.apdp-video-card')?.classList.remove('is-playing'));
-      video.addEventListener('ended', () => button.closest('.apdp-video-card')?.classList.remove('is-playing'));
-    });
-
-    root.querySelectorAll('.apdp-card__media, .apdp-featured-review__media, .apdp-ugc__media').forEach((media) => {
-      const video = media.querySelector('video');
-      if (!video) return;
-
-      media.tabIndex = 0;
-      media.setAttribute('role', 'button');
-      media.setAttribute('aria-label', 'Play video');
-      const toggle = () => {
-        if (video.paused) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
+    const activate = (id, focus = false) => {
+      let found = false;
+      thumbs.forEach((thumb) => {
+        const active = String(thumb.dataset.apdpThumb) === String(id);
+        thumb.classList.toggle('is-active', active);
+        thumb.setAttribute('aria-selected', String(active));
+        thumb.tabIndex = active ? 0 : -1;
+        if (active) {
+          found = true;
+          if (focus) thumb.focus({ preventScroll: true });
         }
-        media.classList.toggle('is-playing', !video.paused);
-        media.setAttribute('aria-label', video.paused ? 'Play video' : 'Pause video');
-      };
-      media.addEventListener('click', toggle);
-      media.addEventListener('keydown', (event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
+      });
+      if (!found) return;
+      items.forEach((item) => {
+        const active = String(item.dataset.apdpMedia) === String(id);
+        item.hidden = !active;
+        item.classList.toggle('is-active', active);
+        if (!active) item.querySelectorAll('video').forEach((video) => video.pause());
+      });
+    };
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => activate(thumb.dataset.apdpThumb));
+      thumb.addEventListener('keydown', (event) => {
+        if (!['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
-        toggle();
+        let next = index;
+        if (['ArrowDown', 'ArrowRight'].includes(event.key)) next = (index + 1) % thumbs.length;
+        if (['ArrowUp', 'ArrowLeft'].includes(event.key)) next = (index - 1 + thumbs.length) % thumbs.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = thumbs.length - 1;
+        activate(thumbs[next].dataset.apdpThumb, true);
       });
     });
-  };
+    return activate;
+  }
 
-  const setupVariantPrice = (root) => {
+  function initQuantity(root) {
+    const input = root.querySelector('[data-apdp-quantity]');
+    if (!input) return;
+    root.querySelector('[data-apdp-quantity-minus]')?.addEventListener('click', () => {
+      input.value = Math.max(Number(input.min || 1), Number(input.value || 1) - 1);
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    root.querySelector('[data-apdp-quantity-plus]')?.addEventListener('click', () => {
+      input.value = Number(input.value || 1) + 1;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  }
+
+  function initVariants(root, activateMedia) {
+    const form = root.querySelector('.apdp-form');
+    const idInput = root.querySelector('[data-apdp-variant-id]');
     const select = root.querySelector('[data-apdp-variant-select]');
-    if (!select) return;
-
-    const variantsScript = root.querySelector('[data-apdp-product-json]');
-    const variants = variantsScript ? JSON.parse(variantsScript.textContent) : [];
-    const sectionId = root.dataset.section;
+    const radios = [...root.querySelectorAll('[data-apdp-variant-option]')];
     const currentPrice = root.querySelector('[data-apdp-current-price]');
     const comparePrice = root.querySelector('[data-apdp-compare-price]');
-    const submit = root.querySelector('.apdp-form [name="add"]');
-    const submitText = submit && submit.querySelector('span');
-    if (submitText) submitText.dataset.availableText = submitText.textContent;
+    const savings = root.querySelector('[data-apdp-savings]');
+    const submit = root.querySelector('[data-apdp-submit]');
+    const submitText = root.querySelector('[data-apdp-submit-text]');
+    const stickySubmit = root.querySelector('[data-apdp-sticky-submit]');
+    const stickyText = root.querySelector('[data-apdp-sticky-text]');
+    const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
+    const variantsNode = root.querySelector('[data-apdp-product-json]');
+    const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
+    const format = root.dataset.moneyFormat;
 
-    const update = () => {
-      const option = select.selectedOptions[0];
-      if (!option) return;
+    const chosenControl = () => select?.selectedOptions?.[0] || radios.find((radio) => radio.checked);
+    const update = (pushUrl = true) => {
+      const control = chosenControl();
+      if (!control) return;
+      const id = control.value;
+      const price = Number(control.dataset.price || 0);
+      const compare = Number(control.dataset.compare || 0);
+      const available = control.dataset.available === 'true';
+      const mediaId = control.dataset.mediaId;
+      const variant = variants.find((item) => String(item.id) === String(id));
 
-      const price = Number(option.dataset.price || 0);
-      const compare = Number(option.dataset.comparePrice || 0);
-      const available = option.dataset.available === 'true';
-
-      if (currentPrice) currentPrice.textContent = formatMoney(price);
+      if (idInput) idInput.value = id;
+      if (currentPrice) currentPrice.textContent = money(price, format);
+      if (stickyPrice) stickyPrice.textContent = money(price, format);
       if (comparePrice) {
-        comparePrice.hidden = !(compare > price);
-        if (compare > price) comparePrice.textContent = formatMoney(compare);
+        comparePrice.hidden = compare <= price;
+        if (compare > price) comparePrice.textContent = money(compare, format);
       }
+      if (savings) {
+        savings.hidden = compare <= price;
+        if (compare > price) savings.textContent = `Save ${money(compare - price, format)}`;
+      }
+      [submit, stickySubmit].forEach((button) => {
+        if (!button) return;
+        button.disabled = !available;
+        if (available) button.removeAttribute('aria-disabled');
+        else button.setAttribute('aria-disabled', 'true');
+      });
+      const label = available ? (submitText?.dataset.availableText || 'Add to cart') : 'Sold out';
+      if (submitText) submitText.textContent = label;
+      if (stickyText) stickyText.textContent = label;
+      if (mediaId) activateMedia(mediaId);
 
-      if (submit) {
-        submit.disabled = !available;
-        submit.toggleAttribute('aria-disabled', !available);
+      if (pushUrl) {
+        const url = new URL(root.dataset.productUrl, window.location.origin);
+        url.searchParams.set('variant', id);
+        window.history.replaceState({ ...window.history.state, variant: id }, '', url);
       }
-      if (submitText && window.ScaloraTheme && ScaloraTheme.variantStrings) {
-        submitText.textContent = available ? submitText.dataset.availableText : ScaloraTheme.variantStrings.soldOut;
-      }
-
-      if (window.ScaloraTheme && ScaloraTheme.pubsub && ScaloraTheme.pubsub.PUB_SUB_EVENTS) {
-        const variant = variants.find((item) => String(item.id) === String(option.value));
-        ScaloraTheme.pubsub.publish(ScaloraTheme.pubsub.PUB_SUB_EVENTS.variantChange, {
-          data: {
-            sectionId,
-            html: document,
-            variant,
-          },
-        });
-      }
-
-      const nextUrl = new URL(window.location.href);
-      nextUrl.searchParams.set('variant', option.value);
-      window.history.replaceState({}, '', nextUrl);
+      form?.dispatchEvent(new CustomEvent('altaeron:variant-change', { bubbles: true, detail: { variant } }));
     };
 
-    select.addEventListener('change', update);
-    update();
-  };
+    select?.addEventListener('change', () => update());
+    radios.forEach((radio) => radio.addEventListener('change', () => update()));
+    update(false);
+  }
 
-  const setupCarousels = (root) => {
-    root.querySelectorAll('[data-apdp-carousel]').forEach((carousel) => {
-      carousel.tabIndex = 0;
-      carousel.addEventListener('keydown', (event) => {
-        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
-        event.preventDefault();
-        const direction = event.key === 'ArrowRight' ? 1 : -1;
-        carousel.scrollBy({ left: direction * carousel.clientWidth * 0.8, behavior: 'smooth' });
-      });
+  function initSticky(root) {
+    const sticky = root.querySelector('[data-apdp-sticky]');
+    const purchaseButton = root.querySelector('[data-apdp-submit]');
+    const stickyButton = root.querySelector('[data-apdp-sticky-submit]');
+    const form = root.querySelector('.apdp-form');
+    if (!sticky || !purchaseButton || !stickyButton || !form) return;
+
+    const mobile = window.matchMedia('(max-width: 749px)');
+    const updateVisibility = (visible) => { sticky.hidden = !mobile.matches || !visible; };
+    const observer = new IntersectionObserver(([entry]) => updateVisibility(!entry.isIntersecting), { threshold: 0 });
+    observer.observe(purchaseButton);
+    mobile.addEventListener?.('change', () => updateVisibility(false));
+    stickyButton.addEventListener('click', () => {
+      if (!stickyButton.disabled) form.requestSubmit();
     });
+  }
 
-    const ugcSlider = root.querySelector('[data-apdp-ugc-slider]');
-    const dots = [...root.querySelectorAll('[data-apdp-ugc-dots] button')];
-    if (!ugcSlider || dots.length === 0) return;
-
-    let frame;
-    const setActiveDot = (index) => {
-      dots.forEach((dot, dotIndex) => {
-        const active = dotIndex === index;
-        dot.classList.toggle('is-active', active);
-        dot.setAttribute('aria-current', active ? 'true' : 'false');
+  function initLazyVideos(root) {
+    const videos = [...root.querySelectorAll('[data-apdp-lazy-video] video')];
+    if (!videos.length || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const video = entry.target;
+        video.querySelectorAll('source[data-src]').forEach((source) => { source.src = source.dataset.src; source.removeAttribute('data-src'); });
+        video.load();
+        observer.unobserve(video);
       });
-    };
+    }, { rootMargin: '300px 0px' });
+    videos.forEach((video) => observer.observe(video));
+  }
 
-    const updateDots = () => {
-      frame = null;
-      const maxScroll = ugcSlider.scrollWidth - ugcSlider.clientWidth;
-      const progress = maxScroll > 0 ? ugcSlider.scrollLeft / maxScroll : 0;
-      setActiveDot(Math.round(progress * (dots.length - 1)));
-    };
+  function init(root) {
+    if (!root || root.dataset.apdpReady === 'true') return;
+    root.dataset.apdpReady = 'true';
+    const activateMedia = initGallery(root);
+    initQuantity(root);
+    initVariants(root, activateMedia);
+    initSticky(root);
+    initLazyVideos(root);
+  }
 
-    ugcSlider.addEventListener('scroll', () => {
-      if (!frame) frame = requestAnimationFrame(updateDots);
-    }, { passive: true });
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        const maxScroll = ugcSlider.scrollWidth - ugcSlider.clientWidth;
-        const left = dots.length > 1 ? maxScroll * index / (dots.length - 1) : 0;
-        ugcSlider.scrollTo({ left, behavior: 'smooth' });
-      });
-    });
-
-    updateDots();
-  };
-
-  const setupJudgeReview = (root) => {
-    const featured = root.querySelector('[data-apdp-judge-featured]');
-    const widget = root.querySelector('.apdp-reviews');
-    if (!featured || !widget) return;
-
-    const populate = () => {
-      const review = widget.querySelector('.jdgm-rev');
-      if (!review) return false;
-
-      const body = review.querySelector('.jdgm-rev__body, .jdgm-rev__body p')?.textContent.trim();
-      const author = review.querySelector('.jdgm-rev__author')?.textContent.trim();
-      if (!body || !author) return false;
-
-      const ratingElement = review.querySelector('.jdgm-rev__rating');
-      const rating = Math.max(1, Math.min(5, Math.round(Number(
-        ratingElement?.dataset.score || ratingElement?.getAttribute('data-score') || 5
-      ))));
-      featured.querySelector('[data-apdp-review-stars]').textContent = '\u2605'.repeat(rating);
-      featured.querySelector('[data-apdp-review-stars]').setAttribute('aria-label', `${rating} out of 5 stars`);
-      featured.querySelector('[data-apdp-review-body]').textContent = body;
-      featured.querySelector('[data-apdp-review-author]').textContent = `- ${author}`;
-
-      const reviewImage = review.querySelector('.jdgm-rev__pic-img, .jdgm-rev__pics img');
-      const media = featured.querySelector('.apdp-featured-review__media');
-      if (reviewImage && media) {
-        const image = reviewImage.cloneNode(true);
-        image.removeAttribute('width');
-        image.removeAttribute('height');
-        image.alt = `Customer review by ${author}`;
-        media.replaceChildren(image);
-        media.removeAttribute('role');
-        media.removeAttribute('tabindex');
-      }
-
-      featured.hidden = false;
-      return true;
-    };
-
-    if (populate()) return;
-    const observer = new MutationObserver(() => {
-      if (populate()) observer.disconnect();
-    });
-    observer.observe(widget, { childList: true, subtree: true });
-    window.setTimeout(() => observer.disconnect(), 10000);
-  };
-
-  const setupFaq = (root) => {
-    const items = [...root.querySelectorAll('.apdp-faq__item')];
-    items.forEach((item) => {
-      item.addEventListener('toggle', () => {
-        if (!item.open) return;
-        items.forEach((other) => {
-          if (other !== item) other.open = false;
-        });
-      });
-    });
-  };
-
-  const init = (root) => {
-    if (root.dataset.apdpInitialized === 'true') return;
-    root.dataset.apdpInitialized = 'true';
-    document.body.classList.add('altaeron-pdp-active');
-    setupVideos(root);
-    setupVariantPrice(root);
-    setupCarousels(root);
-    setupFaq(root);
-    setupJudgeReview(root);
-  };
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.altaeron-pdp').forEach(init);
-  });
-
-  document.addEventListener('shopify:section:load', (event) => {
-    const root = event.target.querySelector('.altaeron-pdp');
-    if (root) init(root);
-  });
+  const initAll = (scope = document) => scope.querySelectorAll(SELECTOR).forEach(init);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initAll());
+  else initAll();
+  document.addEventListener('shopify:section:load', (event) => initAll(event.target));
 })();
