@@ -1,40 +1,162 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "altaeron_home": {
       "type": "altaeron-home",
       "blocks": {
-        "pain_shoes": {"type":"pain","settings":{"image":"","title":"Shoes hurt","text":"Pressure and pain make every step uncomfortable."}},
-        "pain_walk": {"type":"pain","settings":{"image":"","title":"Hard to walk","text":"Pain holds you back from the things you love."}},
-        "pain_swelling": {"type":"pain","settings":{"image":"","title":"Swelling","text":"Bunions can cause swelling and inflammation."}},
-        "pain_heels": {"type":"pain","settings":{"image":"","title":"Can’t wear heels","text":"Bunions make it almost impossible to wear the shoes you want."}},
-        "testimonial_jessica": {"type":"testimonial","settings":{"image":"","quote":"Finally something that actually works!","name":"Jessica, Nurse"}},
-        "testimonial_sarah": {"type":"testimonial","settings":{"image":"","quote":"I can wear shoes again all day.","name":"Sarah, Teacher"}},
-        "testimonial_emily": {"type":"testimonial","settings":{"image":"","quote":"Game changer for my morning run!","name":"Emily, Runner"}},
-        "use_morning": {"type":"everyday","settings":{"image":"","icon":"☀","title":"Morning"}},
-        "use_work": {"type":"everyday","settings":{"image":"","icon":"▣","title":"Work"}},
-        "use_active": {"type":"everyday","settings":{"image":"","icon":"♧","title":"Active"}},
-        "use_travel": {"type":"everyday","settings":{"image":"","icon":"✈","title":"Travel"}},
-        "article_one": {"type":"article","settings":{"article":"news/what-causes-bunions-and-how-to-treat-them","eyebrow":"BUNIONS · 4 MIN READ","fallback_title":"What Causes Bunions and How to Treat Them"}},
-        "article_two": {"type":"article","settings":{"article":"news/how-to-relieve-foot-pain-naturally","eyebrow":"RELIEF · 5 MIN READ","fallback_title":"How to Relieve Foot Pain Naturally"}},
-        "article_three": {"type":"article","settings":{"article":"news/can-bunion-correctors-really-help","eyebrow":"TIPS · 6 MIN READ","fallback_title":"Can Bunion Correctors Really Help?"}}
+        "pain_shoes": {
+          "type": "pain",
+          "settings": {
+            "image": "",
+            "title": "Shoes hurt",
+            "text": "Pressure and pain make every step uncomfortable."
+          }
+        },
+        "pain_walk": {
+          "type": "pain",
+          "settings": {
+            "image": "",
+            "title": "Hard to walk",
+            "text": "Pain holds you back from the things you love."
+          }
+        },
+        "pain_swelling": {
+          "type": "pain",
+          "settings": {
+            "image": "",
+            "title": "Swelling",
+            "text": "Bunions can cause swelling and inflammation."
+          }
+        },
+        "pain_heels": {
+          "type": "pain",
+          "settings": {
+            "image": "",
+            "title": "Can’t wear heels",
+            "text": "Bunions make it almost impossible to wear the shoes you want."
+          }
+        },
+        "testimonial_jessica": {
+          "type": "testimonial",
+          "settings": {
+            "image": "",
+            "quote": "Finally something that actually works!",
+            "name": "Jessica, Nurse"
+          }
+        },
+        "testimonial_sarah": {
+          "type": "testimonial",
+          "settings": {
+            "image": "",
+            "quote": "I can wear shoes again all day.",
+            "name": "Sarah, Teacher"
+          }
+        },
+        "testimonial_emily": {
+          "type": "testimonial",
+          "settings": {
+            "image": "",
+            "quote": "Game changer for my morning run!",
+            "name": "Emily, Runner"
+          }
+        },
+        "use_morning": {
+          "type": "everyday",
+          "settings": {
+            "image": "",
+            "icon": "☀",
+            "title": "Morning"
+          }
+        },
+        "use_work": {
+          "type": "everyday",
+          "settings": {
+            "image": "",
+            "icon": "▣",
+            "title": "Work"
+          }
+        },
+        "use_active": {
+          "type": "everyday",
+          "settings": {
+            "image": "",
+            "icon": "♧",
+            "title": "Active"
+          }
+        },
+        "use_travel": {
+          "type": "everyday",
+          "settings": {
+            "image": "",
+            "icon": "✈",
+            "title": "Travel"
+          }
+        },
+        "article_one": {
+          "type": "article",
+          "settings": {
+            "article": "news/what-causes-bunions-and-how-to-treat-them",
+            "eyebrow": "BUNIONS · 4 MIN READ",
+            "fallback_title": "What Causes Bunions and How to Treat Them"
+          }
+        },
+        "article_two": {
+          "type": "article",
+          "settings": {
+            "article": "news/how-to-relieve-foot-pain-naturally",
+            "eyebrow": "RELIEF · 5 MIN READ",
+            "fallback_title": "How to Relieve Foot Pain Naturally"
+          }
+        },
+        "article_three": {
+          "type": "article",
+          "settings": {
+            "article": "news/can-bunion-correctors-really-help",
+            "eyebrow": "TIPS · 6 MIN READ",
+            "fallback_title": "Can Bunion Correctors Really Help?"
+          }
+        }
       },
-      "block_order": ["pain_shoes","pain_walk","pain_swelling","pain_heels","testimonial_jessica","testimonial_sarah","testimonial_emily","use_morning","use_work","use_active","use_travel","article_one","article_two","article_three"],
+      "block_order": [
+        "pain_shoes",
+        "pain_walk",
+        "pain_swelling",
+        "pain_heels",
+        "testimonial_jessica",
+        "testimonial_sarah",
+        "testimonial_emily",
+        "use_morning",
+        "use_work",
+        "use_active",
+        "use_travel",
+        "article_one",
+        "article_two",
+        "article_three"
+      ],
       "settings": {
-        "hero_product":"adjustable-knob-bunion-corrector",
-        "hero_image":"",
-        "proof_text":"LOVED BY 2,300+ CUSTOMERS",
-        "hero_text":"<p>Adjustable support that realigns your toe and relieves pressure — every step, every day.</p>",
-        "rating_label":"5 out of 5 stars",
-        "rating_text":"4.8/5 from 2,300+ customers",
-        "hero_button":"SHOP NOW",
-        "hero_link":"",
-        "collection":"best-sellers",
-        "how_text":"<p>Our adjustable design gently realigns your toe and relieves pressure with every step.</p>",
-        "video_poster":"",
-        "video_url":"",
-        "featured_product":"adjustable-knob-bunion-corrector",
-        "guarantee_text":"Try Altaeron risk-free for 30 days. If it’s not right for you, send it back and we’ll make it right.",
-        "guarantee_link":""
+        "hero_product": "adjustable-bunion-corrector",
+        "hero_image": "",
+        "proof_text": "LOVED BY 2,300+ CUSTOMERS",
+        "hero_text": "<p>Adjustable support that realigns your toe and relieves pressure — every step, every day.</p>",
+        "rating_label": "5 out of 5 stars",
+        "rating_text": "4.8/5 from 2,300+ customers",
+        "hero_button": "SHOP NOW",
+        "hero_link": "",
+        "collection": "best-sellers",
+        "how_text": "<p>Our adjustable design gently realigns your toe and relieves pressure with every step.</p>",
+        "video_poster": "",
+        "video_url": "",
+        "featured_product": "adjustable-bunion-corrector",
+        "guarantee_text": "Try Altaeron risk-free for 30 days. If it’s not right for you, send it back and we’ll make it right.",
+        "guarantee_link": ""
       }
     }
   },
