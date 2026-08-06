@@ -54,6 +54,7 @@ class AltaeronHome extends HTMLElement {
     const steps = [...quiz.querySelectorAll('[data-quiz-step]')];
     const markers = [...quiz.querySelectorAll('.ah-progress span')];
     const result = quiz.querySelector('[data-quiz-result]');
+    quiz.querySelectorAll('[data-quiz-choice]').forEach((choice) => choice.setAttribute('aria-pressed', 'false'));
     let current = 0;
     let recommendation = { title: '', url: '' };
 
@@ -71,27 +72,38 @@ class AltaeronHome extends HTMLElement {
         return;
       }
       const choice = event.target.closest('[data-quiz-choice]');
-      if (!choice) return;
-      choice.parentElement?.querySelectorAll('[data-quiz-choice]').forEach((button) => button.classList.toggle('is-selected', button === choice));
-      if (current === 0) {
-        recommendation = { title: choice.dataset.title || choice.textContent.trim(), url: choice.dataset.url || '' };
-        this.track('quiz_started', { concern: recommendation.title });
-      }
-      this.track('quiz_step_completed', { step: current + 1, answer: choice.textContent.trim() });
-      window.setTimeout(() => {
-        if (current + 1 < steps.length) {
-          showStep(current + 1);
-          return;
+      if (choice) {
+        const step = steps[current];
+        step?.querySelectorAll('[data-quiz-choice]').forEach((button) => {
+          button.classList.toggle('is-selected', button === choice);
+          button.setAttribute('aria-pressed', button === choice ? 'true' : 'false');
+        });
+        if (step) step.dataset.answer = choice.textContent.trim();
+        step?.querySelector('[data-quiz-next]')?.removeAttribute('disabled');
+        if (current === 0) {
+          recommendation = { title: choice.dataset.title || choice.textContent.trim(), url: choice.dataset.url || '' };
+          if (!quiz.dataset.started) {
+            quiz.dataset.started = 'true';
+            this.track('quiz_started', { concern: recommendation.title });
+          }
         }
-        steps[current]?.classList.remove('is-active');
-        result.hidden = false;
-        result.querySelector('[data-quiz-result-title]').textContent = recommendation.title;
-        const link = result.querySelector('[data-quiz-result-link]');
-        if (recommendation.url) link.href = recommendation.url;
-        link.focus();
-        this.track('quiz_completed', { concern: recommendation.title });
-        this.track('quiz_result_viewed', { concern: recommendation.title });
-      }, this.reducedMotion ? 0 : 160);
+        return;
+      }
+      const next = event.target.closest('[data-quiz-next]');
+      if (!next || next.disabled || !steps[current]?.dataset.answer) return;
+      this.track('quiz_step_completed', { step: current + 1, answer: steps[current].dataset.answer });
+      if (current + 1 < steps.length) {
+        showStep(current + 1);
+        return;
+      }
+      steps[current]?.classList.remove('is-active');
+      result.hidden = false;
+      result.querySelector('[data-quiz-result-title]').textContent = recommendation.title;
+      const link = result.querySelector('[data-quiz-result-link]');
+      if (recommendation.url) link.href = recommendation.url;
+      link.focus();
+      this.track('quiz_completed', { concern: recommendation.title });
+      this.track('quiz_result_viewed', { concern: recommendation.title });
     });
   }
 
@@ -106,6 +118,12 @@ class AltaeronHome extends HTMLElement {
     };
     this.querySelectorAll('[data-video-open]').forEach((button) => button.addEventListener('click', () => {
       if (title) title.textContent = button.dataset.videoTitle || 'Product demonstration';
+      const source = video?.querySelector('source');
+      if (source && button.dataset.videoSrc && source.src !== button.dataset.videoSrc) {
+        source.src = button.dataset.videoSrc;
+        video.poster = button.dataset.videoPoster || '';
+        video.load();
+      }
       modal.showModal();
       modal.querySelector('[data-video-close]')?.focus();
     }));

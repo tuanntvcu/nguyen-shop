@@ -2,7 +2,7 @@ import { chromium } from '../tmp/pw/node_modules/playwright/index.mjs';
 import fs from 'node:fs/promises';
 
 const url = process.env.QA_URL || 'https://altaeron.com/?preview_theme_id=140844204093';
-const widths = [320, 360, 375, 390, 414, 430, 768, 1024, 1280, 1440, 1920];
+const widths = [320, 360, 375, 390, 414, 430, 768, 1024, 1280, 1440, 1600, 1920];
 const report = { url, generatedAt: new Date().toISOString(), viewports: [], functional: {}, accessibility: {} };
 const browser = await chromium.launch({ headless: true });
 
@@ -40,12 +40,14 @@ for (const width of widths) {
 const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
 await prepare(page);
 await page.locator('[data-quiz-step="1"] [data-quiz-choice]').first().click();
+await page.locator('[data-quiz-step="1"] [data-quiz-next]').click();
 await page.locator('[data-quiz-back]').first().click();
 const returnedToStepOne = await page.locator('[data-quiz-step="1"]').isVisible();
-await page.locator('[data-quiz-step="1"] [data-quiz-choice]').first().click();
+await page.locator('[data-quiz-step="1"] [data-quiz-next]').click();
 await page.locator('[data-quiz-step="2"] [data-quiz-choice]').first().click();
+await page.locator('[data-quiz-step="2"] [data-quiz-next]').click();
 await page.locator('[data-quiz-step="3"] [data-quiz-choice]').first().click();
-await page.waitForTimeout(250);
+await page.locator('[data-quiz-step="3"] [data-quiz-next]').click();
 report.functional.quiz = {
   backWorks: returnedToStepOne,
   resultVisible: await page.locator('[data-quiz-result]').isVisible(),

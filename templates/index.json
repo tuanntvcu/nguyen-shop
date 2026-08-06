@@ -28,18 +28,28 @@
         "value_focus": {"type":"value","settings":{"icon":"fit","heading":"Not Another Marketplace","text":"Products chosen for specific foot concerns."}},
         "value_guidance": {"type":"value","settings":{"icon":"shield","heading":"Real Expectations","text":"Simple guidance so you know what to expect."}},
         "value_comfort": {"type":"value","settings":{"icon":"heart","heading":"Everyday Comfort","text":"Support that fits your routine and lifestyle."}},
+        "testimonial_douglass": {"type":"testimonial","settings":{"product":"plantar-fasciitis-night-splint-sock","review_number":3,"video":"","video_url":"","poster":"","image":"","media_alt":"Customer photo of the plantar fasciitis night splint","quote":"","customer_name":"","persona":"","rating":0,"verified_label":"","link":""}},
+        "testimonial_iraida": {"type":"testimonial","settings":{"product":"plantar-fasciitis-night-splint-sock","review_number":4,"video":"","video_url":"","poster":"","image":"","media_alt":"Plantar fasciitis night splint","quote":"","customer_name":"","persona":"","rating":0,"verified_label":"","link":""}},
+        "testimonial_pasty": {"type":"testimonial","settings":{"product":"electric-foot-hand-massager","review_number":3,"video":"","video_url":"","poster":"","image":"","media_alt":"Electric foot and hand massager","quote":"","customer_name":"","persona":"","rating":0,"verified_label":"","link":""}},
         "faq_shipping": {"type":"faq","settings":{"question":"How long does shipping take?","answer":"<p>Available delivery estimates and costs are shown during checkout for your address.</p>"}},
         "faq_fit": {"type":"faq","settings":{"question":"What if it does not fit or help?","answer":"<p>Review the product fit guidance before use. If the product is not right for you, contact support and consult the current refund policy.</p>"}},
         "faq_choose": {"type":"faq","settings":{"question":"How should I choose the right product?","answer":"<p>Start with the area where you need support, then compare wear time, adjustability, and available variants on each product page.</p>"}},
         "faq_safe": {"type":"faq","settings":{"question":"Is it safe to use every day?","answer":"<p>Follow the product-specific usage guidance. Stop use if pain, numbness, or irritation increases and seek professional advice when needed.</p>"}},
         "faq_clean": {"type":"faq","settings":{"question":"How do I clean the products?","answer":"<p>Follow the care instructions shown on the product page or packaging. Keep powered products away from water unless their instructions state otherwise.</p>"}}
       },
-      "block_order": ["trust_support","trust_mobile","trust_selected","trust_shipping","concern_bunion","concern_heel","concern_ankle","concern_recovery","demo_adjust","demo_day","demo_night","demo_ankle","demo_recovery","value_focus","value_guidance","value_comfort","faq_shipping","faq_fit","faq_choose","faq_safe","faq_clean"],
+      "block_order": ["trust_support","trust_mobile","trust_selected","trust_shipping","concern_bunion","concern_heel","concern_ankle","concern_recovery","demo_adjust","demo_day","demo_night","demo_ankle","demo_recovery","value_focus","value_guidance","value_comfort","testimonial_douglass","testimonial_iraida","testimonial_pasty","faq_shipping","faq_fit","faq_choose","faq_safe","faq_clean"],
       "settings": {
         "hero_heading":"Support Every Step.",
         "hero_text":"<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>",
         "hero_product":"breathable-bunion-support",
         "hero_image":"",
+        "hero_mobile_image":"",
+        "hero_image_alt":"Foot support products for everyday comfort",
+        "hero_desktop_x":50,
+        "hero_desktop_y":50,
+        "hero_mobile_x":67,
+        "hero_mobile_y":50,
+        "hero_mobile_overlay":85,
         "primary_label":"Shop by Concern",
         "secondary_label":"Find Your Match",
         "concern_heading":"Where Does It Hurt?",
@@ -64,7 +74,8 @@
         "newsletter_heading":"Take Better Steps.",
         "newsletter_text":"Tips, guides and product updates straight to your inbox.",
         "newsletter_placeholder":"Your email address",
-        "newsletter_button":"Subscribe"
+        "newsletter_button":"Subscribe",
+        "newsletter_privacy":"No spam. Unsubscribe anytime."
       }
     }
   },

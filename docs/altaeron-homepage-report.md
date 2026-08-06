@@ -204,3 +204,42 @@ Machine-readable results: `tmp/homepage-audit/qa-report.json`.
 - Data rollback: restore the product/menu/metafield values from the before snapshots; unpublish/delete only the four recorded collection IDs if desired.
 - The live theme was not overwritten, so customers do not need an emergency theme rollback.
 
+## 17. Reference-scale correction pass (2026-08-05)
+
+The undersized appearance came from geometry rather than browser zoom. The square hero media was expanding the desktop hero to roughly 792 px, while adjacent sections each contributed large top and bottom padding, producing about 168 px between content groups. Narrow carousel percentages then made the cards appear smaller again.
+
+Corrections applied:
+
+- Desktop content container calibrated to 1320 px with 32 px gutters; mobile gutters are 16 px.
+- Desktop hero is constrained to 590 px and retains the 40/60 copy/media composition.
+- Adjacent section padding now produces about 80 px desktop and 56 px mobile content separation.
+- Product, concern, demonstration, review, guide, newsletter, and footer dimensions were enlarged to match the reference density.
+- Mobile trust items stay in one row; concerns and quiz answers use 2-by-2 grids; product, demonstration, and review rails expose the intended next-card peek.
+- Quiz answers no longer auto-advance. Each step has an explicit disabled-until-selected Next button, Back navigation, retained selections, and a final result CTA.
+- Review copy remains real Judge.me data. When no genuine customer media exists, the cards use a neutral configurable placeholder instead of repurposing product photography as testimonial UGC.
+- Newsletter privacy copy is configurable and rendered below the form.
+
+Final scale screenshots:
+
+- `tmp/screenshots/final-scale/homepage-375.png`
+- `tmp/screenshots/final-scale/homepage-1440.png`
+- Additional captures: 320, 390, 768, 1024, 1280, and 1600 px.
+
+QA was repeated from 320 through 1920 px: no horizontal overflow, zero missing image alt attributes, zero unnamed buttons, and the quiz, FAQ, video modal, mobile drawer, search/cart controls, and newsletter controls all passed. Theme Check completed with zero errors; its warnings are pre-existing style/static-analysis findings in the base theme plus one remote Shopify-hosted video source warning.
+
+## 18. Strict fidelity continuation (2026-08-05)
+
+- Added shared page-width, responsive gutter, display, heading, body, and radius tokens for the approved visual scale.
+- Desktop now renders exactly four complete primary product cards; mobile cards use a 46vw rail with intentional next-card reveal.
+- Hero focal-point and mobile gradient controls now drive the rendered CSS rather than existing only in schema.
+- Mobile Why Altaeron is restored to the approved three-column composition.
+- Demonstration blocks now support an individual Shopify video, poster, external video URL, optional link, label, and accessibility label. A single lazy modal player swaps the selected source on demand.
+- Testimonials now render as configurable media cards. Priority is merchant video/image, then contextual reviewed-product media, with real Judge.me quote/name/rating data. No synthetic customer imagery, identity, persona, verified status, rating, or review total was added.
+- Removed the neutral quote placeholder UI and corrected empty/broken review-media fallback behavior.
+- Final responsive QA covers 320, 360, 375, 390, 414, 430, 768, 1024, 1280, 1440, 1600, and 1920 px with no page-level horizontal overflow.
+
+Strict-fidelity screenshots:
+
+- `tmp/screenshots/fidelity-final-v2/homepage-375.png`
+- `tmp/screenshots/fidelity-final-v2/homepage-1440.png`
+

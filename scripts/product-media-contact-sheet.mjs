@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import { chromium } from '../tmp/pw/node_modules/playwright/index.mjs';
 
-const data = JSON.parse(await fs.readFile('tmp/homepage-audit/layout-data-audit.json', 'utf8'));
+const data = JSON.parse(await fs.readFile(process.env.PRODUCT_MEDIA_AUDIT || 'tmp/pdp-audit/store-inventory.json', 'utf8'));
 const products = data.products.nodes;
 const cards = products.flatMap((product) => product.media.nodes.map((media, index) => ({
   product: product.title,
