@@ -1,29 +1,42 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "altaeron_pdp": {
       "type": "altaeron-pdp",
+      "blocks": {
+        "guide_1": { "type": "guide", "settings": { "title": "How To Wear It", "text": "Step-by-step guidance for best results." } },
+        "guide_2": { "type": "guide", "settings": { "title": "Morning Heel Pain?", "text": "What it means and what can help." } },
+        "guide_3": { "type": "guide", "settings": { "title": "Bunion vs. Hallux Valgus", "text": "Understanding the difference." } }
+      },
+      "block_order": ["guide_1", "guide_2", "guide_3"],
       "settings": {
         "identity_heading": "You might see yourself here...",
         "price_label": "From",
-        "variant_label": "Choose your option",
-        "quantity_label": "Quantity",
-        "cta_label": "Add to cart",
+        "variant_label": "Device Pair",
+        "cta_label": "Start Walking Comfortably Again",
         "order_help_heading": "Questions before ordering?",
         "order_help_text": "Check the fit notes and policies, or contact us for help.",
         "video_eyebrow": "See the routine",
-        "reviews_heading": "Real people. Real feedback.",
-        "routine_heading": "Support your routine",
-        "values_heading": "No miracles. Just thoughtful support.",
-        "value_1_title": "Useful by design",
-        "value_1_text": "Products selected for practical daily routines.",
-        "value_2_title": "Clear information",
-        "value_2_text": "Straightforward details without miracle claims.",
-        "value_3_title": "Real feedback",
-        "value_3_text": "Review data is shown only when it exists.",
-        "value_4_title": "Support available",
-        "value_4_text": "Contact us when you need order help.",
-        "safety_heading": "Use and safety notes",
-        "faq_heading": "You ask, we answer"
+        "reviews_heading": "Real People. Real Results.",
+        "routine_heading": "Support When You Need It. Recovery When You Don’t.",
+        "values_heading": "No Miracles. Just Small Changes That Add Up.",
+        "value_1_title": "Helpful by design",
+        "value_1_text": "We design helpful products that support real people.",
+        "value_2_title": "Consistency first",
+        "value_2_text": "We focus on consistency, not quick fixes.",
+        "value_3_title": "Always improving",
+        "value_3_text": "We listen, learn, and keep improving.",
+        "value_4_title": "Honest support",
+        "value_4_text": "We’re here with honest guidance and real support.",
+        "faq_heading": "You Ask, We Answer"
       }
     }
   },

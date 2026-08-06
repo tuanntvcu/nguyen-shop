@@ -75,6 +75,7 @@
     const stickySubmit = root.querySelector('[data-apdp-sticky-submit]');
     const stickyText = root.querySelector('[data-apdp-sticky-text]');
     const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
+    const stickyCompare = root.querySelector('[data-apdp-sticky-compare]');
     const variantsNode = root.querySelector('[data-apdp-product-json]');
     const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
     const format = root.dataset.moneyFormat;
@@ -93,6 +94,10 @@
       if (idInput) idInput.value = id;
       if (currentPrice) currentPrice.textContent = money(price, format);
       if (stickyPrice) stickyPrice.textContent = money(price, format);
+      if (stickyCompare) {
+        stickyCompare.hidden = compare <= price;
+        if (compare > price) stickyCompare.textContent = money(compare, format);
+      }
       if (comparePrice) {
         comparePrice.hidden = compare <= price;
         if (compare > price) comparePrice.textContent = money(compare, format);
