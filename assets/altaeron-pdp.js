@@ -102,6 +102,10 @@
         comparePrice.hidden = compare <= price;
         if (compare > price) comparePrice.textContent = money(compare, format);
       }
+      if (comparePrice) {
+        comparePrice.hidden = compare <= price;
+        if (compare > price) comparePrice.textContent = money(compare, format);
+      }
       if (savings) {
         savings.hidden = compare <= price;
         if (compare > price) savings.textContent = `Save ${money(compare - price, format)}`;
@@ -110,13 +114,10 @@
         if (!button) return;
         button.disabled = !available;
         if (available) button.removeAttribute('aria-disabled');
-        else button.setAttribute('aria-disabled', 'true');
-      });
       const label = available ? (submitText?.dataset.availableText || 'Add to cart') : 'Sold out';
       if (submitText) submitText.textContent = label;
       if (stickyText) stickyText.textContent = label;
       if (mediaId) activateMedia(mediaId);
-
       if (pushUrl) {
         const url = new URL(root.dataset.productUrl, window.location.origin);
         url.searchParams.set('variant', id);

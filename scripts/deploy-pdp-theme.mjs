@@ -51,10 +51,17 @@ for (const file of before.theme.files.nodes) {
 }
 
 const files = await Promise.all(filenames.map(async (filename) => ({ filename, body: { type: 'TEXT', value: await fs.readFile(filename, 'utf8') } })));
-const result = await gql(`mutation UpsertPdpThemeFiles($themeId: ID!, $files: [OnlineStoreThemeFilesUpsertFileInput!]!) { themeFilesUpsert(themeId: $themeId, files: $files) { upsertedThemeFiles { filename } job { id done } userErrors { field message } } }`, { themeId: theme.id, files }, 'Deploy PDP theme files');
-if (result.themeFilesUpsert.userErrors.length) throw new Error(JSON.stringify(result.themeFilesUpsert.userErrors));
+const mutation = `mutation UpsertPdpThemeFiles($themeId: ID!, $files: [OnlineStoreThemeFilesUpsertFileInput!]!) { themeFilesUpsert(themeId: $themeId, files: $files) { upsertedThemeFiles { filename } job { id done } userErrors { field message } } }`;
+// Sections must be present before templates that instantiate newly added block types.
+const sectionFiles = files.filter((file) => !file.filename.startsWith('templates/'));
+const templateFiles = files.filter((file) => file.filename.startsWith('templates/'));
+const sectionResult = await gql(mutation, { themeId: theme.id, files: sectionFiles }, 'Deploy PDP section files');
+if (sectionResult.themeFilesUpsert.userErrors.length) throw new Error(JSON.stringify(sectionResult.themeFilesUpsert.userErrors));
+const templateResult = await gql(mutation, { themeId: theme.id, files: templateFiles }, 'Deploy PDP template files');
+if (templateResult.themeFilesUpsert.userErrors.length) throw new Error(JSON.stringify(templateResult.themeFilesUpsert.userErrors));
+const deployedFiles = [...sectionResult.themeFilesUpsert.upsertedThemeFiles, ...templateResult.themeFilesUpsert.upsertedThemeFiles];
 const report = {
-  theme, files: result.themeFilesUpsert.upsertedThemeFiles.map((file) => file.filename), job: result.themeFilesUpsert.job,
+  theme, files: deployedFiles.map((file) => file.filename), job: templateResult.themeFilesUpsert.job,
   backupDirectory,
   previewUrl: `https://${shop}/products/adjustable-bunion-corrector?preview_theme_id=${themeNumericId}`,
 };
