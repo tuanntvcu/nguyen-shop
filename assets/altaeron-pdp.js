@@ -76,6 +76,7 @@
     const stickyText = root.querySelector('[data-apdp-sticky-text]');
     const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
     const stickyCompare = root.querySelector('[data-apdp-sticky-compare]');
+    const stickySavings = root.querySelector('[data-apdp-sticky-savings]');
     const variantsNode = root.querySelector('[data-apdp-product-json]');
     const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
     const format = root.dataset.moneyFormat;
@@ -102,18 +103,20 @@
         comparePrice.hidden = compare <= price;
         if (compare > price) comparePrice.textContent = money(compare, format);
       }
-      if (comparePrice) {
-        comparePrice.hidden = compare <= price;
-        if (compare > price) comparePrice.textContent = money(compare, format);
-      }
       if (savings) {
         savings.hidden = compare <= price;
         if (compare > price) savings.textContent = `Save ${money(compare - price, format)}`;
+      }
+      if (stickySavings) {
+        stickySavings.hidden = compare <= price;
+        if (compare > price) stickySavings.textContent = `Save ${money(compare - price, format)}`;
       }
       [submit, stickySubmit].forEach((button) => {
         if (!button) return;
         button.disabled = !available;
         if (available) button.removeAttribute('aria-disabled');
+        else button.setAttribute('aria-disabled', 'true');
+      });
       const label = available ? (submitText?.dataset.availableText || 'Add to cart') : 'Sold out';
       if (submitText) submitText.textContent = label;
       if (stickyText) stickyText.textContent = label;
