@@ -9,7 +9,7 @@ body:has(.altaeron-pdp) #shopify-section-sticky-atc-bar{display:none!important}
 .altaeron-pdp h3{font-size:15px;margin:0 0 5px}
 .altaeron-pdp a{color:inherit}
 .altaeron-pdp svg{display:block;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.7}
-.apdp-shell{margin-inline:auto;width:min(1336px,calc(100% - 64px))}
+.apdp-shell{margin-inline:auto;width:min(1360px,calc(100% - 64px))}
 .apdp-section{padding:28px 0}
 .apdp-section__intro{color:var(--apdp-muted);margin:0 0 15px}
 .apdp-section-marker{align-items:center;color:var(--apdp-green);display:flex;font-size:12px;font-weight:750;gap:7px;margin-bottom:8px;text-transform:uppercase}
