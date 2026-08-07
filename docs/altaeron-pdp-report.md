@@ -1,76 +1,87 @@
-# Altaeron PDP correction report
+# Altaeron PDP final correction report
 
 Generated: 2026-08-06
 
-QA theme: `Development (771095-DESKTOP-B231O49)` (`140844204093`)
+Development theme: `Development (771095-DESKTOP-B231O49)` (`140844204093`)
 
-## Scope and deployment
-
-The `product.altaeron` PDP was corrected against the supplied desktop and mobile references. It was validated on the development theme, then the same seven scoped PDP files were promoted to production theme `nguyen-shop/main` (`140538314813`). The announcement bar, global header, global footer, global layout, and unrelated templates were not edited.
-
-Mobile is one continuous document column. Horizontal scrolling is contained to designated card rails only.
+Production theme: `nguyen-shop/main` (`140538314813`)
 
 ## Files
 
-Modified in this correction pass:
+Modified in this final pass:
 
 - `assets/altaeron-pdp.css`
+- `assets/altaeron-pdp.js`
 - `sections/altaeron-pdp.liquid`
 - `scripts/qa-pdp-reference.mjs`
 - `docs/altaeron-pdp-report.md`
 
-Existing scoped PDP worktree files preserved and included by the development deployment helper:
+The scoped deployment also included the existing PDP snippets and `templates/product.altaeron.json`; those files were not changed in this final pass. No source files were removed.
 
-- `assets/altaeron-pdp.js`
-- `snippets/altaeron-pdp-card.liquid`
-- `snippets/altaeron-pdp-icon.liquid`
-- `snippets/altaeron-pdp-media.liquid`
-- `templates/product.altaeron.json`
-- `scripts/deploy-pdp-theme.mjs`
+Generated files:
 
-Generated QA artifacts are under `tmp/pdp-reference-qa/` and backups under `tmp/pdp-audit/`. No source files were removed.
+- `tmp/pdp-reference-qa/report-final-development.json`
+- `tmp/pdp-reference-qa/report-final-production.json`
+- `tmp/pdp-reference-qa/overlay-final-desktop-1440.png`
+- `tmp/pdp-reference-qa/overlay-final-mobile-375-first-segment.png`
+- Final viewport screenshots under `tmp/pdp-reference-qa/`
 
-## Layout results
+## Cleanup and functionality
 
-- Desktop container: `1336px` maximum width, centered, with `32px` gutters at 1440px.
-- Desktop hero grid: `43% / 29% / 28%`, with `28px` gaps.
-- Desktop gallery stage: explicit `1.02 / 1` aspect ratio with cover cropping and fixed thumbnail rail.
-- The desktop headline is 36px in the available theme font to preserve the reference's two-line wrap; the supplied 40px starting value produced a visibly incorrect three-line headline.
-- Purchase card: 500px minimum height at wide desktop, full-width 52px CTA, real product form and live variant state.
-- How It Works desktop media: corrected to `1.9 / 1`.
-- Familiar media: `1.6 / 1` desktop and `1.05 / 1` mobile.
-- Story video: `1.55 / 1` desktop and `1.43 / 1` mobile.
-- Moments media: `1.45 / 1` desktop and `1 / 1` mobile.
-- Support product media: `1.2 / 1` desktop and `0.9 / 1` mobile.
-- Desktop reassurance is a title panel plus four value cells plus separate guarantee card. Mobile stacks the title above four compact value cells and omits the duplicate guarantee card.
-- Mobile sticky ATC: 82px high, 10px side inset, 8px plus safe-area bottom offset, 13px radius, 46/54 information/action split, synchronized with the primary product form.
+- Repaired the malformed variant update loop in `altaeron-pdp.js`; `node --check` now passes.
+- Removed a duplicate compare-at price update branch.
+- Added selected-variant savings synchronization to the sticky cart.
+- Replaced supplier product titles/descriptions in the support routine with configurable Day Support, Night Support, and Recovery labels and short benefits.
+- No customer-facing review placeholder exists.
+- One native product form remains; the sticky CTA dispatches that form rather than creating a second form.
 
-## Review handling and truthful-content limits
+## Final layout
 
-Judge.me currently exposes zero usable product reviews. The entire testimonials section is therefore omitted. No customer-facing empty/technical placeholder remains, and no names, portraits, quotes, ratings, review counts, occupations, or verified labels were invented.
+- Desktop container: `1360px` maximum, centered with 40px measured gutters at 1440px.
+- Wide desktop hero: `43% / 29% / 28%`, 28px gaps.
+- 1440px hero grid: `1360×540px`.
+- 1440px gallery: `561×505px`; narrative: `378×533px`; purchase card: `365×540px`.
+- 375px hero: `375×708px`; narrative: `375×585px`; purchase area: `375×123px`.
+- Headline: scoped serif treatment with exact two-line desktop, three-line mobile, and three-line narrow-tablet groupings. Custom merchant headlines remain dynamic.
+- Trust strip: `1360×90px` desktop and `351×128px` at 375px.
+- Familiar card: `325×316px` desktop and `187×309px` mobile, with explicit snap-scrolling on mobile.
+- Reassurance strip now has separate bold heading and supporting sentence.
+- Desktop Support is restrained to the heading shown in the reference; mobile retains the three product-linked routine cards and truthful bundle CTA.
+- Desktop No Miracles uses one heading/pillar panel plus a separate 25% policy panel.
+- FAQ contains seven entries, uses existing metafield items first, and adds two configurable safety-focused fallbacks when needed.
 
-Current product/lifestyle images and the fantasy video remain temporary store media. Their layout frames and cropping are corrected; their content does not match the comps. Helpful Guide blocks have configurable titles and summaries but no links because no matching real articles were available. The live FAQ metafield contains five questions rather than the seven shown in the concept. Unsupported customer counts, medical promises, delivery windows, bundle percentages, and guarantee claims were not added.
+Corrected UI aspect ratios:
 
-## Browser QA
+- Desktop gallery stage: `0.95 / 1` (near-square portrait-leaning frame)
+- Familiar media: `1.5 / 1` desktop; `1 / 1` mobile
+- Story video: `1.85 / 1` desktop; `1.32 / 1` mobile
+- How It Works: `2 / 1` desktop; media hidden in the target mobile step layout
+- Moments: `1.45 / 1` desktop; `0.95 / 1` mobile
+- Support media: `1.2 / 1` desktop/tablet; `0.86 / 1` mobile
+- Shoe media: `1 / 1`
 
-Final suite:
+## Reviews and truthful data
 
-- 1440×1000
-- 1280×900
-- 1024×900
-- 768×900
-- 390×844
-- 375×812
+Judge.me currently exposes zero usable product reviews. The entire live review section is omitted. No names, portraits, quotes, ratings, review counts, occupations, or verified labels were fabricated.
 
-All development renders returned HTTP 200, produced zero page errors, and had `scrollWidth === clientWidth`. Production was then smoke-tested at 1440×1000 and 375×812 with the same result. The only console messages were the pre-existing Shop Pay preview iframe CSP/403 messages. Sticky ATC was explicitly measured after the hero left view and captured separately at 390px and 375px.
+Current product/lifestyle images and the fantasy video remain temporary store media. Helpful Guide titles and summaries are configured, but cards without real article URLs remain non-linked. Unsupported customer counts, review claims, fixed delivery windows, medical promises, bundle discounts, and guarantee promises were not added.
 
-Normalized 50% reference overlays are saved as `tmp/pdp-reference-qa/overlay-desktop-1440.png` and `tmp/pdp-reference-qa/overlay-mobile-375-first-segment.png`. PDP content starts were aligned before compositing because the global header is intentionally outside task scope; the mobile overlay uses the first pane of the side-by-side reference.
+## Sticky add to cart
 
-The development-theme preview toolbar may appear across preview screenshots even after its iframe is removed by QA automation; it is not storefront content. Exact media content, absent real testimonials, five live FAQ entries, and untouched global header/footer styling remain the material differences from the concept.
+- 375px: `355×84px`, x-position 10px.
+- 390px: `370×84px`, x-position 10px.
+- 8px plus safe-area bottom offset, 14px radius, 47/53 content/action split.
+- Shows a configurable short title, current price, compare-at price, and live savings.
+- Appears only after the primary CTA leaves the viewport.
+- Updates with the selected variant, availability, and sold-out state.
+- QA observed a native `/cart/add` request from the 375px sticky CTA.
 
-## Global confirmation
+## QA and remaining differences
 
-- Announcement bar untouched.
-- Global header untouched.
-- Global footer untouched.
-- Mobile is one continuous vertical page, not a two-column PDP.
+Development captures passed at 1440, 1280, 1024, 768, 390, and 375px. Production passed at 1440 and 375px. Every render returned HTTP 200, had zero page errors, and reported `scrollWidth === clientWidth`.
+
+The two console messages are Shopify's existing Shop Pay preview iframe CSP/403 messages. They are unrelated to PDP code.
+
+Normalized 50% overlays align the PDP content start because global chrome is outside scope. The mobile overlay uses the first pane of the side-by-side target. Remaining visual differences are the temporary media content, absent real testimonials, the target's unverified customer/review claims, and the untouched global header/footer styling. The exact target editorial font is not loaded by the active theme; the PDP uses a scoped system serif approximation for the hero only.
+
+The announcement bar, global header, global navigation, footer, and footer menus were untouched. Mobile is one continuous vertical document; only the designated card rows scroll horizontally.

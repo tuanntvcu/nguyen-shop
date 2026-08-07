@@ -10,7 +10,54 @@
   function initGallery(root) {
     const thumbs = [...root.querySelectorAll('[data-apdp-thumb]')];
     const items = [...root.querySelectorAll('[data-apdp-media]')];
+    const thumbsList = root.querySelector('.apdp-gallery__thumbs');
     if (!thumbs.length || !items.length) return () => {};
+
+    if (thumbsList) {
+      let pointerId = null;
+      let startY = 0;
+      let startScrollTop = 0;
+      let dragged = false;
+      let suppressClick = false;
+
+      thumbsList.addEventListener('dragstart', (event) => event.preventDefault());
+
+      thumbsList.addEventListener('pointerdown', (event) => {
+        if (event.pointerType !== 'mouse' || event.button !== 0) return;
+        pointerId = event.pointerId;
+        startY = event.clientY;
+        startScrollTop = thumbsList.scrollTop;
+        dragged = false;
+        thumbsList.setPointerCapture(pointerId);
+      });
+
+      thumbsList.addEventListener('pointermove', (event) => {
+        if (event.pointerId !== pointerId) return;
+        const distance = event.clientY - startY;
+        if (!dragged && Math.abs(distance) < 4) return;
+        dragged = true;
+        suppressClick = true;
+        thumbsList.classList.add('is-dragging');
+        thumbsList.scrollTop = startScrollTop - distance;
+        event.preventDefault();
+      });
+
+      const stopDragging = (event) => {
+        if (event.pointerId !== pointerId) return;
+        if (thumbsList.hasPointerCapture(pointerId)) thumbsList.releasePointerCapture(pointerId);
+        pointerId = null;
+        thumbsList.classList.remove('is-dragging');
+        if (dragged) window.setTimeout(() => { suppressClick = false; }, 0);
+      };
+
+      thumbsList.addEventListener('pointerup', stopDragging);
+      thumbsList.addEventListener('pointercancel', stopDragging);
+      thumbsList.addEventListener('click', (event) => {
+        if (!suppressClick) return;
+        event.preventDefault();
+        event.stopPropagation();
+      }, true);
+    }
 
     const activate = (id, focus = false) => {
       let found = false;
@@ -72,6 +119,8 @@
     const savings = root.querySelector('[data-apdp-savings]');
     const submit = root.querySelector('[data-apdp-submit]');
     const submitText = root.querySelector('[data-apdp-submit-text]');
+    const submitLabel = root.querySelector('[data-apdp-submit-label]');
+    const ctaPrice = root.querySelector('[data-apdp-cta-price]');
     const stickySubmit = root.querySelector('[data-apdp-sticky-submit]');
     const stickyText = root.querySelector('[data-apdp-sticky-text]');
     const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
@@ -100,12 +149,22 @@
         if (compare > price) stickyCompare.textContent = money(compare, format);
       }
       if (comparePrice) {
-        comparePrice.hidden = compare <= price;
-        if (compare > price) comparePrice.textContent = money(compare, format);
+        if (comparePrice.dataset.staticPrice) {
+          comparePrice.hidden = false;
+          comparePrice.textContent = comparePrice.dataset.staticPrice;
+        } else {
+          comparePrice.hidden = compare <= price;
+          if (compare > price) comparePrice.textContent = money(compare, format);
+        }
       }
       if (savings) {
-        savings.hidden = compare <= price;
-        if (compare > price) savings.textContent = `Save ${money(compare - price, format)}`;
+        if (savings.dataset.staticSavings) {
+          savings.hidden = false;
+          savings.textContent = savings.dataset.staticSavings;
+        } else {
+          savings.hidden = compare <= price;
+          if (compare > price) savings.textContent = `Save ${money(compare - price, format)}`;
+        }
       }
       if (stickySavings) {
         stickySavings.hidden = compare <= price;
@@ -117,8 +176,12 @@
         if (available) button.removeAttribute('aria-disabled');
         else button.setAttribute('aria-disabled', 'true');
       });
-      const label = available ? (submitText?.dataset.availableText || 'Add to cart') : 'Sold out';
-      if (submitText) submitText.textContent = label;
+      const label = available ? (submitLabel?.dataset.availableText || 'Add to cart') : 'Sold out';
+      if (submitLabel) submitLabel.textContent = label;
+      if (ctaPrice) {
+        ctaPrice.hidden = !available;
+        if (available) ctaPrice.textContent = ` — ${money(price, format)}`;
+      }
       if (stickyText) stickyText.textContent = label;
       if (mediaId) activateMedia(mediaId);
       if (pushUrl) {
@@ -139,13 +202,26 @@
     const purchaseButton = root.querySelector('[data-apdp-submit]');
     const stickyButton = root.querySelector('[data-apdp-sticky-submit]');
     const form = root.querySelector('.apdp-form');
+    const finalCta = root.querySelector('.apdp-final-cta');
     if (!sticky || !purchaseButton || !stickyButton || !form) return;
 
     const mobile = window.matchMedia('(max-width: 749px)');
-    const updateVisibility = (visible) => { sticky.hidden = !mobile.matches || !visible; };
-    const observer = new IntersectionObserver(([entry]) => updateVisibility(!entry.isIntersecting), { threshold: 0 });
+    let purchaseIsPast = false;
+    let finalCtaIsVisible = false;
+    const updateVisibility = () => { sticky.hidden = !mobile.matches || !purchaseIsPast || finalCtaIsVisible; };
+    const observer = new IntersectionObserver(([entry]) => {
+      purchaseIsPast = !entry.isIntersecting;
+      updateVisibility();
+    }, { threshold: 0 });
     observer.observe(purchaseButton);
-    mobile.addEventListener?.('change', () => updateVisibility(false));
+    if (finalCta) {
+      const finalCtaObserver = new IntersectionObserver(([entry]) => {
+        finalCtaIsVisible = entry.isIntersecting;
+        updateVisibility();
+      }, { threshold: 0 });
+      finalCtaObserver.observe(finalCta);
+    }
+    mobile.addEventListener?.('change', updateVisibility);
     stickyButton.addEventListener('click', () => {
       if (!stickyButton.disabled) form.requestSubmit();
     });
@@ -166,6 +242,31 @@
     videos.forEach((video) => observer.observe(video));
   }
 
+  function initReviewSlider(root) {
+    const slider = root.querySelector('[data-apdp-review-slider]');
+    const previous = root.querySelector('[data-apdp-review-prev]');
+    const next = root.querySelector('[data-apdp-review-next]');
+    if (!slider || !previous || !next) return;
+
+    const card = () => slider.querySelector('.apdp-tail-review');
+    const step = () => {
+      const item = card();
+      if (!item) return slider.clientWidth;
+      const styles = window.getComputedStyle(slider.querySelector('.apdp-tail-review-grid'));
+      return item.getBoundingClientRect().width + Number.parseFloat(styles.columnGap || styles.gap || 0);
+    };
+    const update = () => {
+      const maximum = Math.max(0, slider.scrollWidth - slider.clientWidth);
+      previous.disabled = slider.scrollLeft <= 2;
+      next.disabled = slider.scrollLeft >= maximum - 2;
+    };
+    previous.addEventListener('click', () => slider.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => slider.scrollBy({ left: step(), behavior: 'smooth' }));
+    slider.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+
   function init(root) {
     if (!root || root.dataset.apdpReady === 'true') return;
     root.dataset.apdpReady = 'true';
@@ -174,6 +275,7 @@
     initVariants(root, activateMedia);
     initSticky(root);
     initLazyVideos(root);
+    initReviewSlider(root);
   }
 
   const initAll = (scope = document) => scope.querySelectorAll(SELECTOR).forEach(init);

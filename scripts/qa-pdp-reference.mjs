@@ -28,7 +28,7 @@ for (const viewport of viewports) {
   page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
   page.on('pageerror', error => pageErrors.push(error.message));
   const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.addStyleTag({ content: '#preview-bar-iframe, iframe[src*="preview_bar"] { display: none !important; visibility: hidden !important; }' });
+  await page.addStyleTag({ content: '#preview-bar-iframe, iframe[src*="preview_bar"] { display: none !important; visibility: hidden !important; }' }).catch(() => {});
   await page.waitForLoadState('networkidle', { timeout: 3000 }).catch(() => {});
   await page.getByRole('button', { name: 'DECLINE', exact: true }).first().click({ timeout: 2000 }).catch(() => {});
   await page.locator('#preview-bar-iframe, iframe[src*="preview_bar"]').evaluateAll(nodes => nodes.forEach(node => node.remove())).catch(() => {});
@@ -49,10 +49,11 @@ for (const viewport of viewports) {
     };
     return {
       document: { clientWidth: document.documentElement.clientWidth, scrollWidth: document.documentElement.scrollWidth, scrollHeight: document.documentElement.scrollHeight },
-      title: node.querySelector('h1')?.textContent.trim(),
+      title: node.querySelector('h1')?.getAttribute('aria-label') || node.querySelector('h1')?.textContent.trim(),
       sectionOrder: [...node.children].filter(item => item.matches('section')).map(item => item.className),
       hero: rect('.apdp-hero'), heroGrid: rect('.apdp-hero__grid'), gallery: rect('.apdp-gallery'), narrative: rect('.apdp-narrative'), purchase: rect('.apdp-buy'),
       trust: rect('.apdp-trust-strip'), familiar: rect('.apdp-familiar'), story: rect('.apdp-story'), reviews: rect('.apdp-reviews'), how: rect('.apdp-how'), moments: rect('.apdp-lifestyle'), routine: rect('.apdp-routine'), values: rect('.apdp-values'), faq: rect('.apdp-faq'), compatibility: rect('.apdp-compatibility'), guides: rect('.apdp-guides'), sticky: rect('.apdp-sticky'),
+      components: { headline: rect('h1'), trustGrid: rect('.apdp-trust-strip__grid'), familiarCard: rect('.apdp-familiar .apdp-content-card'), reassurance: rect('.apdp-reassurance'), storyMedia: rect('.apdp-story__media'), howMedia: rect('.apdp-how__media'), momentCard: rect('.apdp-lifestyle .apdp-content-card'), routineCard: rect('.apdp-product-card'), valuesPanel: rect('.apdp-values__panel'), disclaimer: rect('.apdp-disclaimer'), faqAccordion: rect('.apdp-accordion'), shoeMedia: rect('.apdp-compatibility .apdp-content-card__media'), guideCard: rect('.apdp-guides .apdp-content-card') },
       cards: { familiar: node.querySelectorAll('.apdp-familiar .apdp-content-card').length, reviews: node.querySelectorAll('.apdp-review').length, steps: node.querySelectorAll('.apdp-steps li').length, moments: node.querySelectorAll('.apdp-lifestyle .apdp-content-card').length, routine: node.querySelectorAll('.apdp-product-card').length, faq: node.querySelectorAll('.apdp-accordion details').length, shoes: node.querySelectorAll('.apdp-compatibility .apdp-content-card').length, guides: node.querySelectorAll('.apdp-guides .apdp-content-card').length },
     };
   });
@@ -72,9 +73,17 @@ for (const viewport of viewports) {
     await page.locator('#preview-bar-iframe, iframe[src*="preview_bar"]').evaluateAll(nodes => nodes.forEach(node => node.remove())).catch(() => {});
     metrics.stickyAfterHero = await root.locator('.apdp-sticky').evaluate(element => {
       const box = element.getBoundingClientRect();
-      return { hidden: element.hidden, x: Math.round(box.x), y: Math.round(box.y), width: Math.round(box.width), height: Math.round(box.height) };
+      const title = element.querySelector('.apdp-sticky__product strong')?.textContent.trim();
+      const savings = element.querySelector('[data-apdp-sticky-savings]');
+      return { hidden: element.hidden, x: Math.round(box.x), y: Math.round(box.y), width: Math.round(box.width), height: Math.round(box.height), title, savings: savings?.hidden ? null : savings?.textContent.trim() };
     });
     await page.screenshot({ path: `tmp/pdp-reference-qa/${viewport.name}-sticky.png` });
+    if (viewport.width === 375) {
+      const cartRequest = page.waitForRequest(request => request.url().includes('/cart/add'), { timeout: 5000 }).catch(() => null);
+      await root.locator('[data-apdp-sticky-submit]').evaluate(button => button.click());
+      const request = await cartRequest;
+      metrics.stickyAfterHero.nativeCartRequest = Boolean(request);
+    }
   }
   output.push({ viewport, status: response?.status(), metrics, consoleErrors, pageErrors });
   await context.close();

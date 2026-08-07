@@ -615,6 +615,56 @@
       "expiration_date": "Expires {{ expires_on }}"
     }
   },
+  "altaeron_pdp": {
+    "hero": {
+      "eyebrow_rank": "#1 Rated",
+      "eyebrow_category": "in Bunion Relief",
+      "headline": "Walk Without Thinking About Your Feet Again.",
+      "subheadline": "Adjustable support that relieves bunion pressure, improves alignment while worn, and helps you move comfortably—every day.",
+      "rating": "4.8/5 from 2,341+ reviews",
+      "benefit_1": "Relieves bunion pain & pressure",
+      "benefit_2": "Improves alignment while worn",
+      "benefit_3": "Comfortable for all-day use",
+      "benefit_4": "Wear with most shoes"
+    },
+    "buy": {
+      "title": "ALTAERON™ Adjustable Knob Bunion Corrector",
+      "rating": "4.8 (2,341 reviews)",
+      "compare_price": "$49.99",
+      "saving": "Save $10.00",
+      "variant_label": "Device Pair",
+      "popular": "Most Popular",
+      "variant_1": "1 Pair",
+      "variant_2": "2 Pairs",
+      "variant_3": "3 Pairs",
+      "cta": "Add to Cart",
+      "installments": "or 4 interest-free payments of $10.00 with",
+      "guarantee_title": "Risk-free 30-Day Guarantee",
+      "guarantee_line_1": "Wear it at home, at work, or on the go.",
+      "guarantee_line_2": "If it’s not the relief you expected, return it—no questions asked.",
+      "returns": "30-Day Returns",
+      "returns_note": "Love it or return your order.",
+      "shipping": "Fast Shipping",
+      "shipping_note": "Ships in 1–3 days from our warehouse.",
+      "secure": "Secure Checkout",
+      "secure_note": "Encrypted & 100% safe.",
+      "support": "Real People Support",
+      "support_note": "We’re here 24/7."
+    },
+    "expert": {
+      "reviewed_by": "Medically Reviewed by",
+      "name": "Dr. James Peterson, DPM",
+      "role": "Podiatric Surgeon — Foot & Ankle Specialist",
+      "experience": "15+ years of clinical experience",
+      "signature": "James Peterson",
+      "quote": "Proper alignment and pressure relief are key to managing bunion discomfort. This adjustable device is a smart, non-invasive option for daily support and pain relief while worn.",
+      "criteria_heading": "As a Podiatrist, I look for:",
+      "criterion_1": "Adjustability for a personalized fit",
+      "criterion_2": "Gentle alignment without discomfort",
+      "criterion_3": "Realistic expectations & consistent use",
+      "criteria_footer": "This device meets those criteria."
+    }
+  },
   "recipient": {
     "form": {
       "checkbox": "I want to send this as a gift",

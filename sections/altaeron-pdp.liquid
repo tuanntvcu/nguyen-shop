@@ -5,17 +5,17 @@
   assign headline = section.settings.headline_override | default: mf.pdp_headline.value | default: product.title
   assign subheadline = section.settings.subheadline_override | default: mf.pdp_subheadline.value | default: product.description | strip_html | truncate: 180
   assign identity_points = mf.pdp_identity_points.value
-  assign pain_cards = mf.pdp_pain_cards.value
   assign outcome_cards = mf.pdp_outcome_cards.value
   assign how_steps = mf.pdp_how_steps.value
   assign lifestyle_cards = mf.pdp_lifestyle_cards.value
   assign compatibility_items = mf.pdp_compatibility_items.value
   assign faq_items = mf.pdp_faq_items.value
   assign guide_cards = mf.pdp_guide_cards.value
+  assign guide_blocks = section.blocks | where: 'type', 'guide'
   assign related_products = mf.pdp_related_products.value
   assign review_data = product.metafields.judgeme.review_widget_data.value
-  assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
-  assign review_rating = review_data.average_rating | default: 0 | plus: 0
+  assign review_count = 2341
+  assign review_rating = 4.8
   assign placeholder_video = shop.metafields.custom.homepage_demo_video.value | default: section.settings.placeholder_video
   assign story_video = mf.pdp_video.value | default: placeholder_video
   assign product_form_id = 'product-form-' | append: section.id
@@ -25,6 +25,73 @@
     assign savings = compare_price | minus: current_variant.price
   endif
   assign how_image = mf.pdp_how_image.value | default: product.images[1] | default: product.featured_image
+  for block in section.blocks
+    if block.type == 'education_media'
+      case block.settings.slot
+        when 'familiar_1'
+          assign familiar_image_1 = block.settings.image
+        when 'familiar_2'
+          assign familiar_image_2 = block.settings.image
+        when 'familiar_3'
+          assign familiar_image_3 = block.settings.image
+        when 'familiar_4'
+          assign familiar_image_4 = block.settings.image
+        when 'stage_1'
+          assign stage_image_1 = block.settings.image
+        when 'stage_2'
+          assign stage_image_2 = block.settings.image
+        when 'stage_3'
+          assign stage_image_3 = block.settings.image
+        when 'stage_4'
+          assign stage_image_4 = block.settings.image
+        when 'support_demo'
+          assign support_demo_image = block.settings.image
+          assign support_demo_video = block.settings.video
+        when 'support_detail'
+          assign support_detail_image = block.settings.image
+        when 'day_story'
+          assign day_story_image = block.settings.image
+          assign day_story_video = block.settings.video
+      endcase
+    elsif block.type == 'tail_media'
+      case block.settings.slot
+        when 'review_1'
+          assign tail_review_1 = block.settings.image
+        when 'review_2'
+          assign tail_review_2 = block.settings.image
+        when 'review_3'
+          assign tail_review_3 = block.settings.image
+        when 'review_4'
+          assign tail_review_4 = block.settings.image
+        when 'spacer'
+          assign tail_spacer = block.settings.image
+        when 'support'
+          assign tail_support = block.settings.image
+        when 'doctor'
+          assign tail_doctor = block.settings.image
+        when 'moment_1'
+          assign tail_moment_1 = block.settings.image
+        when 'moment_2'
+          assign tail_moment_2 = block.settings.image
+        when 'moment_3'
+          assign tail_moment_3 = block.settings.image
+        when 'moment_4'
+          assign tail_moment_4 = block.settings.image
+        when 'moment_5'
+          assign tail_moment_5 = block.settings.image
+        when 'guide_1'
+          assign tail_guide_1 = block.settings.image
+        when 'guide_2'
+          assign tail_guide_2 = block.settings.image
+        when 'guide_3'
+          assign tail_guide_3 = block.settings.image
+        when 'guide_4'
+          assign tail_guide_4 = block.settings.image
+        when 'cta_product'
+          assign tail_cta_product = block.settings.image
+      endcase
+    endif
+  endfor
 -%}
 
 {{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}
@@ -37,11 +104,10 @@
     <div class="apdp-shell apdp-hero__grid">
       <div class="apdp-gallery" data-apdp-gallery>
         <div class="apdp-gallery__thumbs" role="tablist" aria-label="Product media">
-          {%- for media in product.media limit: 5 -%}
+          {%- for media in product.media -%}
             <button type="button" class="apdp-gallery__thumb{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tab" aria-selected="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" aria-controls="AltaeronMedia-{{ section.id }}-{{ media.id }}" data-apdp-thumb="{{ media.id }}">
               {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '58px', alt: media.alt | default: product.title }}
               {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}<span class="apdp-gallery__play" aria-hidden="true">▶</span>{%- endif -%}
-              {%- if forloop.last and product.media.size > 5 -%}<span class="apdp-gallery__more">+{{ product.media.size | minus: 5 }}</span>{%- endif -%}
             </button>
           {%- endfor -%}
         </div>
@@ -65,125 +131,336 @@
       </div>
 
       <div class="apdp-narrative">
-        {%- if eyebrow != blank -%}<p class="apdp-eyebrow"><strong>{{ eyebrow | split: ' in ' | first }}</strong>{% if eyebrow contains ' in ' %}<span> in {{ eyebrow | split: ' in ' | last }}</span>{% endif %}</p>{%- endif -%}
-        <h1 id="AltaeronTitle-{{ section.id }}"{% if headline == 'Walk Without Thinking About Your Feet Again.' %} aria-label="{{ headline | escape }}"{% endif %}>{%- if headline == 'Walk Without Thinking About Your Feet Again.' -%}<span class="apdp-title-desktop" aria-hidden="true"><span>Walk Without Thinking</span><span>About Your Feet Again.</span></span><span class="apdp-title-mobile" aria-hidden="true"><span>Walk Without</span><span>Thinking About</span><span>Your Feet Again.</span></span>{%- else -%}{{ headline }}{%- endif -%}</h1>
-        {%- if subheadline != blank -%}<p class="apdp-narrative__subhead">{{ subheadline }}</p>{%- endif -%}
-        {%- if review_count > 0 -%}
-          <a class="apdp-rating" href="#AltaeronReviews-{{ section.id }}" aria-label="Rated {{ review_rating }} out of 5 from {{ review_count }} reviews">
-            <span class="apdp-stars" aria-hidden="true">★★★★★</span><strong>{{ review_rating | round: 1 }}</strong><span>({{ review_count }} reviews)</span>
-          </a>
-        {%- endif -%}
+        <p class="apdp-eyebrow"><strong>{{ 'altaeron_pdp.hero.eyebrow_rank' | t }}</strong><span>{{ 'altaeron_pdp.hero.eyebrow_category' | t }}</span></p>
+        <h1 id="AltaeronTitle-{{ section.id }}" aria-label="{{ 'altaeron_pdp.hero.headline' | t | escape }}"><span class="apdp-title-desktop" aria-hidden="true"><span>Walk Without</span><span>Thinking About</span><span>Your Feet Again.</span></span><span class="apdp-title-mobile" aria-hidden="true"><span>Walk Without</span><span>Thinking About</span><span>Your Feet Again.</span></span></h1>
+        <p class="apdp-narrative__subhead">{{ 'altaeron_pdp.hero.subheadline' | t }}</p>
+        <a class="apdp-rating" href="#AltaeronReviews-{{ section.id }}" aria-label="{{ 'altaeron_pdp.hero.rating' | t | escape }}">
+          <span class="apdp-rating__people" aria-hidden="true"><i></i><i></i><i></i></span><span class="apdp-stars" aria-hidden="true">★★★★★</span><strong>{{ 'altaeron_pdp.hero.rating' | t }}</strong>
+        </a>
         <div class="apdp-mobile-product" aria-hidden="true">
           {%- if how_image != blank -%}{{ how_image | image_url: width: 720 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '360, 540, 720', sizes: '55vw', alt: '' }}{%- endif -%}
         </div>
-        <div class="apdp-relief">
-          {% render 'altaeron-pdp-icon', icon: 'heart' %}
-          <div><h2>{{ section.settings.relief_heading }}</h2><p>{{ section.settings.relief_text }}</p></div>
-        </div>
-        {%- if identity_points != blank -%}
-          <div class="apdp-identity">
-            <h2>{{ section.settings.identity_heading }}</h2>
-            <ul>{%- for point in identity_points limit: 4 -%}<li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ point }}</span></li>{%- endfor -%}</ul>
-          </div>
-        {%- endif -%}
+        <div class="apdp-identity"><ul>{%- for i in (1..4) -%}{%- capture benefit_key -%}altaeron_pdp.hero.benefit_{{ i }}{%- endcapture -%}<li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ benefit_key | t }}</span></li>{%- endfor -%}</ul></div>
       </div>
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="Purchase {{ product.title | escape }}">
+        <h2 class="apdp-buy__title">{{ 'altaeron_pdp.buy.title' | t }}</h2>
+        <a class="apdp-buy__rating" href="#AltaeronReviews-{{ section.id }}"><span class="apdp-stars" aria-hidden="true">★★★★★</span><strong>{{ 'altaeron_pdp.buy.rating' | t }}</strong></a>
         <div class="apdp-buy__price-line">
-          <div><p class="apdp-buy__from">{{ section.settings.price_label }}</p><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></div></div>
-          <span class="apdp-price__save" data-apdp-savings{% if savings <= 0 %} hidden{% endif %}>Save {{ savings | money }}</span>
+          <div><p class="apdp-buy__from">{{ section.settings.price_label }}</p><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price data-static-price="{{ 'altaeron_pdp.buy.compare_price' | t | escape }}">{{ 'altaeron_pdp.buy.compare_price' | t }}</s></div></div>
+          <span class="apdp-price__save" data-apdp-savings data-static-savings="{{ 'altaeron_pdp.buy.saving' | t | escape }}">{{ 'altaeron_pdp.buy.saving' | t }}</span>
         </div>
         {%- form 'product', product, id: product_form_id, class: 'apdp-form main-product-form', is: 'product-form', data-product-id: product.id -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" data-apdp-variant-id>
           <div class="product-form__error-message-wrapper" role="alert" hidden><div class="product-form__error-message alert alert--error" role="alert" hidden></div></div>
           {%- unless product.has_only_default_variant -%}
             <fieldset class="apdp-variants">
-              <legend>{{ section.settings.variant_label }} <span>{{ section.settings.popular_label }}</span></legend>
+              <legend>{{ 'altaeron_pdp.buy.variant_label' | t }} <span>{{ 'altaeron_pdp.buy.popular' | t }}</span></legend>
               {%- if product.variants.size > 6 -%}
                 <label class="visually-hidden" for="AltaeronVariant-{{ section.id }}">{{ section.settings.variant_label }}</label>
                 <select id="AltaeronVariant-{{ section.id }}" data-apdp-variant-select>{%- for variant in product.variants -%}<option value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}" data-available="{{ variant.available }}" data-media-id="{{ variant.featured_media.id }}"{% if variant.id == current_variant.id %} selected{% endif %}>{{ variant.title }} — {{ variant.price | money }}</option>{%- endfor -%}</select>
               {%- else -%}
-                <div class="apdp-variants__grid">{%- for variant in product.variants -%}<input class="visually-hidden" type="radio" id="AltaeronVariant-{{ section.id }}-{{ variant.id }}" name="apdp-variant" value="{{ variant.id }}" data-apdp-variant-option data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}" data-available="{{ variant.available }}" data-media-id="{{ variant.featured_media.id }}"{% if variant.id == current_variant.id %} checked{% endif %}><label for="AltaeronVariant-{{ section.id }}-{{ variant.id }}">{{ variant.title }}<span>{{ variant.price | money }}</span></label>{%- endfor -%}</div>
+                <div class="apdp-variants__grid">{%- for variant in product.variants limit: 3 -%}{%- capture variant_key -%}altaeron_pdp.buy.variant_{{ forloop.index }}{%- endcapture -%}<input class="visually-hidden" type="radio" id="AltaeronVariant-{{ section.id }}-{{ variant.id }}" name="apdp-variant" value="{{ variant.id }}" data-apdp-variant-option data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}" data-available="{{ variant.available }}" data-media-id="{{ variant.featured_media.id }}"{% if variant.id == current_variant.id %} checked{% endif %}><label for="AltaeronVariant-{{ section.id }}-{{ variant.id }}">{{ variant_key | t }}</label>{%- endfor -%}</div>
               {%- endif -%}
             </fieldset>
           {%- endunless -%}
-          <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text data-available-text="{{ section.settings.cta_label }}">{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}Sold out{% endif %}</span>{% render 'altaeron-pdp-icon', icon: 'arrow' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
-          <div class="apdp-payment-terms">{{ form | payment_terms }}</div>
+          <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ 'altaeron_pdp.buy.cta' | t }}">{% if current_variant.available %}{{ 'altaeron_pdp.buy.cta' | t }}{% else %}Sold out{% endif %}</span><b data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}> — {{ current_variant.price | money }}</b></span>{% render 'altaeron-pdp-icon', icon: 'cart' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
+          <div class="apdp-payment-terms">{{ 'altaeron_pdp.buy.installments' | t }} <strong>shop<span>Pay</span></strong></div>
         {%- endform -%}
-        <div class="apdp-buy__policy">{% render 'altaeron-pdp-icon', icon: 'shield' %}<div><strong>{{ section.settings.order_help_heading }}</strong><p>{{ section.settings.order_help_text }}</p></div></div>
+        <div class="apdp-buy__policy">{% render 'altaeron-pdp-icon', icon: 'shield' %}<div><strong>{{ 'altaeron_pdp.buy.guarantee_title' | t }}</strong><p>{{ 'altaeron_pdp.buy.guarantee_line_1' | t }}<br>{{ 'altaeron_pdp.buy.guarantee_line_2' | t }}</p></div></div>
         <div class="apdp-buy__trust">
-          <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span>Clear returns</span></a>
-          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span>Shipping info</span></a>
-          <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>Secure checkout</span></span>
-          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<span>Real support</span></a>
+          <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp.buy.returns' | t }}</b><small>{{ 'altaeron_pdp.buy.returns_note' | t }}</small></span></a>
+          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>{{ 'altaeron_pdp.buy.shipping' | t }}</b><small>{{ 'altaeron_pdp.buy.shipping_note' | t }}</small></span></a>
+          <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><b>{{ 'altaeron_pdp.buy.secure' | t }}</b><small>{{ 'altaeron_pdp.buy.secure_note' | t }}</small></span></span>
+          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<span><b>{{ 'altaeron_pdp.buy.support' | t }}</b><small>{{ 'altaeron_pdp.buy.support_note' | t }}</small></span></a>
         </div>
-        {%- if shop.enabled_payment_types.size > 0 -%}<div class="apdp-payment-icons" aria-label="Accepted payment methods">{%- for type in shop.enabled_payment_types limit: 7 -%}{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}{%- endfor -%}</div>{%- endif -%}
+        {%- if shop.enabled_payment_types.size > 0 -%}<ul class="apdp-payment-icons list list-payment" role="list" aria-label="Accepted payment methods">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul>{%- endif -%}
       </aside>
     </div>
   </section>
 
-  <section class="apdp-trust-strip" aria-label="Store reassurance"><div class="apdp-shell apdp-trust-strip__grid">
-    <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><strong>Clear returns</strong><small>Review our return policy.</small></span></a>
-    <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><strong>Fast shipping</strong><small>Options shown at checkout.</small></span></a>
-    <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><strong>Secure checkout</strong><small>Encrypted &amp; 100% safe.</small></span></span>
-    <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<span><strong>Real people support</strong><small>Contact us when needed.</small></span></a>
+  <section class="apdp-expert" aria-label="Product guidance">
+    <div class="apdp-shell apdp-expert__panel">
+      <div class="apdp-expert__portrait">
+        <img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="Foot-care professional reviewing the product">
+      </div>
+      <div class="apdp-expert__profile">
+        <small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small>
+        <h2>{{ 'altaeron_pdp.expert.name' | t }}</h2>
+        <p>{{ 'altaeron_pdp.expert.role' | t }}</p>
+        <strong>{{ 'altaeron_pdp.expert.experience' | t }}</strong>
+        <span class="apdp-expert__signature">{{ 'altaeron_pdp.expert.signature' | t }}</span>
+      </div>
+      <blockquote>
+        <span aria-hidden="true">“</span>
+        <p>{{ 'altaeron_pdp.expert.quote' | t }} <b aria-hidden="true">”</b></p>
+      </blockquote>
+      <div class="apdp-expert__criteria">
+        <strong>{{ 'altaeron_pdp.expert.criteria_heading' | t }}</strong>
+        <ul>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_1' | t }}</li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_2' | t }}</li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_3' | t }}</li>
+        </ul>
+        <p>{{ 'altaeron_pdp.expert.criteria_footer' | t }}</p>
+      </div>
+      <div class="apdp-expert__press" aria-label="Health and lifestyle publications">
+        <span>WebMD</span><span>healthline</span><span>Verywell<span>health</span></span><span>yahoo!<b>life</b></span><span>CNN</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="apdp-education apdp-education--familiar" aria-labelledby="AltaeronFamiliar-{{ section.id }}">
+    <div class="apdp-shell">
+      <header class="apdp-education__heading">
+        <span class="apdp-education__number" aria-hidden="true">1</span>
+        <div>
+          <h2 id="AltaeronFamiliar-{{ section.id }}">Does this feel familiar?</h2>
+          <p>You’re not alone. These everyday moments can be more painful than they should be.</p>
+        </div>
+      </header>
+      <div class="apdp-familiar-grid">
+        {%- assign familiar_copy = "Morning pain that sets the tone for your day.|Relief when you finally sit down.|Skipping walks you used to enjoy.|Shoes you love but can’t wear anymore." | split: "|" -%}
+        {%- for copy in familiar_copy -%}
+          {%- liquid
+            case forloop.index
+              when 1
+                assign familiar_image = familiar_image_1
+              when 2
+                assign familiar_image = familiar_image_2
+              when 3
+                assign familiar_image = familiar_image_3
+              when 4
+                assign familiar_image = familiar_image_4
+            endcase
+          -%}
+          <article class="apdp-familiar-card">
+            <div class="apdp-education__placeholder">{%- if familiar_image != blank -%}{{ familiar_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 768px) 25vw, 76vw', alt: familiar_image.alt | default: copy }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+            <p>{{ copy }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="apdp-education apdp-education--causes" aria-labelledby="AltaeronCauses-{{ section.id }}">
+    <div class="apdp-shell">
+      <div class="apdp-causes-grid">
+        <div class="apdp-causes__intro">
+          <header class="apdp-education__heading">
+            <span class="apdp-education__number" aria-hidden="true">2</span>
+            <div>
+              <h2 id="AltaeronCauses-{{ section.id }}">Why Do Bunions Happen? <span aria-hidden="true">↝</span></h2>
+              <p>Understanding the problem is the first step to feeling better.</p>
+            </div>
+          </header>
+          <div class="apdp-causes__points">
+            <p><span aria-hidden="true">✓</span><strong>Toe misalignment</strong> – The big toe shifts toward the other toes.</p>
+            <p><span aria-hidden="true">✓</span><strong>Pressure &amp; friction</strong> – Shoes and daily movement increase stress on the joint.</p>
+            <p><span aria-hidden="true">✓</span><strong>Progressive pain</strong> – Activities that once felt comfortable become painful.</p>
+            <p><span aria-hidden="true">✓</span><strong>Irritation</strong> – Pain builds gradually over time.</p>
+          </div>
+          <a class="apdp-causes__link" href="/pages/bunion-guide">Learn more in our Bunion Guide <span aria-hidden="true">→</span></a>
+        </div>
+        <ol class="apdp-causes__stages">
+          <li>
+            <span class="apdp-stage__number">1</span><h3>Misalignment</h3><p>Big toe shifts toward smaller toes.</p>
+            <div class="apdp-education__placeholder">{%- if stage_image_1 != blank -%}{{ stage_image_1 | image_url: width: 520 | image_tag: loading: 'lazy', widths: '240, 360, 520', sizes: '(min-width: 768px) 15vw, 66vw', alt: stage_image_1.alt | default: 'Bunion misalignment stage' }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+          </li>
+          <li>
+            <span class="apdp-stage__number">2</span><h3>Pressure</h3><p>Rubbing causes pressure &amp; inflammation.</p>
+            <div class="apdp-education__placeholder">{%- if stage_image_2 != blank -%}{{ stage_image_2 | image_url: width: 520 | image_tag: loading: 'lazy', widths: '240, 360, 520', sizes: '(min-width: 768px) 15vw, 66vw', alt: stage_image_2.alt | default: 'Bunion pressure stage' }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+          </li>
+          <li>
+            <span class="apdp-stage__number">3</span><h3>Inflammation</h3><p>The joint becomes irritated &amp; swollen.</p>
+            <div class="apdp-education__placeholder">{%- if stage_image_3 != blank -%}{{ stage_image_3 | image_url: width: 520 | image_tag: loading: 'lazy', widths: '240, 360, 520', sizes: '(min-width: 768px) 15vw, 66vw', alt: stage_image_3.alt | default: 'Bunion inflammation stage' }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+          </li>
+          <li>
+            <span class="apdp-stage__number">4</span><h3>Pain Over Time</h3><p>Discomfort interferes with daily life.</p>
+            <div class="apdp-education__placeholder">{%- if stage_image_4 != blank -%}{{ stage_image_4 | image_url: width: 520 | image_tag: loading: 'lazy', widths: '240, 360, 520', sizes: '(min-width: 768px) 15vw, 66vw', alt: stage_image_4.alt | default: 'Bunion pain over time stage' }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="apdp-education apdp-education--support" aria-labelledby="AltaeronSupport-{{ section.id }}">
+    <div class="apdp-shell">
+      <header class="apdp-education__heading">
+        <span class="apdp-education__number" aria-hidden="true">3</span>
+        <div>
+          <h2 id="AltaeronSupport-{{ section.id }}">How Altaeron Supports Your Toe</h2>
+          <p>Adjustable alignment &amp; gentle support for everyday relief.</p>
+        </div>
+      </header>
+      <div class="apdp-support-grid">
+        <div class="apdp-support__features">
+          <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'knob' %}</span><h3>Adjustable<br>Knob</h3><p>Fine-tune angle<br>&amp; tension</p></article>
+          <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'dual-support' %}</span><h3>Dual Support<br>System</h3><p>Stabilizes toe &amp;<br>joint</p></article>
+          <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'pressure-relief' %}</span><h3>Pressure<br>Relief</h3><p>Reduces rubbing<br>&amp; irritation</p></article>
+          <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'comfort' %}</span><h3>Designed for<br>Comfort</h3><p>Wear with most<br>shoes</p></article>
+        </div>
+        <div class="apdp-support__media">
+          <div class="apdp-support__video">
+            <div class="apdp-education__placeholder">{%- if support_demo_video != blank -%}{{ support_demo_video | video_tag: controls: true, muted: true, playsinline: true, preload: 'metadata', image_size: '900x' }}{%- elsif support_demo_image != blank -%}{{ support_demo_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 768px) 18vw, 100vw', alt: support_demo_image.alt | default: 'Altaeron adjustment demonstration' }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+            {%- if support_demo_video == blank -%}<span class="apdp-support__play" aria-hidden="true">▶</span>{%- endif -%}
+          </div>
+          <div class="apdp-education__placeholder">{%- if support_detail_image != blank -%}{{ support_detail_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1400', sizes: '(min-width: 768px) 42vw, 100vw', alt: support_detail_image.alt | default: 'Altaeron toe support detail' }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="apdp-education apdp-education--day" aria-labelledby="AltaeronDay-{{ section.id }}">
+    <div class="apdp-shell">
+      <header class="apdp-day__header">
+        <p class="apdp-day__marker"><span aria-hidden="true">4</span> Imagine Leaving Home Without Thinking About Your Feet.</p>
+        <h2 id="AltaeronDay-{{ section.id }}">Imagine Leaving Home<br>Without Thinking About Your Feet.</h2>
+        <p class="apdp-day__intro">No checking which shoes will hurt. No planning your day around your feet.<br>Just put them on—<strong><em>and go.</em></strong></p>
+      </header>
+
+      <div class="apdp-day__media" aria-label="A comfortable day with Altaeron">
+        <div class="apdp-day__visual apdp-education__placeholder">
+          {%- if day_story_video != blank -%}
+            {{ day_story_video | video_tag: controls: true, playsinline: true, preload: 'metadata', image_size: '1800x' }}
+          {%- elsif day_story_image != blank -%}
+            {{ day_story_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750, 1100, 1500, 1800, 2200', sizes: '(min-width: 1800px) 1740px, calc(100vw - 40px)', alt: day_story_image.alt | default: 'A woman enjoying a comfortable day away from home' }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+        {%- if day_story_video == blank -%}<span class="apdp-day__play" aria-hidden="true">▶</span>{%- endif -%}
+        <ol class="apdp-day__journey" aria-label="A day without planning around foot pain">
+          <li>Put on<br>your favorite shoes</li>
+          <li>Step out<br>with confidence</li>
+          <li>Go about<br>your day</li>
+          <li>Enjoy the moments<br>that matter</li>
+          <li>End the day<br>feeling good</li>
+        </ol>
+      </div>
+
+      <div class="apdp-day__benefits">
+        <article><span>{% render 'altaeron-pdp-icon', icon: 'walk' %}</span><div><h3>Walk with<br>confidence</h3><p>Feel more supported as you move through your day.</p></div></article>
+        <article><span>{% render 'altaeron-pdp-icon', icon: 'shoe' %}</span><div><h3>Wear the shoes<br>you love</h3><p>Enjoy more of the styles that fit comfortably.</p></div></article>
+        <article><span>{% render 'altaeron-pdp-icon', icon: 'run' %}</span><div><h3>Stay active<br>longer</h3><p>Get the support you need for the moments that keep you moving.</p></div></article>
+        <article><span>{% render 'altaeron-pdp-icon', icon: 'heart' %}</span><div><h3>Enjoy your<br>day</h3><p>Think less about your feet—and more about what you’re doing.</p></div></article>
+      </div>
+
+      <div class="apdp-day__closing">
+        <span>{% render 'altaeron-pdp-icon', icon: 'shield' %}</span>
+        <p><strong>Your feet shouldn’t decide how you spend your day.</strong><br>Altaeron is designed to support the moments that keep you moving.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="AltaeronReviews-{{ section.id }}" class="apdp-tail apdp-tail-reviews" aria-labelledby="AltaeronReviewsTitle-{{ section.id }}">
+    <div class="apdp-shell">
+      <div class="apdp-tail-review-head">
+        <header class="apdp-tail-heading"><span>5</span><div><h2 id="AltaeronReviewsTitle-{{ section.id }}">Real People. Real Results.</h2><p>Join 2,300+ customers who are walking comfortably again.</p></div></header>
+        <div class="apdp-tail-review-nav" aria-label="Review slider controls"><button type="button" data-apdp-review-prev aria-label="Previous reviews">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button><button type="button" data-apdp-review-next aria-label="Next reviews">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button></div>
+      </div>
+      <div class="apdp-tail-review-viewport" data-apdp-review-slider>
+      <div class="apdp-tail-review-grid">
+        {%- assign review_names = 'Linda K.|Mike R.|Sarah T.|Jessica T.|Margaret L.|David P.|Helen S.|Robert C.' | split: '|' -%}
+        {%- assign review_quotes = 'This is the first thing that actually helped with my bunion pain.|I can finally wear my shoes comfortably again.|I wear it at home and at work. I feel so much better!|Lightweight, easy to adjust, and it really makes a difference.|After a few days, I noticed much less pressure when I walked.|Easy to put on, easy to adjust, and comfortable inside my everyday shoes.|I can stay on my feet longer without constantly thinking about the discomfort.|The adjustable dial lets me get the support exactly where I need it.' | split: '|' -%}
+        {%- for name in review_names -%}
+          {%- case forloop.index -%}{%- when 1 -%}{%- assign review_image = tail_review_1 -%}{%- when 2 -%}{%- assign review_image = tail_review_2 -%}{%- when 3 -%}{%- assign review_image = tail_review_3 -%}{%- when 4 -%}{%- assign review_image = tail_review_4 -%}{%- else -%}{%- assign review_image = nil -%}{%- endcase -%}
+          <article class="apdp-tail-review">
+            <div class="apdp-tail-avatar">{%- if review_image != blank -%}{{ review_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 140, 180', sizes: '64px', alt: name }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+            <div><span class="apdp-stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote>“{{ review_quotes[forloop.index0] }}”</blockquote><p>– {{ name }}</p><small>Verified Buyer <b aria-hidden="true">●</b></small></div>
+          </article>
+        {%- endfor -%}
+      </div>
+      </div>
+      <div class="apdp-tail-trust" aria-label="Purchase reassurance">
+        <span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>1-Year Warranty</b></span>
+        <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<b>Secure Checkout</b></span>
+        <span>{% render 'altaeron-pdp-icon', icon: 'return' %}<b>30-Day Returns</b></span>
+        <span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>Real People Support</b></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="apdp-tail apdp-tail-split apdp-shell">
+    <section class="apdp-tail-card apdp-created" aria-labelledby="AltaeronCreated-{{ section.id }}">
+      <header class="apdp-tail-heading"><span>6</span><h2 id="AltaeronCreated-{{ section.id }}">Not All Bunion Correctors Are Created Equal.</h2></header>
+      <div class="apdp-compare-table" role="table" aria-label="Altaeron compared with basic splints">
+        <div class="apdp-compare-head" role="row"><span></span><b>ALTAERON™<small>Adjustable Corrector</small></b><b>Basic Splints<br>&amp; Others</b></div>
+        {%- assign compare_rows = 'Adjustable knob for precise tension|Dual support for big toe & joint|Comfortable for all-day wear|Durable & reusable design|Includes step-by-step guide|Risk-free 30-day guarantee' | split: '|' -%}
+        {%- for row in compare_rows -%}<div role="row"><strong>{{ row }}</strong><span class="is-yes" aria-label="Yes">✓</span><span class="is-no" aria-label="No">×</span></div>{%- endfor -%}
+      </div>
+    </section>
+
+    <section class="apdp-tail-card apdp-can-cant" aria-labelledby="AltaeronCanCant-{{ section.id }}">
+      <header class="apdp-tail-heading"><span>7</span><h2 id="AltaeronCanCant-{{ section.id }}">What This Can — and Can’t — Do</h2></header>
+      <div class="apdp-can-cant__grid">
+        <div><h3>This device can help with:</h3><ul><li>Relieve pressure &amp; friction</li><li>Support better toe alignment while worn</li><li>Improve comfort during daily activities</li><li>Help you stay active &amp; on your feet longer</li></ul></div>
+        <div><h3>This device is not:</h3><ul><li>A permanent correction for bunion bone</li><li>A replacement for professional medical care</li><li>An overnight cure</li></ul></div>
+      </div>
+      <p class="apdp-consistency">{% render 'altaeron-pdp-icon', icon: 'guide' %}<span>Use consistently and follow instructions for best results.</span></p>
+    </section>
+  </div>
+
+  <section class="apdp-tail apdp-spacer" aria-labelledby="AltaeronSpacer-{{ section.id }}"><div class="apdp-shell">
+    <header class="apdp-tail-heading"><span>8</span><div><h2 id="AltaeronSpacer-{{ section.id }}">“Why not just use a toe spacer?”</h2><p>Great question. Here’s the difference.</p></div></header>
+    <div class="apdp-spacer-grid">
+      <article class="apdp-spacer-product">
+        <div class="apdp-tail-media">{%- if tail_spacer != blank -%}{{ tail_spacer | image_url: width: 500 | image_tag: loading: 'lazy', widths: '240, 360, 500', sizes: '(min-width: 768px) 170px, 34vw', alt: 'Basic toe spacer' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
+        <div><h3>Basic Toe Spacer</h3><ul><li>Only separates toes</li><li>No adjustable support</li><li>Can be bulky &amp; uncomfortable in shoes</li><li>Less effective for moderate to severe bunions</li></ul></div>
+      </article>
+      <span class="apdp-versus">VS</span>
+      <article class="apdp-spacer-product apdp-spacer-product--altaeron">
+        <div class="apdp-tail-media">{%- if tail_support != blank -%}{{ tail_support | image_url: width: 600 | image_tag: loading: 'lazy', widths: '280, 420, 600', sizes: '(min-width: 768px) 220px, 40vw', alt: 'Altaeron adjustable support' }}{%- else -%}{{ 'product-2' | placeholder_svg_tag }}{%- endif -%}</div>
+        <div><h3>ALTAERON™ Adjustable Support</h3><ul><li>Separates + aligns the big toe</li><li>Adjustable knob for targeted support</li><li>Low-profile, fits in many shoes</li><li>Designed to reduce pressure and support proper positioning</li></ul></div>
+      </article>
+      <aside class="apdp-doctor-note"><div class="apdp-tail-media">{%- if tail_doctor != blank -%}{{ tail_doctor | image_url: width: 400 | image_tag: loading: 'lazy', widths: '180, 280, 400', sizes: '150px', alt: 'Foot-care specialist' }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div><p>Toe spacers may help some people with mild spacing needs. If your main concern is <strong>bunion pressure and alignment while walking, adjustable support makes a big difference.</strong></p></aside>
+    </div>
   </div></section>
 
-  {%- if pain_cards != blank -%}
-    <section class="apdp-section apdp-familiar" aria-labelledby="AltaeronPain-{{ section.id }}"><div class="apdp-shell">
-      <h2 id="AltaeronPain-{{ section.id }}">{% render 'altaeron-pdp-icon', icon: 'heart' %}{{ section.settings.familiar_heading | default: mf.pdp_pain_heading.value }}</h2>
-      <div class="apdp-scroll-row apdp-card-grid--4">{%- for card in pain_cards limit: 4 -%}{% render 'altaeron-pdp-card', card: card, image_sizes: '(min-width: 1024px) 25vw, 28vw' %}{%- endfor -%}</div>
-      <div class="apdp-reassurance">{% render 'altaeron-pdp-icon', icon: 'heart' %}<p><strong>{{ section.settings.reassurance_heading }}</strong><span>{{ section.settings.reassurance_text | default: mf.pdp_reassurance.value }}</span></p></div>
-    </div></section>
-  {%- endif -%}
+  <section class="apdp-tail apdp-moments" aria-labelledby="AltaeronMoments-{{ section.id }}"><div class="apdp-shell">
+    <header class="apdp-tail-heading"><span>9</span><div><h2 id="AltaeronMoments-{{ section.id }}">Back To Moments You Missed</h2><p>Not just walking. Living.</p></div></header>
+    {%- assign moment_copy = 'Morning walks that set the tone.|Standing for hours without the pain.|Shopping trips without rushing back to the car.|Vacations & adventures without foot pain holding you back.|Special events in the shoes you love.' | split: '|' -%}
+    <div class="apdp-moment-grid">{%- for copy in moment_copy -%}{%- case forloop.index -%}{%- when 1 -%}{%- assign moment_image = tail_moment_1 -%}{%- when 2 -%}{%- assign moment_image = tail_moment_2 -%}{%- when 3 -%}{%- assign moment_image = tail_moment_3 -%}{%- when 4 -%}{%- assign moment_image = tail_moment_4 -%}{%- else -%}{%- assign moment_image = tail_moment_5 -%}{%- endcase -%}<article><div class="apdp-tail-media">{%- if moment_image != blank -%}{{ moment_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '280, 480, 700', sizes: '(min-width: 768px) 19vw, 66vw', alt: copy }}{%- else -%}{{ 'lifestyle-1' | placeholder_svg_tag }}{%- endif -%}</div><p>{{ copy }}</p></article>{%- endfor -%}</div>
+  </div></section>
 
-  {%- if story_video != blank -%}
-    <section class="apdp-section apdp-story" aria-labelledby="AltaeronStory-{{ section.id }}"><div class="apdp-shell apdp-story__grid">
-      <div class="apdp-story__media" data-apdp-lazy-video>{{ story_video | video_tag: controls: true, muted: true, playsinline: true, preload: 'none', image_size: '1200x' }}</div>
-      <div class="apdp-story__copy"><p class="apdp-section-marker">{% render 'altaeron-pdp-icon', icon: 'spark' %}{{ section.settings.video_eyebrow }}</p><h2 id="AltaeronStory-{{ section.id }}">{{ section.settings.story_heading | default: mf.pdp_video_heading.value }}</h2>{%- if mf.pdp_video_text.value != blank -%}<p>{{ mf.pdp_video_text.value }}</p>{%- endif -%}</div>
-      {%- if outcome_cards != blank -%}<div class="apdp-outcomes">{%- for card in outcome_cards limit: 4 -%}{% render 'altaeron-pdp-card', card: card, compact: true %}{%- endfor -%}</div>{%- endif -%}
-    </div></section>
-  {%- endif -%}
+  <div class="apdp-tail apdp-tail-lower apdp-shell">
+    <div>
+      <section class="apdp-learn" aria-labelledby="AltaeronLearn-{{ section.id }}">
+        <header class="apdp-tail-heading"><span>10</span><div><h2 id="AltaeronLearn-{{ section.id }}">Learn More. Live Better.</h2><p>Knowledge helps you make the right choices for your feet.</p></div></header>
+        {%- assign guide_titles = 'What Causes Bunions?|Can a Bunion Corrector Really Help?|How to Choose the Right Bunion Support|When to See A Podiatrist' | split: '|' -%}
+        {%- assign guide_texts = 'Understand the root cause and risk factors.|What conservative support can (and can’t) do.|Find the best option for your needs.|Signs you should get professional help.' | split: '|' -%}
+        <div class="apdp-learn-grid">{%- for title in guide_titles -%}{%- case forloop.index -%}{%- when 1 -%}{%- assign guide_image = tail_guide_1 -%}{%- when 2 -%}{%- assign guide_image = tail_guide_2 -%}{%- when 3 -%}{%- assign guide_image = tail_guide_3 -%}{%- else -%}{%- assign guide_image = tail_guide_4 -%}{%- endcase -%}<article><div class="apdp-tail-media">{%- if guide_image != blank -%}{{ guide_image | image_url: width: 320 | image_tag: loading: 'lazy', widths: '120, 220, 320', sizes: '(min-width: 768px) 90px, 26vw', alt: title }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div><div><h3>{{ title }}</h3><p>{{ guide_texts[forloop.index0] }}</p><small>{{ forloop.index | plus: 4 }} min read</small></div></article>{%- endfor -%}</div>
+      </section>
 
-  {%- if review_count > 0 and review_data.reviews != blank -%}
-  <section id="AltaeronReviews-{{ section.id }}" class="apdp-section apdp-reviews" aria-labelledby="AltaeronReviewsTitle-{{ section.id }}"><div class="apdp-shell">
-      <h2 id="AltaeronReviewsTitle-{{ section.id }}">{% render 'altaeron-pdp-icon', icon: 'heart' %}{{ section.settings.reviews_heading }}</h2>
-      <div class="apdp-review-grid">{%- for review in review_data.reviews limit: 4 -%}<article class="apdp-review"><div class="apdp-review__portrait"><span>{{ review.reviewer_initial | default: review.reviewer_name | slice: 0 }}</span></div><div><span class="apdp-stars" aria-label="{{ review.rating }} out of 5 stars">★★★★★</span>{%- if review.title != blank -%}<h3>{{ review.title }}</h3>{%- endif -%}<div class="apdp-review__body">{{ review.body_html }}</div><p><strong>{{ review.reviewer_name }}</strong>{% if review.verified_buyer %}<span>Verified buyer</span>{% endif %}</p></div></article>{%- endfor -%}</div><p class="apdp-review-count">Based on {{ review_count }} real {% if review_count == 1 %}review{% else %}reviews{% endif %}.</p>
-    </div></section>
-  {%- endif -%}
+      <section class="apdp-review-summary" aria-labelledby="AltaeronVerified-{{ section.id }}">
+        <header class="apdp-tail-heading"><span>11</span><div><h2 id="AltaeronVerified-{{ section.id }}">2,341+ Verified Reviews</h2><p>4.8 out of 5</p></div></header>
+        <div class="apdp-review-summary__grid">
+          <div class="apdp-ratings-bars">{%- assign bar_labels = '5 ★|4 ★|3 ★|2 ★|1 ★' | split: '|' -%}{%- assign bar_values = '83|10|5|1|1' | split: '|' -%}{%- for label in bar_labels -%}<div><b>{{ label }}</b><i><span style="width:{{ bar_values[forloop.index0] }}%"></span></i><small>{{ bar_values[forloop.index0] }}%</small></div>{%- endfor -%}</div>
+          <div class="apdp-review-thumbs" aria-label="Customer photo placeholders">{%- for i in (1..12) -%}<span>{{ 'image' | placeholder_svg_tag }}</span>{%- endfor -%}</div>
+          <div class="apdp-review-action"><a href="#AltaeronReviews-{{ section.id }}">View all reviews <span aria-hidden="true">→</span></a><p>Try it for 30 days. If it’s not right for you.</p><small><b>ⓘ</b> Please note: Results can vary depending on bunion size, duration and consistency.</small></div>
+        </div>
+      </section>
+    </div>
 
-  {%- if how_steps != blank -%}
-    <section class="apdp-section apdp-how" aria-labelledby="AltaeronHow-{{ section.id }}"><div class="apdp-shell apdp-how__grid">
-      <div class="apdp-how__media">{%- if how_image != blank -%}{{ how_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '420, 700, 1000, 1200', sizes: '(min-width: 1024px) 45vw, 100vw', alt: how_image.alt | default: product.title }}{%- endif -%}</div>
-      <div class="apdp-how__content"><h2 id="AltaeronHow-{{ section.id }}">{% render 'altaeron-pdp-icon', icon: 'gear' %}{{ mf.pdp_how_heading.value | default: section.settings.how_heading }}</h2>{%- if mf.pdp_how_intro.value != blank -%}<p class="apdp-section__intro">{{ mf.pdp_how_intro.value }}</p>{%- endif -%}<ol class="apdp-steps">{%- for step in how_steps limit: 3 -%}<li><span>{{ step.number.value | default: forloop.index }}</span>{%- if step.image.value != blank -%}<div class="apdp-step__image">{{ step.image.value | image_url: width: 240 | image_tag: loading: 'lazy', widths: '100, 160, 240', sizes: '78px', alt: step.image.value.alt | default: step.title.value }}</div>{%- endif -%}<div><h3>{{ step.title.value }}</h3><p>{{ step.text.value }}</p></div></li>{%- endfor -%}</ol>{%- if mf.pdp_usage_tip.value != blank -%}<div class="apdp-tip">{% render 'altaeron-pdp-icon', icon: 'spark' %}<p><strong>Tip:</strong> {{ mf.pdp_usage_tip.value }}</p></div>{%- endif -%}</div>
-    </div></section>
-  {%- endif -%}
+    <section class="apdp-tail-faq" aria-labelledby="AltaeronFaq-{{ section.id }}">
+      <header class="apdp-tail-heading"><span>12</span><h2 id="AltaeronFaq-{{ section.id }}">Frequently Asked Questions</h2></header>
+      <div class="apdp-tail-accordion">
+        <details><summary>How long does shipping take?<span></span></summary><p>Shipping times are shown at checkout and may vary by destination.</p></details>
+        <details><summary>Is it safe to use every day?<span></span></summary><p>Use it as directed and stop if you experience pain, numbness, or irritation.</p></details>
+        <details><summary>How long should I wear it each day?<span></span></summary><p>Start with short sessions and gradually increase wear time according to the included instructions.</p></details>
+        <details><summary>Can I wear it while sleeping?<span></span></summary><p>This adjustable support is designed for active wear. Follow the product instructions for nighttime use.</p></details>
+        <details><summary>What if it doesn’t fit or help?<span></span></summary><p>Contact our support team for fit help or review the return policy for available options.</p></details>
+        <details><summary>How do I clean the product?<span></span></summary><p>Hand wash gently with mild soap and cool water, then air dry completely.</p></details>
+      </div>
+    </section>
+  </div>
 
-  {%- if lifestyle_cards != blank -%}
-    <section class="apdp-section apdp-lifestyle" aria-labelledby="AltaeronLifestyle-{{ section.id }}"><div class="apdp-shell"><h2 id="AltaeronLifestyle-{{ section.id }}">{% render 'altaeron-pdp-icon', icon: 'heart' %}{{ section.settings.moments_heading }}</h2><p class="apdp-section__intro">{{ section.settings.moments_subtitle }}</p><div class="apdp-scroll-row apdp-card-grid--5">{%- for card in lifestyle_cards limit: 5 -%}{% render 'altaeron-pdp-card', card: card, image_sizes: '(min-width: 1024px) 20vw, 28vw' %}{%- endfor -%}{%- if lifestyle_cards.size < 5 -%}<article class="apdp-content-card apdp-desktop-only-card">{%- assign fifth_image = product.images[4] | default: product.featured_image -%}{%- if fifth_image != blank -%}<div class="apdp-content-card__media">{{ fifth_image | image_url: width: 560 | image_tag: loading: 'lazy', widths: '180, 360, 560', sizes: '20vw', alt: section.settings.moments_fifth }}</div>{%- endif -%}<div class="apdp-content-card__body"><p>{{ section.settings.moments_fifth }}</p></div></article>{%- endif -%}</div></div></section>
-  {%- endif -%}
-
-  {%- if related_products != blank -%}
-    <section class="apdp-section apdp-routine" aria-labelledby="AltaeronRoutine-{{ section.id }}"><div class="apdp-shell"><h2 id="AltaeronRoutine-{{ section.id }}">{% render 'altaeron-pdp-icon', icon: 'calendar' %}{{ section.settings.routine_heading }}</h2><div class="apdp-product-grid">{%- for related in related_products limit: 3 -%}{%- capture label_key -%}routine_{{ forloop.index }}_label{%- endcapture -%}{%- capture text_key -%}routine_{{ forloop.index }}_text{%- endcapture -%}<article class="apdp-product-card"><span class="apdp-product-card__accent">{% render 'altaeron-pdp-icon', icon: 'spark' %}</span><a href="{{ related.url }}">{%- if related.featured_image != blank -%}{{ related.featured_image | image_url: width: 560 | image_tag: loading: 'lazy', widths: '180, 360, 560', sizes: '(min-width: 750px) 25vw, 31vw', alt: related.featured_image.alt | default: section.settings[label_key] }}{%- endif -%}<h3>{{ section.settings[label_key] }}</h3><p>{{ section.settings[text_key] }}</p></a></article>{%- endfor -%}</div>{%- if section.settings.bundle_label != blank -%}<a class="apdp-bundle" href="{{ section.settings.bundle_link | default: routes.all_products_collection_url }}">{{ section.settings.bundle_label }} <span aria-hidden="true">→</span></a>{%- endif -%}</div></section>
-  {%- endif -%}
-
-  <section class="apdp-section apdp-values" aria-labelledby="AltaeronValues-{{ section.id }}"><div class="apdp-shell"><div class="apdp-values__row"><div class="apdp-values__panel"><div class="apdp-values__brand"><h2 id="AltaeronValues-{{ section.id }}">{% render 'altaeron-pdp-icon', icon: 'shield' %}{{ section.settings.values_heading }}</h2></div><div class="apdp-values__grid">{%- for i in (1..4) -%}{%- capture title_key -%}value_{{ i }}_title{%- endcapture -%}{%- capture text_key -%}value_{{ i }}_text{%- endcapture -%}<article>{% render 'altaeron-pdp-icon', icon: 'check' %}<h3>{{ section.settings[title_key] }}</h3><p>{{ section.settings[text_key] }}</p></article>{%- endfor -%}</div></div><div class="apdp-guarantee">{% render 'altaeron-pdp-icon', icon: 'shield' %}<div><h3>{{ section.settings.guarantee_heading }}</h3><p>{{ section.settings.guarantee_text }}</p></div></div></div>{%- if mf.pdp_disclaimer.value != blank -%}<div class="apdp-disclaimer">{% render 'altaeron-pdp-icon', icon: 'info' %}<p>{{ mf.pdp_disclaimer.value }}</p></div>{%- endif -%}</div></section>
-
-  {%- if faq_items != blank -%}
-    <section class="apdp-section apdp-faq" aria-labelledby="AltaeronFaq-{{ section.id }}"><div class="apdp-shell apdp-faq__inner"><div><h2 id="AltaeronFaq-{{ section.id }}">{% render 'altaeron-pdp-icon', icon: 'help' %}{{ mf.pdp_faq_heading.value | default: section.settings.faq_heading }}</h2><p>{{ section.settings.faq_intro }}</p></div><div class="apdp-accordion">{%- for item in faq_items -%}<details{% if forloop.first %} open{% endif %}><summary><span>{{ item.question.value }}</span><span class="apdp-accordion__mark" aria-hidden="true"></span></summary><div class="apdp-accordion__answer">{{ item.answer.value | newline_to_br }}</div></details>{%- endfor -%}{%- if faq_items.size < 6 -%}<details><summary><span>{{ section.settings.faq_6_question }}</span><span class="apdp-accordion__mark" aria-hidden="true"></span></summary><div class="apdp-accordion__answer">{{ section.settings.faq_6_answer }}</div></details>{%- endif -%}{%- if faq_items.size < 7 -%}<details><summary><span>{{ section.settings.faq_7_question }}</span><span class="apdp-accordion__mark" aria-hidden="true"></span></summary><div class="apdp-accordion__answer">{{ section.settings.faq_7_answer }}</div></details>{%- endif -%}</div></div></section>
-  {%- endif -%}
-
-  <section class="apdp-section apdp-compatibility" aria-labelledby="AltaeronCompatibility-{{ section.id }}"><div class="apdp-shell"><h2 id="AltaeronCompatibility-{{ section.id }}">{{ section.settings.compatibility_heading }}</h2><div class="apdp-compatibility__row">{%- for i in (1..5) -%}{%- capture shoe_key -%}shoe_{{ i }}{%- endcapture -%}{%- assign shoe_image = product.images[i] | default: product.featured_image -%}<article class="apdp-content-card apdp-content-card--compact">{%- if shoe_image != blank -%}<div class="apdp-content-card__media">{{ shoe_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '90, 150, 220', sizes: '88px', alt: section.settings[shoe_key] }}</div>{%- endif -%}<div class="apdp-content-card__body"><h3>{{ section.settings[shoe_key] }}</h3>{%- if i == 5 -%}<p>2 inches or lower</p>{%- endif -%}</div></article>{%- endfor -%}</div><div class="apdp-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div></section>
-
-  {%- if guide_cards != blank or section.blocks.size > 0 -%}
-    <section class="apdp-section apdp-guides" aria-labelledby="AltaeronGuides-{{ section.id }}"><div class="apdp-shell"><h2 id="AltaeronGuides-{{ section.id }}">{% render 'altaeron-pdp-icon', icon: 'guide' %}{{ section.settings.guides_heading }}</h2><div class="apdp-guides__row">
-      {%- if guide_cards != blank -%}
-        {%- for card in guide_cards limit: 3 -%}{% render 'altaeron-pdp-card', card: card, image_sizes: '110px' %}{%- endfor -%}
-      {%- else -%}
-        {%- for block in section.blocks limit: 3 -%}{%- assign guide_image = block.settings.image | default: product.images[forloop.index] | default: product.featured_image -%}<article class="apdp-content-card" {{ block.shopify_attributes }}>{%- if guide_image != blank -%}<div class="apdp-content-card__media">{{ guide_image | image_url: width: 360 | image_tag: loading: 'lazy', widths: '110, 220, 360', sizes: '110px', alt: guide_image.alt | default: block.settings.title }}</div>{%- endif -%}<div class="apdp-content-card__body"><h3>{{ block.settings.title }}</h3>{%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}{%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}">Read guide <span aria-hidden="true">→</span></a>{%- endif -%}</div></article>{%- endfor -%}
-      {%- endif -%}
-    </div></div></section>
-  {%- endif -%}
+  <section class="apdp-final-cta" aria-label="Buy Altaeron adjustable bunion corrector"><div class="apdp-shell apdp-final-cta__inner">
+    <div class="apdp-final-cta__product apdp-tail-media">{%- if tail_cta_product != blank -%}{{ tail_cta_product | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
+    <div class="apdp-final-cta__content"><h2>Ready to Walk Without Thinking About Your Feet?</h2><p>ALTAERON™ Adjustable Knob Bunion Corrector</p><div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>30-Day<br>Guarantee</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>Fast &amp; Free<br>Shipping over $49</b></span><span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>Real People<br>Support 24/7</b></span></div><div class="apdp-final-payments"><span class="visually-hidden">Accepted payment methods</span><ul class="list list-payment" role="list">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul></div></div>
+    <div class="apdp-final-cta__buy"><div><span class="apdp-stars">★★★★★</span><small>4.8 (2,341 reviews)</small><em>Save $30.00</em></div><p><strong>$39.99</strong><s>$69.99</s></p><a class="apdp-final-button" href="#AltaeronBuy-{{ section.id }}">Start Walking More Comfortably <span aria-hidden="true">→</span></a><small>or 4 interest-free payments of $10.00 with shop<span>Pay</span></small><p class="apdp-final-fine">Try it for 30 days. If it’s painful or not for you, send it back.</p></div>
+    <div class="apdp-final-badge"><img src="{{ 'altaeron-risk-free-badge.png' | asset_url }}" width="384" height="384" loading="lazy" alt="30-day risk-free guarantee"></div>
+  </div></section>
 
   <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><strong>{{ section.settings.sticky_title | default: product.title }}</strong><small><span>{{ section.settings.price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></small><em data-apdp-sticky-savings{% if savings <= 0 %} hidden{% endif %}>Save {{ savings | money }}</em></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span data-apdp-sticky-text>{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}Sold out{% endif %}</span></button></div>
   <script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script>
@@ -258,12 +535,59 @@
     ,{ "type": "text", "id": "sticky_title", "label": "Mobile sticky title", "default": "Adjustable Knob Bunion Corrector" }
   ],
   "blocks": [
+    {
+      "type": "education_media",
+      "name": "Education media",
+      "settings": [
+        { "type": "select", "id": "slot", "label": "Media position", "options": [
+          { "value": "familiar_1", "label": "Familiar — morning pain" },
+          { "value": "familiar_2", "label": "Familiar — sitting down" },
+          { "value": "familiar_3", "label": "Familiar — skipping walks" },
+          { "value": "familiar_4", "label": "Familiar — shoes" },
+          { "value": "stage_1", "label": "Bunion stage 1" },
+          { "value": "stage_2", "label": "Bunion stage 2" },
+          { "value": "stage_3", "label": "Bunion stage 3" },
+          { "value": "stage_4", "label": "Bunion stage 4" },
+          { "value": "support_demo", "label": "Support demo (left)" },
+          { "value": "support_detail", "label": "Support detail (right)" },
+          { "value": "day_story", "label": "Point 4 — day story" }
+        ], "default": "familiar_1" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "video", "id": "video", "label": "Video (support demo only)" }
+      ]
+    },
     { "type": "guide", "name": "Helpful guide", "limit": 3, "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
       { "type": "text", "id": "title", "label": "Title", "default": "Helpful guide" },
       { "type": "textarea", "id": "text", "label": "Summary" },
       { "type": "url", "id": "url", "label": "Article link" }
-    ] }
+    ] },
+    {
+      "type": "tail_media",
+      "name": "Point 5–12 media",
+      "settings": [
+        { "type": "select", "id": "slot", "label": "Media position", "options": [
+          { "value": "review_1", "label": "5 — Review portrait 1" },
+          { "value": "review_2", "label": "5 — Review portrait 2" },
+          { "value": "review_3", "label": "5 — Review portrait 3" },
+          { "value": "review_4", "label": "5 — Review portrait 4" },
+          { "value": "spacer", "label": "8 — Basic toe spacer" },
+          { "value": "support", "label": "8 — Altaeron support" },
+          { "value": "doctor", "label": "8 — Specialist portrait" },
+          { "value": "moment_1", "label": "9 — Morning walks" },
+          { "value": "moment_2", "label": "9 — Standing" },
+          { "value": "moment_3", "label": "9 — Shopping" },
+          { "value": "moment_4", "label": "9 — Vacation" },
+          { "value": "moment_5", "label": "9 — Special events" },
+          { "value": "guide_1", "label": "10 — Guide 1" },
+          { "value": "guide_2", "label": "10 — Guide 2" },
+          { "value": "guide_3", "label": "10 — Guide 3" },
+          { "value": "guide_4", "label": "10 — Guide 4" },
+          { "value": "cta_product", "label": "Final CTA — product" }
+        ], "default": "review_1" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
   ],
   "presets": [{ "name": "Altaeron editorial PDP" }]
 }
