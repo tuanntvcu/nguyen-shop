@@ -1,0 +1,21 @@
+{%- comment -%}
+  Shared numbered chapter heading for the Altaeron PDP.
+
+  Accepts:
+  - number: chapter number
+  - title: heading copy (may contain dynamic Liquid output)
+  - subtitle: optional supporting copy
+  - heading_id: optional id used by the parent section's aria-labelledby
+  - heading_tag: optional semantic heading tag; defaults to h2
+{%- endcomment -%}
+
+{%- assign heading_tag = heading_tag | default: 'h2' -%}
+<header class="alta-pdp-section-heading">
+  <div class="alta-pdp-section-heading__top">
+    <span class="alta-pdp-section-heading__number" aria-hidden="true">{{ number }}</span>
+    <{{ heading_tag }} class="alta-pdp-section-heading__title"{% if heading_id != blank %} id="{{ heading_id }}"{% endif %}>{{ title }}</{{ heading_tag }}>
+  </div>
+  {%- if subtitle != blank -%}
+    <p class="alta-pdp-section-heading__subtitle">{{ subtitle }}</p>
+  {%- endif -%}
+</header>

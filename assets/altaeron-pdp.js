@@ -15,8 +15,9 @@
 
     if (thumbsList) {
       let pointerId = null;
-      let startY = 0;
-      let startScrollTop = 0;
+      let startPosition = 0;
+      let startScrollPosition = 0;
+      let horizontal = false;
       let dragged = false;
       let suppressClick = false;
 
@@ -25,20 +26,23 @@
       thumbsList.addEventListener('pointerdown', (event) => {
         if (event.pointerType !== 'mouse' || event.button !== 0) return;
         pointerId = event.pointerId;
-        startY = event.clientY;
-        startScrollTop = thumbsList.scrollTop;
+        horizontal = getComputedStyle(thumbsList).flexDirection === 'row';
+        startPosition = horizontal ? event.clientX : event.clientY;
+        startScrollPosition = horizontal ? thumbsList.scrollLeft : thumbsList.scrollTop;
         dragged = false;
         thumbsList.setPointerCapture(pointerId);
       });
 
       thumbsList.addEventListener('pointermove', (event) => {
         if (event.pointerId !== pointerId) return;
-        const distance = event.clientY - startY;
+        const position = horizontal ? event.clientX : event.clientY;
+        const distance = position - startPosition;
         if (!dragged && Math.abs(distance) < 4) return;
         dragged = true;
         suppressClick = true;
         thumbsList.classList.add('is-dragging');
-        thumbsList.scrollTop = startScrollTop - distance;
+        if (horizontal) thumbsList.scrollLeft = startScrollPosition - distance;
+        else thumbsList.scrollTop = startScrollPosition - distance;
         event.preventDefault();
       });
 

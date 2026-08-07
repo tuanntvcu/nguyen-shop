@@ -14,8 +14,14 @@
   assign guide_blocks = section.blocks | where: 'type', 'guide'
   assign related_products = mf.pdp_related_products.value
   assign review_data = product.metafields.judgeme.review_widget_data.value
-  assign review_count = 2341
-  assign review_rating = 4.8
+  assign review_count = review_data.number_of_reviews
+  assign review_rating = review_data.rating
+  if review_count == blank
+    assign review_count = '2,341'
+  endif
+  if review_rating == blank
+    assign review_rating = 4.8
+  endif
   assign placeholder_video = shop.metafields.custom.homepage_demo_video.value | default: section.settings.placeholder_video
   assign story_video = mf.pdp_video.value | default: placeholder_video
   assign product_form_id = 'product-form-' | append: section.id
@@ -179,7 +185,7 @@
     </div>
   </section>
 
-  <section class="apdp-expert" aria-label="Product guidance">
+  <section class="apdp-expert alta-pdp-flow-section alta-pdp-flow-section--hero-authority" aria-label="Product guidance">
     <div class="apdp-shell apdp-expert__panel">
       <div class="apdp-expert__portrait">
         <img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="Foot-care professional reviewing the product">
@@ -210,15 +216,10 @@
     </div>
   </section>
 
-  <section class="apdp-education apdp-education--familiar" aria-labelledby="AltaeronFamiliar-{{ section.id }}">
+  <section class="apdp-education apdp-education--familiar alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronFamiliar-{{ section.id }}">
     <div class="apdp-shell">
-      <header class="apdp-education__heading">
-        <span class="apdp-education__number" aria-hidden="true">1</span>
-        <div>
-          <h2 id="AltaeronFamiliar-{{ section.id }}">Does this feel familiar?</h2>
-          <p>You’re not alone. These everyday moments can be more painful than they should be.</p>
-        </div>
-      </header>
+      {%- assign chapter_heading_id = 'AltaeronFamiliar-' | append: section.id -%}
+      {% render 'altaeron-pdp-section-heading', number: '1', title: 'Does this feel familiar?', subtitle: 'You’re not alone. These everyday moments can be more painful than they should be.', heading_id: chapter_heading_id %}
       <div class="apdp-familiar-grid">
         {%- assign familiar_copy = "Morning pain that sets the tone for your day.|Relief when you finally sit down.|Skipping walks you used to enjoy.|Shoes you love but can’t wear anymore." | split: "|" -%}
         {%- for copy in familiar_copy -%}
@@ -243,17 +244,12 @@
     </div>
   </section>
 
-  <section class="apdp-education apdp-education--causes" aria-labelledby="AltaeronCauses-{{ section.id }}">
+  <section class="apdp-education apdp-education--causes alta-pdp-flow-section alta-pdp-flow-section--default-compact" aria-labelledby="AltaeronCauses-{{ section.id }}">
     <div class="apdp-shell">
       <div class="apdp-causes-grid">
         <div class="apdp-causes__intro">
-          <header class="apdp-education__heading">
-            <span class="apdp-education__number" aria-hidden="true">2</span>
-            <div>
-              <h2 id="AltaeronCauses-{{ section.id }}">Why Do Bunions Happen? <span aria-hidden="true">↝</span></h2>
-              <p>Understanding the problem is the first step to feeling better.</p>
-            </div>
-          </header>
+          {%- assign chapter_heading_id = 'AltaeronCauses-' | append: section.id -%}
+          {% render 'altaeron-pdp-section-heading', number: '2', title: 'Why Do Bunions Happen?', subtitle: 'Understanding the problem is the first step to feeling better.', heading_id: chapter_heading_id %}
           <div class="apdp-causes__points">
             <p><span aria-hidden="true">✓</span><strong>Toe misalignment</strong> – The big toe shifts toward the other toes.</p>
             <p><span aria-hidden="true">✓</span><strong>Pressure &amp; friction</strong> – Shoes and daily movement increase stress on the joint.</p>
@@ -284,15 +280,10 @@
     </div>
   </section>
 
-  <section class="apdp-education apdp-education--support" aria-labelledby="AltaeronSupport-{{ section.id }}">
+  <section class="apdp-education apdp-education--support alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronSupport-{{ section.id }}">
     <div class="apdp-shell">
-      <header class="apdp-education__heading">
-        <span class="apdp-education__number" aria-hidden="true">3</span>
-        <div>
-          <h2 id="AltaeronSupport-{{ section.id }}">How Altaeron Supports Your Toe</h2>
-          <p>Adjustable alignment &amp; gentle support for everyday relief.</p>
-        </div>
-      </header>
+      {%- assign chapter_heading_id = 'AltaeronSupport-' | append: section.id -%}
+      {% render 'altaeron-pdp-section-heading', number: '3', title: 'How Altaeron Supports Your Toe', subtitle: 'Adjustable alignment &amp; gentle support for everyday relief.', heading_id: chapter_heading_id %}
       <div class="apdp-support-grid">
         <div class="apdp-support__features">
           <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'knob' %}</span><h3>Adjustable<br>Knob</h3><p>Fine-tune angle<br>&amp; tension</p></article>
@@ -311,13 +302,11 @@
     </div>
   </section>
 
-  <section class="apdp-education apdp-education--day" aria-labelledby="AltaeronDay-{{ section.id }}">
+  <section class="apdp-education apdp-education--day alta-pdp-flow-section alta-pdp-flow-section--spacious" aria-labelledby="AltaeronDay-{{ section.id }}">
     <div class="apdp-shell">
-      <header class="apdp-day__header">
-        <p class="apdp-day__marker"><span aria-hidden="true">4</span> Imagine Leaving Home Without Thinking About Your Feet.</p>
-        <h2 id="AltaeronDay-{{ section.id }}">Imagine Leaving Home<br>Without Thinking About Your Feet.</h2>
-        <p class="apdp-day__intro">No checking which shoes will hurt. No planning your day around your feet.<br>Just put them on—<strong><em>and go.</em></strong></p>
-      </header>
+      {%- capture day_heading_subtitle -%}No checking which shoes will hurt. No planning your day around your feet. Just put them on—<strong><em>and go.</em></strong>{%- endcapture -%}
+      {%- assign chapter_heading_id = 'AltaeronDay-' | append: section.id -%}
+      {% render 'altaeron-pdp-section-heading', number: '4', title: 'Imagine Leaving Home Without Thinking About Your Feet.', subtitle: day_heading_subtitle, heading_id: chapter_heading_id %}
 
       <div class="apdp-day__media" aria-label="A comfortable day with Altaeron">
         <div class="apdp-day__visual apdp-education__placeholder">
@@ -353,10 +342,11 @@
     </div>
   </section>
 
-  <section id="AltaeronReviews-{{ section.id }}" class="apdp-tail apdp-tail-reviews" aria-labelledby="AltaeronReviewsTitle-{{ section.id }}">
+  <section id="AltaeronReviews-{{ section.id }}" class="apdp-tail apdp-tail-reviews alta-pdp-flow-section alta-pdp-flow-section--default" aria-labelledby="AltaeronReviewsTitle-{{ section.id }}">
     <div class="apdp-shell">
       <div class="apdp-tail-review-head">
-        <header class="apdp-tail-heading"><span>5</span><div><h2 id="AltaeronReviewsTitle-{{ section.id }}">Real People. Real Results.</h2><p>Join 2,300+ customers who are walking comfortably again.</p></div></header>
+        {%- assign chapter_heading_id = 'AltaeronReviewsTitle-' | append: section.id -%}
+        {% render 'altaeron-pdp-section-heading', number: '5', title: 'Real People. Real Results.', subtitle: 'Join 2,300+ customers who are walking comfortably again.', heading_id: chapter_heading_id %}
         <div class="apdp-tail-review-nav" aria-label="Review slider controls"><button type="button" data-apdp-review-prev aria-label="Previous reviews">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button><button type="button" data-apdp-review-next aria-label="Next reviews">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button></div>
       </div>
       <div class="apdp-tail-review-viewport" data-apdp-review-slider>
@@ -381,28 +371,35 @@
     </div>
   </section>
 
-  <div class="apdp-tail apdp-tail-split apdp-shell">
-    <section class="apdp-tail-card apdp-created" aria-labelledby="AltaeronCreated-{{ section.id }}">
-      <header class="apdp-tail-heading"><span>6</span><h2 id="AltaeronCreated-{{ section.id }}">Not All Bunion Correctors Are Created Equal.</h2></header>
-      <div class="apdp-compare-table" role="table" aria-label="Altaeron compared with basic splints">
-        <div class="apdp-compare-head" role="row"><span></span><b>ALTAERON™<small>Adjustable Corrector</small></b><b>Basic Splints<br>&amp; Others</b></div>
-        {%- assign compare_rows = 'Adjustable knob for precise tension|Dual support for big toe & joint|Comfortable for all-day wear|Durable & reusable design|Includes step-by-step guide|Risk-free 30-day guarantee' | split: '|' -%}
-        {%- for row in compare_rows -%}<div role="row"><strong>{{ row }}</strong><span class="is-yes" aria-label="Yes">✓</span><span class="is-no" aria-label="No">×</span></div>{%- endfor -%}
+  <div class="apdp-tail apdp-tail-split apdp-shell alta-pdp-flow-section alta-pdp-flow-section--default-compact">
+    <section class="apdp-tail-panel apdp-created" aria-labelledby="AltaeronCreated-{{ section.id }}">
+      {%- assign chapter_heading_id = 'AltaeronCreated-' | append: section.id -%}
+      {% render 'altaeron-pdp-section-heading', number: '6', title: 'Not All Bunion Correctors Are Created Equal.', heading_id: chapter_heading_id %}
+      <div class="apdp-tail-card">
+        <div class="apdp-compare-table" role="table" aria-label="Altaeron compared with basic splints">
+          <div class="apdp-compare-head" role="row"><span></span><b>ALTAERON™<small>Adjustable Corrector</small></b><b>Basic Splints<br>&amp; Others</b></div>
+          {%- assign compare_rows = 'Adjustable knob for precise tension|Dual support for big toe & joint|Comfortable for all-day wear|Durable & reusable design|Includes step-by-step guide|Risk-free 30-day guarantee' | split: '|' -%}
+          {%- for row in compare_rows -%}<div role="row"><strong>{{ row }}</strong><span class="is-yes" aria-label="Yes">✓</span><span class="is-no" aria-label="No">×</span></div>{%- endfor -%}
+        </div>
       </div>
     </section>
 
-    <section class="apdp-tail-card apdp-can-cant" aria-labelledby="AltaeronCanCant-{{ section.id }}">
-      <header class="apdp-tail-heading"><span>7</span><h2 id="AltaeronCanCant-{{ section.id }}">What This Can — and Can’t — Do</h2></header>
-      <div class="apdp-can-cant__grid">
-        <div><h3>This device can help with:</h3><ul><li>Relieve pressure &amp; friction</li><li>Support better toe alignment while worn</li><li>Improve comfort during daily activities</li><li>Help you stay active &amp; on your feet longer</li></ul></div>
-        <div><h3>This device is not:</h3><ul><li>A permanent correction for bunion bone</li><li>A replacement for professional medical care</li><li>An overnight cure</li></ul></div>
+    <section class="apdp-tail-panel alta-pdp-subsection alta-pdp-subsection--tight" aria-labelledby="AltaeronCanCant-{{ section.id }}">
+      {%- assign chapter_heading_id = 'AltaeronCanCant-' | append: section.id -%}
+      {% render 'altaeron-pdp-section-heading', number: '7', title: 'What This Can — and Can’t — Do', heading_id: chapter_heading_id %}
+      <div class="apdp-tail-card apdp-can-cant">
+        <div class="apdp-can-cant__grid">
+          <div><h3>This device can help with:</h3><ul><li>Relieve pressure &amp; friction</li><li>Support better toe alignment while worn</li><li>Improve comfort during daily activities</li><li>Help you stay active &amp; on your feet longer</li></ul></div>
+          <div><h3>This device is not:</h3><ul><li>A permanent correction for bunion bone</li><li>A replacement for professional medical care</li><li>An overnight cure</li></ul></div>
+        </div>
+        <p class="apdp-consistency">{% render 'altaeron-pdp-icon', icon: 'guide' %}<span>Use consistently and follow instructions for best results.</span></p>
       </div>
-      <p class="apdp-consistency">{% render 'altaeron-pdp-icon', icon: 'guide' %}<span>Use consistently and follow instructions for best results.</span></p>
     </section>
   </div>
 
-  <section class="apdp-tail apdp-spacer" aria-labelledby="AltaeronSpacer-{{ section.id }}"><div class="apdp-shell">
-    <header class="apdp-tail-heading"><span>8</span><div><h2 id="AltaeronSpacer-{{ section.id }}">“Why not just use a toe spacer?”</h2><p>Great question. Here’s the difference.</p></div></header>
+  <section class="apdp-tail apdp-spacer alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronSpacer-{{ section.id }}"><div class="apdp-shell">
+    {%- assign chapter_heading_id = 'AltaeronSpacer-' | append: section.id -%}
+    {% render 'altaeron-pdp-section-heading', number: '8', title: '“Why not just use a toe spacer?”', subtitle: 'Great question. Here’s the difference.', heading_id: chapter_heading_id %}
     <div class="apdp-spacer-grid">
       <article class="apdp-spacer-product">
         <div class="apdp-tail-media">{%- if tail_spacer != blank -%}{{ tail_spacer | image_url: width: 500 | image_tag: loading: 'lazy', widths: '240, 360, 500', sizes: '(min-width: 768px) 170px, 34vw', alt: 'Basic toe spacer' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
@@ -417,33 +414,39 @@
     </div>
   </div></section>
 
-  <section class="apdp-tail apdp-moments" aria-labelledby="AltaeronMoments-{{ section.id }}"><div class="apdp-shell">
-    <header class="apdp-tail-heading"><span>9</span><div><h2 id="AltaeronMoments-{{ section.id }}">Back To Moments You Missed</h2><p>Not just walking. Living.</p></div></header>
+  <section class="apdp-tail apdp-moments alta-pdp-flow-section alta-pdp-flow-section--spacious" aria-labelledby="AltaeronMoments-{{ section.id }}"><div class="apdp-shell">
+    {%- assign chapter_heading_id = 'AltaeronMoments-' | append: section.id -%}
+    {% render 'altaeron-pdp-section-heading', number: '9', title: 'Back To Moments You Missed', subtitle: 'Not just walking. Living.', heading_id: chapter_heading_id %}
     {%- assign moment_copy = 'Morning walks that set the tone.|Standing for hours without the pain.|Shopping trips without rushing back to the car.|Vacations & adventures without foot pain holding you back.|Special events in the shoes you love.' | split: '|' -%}
     <div class="apdp-moment-grid">{%- for copy in moment_copy -%}{%- case forloop.index -%}{%- when 1 -%}{%- assign moment_image = tail_moment_1 -%}{%- when 2 -%}{%- assign moment_image = tail_moment_2 -%}{%- when 3 -%}{%- assign moment_image = tail_moment_3 -%}{%- when 4 -%}{%- assign moment_image = tail_moment_4 -%}{%- else -%}{%- assign moment_image = tail_moment_5 -%}{%- endcase -%}<article><div class="apdp-tail-media">{%- if moment_image != blank -%}{{ moment_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '280, 480, 700', sizes: '(min-width: 768px) 19vw, 66vw', alt: copy }}{%- else -%}{{ 'lifestyle-1' | placeholder_svg_tag }}{%- endif -%}</div><p>{{ copy }}</p></article>{%- endfor -%}</div>
   </div></section>
 
-  <div class="apdp-tail apdp-tail-lower apdp-shell">
+  <div class="apdp-tail apdp-tail-lower apdp-shell alta-pdp-flow-section alta-pdp-flow-section--default-compact">
     <div>
       <section class="apdp-learn" aria-labelledby="AltaeronLearn-{{ section.id }}">
-        <header class="apdp-tail-heading"><span>10</span><div><h2 id="AltaeronLearn-{{ section.id }}">Learn More. Live Better.</h2><p>Knowledge helps you make the right choices for your feet.</p></div></header>
-        {%- assign guide_titles = 'What Causes Bunions?|Can a Bunion Corrector Really Help?|How to Choose the Right Bunion Support|When to See A Podiatrist' | split: '|' -%}
+        {%- assign chapter_heading_id = 'AltaeronLearn-' | append: section.id -%}
+        {% render 'altaeron-pdp-section-heading', number: '10', title: 'Learn More. Live Better.', subtitle: 'Knowledge helps you make the right choices for your feet.', heading_id: chapter_heading_id %}
+        {%- assign guide_titles = 'What Causes Bunions?|Can a Bunion Corrector Really Help?|How to Choose the Right Bunion Support|When to See a Podiatrist' | split: '|' -%}
         {%- assign guide_texts = 'Understand the root cause and risk factors.|What conservative support can (and can’t) do.|Find the best option for your needs.|Signs you should get professional help.' | split: '|' -%}
         <div class="apdp-learn-grid">{%- for title in guide_titles -%}{%- case forloop.index -%}{%- when 1 -%}{%- assign guide_image = tail_guide_1 -%}{%- when 2 -%}{%- assign guide_image = tail_guide_2 -%}{%- when 3 -%}{%- assign guide_image = tail_guide_3 -%}{%- else -%}{%- assign guide_image = tail_guide_4 -%}{%- endcase -%}<article><div class="apdp-tail-media">{%- if guide_image != blank -%}{{ guide_image | image_url: width: 320 | image_tag: loading: 'lazy', widths: '120, 220, 320', sizes: '(min-width: 768px) 90px, 26vw', alt: title }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div><div><h3>{{ title }}</h3><p>{{ guide_texts[forloop.index0] }}</p><small>{{ forloop.index | plus: 4 }} min read</small></div></article>{%- endfor -%}</div>
       </section>
 
-      <section class="apdp-review-summary" aria-labelledby="AltaeronVerified-{{ section.id }}">
-        <header class="apdp-tail-heading"><span>11</span><div><h2 id="AltaeronVerified-{{ section.id }}">2,341+ Verified Reviews</h2><p>4.8 out of 5</p></div></header>
+      <section class="apdp-review-summary alta-pdp-subsection alta-pdp-subsection--default-compact" aria-labelledby="AltaeronVerified-{{ section.id }}">
+        {%- capture verified_reviews_title -%}{{ review_count }}+ Verified Reviews{%- endcapture -%}
+        {%- capture verified_reviews_subtitle -%}{{ review_rating }} out of 5{%- endcapture -%}
+        {%- assign chapter_heading_id = 'AltaeronVerified-' | append: section.id -%}
+        {% render 'altaeron-pdp-section-heading', number: '11', title: verified_reviews_title, subtitle: verified_reviews_subtitle, heading_id: chapter_heading_id %}
         <div class="apdp-review-summary__grid">
           <div class="apdp-ratings-bars">{%- assign bar_labels = '5 ★|4 ★|3 ★|2 ★|1 ★' | split: '|' -%}{%- assign bar_values = '83|10|5|1|1' | split: '|' -%}{%- for label in bar_labels -%}<div><b>{{ label }}</b><i><span style="width:{{ bar_values[forloop.index0] }}%"></span></i><small>{{ bar_values[forloop.index0] }}%</small></div>{%- endfor -%}</div>
           <div class="apdp-review-thumbs" aria-label="Customer photo placeholders">{%- for i in (1..12) -%}<span>{{ 'image' | placeholder_svg_tag }}</span>{%- endfor -%}</div>
-          <div class="apdp-review-action"><a href="#AltaeronReviews-{{ section.id }}">View all reviews <span aria-hidden="true">→</span></a><p>Try it for 30 days. If it’s not right for you.</p><small><b>ⓘ</b> Please note: Results can vary depending on bunion size, duration and consistency.</small></div>
+          <div class="apdp-review-action"><a href="#AltaeronReviews-{{ section.id }}">View All Reviews <span aria-hidden="true">→</span></a><p>Try it for 30 days. If it’s not right for you.</p><small><b>ⓘ</b> Please note: Results can vary depending on bunion size, duration and consistency.</small></div>
         </div>
       </section>
     </div>
 
-    <section class="apdp-tail-faq" aria-labelledby="AltaeronFaq-{{ section.id }}">
-      <header class="apdp-tail-heading"><span>12</span><h2 id="AltaeronFaq-{{ section.id }}">Frequently Asked Questions</h2></header>
+    <section class="apdp-tail-faq alta-pdp-subsection alta-pdp-subsection--tight" aria-labelledby="AltaeronFaq-{{ section.id }}">
+      {%- assign chapter_heading_id = 'AltaeronFaq-' | append: section.id -%}
+      {% render 'altaeron-pdp-section-heading', number: '12', title: 'Frequently Asked Questions', heading_id: chapter_heading_id %}
       <div class="apdp-tail-accordion">
         <details><summary>How long does shipping take?<span></span></summary><p>Shipping times are shown at checkout and may vary by destination.</p></details>
         <details><summary>Is it safe to use every day?<span></span></summary><p>Use it as directed and stop if you experience pain, numbness, or irritation.</p></details>
@@ -455,7 +458,7 @@
     </section>
   </div>
 
-  <section class="apdp-final-cta" aria-label="Buy Altaeron adjustable bunion corrector"><div class="apdp-shell apdp-final-cta__inner">
+  <section class="apdp-final-cta alta-pdp-flow-section alta-pdp-flow-section--spacious" aria-label="Buy Altaeron adjustable bunion corrector"><div class="apdp-shell apdp-final-cta__inner">
     <div class="apdp-final-cta__product apdp-tail-media">{%- if tail_cta_product != blank -%}{{ tail_cta_product | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
     <div class="apdp-final-cta__content"><h2>Ready to Walk Without Thinking About Your Feet?</h2><p>ALTAERON™ Adjustable Knob Bunion Corrector</p><div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>30-Day<br>Guarantee</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>Fast &amp; Free<br>Shipping over $49</b></span><span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>Real People<br>Support 24/7</b></span></div><div class="apdp-final-payments"><span class="visually-hidden">Accepted payment methods</span><ul class="list list-payment" role="list">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul></div></div>
     <div class="apdp-final-cta__buy"><div><span class="apdp-stars">★★★★★</span><small>4.8 (2,341 reviews)</small><em>Save $30.00</em></div><p><strong>$39.99</strong><s>$69.99</s></p><a class="apdp-final-button" href="#AltaeronBuy-{{ section.id }}">Start Walking More Comfortably <span aria-hidden="true">→</span></a><small>or 4 interest-free payments of $10.00 with shop<span>Pay</span></small><p class="apdp-final-fine">Try it for 30 days. If it’s painful or not for you, send it back.</p></div>

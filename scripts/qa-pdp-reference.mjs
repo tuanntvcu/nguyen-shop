@@ -11,6 +11,7 @@ const allViewports = [
   { name: 'desktop-1280', width: 1280, height: 900 },
   { name: 'desktop-1024', width: 1024, height: 900 },
   { name: 'tablet-768', width: 768, height: 900 },
+  { name: 'mobile-430', width: 430, height: 932 },
   { name: 'mobile-390', width: 390, height: 844 },
   { name: 'mobile-375', width: 375, height: 812 },
 ];
@@ -47,6 +48,30 @@ for (const viewport of viewports) {
       const box = element.getBoundingClientRect();
       return { x: Math.round(box.x), y: Math.round(box.y), width: Math.round(box.width), height: Math.round(box.height) };
     };
+    const computedType = selector => {
+      const element = node.querySelector(selector);
+      if (!element) return null;
+      const style = getComputedStyle(element);
+      return { fontFamily: style.fontFamily, fontSize: style.fontSize, fontWeight: style.fontWeight, lineHeight: style.lineHeight, letterSpacing: style.letterSpacing };
+    };
+    const chapterHeadings = [...node.querySelectorAll('.alta-pdp-section-heading')].map(heading => {
+      const number = heading.querySelector('.alta-pdp-section-heading__number');
+      const title = heading.querySelector('.alta-pdp-section-heading__title');
+      const subtitle = heading.querySelector('.alta-pdp-section-heading__subtitle');
+      const numberBox = number.getBoundingClientRect();
+      const titleStyle = getComputedStyle(title);
+      return {
+        number: number.textContent.trim(),
+        badge: { width: Math.round(numberBox.width), height: Math.round(numberBox.height), fontSize: getComputedStyle(number).fontSize, fontWeight: getComputedStyle(number).fontWeight },
+        title: title.textContent.trim(),
+        titleType: { fontSize: titleStyle.fontSize, fontWeight: titleStyle.fontWeight, lineHeight: titleStyle.lineHeight, letterSpacing: titleStyle.letterSpacing },
+        subtitleType: subtitle ? { fontSize: getComputedStyle(subtitle).fontSize, fontWeight: getComputedStyle(subtitle).fontWeight, lineHeight: getComputedStyle(subtitle).lineHeight } : null,
+      };
+    });
+    const undersizedText = [...node.querySelectorAll('p,li,blockquote,summary,a,button,label,legend,small,strong')].filter(element => {
+      const style = getComputedStyle(element);
+      return element.textContent.trim() && style.display !== 'none' && style.visibility !== 'hidden' && Number.parseFloat(style.fontSize) < 12 && !element.closest('.visually-hidden,.list-payment');
+    }).map(element => ({ tag: element.tagName, className: element.className, fontSize: getComputedStyle(element).fontSize, text: element.textContent.trim().replace(/\s+/g, ' ').slice(0, 80) }));
     return {
       document: { clientWidth: document.documentElement.clientWidth, scrollWidth: document.documentElement.scrollWidth, scrollHeight: document.documentElement.scrollHeight },
       title: node.querySelector('h1')?.getAttribute('aria-label') || node.querySelector('h1')?.textContent.trim(),
@@ -55,6 +80,9 @@ for (const viewport of viewports) {
       trust: rect('.apdp-trust-strip'), familiar: rect('.apdp-familiar'), story: rect('.apdp-story'), reviews: rect('.apdp-reviews'), how: rect('.apdp-how'), moments: rect('.apdp-lifestyle'), routine: rect('.apdp-routine'), values: rect('.apdp-values'), faq: rect('.apdp-faq'), compatibility: rect('.apdp-compatibility'), guides: rect('.apdp-guides'), sticky: rect('.apdp-sticky'),
       components: { headline: rect('h1'), trustGrid: rect('.apdp-trust-strip__grid'), familiarCard: rect('.apdp-familiar .apdp-content-card'), reassurance: rect('.apdp-reassurance'), storyMedia: rect('.apdp-story__media'), howMedia: rect('.apdp-how__media'), momentCard: rect('.apdp-lifestyle .apdp-content-card'), routineCard: rect('.apdp-product-card'), valuesPanel: rect('.apdp-values__panel'), disclaimer: rect('.apdp-disclaimer'), faqAccordion: rect('.apdp-accordion'), shoeMedia: rect('.apdp-compatibility .apdp-content-card__media'), guideCard: rect('.apdp-guides .apdp-content-card') },
       cards: { familiar: node.querySelectorAll('.apdp-familiar .apdp-content-card').length, reviews: node.querySelectorAll('.apdp-review').length, steps: node.querySelectorAll('.apdp-steps li').length, moments: node.querySelectorAll('.apdp-lifestyle .apdp-content-card').length, routine: node.querySelectorAll('.apdp-product-card').length, faq: node.querySelectorAll('.apdp-accordion details').length, shoes: node.querySelectorAll('.apdp-compatibility .apdp-content-card').length, guides: node.querySelectorAll('.apdp-guides .apdp-content-card').length },
+      typography: { hero: computedType('h1'), productTitle: computedType('.apdp-buy__title'), price: computedType('.apdp-price__current'), finalHeading: computedType('.apdp-final-cta h2'), finalPrice: computedType('.apdp-final-cta__buy>p strong'), faqQuestion: computedType('.apdp-tail-accordion summary'), faqAnswer: computedType('.apdp-tail-accordion p') },
+      chapterHeadings,
+      undersizedText,
     };
   });
   // Trigger the production theme's viewport reveal animations before a full-page capture.

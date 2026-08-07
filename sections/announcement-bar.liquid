@@ -1,32 +1,38 @@
 <div
   data-section-index="{{ section.index }}"
-  class="announcement-bar color-{{ section.settings.color_scheme }} page-width section--padding"
+  class="announcement-bar color-{{ section.settings.color_scheme }}{% unless section.settings.promise_layout %} page-width{% endunless %} section--padding"
   style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
   {%- if section.settings.promise_layout -%}
-    <div class="announcement-bar__promises" role="list">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'announcement_bar' and block.settings.text != blank -%}
-          <div class="announcement-bar__promise" role="listitem" {{ block.shopify_attributes }}>
-            <span class="announcement-bar__promise-icon" aria-hidden="true">
-              {%- render 'altaeron-icon', type: block.settings.icon -%}
-            </span>
-            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{%- endif -%}
-            {{ block.settings.text }}
-            {%- if block.settings.link != blank -%}</a>{%- endif -%}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-    <div class="announcement-bar__mobile-promises" aria-label="Store announcements">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'announcement_bar' and block.settings.text != blank -%}
-          <div class="announcement-bar__mobile-promise">
-            <span class="announcement-bar__promise-icon" aria-hidden="true">{%- render 'altaeron-icon', type: block.settings.icon -%}</span>
-            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{%- endif -%}{{ block.settings.text }}{%- if block.settings.link != blank -%}</a>{%- endif -%}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
+    <div class="announcement-bar__marquee" aria-label="Store announcements">
+      <div class="announcement-bar__marquee-track">
+        <div class="announcement-bar__marquee-group" role="list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'announcement_bar' and block.settings.text != blank -%}
+              <div class="announcement-bar__promise" role="listitem" {{ block.shopify_attributes }}>
+                <span class="announcement-bar__promise-icon" aria-hidden="true">
+                  {%- render 'altaeron-icon', type: block.settings.icon -%}
+                </span>
+                {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{%- endif -%}
+                {{ block.settings.text }}
+                {%- if block.settings.link != blank -%}</a>{%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div class="announcement-bar__marquee-group" aria-hidden="true">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'announcement_bar' and block.settings.text != blank -%}
+              <div class="announcement-bar__promise">
+                <span class="announcement-bar__promise-icon" aria-hidden="true">
+                  {%- render 'altaeron-icon', type: block.settings.icon -%}
+                </span>
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
     </div>
   {%- else -%}
   <announcement-bar
@@ -120,14 +126,29 @@
       color: #fff;
       background: #063f32;
     }
-    #shopify-section-{{ section.id }} .announcement-bar__promises {
-      display: grid;
-      grid-template-columns: repeat({{ section.blocks.size }}, minmax(0, 1fr));
-      min-height: 38px;
+    #shopify-section-{{ section.id }} .announcement-bar__marquee {
+      width: 100%;
+      overflow: hidden;
+    }
+    #shopify-section-{{ section.id }} .announcement-bar__marquee-track {
+      display: flex;
+      width: max-content;
+      min-width: 100%;
+      animation: altaeron-announcement-marquee 24s linear infinite;
+      will-change: transform;
+    }
+    #shopify-section-{{ section.id }} .announcement-bar__marquee-group {
+      display: flex;
+      flex-shrink: 0;
+      gap: clamp(40px, 7vw, 110px);
+      min-width: 100%;
+      padding-right: clamp(40px, 7vw, 110px);
       align-items: center;
+      justify-content: space-around;
     }
     #shopify-section-{{ section.id }} .announcement-bar__promise {
       display: flex;
+      flex-shrink: 0;
       align-items: center;
       justify-content: center;
       gap: 9px;
@@ -138,6 +159,7 @@
       line-height: 1.2;
       text-align: center;
       text-transform: uppercase;
+      white-space: nowrap;
     }
     #shopify-section-{{ section.id }} .announcement-bar__promise a { color: inherit; text-decoration: none; }
     #shopify-section-{{ section.id }} .announcement-bar__promise-icon { width: 22px; height: 22px; flex: 0 0 22px; }
@@ -151,18 +173,19 @@
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    #shopify-section-{{ section.id }} .announcement-bar__mobile-promises { display: none; }
+    #shopify-section-{{ section.id }} .announcement-bar__marquee:hover .announcement-bar__marquee-track { animation-play-state: paused; }
+    @keyframes altaeron-announcement-marquee { to { transform: translateX(-50%); } }
     @media (max-width: 767px) {
-      #shopify-section-{{ section.id }} .announcement-bar__promises { display: none; }
-      #shopify-section-{{ section.id }} .announcement-bar__mobile-promises { position: relative; display: block; min-height: 36px; overflow: hidden; }
-      #shopify-section-{{ section.id }} .announcement-bar__mobile-promise { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 7px 16px; opacity: 0; font-size: 11px; font-weight: 600; line-height: 1.2; text-align: center; animation: altaeron-promise-cycle 15s infinite; }
-      #shopify-section-{{ section.id }} .announcement-bar__mobile-promise:nth-child(2) { animation-delay: 5s; }
-      #shopify-section-{{ section.id }} .announcement-bar__mobile-promise:nth-child(3) { animation-delay: 10s; }
-      #shopify-section-{{ section.id }} .announcement-bar__mobile-promise a { color: inherit; text-decoration: none; }
+      #shopify-section-{{ section.id }} .announcement-bar__marquee-track { animation-duration: 18s; }
+      #shopify-section-{{ section.id }} .announcement-bar__marquee-group { gap: 38px; padding-right: 38px; }
+      #shopify-section-{{ section.id }} .announcement-bar__promise { gap: 7px; padding: 7px 0; font-size: 11px; }
       #shopify-section-{{ section.id }} .announcement-bar__promise-icon { width: 19px; height: 19px; flex-basis: 19px; }
     }
-    @keyframes altaeron-promise-cycle { 0%,30% { opacity: 1; transform: translateY(0); } 33%,96% { opacity: 0; transform: translateY(-6px); } 97%,100% { opacity: 0; transform: translateY(6px); } }
-    @media (prefers-reduced-motion: reduce) { #shopify-section-{{ section.id }} .announcement-bar__mobile-promise { animation: none; opacity: 0; } #shopify-section-{{ section.id }} .announcement-bar__mobile-promise:first-child { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      #shopify-section-{{ section.id }} .announcement-bar__marquee { overflow-x: auto; }
+      #shopify-section-{{ section.id }} .announcement-bar__marquee-track { animation: none; }
+      #shopify-section-{{ section.id }} .announcement-bar__marquee-group[aria-hidden="true"] { display: none; }
+    }
   {% endstyle %}
 {%- endif -%}
 {% schema %}
