@@ -44,7 +44,6 @@
           "type": "concern",
           "settings": {
             "collection": "bunion-toe-alignment",
-            "image": "",
             "heading": "",
             "text": "Adjustable support for toe alignment and everyday comfort.",
             "quiz_label": "Toe",
@@ -55,7 +54,6 @@
           "type": "concern",
           "settings": {
             "collection": "heel-plantar-fascia",
-            "image": "",
             "heading": "",
             "text": "Support options for heel and plantar fascia comfort.",
             "quiz_label": "Heel",
@@ -66,7 +64,6 @@
           "type": "concern",
           "settings": {
             "collection": "ankle-support",
-            "image": "",
             "heading": "",
             "text": "Stabilizing support for everyday movement.",
             "quiz_label": "Ankle",
@@ -77,7 +74,6 @@
           "type": "concern",
           "settings": {
             "collection": "recovery-massage",
-            "image": "",
             "heading": "",
             "text": "Portable tools for post-activity relaxation.",
             "quiz_label": "Entire Foot",
@@ -88,45 +84,50 @@
           "type": "demonstration",
           "settings": {
             "product": "adjustable-bunion-corrector-2",
-            "poster": "",
             "video_url": "",
-            "heading": "How to Adjust"
+            "link": "",
+            "heading": "How to Adjust",
+            "accessibility_label": ""
           }
         },
         "demo_day": {
           "type": "demonstration",
           "settings": {
             "product": "day-night-bunion-corrector",
-            "poster": "",
             "video_url": "",
-            "heading": "Daytime Use"
+            "link": "",
+            "heading": "Daytime Use",
+            "accessibility_label": ""
           }
         },
         "demo_night": {
           "type": "demonstration",
           "settings": {
             "product": "plantar-fasciitis-night-splint-sock",
-            "poster": "",
             "video_url": "",
-            "heading": "Nighttime Support"
+            "link": "",
+            "heading": "Nighttime Support",
+            "accessibility_label": ""
           }
         },
         "demo_ankle": {
           "type": "demonstration",
           "settings": {
             "product": "ankle-support-side-stabilizers",
-            "poster": "",
             "video_url": "",
-            "heading": "Ankle Support"
+            "link": "",
+            "heading": "Ankle Support",
+            "accessibility_label": ""
           }
         },
         "demo_recovery": {
           "type": "demonstration",
           "settings": {
             "product": "electric-foot-hand-massager",
-            "poster": "",
             "video_url": "",
-            "heading": "Massage & Recovery"
+            "link": "",
+            "heading": "Massage & Recovery",
+            "accessibility_label": ""
           }
         },
         "value_focus": {
@@ -159,8 +160,6 @@
             "product": "plantar-fasciitis-night-splint-sock",
             "review_number": 3,
             "video_url": "",
-            "poster": "",
-            "image": "",
             "media_alt": "Customer photo of the plantar fasciitis night splint",
             "quote": "",
             "customer_name": "",
@@ -176,8 +175,6 @@
             "product": "plantar-fasciitis-night-splint-sock",
             "review_number": 4,
             "video_url": "",
-            "poster": "",
-            "image": "",
             "media_alt": "Plantar fasciitis night splint",
             "quote": "",
             "customer_name": "",
@@ -193,8 +190,6 @@
             "product": "electric-foot-hand-massager",
             "review_number": 3,
             "video_url": "",
-            "poster": "",
-            "image": "",
             "media_alt": "Electric foot and hand massager",
             "quote": "",
             "customer_name": "",
@@ -270,8 +265,7 @@
         "hero_heading": "Support Every Step.",
         "hero_text": "<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>",
         "hero_product": "adjustable-bunion-corrector",
-        "hero_image": "",
-        "hero_mobile_image": "",
+        "hero_image": "shopify://shop_images/784d36f8-52e3-4d44-8b5a-e0b8568757d2.png",
         "hero_image_alt": "Foot support products for everyday comfort",
         "hero_desktop_x": 50,
         "hero_desktop_y": 50,
