@@ -203,8 +203,8 @@
         <h2 class="apdp-buy__title">{{ 'altaeron_pdp.buy.title' | t }}</h2>
         <a class="apdp-buy__rating" href="#AltaeronReviews-{{ section.id }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ buy_rating_label }}</strong></a>
         <div class="apdp-buy__price-line">
-          <div><p class="apdp-buy__from">{{ section.settings.price_label }}</p><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price data-static-price="{{ 'altaeron_pdp.buy.compare_price' | t | escape }}">{{ 'altaeron_pdp.buy.compare_price' | t }}</s></div></div>
-          <span class="apdp-price__save" data-apdp-savings data-static-savings="{{ 'altaeron_pdp.buy.saving' | t | escape }}">{{ 'altaeron_pdp.buy.saving' | t }}</span>
+          <div><p class="apdp-buy__from">{{ section.settings.price_label }}</p><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></div></div>
+          <span class="apdp-price__save" data-apdp-savings{% if savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp.common.save_amount' | t: amount: savings_money }}</span>
         </div>
         {%- form 'product', product, id: product_form_id, class: 'apdp-form main-product-form', is: 'product-form', data-product-id: product.id -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" data-apdp-variant-id>
@@ -487,7 +487,7 @@
     <div class="apdp-final-badge"><img src="{{ 'altaeron-risk-free-badge.png' | asset_url }}" width="384" height="384" loading="lazy" alt="{{ 'altaeron_pdp.final_cta.badge_alt' | t | escape }}"></div>
   </div></section>
 
-  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><strong>{{ section.settings.sticky_title | default: product.title }}</strong><small><span>{{ section.settings.price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></small><em data-apdp-sticky-savings{% if savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp.common.save_amount' | t: amount: savings_money }}</em></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span data-apdp-sticky-text>{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span></button></div>
+  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small><span>{{ section.settings.price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></small><em data-apdp-sticky-savings{% if savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp.common.save_amount' | t: amount: savings_money }}</em></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span data-apdp-sticky-text>{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span></button></div>
   <script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script>
 </div>
 
@@ -557,7 +557,6 @@
     { "type": "text", "id": "shoe_4", "label": "Shoe type 4", "default": "Wide Shoes" },
     { "type": "text", "id": "shoe_5", "label": "Shoe type 5", "default": "Heels" },
     { "type": "text", "id": "guides_heading", "label": "Guides heading", "default": "Helpful Guides" }
-    ,{ "type": "text", "id": "sticky_title", "label": "Mobile sticky title", "default": "Adjustable Knob Bunion Corrector" }
   ],
   "blocks": [
     {

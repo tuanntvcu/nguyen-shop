@@ -50,6 +50,9 @@
 
 @media(max-width:374px){.ah-shell{width:calc(100% - 24px)}.ah-product{flex-basis:47%}.ah-hero__copy{left:12px}.ah-trust__item{font-size:10.5px}}
 
+/* Keep the configured logo visible in the mobile header. */
+@media(max-width:749px){.index-template .header__logo--image .header__logo--mobile{display:block!important}}
+
 /* Approved-design fidelity tokens and final component geometry. */
 .altaeron-home{--ah-page-width:1400px;--ah-page-padding-desktop:32px;--ah-page-padding-tablet:24px;--ah-page-padding-mobile:16px;--ah-display-desktop:56px;--ah-display-mobile:42px;--ah-h2-desktop:32px;--ah-h2-mobile:26px;--ah-h3-desktop:20px;--ah-h3-mobile:17px;--ah-body-lg:17px;--ah-body:15px;--ah-body-sm:13px;--ah-radius:14px}
 .ah-video-card__link{position:absolute;z-index:2;inset:0}

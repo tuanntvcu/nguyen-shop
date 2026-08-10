@@ -6337,6 +6337,8 @@ body:not(.header-pinned) .header-scrolled .header {
     align-items: flex-start;
   }
   .footer__copyright {
+    align-self: stretch;
     order: 2;
+    text-align: center;
   }
 }

@@ -8,11 +8,14 @@
   -%}
   {%- if review_body != blank and reviewer_name != blank -%}
     <article class="apdp-tail-review">
-      <div class="apdp-tail-avatar">
-        {%- if review_picture != blank -%}
-          <img src="{{ review_picture | escape }}" loading="lazy" width="180" height="180" alt="{{ reviewer_name | escape }}">
-        {%- else -%}
+      <div class="apdp-tail-review__media-column">
+        <div class="apdp-tail-avatar">
           <span class="apdp-tail-avatar__initial" aria-hidden="true">{{ reviewer_initial | escape }}</span>
+        </div>
+        {%- if review_picture != blank -%}
+          <div class="apdp-tail-review__image">
+            <img src="{{ review_picture | escape }}" loading="lazy" width="180" height="180" alt="{{ reviewer_name | escape }}">
+          </div>
         {%- endif -%}
       </div>
       <div>
