@@ -18,7 +18,7 @@
     <div class="ah-product__body">
       <h3 class="ah-product__title"><a href="{{ product.url }}" data-track="popular_product_click">{{ short_title }}</a></h3>
       {%- if rating != blank and rating_count > 0 -%}
-        <div class="ah-product__rating" aria-label="{{ rating }} out of 5 stars from {{ rating_count }} reviews">
+        <div class="ah-product__rating" aria-label="{{ 'altaeron_home.product.rating' | t: rating: rating, count: rating_count | escape }}">
           <span class="ah-stars" aria-hidden="true">★★★★★</span><span>{{ rating | round: 1 }} ({{ rating_count }})</span>
         </div>
       {%- endif -%}
@@ -27,10 +27,10 @@
         {%- if product.available and product.has_only_default_variant -%}
           {%- form 'product', product, is: 'product-form', class: 'ah-quick-add', data-quick-add: '' -%}
             <input type="hidden" name="id" value="{{ selected_variant.id }}">
-            <button class="ah-cart-button" type="submit" name="add" aria-label="Add {{ product.title | escape }} to cart" data-track="quick_add">{% render 'icon-cart', name: settings.cart_icon %}</button>
+            <button class="ah-cart-button" type="submit" name="add" aria-label="{{ 'altaeron_home.product.add_to_cart' | t: product: product.title | escape }}" data-track="quick_add">{% render 'icon-cart', name: settings.cart_icon %}</button>
           {%- endform -%}
         {%- else -%}
-          <a class="ah-cart-button" href="{{ product.url }}" aria-label="{% if product.available %}Choose options for{% else %}View{% endif %} {{ product.title | escape }}">{% render 'icon-cart', name: settings.cart_icon %}</a>
+          <a class="ah-cart-button" href="{{ product.url }}" aria-label="{% if product.available %}{{ 'altaeron_home.product.choose_options' | t: product: product.title | escape }}{% else %}{{ 'altaeron_home.product.view' | t: product: product.title | escape }}{% endif %}">{% render 'icon-cart', name: settings.cart_icon %}</a>
         {%- endif -%}
       </div>
     </div>

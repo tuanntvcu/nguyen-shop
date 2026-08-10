@@ -167,12 +167,12 @@
           savings.textContent = savings.dataset.staticSavings;
         } else {
           savings.hidden = compare <= price;
-          if (compare > price) savings.textContent = `Save ${money(compare - price, format)}`;
+          if (compare > price) savings.textContent = `${root.dataset.saveLabel} ${money(compare - price, format)}`;
         }
       }
       if (stickySavings) {
         stickySavings.hidden = compare <= price;
-        if (compare > price) stickySavings.textContent = `Save ${money(compare - price, format)}`;
+        if (compare > price) stickySavings.textContent = `${root.dataset.saveLabel} ${money(compare - price, format)}`;
       }
       [submit, stickySubmit].forEach((button) => {
         if (!button) return;
@@ -180,7 +180,7 @@
         if (available) button.removeAttribute('aria-disabled');
         else button.setAttribute('aria-disabled', 'true');
       });
-      const label = available ? (submitLabel?.dataset.availableText || 'Add to cart') : 'Sold out';
+      const label = available ? (submitLabel?.dataset.availableText || root.dataset.addToCartLabel) : root.dataset.soldOutLabel;
       if (submitLabel) submitLabel.textContent = label;
       if (ctaPrice) {
         ctaPrice.hidden = !available;

@@ -22,7 +22,7 @@ class AltaeronHome extends HTMLElement {
           const dot = document.createElement('button');
           dot.type = 'button';
           dot.className = `ah-dot${index === 0 ? ' is-active' : ''}`;
-          dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+          dot.setAttribute('aria-label', `${this.dataset.slideLabel} ${index + 1}`);
           dot.addEventListener('click', () => cards[index]?.scrollIntoView({ behavior: this.reducedMotion ? 'auto' : 'smooth', block: 'nearest', inline: 'start' }));
           dotsHost.append(dot);
         }
@@ -117,7 +117,7 @@ class AltaeronHome extends HTMLElement {
       if (modal.open) modal.close();
     };
     this.querySelectorAll('[data-video-open]').forEach((button) => button.addEventListener('click', () => {
-      if (title) title.textContent = button.dataset.videoTitle || 'Product demonstration';
+      if (title) title.textContent = button.dataset.videoTitle || this.dataset.demoTitle;
       const source = video?.querySelector('source');
       if (source && button.dataset.videoSrc && source.src !== button.dataset.videoSrc) {
         source.src = button.dataset.videoSrc;

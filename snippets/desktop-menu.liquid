@@ -7,7 +7,7 @@
   endunless
 -%}
 
-<nav class="header__menu flex" role="navigation" aria-label="Primary">
+<nav class="header__menu flex" role="navigation" aria-label="{{ 'accessibility.primary_navigation' | t | escape }}">
   <ul class="flex flex-wrap">
     {%- for link in menu.links limit: limit offset: offset -%}
       {%- liquid

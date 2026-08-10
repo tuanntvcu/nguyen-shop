@@ -50,7 +50,7 @@
             </motion-element>
           </div>
           <tab-selector class="tabs__select select block lg:hidden">
-            <select name="tabs_select" class="form-control form-control--select" aria-label="tabs">
+            <select name="tabs_select" class="form-control form-control--select" aria-label="{{ 'accessibility.tabs' | t | escape }}">
               {%- for block in section.blocks -%}
                 {%- liquid
                   if block.settings.title != blank

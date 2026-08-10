@@ -4,7 +4,7 @@
   style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
   {%- if section.settings.promise_layout -%}
-    <div class="announcement-bar__marquee" aria-label="Store announcements">
+    <div class="announcement-bar__marquee" aria-label="{{ 'accessibility.store_announcements' | t | escape }}">
       <div class="announcement-bar__marquee-track">
         <div class="announcement-bar__marquee-group" role="list">
           {%- for block in section.blocks -%}

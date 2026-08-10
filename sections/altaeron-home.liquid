@@ -15,7 +15,7 @@
   assign demo_video = shop.metafields.custom.homepage_demo_video.value
 -%}
 
-<altaeron-home class="altaeron-home" data-section-id="{{ section.id }}">
+<altaeron-home class="altaeron-home" data-section-id="{{ section.id }}" data-slide-label="{{ 'altaeron_home.accessibility.go_to_slide' | t | escape }}" data-demo-title="{{ 'altaeron_home.accessibility.product_demonstration' | t | escape }}">
   <section class="ah-hero" aria-labelledby="HeroHeading-{{ section.id }}" style="--ah-hero-desktop-x:{{ section.settings.hero_desktop_x }}%;--ah-hero-desktop-y:{{ section.settings.hero_desktop_y }}%;--ah-hero-mobile-x:{{ section.settings.hero_mobile_x }}%;--ah-hero-mobile-y:{{ section.settings.hero_mobile_y }}%;--ah-hero-overlay:{{ section.settings.hero_mobile_overlay }}">
     <div class="ah-shell ah-hero__grid">
       <div class="ah-hero__copy">
@@ -37,7 +37,7 @@
     </div>
   </section>
 
-  <section class="ah-trust" aria-label="Store benefits">
+  <section class="ah-trust" aria-label="{{ 'altaeron_home.accessibility.store_benefits' | t | escape }}">
     <div class="ah-shell ah-trust__grid">
       {%- for block in section.blocks -%}{%- if block.type == 'trust' and block.settings.text != blank -%}
         <div class="ah-trust__item" {{ block.shopify_attributes }}>
@@ -75,10 +75,10 @@
     <section class="ah-section ah-popular" aria-labelledby="PopularHeading-{{ section.id }}">
       <div class="ah-shell">
         <div class="ah-section-head"><h2 id="PopularHeading-{{ section.id }}">{{ section.settings.popular_heading }}</h2><a href="{{ popular_collection.url }}">{{ section.settings.view_all_label }} →</a></div>
-        <div class="ah-carousel-wrap"><button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="Previous products">‹</button><div class="ah-products ah-slider" data-slider tabindex="0" aria-label="{{ section.settings.popular_heading | escape }}">
+        <div class="ah-carousel-wrap"><button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="{{ 'altaeron_home.accessibility.previous_products' | t | escape }}">‹</button><div class="ah-products ah-slider" data-slider tabindex="0" aria-label="{{ section.settings.popular_heading | escape }}">
           {%- for product in popular_collection.products limit: 8 -%}{% render 'altaeron-home-product', product: product %}{%- endfor -%}
-        </div><button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="Next products">›</button></div>
-        <div class="ah-dots" data-slider-dots aria-label="Product carousel pagination"></div>
+        </div><button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="{{ 'altaeron_home.accessibility.next_products' | t | escape }}">›</button></div>
+        <div class="ah-dots" data-slider-dots aria-label="{{ 'altaeron_home.accessibility.product_carousel_pagination' | t | escape }}"></div>
       </div>
     </section>
   {%- endif -%}
@@ -87,16 +87,16 @@
     <div class="ah-shell ah-quiz">
       <div class="ah-quiz__intro"><h2 id="QuizHeading-{{ section.id }}">{{ section.settings.quiz_heading }}</h2><p>{{ section.settings.quiz_text }}</p></div>
       <div class="ah-quiz__main" data-quiz>
-        <div class="ah-progress" aria-label="Question progress"><span class="is-active">1</span><i></i><span>2</span><i></i><span>3</span></div>
+        <div class="ah-progress" aria-label="{{ 'altaeron_home.accessibility.question_progress' | t | escape }}"><span class="is-active">1</span><i></i><span>2</span><i></i><span>3</span></div>
         <fieldset class="ah-quiz__step is-active" data-quiz-step="1"><legend>{{ section.settings.quiz_question_one }}</legend><div class="ah-quiz__answer-row"><div class="ah-quiz__choices">
           {%- for block in section.blocks -%}{%- if block.type == 'concern' and block.settings.collection != blank -%}
             <button type="button" data-quiz-choice data-title="{{ block.settings.heading | default: block.settings.collection.title | escape }}" data-url="{{ block.settings.collection.url }}"><span class="ah-quiz__choice-icon" aria-hidden="true">{% render 'altaeron-icon', type: block.settings.quiz_icon %}</span><span>{{ block.settings.quiz_label | default: block.settings.heading | default: block.settings.collection.title }}</span></button>
           {%- endif -%}{%- endfor -%}
-        </div><div class="ah-quiz__nav"><button class="ah-button ah-quiz__next" type="button" data-quiz-next disabled>Next Question →</button></div></div></fieldset>
-        <fieldset class="ah-quiz__step" data-quiz-step="2"><legend>{{ section.settings.quiz_question_two }}</legend><div class="ah-quiz__answer-row"><div class="ah-quiz__choices ah-quiz__choices--three"><button type="button" data-quiz-choice><span>Daytime</span></button><button type="button" data-quiz-choice><span>Nighttime</span></button><button type="button" data-quiz-choice><span>Both</span></button></div><div class="ah-quiz__nav"><button class="ah-quiz__back" type="button" data-quiz-back>← Back</button><button class="ah-button ah-quiz__next" type="button" data-quiz-next disabled>Next Question →</button></div></div></fieldset>
-        <fieldset class="ah-quiz__step" data-quiz-step="3"><legend>{{ section.settings.quiz_question_three }}</legend><div class="ah-quiz__answer-row"><div class="ah-quiz__choices ah-quiz__choices--three"><button type="button" data-quiz-choice><span>Gentle</span></button><button type="button" data-quiz-choice><span>Adjustable</span></button><button type="button" data-quiz-choice><span>Firm</span></button></div><div class="ah-quiz__nav"><button class="ah-quiz__back" type="button" data-quiz-back>← Back</button><button class="ah-button ah-quiz__next" type="button" data-quiz-next disabled>See Results →</button></div></div></fieldset>
+        </div><div class="ah-quiz__nav"><button class="ah-button ah-quiz__next" type="button" data-quiz-next disabled>{{ 'altaeron_home.quiz.next' | t }} →</button></div></div></fieldset>
+        <fieldset class="ah-quiz__step" data-quiz-step="2"><legend>{{ section.settings.quiz_question_two }}</legend><div class="ah-quiz__answer-row"><div class="ah-quiz__choices ah-quiz__choices--three"><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.daytime' | t }}</span></button><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.nighttime' | t }}</span></button><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.both' | t }}</span></button></div><div class="ah-quiz__nav"><button class="ah-quiz__back" type="button" data-quiz-back>← {{ 'altaeron_home.quiz.back' | t }}</button><button class="ah-button ah-quiz__next" type="button" data-quiz-next disabled>{{ 'altaeron_home.quiz.next' | t }} →</button></div></div></fieldset>
+        <fieldset class="ah-quiz__step" data-quiz-step="3"><legend>{{ section.settings.quiz_question_three }}</legend><div class="ah-quiz__answer-row"><div class="ah-quiz__choices ah-quiz__choices--three"><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.gentle' | t }}</span></button><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.adjustable' | t }}</span></button><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.firm' | t }}</span></button></div><div class="ah-quiz__nav"><button class="ah-quiz__back" type="button" data-quiz-back>← {{ 'altaeron_home.quiz.back' | t }}</button><button class="ah-button ah-quiz__next" type="button" data-quiz-next disabled>{{ 'altaeron_home.quiz.results' | t }} →</button></div></div></fieldset>
         <div class="ah-quiz__result" data-quiz-result hidden><p>{{ section.settings.quiz_result_prefix }} <strong data-quiz-result-title></strong></p><a class="ah-button" href="{{ routes.all_products_collection_url }}" data-quiz-result-link data-track="quiz_result_clicked">{{ section.settings.quiz_result_label }} →</a></div>
-        <p class="ah-quiz__disclaimer">This tool provides general product guidance and is not medical advice.</p>
+        <p class="ah-quiz__disclaimer">{{ 'altaeron_home.quiz.disclaimer' | t }}</p>
       </div>
     </div>
   </section>
@@ -125,12 +125,12 @@
               endif
             -%}
             <article class="ah-video-card" {{ block.shopify_attributes }}>
-              <div class="ah-video-card__media ah-media">{% if demo_poster %}{{ demo_poster | image_url: width: 600 | image_tag: loading: 'lazy', widths: '220, 360, 600', sizes: '(min-width: 990px) 20vw, 34vw', alt: demo_accessibility_label }}{% endif %}{% if demo_video_source != blank %}<button class="ah-play" type="button" aria-label="Play {{ demo_accessibility_label | escape }}" data-video-open data-video-title="{{ block.settings.heading | default: demo_product.title | escape }}" data-video-src="{{ demo_video_source | escape }}"{% if demo_block_video.preview_image %} data-video-poster="{{ demo_block_video.preview_image | image_url: width: 960 }}"{% endif %} data-track="demonstration_video_play">▶</button>{% elsif block.settings.video_url != blank %}<a class="ah-play" href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="Play {{ demo_accessibility_label | escape }}" data-track="demonstration_video_play">▶</a>{% elsif block.settings.link != blank %}<a class="ah-video-card__link" href="{{ block.settings.link }}" aria-label="{{ demo_accessibility_label | escape }}"></a>{% endif %}</div>
+              <div class="ah-video-card__media ah-media">{% if demo_poster %}{{ demo_poster | image_url: width: 600 | image_tag: loading: 'lazy', widths: '220, 360, 600', sizes: '(min-width: 990px) 20vw, 34vw', alt: demo_accessibility_label }}{% endif %}{% if demo_video_source != blank %}<button class="ah-play" type="button" aria-label="{{ 'altaeron_home.accessibility.play_named' | t: name: demo_accessibility_label | escape }}" data-video-open data-video-title="{{ block.settings.heading | default: demo_product.title | escape }}" data-video-src="{{ demo_video_source | escape }}"{% if demo_block_video.preview_image %} data-video-poster="{{ demo_block_video.preview_image | image_url: width: 960 }}"{% endif %} data-track="demonstration_video_play">▶</button>{% elsif block.settings.video_url != blank %}<a class="ah-play" href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="{{ 'altaeron_home.accessibility.play_named' | t: name: demo_accessibility_label | escape }}" data-track="demonstration_video_play">▶</a>{% elsif block.settings.link != blank %}<a class="ah-video-card__link" href="{{ block.settings.link }}" aria-label="{{ demo_accessibility_label | escape }}"></a>{% endif %}</div>
               <h3>{{ block.settings.heading | default: demo_product.title }}</h3>
             </article>
           {%- endif -%}{%- endfor -%}
         </div><div class="ah-dots" data-slider-dots></div>
-        {%- if has_demo_video -%}<dialog class="ah-video-modal" data-video-modal aria-labelledby="VideoModalTitle-{{ section.id }}"><div class="ah-video-modal__inner"><button class="ah-video-modal__close" type="button" data-video-close aria-label="Close video">×</button><h3 id="VideoModalTitle-{{ section.id }}" data-video-modal-title>{{ section.settings.demo_heading }}</h3><video controls preload="none" playsinline><source type="video/mp4"></video></div></dialog>{%- endif -%}
+        {%- if has_demo_video -%}<dialog class="ah-video-modal" data-video-modal aria-labelledby="VideoModalTitle-{{ section.id }}"><div class="ah-video-modal__inner"><button class="ah-video-modal__close" type="button" data-video-close aria-label="{{ 'altaeron_home.accessibility.close_video' | t | escape }}">×</button><h3 id="VideoModalTitle-{{ section.id }}" data-video-modal-title>{{ section.settings.demo_heading }}</h3><video controls preload="none" playsinline><source type="video/mp4"></video></div></dialog>{%- endif -%}
       </div>
     </section>
   {%- endif -%}
@@ -171,7 +171,7 @@
             {%- if block.settings.video != blank -%}
               {{ block.settings.video | video_tag: controls: true, preload: 'none', image_size: '900x', class: 'ah-review__video' }}
             {%- elsif block.settings.video_url != blank -%}
-              <a href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="Play customer testimonial: {{ block.settings.media_alt | escape }}" data-track="review_video_play">
+              <a href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="{{ 'altaeron_home.accessibility.play_testimonial' | t: name: block.settings.media_alt | escape }}" data-track="review_video_play">
                 {%- if block.settings.poster != blank -%}{{ block.settings.poster | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, 44vw', alt: block.settings.media_alt }}{%- elsif testimonial_image != blank -%}{{ testimonial_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, 44vw', alt: block.settings.media_alt }}{%- endif -%}
                 <span class="ah-review__play" aria-hidden="true">▶</span>
               </a>
@@ -179,29 +179,29 @@
               {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, 44vw', alt: block.settings.media_alt }}
             {%- elsif testimonial_image != blank -%}
               {{ testimonial_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, 44vw', alt: block.settings.media_alt }}
-              <span class="ah-review__context">Reviewed product</span>
+              <span class="ah-review__context">{{ 'altaeron_home.reviews.reviewed_product' | t }}</span>
             {%- elsif review_picture != blank -%}
               <img src="{{ review_picture | escape }}" loading="lazy" width="900" height="560" alt="{{ block.settings.media_alt | default: reviewer_name | escape }}">
             {%- endif -%}
           </div>
           <div class="ah-review__body">
-            {%- if review_rating > 0 -%}<span class="ah-stars" aria-label="{{ review_rating }} out of 5 stars">★★★★★</span>{%- endif -%}
+            {%- if review_rating > 0 -%}<span class="ah-stars" aria-label="{{ 'altaeron_home.reviews.rating' | t: rating: review_rating | escape }}">★★★★★</span>{%- endif -%}
             <blockquote>“{{ review_body | escape }}”</blockquote>
             <cite>— {{ reviewer_name | escape }}{% if block.settings.persona != blank %}, {{ block.settings.persona | escape }}{% endif %}</cite>
             {%- if block.settings.verified_label != blank -%}<span class="ah-review__verified">{{ block.settings.verified_label | escape }}</span>{%- endif -%}
-            <a class="ah-review__link" href="{% if block.settings.link != blank %}{{ block.settings.link }}{% elsif testimonial_product != blank %}{{ testimonial_product.url }}#judgeme_product_reviews{% else %}#altaeron-reviews{% endif %}" data-track="review_click">Read review<span aria-hidden="true"> →</span></a>
+            <a class="ah-review__link" href="{% if block.settings.link != blank %}{{ block.settings.link }}{% elsif testimonial_product != blank %}{{ testimonial_product.url }}#judgeme_product_reviews{% else %}#altaeron-reviews{% endif %}" data-track="review_click">{{ 'altaeron_home.reviews.read_review' | t }}<span aria-hidden="true"> →</span></a>
           </div>
         </article>
       {%- endif -%}
     {%- endif -%}{%- endfor -%}
   {%- endcapture -%}
   {%- if review_count > 0 -%}
-    <section id="altaeron-reviews" class="ah-section ah-reviews" aria-labelledby="ReviewsHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-centered"><h2 id="ReviewsHeading-{{ section.id }}">{{ section.settings.reviews_heading }}</h2>{% if aggregate_review_count > 0 %}{% assign aggregate_average = aggregate_review_points | divided_by: aggregate_review_count %}<p class="ah-review-summary"><span class="ah-stars" aria-hidden="true">★★★★★</span> {{ aggregate_average | round: 1 }}/5 from {{ aggregate_review_count }} reviews</p>{% endif %}</div><div class="ah-review-rail ah-slider" data-slider tabindex="0">{{ review_cards }}</div><div class="ah-dots" data-slider-dots></div></div></section>
+    <section id="altaeron-reviews" class="ah-section ah-reviews" aria-labelledby="ReviewsHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-centered"><h2 id="ReviewsHeading-{{ section.id }}">{{ section.settings.reviews_heading }}</h2>{% if aggregate_review_count > 0 %}{% assign aggregate_average = aggregate_review_points | divided_by: aggregate_review_count | round: 1 %}<p class="ah-review-summary"><span class="ah-stars" aria-hidden="true">★★★★★</span> {{ 'altaeron_home.reviews.summary' | t: rating: aggregate_average, count: aggregate_review_count }}</p>{% endif %}</div><div class="ah-review-rail ah-slider" data-slider tabindex="0">{{ review_cards }}</div><div class="ah-dots" data-slider-dots></div></div></section>
   {%- endif -%}
 
   {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
     <section class="ah-section ah-guides" aria-labelledby="GuidesHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-section-head"><h2 id="GuidesHeading-{{ section.id }}">{{ section.settings.guides_heading }}</h2><a href="{{ section.settings.blog.url }}">{{ section.settings.view_all_label }} →</a></div><div class="ah-guide-grid">
-      {%- for article in section.settings.blog.articles limit: 3 -%}{%- assign article_cover = article.image | default: article.metafields.custom.cover_image.value -%}{%- assign article_words = article.content | strip_html | split: ' ' | size -%}{%- assign read_minutes = article_words | divided_by: 200 | plus: 1 -%}<article class="ah-guide"><a href="{{ article.url }}" data-track="article_click"><div class="ah-guide__media ah-media">{% if article_cover %}{{ article_cover | image_url: width: 620 | image_tag: loading: 'lazy', widths: '240, 400, 620', sizes: '(min-width: 750px) 33vw, 28vw', alt: article.title }}{% endif %}</div><div class="ah-guide__body"><h3>{{ article.title }}</h3><p>{{ read_minutes }} min read</p></div></a></article>{%- endfor -%}
+      {%- for article in section.settings.blog.articles limit: 3 -%}{%- assign article_cover = article.image | default: article.metafields.custom.cover_image.value -%}{%- assign article_words = article.content | strip_html | split: ' ' | size -%}{%- assign read_minutes = article_words | divided_by: 200 | plus: 1 -%}<article class="ah-guide"><a href="{{ article.url }}" data-track="article_click"><div class="ah-guide__media ah-media">{% if article_cover %}{{ article_cover | image_url: width: 620 | image_tag: loading: 'lazy', widths: '240, 400, 620', sizes: '(min-width: 750px) 33vw, 28vw', alt: article.title }}{% endif %}</div><div class="ah-guide__body"><h3>{{ article.title }}</h3><p>{{ 'altaeron_home.guides.reading_time' | t: minutes: read_minutes }}</p></div></a></article>{%- endfor -%}
     </div></div></section>
   {%- endif -%}
 
@@ -209,7 +209,7 @@
     {%- for block in section.blocks -%}{%- if block.type == 'faq' and block.settings.question != blank -%}<details class="ah-faq__item" {{ block.shopify_attributes }}><summary data-track="faq_open">{{ block.settings.question }}<span aria-hidden="true">⌄</span></summary><div class="rte">{{ block.settings.answer }}</div></details>{%- endif -%}{%- endfor -%}
   </div></div></section>
 
-  <section class="ah-newsletter" aria-labelledby="NewsletterHeading-{{ section.id }}"><div class="ah-shell ah-newsletter__inner"><div><h2 id="NewsletterHeading-{{ section.id }}">{{ section.settings.newsletter_heading }}</h2><p>{{ section.settings.newsletter_text }}</p></div>{%- form 'customer', class: 'ah-newsletter__form' -%}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">Email address</label><input id="NewsletterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="{{ section.settings.newsletter_placeholder }}" required><button type="submit" data-track="newsletter_signup">{{ section.settings.newsletter_button }}</button>{%- if form.posted_successfully? -%}<p class="ah-newsletter__message" role="status">{{ 'newsletter.success' | t }}</p>{%- elsif form.errors -%}<p class="ah-newsletter__message" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}{%- endform -%}{%- if section.settings.newsletter_privacy != blank -%}<p class="ah-newsletter__privacy">{{ section.settings.newsletter_privacy }}</p>{%- endif -%}</div></section>
+  <section class="ah-newsletter" aria-labelledby="NewsletterHeading-{{ section.id }}"><div class="ah-shell ah-newsletter__inner"><div><h2 id="NewsletterHeading-{{ section.id }}">{{ section.settings.newsletter_heading }}</h2><p>{{ section.settings.newsletter_text }}</p></div>{%- form 'customer', class: 'ah-newsletter__form' -%}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">{{ 'newsletter.label' | t }}</label><input id="NewsletterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="{{ section.settings.newsletter_placeholder }}" required><button type="submit" data-track="newsletter_signup">{{ section.settings.newsletter_button }}</button>{%- if form.posted_successfully? -%}<p class="ah-newsletter__message" role="status">{{ 'newsletter.success' | t }}</p>{%- elsif form.errors -%}<p class="ah-newsletter__message" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}{%- endform -%}{%- if section.settings.newsletter_privacy != blank -%}<p class="ah-newsletter__privacy">{{ section.settings.newsletter_privacy }}</p>{%- endif -%}</div></section>
 </altaeron-home>
 
 {% schema %}
