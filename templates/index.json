@@ -12,72 +12,302 @@
     "altaeron_home": {
       "type": "altaeron-home",
       "blocks": {
-        "trust_support": {"type":"trust","settings":{"icon":"fit","text":"Everyday foot support"}},
-        "trust_mobile": {"type":"trust","settings":{"icon":"heart","text":"Mobile-friendly guidance"}},
-        "trust_selected": {"type":"trust","settings":{"icon":"shield","text":"Carefully selected"}},
-        "trust_shipping": {"type":"trust","settings":{"icon":"shipping","text":"Shipping at checkout"}},
-        "concern_bunion": {"type":"concern","settings":{"collection":"bunion-toe-alignment","image":"","heading":"","text":"Adjustable support for toe alignment and everyday comfort.","quiz_label":"Toe","quiz_icon":"fit"}},
-        "concern_heel": {"type":"concern","settings":{"collection":"heel-plantar-fascia","image":"","heading":"","text":"Support options for heel and plantar fascia comfort.","quiz_label":"Heel","quiz_icon":"heart"}},
-        "concern_ankle": {"type":"concern","settings":{"collection":"ankle-support","image":"","heading":"","text":"Stabilizing support for everyday movement.","quiz_label":"Ankle","quiz_icon":"shield"}},
-        "concern_recovery": {"type":"concern","settings":{"collection":"recovery-massage","image":"","heading":"","text":"Portable tools for post-activity relaxation.","quiz_label":"Entire Foot","quiz_icon":"community"}},
-        "demo_adjust": {"type":"demonstration","settings":{"product":"adjustable-bunion-corrector","poster":"","video_url":"","heading":"How to Adjust"}},
-        "demo_day": {"type":"demonstration","settings":{"product":"day-night-bunion-corrector","poster":"","video_url":"","heading":"Daytime Use"}},
-        "demo_night": {"type":"demonstration","settings":{"product":"plantar-fasciitis-night-splint-sock","poster":"","video_url":"","heading":"Nighttime Support"}},
-        "demo_ankle": {"type":"demonstration","settings":{"product":"ankle-support-side-stabilizers","poster":"","video_url":"","heading":"Ankle Support"}},
-        "demo_recovery": {"type":"demonstration","settings":{"product":"electric-foot-hand-massager","poster":"","video_url":"","heading":"Massage & Recovery"}},
-        "value_focus": {"type":"value","settings":{"icon":"fit","heading":"Not Another Marketplace","text":"Products chosen for specific foot concerns."}},
-        "value_guidance": {"type":"value","settings":{"icon":"shield","heading":"Real Expectations","text":"Simple guidance so you know what to expect."}},
-        "value_comfort": {"type":"value","settings":{"icon":"heart","heading":"Everyday Comfort","text":"Support that fits your routine and lifestyle."}},
-        "testimonial_douglass": {"type":"testimonial","settings":{"product":"plantar-fasciitis-night-splint-sock","review_number":3,"video":"","video_url":"","poster":"","image":"","media_alt":"Customer photo of the plantar fasciitis night splint","quote":"","customer_name":"","persona":"","rating":0,"verified_label":"","link":""}},
-        "testimonial_iraida": {"type":"testimonial","settings":{"product":"plantar-fasciitis-night-splint-sock","review_number":4,"video":"","video_url":"","poster":"","image":"","media_alt":"Plantar fasciitis night splint","quote":"","customer_name":"","persona":"","rating":0,"verified_label":"","link":""}},
-        "testimonial_pasty": {"type":"testimonial","settings":{"product":"electric-foot-hand-massager","review_number":3,"video":"","video_url":"","poster":"","image":"","media_alt":"Electric foot and hand massager","quote":"","customer_name":"","persona":"","rating":0,"verified_label":"","link":""}},
-        "faq_shipping": {"type":"faq","settings":{"question":"How long does shipping take?","answer":"<p>Available delivery estimates and costs are shown during checkout for your address.</p>"}},
-        "faq_fit": {"type":"faq","settings":{"question":"What if it does not fit or help?","answer":"<p>Review the product fit guidance before use. If the product is not right for you, contact support and consult the current refund policy.</p>"}},
-        "faq_choose": {"type":"faq","settings":{"question":"How should I choose the right product?","answer":"<p>Start with the area where you need support, then compare wear time, adjustability, and available variants on each product page.</p>"}},
-        "faq_safe": {"type":"faq","settings":{"question":"Is it safe to use every day?","answer":"<p>Follow the product-specific usage guidance. Stop use if pain, numbness, or irritation increases and seek professional advice when needed.</p>"}},
-        "faq_clean": {"type":"faq","settings":{"question":"How do I clean the products?","answer":"<p>Follow the care instructions shown on the product page or packaging. Keep powered products away from water unless their instructions state otherwise.</p>"}}
+        "trust_support": {
+          "type": "trust",
+          "settings": {
+            "icon": "fit",
+            "text": "Everyday foot support"
+          }
+        },
+        "trust_mobile": {
+          "type": "trust",
+          "settings": {
+            "icon": "heart",
+            "text": "Mobile-friendly guidance"
+          }
+        },
+        "trust_selected": {
+          "type": "trust",
+          "settings": {
+            "icon": "shield",
+            "text": "Carefully selected"
+          }
+        },
+        "trust_shipping": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "text": "Shipping at checkout"
+          }
+        },
+        "concern_bunion": {
+          "type": "concern",
+          "settings": {
+            "collection": "bunion-toe-alignment",
+            "image": "",
+            "heading": "",
+            "text": "Adjustable support for toe alignment and everyday comfort.",
+            "quiz_label": "Toe",
+            "quiz_icon": "fit"
+          }
+        },
+        "concern_heel": {
+          "type": "concern",
+          "settings": {
+            "collection": "heel-plantar-fascia",
+            "image": "",
+            "heading": "",
+            "text": "Support options for heel and plantar fascia comfort.",
+            "quiz_label": "Heel",
+            "quiz_icon": "heart"
+          }
+        },
+        "concern_ankle": {
+          "type": "concern",
+          "settings": {
+            "collection": "ankle-support",
+            "image": "",
+            "heading": "",
+            "text": "Stabilizing support for everyday movement.",
+            "quiz_label": "Ankle",
+            "quiz_icon": "shield"
+          }
+        },
+        "concern_recovery": {
+          "type": "concern",
+          "settings": {
+            "collection": "recovery-massage",
+            "image": "",
+            "heading": "",
+            "text": "Portable tools for post-activity relaxation.",
+            "quiz_label": "Entire Foot",
+            "quiz_icon": "community"
+          }
+        },
+        "demo_adjust": {
+          "type": "demonstration",
+          "settings": {
+            "product": "adjustable-bunion-corrector-2",
+            "poster": "",
+            "video_url": "",
+            "heading": "How to Adjust"
+          }
+        },
+        "demo_day": {
+          "type": "demonstration",
+          "settings": {
+            "product": "day-night-bunion-corrector",
+            "poster": "",
+            "video_url": "",
+            "heading": "Daytime Use"
+          }
+        },
+        "demo_night": {
+          "type": "demonstration",
+          "settings": {
+            "product": "plantar-fasciitis-night-splint-sock",
+            "poster": "",
+            "video_url": "",
+            "heading": "Nighttime Support"
+          }
+        },
+        "demo_ankle": {
+          "type": "demonstration",
+          "settings": {
+            "product": "ankle-support-side-stabilizers",
+            "poster": "",
+            "video_url": "",
+            "heading": "Ankle Support"
+          }
+        },
+        "demo_recovery": {
+          "type": "demonstration",
+          "settings": {
+            "product": "electric-foot-hand-massager",
+            "poster": "",
+            "video_url": "",
+            "heading": "Massage & Recovery"
+          }
+        },
+        "value_focus": {
+          "type": "value",
+          "settings": {
+            "icon": "fit",
+            "heading": "Not Another Marketplace",
+            "text": "Products chosen for specific foot concerns."
+          }
+        },
+        "value_guidance": {
+          "type": "value",
+          "settings": {
+            "icon": "shield",
+            "heading": "Real Expectations",
+            "text": "Simple guidance so you know what to expect."
+          }
+        },
+        "value_comfort": {
+          "type": "value",
+          "settings": {
+            "icon": "heart",
+            "heading": "Everyday Comfort",
+            "text": "Support that fits your routine and lifestyle."
+          }
+        },
+        "testimonial_douglass": {
+          "type": "testimonial",
+          "settings": {
+            "product": "plantar-fasciitis-night-splint-sock",
+            "review_number": 3,
+            "video_url": "",
+            "poster": "",
+            "image": "",
+            "media_alt": "Customer photo of the plantar fasciitis night splint",
+            "quote": "",
+            "customer_name": "",
+            "persona": "",
+            "rating": 0,
+            "verified_label": "",
+            "link": ""
+          }
+        },
+        "testimonial_iraida": {
+          "type": "testimonial",
+          "settings": {
+            "product": "plantar-fasciitis-night-splint-sock",
+            "review_number": 4,
+            "video_url": "",
+            "poster": "",
+            "image": "",
+            "media_alt": "Plantar fasciitis night splint",
+            "quote": "",
+            "customer_name": "",
+            "persona": "",
+            "rating": 0,
+            "verified_label": "",
+            "link": ""
+          }
+        },
+        "testimonial_pasty": {
+          "type": "testimonial",
+          "settings": {
+            "product": "electric-foot-hand-massager",
+            "review_number": 3,
+            "video_url": "",
+            "poster": "",
+            "image": "",
+            "media_alt": "Electric foot and hand massager",
+            "quote": "",
+            "customer_name": "",
+            "persona": "",
+            "rating": 0,
+            "verified_label": "",
+            "link": ""
+          }
+        },
+        "faq_shipping": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Available delivery estimates and costs are shown during checkout for your address.</p>"
+          }
+        },
+        "faq_fit": {
+          "type": "faq",
+          "settings": {
+            "question": "What if it does not fit or help?",
+            "answer": "<p>Review the product fit guidance before use. If the product is not right for you, contact support and consult the current refund policy.</p>"
+          }
+        },
+        "faq_choose": {
+          "type": "faq",
+          "settings": {
+            "question": "How should I choose the right product?",
+            "answer": "<p>Start with the area where you need support, then compare wear time, adjustability, and available variants on each product page.</p>"
+          }
+        },
+        "faq_safe": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it safe to use every day?",
+            "answer": "<p>Follow the product-specific usage guidance. Stop use if pain, numbness, or irritation increases and seek professional advice when needed.</p>"
+          }
+        },
+        "faq_clean": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I clean the products?",
+            "answer": "<p>Follow the care instructions shown on the product page or packaging. Keep powered products away from water unless their instructions state otherwise.</p>"
+          }
+        }
       },
-      "block_order": ["trust_support","trust_mobile","trust_selected","trust_shipping","concern_bunion","concern_heel","concern_ankle","concern_recovery","demo_adjust","demo_day","demo_night","demo_ankle","demo_recovery","value_focus","value_guidance","value_comfort","testimonial_douglass","testimonial_iraida","testimonial_pasty","faq_shipping","faq_fit","faq_choose","faq_safe","faq_clean"],
+      "block_order": [
+        "trust_support",
+        "trust_mobile",
+        "trust_selected",
+        "trust_shipping",
+        "concern_bunion",
+        "concern_heel",
+        "concern_ankle",
+        "concern_recovery",
+        "demo_adjust",
+        "demo_day",
+        "demo_night",
+        "demo_ankle",
+        "demo_recovery",
+        "value_focus",
+        "value_guidance",
+        "value_comfort",
+        "testimonial_douglass",
+        "testimonial_iraida",
+        "testimonial_pasty",
+        "faq_shipping",
+        "faq_fit",
+        "faq_choose",
+        "faq_safe",
+        "faq_clean"
+      ],
       "settings": {
-        "hero_heading":"Support Every Step.",
-        "hero_text":"<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>",
-        "hero_product":"breathable-bunion-support",
-        "hero_image":"",
-        "hero_mobile_image":"",
-        "hero_image_alt":"Foot support products for everyday comfort",
-        "hero_desktop_x":50,
-        "hero_desktop_y":50,
-        "hero_mobile_x":67,
-        "hero_mobile_y":50,
-        "hero_mobile_overlay":85,
-        "primary_label":"Shop by Concern",
-        "secondary_label":"Find Your Match",
-        "concern_heading":"Where Does It Hurt?",
-        "explore_label":"Explore",
-        "popular_collection":"best-sellers",
-        "popular_heading":"Most Popular Solutions",
-        "view_all_label":"View all",
-        "quiz_heading":"Find the Right Support",
-        "quiz_text":"Answer 3 quick questions and get a personalized collection recommendation.",
-        "quiz_question_one":"Where do you feel discomfort?",
-        "quiz_question_two":"When would you use support most?",
-        "quiz_question_three":"What support feel do you prefer?",
-        "quiz_result_prefix":"A useful place to start:",
-        "quiz_result_label":"View recommendations",
-        "demo_heading":"Real Demonstrations",
-        "demo_text":"See how our products work in real life.",
-        "values_heading":"Why Altaeron?",
-        "reviews_heading":"Loved by Real Customers",
-        "blog":"news",
-        "guides_heading":"Foot Care Tips & Guides",
-        "faq_heading":"Frequently Asked Questions",
-        "newsletter_heading":"Take Better Steps.",
-        "newsletter_text":"Tips, guides and product updates straight to your inbox.",
-        "newsletter_placeholder":"Your email address",
-        "newsletter_button":"Subscribe",
-        "newsletter_privacy":"No spam. Unsubscribe anytime."
+        "hero_heading": "Support Every Step.",
+        "hero_text": "<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>",
+        "hero_product": "adjustable-bunion-corrector",
+        "hero_image": "",
+        "hero_mobile_image": "",
+        "hero_image_alt": "Foot support products for everyday comfort",
+        "hero_desktop_x": 50,
+        "hero_desktop_y": 50,
+        "hero_mobile_x": 67,
+        "hero_mobile_y": 50,
+        "hero_mobile_overlay": 85,
+        "primary_label": "Shop by Concern",
+        "secondary_label": "Find Your Match",
+        "concern_heading": "Where Does It Hurt?",
+        "explore_label": "Explore",
+        "popular_collection": "best-sellers",
+        "popular_heading": "Most Popular Solutions",
+        "view_all_label": "View all",
+        "quiz_heading": "Find the Right Support",
+        "quiz_text": "Answer 3 quick questions and get a personalized collection recommendation.",
+        "quiz_question_one": "Where do you feel discomfort?",
+        "quiz_question_two": "When would you use support most?",
+        "quiz_question_three": "What support feel do you prefer?",
+        "quiz_result_prefix": "A useful place to start:",
+        "quiz_result_label": "View recommendations",
+        "demo_heading": "Real Demonstrations",
+        "demo_text": "See how our products work in real life.",
+        "values_heading": "Why Altaeron?",
+        "reviews_heading": "Loved by Real Customers",
+        "blog": "news",
+        "guides_heading": "Foot Care Tips & Guides",
+        "faq_heading": "Frequently Asked Questions",
+        "newsletter_heading": "Take Better Steps.",
+        "newsletter_text": "Tips, guides and product updates straight to your inbox.",
+        "newsletter_placeholder": "Your email address",
+        "newsletter_button": "Subscribe",
+        "newsletter_privacy": "No spam. Unsubscribe anytime."
       }
     }
   },
-  "order": ["altaeron_home"]
+  "order": [
+    "altaeron_home"
+  ]
 }
