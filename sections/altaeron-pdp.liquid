@@ -41,6 +41,25 @@
   assign spacer_basic_alt = 'altaeron_pdp.spacer.basic_alt' | t
   assign spacer_altaeron_alt = 'altaeron_pdp.spacer.altaeron_alt' | t
   assign spacer_expert_alt = 'altaeron_pdp.spacer.expert_alt' | t
+  assign familiar_title = 'altaeron_pdp.familiar.title' | t
+  assign familiar_subtitle = 'altaeron_pdp.familiar.subtitle' | t
+  assign causes_title = 'altaeron_pdp.causes.title' | t
+  assign causes_subtitle = 'altaeron_pdp.causes.subtitle' | t
+  assign support_title = 'altaeron_pdp.support.title' | t
+  assign support_subtitle = 'altaeron_pdp.support.subtitle' | t
+  assign day_title = 'altaeron_pdp.day.title' | t
+  assign day_heading_subtitle = 'altaeron_pdp.day.subtitle_html' | t
+  assign reviews_title = 'altaeron_pdp.reviews.title' | t
+  assign reviews_subtitle = 'altaeron_pdp.reviews.subtitle' | t
+  assign comparison_title = 'altaeron_pdp.comparison.title' | t
+  assign expectations_title = 'altaeron_pdp.expectations.title' | t
+  assign spacer_title = 'altaeron_pdp.spacer.title' | t
+  assign spacer_subtitle = 'altaeron_pdp.spacer.subtitle' | t
+  assign moments_title = 'altaeron_pdp.moments.title' | t
+  assign moments_subtitle = 'altaeron_pdp.moments.subtitle' | t
+  assign learn_title = 'altaeron_pdp.learn.title' | t
+  assign learn_subtitle = 'altaeron_pdp.learn.subtitle' | t
+  assign faq_title = 'altaeron_pdp.faq.title' | t
   assign how_image = mf.pdp_how_image.value | default: product.images[1] | default: product.featured_image
   for block in section.blocks
     if block.type == 'education_media'
@@ -230,7 +249,7 @@
   <section class="apdp-education apdp-education--familiar alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronFamiliar-{{ section.id }}">
     <div class="apdp-shell">
       {%- assign chapter_heading_id = 'AltaeronFamiliar-' | append: section.id -%}
-      {% render 'altaeron-pdp-section-heading', number: '1', title: 'altaeron_pdp.familiar.title' | t, subtitle: 'altaeron_pdp.familiar.subtitle' | t, heading_id: chapter_heading_id %}
+      {% render 'altaeron-pdp-section-heading', number: '1', title: familiar_title, subtitle: familiar_subtitle, heading_id: chapter_heading_id %}
       <div class="apdp-familiar-grid">
         {%- for i in (1..4) -%}
           {%- capture familiar_key -%}altaeron_pdp.familiar.item_{{ i }}{%- endcapture -%}
@@ -261,7 +280,7 @@
       <div class="apdp-causes-grid">
         <div class="apdp-causes__intro">
           {%- assign chapter_heading_id = 'AltaeronCauses-' | append: section.id -%}
-          {% render 'altaeron-pdp-section-heading', number: '2', title: 'altaeron_pdp.causes.title' | t, subtitle: 'altaeron_pdp.causes.subtitle' | t, heading_id: chapter_heading_id %}
+          {% render 'altaeron-pdp-section-heading', number: '2', title: causes_title, subtitle: causes_subtitle, heading_id: chapter_heading_id %}
           <div class="apdp-causes__points">
             {%- for i in (1..4) -%}{%- capture cause_key -%}altaeron_pdp.causes.point_{{ i }}_html{%- endcapture -%}<p><span aria-hidden="true">✓</span>{{ cause_key | t }}</p>{%- endfor -%}
           </div>
@@ -292,7 +311,7 @@
   <section class="apdp-education apdp-education--support alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronSupport-{{ section.id }}">
     <div class="apdp-shell">
       {%- assign chapter_heading_id = 'AltaeronSupport-' | append: section.id -%}
-      {% render 'altaeron-pdp-section-heading', number: '3', title: 'altaeron_pdp.support.title' | t, subtitle: 'altaeron_pdp.support.subtitle' | t, heading_id: chapter_heading_id %}
+      {% render 'altaeron-pdp-section-heading', number: '3', title: support_title, subtitle: support_subtitle, heading_id: chapter_heading_id %}
       <div class="apdp-support-grid">
         <div class="apdp-support__features">
           {%- assign support_icons = 'knob|dual-support|pressure-relief|comfort' | split: '|' -%}{%- for icon in support_icons -%}{%- capture support_title_key -%}altaeron_pdp.support.item_{{ forloop.index }}_title_html{%- endcapture -%}{%- capture support_text_key -%}altaeron_pdp.support.item_{{ forloop.index }}_text_html{%- endcapture -%}<article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: icon %}</span><h3>{{ support_title_key | t }}</h3><p>{{ support_text_key | t }}</p></article>{%- endfor -%}
@@ -310,9 +329,8 @@
 
   <section class="apdp-education apdp-education--day alta-pdp-flow-section alta-pdp-flow-section--spacious" aria-labelledby="AltaeronDay-{{ section.id }}">
     <div class="apdp-shell">
-      {%- assign day_heading_subtitle = 'altaeron_pdp.day.subtitle_html' | t -%}
       {%- assign chapter_heading_id = 'AltaeronDay-' | append: section.id -%}
-      {% render 'altaeron-pdp-section-heading', number: '4', title: 'altaeron_pdp.day.title' | t, subtitle: day_heading_subtitle, heading_id: chapter_heading_id %}
+      {% render 'altaeron-pdp-section-heading', number: '4', title: day_title, subtitle: day_heading_subtitle, heading_id: chapter_heading_id %}
 
       <div class="apdp-day__media" aria-label="{{ 'altaeron_pdp.day.media_label' | t | escape }}">
         <div class="apdp-day__visual apdp-education__placeholder">
@@ -343,7 +361,7 @@
     <div class="apdp-shell">
       <div class="apdp-tail-review-head">
         {%- assign chapter_heading_id = 'AltaeronReviewsTitle-' | append: section.id -%}
-        {% render 'altaeron-pdp-section-heading', number: '5', title: 'altaeron_pdp.reviews.title' | t, subtitle: 'altaeron_pdp.reviews.subtitle' | t, heading_id: chapter_heading_id %}
+        {% render 'altaeron-pdp-section-heading', number: '5', title: reviews_title, subtitle: reviews_subtitle, heading_id: chapter_heading_id %}
         <div class="apdp-tail-review-nav" aria-label="{{ 'altaeron_pdp.reviews.slider_controls' | t | escape }}"><button type="button" data-apdp-review-prev aria-label="{{ 'altaeron_pdp.reviews.previous' | t | escape }}">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button><button type="button" data-apdp-review-next aria-label="{{ 'altaeron_pdp.reviews.next' | t | escape }}">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button></div>
       </div>
       <div class="apdp-tail-review-viewport" data-apdp-review-slider>
@@ -371,7 +389,7 @@
   <div class="apdp-tail apdp-tail-split apdp-shell alta-pdp-flow-section alta-pdp-flow-section--default-compact">
     <section class="apdp-tail-panel apdp-created" aria-labelledby="AltaeronCreated-{{ section.id }}">
       {%- assign chapter_heading_id = 'AltaeronCreated-' | append: section.id -%}
-      {% render 'altaeron-pdp-section-heading', number: '6', title: 'altaeron_pdp.comparison.title' | t, heading_id: chapter_heading_id %}
+      {% render 'altaeron-pdp-section-heading', number: '6', title: comparison_title, heading_id: chapter_heading_id %}
       <div class="apdp-tail-card">
         <div class="apdp-compare-table" role="table" aria-label="{{ 'altaeron_pdp.comparison.table_label' | t | escape }}">
           <div class="apdp-compare-head" role="row"><span></span><b>{{ 'altaeron_pdp.comparison.altaeron_html' | t }}</b><b>{{ 'altaeron_pdp.comparison.others_html' | t }}</b></div>
@@ -382,7 +400,7 @@
 
     <section class="apdp-tail-panel alta-pdp-subsection alta-pdp-subsection--tight" aria-labelledby="AltaeronCanCant-{{ section.id }}">
       {%- assign chapter_heading_id = 'AltaeronCanCant-' | append: section.id -%}
-      {% render 'altaeron-pdp-section-heading', number: '7', title: 'altaeron_pdp.expectations.title' | t, heading_id: chapter_heading_id %}
+      {% render 'altaeron-pdp-section-heading', number: '7', title: expectations_title, heading_id: chapter_heading_id %}
       <div class="apdp-tail-card apdp-can-cant">
         <div class="apdp-can-cant__grid">
           <div><h3>{{ 'altaeron_pdp.expectations.can_title' | t }}</h3><ul>{%- for i in (1..4) -%}{%- capture can_key -%}altaeron_pdp.expectations.can_{{ i }}{%- endcapture -%}<li>{{ can_key | t }}</li>{%- endfor -%}</ul></div>
@@ -395,7 +413,7 @@
 
   <section class="apdp-tail apdp-spacer alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronSpacer-{{ section.id }}"><div class="apdp-shell">
     {%- assign chapter_heading_id = 'AltaeronSpacer-' | append: section.id -%}
-    {% render 'altaeron-pdp-section-heading', number: '8', title: 'altaeron_pdp.spacer.title' | t, subtitle: 'altaeron_pdp.spacer.subtitle' | t, heading_id: chapter_heading_id %}
+    {% render 'altaeron-pdp-section-heading', number: '8', title: spacer_title, subtitle: spacer_subtitle, heading_id: chapter_heading_id %}
     <div class="apdp-spacer-grid">
       <article class="apdp-spacer-product">
         <div class="apdp-tail-media">{%- if tail_spacer != blank -%}{{ tail_spacer | image_url: width: 500 | image_tag: loading: 'lazy', widths: '240, 360, 500', sizes: '(min-width: 768px) 170px, 34vw', alt: spacer_basic_alt }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
@@ -412,7 +430,7 @@
 
   <section class="apdp-tail apdp-moments alta-pdp-flow-section alta-pdp-flow-section--spacious" aria-labelledby="AltaeronMoments-{{ section.id }}"><div class="apdp-shell">
     {%- assign chapter_heading_id = 'AltaeronMoments-' | append: section.id -%}
-    {% render 'altaeron-pdp-section-heading', number: '9', title: 'altaeron_pdp.moments.title' | t, subtitle: 'altaeron_pdp.moments.subtitle' | t, heading_id: chapter_heading_id %}
+    {% render 'altaeron-pdp-section-heading', number: '9', title: moments_title, subtitle: moments_subtitle, heading_id: chapter_heading_id %}
     <div class="apdp-moment-grid">{%- for i in (1..5) -%}{%- capture moment_key -%}altaeron_pdp.moments.item_{{ i }}{%- endcapture -%}{%- assign copy = moment_key | t -%}{%- case forloop.index -%}{%- when 1 -%}{%- assign moment_image = tail_moment_1 -%}{%- when 2 -%}{%- assign moment_image = tail_moment_2 -%}{%- when 3 -%}{%- assign moment_image = tail_moment_3 -%}{%- when 4 -%}{%- assign moment_image = tail_moment_4 -%}{%- else -%}{%- assign moment_image = tail_moment_5 -%}{%- endcase -%}<article><div class="apdp-tail-media">{%- if moment_image != blank -%}{{ moment_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '280, 480, 700', sizes: '(min-width: 768px) 19vw, 66vw', alt: copy }}{%- else -%}{{ 'lifestyle-1' | placeholder_svg_tag }}{%- endif -%}</div><p>{{ copy }}</p></article>{%- endfor -%}</div>
   </div></section>
 
@@ -420,7 +438,7 @@
     <div>
       <section class="apdp-learn" aria-labelledby="AltaeronLearn-{{ section.id }}">
         {%- assign chapter_heading_id = 'AltaeronLearn-' | append: section.id -%}
-        {% render 'altaeron-pdp-section-heading', number: '10', title: 'altaeron_pdp.learn.title' | t, subtitle: 'altaeron_pdp.learn.subtitle' | t, heading_id: chapter_heading_id %}
+        {% render 'altaeron-pdp-section-heading', number: '10', title: learn_title, subtitle: learn_subtitle, heading_id: chapter_heading_id %}
         <div class="apdp-learn-grid">{%- for i in (1..4) -%}{%- capture guide_title_key -%}altaeron_pdp.learn.item_{{ i }}_title{%- endcapture -%}{%- assign title = guide_title_key | t -%}{%- capture guide_text_key -%}altaeron_pdp.learn.item_{{ i }}_text{%- endcapture -%}{%- assign guide_minutes = forloop.index | plus: 4 -%}{%- case forloop.index -%}{%- when 1 -%}{%- assign guide_image = tail_guide_1 -%}{%- when 2 -%}{%- assign guide_image = tail_guide_2 -%}{%- when 3 -%}{%- assign guide_image = tail_guide_3 -%}{%- else -%}{%- assign guide_image = tail_guide_4 -%}{%- endcase -%}<article><div class="apdp-tail-media">{%- if guide_image != blank -%}{{ guide_image | image_url: width: 320 | image_tag: loading: 'lazy', widths: '120, 220, 320', sizes: '(min-width: 768px) 90px, 26vw', alt: title }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div><div><h3>{{ title }}</h3><p>{{ guide_text_key | t }}</p><small>{{ 'altaeron_pdp.learn.reading_time' | t: minutes: guide_minutes }}</small></div></article>{%- endfor -%}</div>
       </section>
 
@@ -439,7 +457,7 @@
 
     <section class="apdp-tail-faq alta-pdp-subsection alta-pdp-subsection--tight" aria-labelledby="AltaeronFaq-{{ section.id }}">
       {%- assign chapter_heading_id = 'AltaeronFaq-' | append: section.id -%}
-      {% render 'altaeron-pdp-section-heading', number: '12', title: 'altaeron_pdp.faq.title' | t, heading_id: chapter_heading_id %}
+      {% render 'altaeron-pdp-section-heading', number: '12', title: faq_title, heading_id: chapter_heading_id %}
       <div class="apdp-tail-accordion">
         {%- for i in (1..6) -%}{%- capture question_key -%}altaeron_pdp.faq.question_{{ i }}{%- endcapture -%}{%- capture answer_key -%}altaeron_pdp.faq.answer_{{ i }}{%- endcapture -%}<details><summary>{{ question_key | t }}<span></span></summary><p>{{ answer_key | t }}</p></details>{%- endfor -%}
       </div>
