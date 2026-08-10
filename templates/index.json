@@ -88,7 +88,8 @@
           "type": "demonstration",
           "settings": {
             "product": "adjustable-bunion-corrector-2",
-            "video_url": "",
+            "video": "shopify://files/videos/kling_20260723_VIDEO_Image_to_V_3900_0.mp4",
+            "video_url": "shopify://products/adjustable-bunion-corrector",
             "link": "",
             "heading": "How to Adjust",
             "accessibility_label": ""
