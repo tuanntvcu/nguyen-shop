@@ -102,17 +102,17 @@
   </section>
 
   {%- assign demo_count = section.blocks | where: 'type', 'demonstration' | size -%}
-  {%- if demo_count > 0 -%}
-    {%- assign has_demo_video = false -%}
-    <section class="ah-section ah-demo" aria-labelledby="DemoHeading-{{ section.id }}">
+  {%- assign has_demo_video = false -%}
+  <section class="ah-section ah-demo" aria-labelledby="DemoHeading-{{ section.id }}">
       <div class="ah-shell"><div class="ah-centered"><h2 id="DemoHeading-{{ section.id }}">{{ section.settings.demo_heading }}</h2><p>{{ section.settings.demo_text }}</p></div>
         <div class="ah-demo__rail ah-slider" data-slider tabindex="0">
-          {%- for block in section.blocks -%}{%- if block.type == 'demonstration' and block.settings.product != blank -%}
+          {%- for block in section.blocks -%}{%- if block.type == 'demonstration' -%}
             {%- liquid
               assign demo_product = block.settings.product
               assign demo_block_video = block.settings.video | default: demo_video
               assign demo_poster = block.settings.poster | default: block.settings.video.preview_image | default: demo_product.metafields.custom.homepage_card_image.value | default: demo_product.featured_image | default: demo_video.preview_image
-              assign demo_accessibility_label = block.settings.accessibility_label | default: block.settings.heading | default: demo_product.title
+              assign demo_title = block.settings.heading | default: demo_product.title | default: 'Product demonstration'
+              assign demo_accessibility_label = block.settings.accessibility_label | default: demo_title
               assign demo_video_source = blank
               if demo_block_video != blank
                 assign has_demo_video = true
@@ -125,15 +125,23 @@
               endif
             -%}
             <article class="ah-video-card" {{ block.shopify_attributes }}>
-              <div class="ah-video-card__media ah-media">{% if demo_poster %}{{ demo_poster | image_url: width: 600 | image_tag: loading: 'lazy', widths: '220, 360, 600', sizes: '(min-width: 990px) 20vw, 34vw', alt: demo_accessibility_label }}{% endif %}{% if demo_video_source != blank %}<button class="ah-play" type="button" aria-label="{{ 'altaeron_home.accessibility.play_named' | t: name: demo_accessibility_label | escape }}" data-video-open data-video-title="{{ block.settings.heading | default: demo_product.title | escape }}" data-video-src="{{ demo_video_source | escape }}"{% if demo_block_video.preview_image %} data-video-poster="{{ demo_block_video.preview_image | image_url: width: 960 }}"{% endif %} data-track="demonstration_video_play">▶</button>{% elsif block.settings.video_url != blank %}<a class="ah-play" href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="{{ 'altaeron_home.accessibility.play_named' | t: name: demo_accessibility_label | escape }}" data-track="demonstration_video_play">▶</a>{% elsif block.settings.link != blank %}<a class="ah-video-card__link" href="{{ block.settings.link }}" aria-label="{{ demo_accessibility_label | escape }}"></a>{% endif %}</div>
-              <h3>{{ block.settings.heading | default: demo_product.title }}</h3>
+              <div class="ah-video-card__media ah-media">{% if demo_poster %}{{ demo_poster | image_url: width: 600 | image_tag: loading: 'lazy', widths: '220, 360, 600', sizes: '(min-width: 990px) 20vw, 34vw', alt: demo_accessibility_label }}{% else %}{{ 'product-1' | placeholder_svg_tag: 'ah-placeholder-svg' }}{% endif %}{% if demo_video_source != blank %}<button class="ah-play" type="button" aria-label="{{ 'altaeron_home.accessibility.play_named' | t: name: demo_accessibility_label | escape }}" data-video-open data-video-title="{{ demo_title | escape }}" data-video-src="{{ demo_video_source | escape }}"{% if demo_block_video.preview_image %} data-video-poster="{{ demo_block_video.preview_image | image_url: width: 960 }}"{% endif %} data-track="demonstration_video_play">▶</button>{% elsif block.settings.video_url != blank %}<a class="ah-play" href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="{{ 'altaeron_home.accessibility.play_named' | t: name: demo_accessibility_label | escape }}" data-track="demonstration_video_play">▶</a>{% elsif block.settings.link != blank %}<a class="ah-video-card__link" href="{{ block.settings.link }}" aria-label="{{ demo_accessibility_label | escape }}"></a>{% else %}<span class="ah-play ah-play--mock" aria-hidden="true">▶</span>{% endif %}</div>
+              <h3>{{ demo_title }}</h3>
             </article>
           {%- endif -%}{%- endfor -%}
+          {%- if demo_count == 0 -%}
+            {%- for i in (1..5) -%}
+              {%- case i -%}{%- when 1 -%}{%- assign mock_demo_title = 'How to Adjust' -%}{%- when 2 -%}{%- assign mock_demo_title = 'Daytime Use' -%}{%- when 3 -%}{%- assign mock_demo_title = 'Nighttime Support' -%}{%- when 4 -%}{%- assign mock_demo_title = 'Ankle Support' -%}{%- else -%}{%- assign mock_demo_title = 'Massage & Recovery' -%}{%- endcase -%}
+              <article class="ah-video-card ah-video-card--mock">
+                <div class="ah-video-card__media ah-media">{{ 'product-1' | placeholder_svg_tag: 'ah-placeholder-svg' }}<span class="ah-play ah-play--mock" aria-hidden="true">▶</span></div>
+                <h3>{{ mock_demo_title }}</h3>
+              </article>
+            {%- endfor -%}
+          {%- endif -%}
         </div><div class="ah-dots" data-slider-dots></div>
         {%- if has_demo_video -%}<dialog class="ah-video-modal" data-video-modal aria-labelledby="VideoModalTitle-{{ section.id }}"><div class="ah-video-modal__inner"><button class="ah-video-modal__close" type="button" data-video-close aria-label="{{ 'altaeron_home.accessibility.close_video' | t | escape }}">×</button><h3 id="VideoModalTitle-{{ section.id }}" data-video-modal-title>{{ section.settings.demo_heading }}</h3><video controls preload="none" playsinline><source type="video/mp4"></video></div></dialog>{%- endif -%}
       </div>
-    </section>
-  {%- endif -%}
+  </section>
 
   <section id="altaeron-values" class="ah-section ah-values" aria-labelledby="ValuesHeading-{{ section.id }}"><div class="ah-shell"><h2 id="ValuesHeading-{{ section.id }}">{{ section.settings.values_heading }}</h2><div class="ah-values__grid">
     {%- for block in section.blocks -%}{%- if block.type == 'value' -%}<article class="ah-value" {{ block.shopify_attributes }}><span class="ah-icon" aria-hidden="true">{% render 'altaeron-icon', type: block.settings.icon %}</span><h3>{{ block.settings.heading }}</h3><p>{{ block.settings.text }}</p></article>{%- endif -%}{%- endfor -%}
@@ -195,9 +203,17 @@
       {%- endif -%}
     {%- endif -%}{%- endfor -%}
   {%- endcapture -%}
-  {%- if review_count > 0 -%}
-    <section id="altaeron-reviews" class="ah-section ah-reviews" aria-labelledby="ReviewsHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-centered"><h2 id="ReviewsHeading-{{ section.id }}">{{ section.settings.reviews_heading }}</h2>{% if aggregate_review_count > 0 %}{% assign aggregate_average = aggregate_review_points | divided_by: aggregate_review_count | round: 1 %}<p class="ah-review-summary"><span class="ah-stars" aria-hidden="true">★★★★★</span> {{ 'altaeron_home.reviews.summary' | t: rating: aggregate_average, count: aggregate_review_count }}</p>{% endif %}</div><div class="ah-review-rail ah-slider" data-slider tabindex="0">{{ review_cards }}</div><div class="ah-dots" data-slider-dots></div></div></section>
+  {%- if review_count == 0 -%}
+    {%- capture review_cards -%}
+      {%- for i in (1..3) -%}
+        <article class="ah-review ah-review--mock">
+          <div class="ah-review__media ah-media">{{ 'lifestyle-1' | placeholder_svg_tag: 'ah-placeholder-svg' }}</div>
+          <div class="ah-review__body"><blockquote>“Customer review content will appear here once added.”</blockquote><cite>— Sample customer</cite><span class="ah-review__sample">Preview content</span></div>
+        </article>
+      {%- endfor -%}
+    {%- endcapture -%}
   {%- endif -%}
+  <section id="altaeron-reviews" class="ah-section ah-reviews" aria-labelledby="ReviewsHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-centered"><h2 id="ReviewsHeading-{{ section.id }}">{{ section.settings.reviews_heading }}</h2>{% if aggregate_review_count > 0 %}{% assign aggregate_average = aggregate_review_points | divided_by: aggregate_review_count | round: 1 %}<p class="ah-review-summary"><span class="ah-stars" aria-hidden="true">★★★★★</span> {{ 'altaeron_home.reviews.summary' | t: rating: aggregate_average, count: aggregate_review_count }}</p>{% endif %}</div><div class="ah-review-rail ah-slider" data-slider tabindex="0">{{ review_cards }}</div><div class="ah-dots" data-slider-dots></div></div></section>
 
   {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
     <section class="ah-section ah-guides" aria-labelledby="GuidesHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-section-head"><h2 id="GuidesHeading-{{ section.id }}">{{ section.settings.guides_heading }}</h2><a href="{{ section.settings.blog.url }}"><span>{{ section.settings.view_all_label }}</span><span aria-hidden="true">→</span></a></div><div class="ah-guide-grid">
@@ -247,7 +263,7 @@
     {"type":"range","id":"hero_desktop_y","label":"Desktop focal point vertical","min":0,"max":100,"step":1,"unit":"%","default":50},
     {"type":"range","id":"hero_mobile_x","label":"Mobile focal point horizontal","min":0,"max":100,"step":1,"unit":"%","default":67},
     {"type":"range","id":"hero_mobile_y","label":"Mobile focal point vertical","min":0,"max":100,"step":1,"unit":"%","default":50},
-    {"type":"range","id":"hero_mobile_overlay","label":"Mobile copy gradient strength","min":0,"max":100,"step":5,"unit":"%","default":85},
+    {"type":"range","id":"hero_mobile_overlay","label":"Mobile copy gradient strength","min":0,"max":100,"step":5,"unit":"%","default":60},
     {"type":"text","id":"primary_label","label":"Primary button","default":"Shop by Concern"},
     {"type":"text","id":"secondary_label","label":"Secondary button","default":"Find Your Match"},
     {"type":"text","id":"concern_heading","label":"Concern heading","default":"Where Does It Hurt?"},
