@@ -97,6 +97,25 @@
         activate(thumbs[next].dataset.apdpThumb, true);
       });
     });
+
+    const zoomItems = items.filter((item) => item.dataset.apdpZoomSrc);
+    if (zoomItems.length && window.ScaloraTheme?.PhotoSwipeLightbox && window.ScaloraTheme?.PhotoSwipe) {
+      const lightbox = new window.ScaloraTheme.PhotoSwipeLightbox({
+        dataSource: zoomItems.map((item) => ({
+          src: item.dataset.apdpZoomSrc,
+          width: Number(item.dataset.apdpZoomWidth),
+          height: Number(item.dataset.apdpZoomHeight),
+          alt: item.querySelector('img')?.alt || '',
+        })),
+        pswpModule: window.ScaloraTheme.PhotoSwipe,
+        bgOpacity: 1,
+      });
+      lightbox.init();
+      zoomItems.forEach((item, index) => {
+        item.querySelector('[data-apdp-zoom]')?.addEventListener('click', () => lightbox.loadAndOpen(index));
+      });
+    }
+
     return activate;
   }
 
@@ -246,29 +265,31 @@
     videos.forEach((video) => observer.observe(video));
   }
 
-  function initReviewSlider(root) {
-    const slider = root.querySelector('[data-apdp-review-slider]');
-    const previous = root.querySelector('[data-apdp-review-prev]');
-    const next = root.querySelector('[data-apdp-review-next]');
-    if (!slider || !previous || !next) return;
+  function initReviewSliders(root) {
+    root.querySelectorAll('[data-apdp-review-slider]').forEach((slider) => {
+      const group = slider.closest('[data-apdp-review-slider-group]');
+      const previous = group?.querySelector('[data-apdp-review-prev]');
+      const next = group?.querySelector('[data-apdp-review-next]');
+      if (!previous || !next) return;
 
-    const card = () => slider.querySelector('.apdp-tail-review');
-    const step = () => {
-      const item = card();
-      if (!item) return slider.clientWidth;
-      const styles = window.getComputedStyle(slider.querySelector('.apdp-tail-review-grid'));
-      return item.getBoundingClientRect().width + Number.parseFloat(styles.columnGap || styles.gap || 0);
-    };
-    const update = () => {
-      const maximum = Math.max(0, slider.scrollWidth - slider.clientWidth);
-      previous.disabled = slider.scrollLeft <= 2;
-      next.disabled = slider.scrollLeft >= maximum - 2;
-    };
-    previous.addEventListener('click', () => slider.scrollBy({ left: -step(), behavior: 'smooth' }));
-    next.addEventListener('click', () => slider.scrollBy({ left: step(), behavior: 'smooth' }));
-    slider.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-    update();
+      const card = () => slider.querySelector('.apdp-tail-review');
+      const step = () => {
+        const item = card();
+        if (!item) return slider.clientWidth;
+        const styles = window.getComputedStyle(slider.querySelector('.apdp-tail-review-grid'));
+        return item.getBoundingClientRect().width + Number.parseFloat(styles.columnGap || styles.gap || 0);
+      };
+      const update = () => {
+        const maximum = Math.max(0, slider.scrollWidth - slider.clientWidth);
+        previous.disabled = slider.scrollLeft <= 2;
+        next.disabled = slider.scrollLeft >= maximum - 2;
+      };
+      previous.addEventListener('click', () => slider.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => slider.scrollBy({ left: step(), behavior: 'smooth' }));
+      slider.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    });
   }
 
   function init(root) {
@@ -279,7 +300,7 @@
     initVariants(root, activateMedia);
     initSticky(root);
     initLazyVideos(root);
-    initReviewSlider(root);
+    initReviewSliders(root);
   }
 
   const initAll = (scope = document) => scope.querySelectorAll(SELECTOR).forEach(init);

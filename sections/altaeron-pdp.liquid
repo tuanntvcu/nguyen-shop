@@ -1,6 +1,7 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign mf = product.metafields.altaeron
+  assign hero_image = mf.pdp_hero_image.value | default: product.featured_image
   assign eyebrow = section.settings.eyebrow | default: mf.pdp_eyebrow.value
   assign headline = section.settings.headline_override | default: mf.pdp_headline.value | default: product.title
   assign subheadline = section.settings.subheadline_override | default: mf.pdp_subheadline.value | default: product.description | strip_html | truncate: 180
@@ -14,14 +15,11 @@
   assign guide_blocks = section.blocks | where: 'type', 'guide'
   assign related_products = mf.pdp_related_products.value
   assign review_data = product.metafields.judgeme.review_widget_data.value
-  assign review_count = review_data.number_of_reviews
-  assign review_rating = review_data.rating
-  if review_count == blank
-    assign review_count = '2,341'
-  endif
-  if review_rating == blank
-    assign review_rating = 4.8
-  endif
+  assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
+  assign review_rating = review_data.average_rating | default: 0 | plus: 0
+  assign hero_rating_label = 'altaeron_pdp.hero.rating' | t: rating: review_rating, count: review_count
+  assign buy_rating_label = 'altaeron_pdp.buy.rating' | t: rating: review_rating, count: review_count
+  assign final_cta_rating_label = 'altaeron_pdp.final_cta.rating' | t: rating: review_rating, count: review_count
   assign placeholder_video = shop.metafields.custom.homepage_demo_video.value | default: section.settings.placeholder_video
   assign story_video = mf.pdp_video.value | default: placeholder_video
   assign product_form_id = 'product-form-' | append: section.id
@@ -50,7 +48,7 @@
   assign day_title = 'altaeron_pdp.day.title' | t
   assign day_heading_subtitle = 'altaeron_pdp.day.subtitle_html' | t
   assign reviews_title = 'altaeron_pdp.reviews.title' | t
-  assign reviews_subtitle = 'altaeron_pdp.reviews.subtitle' | t
+  assign reviews_subtitle = 'altaeron_pdp.reviews.subtitle' | t: count: review_count
   assign comparison_title = 'altaeron_pdp.comparison.title' | t
   assign expectations_title = 'altaeron_pdp.expectations.title' | t
   assign spacer_title = 'altaeron_pdp.spacer.title' | t
@@ -133,6 +131,8 @@
 {{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
 {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+<link id="AltaeronPhotoswipe" rel="stylesheet" href="{{ 'photoswipe-component.css' | asset_url }}" media="print" onload="this.media='all'">
+<script src="{{ 'photoswipe.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'altaeron-pdp.js' | asset_url }}" defer="defer"></script>
 
 <div id="AltaeronPdp-{{ section.id }}" class="altaeron-pdp" data-section="{{ section.id }}" data-product-id="{{ product.id }}" data-product-url="{{ product.url }}" data-money-format="{{ shop.money_format | escape }}" data-save-label="{{ 'altaeron_pdp.common.save' | t | escape }}" data-add-to-cart-label="{{ 'products.product.add_to_cart' | t | escape }}" data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}">
@@ -147,9 +147,16 @@
             </button>
           {%- endfor -%}
         </div>
-        <div class="apdp-gallery__stage" aria-live="polite">
+        <div class="apdp-gallery__stage apdp-gallery__hero">
+          {%- if hero_image != blank -%}
+            {{ hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1500, 1800', sizes: '(min-width: 1280px) 37vw, (min-width: 768px) 55vw, 100vw', alt: hero_image.alt | default: product.title }}
+          {%- else -%}
+            <div class="apdp-gallery__empty">{{ 'product-1' | placeholder_svg_tag }}</div>
+          {%- endif -%}
+        </div>
+        <div class="apdp-gallery__viewer" aria-live="polite">
           {%- for media in product.media -%}
-            <div id="AltaeronMedia-{{ section.id }}-{{ media.id }}" class="apdp-gallery__item{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tabpanel" data-apdp-media="{{ media.id }}"{% unless media.id == product.featured_media.id %} hidden{% endunless %}>
+            <div id="AltaeronMedia-{{ section.id }}-{{ media.id }}" class="apdp-gallery__item{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tabpanel" data-apdp-media="{{ media.id }}"{% if media.media_type == 'image' %} data-apdp-zoom-src="{{ media.preview_image | image_url: width: 2400 }}" data-apdp-zoom-width="{{ media.preview_image.width }}" data-apdp-zoom-height="{{ media.preview_image.height }}"{% endif %}{% unless media.id == product.featured_media.id %} hidden{% endunless %}>
               {%- liquid
                 assign media_loading = 'lazy'
                 assign media_priority = 'auto'
@@ -159,6 +166,10 @@
                 endif
               -%}
               {% render 'altaeron-pdp-media', media: media, product: product, loading: media_loading, fetchpriority: media_priority, sizes: '(min-width: 1024px) 560px, 55vw' %}
+              {%- if media.media_type == 'image' -%}
+                <span class="apdp-gallery__zoom-icon" aria-hidden="true">{% render 'icon-zoom' %}</span>
+                <button type="button" class="apdp-gallery__zoom" data-apdp-zoom aria-haspopup="dialog" aria-label="{{ 'products.product.media.open_media' | t: index: forloop.index | escape }}"></button>
+              {%- endif -%}
             </div>
           {%- else -%}
             <div class="apdp-gallery__empty">{{ 'product-1' | placeholder_svg_tag }}</div>
@@ -170,8 +181,8 @@
         <p class="apdp-eyebrow"><strong>{{ 'altaeron_pdp.hero.eyebrow_rank' | t }}</strong><span>{{ 'altaeron_pdp.hero.eyebrow_category' | t }}</span></p>
         <h1 id="AltaeronTitle-{{ section.id }}" aria-label="{{ 'altaeron_pdp.hero.headline' | t | escape }}"><span class="apdp-title-desktop" aria-hidden="true"><span>{{ 'altaeron_pdp.hero.headline_line_1' | t }}</span><span>{{ 'altaeron_pdp.hero.headline_line_2' | t }}</span><span>{{ 'altaeron_pdp.hero.headline_line_3' | t }}</span></span><span class="apdp-title-mobile" aria-hidden="true"><span>{{ 'altaeron_pdp.hero.headline_line_1' | t }}</span><span>{{ 'altaeron_pdp.hero.headline_line_2' | t }}</span><span>{{ 'altaeron_pdp.hero.headline_line_3' | t }}</span></span></h1>
         <p class="apdp-narrative__subhead">{{ 'altaeron_pdp.hero.subheadline' | t }}</p>
-        <a class="apdp-rating" href="#AltaeronReviews-{{ section.id }}" aria-label="{{ 'altaeron_pdp.hero.rating' | t | escape }}">
-          <span class="apdp-rating__people" aria-hidden="true"><i></i><i></i><i></i></span><span class="apdp-stars" aria-hidden="true">★★★★★</span><strong>{{ 'altaeron_pdp.hero.rating' | t }}</strong>
+        <a class="apdp-rating" href="#AltaeronReviews-{{ section.id }}" aria-label="{{ hero_rating_label | escape }}">
+          <span class="apdp-rating__people" aria-hidden="true"><i></i><i></i><i></i></span>{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ hero_rating_label }}</strong>
         </a>
         <div class="apdp-mobile-product" aria-hidden="true">
           {%- if how_image != blank -%}{{ how_image | image_url: width: 720 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '360, 540, 720', sizes: '55vw', alt: '' }}{%- endif -%}
@@ -181,7 +192,7 @@
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ 'altaeron_pdp.accessibility.purchase_product' | t: product: product.title | escape }}">
         <h2 class="apdp-buy__title">{{ 'altaeron_pdp.buy.title' | t }}</h2>
-        <a class="apdp-buy__rating" href="#AltaeronReviews-{{ section.id }}"><span class="apdp-stars" aria-hidden="true">★★★★★</span><strong>{{ 'altaeron_pdp.buy.rating' | t }}</strong></a>
+        <a class="apdp-buy__rating" href="#AltaeronReviews-{{ section.id }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ buy_rating_label }}</strong></a>
         <div class="apdp-buy__price-line">
           <div><p class="apdp-buy__from">{{ section.settings.price_label }}</p><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price data-static-price="{{ 'altaeron_pdp.buy.compare_price' | t | escape }}">{{ 'altaeron_pdp.buy.compare_price' | t }}</s></div></div>
           <span class="apdp-price__save" data-apdp-savings data-static-savings="{{ 'altaeron_pdp.buy.saving' | t | escape }}">{{ 'altaeron_pdp.buy.saving' | t }}</span>
@@ -357,7 +368,7 @@
     </div>
   </section>
 
-  <section id="AltaeronReviews-{{ section.id }}" class="apdp-tail apdp-tail-reviews alta-pdp-flow-section alta-pdp-flow-section--default" aria-labelledby="AltaeronReviewsTitle-{{ section.id }}">
+  <section id="AltaeronReviews-{{ section.id }}" class="apdp-tail apdp-tail-reviews alta-pdp-flow-section alta-pdp-flow-section--default" aria-labelledby="AltaeronReviewsTitle-{{ section.id }}" data-apdp-review-slider-group>
     <div class="apdp-shell">
       <div class="apdp-tail-review-head">
         {%- assign chapter_heading_id = 'AltaeronReviewsTitle-' | append: section.id -%}
@@ -366,15 +377,7 @@
       </div>
       <div class="apdp-tail-review-viewport" data-apdp-review-slider>
       <div class="apdp-tail-review-grid">
-        {%- for i in (1..8) -%}
-          {%- capture review_name_key -%}altaeron_pdp.reviews.item_{{ i }}_name{%- endcapture -%}{%- assign name = review_name_key | t -%}
-          {%- capture review_quote_key -%}altaeron_pdp.reviews.item_{{ i }}_quote{%- endcapture -%}{%- assign review_quote = review_quote_key | t -%}
-          {%- case forloop.index -%}{%- when 1 -%}{%- assign review_image = tail_review_1 -%}{%- when 2 -%}{%- assign review_image = tail_review_2 -%}{%- when 3 -%}{%- assign review_image = tail_review_3 -%}{%- when 4 -%}{%- assign review_image = tail_review_4 -%}{%- else -%}{%- assign review_image = nil -%}{%- endcase -%}
-          <article class="apdp-tail-review">
-            <div class="apdp-tail-avatar">{%- if review_image != blank -%}{{ review_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 140, 180', sizes: '64px', alt: name }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
-            <div><span class="apdp-stars" aria-label="{{ 'altaeron_pdp.reviews.five_stars' | t | escape }}">★★★★★</span><blockquote>“{{ review_quote }}”</blockquote><p>– {{ name }}</p><small>{{ 'altaeron_pdp.reviews.verified_buyer' | t }} <b aria-hidden="true">●</b></small></div>
-          </article>
-        {%- endfor -%}
+        {% render 'altaeron-pdp-review-cards', reviews: review_data.reviews, limit: 8 %}
       </div>
       </div>
       <div class="apdp-tail-trust" aria-label="{{ 'altaeron_pdp.accessibility.purchase_reassurance' | t | escape }}">
@@ -442,15 +445,18 @@
         <div class="apdp-learn-grid">{%- for i in (1..4) -%}{%- capture guide_title_key -%}altaeron_pdp.learn.item_{{ i }}_title{%- endcapture -%}{%- assign title = guide_title_key | t -%}{%- capture guide_text_key -%}altaeron_pdp.learn.item_{{ i }}_text{%- endcapture -%}{%- assign guide_minutes = forloop.index | plus: 4 -%}{%- case forloop.index -%}{%- when 1 -%}{%- assign guide_image = tail_guide_1 -%}{%- when 2 -%}{%- assign guide_image = tail_guide_2 -%}{%- when 3 -%}{%- assign guide_image = tail_guide_3 -%}{%- else -%}{%- assign guide_image = tail_guide_4 -%}{%- endcase -%}<article><div class="apdp-tail-media">{%- if guide_image != blank -%}{{ guide_image | image_url: width: 320 | image_tag: loading: 'lazy', widths: '120, 220, 320', sizes: '(min-width: 768px) 90px, 26vw', alt: title }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div><div><h3>{{ title }}</h3><p>{{ guide_text_key | t }}</p><small>{{ 'altaeron_pdp.learn.reading_time' | t: minutes: guide_minutes }}</small></div></article>{%- endfor -%}</div>
       </section>
 
-      <section class="apdp-review-summary alta-pdp-subsection alta-pdp-subsection--default-compact" aria-labelledby="AltaeronVerified-{{ section.id }}">
+      <section class="apdp-review-summary alta-pdp-subsection alta-pdp-subsection--default-compact" aria-labelledby="AltaeronVerified-{{ section.id }}" data-apdp-review-slider-group>
         {%- assign verified_reviews_title = 'altaeron_pdp.review_summary.title' | t: count: review_count -%}
         {%- assign verified_reviews_subtitle = 'altaeron_pdp.review_summary.rating' | t: rating: review_rating -%}
         {%- assign chapter_heading_id = 'AltaeronVerified-' | append: section.id -%}
-        {% render 'altaeron-pdp-section-heading', number: '11', title: verified_reviews_title, subtitle: verified_reviews_subtitle, heading_id: chapter_heading_id %}
-        <div class="apdp-review-summary__grid">
-          <div class="apdp-ratings-bars">{%- assign bar_labels = '5 ★|4 ★|3 ★|2 ★|1 ★' | split: '|' -%}{%- assign bar_values = '83|10|5|1|1' | split: '|' -%}{%- for label in bar_labels -%}<div><b>{{ label }}</b><i><span style="width:{{ bar_values[forloop.index0] }}%"></span></i><small>{{ bar_values[forloop.index0] }}%</small></div>{%- endfor -%}</div>
-          <div class="apdp-review-thumbs" aria-label="{{ 'altaeron_pdp.review_summary.photo_placeholders' | t | escape }}">{%- for i in (1..12) -%}<span>{{ 'image' | placeholder_svg_tag }}</span>{%- endfor -%}</div>
-          <div class="apdp-review-action"><a href="#AltaeronReviews-{{ section.id }}">{{ 'altaeron_pdp.review_summary.view_all' | t }} <span aria-hidden="true">→</span></a><p>{{ 'altaeron_pdp.review_summary.trial' | t }}</p><small><b>ⓘ</b> {{ 'altaeron_pdp.review_summary.disclaimer' | t }}</small></div>
+        <div class="apdp-review-summary__head">
+          {% render 'altaeron-pdp-section-heading', number: '11', title: verified_reviews_title, subtitle: verified_reviews_subtitle, heading_id: chapter_heading_id %}
+          <div class="apdp-tail-review-nav" aria-label="{{ 'altaeron_pdp.reviews.slider_controls' | t | escape }}"><button type="button" data-apdp-review-prev aria-label="{{ 'altaeron_pdp.reviews.previous' | t | escape }}">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button><button type="button" data-apdp-review-next aria-label="{{ 'altaeron_pdp.reviews.next' | t | escape }}">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button></div>
+        </div>
+        <div class="apdp-tail-review-viewport" data-apdp-review-slider>
+          <div class="apdp-tail-review-grid">
+            {% render 'altaeron-pdp-review-cards', reviews: review_data.reviews, limit: 10 %}
+          </div>
         </div>
       </section>
     </div>
@@ -467,7 +473,7 @@
   <section class="apdp-final-cta alta-pdp-flow-section alta-pdp-flow-section--spacious" aria-label="{{ 'altaeron_pdp.final_cta.label' | t | escape }}"><div class="apdp-shell apdp-final-cta__inner">
     <div class="apdp-final-cta__product apdp-tail-media">{%- if tail_cta_product != blank -%}{{ tail_cta_product | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
     <div class="apdp-final-cta__content"><h2>{{ 'altaeron_pdp.final_cta.title' | t }}</h2><p>{{ 'altaeron_pdp.final_cta.product' | t }}</p><div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>{{ 'altaeron_pdp.final_cta.guarantee_html' | t }}</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>{{ 'altaeron_pdp.final_cta.shipping_html' | t }}</b></span><span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>{{ 'altaeron_pdp.final_cta.support_html' | t }}</b></span></div><div class="apdp-final-payments"><span class="visually-hidden">{{ 'altaeron_pdp.accessibility.accepted_payment_methods' | t }}</span><ul class="list list-payment" role="list">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul></div></div>
-    <div class="apdp-final-cta__buy"><div><span class="apdp-stars">★★★★★</span><small>{{ 'altaeron_pdp.final_cta.rating' | t }}</small><em>{{ 'altaeron_pdp.final_cta.saving' | t }}</em></div><p><strong>{{ 'altaeron_pdp.final_cta.price' | t }}</strong><s>{{ 'altaeron_pdp.final_cta.compare_price' | t }}</s></p><a class="apdp-final-button" href="#AltaeronBuy-{{ section.id }}">{{ 'altaeron_pdp.final_cta.button' | t }} <span aria-hidden="true">→</span></a><small>{{ 'altaeron_pdp.final_cta.installments' | t }} shop<span>Pay</span></small><p class="apdp-final-fine">{{ 'altaeron_pdp.final_cta.fine_print' | t }}</p></div>
+    <div class="apdp-final-cta__buy"><div>{% render 'altaeron-pdp-stars', rating: review_rating %}<small>{{ final_cta_rating_label }}</small><em>{{ 'altaeron_pdp.final_cta.saving' | t }}</em></div><p><strong>{{ 'altaeron_pdp.final_cta.price' | t }}</strong><s>{{ 'altaeron_pdp.final_cta.compare_price' | t }}</s></p><a class="apdp-final-button" href="#AltaeronBuy-{{ section.id }}">{{ 'altaeron_pdp.final_cta.button' | t }} <span aria-hidden="true">→</span></a><small>{{ 'altaeron_pdp.final_cta.installments' | t }} shop<span>Pay</span></small><p class="apdp-final-fine">{{ 'altaeron_pdp.final_cta.fine_print' | t }}</p></div>
     <div class="apdp-final-badge"><img src="{{ 'altaeron-risk-free-badge.png' | asset_url }}" width="384" height="384" loading="lazy" alt="{{ 'altaeron_pdp.final_cta.badge_alt' | t | escape }}"></div>
   </div></section>
 

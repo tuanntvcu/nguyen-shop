@@ -1,0 +1,14 @@
+{%- liquid
+  assign normalized_rating = rating | default: 0 | plus: 0
+  if normalized_rating < 0
+    assign normalized_rating = 0
+  elsif normalized_rating > 5
+    assign normalized_rating = 5
+  endif
+  assign fill_percentage = normalized_rating | times: 20
+  assign rating_label = 'altaeron_pdp.review_summary.rating' | t: rating: normalized_rating
+-%}
+<span class="apdp-stars apdp-stars--meter" role="img" aria-label="{{ rating_label | escape }}">
+  <span class="apdp-stars__base" aria-hidden="true">★★★★★</span>
+  <span class="apdp-stars__fill" aria-hidden="true" style="width: {{ fill_percentage }}%">★★★★★</span>
+</span>

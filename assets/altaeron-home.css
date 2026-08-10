@@ -96,21 +96,23 @@
 /* Keep product cards compact and make every non-cart area open the product. */
 .ah-products{align-items:flex-start}
 .ah-product{height:auto;min-height:0;cursor:pointer}
+.ah-product__image{height:auto;aspect-ratio:1/1}
 .ah-product__body{display:block;flex:none}
 .ah-product__title{min-height:0;margin-bottom:10px}
 .ah-product__rating{min-height:0}
 .ah-product__footer{margin-top:12px}
 .ah-product__title a::after{position:absolute;z-index:1;inset:0;content:""}
 .ah-product__badge{pointer-events:none}
-.ah-quick-add,.ah-cart-button{position:relative;z-index:2}
+.ah-quick-add{position:relative;z-index:2;width:44px;min-width:44px;max-width:44px;flex:0 0 44px}
+.ah-product .ah-cart-button{position:relative;z-index:2;width:44px;min-width:44px;max-width:44px;height:42px;padding:0;border:0;border-radius:7px;background:var(--ah-green);color:#fff!important;box-shadow:none}
 
 @media(max-width:749px){
   .ah-product{min-height:0}
+  .ah-products.ah-slider .ah-product{flex:0 0 65%}
   .ah-product__body{padding:12px}
   .ah-product__title{min-height:0}
-  .ah-cart-button{width:36px;height:36px;padding:6px;border:0;background:transparent;color:var(--ah-green)!important;box-shadow:none}
-  .ah-cart-button:hover,.ah-cart-button:focus-visible{background:transparent;color:var(--ah-green)!important}
-  .ah-cart-button svg{width:24px;height:24px}
+  .ah-product .ah-cart-button:hover,.ah-product .ah-cart-button:focus-visible{background:var(--ah-green-dark);color:#fff!important}
+  .ah-product .ah-cart-button svg{width:21px;height:21px}
 }
 
 /* Let the mobile hero artwork reach both viewport edges while its copy keeps its own inset. */

@@ -1,0 +1,25 @@
+{%- for review in reviews limit: limit -%}
+  {%- liquid
+    assign review_body = review.body | strip_html | strip
+    assign reviewer_name = review.reviewer_name | strip
+    assign review_rating = review.rating | default: 0 | plus: 0
+    assign review_picture = review.pictures_urls.first.original
+    assign reviewer_initial = reviewer_name | slice: 0 | upcase
+  -%}
+  {%- if review_body != blank and reviewer_name != blank -%}
+    <article class="apdp-tail-review">
+      <div class="apdp-tail-avatar">
+        {%- if review_picture != blank -%}
+          <img src="{{ review_picture | escape }}" loading="lazy" width="180" height="180" alt="{{ reviewer_name | escape }}">
+        {%- else -%}
+          <span class="apdp-tail-avatar__initial" aria-hidden="true">{{ reviewer_initial | escape }}</span>
+        {%- endif -%}
+      </div>
+      <div>
+        {% render 'altaeron-pdp-stars', rating: review_rating %}
+        <blockquote>“{{ review_body | escape }}”</blockquote>
+        <p>– {{ reviewer_name | escape }}</p>
+      </div>
+    </article>
+  {%- endif -%}
+{%- endfor -%}
