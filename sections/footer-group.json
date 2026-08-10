@@ -20,7 +20,6 @@
             "block_width": 27,
             "heading": "",
             "heading_size": "h4",
-            "image": "",
             "image_width": 150,
             "text": "<h2>ALTAERON</h2><p>Thoughtfully selected support for everyday foot comfort.</p>",
             "button_label": "",
@@ -89,8 +88,8 @@
       ],
       "settings": {
         "color_scheme": "scheme-inverse",
-        "enable_follow_on_shop": false,
-        "show_social": true,
+        "enable_follow_on_shop": true,
+        "show_social": false,
         "enable_country_selector": false,
         "enable_language_selector": false,
         "payment_enable": true,
