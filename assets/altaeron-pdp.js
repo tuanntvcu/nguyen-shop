@@ -98,25 +98,168 @@
       });
     });
 
-    const zoomItems = items.filter((item) => item.dataset.apdpZoomSrc);
-    if (zoomItems.length && window.ScaloraTheme?.PhotoSwipeLightbox && window.ScaloraTheme?.PhotoSwipe) {
-      const lightbox = new window.ScaloraTheme.PhotoSwipeLightbox({
-        dataSource: zoomItems.map((item) => ({
-          src: item.dataset.apdpZoomSrc,
-          width: Number(item.dataset.apdpZoomWidth),
-          height: Number(item.dataset.apdpZoomHeight),
-          alt: item.querySelector('img')?.alt || '',
-        })),
-        pswpModule: window.ScaloraTheme.PhotoSwipe,
-        bgOpacity: 1,
-      });
-      lightbox.init();
-      zoomItems.forEach((item, index) => {
-        item.querySelector('[data-apdp-zoom]')?.addEventListener('click', () => lightbox.loadAndOpen(index));
-      });
-    }
-
     return activate;
+  }
+
+  function handleZoomClick(event) {
+    const button = event.target.closest?.('[data-apdp-zoom]');
+    const root = button?.closest(SELECTOR);
+    if (!button || !root) return;
+    event.preventDefault();
+    event.stopPropagation();
+
+    const zoomItems = [...root.querySelectorAll('[data-apdp-media][data-apdp-zoom-src]')];
+    const activeItem = button.closest('[data-apdp-media]');
+    const index = Math.max(0, zoomItems.indexOf(activeItem));
+    openZoomViewer(zoomItems.map((item) => ({
+      src: item.dataset.apdpZoomSrc,
+      alt: item.querySelector('img')?.alt || '',
+    })), index, button);
+  }
+
+  function openZoomViewer(images, initialIndex, trigger) {
+    if (!images.length) return;
+    document.querySelector('[data-apdp-zoom-viewer]')?.remove();
+
+    const viewer = document.createElement('div');
+    viewer.className = 'apdp-zoom-viewer';
+    viewer.dataset.apdpZoomViewer = '';
+    viewer.tabIndex = -1;
+    viewer.setAttribute('role', 'dialog');
+    viewer.setAttribute('aria-modal', 'true');
+    viewer.setAttribute('aria-label', trigger.getAttribute('aria-label') || 'Product image viewer');
+    viewer.innerHTML = `
+      <button type="button" class="apdp-zoom-viewer__close" data-apdp-zoom-close aria-label="Close image viewer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      <button type="button" class="apdp-zoom-viewer__nav apdp-zoom-viewer__nav--prev" data-apdp-zoom-prev aria-label="Previous image">&#8249;</button>
+      <div class="apdp-zoom-viewer__canvas" data-apdp-zoom-canvas>
+        <img class="apdp-zoom-viewer__image" data-apdp-zoom-image alt="">
+      </div>
+      <button type="button" class="apdp-zoom-viewer__nav apdp-zoom-viewer__nav--next" data-apdp-zoom-next aria-label="Next image">&#8250;</button>
+      <div class="apdp-zoom-viewer__counter" data-apdp-zoom-counter aria-live="polite"></div>
+    `;
+
+    const image = viewer.querySelector('[data-apdp-zoom-image]');
+    const canvas = viewer.querySelector('[data-apdp-zoom-canvas]');
+    const counter = viewer.querySelector('[data-apdp-zoom-counter]');
+    const previous = viewer.querySelector('[data-apdp-zoom-prev]');
+    const next = viewer.querySelector('[data-apdp-zoom-next]');
+    const oldOverflow = document.body.style.overflow;
+    let index = initialIndex;
+    let dragState = null;
+    let suppressCanvasClick = false;
+
+    const setZoomed = (zoomed) => {
+      image.classList.toggle('is-zoomed', zoomed);
+      canvas.classList.toggle('is-zoomed', zoomed);
+      if (zoomed) {
+        requestAnimationFrame(() => {
+          canvas.scrollLeft = Math.max(0, (canvas.scrollWidth - canvas.clientWidth) / 2);
+          canvas.scrollTop = Math.max(0, (canvas.scrollHeight - canvas.clientHeight) / 2);
+        });
+      } else {
+        canvas.scrollTo(0, 0);
+      }
+    };
+
+    const show = (nextIndex) => {
+      index = (nextIndex + images.length) % images.length;
+      image.style.transform = '';
+      setZoomed(false);
+      image.src = images[index].src;
+      image.alt = images[index].alt;
+      counter.textContent = `${index + 1} / ${images.length}`;
+    };
+    const close = () => {
+      document.removeEventListener('keydown', onKeydown);
+      document.body.style.overflow = oldOverflow;
+      viewer.remove();
+      if (trigger.isConnected) trigger.focus({ preventScroll: true });
+    };
+    const onKeydown = (event) => {
+      if (event.key === 'Escape') close();
+      if (event.key === 'ArrowLeft' && images.length > 1) show(index - 1);
+      if (event.key === 'ArrowRight' && images.length > 1) show(index + 1);
+      if (event.key === 'Tab') {
+        const controls = [...viewer.querySelectorAll('button:not([hidden])')];
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    if (images.length === 1) {
+      previous.hidden = true;
+      next.hidden = true;
+    }
+    viewer.querySelector('[data-apdp-zoom-close]').addEventListener('click', close);
+    previous.addEventListener('click', () => show(index - 1));
+    next.addEventListener('click', () => show(index + 1));
+    canvas.addEventListener('pointerdown', (event) => {
+      if (!event.isPrimary || event.button > 0) return;
+      dragState = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        scrollLeft: canvas.scrollLeft,
+        scrollTop: canvas.scrollTop,
+        zoomed: image.classList.contains('is-zoomed'),
+        moved: false,
+      };
+      canvas.setPointerCapture(event.pointerId);
+      canvas.classList.add('is-dragging');
+    });
+    canvas.addEventListener('pointermove', (event) => {
+      if (!dragState || event.pointerId !== dragState.pointerId) return;
+      const deltaX = event.clientX - dragState.startX;
+      const deltaY = event.clientY - dragState.startY;
+      if (!dragState.moved && Math.hypot(deltaX, deltaY) < 5) return;
+      dragState.moved = true;
+      event.preventDefault();
+      if (dragState.zoomed) {
+        canvas.scrollLeft = dragState.scrollLeft - deltaX;
+        canvas.scrollTop = dragState.scrollTop - deltaY;
+      } else if (images.length > 1) {
+        image.style.transform = `translate3d(${deltaX}px,0,0)`;
+      }
+    });
+    const finishDrag = (event) => {
+      if (!dragState || event.pointerId !== dragState.pointerId) return;
+      const deltaX = event.clientX - dragState.startX;
+      const wasMoved = dragState.moved;
+      const wasZoomed = dragState.zoomed;
+      if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+      canvas.classList.remove('is-dragging');
+      dragState = null;
+      image.style.transform = '';
+      if (wasMoved) {
+        suppressCanvasClick = true;
+        window.setTimeout(() => { suppressCanvasClick = false; }, 0);
+      }
+      if (!wasZoomed && wasMoved && Math.abs(deltaX) >= Math.min(100, canvas.clientWidth * 0.16)) {
+        show(index + (deltaX < 0 ? 1 : -1));
+      }
+    };
+    canvas.addEventListener('pointerup', finishDrag);
+    canvas.addEventListener('pointercancel', finishDrag);
+    canvas.addEventListener('click', () => {
+      if (suppressCanvasClick) {
+        suppressCanvasClick = false;
+        return;
+      }
+      setZoomed(!image.classList.contains('is-zoomed'));
+    });
+    viewer.addEventListener('click', (event) => { if (event.target === viewer) close(); });
+    document.addEventListener('keydown', onKeydown);
+    document.body.appendChild(viewer);
+    document.body.style.overflow = 'hidden';
+    show(index);
+    viewer.focus({ preventScroll: true });
   }
 
   function initQuantity(root) {
@@ -304,6 +447,10 @@
   }
 
   const initAll = (scope = document) => scope.querySelectorAll(SELECTOR).forEach(init);
+  if (!window.__altaeronPdpZoomBound) {
+    window.__altaeronPdpZoomBound = true;
+    document.addEventListener('click', handleZoomClick);
+  }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initAll());
   else initAll();
   document.addEventListener('shopify:section:load', (event) => initAll(event.target));

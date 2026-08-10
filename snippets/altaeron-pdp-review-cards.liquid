@@ -1,8 +1,8 @@
 {%- for review in reviews limit: limit -%}
   {%- liquid
-    assign review_body = review.body | strip_html | strip
-    assign reviewer_name = review.reviewer_name | strip
-    assign review_rating = review.rating | default: 0 | plus: 0
+    assign review_body = review.body.value | default: review.body | strip_html | strip
+    assign reviewer_name = review.reviewer_name.value | default: review.reviewer_name | strip
+    assign review_rating = review.rating.value | default: review.rating | default: 0 | plus: 0
     assign review_picture = review.pictures_urls.first.original
     assign reviewer_initial = reviewer_name | slice: 0 | upcase
   -%}

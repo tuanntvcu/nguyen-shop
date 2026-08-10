@@ -7,11 +7,11 @@
   if hero_product == blank and popular_collection != blank
     assign hero_product = popular_collection.products.first
   endif
-  assign hero_image = section.settings.hero_image
-  if hero_image == blank and hero_product != blank
-    assign hero_image = hero_product.metafields.custom.homepage_card_image.value | default: hero_product.featured_image
+  assign hero_desktop_image = section.settings.hero_image
+  if hero_desktop_image == blank and hero_product != blank
+    assign hero_desktop_image = hero_product.metafields.custom.homepage_card_image.value | default: hero_product.featured_image
   endif
-  assign hero_mobile_image = section.settings.hero_mobile_image | default: hero_image
+  assign hero_mobile_image = section.settings.hero_mobile_image | default: hero_desktop_image
   assign demo_video = shop.metafields.custom.homepage_demo_video.value
 -%}
 
@@ -27,10 +27,10 @@
         </div>
       </div>
       <div class="ah-hero__media ah-media">
-        {%- if hero_image != blank -%}
+        {%- if hero_desktop_image != blank -%}
           <picture>
             {%- if hero_mobile_image != blank -%}<source media="(max-width: 749px)" srcset="{{ hero_mobile_image | image_url: width: 480 }} 480w, {{ hero_mobile_image | image_url: width: 750 }} 750w" sizes="100vw">{%- endif -%}
-            {{ hero_image | image_url: width: 1800 | image_tag: widths: '480, 720, 960, 1200, 1440, 1800', sizes: '(min-width: 750px) 60vw, 100vw', loading: 'eager', fetchpriority: 'high', alt: section.settings.hero_image_alt }}
+            {{ hero_desktop_image | image_url: width: 1800 | image_tag: widths: '480, 720, 960, 1200, 1440, 1800', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: section.settings.hero_image_alt }}
           </picture>
         {%- endif -%}
       </div>
@@ -240,8 +240,8 @@
     {"type":"text","id":"hero_heading","label":"Hero heading","default":"Support Every Step."},
     {"type":"richtext","id":"hero_text","label":"Hero text","default":"<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>"},
     {"type":"product","id":"hero_product","label":"Hero product fallback"},
-    {"type":"image_picker","id":"hero_image","label":"Hero image"},
-    {"type":"image_picker","id":"hero_mobile_image","label":"Hero mobile image"},
+    {"type":"image_picker","id":"hero_image","label":"Hero desktop image"},
+    {"type":"image_picker","id":"hero_mobile_image","label":"Hero mobile image","info":"Optional. Uses the desktop image when left blank."},
     {"type":"text","id":"hero_image_alt","label":"Hero image alt text","default":"Foot support products for everyday comfort"},
     {"type":"range","id":"hero_desktop_x","label":"Desktop focal point horizontal","min":0,"max":100,"step":1,"unit":"%","default":50},
     {"type":"range","id":"hero_desktop_y","label":"Desktop focal point vertical","min":0,"max":100,"step":1,"unit":"%","default":50},
