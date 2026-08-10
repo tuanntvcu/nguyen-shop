@@ -9,11 +9,11 @@
  */
 {
   "current": {
-    "favicon": "shopify://shop_images/ChatGPT_Image_Aug_4_2026_07_32_00_PM.png",
     "logo": "shopify://shop_images/ChatGPT_Image_Aug_4_2026_07_32_00_PM.png",
     "logo_width": 160,
     "logo_mobile": "shopify://shop_images/ChatGPT_Image_Aug_4_2026_07_32_00_PM.png",
     "logo_width_mobile": 140,
+    "favicon": "shopify://shop_images/ChatGPT_Image_Aug_4_2026_07_32_00_PM.png",
     "color_badge_sale": "#c6512c",
     "color_badge_hot": "#000000",
     "color_badge_new": "#67785d",
@@ -113,6 +113,13 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "8023178096671368477": {
+        "type": "shopify://apps/smart-discounts/blocks/embed/019d1c1c-2c4b-704e-be88-ea7fd20c9afb",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
