@@ -12,11 +12,14 @@ class AltaeronHome extends HTMLElement {
     this.querySelectorAll('[data-slider]').forEach((slider) => {
       const cards = [...slider.children];
       const dotsHost = slider.closest('.ah-shell')?.querySelector('[data-slider-dots]');
+      const carouselWrap = slider.closest('.ah-carousel-wrap');
+      const arrows = [...(carouselWrap?.querySelectorAll('[data-slider-prev], [data-slider-next]') || [])];
       if (!cards.length || !dotsHost) return;
       const visible = () => Math.max(1, Math.round(slider.clientWidth / cards[0].getBoundingClientRect().width));
       const pages = () => Math.max(1, cards.length - visible() + 1);
 
       const renderDots = () => {
+        const hasOverflow = pages() > 1;
         dotsHost.replaceChildren();
         for (let index = 0; index < pages(); index += 1) {
           const dot = document.createElement('button');
@@ -26,7 +29,13 @@ class AltaeronHome extends HTMLElement {
           dot.addEventListener('click', () => cards[index]?.scrollIntoView({ behavior: this.reducedMotion ? 'auto' : 'smooth', block: 'nearest', inline: 'start' }));
           dotsHost.append(dot);
         }
-        dotsHost.hidden = pages() <= 1;
+        dotsHost.hidden = !hasOverflow;
+        arrows.forEach((arrow) => {
+          arrow.hidden = !hasOverflow;
+          arrow.setAttribute('aria-hidden', hasOverflow ? 'false' : 'true');
+          arrow.tabIndex = hasOverflow ? 0 : -1;
+        });
+        slider.classList.toggle('ah-slider--static', !hasOverflow);
       };
       const updateDots = () => {
         const step = (cards[0]?.getBoundingClientRect().width || 1) + 16;

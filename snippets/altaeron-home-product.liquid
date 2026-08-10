@@ -6,10 +6,28 @@
   assign card_image = product.metafields.custom.homepage_card_image.value | default: product.featured_image
   assign short_title = product.metafields.custom.short_title.value | default: product.title
   assign selected_variant = product.selected_or_first_available_variant
+  assign is_best_seller = false
+  for product_tag in product.tags
+    assign normalized_tag = product_tag | strip | downcase
+    if normalized_tag == 'best-seller'
+      assign is_best_seller = true
+      break
+    endif
+  endfor
+  assign is_on_sale = false
+  if product.compare_at_price > product.price
+    assign is_on_sale = true
+  endif
 -%}
 {%- if product != blank -%}
   <article class="ah-product" data-product-card>
-    {%- if badge != blank -%}<span class="ah-product__badge">{{ badge }}</span>{%- elsif concern != blank -%}<span class="ah-product__badge">{{ concern }}</span>{%- endif -%}
+    {%- if is_best_seller or is_on_sale or badge != blank or concern != blank -%}
+      <div class="ah-product__badges" aria-label="Product badges">
+        {%- if is_best_seller -%}<span class="ah-product__badge ah-product__badge--best-seller">Best seller</span>{%- endif -%}
+        {%- if is_on_sale -%}<span class="ah-product__badge ah-product__badge--sale">Sale</span>{%- endif -%}
+        {%- if badge != blank -%}<span class="ah-product__badge">{{ badge }}</span>{%- elsif concern != blank -%}<span class="ah-product__badge">{{ concern }}</span>{%- endif -%}
+      </div>
+    {%- endif -%}
     <a class="ah-product__image ah-media" href="{{ product.url }}" tabindex="-1" data-track="popular_product_click">
       {%- if card_image -%}
         {{ card_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '220, 360, 520, 700', sizes: '(min-width: 990px) 25vw, 44vw', alt: short_title }}
@@ -24,13 +42,13 @@
       {%- endif -%}
       <div class="ah-product__footer">
         <span class="ah-product__price">{{ product.price | money }}{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}</span>
-        {%- if product.available and product.has_only_default_variant -%}
+        {%- if product.available -%}
           {%- form 'product', product, is: 'product-form', class: 'ah-quick-add', data-quick-add: '' -%}
             <input type="hidden" name="id" value="{{ selected_variant.id }}">
             <button class="ah-cart-button" type="submit" name="add" aria-label="{{ 'altaeron_home.product.add_to_cart' | t: product: product.title | escape }}" data-track="quick_add">{% render 'icon-cart', name: settings.cart_icon %}</button>
           {%- endform -%}
         {%- else -%}
-          <a class="ah-cart-button" href="{{ product.url }}" aria-label="{% if product.available %}{{ 'altaeron_home.product.choose_options' | t: product: product.title | escape }}{% else %}{{ 'altaeron_home.product.view' | t: product: product.title | escape }}{% endif %}">{% render 'icon-cart', name: settings.cart_icon %}</a>
+          <a class="ah-cart-button" href="{{ product.url }}" aria-label="{{ 'altaeron_home.product.view' | t: product: product.title | escape }}">{% render 'icon-cart', name: settings.cart_icon %}</a>
         {%- endif -%}
       </div>
     </div>

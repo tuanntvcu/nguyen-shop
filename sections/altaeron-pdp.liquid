@@ -459,7 +459,7 @@
       {%- assign chapter_heading_id = 'AltaeronFaq-' | append: section.id -%}
       {% render 'altaeron-pdp-section-heading', number: '12', title: faq_title, heading_id: chapter_heading_id %}
       <div class="apdp-tail-accordion">
-        {%- for i in (1..6) -%}{%- capture question_key -%}altaeron_pdp.faq.question_{{ i }}{%- endcapture -%}{%- capture answer_key -%}altaeron_pdp.faq.answer_{{ i }}{%- endcapture -%}<details><summary>{{ question_key | t }}<span></span></summary><p>{{ answer_key | t }}</p></details>{%- endfor -%}
+        {%- for i in (1..6) -%}{%- capture question_key -%}altaeron_pdp.faq.question_{{ i }}{%- endcapture -%}{%- capture answer_key -%}altaeron_pdp.faq.answer_{{ i }}{%- endcapture -%}<details><summary>{{ question_key | t }}{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>{{ answer_key | t }}</p></details>{%- endfor -%}
       </div>
     </section>
   </div>

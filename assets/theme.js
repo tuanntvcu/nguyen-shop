@@ -338,6 +338,7 @@ ScaloraTheme.config = {
     class Carousel {
       constructor(container, options, modules = null) {
         this.container = container;
+        this.slideCount = container.querySelectorAll('.swiper-wrapper > .swiper-slide').length;
         let defaultModules = [
           ScaloraTheme.Swiper.Navigation,
           ScaloraTheme.Swiper.Pagination,
@@ -348,14 +349,81 @@ ScaloraTheme.config = {
           defaultModules = defaultModules.concat(modules);
         }
 
+        const configuredSlidesPerView = [
+          options.slidesPerView,
+          ...Object.values(options.breakpoints || {}).map((breakpoint) => breakpoint.slidesPerView),
+        ]
+          .map(Number)
+          .filter(Number.isFinite);
+        const maximumSlidesPerView = Math.max(1, ...configuredSlidesPerView);
+        const carouselEvents = options.on || {};
+        const updateOverflow = (eventName) => (...args) => {
+          if (typeof carouselEvents[eventName] === 'function') {
+            carouselEvents[eventName](...args);
+          }
+          window.requestAnimationFrame(() => this.updateOverflowState(args[0]));
+        };
+
         this.options = {
           modules: defaultModules,
           ...options,
+          // Do not create duplicate loop slides when every real slide fits at
+          // one of the configured breakpoints. The slider can still navigate
+          // normally at narrower breakpoints where fewer cards are visible.
+          loop: this.slideCount > maximumSlidesPerView && options.loop === true,
+          watchOverflow: true,
+          on: {
+            ...carouselEvents,
+            init: updateOverflow('init'),
+            resize: updateOverflow('resize'),
+            breakpoint: updateOverflow('breakpoint'),
+            update: updateOverflow('update'),
+          },
         };
       }
 
       init() {
         this.slider = new ScaloraTheme.Swiper.Swiper(this.container, this.options);
+      }
+
+      updateOverflowState(swiper) {
+        if (!swiper || swiper.destroyed) return;
+
+        const slidesPerView = Number(swiper.params.slidesPerView);
+        const hasOverflow = Number.isFinite(slidesPerView)
+          ? this.slideCount > slidesPerView
+          : this.hasAutoSlidesOverflow(swiper);
+        const controls = [
+          swiper.navigation && swiper.navigation.prevEl,
+          swiper.navigation && swiper.navigation.nextEl,
+          swiper.pagination && swiper.pagination.el,
+        ].flatMap((element) =>
+          Array.from(element ? (element.length !== undefined && !element.nodeType ? element : [element]) : [])
+        );
+
+        this.container.classList.toggle('swiper-without-overflow', !hasOverflow);
+        swiper.allowTouchMove = hasOverflow && swiper.params.allowTouchMove !== false;
+
+        const controlGroups = new Set();
+        controls.forEach((control) => {
+          control.classList.toggle('slider-control-hidden', !hasOverflow);
+          const group =
+            control.closest('.slider-controls--group') ||
+            control.closest('.swiper-controls') ||
+            control.closest('.slider-controls');
+          if (group) controlGroups.add(group);
+        });
+        controlGroups.forEach((group) => group.classList.toggle('slider-controls--inactive', !hasOverflow));
+      }
+
+      hasAutoSlidesOverflow(swiper) {
+        const slides = Array.from(this.container.querySelectorAll('.swiper-wrapper > .swiper-slide')).slice(
+          0,
+          this.slideCount
+        );
+        const spaceBetween = Number(swiper.params.spaceBetween) || 0;
+        const slidesWidth = slides.reduce((width, slide) => width + slide.getBoundingClientRect().width, 0);
+        return slidesWidth + Math.max(0, slides.length - 1) * spaceBetween > this.container.clientWidth + 1;
       }
     }
     return Carousel;

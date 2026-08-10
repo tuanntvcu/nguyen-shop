@@ -2901,26 +2901,45 @@ input:is([type=radio])::after {
   z-index: 0;
 }
 
-.swiper-button-prev, .swiper-button-next {
+.swiper-button-prev, .swiper-button-next,
+.swiper-btn-prev, .swiper-btn-next {
   position: absolute;
   text-align: center;
   width: var(--swiper-navigation-size);
   height: var(--swiper-navigation-size);
+  min-width: var(--swiper-navigation-size);
+  min-height: var(--swiper-navigation-size);
+  max-width: var(--swiper-navigation-size);
+  max-height: var(--swiper-navigation-size);
+  flex: 0 0 var(--swiper-navigation-size);
   color: rgb(var(--color-foreground));
   background-color: rgb(var(--color-background));
   border: 0.1rem solid rgba(var(--color-foreground), 0.2);
   border-radius: 50%;
   padding: 0;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+/* Controls only belong on a carousel that has content beyond the current view. */
+.slider-control-hidden,
+.slider-controls--inactive {
+  display: none !important;
 }
 .swiper-button-prev:after, .swiper-button-next:after {
   position: absolute !important;
   content: "" !important;
 }
-.swiper-button-prev svg, .swiper-button-next svg {
+.swiper-button-prev svg, .swiper-button-next svg,
+.swiper-btn-prev svg, .swiper-btn-next svg {
+  display: block;
   width: var(--swiper-navigation-icon-size);
   height: var(--swiper-navigation-icon-size);
+  margin: auto;
+  flex: 0 0 var(--swiper-navigation-icon-size);
 }
-.swiper-button-prev:hover, .swiper-button-next:hover {
+.swiper-button-prev:hover, .swiper-button-next:hover,
+.swiper-btn-prev:hover, .swiper-btn-next:hover {
   --color-border: var(--color-button-hover-background);
   color: rgb(var(--color-button-hover-text));
   border-color: rgb(var(--color-border));

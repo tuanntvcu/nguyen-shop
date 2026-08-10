@@ -74,10 +74,10 @@
   {%- if popular_collection != blank and popular_collection.products_count > 0 -%}
     <section class="ah-section ah-popular" aria-labelledby="PopularHeading-{{ section.id }}">
       <div class="ah-shell">
-        <div class="ah-section-head"><h2 id="PopularHeading-{{ section.id }}">{{ section.settings.popular_heading }}</h2><a href="{{ popular_collection.url }}">{{ section.settings.view_all_label }} →</a></div>
-        <div class="ah-carousel-wrap"><button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="{{ 'altaeron_home.accessibility.previous_products' | t | escape }}">‹</button><div class="ah-products ah-slider" data-slider tabindex="0" aria-label="{{ section.settings.popular_heading | escape }}">
+        <div class="ah-section-head"><h2 id="PopularHeading-{{ section.id }}">{{ section.settings.popular_heading }}</h2><a href="{{ popular_collection.url }}"><span>{{ section.settings.view_all_label }}</span><span aria-hidden="true">→</span></a></div>
+        <div class="ah-carousel-wrap"><button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="{{ 'altaeron_home.accessibility.previous_products' | t | escape }}">{% render 'icon-slider-prev' %}</button><div class="ah-products ah-slider" data-slider tabindex="0" aria-label="{{ section.settings.popular_heading | escape }}">
           {%- for product in popular_collection.products limit: 8 -%}{% render 'altaeron-home-product', product: product %}{%- endfor -%}
-        </div><button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="{{ 'altaeron_home.accessibility.next_products' | t | escape }}">›</button></div>
+        </div><button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="{{ 'altaeron_home.accessibility.next_products' | t | escape }}">{% render 'icon-slider-next' %}</button></div>
         <div class="ah-dots" data-slider-dots aria-label="{{ 'altaeron_home.accessibility.product_carousel_pagination' | t | escape }}"></div>
       </div>
     </section>
@@ -200,13 +200,32 @@
   {%- endif -%}
 
   {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
-    <section class="ah-section ah-guides" aria-labelledby="GuidesHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-section-head"><h2 id="GuidesHeading-{{ section.id }}">{{ section.settings.guides_heading }}</h2><a href="{{ section.settings.blog.url }}">{{ section.settings.view_all_label }} →</a></div><div class="ah-guide-grid">
-      {%- for article in section.settings.blog.articles limit: 3 -%}{%- assign article_cover = article.image | default: article.metafields.custom.cover_image.value -%}{%- assign article_words = article.content | strip_html | split: ' ' | size -%}{%- assign read_minutes = article_words | divided_by: 200 | plus: 1 -%}<article class="ah-guide"><a href="{{ article.url }}" data-track="article_click"><div class="ah-guide__media ah-media">{% if article_cover %}{{ article_cover | image_url: width: 620 | image_tag: loading: 'lazy', widths: '240, 400, 620', sizes: '(min-width: 750px) 33vw, 28vw', alt: article.title }}{% endif %}</div><div class="ah-guide__body"><h3>{{ article.title }}</h3><p>{{ 'altaeron_home.guides.reading_time' | t: minutes: read_minutes }}</p></div></a></article>{%- endfor -%}
+    <section class="ah-section ah-guides" aria-labelledby="GuidesHeading-{{ section.id }}"><div class="ah-shell"><div class="ah-section-head"><h2 id="GuidesHeading-{{ section.id }}">{{ section.settings.guides_heading }}</h2><a href="{{ section.settings.blog.url }}"><span>{{ section.settings.view_all_label }}</span><span aria-hidden="true">→</span></a></div><div class="ah-guide-grid">
+      {%- for article in section.settings.blog.articles limit: 3 -%}
+        {%- liquid
+          assign article_cover = article.image | default: article.metafields.custom.cover_image.value
+          assign article_words = article.content | strip_html | split: ' ' | size
+          assign read_minutes = article_words | divided_by: 200 | plus: 1
+          assign article_description = article.excerpt | default: article.content | strip_html | strip
+        -%}
+        <article class="ah-guide">
+          <a href="{{ article.url }}" data-track="article_click">
+            <div class="ah-guide__media ah-media">
+              {% if article_cover %}{{ article_cover | image_url: width: 620 | image_tag: loading: 'lazy', widths: '240, 400, 620', sizes: '(min-width: 750px) 33vw, 28vw', alt: article.title }}{% endif %}
+            </div>
+            <div class="ah-guide__body">
+              <h3>{{ article.title }}</h3>
+              {%- if article_description != blank -%}<p class="ah-guide__description">{{ article_description }}</p>{%- endif -%}
+              <p class="ah-guide__reading-time">{{ 'altaeron_home.guides.reading_time' | t: minutes: read_minutes }}</p>
+            </div>
+          </a>
+        </article>
+      {%- endfor -%}
     </div></div></section>
   {%- endif -%}
 
   <section id="altaeron-faq" class="ah-section ah-faq" aria-labelledby="FaqHeading-{{ section.id }}"><div class="ah-shell"><h2 id="FaqHeading-{{ section.id }}">{{ section.settings.faq_heading }}</h2><div class="ah-faq__grid">
-    {%- for block in section.blocks -%}{%- if block.type == 'faq' and block.settings.question != blank -%}<details class="ah-faq__item" {{ block.shopify_attributes }}><summary data-track="faq_open">{{ block.settings.question }}<span aria-hidden="true">⌄</span></summary><div class="rte">{{ block.settings.answer }}</div></details>{%- endif -%}{%- endfor -%}
+    {%- for block in section.blocks -%}{%- if block.type == 'faq' and block.settings.question != blank -%}<details class="ah-faq__item" {{ block.shopify_attributes }}><summary data-track="faq_open">{{ block.settings.question }}{% render 'icon-accordion-chevron', class: 'ah-faq__chevron' %}</summary><div class="rte">{{ block.settings.answer }}</div></details>{%- endif -%}{%- endfor -%}
   </div></div></section>
 
   <section class="ah-newsletter" aria-labelledby="NewsletterHeading-{{ section.id }}"><div class="ah-shell ah-newsletter__inner"><div><h2 id="NewsletterHeading-{{ section.id }}">{{ section.settings.newsletter_heading }}</h2><p>{{ section.settings.newsletter_text }}</p></div>{%- form 'customer', class: 'ah-newsletter__form' -%}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">{{ 'newsletter.label' | t }}</label><input id="NewsletterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="{{ section.settings.newsletter_placeholder }}" required><button type="submit" data-track="newsletter_signup">{{ section.settings.newsletter_button }}</button>{%- if form.posted_successfully? -%}<p class="ah-newsletter__message" role="status">{{ 'newsletter.success' | t }}</p>{%- elsif form.errors -%}<p class="ah-newsletter__message" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}{%- endform -%}{%- if section.settings.newsletter_privacy != blank -%}<p class="ah-newsletter__privacy">{{ section.settings.newsletter_privacy }}</p>{%- endif -%}</div></section>
