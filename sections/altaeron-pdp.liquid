@@ -349,8 +349,45 @@
       {%- assign chapter_heading_id = 'AltaeronSupport-' | append: section.id -%}
       {% render 'altaeron-pdp-section-heading', number: '3', title: support_title, subtitle: support_subtitle, heading_id: chapter_heading_id %}
       <div class="apdp-support-grid">
-        <div class="apdp-support__features">
-          {%- assign support_icons = 'knob|dual-support|pressure-relief|comfort' | split: '|' -%}{%- for icon in support_icons -%}{%- capture support_title_key -%}altaeron_pdp.support.item_{{ forloop.index }}_title_html{%- endcapture -%}{%- capture support_text_key -%}altaeron_pdp.support.item_{{ forloop.index }}_text_html{%- endcapture -%}<article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: icon %}</span><h3>{{ support_title_key | t }}</h3><p>{{ support_text_key | t }}</p></article>{%- endfor -%}
+        <div class="apdp-support__info">
+          <div class="apdp-support__features">
+            {%- assign support_icons = 'knob|dual-support|pressure-relief|comfort' | split: '|' -%}
+            {%- for icon in support_icons -%}
+              {%- capture support_title_key -%}altaeron_pdp.support.item_{{ forloop.index }}_title_html{%- endcapture -%}
+              {%- capture support_text_key -%}altaeron_pdp.support.item_{{ forloop.index }}_text_html{%- endcapture -%}
+              <article>
+                <span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: icon %}</span>
+                {%- if forloop.index == 4 -%}
+                  <h3>Comfort-Focused<br>Design</h3>
+                  <p>Soft padding where<br>it matters</p>
+                {%- else -%}
+                  <h3>{{ support_title_key | t }}</h3>
+                  <p>{{ support_text_key | t }}</p>
+                {%- endif -%}
+              </article>
+            {%- endfor -%}
+          </div>
+          <aside class="apdp-support__fit" aria-labelledby="AltaeronSupportFit-{{ section.id }}">
+            <p class="apdp-support__fit-eyebrow" id="AltaeronSupportFit-{{ section.id }}">DESIGNED TO FIT YOU</p>
+            <div class="apdp-support__fit-grid">
+              <article>
+                <span class="apdp-support__fit-icon">{% render 'altaeron-pdp-icon', icon: 'age-person' %}</span>
+                <p><strong>AGES 13+</strong><small>Teens &amp; adults</small></p>
+              </article>
+              <article>
+                <span class="apdp-support__fit-icon">{% render 'altaeron-pdp-icon', icon: 'people' %}</span>
+                <p><strong>UNISEX</strong><small>Men &amp; women</small></p>
+              </article>
+              <article>
+                <span class="apdp-support__fit-icon">{% render 'altaeron-pdp-icon', icon: 'sliders' %}</span>
+                <p><strong>ADJUSTABLE FIT</strong><small>Fine-tune to your foot</small></p>
+              </article>
+              <article>
+                <span class="apdp-support__fit-icon">{% render 'altaeron-pdp-icon', icon: 'left-right' %}</span>
+                <p><strong>LEFT OR RIGHT</strong><small>Designed for either foot</small></p>
+              </article>
+            </div>
+          </aside>
         </div>
         <div class="apdp-support__media">
           <div class="apdp-support__video">
