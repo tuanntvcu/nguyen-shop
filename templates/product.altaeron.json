@@ -112,6 +112,13 @@
             "text": "Understanding the difference.",
             "url": ""
           }
+        },
+        "tail_media_tfdtiU": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "spacer",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_54_15_PM.png"
+          }
         }
       },
       "block_order": [
@@ -128,7 +135,8 @@
         "education_media_DTAHdH",
         "guide_1",
         "guide_2",
-        "guide_3"
+        "guide_3",
+        "tail_media_tfdtiU"
       ],
       "settings": {
         "eyebrow": "#1 Rated in Bunion & Toe Alignment",
