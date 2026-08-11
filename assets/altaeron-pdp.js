@@ -11,6 +11,7 @@
     const thumbs = [...root.querySelectorAll('[data-apdp-thumb]')];
     const items = [...root.querySelectorAll('[data-apdp-media]')];
     const thumbsList = root.querySelector('.apdp-gallery__thumbs');
+    const stageImage = root.querySelector('.apdp-gallery__stage img');
     if (!thumbs.length || !items.length) return () => {};
 
     if (thumbsList) {
@@ -63,29 +64,43 @@
       }, true);
     }
 
-    const activate = (id, focus = false) => {
-      let found = false;
+    const activate = (id, focus = false, syncStage = true) => {
+      const activeItem = items.find((item) => String(item.dataset.apdpMedia) === String(id));
+      const activeThumb = thumbs.find((thumb) => String(thumb.dataset.apdpThumb) === String(id));
+      if (!activeItem) return;
+
+      if (syncStage && stageImage && activeThumb?.dataset.apdpPreviewSrc) {
+        stageImage.src = activeThumb.dataset.apdpPreviewSrc;
+        stageImage.removeAttribute('srcset');
+        stageImage.alt = activeThumb.dataset.apdpPreviewAlt || '';
+      }
+
       thumbs.forEach((thumb) => {
         const active = String(thumb.dataset.apdpThumb) === String(id);
         thumb.classList.toggle('is-active', active);
         thumb.setAttribute('aria-selected', String(active));
         thumb.tabIndex = active ? 0 : -1;
-        if (active) {
-          found = true;
-          if (focus) thumb.focus({ preventScroll: true });
+        if (active && focus) {
+          thumb.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+          thumb.focus({ preventScroll: true });
         }
       });
-      if (!found) return;
       items.forEach((item) => {
-        const active = String(item.dataset.apdpMedia) === String(id);
+        const active = item === activeItem;
         item.hidden = !active;
+        item.setAttribute('aria-hidden', String(!active));
         item.classList.toggle('is-active', active);
         if (!active) item.querySelectorAll('video').forEach((video) => video.pause());
       });
     };
 
+    thumbsList?.addEventListener('click', (event) => {
+      const thumb = event.target.closest('[data-apdp-thumb]');
+      if (!thumb || !thumbsList.contains(thumb)) return;
+      activate(thumb.dataset.apdpThumb);
+    });
+
     thumbs.forEach((thumb, index) => {
-      thumb.addEventListener('click', () => activate(thumb.dataset.apdpThumb));
       thumb.addEventListener('keydown', (event) => {
         if (!['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
@@ -97,6 +112,9 @@
         activate(thumbs[next].dataset.apdpThumb, true);
       });
     });
+
+    const initiallyActive = thumbs.find((thumb) => thumb.classList.contains('is-active')) || thumbs[0];
+    activate(initiallyActive.dataset.apdpThumb, false, false);
 
     return activate;
   }
@@ -292,12 +310,55 @@
     const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
     const stickyCompare = root.querySelector('[data-apdp-sticky-compare]');
     const stickySavings = root.querySelector('[data-apdp-sticky-savings]');
+    const installmentTerms = [...root.querySelectorAll('[data-apdp-installments]')];
+    const finalPrice = root.querySelector('[data-apdp-final-price]');
+    const finalCompare = root.querySelector('[data-apdp-final-compare]');
+    const finalSavings = root.querySelector('[data-apdp-final-savings]');
     const variantsNode = root.querySelector('[data-apdp-product-json]');
     const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
     const format = root.dataset.moneyFormat;
     const bundleWidget = root.querySelector('bundle-deals-widget');
 
-    const chosenControl = () => select?.selectedOptions?.[0] || radios.find((radio) => radio.checked);
+    const updateInstallments = (price) => {
+      const installment = money(Math.round(price / 4), format);
+      installmentTerms.forEach((element) => {
+        const textNode = [...element.childNodes].find((node) => node.nodeType === Node.TEXT_NODE && /\d/.test(node.textContent));
+        if (!textNode) return;
+        textNode.textContent = textNode.textContent.replace(/(?:[$€£¥₹₩₫]\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|CAD|AUD|VND|₫))/i, installment);
+      });
+    };
+
+    const updateRelatedPrices = (price, compare) => {
+      const hasSavings = compare > price;
+      const saved = Math.max(compare - price, 0);
+      if (finalPrice) finalPrice.textContent = money(price, format);
+      if (finalCompare) {
+        finalCompare.hidden = !hasSavings;
+        if (hasSavings) finalCompare.textContent = money(compare, format);
+      }
+      if (finalSavings) {
+        finalSavings.hidden = !hasSavings;
+        if (hasSavings) finalSavings.textContent = `${root.dataset.saveLabel} ${money(saved, format)}`;
+      }
+      updateInstallments(price);
+    };
+
+    const chosenControl = () => {
+      const explicitControl = select?.selectedOptions?.[0] || radios.find((radio) => radio.checked);
+      if (explicitControl) return explicitControl;
+
+      const variant = variants.find((item) => String(item.id) === String(idInput?.value)) || variants[0];
+      if (!variant) return null;
+      return {
+        value: variant.id,
+        dataset: {
+          price: variant.price,
+          compare: variant.compare_at_price || 0,
+          available: String(variant.available),
+          mediaId: variant.featured_media?.id || '',
+        },
+      };
+    };
     const update = (pushUrl = true) => {
       const control = chosenControl();
       if (!control) return;
@@ -350,6 +411,7 @@
         if (available) ctaPrice.textContent = ` — ${money(price, format)}`;
       }
       if (stickyText) stickyText.textContent = label;
+      updateRelatedPrices(price, compare);
       if (mediaId) activateMedia(mediaId);
       if (pushUrl) {
         const url = new URL(root.dataset.productUrl, window.location.origin);
@@ -372,13 +434,14 @@
 
     const selectedBundle = () => {
       if (!bundleWidget) return null;
-      const checkedInputs = [...bundleWidget.querySelectorAll('input[type="radio"]:checked')];
+      const widgetRoot = bundleWidget.shadowRoot || bundleWidget;
+      const checkedInputs = [...widgetRoot.querySelectorAll('input[type="radio"]:checked, [role="radio"][aria-checked="true"]')];
       const moneyPattern = /(?:[$€£¥₹₩]\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|CAD|AUD|VND|₫))/gi;
 
       for (const input of checkedInputs) {
         const candidates = [...(input.labels || [])];
         let ancestor = input.parentElement;
-        while (ancestor && ancestor !== bundleWidget) {
+        while (ancestor && ancestor !== widgetRoot) {
           candidates.push(ancestor);
           ancestor = ancestor.parentElement;
         }
@@ -420,19 +483,36 @@
         if (bundleSavings > 0) element.textContent = `${root.dataset.saveLabel} ${money(bundleSavings, format)}`;
       });
       if (ctaPrice) ctaPrice.textContent = ` — ${money(bundle.price, format)}`;
+      updateRelatedPrices(bundle.price, bundleCompare);
     };
 
-    const scheduleBundlePricing = () => window.requestAnimationFrame(syncBundlePricing);
+    let bundleFrame;
+    const scheduleBundlePricing = () => {
+      window.cancelAnimationFrame(bundleFrame);
+      bundleFrame = window.requestAnimationFrame(syncBundlePricing);
+    };
 
     select?.addEventListener('change', () => { update(); scheduleBundlePricing(); });
     radios.forEach((radio) => radio.addEventListener('change', () => { update(); scheduleBundlePricing(); }));
-    bundleWidget?.addEventListener('change', scheduleBundlePricing);
     if (bundleWidget) {
-      new MutationObserver(scheduleBundlePricing).observe(bundleWidget, {
-        attributes: true,
-        attributeFilter: ['checked', 'class', 'aria-checked'],
-        childList: true,
-        subtree: true,
+      const observedRoots = new WeakSet();
+      const observeBundleRoot = (observedRoot) => {
+        if (!observedRoot || observedRoots.has(observedRoot)) return;
+        observedRoots.add(observedRoot);
+        ['change', 'input', 'click'].forEach((eventName) => observedRoot.addEventListener(eventName, scheduleBundlePricing, true));
+        new MutationObserver(scheduleBundlePricing).observe(observedRoot, {
+          attributes: true,
+          attributeFilter: ['checked', 'class', 'aria-checked'],
+          childList: true,
+          subtree: true,
+        });
+      };
+
+      observeBundleRoot(bundleWidget);
+      observeBundleRoot(bundleWidget.shadowRoot);
+      window.customElements?.whenDefined(bundleWidget.localName).then(() => {
+        observeBundleRoot(bundleWidget.shadowRoot);
+        scheduleBundlePricing();
       });
     }
     update(false);

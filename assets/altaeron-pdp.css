@@ -509,7 +509,7 @@ bundle-deals-widget input[type="radio"]{
   .altaeron-pdp .apdp-narrative .apdp-identity{width:74%}
 }
 
-/* Keep the metafield hero fixed while thumbnail selections update the viewer below. */
+/* Keep the hero and media viewer readable as separate rows on small screens. */
 @media(max-width:767px){
   .altaeron-pdp .apdp-hero__grid{display:flex;flex-direction:column;position:relative}
   .altaeron-pdp .apdp-narrative{z-index:1}
