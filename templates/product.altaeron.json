@@ -147,6 +147,12 @@
             "slot": "moment_2",
             "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_11_05_PM.png"
           }
+        },
+        "tail_media_WfJCPe": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_3"
+          }
         }
       },
       "block_order": [
@@ -168,7 +174,8 @@
         "tail_media_jjfyFD",
         "tail_media_7HAByV",
         "tail_media_zAU4QY",
-        "tail_media_YraHNf"
+        "tail_media_YraHNf",
+        "tail_media_WfJCPe"
       ],
       "settings": {
         "eyebrow": "#1 Rated in Bunion & Toe Alignment",
