@@ -16,7 +16,14 @@
           "type": "education_media",
           "settings": {
             "slot": "familiar_1",
-            "video": "shopify://files/videos/Woman_experiencing_morning_foot_…_202608111323.mp4"
+            "video": "shopify://files/videos/Woman_experiencing_morning_foot_…_202608111323 (online-video-cutter.com).mp4"
+          }
+        },
+        "education_media_rdBfxy": {
+          "type": "education_media",
+          "settings": {
+            "slot": "familiar_2",
+            "video": "shopify://files/videos/Woman_sitting_down_with_relief_202608111323 (online-video-cutter.com).mp4"
           }
         },
         "guide_1": {
@@ -46,6 +53,7 @@
       },
       "block_order": [
         "education_media_b7EGMf",
+        "education_media_rdBfxy",
         "guide_1",
         "guide_2",
         "guide_3"
