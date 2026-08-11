@@ -82,6 +82,13 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png"
           }
         },
+        "education_media_DTAHdH": {
+          "type": "education_media",
+          "settings": {
+            "slot": "day_story",
+            "video": "shopify://files/videos/Woman_walking_through_daily_routine_202608111534.mp4"
+          }
+        },
         "guide_1": {
           "type": "guide",
           "settings": {
@@ -118,6 +125,7 @@
         "education_media_AaEAa3",
         "education_media_HdWmkX",
         "education_media_DM7yez",
+        "education_media_DTAHdH",
         "guide_1",
         "guide_2",
         "guide_3"
