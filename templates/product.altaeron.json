@@ -68,6 +68,19 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_01_59_36_PM.png"
           }
         },
+        "education_media_HdWmkX": {
+          "type": "education_media",
+          "settings": {
+            "slot": "support_demo",
+            "video": "shopify://files/videos/Your feet work hard every day—give them the support they need. This bunion corrector is lightweight, comfortable, and easy to wear at home or on the go. (online-video-cutter.com).mp4"
+          }
+        },
+        "education_media_DM7yez": {
+          "type": "education_media",
+          "settings": {
+            "slot": "support_detail"
+          }
+        },
         "guide_1": {
           "type": "guide",
           "settings": {
@@ -102,6 +115,8 @@
         "education_media_7NPnFT",
         "education_media_HBdgYG",
         "education_media_AaEAa3",
+        "education_media_HdWmkX",
+        "education_media_DM7yez",
         "guide_1",
         "guide_2",
         "guide_3"
