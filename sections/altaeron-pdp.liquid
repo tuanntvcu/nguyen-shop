@@ -320,7 +320,7 @@
           <div class="apdp-causes__points">
             {%- for i in (1..4) -%}{%- capture cause_key -%}altaeron_pdp.causes.point_{{ i }}_html{%- endcapture -%}<p><span aria-hidden="true">✓</span>{{ cause_key | t }}</p>{%- endfor -%}
           </div>
-          <a class="apdp-causes__link" href="/pages/bunion-guide">{{ 'altaeron_pdp.causes.guide_link' | t }} <span aria-hidden="true">→</span></a>
+          <a class="apdp-causes__link" href="#AltaeronCreated-{{ section.id }}">{{ 'altaeron_pdp.causes.guide_link' | t }} <span aria-hidden="true">→</span></a>
         </div>
         <ol class="apdp-causes__stages">
           <li>
