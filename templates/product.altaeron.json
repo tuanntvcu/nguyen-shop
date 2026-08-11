@@ -130,7 +130,8 @@
         "tail_media_7HAByV": {
           "type": "tail_media",
           "settings": {
-            "slot": "review_1"
+            "slot": "doctor",
+            "image": "shopify://shop_images/SHYHMT6XQaE_Wbc6UW3daASG0Y6cJ8LG_Gd4h_FY0ALS9V9obgK2vzZshJV8QY9iTB113J4KVufupcLUkaXiLvSlaCjmxGFCwYbQqnxvMLHoHV4G89Znhn4Yqhc5ZpiAm45ucD4m8aKAkdoG6Hgs3ly5jtwH1Xlmetd9xeYrZ83_l9QF4N8Z4xN.jpg"
           }
         }
       },
