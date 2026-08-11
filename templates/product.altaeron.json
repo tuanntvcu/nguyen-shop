@@ -165,7 +165,8 @@
         "tail_media_MtBhaR": {
           "type": "tail_media",
           "settings": {
-            "slot": "moment_5"
+            "slot": "moment_5",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_17_09_PM.png"
           }
         }
       },
