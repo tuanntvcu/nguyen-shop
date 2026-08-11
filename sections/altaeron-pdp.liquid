@@ -502,7 +502,34 @@
       <section class="apdp-learn" aria-labelledby="AltaeronLearn-{{ section.id }}">
         {%- assign chapter_heading_id = 'AltaeronLearn-' | append: section.id -%}
         {% render 'altaeron-pdp-section-heading', number: '10', title: learn_title, subtitle: learn_subtitle, heading_id: chapter_heading_id %}
-        <div class="apdp-learn-grid">{%- for i in (1..4) -%}{%- capture guide_title_key -%}altaeron_pdp.learn.item_{{ i }}_title{%- endcapture -%}{%- assign title = guide_title_key | t -%}{%- capture guide_text_key -%}altaeron_pdp.learn.item_{{ i }}_text{%- endcapture -%}{%- assign guide_minutes = forloop.index | plus: 4 -%}{%- case forloop.index -%}{%- when 1 -%}{%- assign guide_image = tail_guide_1 -%}{%- when 2 -%}{%- assign guide_image = tail_guide_2 -%}{%- when 3 -%}{%- assign guide_image = tail_guide_3 -%}{%- else -%}{%- assign guide_image = tail_guide_4 -%}{%- endcase -%}<article><div class="apdp-tail-media">{%- if guide_image != blank -%}{{ guide_image | image_url: width: 320 | image_tag: loading: 'lazy', widths: '120, 220, 320', sizes: '(min-width: 768px) 90px, 26vw', alt: title }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div><div><h3>{{ title }}</h3><p>{{ guide_text_key | t }}</p><small>{{ 'altaeron_pdp.learn.reading_time' | t: minutes: guide_minutes }}</small></div></article>{%- endfor -%}</div>
+        {%- liquid
+          assign learn_blog = section.settings.learn_blog
+          if learn_blog == blank
+            assign learn_blog = blogs['news']
+          endif
+        -%}
+        <div class="apdp-learn-grid">
+          {%- for article in learn_blog.articles limit: 4 -%}
+            {%- assign guide_minutes = article.id | modulo: 4 | plus: 5 -%}
+            {%- assign article_summary = article.excerpt_or_content | strip_html | truncatewords: 12 -%}
+            <article>
+              <a class="apdp-learn-card__link" href="{{ article.url }}" aria-label="{{ article.title | escape }}">
+                <div class="apdp-tail-media">
+                  {%- if article.image != blank -%}
+                    {{ article.image | image_url: width: 480 | image_tag: loading: 'lazy', widths: '160, 240, 320, 480', sizes: '(min-width: 768px) 90px, 26vw', alt: article.image.alt | default: article.title }}
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </div>
+                <div>
+                  <h3>{{ article.title }}</h3>
+                  <p>{{ article_summary }}</p>
+                  <small>{{ 'altaeron_pdp.learn.reading_time' | t: minutes: guide_minutes }}</small>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
       </section>
 
       <section class="apdp-review-summary alta-pdp-subsection alta-pdp-subsection--default-compact" aria-labelledby="AltaeronVerified-{{ section.id }}" data-apdp-review-slider-group>
@@ -606,7 +633,8 @@
     { "type": "text", "id": "shoe_3", "label": "Shoe type 3", "default": "Sandals" },
     { "type": "text", "id": "shoe_4", "label": "Shoe type 4", "default": "Wide Shoes" },
     { "type": "text", "id": "shoe_5", "label": "Shoe type 5", "default": "Heels" },
-    { "type": "text", "id": "guides_heading", "label": "Guides heading", "default": "Helpful Guides" }
+    { "type": "text", "id": "guides_heading", "label": "Guides heading", "default": "Helpful Guides" },
+    { "type": "blog", "id": "learn_blog", "label": "Learn More blog" }
   ],
   "blocks": [
     {
