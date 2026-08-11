@@ -12,21 +12,76 @@
     "altaeron_pdp": {
       "type": "altaeron-pdp",
       "blocks": {
-        "guide_1": { "type": "guide", "settings": { "title": "How To Wear It", "text": "Step-by-step guidance for best results." } },
-        "guide_2": { "type": "guide", "settings": { "title": "Morning Heel Pain?", "text": "What it means and what can help." } },
-        "guide_3": { "type": "guide", "settings": { "title": "Bunion vs. Hallux Valgus", "text": "Understanding the difference." } }
+        "education_media_b7EGMf": {
+          "type": "education_media",
+          "settings": {
+            "slot": "familiar_1",
+            "video": "shopify://files/videos/kling_20260723_VIDEO_Image_to_V_3900_0.mp4"
+          }
+        },
+        "guide_1": {
+          "type": "guide",
+          "settings": {
+            "title": "How To Wear It",
+            "text": "Step-by-step guidance for best results.",
+            "url": ""
+          }
+        },
+        "guide_2": {
+          "type": "guide",
+          "settings": {
+            "title": "Morning Heel Pain?",
+            "text": "What it means and what can help.",
+            "url": ""
+          }
+        },
+        "guide_3": {
+          "type": "guide",
+          "settings": {
+            "title": "Bunion vs. Hallux Valgus",
+            "text": "Understanding the difference.",
+            "url": ""
+          }
+        }
       },
-      "block_order": ["guide_1", "guide_2", "guide_3"],
+      "block_order": [
+        "education_media_b7EGMf",
+        "guide_1",
+        "guide_2",
+        "guide_3"
+      ],
       "settings": {
+        "eyebrow": "#1 Rated in Bunion & Toe Alignment",
+        "headline_override": "Walk Without Thinking About Your Feet Again.",
+        "subheadline_override": "Leave the house. Wear the shoes you love, and enjoy your day—without planning around foot pain.",
         "identity_heading": "You might see yourself here...",
+        "relief_heading": "Finally, Relief You Can Feel",
+        "relief_text": "Designed to gently realign your big toe, reduce pressure, and help you move comfortably—every day.",
         "price_label": "From",
         "variant_label": "Device Pair",
+        "popular_label": "Most Popular",
         "cta_label": "Start Walking Comfortably Again",
         "order_help_heading": "Questions before ordering?",
         "order_help_text": "Check the fit notes and policies, or contact us for help.",
+        "familiar_heading": "Does this feel familiar?",
+        "reassurance_heading": "If any of these feel familiar, you’re not imagining it.",
+        "reassurance_text": "People dealing with the same frustration inspired the way Altaeron was designed.",
         "video_eyebrow": "See the routine",
+        "story_heading": "Imagine Leaving Home Without Thinking About Your Feet.",
         "reviews_heading": "Real People. Real Results.",
+        "how_heading": "How It Works",
+        "moments_heading": "Back To Moments You Missed.",
+        "moments_subtitle": "Not just walking. Living.",
+        "moments_fifth": "Everyday plans without planning around foot pain.",
         "routine_heading": "Support When You Need It. Recovery When You Don’t.",
+        "routine_1_label": "Day Support",
+        "routine_1_text": "Wear during the day for active support and alignment.",
+        "routine_2_label": "Night Support",
+        "routine_2_text": "Use supportive night products while you rest.",
+        "routine_3_label": "Recovery",
+        "routine_3_text": "Give your feet time to recover and reset.",
+        "bundle_label": "Build your support routine",
+        "bundle_link": "",
         "values_heading": "No Miracles. Just Small Changes That Add Up.",
         "value_1_title": "Helpful by design",
         "value_1_text": "We design helpful products that support real people.",
@@ -36,9 +91,25 @@
         "value_3_text": "We listen, learn, and keep improving.",
         "value_4_title": "Honest support",
         "value_4_text": "We’re here with honest guidance and real support.",
-        "faq_heading": "You Ask, We Answer"
+        "guarantee_heading": "Order With Confidence",
+        "guarantee_text": "Review our store policies and contact us if you need help before ordering.",
+        "faq_heading": "You Ask, We Answer",
+        "faq_intro": "The answers to the questions we hear most about fit, comfort, safety, and results.",
+        "faq_6_question": "Is it suitable for both men and women?",
+        "faq_6_answer": "Choose the correct side and follow the product fit guidance. If you have a medical condition or are unsure whether the support is appropriate for you, consult a qualified healthcare professional.",
+        "faq_7_question": "What if it doesn’t help me?",
+        "faq_7_answer": "Stop using it if it causes discomfort. Review the store return policy or contact support for help with fit and available options.",
+        "compatibility_heading": "Works With The Shoes You Already Love.",
+        "shoe_1": "Sneakers",
+        "shoe_2": "Loafers",
+        "shoe_3": "Sandals",
+        "shoe_4": "Wide Shoes",
+        "shoe_5": "Heels",
+        "guides_heading": "Helpful Guides"
       }
     }
   },
-  "order": ["altaeron_pdp"]
+  "order": [
+    "altaeron_pdp"
+  ]
 }
