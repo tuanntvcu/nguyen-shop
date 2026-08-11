@@ -78,7 +78,8 @@
         "education_media_DM7yez": {
           "type": "education_media",
           "settings": {
-            "slot": "support_detail"
+            "slot": "support_detail",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png"
           }
         },
         "guide_1": {
