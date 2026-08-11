@@ -295,6 +295,7 @@
     const variantsNode = root.querySelector('[data-apdp-product-json]');
     const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
     const format = root.dataset.moneyFormat;
+    const bundleWidget = root.querySelector('bundle-deals-widget');
 
     const chosenControl = () => select?.selectedOptions?.[0] || radios.find((radio) => radio.checked);
     const update = (pushUrl = true) => {
@@ -358,9 +359,84 @@
       form?.dispatchEvent(new CustomEvent('altaeron:variant-change', { bubbles: true, detail: { variant } }));
     };
 
-    select?.addEventListener('change', () => update());
-    radios.forEach((radio) => radio.addEventListener('change', () => update()));
+    const parseDisplayedMoney = (value) => {
+      const numeric = String(value || '').replace(/[^\d.,]/g, '');
+      const decimalIndex = Math.max(numeric.lastIndexOf('.'), numeric.lastIndexOf(','));
+      if (decimalIndex >= 0 && numeric.length - decimalIndex - 1 === 2) {
+        const whole = numeric.slice(0, decimalIndex).replace(/[^\d]/g, '');
+        const decimal = numeric.slice(decimalIndex + 1).replace(/[^\d]/g, '');
+        return (Number(whole || 0) * 100) + Number(decimal || 0);
+      }
+      return Number(numeric.replace(/[^\d]/g, '') || 0) * 100;
+    };
+
+    const selectedBundle = () => {
+      if (!bundleWidget) return null;
+      const checkedInputs = [...bundleWidget.querySelectorAll('input[type="radio"]:checked')];
+      const moneyPattern = /(?:[$€£¥₹₩]\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|CAD|AUD|VND|₫))/gi;
+
+      for (const input of checkedInputs) {
+        const candidates = [...(input.labels || [])];
+        let ancestor = input.parentElement;
+        while (ancestor && ancestor !== bundleWidget) {
+          candidates.push(ancestor);
+          ancestor = ancestor.parentElement;
+        }
+
+        for (const option of candidates) {
+          const optionInputs = option.querySelectorAll('input[type="radio"]').length;
+          const priceLabels = option.textContent.match(moneyPattern) || [];
+          if (optionInputs <= 1 && priceLabels.length) {
+            const prices = [...new Set(priceLabels.map(parseDisplayedMoney).filter((price) => price > 0))];
+            const quantityMatch = option.textContent.match(/\b(\d+)\s*(?:correctors?|items?|pieces?|packs?)\b/i);
+            const quantity = Number(input.dataset.quantity || quantityMatch?.[1] || 1);
+            return { price: prices[0], compare: prices[1] || 0, quantity };
+          }
+        }
+      }
+      return null;
+    };
+
+    const syncBundlePricing = () => {
+      const bundle = selectedBundle();
+      const control = chosenControl();
+      if (!bundle?.price || !control) return;
+
+      const basePrice = Number(control.dataset.price || 0);
+      const baseCompare = Number(control.dataset.compare || 0);
+      const bundleCompare = bundle.compare || (bundle.quantity > 1 ? basePrice * bundle.quantity : baseCompare);
+      const bundleSavings = Math.max(bundleCompare - bundle.price, 0);
+
+      if (currentPrice) currentPrice.textContent = money(bundle.price, format);
+      if (stickyPrice) stickyPrice.textContent = money(bundle.price, format);
+      [comparePrice, stickyCompare].forEach((element) => {
+        if (!element) return;
+        element.hidden = bundleSavings <= 0;
+        if (bundleSavings > 0) element.textContent = money(bundleCompare, format);
+      });
+      [savings, stickySavings].forEach((element) => {
+        if (!element) return;
+        element.hidden = bundleSavings <= 0;
+        if (bundleSavings > 0) element.textContent = `${root.dataset.saveLabel} ${money(bundleSavings, format)}`;
+      });
+      if (ctaPrice) ctaPrice.textContent = ` — ${money(bundle.price, format)}`;
+    };
+
+    const scheduleBundlePricing = () => window.requestAnimationFrame(syncBundlePricing);
+
+    select?.addEventListener('change', () => { update(); scheduleBundlePricing(); });
+    radios.forEach((radio) => radio.addEventListener('change', () => { update(); scheduleBundlePricing(); }));
+    bundleWidget?.addEventListener('change', scheduleBundlePricing);
+    if (bundleWidget) {
+      new MutationObserver(scheduleBundlePricing).observe(bundleWidget, {
+        attributes: true,
+        attributeFilter: ['checked', 'class', 'aria-checked'],
+        childList: true,
+        subtree: true,
+      });
+    }
     update(false);
+    scheduleBundlePricing();
   }
 
   function initSticky(root) {

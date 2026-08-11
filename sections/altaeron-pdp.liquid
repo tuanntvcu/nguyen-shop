@@ -14,20 +14,19 @@
   assign guide_cards = mf.pdp_guide_cards.value
   assign guide_blocks = section.blocks | where: 'type', 'guide'
   assign related_products = mf.pdp_related_products.value
-  assign reviews = mf.pdp_reviews.value
-  if reviews != blank
-    assign review_count = reviews.size
+  assign custom_reviews = mf.pdp_reviews.value
+  assign review_data = product.metafields.judgeme.review_widget_data.value
+  assign reviews = custom_reviews | default: review_data.reviews
+  assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
+  assign review_rating = review_data.average_rating | default: 0 | plus: 0
+  if review_count == 0 and custom_reviews != blank
+    assign review_count = custom_reviews.size
     assign review_rating_total = 0
-    for custom_review in reviews
+    for custom_review in custom_reviews
       assign custom_review_rating = custom_review.rating.value | default: custom_review.rating | plus: 0
       assign review_rating_total = review_rating_total | plus: custom_review_rating
     endfor
     assign review_rating = review_rating_total | times: 1.0 | divided_by: review_count | round: 1
-  else
-    assign review_data = product.metafields.judgeme.review_widget_data.value
-    assign reviews = review_data.reviews
-    assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
-    assign review_rating = review_data.average_rating | default: 0 | plus: 0
   endif
   assign hero_rating_label = 'altaeron_pdp.hero.rating' | t: rating: review_rating, count: review_count
   assign buy_rating_label = 'altaeron_pdp.buy.rating' | t: rating: review_rating, count: review_count
