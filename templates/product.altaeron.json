@@ -119,6 +119,19 @@
             "slot": "spacer",
             "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_54_15_PM.png"
           }
+        },
+        "tail_media_jjfyFD": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "support",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_59_48_PM.png"
+          }
+        },
+        "tail_media_7HAByV": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "review_1"
+          }
         }
       },
       "block_order": [
@@ -136,7 +149,9 @@
         "guide_1",
         "guide_2",
         "guide_3",
-        "tail_media_tfdtiU"
+        "tail_media_tfdtiU",
+        "tail_media_jjfyFD",
+        "tail_media_7HAByV"
       ],
       "settings": {
         "eyebrow": "#1 Rated in Bunion & Toe Alignment",
