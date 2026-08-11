@@ -61,6 +61,13 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_01_58_42_PM.png"
           }
         },
+        "education_media_wXiYeN": {
+          "type": "education_media",
+          "settings": {
+            "slot": "stage_4",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_01_59_36_PM.png"
+          }
+        },
         "guide_1": {
           "type": "guide",
           "settings": {
@@ -94,6 +101,7 @@
         "education_media_hNwA7M",
         "education_media_7NPnFT",
         "education_media_HBdgYG",
+        "education_media_wXiYeN",
         "guide_1",
         "guide_2",
         "guide_3"
