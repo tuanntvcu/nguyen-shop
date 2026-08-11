@@ -158,7 +158,8 @@
         "tail_media_HjQykf": {
           "type": "tail_media",
           "settings": {
-            "slot": "moment_4"
+            "slot": "moment_4",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_16_07_PM.png"
           }
         },
         "tail_media_MtBhaR": {
