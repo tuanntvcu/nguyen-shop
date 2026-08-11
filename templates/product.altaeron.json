@@ -133,6 +133,13 @@
             "slot": "doctor",
             "image": "shopify://shop_images/SHYHMT6XQaE_Wbc6UW3daASG0Y6cJ8LG_Gd4h_FY0ALS9V9obgK2vzZshJV8QY9iTB113J4KVufupcLUkaXiLvSlaCjmxGFCwYbQqnxvMLHoHV4G89Znhn4Yqhc5ZpiAm45ucD4m8aKAkdoG6Hgs3ly5jtwH1Xlmetd9xeYrZ83_l9QF4N8Z4xN.jpg"
           }
+        },
+        "tail_media_zAU4QY": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_1",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_09_56_PM.png"
+          }
         }
       },
       "block_order": [
@@ -152,7 +159,8 @@
         "guide_3",
         "tail_media_tfdtiU",
         "tail_media_jjfyFD",
-        "tail_media_7HAByV"
+        "tail_media_7HAByV",
+        "tail_media_zAU4QY"
       ],
       "settings": {
         "eyebrow": "#1 Rated in Bunion & Toe Alignment",
