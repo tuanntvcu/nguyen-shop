@@ -153,6 +153,18 @@
           "settings": {
             "slot": "moment_3"
           }
+        },
+        "tail_media_HjQykf": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_4"
+          }
+        },
+        "tail_media_MtBhaR": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_5"
+          }
         }
       },
       "block_order": [
@@ -175,7 +187,9 @@
         "tail_media_7HAByV",
         "tail_media_zAU4QY",
         "tail_media_YraHNf",
-        "tail_media_WfJCPe"
+        "tail_media_WfJCPe",
+        "tail_media_HjQykf",
+        "tail_media_MtBhaR"
       ],
       "settings": {
         "eyebrow": "#1 Rated in Bunion & Toe Alignment",
