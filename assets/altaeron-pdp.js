@@ -21,6 +21,7 @@
       let horizontal = false;
       let dragged = false;
       let suppressClick = false;
+      const dragThreshold = 8;
 
       thumbsList.addEventListener('dragstart', (event) => event.preventDefault());
 
@@ -31,14 +32,14 @@
         startPosition = horizontal ? event.clientX : event.clientY;
         startScrollPosition = horizontal ? thumbsList.scrollLeft : thumbsList.scrollTop;
         dragged = false;
-        thumbsList.setPointerCapture(pointerId);
       });
 
       thumbsList.addEventListener('pointermove', (event) => {
         if (event.pointerId !== pointerId) return;
         const position = horizontal ? event.clientX : event.clientY;
         const distance = position - startPosition;
-        if (!dragged && Math.abs(distance) < 4) return;
+        if (!dragged && Math.abs(distance) < dragThreshold) return;
+        if (!dragged && !thumbsList.hasPointerCapture(pointerId)) thumbsList.setPointerCapture(pointerId);
         dragged = true;
         suppressClick = true;
         thumbsList.classList.add('is-dragging');
@@ -94,13 +95,8 @@
       });
     };
 
-    thumbsList?.addEventListener('click', (event) => {
-      const thumb = event.target.closest('[data-apdp-thumb]');
-      if (!thumb || !thumbsList.contains(thumb)) return;
-      activate(thumb.dataset.apdpThumb);
-    });
-
     thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => activate(thumb.dataset.apdpThumb));
       thumb.addEventListener('keydown', (event) => {
         if (!['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
@@ -306,6 +302,7 @@
     const submitLabel = root.querySelector('[data-apdp-submit-label]');
     const ctaPrice = root.querySelector('[data-apdp-cta-price]');
     const stickySubmit = root.querySelector('[data-apdp-sticky-submit]');
+    const finalSubmit = root.querySelector('[data-apdp-final-submit]');
     const stickyText = root.querySelector('[data-apdp-sticky-text]');
     const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
     const stickyCompare = root.querySelector('[data-apdp-sticky-compare]');
@@ -399,7 +396,7 @@
         stickySavings.hidden = compare <= price;
         if (compare > price) stickySavings.textContent = `${root.dataset.saveLabel} ${money(compare - price, format)}`;
       }
-      [submit, stickySubmit].forEach((button) => {
+      [submit, stickySubmit, finalSubmit].forEach((button) => {
         if (!button) return;
         button.disabled = !available;
         if (available) button.removeAttribute('aria-disabled');
@@ -548,6 +545,7 @@
     const sticky = root.querySelector('[data-apdp-sticky]');
     const purchaseButton = root.querySelector('[data-apdp-submit]');
     const stickyButton = root.querySelector('[data-apdp-sticky-submit]');
+    const finalButton = root.querySelector('[data-apdp-final-submit]');
     const form = root.querySelector('.apdp-form');
     const finalCta = root.querySelector('.apdp-final-cta');
     if (!sticky || !purchaseButton || !stickyButton || !form) return;
@@ -571,6 +569,9 @@
     mobile.addEventListener?.('change', updateVisibility);
     stickyButton.addEventListener('click', () => {
       if (!stickyButton.disabled) form.requestSubmit();
+    });
+    finalButton?.addEventListener('click', () => {
+      if (!finalButton.disabled) form.requestSubmit(purchaseButton);
     });
   }
 
