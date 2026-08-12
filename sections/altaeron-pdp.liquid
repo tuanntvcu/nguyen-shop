@@ -199,7 +199,7 @@
         <div class="apdp-mobile-product" aria-hidden="true">
           {%- if how_image != blank -%}{{ how_image | image_url: width: 720 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '360, 540, 720', sizes: '55vw', alt: '' }}{%- endif -%}
         </div>
-        <div class="apdp-identity"><ul>{%- for i in (1..4) -%}{%- capture benefit_key -%}altaeron_pdp.hero.benefit_{{ i }}{%- endcapture -%}<li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ benefit_key | t }}</span></li>{%- endfor -%}</ul></div>
+        <div class="apdp-identity"><ul>{%- for i in (1..3) -%}{%- capture benefit_key -%}altaeron_pdp.hero.benefit_{{ i }}{%- endcapture -%}<li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ benefit_key | t }}</span></li>{%- endfor -%}</ul></div>
       </div>
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ 'altaeron_pdp.accessibility.purchase_product' | t: product: product.title | escape }}">
