@@ -179,34 +179,36 @@
             "link": "shopify://products/adjustable-bunion-corrector"
           }
         },
-        "testimonial_iraida": {
+        "testimonial_P8ewVN": {
           "type": "testimonial",
           "settings": {
-            "product": "plantar-fasciitis-night-splint-sock",
-            "review_number": 4,
-            "video_url": "",
-            "media_alt": "Plantar fasciitis night splint",
-            "quote": "",
-            "customer_name": "",
-            "persona": "",
-            "rating": 0,
-            "verified_label": "",
-            "link": ""
-          }
-        },
-        "testimonial_pasty": {
-          "type": "testimonial",
-          "settings": {
-            "product": "electric-foot-hand-massager",
+            "product": "adjustable-bunion-corrector",
             "review_number": 3,
             "video_url": "",
-            "media_alt": "Electric foot and hand massager",
-            "quote": "",
-            "customer_name": "",
-            "persona": "",
-            "rating": 0,
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
+            "media_alt": "Customer using the night splint sock before bed",
+            "quote": "I’m on my feet most of the day for work, so mornings used to be the part I dreaded. This is surprisingly simple to put on and I can adjust the tension depending on how I’m feeling. Definitely glad I gave it a try",
+            "customer_name": "Melissa R",
+            "persona": "On her feet all day",
+            "rating": 5,
             "verified_label": "",
-            "link": ""
+            "link": "shopify://products/adjustable-bunion-corrector"
+          }
+        },
+        "testimonial_G9qytK": {
+          "type": "testimonial",
+          "settings": {
+            "product": "adjustable-bunion-corrector",
+            "review_number": 3,
+            "video_url": "",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
+            "media_alt": "Customer demonstrating the plantar fasciitis night splint sock",
+            "quote": "I bought this after getting tired of constantly stretching my foot before getting out of bed. I was worried it would feel bulky while sleeping, but it’s lighter than I expected. I’ve worked it into my nightly routine and so far I’m really happy with it.",
+            "customer_name": "David K.",
+            "persona": "Active lifestyle",
+            "rating": 5,
+            "verified_label": "",
+            "link": "shopify://products/adjustable-bunion-corrector"
           }
         },
         "faq_shipping": {
@@ -263,8 +265,8 @@
         "value_guidance",
         "value_comfort",
         "testimonial_douglass",
-        "testimonial_iraida",
-        "testimonial_pasty",
+        "testimonial_P8ewVN",
+        "testimonial_G9qytK",
         "faq_shipping",
         "faq_fit",
         "faq_choose",
