@@ -88,7 +88,7 @@
           "type": "demonstration",
           "settings": {
             "product": "adjustable-bunion-corrector-2",
-            "video": "shopify://files/videos/kling_20260723_VIDEO_Image_to_V_3900_0.mp4",
+            "video": "shopify://files/videos/0812.mov",
             "video_url": "shopify://products/adjustable-bunion-corrector",
             "link": "",
             "heading": "How to Adjust",
@@ -98,7 +98,8 @@
         "demo_day": {
           "type": "demonstration",
           "settings": {
-            "product": "day-night-bunion-corrector",
+            "product": "",
+            "video": "shopify://files/videos/project mẫu(1).mov",
             "video_url": "",
             "link": "",
             "heading": "Daytime Use",
@@ -109,6 +110,7 @@
           "type": "demonstration",
           "settings": {
             "product": "plantar-fasciitis-night-splint-sock",
+            "video": "shopify://files/videos/Your feet work hard every day—give them the support they need. This bunion corrector is lightweight, comfortable, and easy to wear at home or on the go. (online-video-cutter.com).mp4",
             "video_url": "",
             "link": "",
             "heading": "Nighttime Support",
@@ -119,6 +121,7 @@
           "type": "demonstration",
           "settings": {
             "product": "ankle-support-side-stabilizers",
+            "video": "shopify://files/videos/Woman_experiencing_morning_foot_…_202608111323 (online-video-cutter.com).mp4",
             "video_url": "",
             "link": "",
             "heading": "Ankle Support",
@@ -129,6 +132,7 @@
           "type": "demonstration",
           "settings": {
             "product": "electric-foot-hand-massager",
+            "video": "shopify://files/videos/Woman_walking_through_daily_routine_202608111534 (online-video-cutter.com).mp4",
             "video_url": "",
             "link": "",
             "heading": "Massage & Recovery",
