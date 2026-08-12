@@ -166,16 +166,17 @@
         "testimonial_douglass": {
           "type": "testimonial",
           "settings": {
-            "product": "plantar-fasciitis-night-splint-sock",
+            "product": "adjustable-bunion-corrector",
             "review_number": 3,
             "video_url": "",
-            "media_alt": "Customer photo of the plantar fasciitis night splint",
-            "quote": "",
-            "customer_name": "",
-            "persona": "",
-            "rating": 0,
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
+            "media_alt": "Customer wearing the plantar fasciitis night splint sock at home",
+            "quote": "I’ve been wearing it at night for a couple of weeks now. It took me a night or two to get used to, but I really like the gentle stretch. My feet feel much more comfortable when I first get out of bed.",
+            "customer_name": "Sarah M",
+            "persona": "Morning foot discomfort",
+            "rating": 5,
             "verified_label": "",
-            "link": ""
+            "link": "shopify://products/adjustable-bunion-corrector"
           }
         },
         "testimonial_iraida": {
