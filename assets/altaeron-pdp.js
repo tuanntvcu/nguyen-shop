@@ -11,7 +11,8 @@
     const thumbs = [...root.querySelectorAll('[data-apdp-thumb]')];
     const items = [...root.querySelectorAll('[data-apdp-media]')];
     const thumbsList = root.querySelector('.apdp-gallery__thumbs');
-    const stageImage = root.querySelector('.apdp-gallery__stage img');
+    const stage = root.querySelector('.apdp-gallery__stage');
+    const stageImage = stage?.querySelector('img');
     if (!thumbs.length || !items.length) return () => {};
 
     if (thumbsList) {
