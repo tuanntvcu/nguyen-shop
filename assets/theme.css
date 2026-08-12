@@ -2921,6 +2921,10 @@ input:is([type=radio])::after {
   box-sizing: border-box;
 }
 
+.bd-variant-select {
+  min-width: 100px !important;
+}
+
 /* Controls only belong on a carousel that has content beyond the current view. */
 .slider-control-hidden,
 .slider-controls--inactive {

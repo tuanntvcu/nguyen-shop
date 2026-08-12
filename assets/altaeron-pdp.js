@@ -310,6 +310,7 @@
     const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
     const stickyCompare = root.querySelector('[data-apdp-sticky-compare]');
     const stickySavings = root.querySelector('[data-apdp-sticky-savings]');
+    const stickyBundleTitle = root.querySelector('[data-apdp-sticky-bundle-title]');
     const installmentTerms = [...root.querySelectorAll('[data-apdp-installments]')];
     const finalPrice = root.querySelector('[data-apdp-final-price]');
     const finalCompare = root.querySelector('[data-apdp-final-compare]');
@@ -437,6 +438,25 @@
       const widgetRoot = bundleWidget.shadowRoot || bundleWidget;
       const checkedInputs = [...widgetRoot.querySelectorAll('input[type="radio"]:checked, [role="radio"][aria-checked="true"]')];
       const moneyPattern = /(?:[$€£¥₹₩]\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|CAD|AUD|VND|₫))/gi;
+      const bundleTitle = (option) => {
+        const ignoredPattern = /^(?:recommended|best value|save\b|from\b|for\b)/i;
+        const titlePattern = /\b(?:bundle|pack|correctors?|items?|pieces?|left|right)\b/i;
+        const preferredTitlePattern = /(?:\b\d+\b.*\b(?:bundle|pack|correctors?|items?|pieces?|left|right)\b|\b(?:bundle|pack|correctors?|items?|pieces?)\b)/i;
+        const containsMoney = (text) => {
+          moneyPattern.lastIndex = 0;
+          return moneyPattern.test(text);
+        };
+        const elementTexts = [...option.querySelectorAll('h1,h2,h3,h4,h5,h6,strong,b,[class*="title"],[class*="name"]')]
+          .map((element) => element.textContent.replace(/\s+/g, ' ').trim())
+          .filter((text) => text && text.length <= 70 && !containsMoney(text) && !ignoredPattern.test(text));
+        const lineTexts = String(option.innerText || option.textContent || '')
+          .split(/\r?\n/)
+          .map((text) => text.replace(/\s+/g, ' ').trim())
+          .filter((text) => text && text.length <= 70 && !containsMoney(text) && !ignoredPattern.test(text));
+        moneyPattern.lastIndex = 0;
+        const texts = [...new Set([...elementTexts, ...lineTexts])];
+        return texts.find((text) => preferredTitlePattern.test(text)) || texts.find((text) => titlePattern.test(text)) || '';
+      };
 
       for (const input of checkedInputs) {
         const candidates = [...(input.labels || [])];
@@ -453,7 +473,7 @@
             const prices = [...new Set(priceLabels.map(parseDisplayedMoney).filter((price) => price > 0))];
             const quantityMatch = option.textContent.match(/\b(\d+)\s*(?:correctors?|items?|pieces?|packs?)\b/i);
             const quantity = Number(input.dataset.quantity || quantityMatch?.[1] || 1);
-            return { price: prices[0], compare: prices[1] || 0, quantity };
+            return { price: prices[0], compare: prices[1] || 0, quantity, title: bundleTitle(option) };
           }
         }
       }
@@ -469,6 +489,11 @@
       const baseCompare = Number(control.dataset.compare || 0);
       const bundleCompare = bundle.compare || (bundle.quantity > 1 ? basePrice * bundle.quantity : baseCompare);
       const bundleSavings = Math.max(bundleCompare - bundle.price, 0);
+
+      if (stickyBundleTitle) {
+        stickyBundleTitle.hidden = !bundle.title;
+        stickyBundleTitle.textContent = bundle.title || '';
+      }
 
       if (currentPrice) currentPrice.textContent = money(bundle.price, format);
       if (stickyPrice) stickyPrice.textContent = money(bundle.price, format);
