@@ -218,8 +218,8 @@
         "faq_fit": {
           "type": "faq",
           "settings": {
-            "question": "What if it does not fit or help?",
-            "answer": "<p>Review the product fit guidance before use. If the product is not right for you, contact support and consult the current refund policy.</p>"
+            "question": "",
+            "answer": ""
           }
         },
         "faq_choose": {
