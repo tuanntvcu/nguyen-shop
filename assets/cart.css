@@ -109,6 +109,7 @@
 
 .cart-drawer {
   --color-cart-bubble: rgb(var(--color-foreground));
+  z-index: 50;
 }
 .cart-drawer__header {
   padding: 2rem;

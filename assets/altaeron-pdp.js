@@ -577,18 +577,46 @@
   }
 
   function initLazyVideos(root) {
-    const videos = [...root.querySelectorAll('[data-apdp-lazy-video] video')];
-    if (!videos.length || !('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const video = entry.target;
-        video.querySelectorAll('source[data-src]').forEach((source) => { source.src = source.dataset.src; source.removeAttribute('data-src'); });
-        video.load();
-        observer.unobserve(video);
+    const media = [...root.querySelectorAll('[data-apdp-lazy-video]')];
+    if (!media.length) return;
+
+    const hydrate = (element) => {
+      if (element.dataset.apdpVideoLoaded === 'true') return;
+      element.dataset.apdpVideoLoaded = 'true';
+
+      if (element.tagName === 'IFRAME') {
+        if (element.dataset.src) {
+          element.src = element.dataset.src;
+          element.removeAttribute('data-src');
+        }
+        return;
+      }
+
+      element.querySelectorAll('source[data-src]').forEach((source) => {
+        source.src = source.dataset.src;
+        source.removeAttribute('data-src');
       });
-    }, { rootMargin: '300px 0px' });
-    videos.forEach((video) => observer.observe(video));
+      element.load();
+      if (element.autoplay) element.play().catch(() => {});
+    };
+
+    const startObserving = () => {
+      if (!('IntersectionObserver' in window)) {
+        media.forEach(hydrate);
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          hydrate(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '300px 0px' });
+      media.forEach((element) => observer.observe(element));
+    };
+
+    if (document.readyState === 'complete') startObserving();
+    else window.addEventListener('load', startObserving, { once: true });
   }
 
   function initReviewSliders(root) {

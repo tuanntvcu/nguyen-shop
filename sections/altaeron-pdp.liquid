@@ -306,7 +306,8 @@
           <article class="apdp-familiar-card">
             <div class="apdp-education__placeholder">
               {%- if familiar_video != blank -%}
-                {{ familiar_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '900x' }}
+                {%- capture familiar_video_markup -%}{{ familiar_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '900x' }}{%- endcapture -%}
+                {{- familiar_video_markup | replace: '<video ', '<video data-apdp-lazy-video ' | replace: '<source src="', '<source data-src="' -}}
               {%- elsif familiar_image != blank -%}
                 {{ familiar_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 768px) 25vw, 76vw', alt: familiar_image.alt | default: copy }}
               {%- else -%}
@@ -400,7 +401,7 @@
         </div>
         <div class="apdp-support__media">
           <div class="apdp-support__video">
-            <div class="apdp-education__placeholder">{%- if support_demo_video != blank -%}{{ support_demo_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '900x' }}{%- elsif support_demo_image != blank -%}{{ support_demo_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 768px) 18vw, 100vw', alt: support_demo_image.alt | default: support_demo_alt }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
+            <div class="apdp-education__placeholder">{%- if support_demo_video != blank -%}{%- capture support_video_markup -%}{{ support_demo_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '900x' }}{%- endcapture -%}{{- support_video_markup | replace: '<video ', '<video data-apdp-lazy-video ' | replace: '<source src="', '<source data-src="' -}}{%- elsif support_demo_image != blank -%}{{ support_demo_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 768px) 18vw, 100vw', alt: support_demo_image.alt | default: support_demo_alt }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
           </div>
           <div class="apdp-education__placeholder">{%- if support_detail_image != blank -%}{{ support_detail_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1400', sizes: '(min-width: 768px) 42vw, 100vw', alt: support_detail_image.alt | default: support_detail_alt }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
         </div>
@@ -416,7 +417,8 @@
       <div class="apdp-day__media" aria-label="{{ 'altaeron_pdp.day.media_label' | t | escape }}">
         <div class="apdp-day__visual apdp-education__placeholder">
           {%- if day_story_video != blank -%}
-            {{ day_story_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '1800x' }}
+            {%- capture day_video_markup -%}{{ day_story_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1800x' }}{%- endcapture -%}
+            {{- day_video_markup | replace: '<video ', '<video data-apdp-lazy-video ' | replace: '<source src="', '<source data-src="' -}}
           {%- elsif day_story_image != blank -%}
             {{ day_story_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750, 1100, 1500, 1800, 2200', sizes: '(min-width: 1800px) 1740px, calc(100vw - 40px)', alt: day_story_image.alt | default: day_image_alt }}
           {%- else -%}
