@@ -168,6 +168,13 @@
             "slot": "moment_5",
             "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_17_09_PM.png"
           }
+        },
+        "tail_media_BQ3TdY": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "cta_product",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_14_2026_01_46_46_PM.png"
+          }
         }
       },
       "block_order": [
@@ -192,7 +199,8 @@
         "tail_media_YraHNf",
         "tail_media_WfJCPe",
         "tail_media_HjQykf",
-        "tail_media_MtBhaR"
+        "tail_media_MtBhaR",
+        "tail_media_BQ3TdY"
       ],
       "settings": {
         "eyebrow": "#1 Rated in Bunion & Toe Alignment",
@@ -249,7 +257,8 @@
         "shoe_3": "Sandals",
         "shoe_4": "Wide Shoes",
         "shoe_5": "Heels",
-        "guides_heading": "Helpful Guides"
+        "guides_heading": "Helpful Guides",
+        "learn_blog": ""
       }
     }
   },
