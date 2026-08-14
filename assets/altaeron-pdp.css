@@ -427,7 +427,12 @@ bundle-deals-widget input[type="radio"]{
     padding:24px 15px 0;
   }
   .altaeron-pdp .apdp-narrative::before{
-    content:none;
+    background:linear-gradient(90deg,rgba(249,251,249,.97) 0%,rgba(249,251,249,.92) 52%,rgba(249,251,249,.76) 76%,rgba(249,251,249,.18) 100%);
+    content:"";
+    inset:0;
+    pointer-events:none;
+    position:absolute;
+    z-index:1;
   }
   .altaeron-pdp .apdp-narrative.apdp-narrative h1{
     color:#073f2d;
@@ -451,13 +456,19 @@ bundle-deals-widget input[type="radio"]{
     z-index:2;
   }
   .altaeron-pdp .apdp-narrative .apdp-rating{
-    color:#23483b;
+    backdrop-filter:blur(8px);
+    background:rgba(255,255,255,.84);
+    border:1px solid rgba(7,63,45,.1);
+    border-radius:12px;
+    box-shadow:0 4px 14px rgba(7,63,45,.08);
+    color:#173f32;
     display:grid;
     font-size:12px;
     gap:1px 9px;
     grid-template-columns:auto minmax(0,1fr);
     margin:14px 0 16px;
     max-width:72%;
+    padding:8px 10px;
   }
   .altaeron-pdp .apdp-narrative .apdp-rating__people{
     align-self:center;
@@ -479,12 +490,12 @@ bundle-deals-widget input[type="radio"]{
     white-space:nowrap;
   }
   .altaeron-pdp .apdp-narrative .apdp-identity{
-    backdrop-filter:none;
-    background:transparent;
-    border:0;
-    border-radius:0;
+    backdrop-filter:blur(8px);
+    background:rgba(255,255,255,.88);
+    border:1px solid rgba(7,63,45,.1);
+    border-radius:12px;
     bottom:auto;
-    box-shadow:none;
+    box-shadow:0 4px 14px rgba(7,63,45,.08);
     left:auto;
     margin-top:0;
     padding:13px 14px;
