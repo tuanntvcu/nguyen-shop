@@ -757,6 +757,90 @@
       "item_4_text_html": "Acolchoamento macio onde<br>interessa",
       "demo_alt": "Demonstração de ajuste de Altaeron",
       "detail_alt": "Detalhe de apoio do dedo do pé Altaeron"
+    },
+    "learn": {
+      "item_4_text": "Sinais de que deve procurar ajuda profissional.",
+      "reading_time": "{{ minutes }} min de leitura"
+    },
+    "review_summary": {
+      "title": "{{ count }}+ Avaliações Verificadas",
+      "rating": "{{ rating }} em 5",
+      "photo_placeholders": "Marcadores de posição de fotos do cliente",
+      "view_all": "Ver Todas as Críticas",
+      "trial": "Experimente durante 30 dias. Se não for adequado para si.",
+      "disclaimer": "Por favor, note: Os resultados podem variar dependendo do tamanho do joanete, duração e consistência."
+    },
+    "faq": {
+      "title": "Perguntas Frequentes",
+      "question_1": "Quanto tempo demora o envio?",
+      "answer_1": "Os prazos de envio são apresentados no checkout e podem variar consoante o destino.",
+      "question_2": "É seguro usar todos os dias?",
+      "answer_2": "Utilize-o conforme indicado e pare se sentir dor, dormência ou irritação.",
+      "question_3": "Quanto tempo devo usá-lo por dia?",
+      "answer_3": "Comece com sessões curtas e aumente gradualmente o tempo de uso de acordo com as instruções incluídas.",
+      "question_4": "Posso usá-lo enquanto durmo?",
+      "answer_4": "Este suporte ajustável foi concebido para uso diurno. Siga as instruções do produto para o uso noturno.",
+      "question_5": "E se não servir ou não ajudar?",
+      "answer_5": "Contacte a nossa equipa de apoio para obter ajuda com o ajuste ou reveja a política de devolução para opções disponíveis.",
+      "question_6": "Como limpo o produto?",
+      "answer_6": "Lave cuidadosamente à mão com sabão neutro e água fria e, em seguida, seque completamente ao ar."
+    },
+    "final_cta": {
+      "label": "Comprar corretor de joanete ajustável Altaeron",
+      "title": "Pronto para Caminhar Sem Pensar nos Seus Pés?",
+      "product": "Corretor de Joanetes ALTAERON™ com Botão Ajustável",
+      "guarantee_html": "Garantia<br>de 30 Dias",
+      "shipping_html": "Envio Rápido e Grátis<br>em encomendas de 39€ ou mais",
+      "support_html": "Pessoas Reais<br>Apoio 24/7",
+      "rating": "{{ rating }} ({{ count }} avaliações)",
+      "saving": "Poupe 30,00 €",
+      "price": "39,99 €",
+      "compare_price": "69,99 €",
+      "button": "Comece a Caminhar Mais Confortavelmente",
+      "installments": "ou 4 pagamentos sem juros de 10,00 $ com",
+      "fine_print": "Experimente durante 30 dias. Se for doloroso ou não for para si, devolva.",
+      "badge_alt": "Garantia de 30 dias sem risco"
+    }
+  },
+  "altaeron_home": {
+    "accessibility": {
+      "store_benefits": "Benefícios da loja",
+      "previous_products": "Produtos anteriores",
+      "next_products": "Próximos produtos",
+      "product_carousel_pagination": "Paginação do carrossel de produtos",
+      "question_progress": "Progresso da pergunta",
+      "play_named": "Reproduzir {{ name }}",
+      "close_video": "Fechar vídeo",
+      "play_testimonial": "Reproduzir testemunho do cliente: {{ name }}",
+      "go_to_slide": "Vá para o slide",
+      "product_demonstration": "Demonstração do produto"
+    },
+    "quiz": {
+      "next": "Próxima Pergunta",
+      "back": "Voltar",
+      "daytime": "Período diurno",
+      "nighttime": "Nocturno",
+      "both": "Ambos",
+      "gentle": "Suave",
+      "adjustable": "Ajustável",
+      "firm": "Firme",
+      "results": "Ver Resultados",
+      "disclaimer": "Esta ferramenta fornece orientação geral sobre o produto e não se trata de aconselhamento médico."
+    },
+    "reviews": {
+      "reviewed_product": "Produto avaliado",
+      "read_review": "Ler crítica",
+      "rating": "{{ rating }} em 5 estrelas",
+      "summary": "{{ rating }}/5 de {{ count }} avaliações"
+    },
+    "guides": {
+      "reading_time": "{{ minutes }} min de leitura"
+    },
+    "product": {
+      "rating": "{{ rating }} em 5 estrelas de {{ count }} avaliações",
+      "add_to_cart": "Adicionar {{ product }} ao carrinho",
+      "choose_options": "Escolha as opções para {{ product }}",
+      "view": "Ver {{ product }}"
     }
   }
 }
