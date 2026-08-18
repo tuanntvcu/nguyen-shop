@@ -572,3 +572,6 @@ bundle-deals-widget input[type="radio"]{
 .apdp-tail-review__media-column{display:flex;flex-direction:column;gap:10px}.apdp-tail-avatar{align-items:center;display:flex;justify-content:center}.apdp-tail-avatar__initial{color:#075c3c;font-size:24px;font-weight:700}.apdp-tail-review__image{border-radius:8px;height:68px;overflow:hidden;width:68px}.apdp-tail-review__image img{display:block;height:100%;object-fit:cover;width:100%}
 @media(max-width:767px){.apdp-tail-review__image{height:58px;width:58px}}
 @media(max-width:767px){.apdp-review-summary .apdp-tail-review{flex-basis:86%}}
+
+.apdp-day__benefits{grid-template-columns:repeat(3,1fr)}
+@media(max-width:767px){.apdp-day__benefits{grid-template-columns:1fr}.apdp-day__benefits article+article,.apdp-day__benefits article:nth-child(even){border-left:0}.apdp-day__benefits article:nth-child(n+2){border-top:1px solid #e0e5e1}}
