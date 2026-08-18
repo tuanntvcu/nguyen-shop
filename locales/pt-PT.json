@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -122,7 +131,15 @@
     "menu_drawer": "Alternar menu",
     "layout_switcher": "{{ col }} coluna",
     "play_video": "Reproduzir vídeo",
-    "load_video": "Carregar vídeo: {{ description }}"
+    "load_video": "Carregar vídeo: {{ description }}",
+    "store_announcements": "Anúncios da loja",
+    "breadcrumbs": "Migalhas de pão",
+    "tabs": "Separadores",
+    "image_comparison": "Comparação de imagens",
+    "select_variant": "Selecione a variante",
+    "primary_navigation": "Navegação principal",
+    "create_store_with_shopify": "Crie a sua própria loja online com a Shopify",
+    "shopify_logo": "Logotipo da Shopify"
   },
   "blogs": {
     "article": {
@@ -630,6 +647,314 @@
       "max_characters": "{{ max_chars }} caracteres no máximo",
       "send_on": "AAAA-MM-DD",
       "send_on_label": "Enviar (opcional)"
+    }
+  },
+  "altaeron_pdp": {
+    "hero": {
+      "eyebrow_rank": "Classificado em 1º Lugar",
+      "eyebrow_category": "no Alívio de Joanetes",
+      "headline": "Andar sem voltar a pensar nos seus pés.",
+      "headline_line_1": "Caminhar Sem",
+      "headline_line_2": "A Pensar Em",
+      "headline_line_3": "Os Seus Pés Outra Vez.",
+      "subheadline": "Apoio ajustável que alivia a pressão do joanete, melhora o alinhamento enquanto usado e ajuda-o a mover-se confortavelmente — todos os dias.",
+      "rating": "{{ rating }}/5 de {{ count }}+ avaliações",
+      "benefit_1": "Alivia a dor e pressão do joanete",
+      "benefit_2": "Melhora o alinhamento quando usado",
+      "benefit_3": "Confortável para usar durante todo o dia"
+    },
+    "buy": {
+      "title": "ALTAERON™ Corretor de Joanete com Botão Ajustável",
+      "rating": "{{ rating }} ({{ count }} avaliações)",
+      "compare_price": "49,99 $",
+      "saving": "Poupe 10,00 $",
+      "variant_label": "Emparelhar dispositivo",
+      "popular": "Mais Populares",
+      "variant_1": "1 Par",
+      "variant_2": "2 Pares",
+      "variant_3": "3 Pares",
+      "cta": "Adicionar ao Carrinho",
+      "installments": "ou 4 pagamentos sem juros de $10.00 com",
+      "guarantee_title": "Garantia de 30 dias sem risco",
+      "guarantee_line_1": "Use-a em casa, no trabalho ou em viagem.",
+      "guarantee_line_2": "Se não for o alívio que esperava, devolva-o — sem perguntas.",
+      "returns": "Devoluções em 30 Dias",
+      "returns_note": "Adora ou devolve a tua encomenda.",
+      "shipping": "Envio Rápido",
+      "shipping_note": "Envio em 1 a 3 dias a partir do nosso armazém.",
+      "secure": "Finalizar Compra Segura",
+      "secure_note": "Cifrado e 100% seguro.",
+      "support": "Apoio de Pessoas Reais",
+      "support_note": "Estamos disponíveis 24 horas por dia, 7 dias por semana."
+    },
+    "expert": {
+      "reviewed_by": "Com Revisão Médica de",
+      "name": "Dr. James Peterson, DPM",
+      "role": "Cirurgião Podiátrico — Especialista em Pé e Tornozelo",
+      "experience": "Mais de 15 anos de experiência clínica",
+      "signature": "James Peterson",
+      "quote": "O alinhamento adequado e o alívio da pressão são cruciais para gerir o desconforto dos joanetes. Este dispositivo ajustável é uma opção inteligente e não invasiva para apoio diário e alívio da dor enquanto é usado.",
+      "criteria_heading": "Como podologista, procuro:",
+      "criterion_1": "Ajustabilidade para um ajuste personalizado",
+      "criterion_2": "Alinhamento suave sem desconforto",
+      "criterion_3": "Expectativas realistas e utilização consistente",
+      "criteria_footer": "Este dispositivo cumpre esses critérios."
+    },
+    "common": {
+      "save": "Guardar",
+      "save_amount": "Guardar {{ amount }}",
+      "yes": "Sim",
+      "no": "Não"
+    },
+    "accessibility": {
+      "product_media": "Conteúdo multimédia do produto",
+      "purchase_product": "Comprar {{ product }}",
+      "accepted_payment_methods": "Métodos de pagamento aceites",
+      "product_guidance": "Orientação sobre o produto",
+      "expert_portrait": "Profissional de podologia a analisar o produto",
+      "publications": "Publicações sobre saúde e estilo de vida",
+      "purchase_reassurance": "Garantia de compra"
+    },
+    "familiar": {
+      "title": "Isto parece-lhe familiar?",
+      "subtitle": "Não está sozinho. Estes momentos do dia a dia podem ser mais dolorosos do que deveriam.",
+      "item_1": "Dor matinal que define o tom para o seu dia.",
+      "item_2": "Alívio quando finalmente se senta.",
+      "item_3": "Saltar os passeios de que gostava.",
+      "item_4": "Sapatos que adora, mas que já não pode usar."
+    },
+    "causes": {
+      "title": "Por que é que os joanetes surgem?",
+      "subtitle": "Compreender o problema é o primeiro passo para se sentir melhor.",
+      "point_1_html": "<strong>Desalinhamento do dedo do pé</strong> – O dedo grande do pé move-se na direção dos outros dedos.",
+      "point_2_html": "<strong>Pressão e atrito</strong> – Os sapatos e o movimento diário aumentam a tensão na articulação.",
+      "point_3_html": "<strong>Dor progressiva</strong> – Atividades que antes eram confortáveis tornam-se dolorosas.",
+      "point_4_html": "<strong>Irritação</strong> – A dor aumenta gradualmente com o tempo.",
+      "guide_link": "Saiba mais no nosso Guia para Joanetes",
+      "stage_1_title": "Desalinhamento",
+      "stage_1_text": "O dedo grande do pé move-se na direção dos dedos mais pequenos.",
+      "stage_1_alt": "Fase de desalinhamento do joanete",
+      "stage_2_title": "Pressão",
+      "stage_2_text": "A fricção causa pressão e inflamação.",
+      "stage_2_alt": "Estádio da pressão do joanete",
+      "stage_3_title": "Inflamação",
+      "stage_3_text": "A articulação fica irritada e inchada.",
+      "stage_3_alt": "Fase de inflamação do joanete",
+      "stage_4_title": "Dor ao Longo do Tempo",
+      "stage_4_text": "O desconforto interfere com a vida diária.",
+      "stage_4_alt": "Dor de joanete ao longo do tempo stage"
+    },
+    "support": {
+      "title": "Como o Altaeron Suporta o Seu Dedo do Pé",
+      "subtitle": "Alinhamento ajustável e apoio suave para alívio diário.",
+      "item_1_title_html": "Botão<br>Ajustável",
+      "item_1_text_html": "Ajustar ângulo<br>&amp; tensão",
+      "item_2_title_html": "Sistema<br>de Apoio Duplo",
+      "item_2_text_html": "Estabiliza o dedo do pé e a<br>articulação",
+      "item_3_title_html": "Pressão<br>Alívio",
+      "item_3_text_html": "Reduz a fricção<br>e a irritação",
+      "item_4_title_html": "Design Centrado<br>no Conforto",
+      "item_4_text_html": "Acolchoamento macio onde<br>interessa",
+      "demo_alt": "Demonstração de ajuste de Altaeron",
+      "detail_alt": "Detalhe de apoio do dedo do pé Altaeron"
+    },
+    "learn": {
+      "item_4_text": "Sinais de que deve procurar ajuda profissional.",
+      "reading_time": "{{ minutes }} min de leitura",
+      "title": "Saiba Mais. Viva Melhor.",
+      "subtitle": "O conhecimento ajuda a fazer as escolhas certas para os seus pés.",
+      "item_1_title": "O que causa os joanetes?",
+      "item_1_text": "Compreender a causa raiz e os fatores de risco.",
+      "item_2_title": "Um corretor de joanete pode realmente ajudar?",
+      "item_2_text": "O que o apoio conservador pode (e não pode) fazer.",
+      "item_3_title": "Como Escolher o Suporte Certo para o Joanete",
+      "item_3_text": "Encontre a melhor opção para as suas necessidades.",
+      "item_4_title": "Quando Consultar um Podologista"
+    },
+    "review_summary": {
+      "title": "{{ count }}+ Avaliações Verificadas",
+      "rating": "{{ rating }} em 5",
+      "photo_placeholders": "Marcadores de posição de fotos do cliente",
+      "view_all": "Ver Todas as Críticas",
+      "trial": "Experimente durante 30 dias. Se não for adequado para si.",
+      "disclaimer": "Por favor, note: Os resultados podem variar dependendo do tamanho do joanete, duração e consistência."
+    },
+    "faq": {
+      "title": "Perguntas Frequentes",
+      "question_1": "Quanto tempo demora o envio?",
+      "answer_1": "Os prazos de envio são apresentados no checkout e podem variar consoante o destino.",
+      "question_2": "É seguro usar todos os dias?",
+      "answer_2": "Utilize-o conforme indicado e pare se sentir dor, dormência ou irritação.",
+      "question_3": "Quanto tempo devo usá-lo por dia?",
+      "answer_3": "Comece com sessões curtas e aumente gradualmente o tempo de uso de acordo com as instruções incluídas.",
+      "question_4": "Posso usá-lo enquanto durmo?",
+      "answer_4": "Este suporte ajustável foi concebido para uso diurno. Siga as instruções do produto para o uso noturno.",
+      "question_5": "E se não servir ou não ajudar?",
+      "answer_5": "Contacte a nossa equipa de apoio para obter ajuda com o ajuste ou reveja a política de devolução para opções disponíveis.",
+      "question_6": "Como limpo o produto?",
+      "answer_6": "Lave cuidadosamente à mão com sabão neutro e água fria e, em seguida, seque completamente ao ar."
+    },
+    "final_cta": {
+      "label": "Comprar corretor de joanete ajustável Altaeron",
+      "title": "Pronto para Caminhar Sem Pensar nos Seus Pés?",
+      "product": "Corretor de Joanetes ALTAERON™ com Botão Ajustável",
+      "guarantee_html": "Garantia<br>de 30 Dias",
+      "shipping_html": "Envio Rápido e Grátis<br>em encomendas de 39€ ou mais",
+      "support_html": "Pessoas Reais<br>Apoio 24/7",
+      "rating": "{{ rating }} ({{ count }} avaliações)",
+      "saving": "Poupe 30,00 €",
+      "price": "39,99 €",
+      "compare_price": "69,99 €",
+      "button": "Comece a Caminhar Mais Confortavelmente",
+      "installments": "ou 4 pagamentos sem juros de 10,00 $ com",
+      "fine_print": "Experimente durante 30 dias. Se for doloroso ou não for para si, devolva.",
+      "badge_alt": "Garantia de 30 dias sem risco"
+    },
+    "day": {
+      "title": "Imagine Sair de Casa Sem Pensar nos Seus Pés.",
+      "subtitle_html": "<p>Não precisa de verificar quais sapatos lhe vão magoar. Não precisa de planear o seu dia em função dos seus pés. É só calçá-los—<strong><em>e ir.</em></strong></p>",
+      "media_label": "Um dia confortável com Altaeron",
+      "image_alt": "Uma mulher a desfrutar de um dia agradável longe de casa",
+      "journey_label": "Um dia sem planear em torno da dor nos pés",
+      "journey_1_html": "Calce<br>os seus sapatos preferidos",
+      "journey_2_html": "Saia<br>com confiança",
+      "journey_3_html": "<p>Continue com</p><br>a sua vida",
+      "journey_4_html": "Desfrute dos momentos<br>que importam",
+      "journey_5_html": "<p>Termine o dia<br>sentindo-se bem</p>",
+      "benefit_1_title_html": "Caminhe com<br>confiança",
+      "benefit_1_text": "Sinta-se mais apoiado ao longo do seu dia.",
+      "benefit_2_title_html": "Usa os sapatos<br>que mais gostas",
+      "benefit_2_text": "Desfrute de mais dos estilos que assentam confortavelmente.",
+      "benefit_3_title_html": "Mantenha-se ativo<br>por mais tempo",
+      "benefit_3_text": "Obtenha o apoio de que precisa nos momentos que o mantêm em movimento.",
+      "benefit_4_title_html": "Aproveite o seu<br>dia",
+      "benefit_4_text": "Pense menos nos seus pés — e mais naquilo que está a fazer.",
+      "closing_html": "<strong>Os seus pés não devem decidir como passa o dia.</strong><br>O Altaeron foi concebido para o apoiar nos momentos que o mantêm em movimento."
+    },
+    "reviews": {
+      "title": "Pessoas Reais. Resultados Reais.",
+      "subtitle": "Junte-se a mais de {{ count }} clientes que já andam confortavelmente novamente.",
+      "slider_controls": "Rever controlos deslizantes",
+      "previous": "Avaliações anteriores",
+      "next": "Próximas revisões",
+      "five_stars": "5 em 5 estrelas",
+      "verified_buyer": "Comprador verificado",
+      "item_1_name": "Linda K.",
+      "item_1_quote": "Isto é a primeira coisa que realmente me ajudou com a dor do meu joanete.",
+      "item_2_name": "Mike R.",
+      "item_2_quote": "Finalmente consigo usar os meus sapatos confortavelmente outra vez.",
+      "item_3_name": "Sarah T.",
+      "item_3_quote": "Uso-o em casa e no trabalho. Sinto-me muito melhor!",
+      "item_4_name": "Jessica T.",
+      "item_4_quote": "Leve, fácil de ajustar e realmente faz a diferença.",
+      "item_5_name": "Margaret L.",
+      "item_5_quote": "Após alguns dias, notei muito menos pressão quando caminhava.",
+      "item_6_name": "David P.",
+      "item_6_quote": "Fácil de calçar, fácil de ajustar e confortável dentro dos meus sapatos do dia a dia.",
+      "item_7_name": "Helen S.",
+      "item_7_quote": "Consigo manter-me de pé por mais tempo sem pensar constantemente no desconforto.",
+      "item_8_name": "Robert C.",
+      "item_8_quote": "O seletor ajustável permite-me ter o apoio exatamente onde preciso."
+    },
+    "trust": {
+      "warranty": "Garantia de 1 Ano",
+      "secure_checkout": "Finalizar Compra Segura",
+      "returns": "Devoluções em 30 Dias",
+      "support": "Apoio por Pessoas Reais"
+    },
+    "comparison": {
+      "title": "Nem todos os corretores de joanetes são criados da mesma forma.",
+      "table_label": "Altaeron em comparação com talas básicas",
+      "altaeron_html": "ALTAERON™<small>Corretor Ajustável</small>",
+      "others_html": "Talas Básicas<br>&amp; Outros",
+      "row_1": "Botão ajustável para tensão precisa",
+      "row_2": "Apoio duplo para o dedo grande do pé e articulação",
+      "row_3": "Confortável para usar durante todo o dia",
+      "row_4": "Design durável e reutilizável",
+      "row_5": "Inclui um guia passo a passo",
+      "row_6": "Garantia de 30 dias sem riscos"
+    },
+    "expectations": {
+      "title": "O Que Isto Consegue — e Não Consegue — Fazer",
+      "can_title": "Este dispositivo pode ajudar com:",
+      "can_1": "Aliviar a pressão e a fricção",
+      "can_2": "Apoia um melhor alinhamento dos dedos enquanto usado",
+      "can_3": "Melhorar o conforto durante as atividades diárias",
+      "can_4": "Ajuda-o a manter-se ativo e de pé por mais tempo",
+      "cannot_title": "Este dispositivo não é:",
+      "cannot_1": "Uma correção permanente para o joanete ósseo",
+      "cannot_2": "Um substituto para os cuidados médicos profissionais",
+      "cannot_3": "Uma cura da noite para o dia",
+      "consistency": "Use de forma consistente e siga as instruções para obter os melhores resultados."
+    },
+    "spacer": {
+      "title": "\"Porque não usar simplesmente um separador de dedos?\"",
+      "subtitle": "Ótima pergunta. Eis a diferença.",
+      "basic_alt": "Separador de dedos simples",
+      "basic_title": "Espaçador Básico para os Dedos dos Pés",
+      "basic_1": "Apenas separa os dedos dos pés",
+      "basic_2": "Sem suporte ajustável",
+      "basic_3": "Pode ser volumoso e desconfortável nos sapatos",
+      "basic_4": "Menos eficaz para joanetes moderados a graves",
+      "versus": "VS",
+      "altaeron_alt": "Apoio ajustável Altaeron",
+      "altaeron_title": "ALTAERON™ Apoio Ajustável",
+      "altaeron_1": "Separa + alinha o dedo grande do pé",
+      "altaeron_2": "Manípulo ajustável para suporte direcionado",
+      "altaeron_3": "De perfil baixo, adequado para muitos sapatos",
+      "altaeron_4": "Concebido para reduzir a pressão e apoiar o posicionamento correto",
+      "expert_alt": "Podologista",
+      "expert_note_html": "<p>Os espaçadores de dedos podem ajudar algumas pessoas com necessidades leves de espaçamento. Se a sua principal preocupação é <strong>a pressão e o alinhamento do joanete ao caminhar, o suporte ajustável faz uma grande diferença.</strong></p>"
+    },
+    "moments": {
+      "title": "Voltar Aos Momentos Que Perdeu",
+      "subtitle": "Não apenas a andar. A viver.",
+      "item_1": "Caminhadas matinais que dão o mote.",
+      "item_2": "Estar de pé durante horas sem sentir dor.",
+      "item_3": "Viagens de compras sem ter de ir a correr para o carro.",
+      "item_4": "Férias e aventuras sem as dores nos pés a impedi-lo.",
+      "item_5": "Eventos especiais com os sapatos que adora."
+    }
+  },
+  "altaeron_home": {
+    "accessibility": {
+      "store_benefits": "Benefícios da loja",
+      "previous_products": "Produtos anteriores",
+      "next_products": "Próximos produtos",
+      "product_carousel_pagination": "Paginação do carrossel de produtos",
+      "question_progress": "Progresso da pergunta",
+      "play_named": "Reproduzir {{ name }}",
+      "close_video": "Fechar vídeo",
+      "play_testimonial": "Reproduzir testemunho do cliente: {{ name }}",
+      "go_to_slide": "Vá para o slide",
+      "product_demonstration": "Demonstração do produto"
+    },
+    "quiz": {
+      "next": "Próxima Pergunta",
+      "back": "Voltar",
+      "daytime": "Período diurno",
+      "nighttime": "Nocturno",
+      "both": "Ambos",
+      "gentle": "Suave",
+      "adjustable": "Ajustável",
+      "firm": "Firme",
+      "results": "Ver Resultados",
+      "disclaimer": "Esta ferramenta fornece orientação geral sobre o produto e não se trata de aconselhamento médico."
+    },
+    "reviews": {
+      "reviewed_product": "Produto avaliado",
+      "read_review": "Ler crítica",
+      "rating": "{{ rating }} em 5 estrelas",
+      "summary": "{{ rating }}/5 de {{ count }} avaliações"
+    },
+    "guides": {
+      "reading_time": "{{ minutes }} min de leitura"
+    },
+    "product": {
+      "rating": "{{ rating }} em 5 estrelas de {{ count }} avaliações",
+      "add_to_cart": "Adicionar {{ product }} ao carrinho",
+      "choose_options": "Escolha as opções para {{ product }}",
+      "view": "Ver {{ product }}"
     }
   }
 }

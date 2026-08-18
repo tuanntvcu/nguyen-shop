@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -122,7 +131,15 @@
     "menu_drawer": "Alternar menú",
     "layout_switcher": "{{ col }} columna",
     "play_video": "Reproduce el video",
-    "load_video": "Cargar vídeo: {{ description }}"
+    "load_video": "Cargar vídeo: {{ description }}",
+    "store_announcements": "Anuncios de la tienda",
+    "breadcrumbs": "Migas de pan",
+    "tabs": "Pestañas",
+    "image_comparison": "Comparación de imágenes",
+    "select_variant": "Seleccionar variante",
+    "primary_navigation": "Navegación principal",
+    "create_store_with_shopify": "Crea tu propia tienda online con Shopify",
+    "shopify_logo": "Logotipo de Shopify"
   },
   "blogs": {
     "article": {
@@ -630,6 +647,314 @@
       "max_characters": "{{ max_chars }} caracteres como máximo",
       "send_on": "AAAA-MM-DD",
       "send_on_label": "Enviar (opcional)"
+    }
+  },
+  "altaeron_pdp": {
+    "hero": {
+      "eyebrow_rank": "Número 1 en ventas",
+      "eyebrow_category": "en el Alivio del Juanete",
+      "headline": "Vuelve a caminar sin pensar en tus pies.",
+      "headline_line_1": "Caminar sin",
+      "headline_line_2": "Pensando En",
+      "headline_line_3": "Tus pies otra vez.",
+      "subheadline": "Soporte ajustable que alivia la presión del juanete, mejora la alineación mientras se usa y te ayuda a moverte cómodamente, todos los días.",
+      "rating": "{{ rating }}/5 de {{ count }}+ reseñas",
+      "benefit_1": "Alivia el dolor y la presión del juanete",
+      "benefit_2": "Mejora la alineación mientras se usa",
+      "benefit_3": "Cómodo para usar todo el día"
+    },
+    "buy": {
+      "title": "Corrector de juanetes con perilla ajustable ALTAERON™",
+      "rating": "{{ rating }} ({{ count }} reseñas)",
+      "compare_price": "$49.99",
+      "saving": "Ahorra $10.00",
+      "variant_label": "Emparejamiento de dispositivos",
+      "popular": "Más populares",
+      "variant_1": "1 Par",
+      "variant_2": "2 pares",
+      "variant_3": "3 pares",
+      "cta": "Añadir al carrito",
+      "installments": "o 4 pagos sin intereses de $10.00 con",
+      "guarantee_title": "Garantía de 30 días sin riesgos",
+      "guarantee_line_1": "Úsalo en casa, en el trabajo o mientras te desplazas.",
+      "guarantee_line_2": "Si no es el alivio que esperabas, devuélvelo, sin hacer preguntas.",
+      "returns": "Devoluciones en 30 días",
+      "returns_note": "Ámalo o devuelve tu pedido.",
+      "shipping": "Envío rápido",
+      "shipping_note": "Se envía en 1 a 3 días desde nuestro almacén.",
+      "secure": "Pago Seguro",
+      "secure_note": "Cifrado y 100 % seguro.",
+      "support": "Atención de personas reales",
+      "support_note": "Estamos aquí 24/7."
+    },
+    "expert": {
+      "reviewed_by": "Revisado médicamente por",
+      "name": "Dr. James Peterson, DPM",
+      "role": "Cirujano podólogo — Especialista en pie y tobillo",
+      "experience": "Más de 15 años de experiencia clínica",
+      "signature": "James Peterson",
+      "quote": "Una alineación adecuada y el alivio de la presión son claves para controlar la incomodidad del juanete. Este dispositivo ajustable es una opción inteligente y no invasiva para el apoyo diario y el alivio del dolor mientras se usa.",
+      "criteria_heading": "Como podólogo, busco:",
+      "criterion_1": "Ajustabilidad para un calce personalizado",
+      "criterion_2": "Alineación suave sin molestias",
+      "criterion_3": "Expectativas realistas y uso constante",
+      "criteria_footer": "Este dispositivo cumple con esos criterios."
+    },
+    "common": {
+      "save": "Guardar",
+      "save_amount": "Ahorre {{ amount }}",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "accessibility": {
+      "product_media": "Medios del producto",
+      "purchase_product": "Comprar {{ product }}",
+      "accepted_payment_methods": "Formas de pago aceptadas",
+      "product_guidance": "Orientación del producto",
+      "expert_portrait": "Profesional del cuidado de los pies revisando el producto",
+      "publications": "Publicaciones de salud y estilo de vida",
+      "purchase_reassurance": "Tranquilidad en la compra"
+    },
+    "familiar": {
+      "title": "¿Esto te resulta familiar?",
+      "subtitle": "No estás solo. Estos momentos cotidianos pueden ser más dolorosos de lo que deberían.",
+      "item_1": "Dolor matutino que marca el tono de tu día.",
+      "item_2": "Alivio al sentarte por fin.",
+      "item_3": "Saltarse paseos que antes disfrutaba.",
+      "item_4": "Zapatos que te encantan pero que ya no puedes usar."
+    },
+    "causes": {
+      "title": "¿Por qué salen los juanetes?",
+      "subtitle": "Comprender el problema es el primer paso para sentirse mejor.",
+      "point_1_html": "<strong>Desalineación del dedo del pie</strong> – El dedo gordo del pie se desvía hacia los otros dedos.",
+      "point_2_html": "<strong>Presión y fricción</strong> – Los zapatos y el movimiento diario aumentan el estrés en la articulación.",
+      "point_3_html": "<strong>Dolor progresivo</strong> – Actividades que antes resultaban cómodas se vuelven dolorosas.",
+      "point_4_html": "<strong>Irritation</strong> – El dolor se desarrolla gradualmente con el tiempo.",
+      "guide_link": "Obtenga más información en nuestra Guía sobre los juanetes",
+      "stage_1_title": "Desalineación",
+      "stage_1_text": "El dedo gordo se desplaza hacia los dedos más pequeños.",
+      "stage_1_alt": "Etapa de desalineación del juanete",
+      "stage_2_title": "Presión",
+      "stage_2_text": "Frotar causa presión e inflamación.",
+      "stage_2_alt": "Etapa de presión del juanete",
+      "stage_3_title": "Inflamación",
+      "stage_3_text": "La articulación se irrita e hincha.",
+      "stage_3_alt": "Etapa de inflamación del juanete",
+      "stage_4_title": "Dolor a lo largo del tiempo",
+      "stage_4_text": "La incomodidad interfiere con la vida diaria.",
+      "stage_4_alt": "Etapa del dolor de juanete a lo largo del tiempo"
+    },
+    "support": {
+      "title": "Cómo Altaeron sostiene tu dedo del pie",
+      "subtitle": "Alineación ajustable y soporte suave para el alivio diario.",
+      "item_1_title_html": "Pomo<br>Ajustable",
+      "item_1_text_html": "Ajuste el ángulo<br>y la tensión",
+      "item_2_title_html": "Soporte dual<br>del sistema",
+      "item_2_text_html": "Estabiliza la punta del pie y la<br>articulación",
+      "item_3_title_html": "Presión<br>Alivio",
+      "item_3_text_html": "Reduce el roce<br>y la irritación",
+      "item_4_title_html": "Diseño<br>centrado en el confort",
+      "item_4_text_html": "<span data-sheets-value='{\"1\":2,\"2\":\"Acolchado suave donde\\\\nimporta\"}' data-sheets-userformat='{\"2\":15297,\"3\":{\"1\":0},\"9\":1,\"10\":1,\"11\":4,\"12\":0,\"14\":{\"1\":2,\"2\":0},\"15\":\"Calibri\",\"16\":11}'>Acolchado suave donde<br>importa</span>",
+      "demo_alt": "Demostración de ajuste de Altaeron",
+      "detail_alt": "Detalle del soporte para la puntera de Altaeron"
+    },
+    "learn": {
+      "item_4_text": "Señales de que deberías buscar ayuda profesional.",
+      "reading_time": "{{ minutes }} min de lectura",
+      "title": "Más información. Vive mejor.",
+      "subtitle": "El conocimiento te ayuda a tomar las decisiones correctas para tus pies.",
+      "item_1_title": "¿Qué causa los juanetes?",
+      "item_1_text": "Comprenda la causa raíz y los factores de riesgo.",
+      "item_2_title": "¿Puede realmente ayudar un corrector de juanetes?",
+      "item_2_text": "Lo que el apoyo conservador puede (y no puede) lograr.",
+      "item_3_title": "Cómo elegir el soporte adecuado para juanetes",
+      "item_3_text": "Encuentre la mejor opción para sus necesidades.",
+      "item_4_title": "Cuándo consultar a un podólogo"
+    },
+    "review_summary": {
+      "title": "{{ count }}+ reseñas verificadas",
+      "rating": "{{ rating }} de 5",
+      "photo_placeholders": "Marcadores de posición de fotos del cliente",
+      "view_all": "Ver todas las reseñas",
+      "trial": "Pruébalo durante 30 días. Si no es lo que buscas.",
+      "disclaimer": "Tenga en cuenta: Los resultados pueden variar según el tamaño, la duración y la constancia del juanete."
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "question_1": "¿Cuánto tarda el envío?",
+      "answer_1": "Los plazos de entrega se muestran al finalizar la compra y pueden variar según el destino.",
+      "question_2": "¿Es seguro usarlo todos los días?",
+      "answer_2": "Úselo como se indica y suspéndalo si experimenta dolor, entumecimiento o irritación.",
+      "question_3": "¿Cuánto tiempo debo usarlo cada día?",
+      "answer_3": "Empieza con sesiones cortas y aumenta gradualmente el tiempo de uso según las instrucciones incluidas.",
+      "question_4": "¿Puedo usarlo mientras duermo?",
+      "answer_4": "Este soporte ajustable está diseñado para su uso durante actividades. Siga las instrucciones del producto para su uso nocturno.",
+      "question_5": "¿Y si no encaja o no ayuda?",
+      "answer_5": "Contacta a nuestro equipo de soporte para obtener ayuda con el ajuste o revisa la política de devolución para conocer las opciones disponibles.",
+      "question_6": "¿Cómo limpio el producto?",
+      "answer_6": "Lavar a mano suavemente con jabón suave y agua fría, luego secar completamente al aire."
+    },
+    "final_cta": {
+      "label": "Comprar corrector de juanetes ajustable Altaeron",
+      "title": "¿Listo para caminar sin pensar en tus pies?",
+      "product": "Corrector de juanetes con perilla ajustable ALTAERON™",
+      "guarantee_html": "Garantía de 30 días<br>",
+      "shipping_html": "Envío Rápido y Gratis<br>en pedidos de $39+",
+      "support_html": "Personas reales<br>Soporte 24/7",
+      "rating": "{{ rating }} ({{ count }} valoraciones)",
+      "saving": "Ahorre $30.00",
+      "price": "39,99 $",
+      "compare_price": "$69.99",
+      "button": "Empieza a caminar con mayor comodidad",
+      "installments": "o 4 pagos sin intereses de $10.00 con",
+      "fine_print": "Pruébalo durante 30 días. Si es doloroso o no es para ti, devuélvelo.",
+      "badge_alt": "Garantía de 30 días sin riesgo"
+    },
+    "day": {
+      "title": "Imagínate salir de casa sin pensar en tus pies.",
+      "subtitle_html": "No comprobar qué zapatos te harán daño. No planear tu día en torno a tus pies. Solo póntelos, <strong><em>y listo.</em></strong>",
+      "media_label": "Un día cómodo con Altaeron",
+      "image_alt": "Una mujer disfrutando de un día cómodo fuera de casa",
+      "journey_label": "Un día sin planificar en torno al dolor de pie",
+      "journey_1_html": "Ponte<br>tus zapatos favoritos",
+      "journey_2_html": "Sal<br>con confianza",
+      "journey_3_html": "Continúa con<br>tu día",
+      "journey_4_html": "Disfruta de los momentos<br>que importan",
+      "journey_5_html": "Termina el día<br>sintiéndote bien",
+      "benefit_1_title_html": "Camina con<br>confianza",
+      "benefit_1_text": "Siéntete más apoyado mientras avanzas en tu día.",
+      "benefit_2_title_html": "Ponte los zapatos<br>que te encantan",
+      "benefit_2_text": "Disfruta de más estilos que te quedan cómodamente.",
+      "benefit_3_title_html": "Mantente activo<br>por más tiempo",
+      "benefit_3_text": "Obtén el apoyo que necesitas para los momentos que te mantienen en movimiento.",
+      "benefit_4_title_html": "Disfrute su<br>día",
+      "benefit_4_text": "Piensa menos en tus pies y más en lo que estás haciendo.",
+      "closing_html": "<strong>Tus pies no deberían decidir cómo pasas el día.</strong><br>Altaeron está diseñado para acompañarte en los momentos que te mantienen en movimiento."
+    },
+    "reviews": {
+      "title": "Gente real. Resultados reales.",
+      "subtitle": "Únete a más de {{ count }} clientes que caminan cómodamente de nuevo.",
+      "slider_controls": "Revisar controles deslizantes",
+      "previous": "Reseñas anteriores",
+      "next": "Próximas reseñas",
+      "five_stars": "5 de 5 estrellas",
+      "verified_buyer": "Comprador verificado",
+      "item_1_name": "Linda K.",
+      "item_1_quote": "Esto es lo primero que realmente me ayudó con el dolor de juanete.",
+      "item_2_name": "Mike R.",
+      "item_2_quote": "Por fin puedo volver a usar mis zapatos cómodamente.",
+      "item_3_name": "Sarah T.",
+      "item_3_quote": "Lo uso en casa y en el trabajo. ¡Me siento mucho mejor!",
+      "item_4_name": "Jessica T.",
+      "item_4_quote": "Ligero, fácil de ajustar y realmente marca la diferencia.",
+      "item_5_name": "Margaret L.",
+      "item_5_quote": "Después de unos días, noté mucha menos presión al caminar.",
+      "item_6_name": "David P.",
+      "item_6_quote": "Fácil de poner, fácil de ajustar y cómodo dentro de mis zapatos de diario.",
+      "item_7_name": "Helen S.",
+      "item_7_quote": "Puedo mantenerme de pie por más tiempo sin pensar constantemente en la incomodidad.",
+      "item_8_name": "Roberto C.",
+      "item_8_quote": "El dial ajustable me permite obtener el soporte exactamente donde lo necesito."
+    },
+    "trust": {
+      "warranty": "Garantía de 1 año",
+      "secure_checkout": "Pago Seguro",
+      "returns": "Devoluciones en 30 días",
+      "support": "Soporte de Personas Reales"
+    },
+    "comparison": {
+      "title": "No todos los correctores de juanetes son iguales.",
+      "table_label": "Altaeron comparado con las férulas básicas",
+      "altaeron_html": "ALTAERON™<small>Corrector ajustable</small>",
+      "others_html": "Férulas Básicas<br>y Otros",
+      "row_1": "Perilla ajustable para una tensión precisa",
+      "row_2": "Doble soporte para el dedo gordo del pie y la articulación",
+      "row_3": "Cómodos para usar todo el día",
+      "row_4": "Diseño duradero y reutilizable",
+      "row_5": "Incluye guía paso a paso",
+      "row_6": "Garantía de 30 días sin riesgos"
+    },
+    "expectations": {
+      "title": "Qué puede — y qué no puede — hacer",
+      "can_title": "Este dispositivo puede ayudar con:",
+      "can_1": "Alivia la presión y la fricción",
+      "can_2": "Favorece una mejor alineación de los dedos del pie mientras se usa",
+      "can_3": "Mejorar la comodidad durante las actividades diarias",
+      "can_4": "Te ayuda a mantenerte activo y de pie por más tiempo",
+      "cannot_title": "Este dispositivo no es:",
+      "cannot_1": "Una corrección permanente para el juanete",
+      "cannot_2": "Un sustituto de la atención médica profesional",
+      "cannot_3": "Una cura milagrosa",
+      "consistency": "Use consistentemente y siga las instrucciones para obtener mejores resultados."
+    },
+    "spacer": {
+      "title": "\"¿Por qué no usar simplemente un separador de dedos?\"",
+      "subtitle": "Excelente pregunta. Esta es la diferencia.",
+      "basic_alt": "Separador básico de dedos",
+      "basic_title": "Separador básico de dedos",
+      "basic_1": "Solo separa los dedos de los pies",
+      "basic_2": "Sin soporte ajustable",
+      "basic_3": "Puede ser voluminoso e incómodo en los zapatos",
+      "basic_4": "Menos eficaz para los juanetes moderados a graves",
+      "versus": "contra",
+      "altaeron_alt": "Soporte ajustable Altaeron",
+      "altaeron_title": "Soporte Ajustable ALTAERON™",
+      "altaeron_1": "Separa + alinea el dedo gordo del pie",
+      "altaeron_2": "Perilla ajustable para una sujeción precisa",
+      "altaeron_3": "De perfil bajo, cabe en muchos zapatos",
+      "altaeron_4": "Diseñado para reducir la presión y favorecer un posicionamiento adecuado",
+      "expert_alt": "Podólogo",
+      "expert_note_html": "Los separadores de dedos pueden ayudar a algunas personas con necesidades de espacio leves. Si su principal preocupación es la <strong>presión del juanete y la alineación al caminar, un soporte ajustable marca una gran diferencia.</strong>"
+    },
+    "moments": {
+      "title": "Volver a los momentos que te perdiste",
+      "subtitle": "No es solo caminar. Es vivir.",
+      "item_1": "Paseos matutinos que marcan la pauta.",
+      "item_2": "De pie por horas sin el dolor.",
+      "item_3": "Idas de compras sin tener que volver corriendo al coche.",
+      "item_4": "Vacaciones y aventuras sin que el dolor de pies te detenga.",
+      "item_5": "Eventos especiales con los zapatos que te encantan."
+    }
+  },
+  "altaeron_home": {
+    "accessibility": {
+      "store_benefits": "Beneficios de la tienda",
+      "previous_products": "Productos anteriores",
+      "next_products": "Próximos productos",
+      "product_carousel_pagination": "Paginación de carrusel de productos",
+      "question_progress": "Progreso de la pregunta",
+      "play_named": "Reproducir {{ name }}",
+      "close_video": "Cerrar video",
+      "play_testimonial": "Reproducir testimonio de cliente: {{ name }}",
+      "go_to_slide": "Ir a la diapositiva",
+      "product_demonstration": "Demostración de producto"
+    },
+    "quiz": {
+      "next": "Siguiente pregunta",
+      "back": "Atrás",
+      "daytime": "Diurno",
+      "nighttime": "Nocturno",
+      "both": "Ambos",
+      "gentle": "Suave",
+      "adjustable": "Ajustable",
+      "firm": "Firme",
+      "results": "Ver resultados",
+      "disclaimer": "Esta herramienta proporciona orientación general sobre el producto y no es asesoramiento médico."
+    },
+    "reviews": {
+      "reviewed_product": "Producto reseñado",
+      "read_review": "Leer reseña",
+      "rating": "{{ rating }} de 5 estrellas",
+      "summary": "{{ rating }}/5 de {{ count }} opiniones"
+    },
+    "guides": {
+      "reading_time": "{{ minutes }} min de lectura"
+    },
+    "product": {
+      "rating": "{{ rating }} de 5 estrellas de {{ count }} reseñas",
+      "add_to_cart": "Añadir {{ product }} al carrito",
+      "choose_options": "Elige opciones para {{ product }}",
+      "view": "Ver {{ product }}"
     }
   }
 }

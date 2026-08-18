@@ -139,6 +139,121 @@
       endcase
     endif
   endfor
+  assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
+  assign review_rating = review_data.average_rating | default: 0 | plus: 0
+  assign hero_rating_label = 'altaeron_pdp.hero.rating' | t: rating: review_rating, count: review_count
+  assign buy_rating_label = 'altaeron_pdp.buy.rating' | t: rating: review_rating, count: review_count
+  assign final_cta_rating_label = 'altaeron_pdp.final_cta.rating' | t: rating: review_rating, count: review_count
+  assign placeholder_video = shop.metafields.custom.homepage_demo_video.value | default: section.settings.placeholder_video
+  assign story_video = mf.pdp_video.value | default: placeholder_video
+  assign product_form_id = 'product-form-' | append: section.id
+  assign compare_price = current_variant.compare_at_price
+  assign savings = 0
+  if compare_price > current_variant.price
+    assign savings = compare_price | minus: current_variant.price
+  endif
+  assign savings_money = savings | money
+  assign stage_1_alt = 'altaeron_pdp.causes.stage_1_alt' | t
+  assign stage_2_alt = 'altaeron_pdp.causes.stage_2_alt' | t
+  assign stage_3_alt = 'altaeron_pdp.causes.stage_3_alt' | t
+  assign stage_4_alt = 'altaeron_pdp.causes.stage_4_alt' | t
+  assign support_demo_alt = 'altaeron_pdp.support.demo_alt' | t
+  assign support_detail_alt = 'altaeron_pdp.support.detail_alt' | t
+  assign day_image_alt = 'altaeron_pdp.day.image_alt' | t
+  assign spacer_basic_alt = 'altaeron_pdp.spacer.basic_alt' | t
+  assign spacer_altaeron_alt = 'altaeron_pdp.spacer.altaeron_alt' | t
+  assign spacer_expert_alt = 'altaeron_pdp.spacer.expert_alt' | t
+  assign familiar_title = 'altaeron_pdp.familiar.title' | t
+  assign familiar_subtitle = 'altaeron_pdp.familiar.subtitle' | t
+  assign causes_title = 'altaeron_pdp.causes.title' | t
+  assign causes_subtitle = 'altaeron_pdp.causes.subtitle' | t
+  assign support_title = 'altaeron_pdp.support.title' | t
+  assign support_subtitle = 'altaeron_pdp.support.subtitle' | t
+  assign day_title = 'altaeron_pdp.day.title' | t
+  assign day_heading_subtitle = 'altaeron_pdp.day.subtitle_html' | t
+  assign reviews_title = 'altaeron_pdp.reviews.title' | t
+  assign reviews_subtitle = 'altaeron_pdp.reviews.subtitle' | t: count: review_count
+  assign comparison_title = 'altaeron_pdp.comparison.title' | t
+  assign expectations_title = 'altaeron_pdp.expectations.title' | t
+  assign spacer_title = 'altaeron_pdp.spacer.title' | t
+  assign spacer_subtitle = 'altaeron_pdp.spacer.subtitle' | t
+  assign moments_title = 'altaeron_pdp.moments.title' | t
+  assign moments_subtitle = 'altaeron_pdp.moments.subtitle' | t
+  assign learn_title = 'altaeron_pdp.learn.title' | t
+  assign learn_subtitle = 'altaeron_pdp.learn.subtitle' | t
+  assign faq_title = 'altaeron_pdp.faq.title' | t
+  assign how_image = mf.pdp_how_image.value | default: product.images[1] | default: product.featured_image
+  for block in section.blocks
+    if block.type == 'education_media'
+      case block.settings.slot
+        when 'familiar_1'
+          assign familiar_image_1 = block.settings.image
+          assign familiar_video_1 = block.settings.video
+        when 'familiar_2'
+          assign familiar_image_2 = block.settings.image
+          assign familiar_video_2 = block.settings.video
+        when 'familiar_3'
+          assign familiar_image_3 = block.settings.image
+          assign familiar_video_3 = block.settings.video
+        when 'familiar_4'
+          assign familiar_image_4 = block.settings.image
+          assign familiar_video_4 = block.settings.video
+        when 'stage_1'
+          assign stage_image_1 = block.settings.image
+        when 'stage_2'
+          assign stage_image_2 = block.settings.image
+        when 'stage_3'
+          assign stage_image_3 = block.settings.image
+        when 'stage_4'
+          assign stage_image_4 = block.settings.image
+        when 'support_demo'
+          assign support_demo_image = block.settings.image
+          assign support_demo_video = block.settings.video
+        when 'support_detail'
+          assign support_detail_image = block.settings.image
+        when 'day_story'
+          assign day_story_image = block.settings.image
+          assign day_story_video = block.settings.video
+      endcase
+    elsif block.type == 'tail_media'
+      case block.settings.slot
+        when 'review_1'
+          assign tail_review_1 = block.settings.image
+        when 'review_2'
+          assign tail_review_2 = block.settings.image
+        when 'review_3'
+          assign tail_review_3 = block.settings.image
+        when 'review_4'
+          assign tail_review_4 = block.settings.image
+        when 'spacer'
+          assign tail_spacer = block.settings.image
+        when 'support'
+          assign tail_support = block.settings.image
+        when 'doctor'
+          assign tail_doctor = block.settings.image
+        when 'moment_1'
+          assign tail_moment_1 = block.settings.image
+        when 'moment_2'
+          assign tail_moment_2 = block.settings.image
+        when 'moment_3'
+          assign tail_moment_3 = block.settings.image
+        when 'moment_4'
+          assign tail_moment_4 = block.settings.image
+        when 'moment_5'
+          assign tail_moment_5 = block.settings.image
+        when 'guide_1'
+          assign tail_guide_1 = block.settings.image
+        when 'guide_2'
+          assign tail_guide_2 = block.settings.image
+        when 'guide_3'
+          assign tail_guide_3 = block.settings.image
+        when 'guide_4'
+          assign tail_guide_4 = block.settings.image
+        when 'cta_product'
+          assign tail_cta_product = block.settings.image
+      endcase
+    endif
+  endfor
 -%}
 
 {{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}
@@ -297,20 +412,9 @@
           {%- capture familiar_key -%}altaeron_pdp.familiar.item_{{ i }}{%- endcapture -%}
           {%- assign copy = familiar_key | t -%}
           {%- liquid
-            case forloop.index
-              when 1
-                assign familiar_image = familiar_image_1
-                assign familiar_video = familiar_video_1
-              when 2
-                assign familiar_image = familiar_image_2
-                assign familiar_video = familiar_video_2
-              when 3
-                assign familiar_image = familiar_image_3
-                assign familiar_video = familiar_video_3
-              when 4
-                assign familiar_image = familiar_image_4
-                assign familiar_video = familiar_video_4
-            endcase
+            assign micro_review_body = micro_review.body.value | default: micro_review.body | strip_html | strip
+            assign micro_review_name = micro_review.reviewer_name.value | default: micro_review.reviewer_name | strip
+            assign micro_review_rating = micro_review.rating.value | default: micro_review.rating | plus: 0
           -%}
           <article class="apdp-familiar-card">
             <div class="apdp-education__placeholder">
