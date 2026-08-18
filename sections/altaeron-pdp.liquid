@@ -15,20 +15,17 @@
   assign guide_cards = mf.pdp_guide_cards.value
   assign guide_blocks = section.blocks | where: 'type', 'guide'
   assign related_products = mf.pdp_related_products.value
-  assign custom_reviews = mf.pdp_reviews.value
   assign review_data = product.metafields.judgeme.review_widget_data.value
-  assign reviews = custom_reviews | default: review_data.reviews
+  assign reviews = review_data.reviews
+  assign micro_review = blank
+  for candidate_review in review_data.reviews
+    if candidate_review.uuid == '1a70e381-a0b9-4cd3-adbe-939ad2c165f6'
+      assign micro_review = candidate_review
+      break
+    endif
+  endfor
   assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
   assign review_rating = review_data.average_rating | default: 0 | plus: 0
-  if review_count == 0 and custom_reviews != blank
-    assign review_count = custom_reviews.size
-    assign review_rating_total = 0
-    for custom_review in custom_reviews
-      assign custom_review_rating = custom_review.rating.value | default: custom_review.rating | plus: 0
-      assign review_rating_total = review_rating_total | plus: custom_review_rating
-    endfor
-    assign review_rating = review_rating_total | times: 1.0 | divided_by: review_count | round: 1
-  endif
   assign hero_rating_label = 'altaeron_pdp.hero.rating' | t: rating: review_rating, count: review_count
   assign buy_rating_label = 'altaeron_pdp.buy.rating' | t: rating: review_rating, count: review_count
   assign final_cta_rating_label = 'altaeron_pdp.final_cta.rating' | t: rating: review_rating, count: review_count
@@ -193,9 +190,9 @@
       </div>
 
       <div class="apdp-narrative">
-        <p class="apdp-eyebrow"><strong>{{ 'altaeron_pdp.hero.eyebrow_rank' | t }}</strong><span>{{ 'altaeron_pdp.hero.eyebrow_category' | t }}</span></p>
-        <h1 id="AltaeronTitle-{{ section.id }}" aria-label="{{ 'altaeron_pdp.hero.headline' | t | escape }}"><span class="apdp-title-desktop" aria-hidden="true"><span>{{ 'altaeron_pdp.hero.headline_line_1' | t }}</span><span>{{ 'altaeron_pdp.hero.headline_line_2' | t }}</span><span>{{ 'altaeron_pdp.hero.headline_line_3' | t }}</span></span><span class="apdp-title-mobile" aria-hidden="true"><span>{{ 'altaeron_pdp.hero.headline_line_1' | t }}</span><span>{{ 'altaeron_pdp.hero.headline_line_2' | t }}</span><span>{{ 'altaeron_pdp.hero.headline_line_3' | t }}</span></span></h1>
-        <p class="apdp-narrative__subhead">{{ 'altaeron_pdp.hero.subheadline' | t }}</p>
+        <p class="apdp-eyebrow"><span>{{ eyebrow }}</span></p>
+        <h1 id="AltaeronTitle-{{ section.id }}"><span class="apdp-title-lines">{{ headline }}</span></h1>
+        <p class="apdp-narrative__subhead">{{ subheadline }}</p>
         <a class="apdp-rating" href="#AltaeronReviews-{{ section.id }}" aria-label="{{ hero_rating_label | escape }}">
           <span class="apdp-rating__people" aria-hidden="true">
             {%- for i in (1..3) -%}
@@ -237,6 +234,18 @@
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp.buy.installments' | t }} <strong>shop<span>Pay</span></strong></div>
         {%- endform -%}
         <div class="apdp-buy__policy">{% render 'altaeron-pdp-icon', icon: 'shield' %}<div><strong>{{ 'altaeron_pdp.buy.guarantee_title' | t }}</strong><p>{{ 'altaeron_pdp.buy.guarantee_line_1' | t }}<br>{{ 'altaeron_pdp.buy.guarantee_line_2' | t }}</p></div></div>
+        {%- if micro_review != blank -%}
+          {%- liquid
+            assign micro_review_body = micro_review.body.value | default: micro_review.body | strip_html | strip
+            assign micro_review_name = micro_review.reviewer_name.value | default: micro_review.reviewer_name | strip
+            assign micro_review_rating = micro_review.rating.value | default: micro_review.rating | plus: 0
+          -%}
+          <figure class="apdp-micro-review">
+            <div>{% render 'altaeron-pdp-stars', rating: micro_review_rating %}<strong>{{ 'altaeron_pdp.reviews.customer_review' | t }}</strong></div>
+            <blockquote>“{{ micro_review_body | truncatewords: 28 | escape }}”</blockquote>
+            <figcaption>— {{ micro_review_name | escape }} <a href="#AltaeronReviews-{{ section.id }}">{{ 'altaeron_pdp.reviews.read_all' | t }} <span aria-hidden="true">→</span></a></figcaption>
+          </figure>
+        {%- endif -%}
         <div class="apdp-buy__trust">
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp.buy.returns' | t }}</b><small>{{ 'altaeron_pdp.buy.returns_note' | t }}</small></span></a>
           <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>{{ 'altaeron_pdp.buy.shipping' | t }}</b><small>{{ 'altaeron_pdp.buy.shipping_note' | t }}</small></span></a>
@@ -586,9 +595,9 @@
   "class": "section-altaeron-pdp",
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "eyebrow", "label": "Ranking label", "default": "#1 Rated in Bunion & Toe Alignment" },
+    { "type": "text", "id": "eyebrow", "label": "Relevance label", "default": "For Bunion Pain & Pressure" },
     { "type": "textarea", "id": "headline_override", "label": "Headline override", "default": "Walk Without Thinking About Your Feet Again." },
-    { "type": "textarea", "id": "subheadline_override", "label": "Supporting copy override", "default": "Leave the house. Wear the shoes you love, and enjoy your day—without planning around foot pain." },
+    { "type": "textarea", "id": "subheadline_override", "label": "Supporting copy override", "default": "Adjustable support designed to reduce bunion pressure and gently support big-toe alignment while worn." },
     { "type": "header", "content": "Rating customer avatars" },
     { "type": "image_picker", "id": "rating_avatar_1", "label": "Customer avatar 1" },
     { "type": "image_picker", "id": "rating_avatar_2", "label": "Customer avatar 2" },
@@ -617,7 +626,7 @@
     { "type": "header", "content": "Routine" },
     { "type": "text", "id": "routine_heading", "label": "Routine heading", "default": "Support When You Need It. Recovery When You Don’t." },
     { "type": "text", "id": "routine_1_label", "label": "Routine card 1 label", "default": "Day Support" },
-    { "type": "textarea", "id": "routine_1_text", "label": "Routine card 1 description", "default": "Wear during the day for active support and alignment." },
+    { "type": "textarea", "id": "routine_1_text", "label": "Routine card 1 description", "default": "Use during low-activity moments with gentle, comfortable tension." },
     { "type": "text", "id": "routine_2_label", "label": "Routine card 2 label", "default": "Night Support" },
     { "type": "textarea", "id": "routine_2_text", "label": "Routine card 2 description", "default": "Use supportive night products while you rest." },
     { "type": "text", "id": "routine_3_label", "label": "Routine card 3 label", "default": "Recovery" },
@@ -642,7 +651,7 @@
     { "type": "textarea", "id": "faq_6_answer", "label": "Fallback FAQ 6 answer", "default": "Choose the correct side and follow the product fit guidance. If you have a medical condition or are unsure whether the support is appropriate for you, consult a qualified healthcare professional." },
     { "type": "text", "id": "faq_7_question", "label": "Fallback FAQ 7 question", "default": "What if it doesn’t help me?" },
     { "type": "textarea", "id": "faq_7_answer", "label": "Fallback FAQ 7 answer", "default": "Stop using it if it causes discomfort. Review the store return policy or contact support for help with fit and available options." },
-    { "type": "text", "id": "compatibility_heading", "label": "Compatibility heading", "default": "Works With The Shoes You Already Love." },
+    { "type": "text", "id": "compatibility_heading", "label": "Compatibility heading", "default": "Designed For Comfortable At-Home Use." },
     { "type": "text", "id": "shoe_1", "label": "Shoe type 1", "default": "Sneakers" },
     { "type": "text", "id": "shoe_2", "label": "Shoe type 2", "default": "Loafers" },
     { "type": "text", "id": "shoe_3", "label": "Shoe type 3", "default": "Sandals" },
