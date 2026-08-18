@@ -5,8 +5,12 @@
     assign review_rating = review.rating.value | default: review.rating | default: 0 | plus: 0
     assign review_picture = review.pictures_urls.first.original
     assign reviewer_initial = reviewer_name | slice: 0 | upcase
+    assign should_render = true
+    if require_mock and review.is_mock.value != true
+      assign should_render = false
+    endif
   -%}
-  {%- if review_body != blank and reviewer_name != blank -%}
+  {%- if should_render and review_body != blank and reviewer_name != blank -%}
     <article class="apdp-tail-review">
       <div class="apdp-tail-review__media-column">
         <div class="apdp-tail-avatar">

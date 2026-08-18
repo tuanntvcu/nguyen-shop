@@ -808,7 +808,7 @@
       "button": "Comece a Caminhar Mais Confortavelmente",
       "installments": "ou 4 pagamentos sem juros de 10,00 $ com",
       "fine_print": "Experimente durante até 90 dias. Se não for adequado para si, envie um email para support@altaeron.com.",
-      "badge_alt": "Emblema de garantia sem risco de 30 dias"
+      "badge_alt": "Garantia sem risco de 90 dias da Altaeron"
     },
     "day": {
       "title": "Uma rotina simples para momentos tranquilos.",
@@ -834,6 +834,8 @@
     "reviews": {
       "title": "Avaliações de clientes",
       "subtitle": "Avaliações recentes do produto recolhidas através do Judge.me.",
+      "illustrative_title": "Histórias ilustrativas de clientes",
+      "illustrative_subtitle": "Exemplos ilustrativos; não são compras verificadas nem avaliações do Judge.me.",
       "slider_controls": "Rever controlos deslizantes",
       "previous": "Avaliações anteriores",
       "next": "Próximas revisões",

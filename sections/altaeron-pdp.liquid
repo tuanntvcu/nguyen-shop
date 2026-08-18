@@ -15,6 +15,7 @@
   assign guide_cards = mf.pdp_guide_cards.value
   assign guide_blocks = section.blocks | where: 'type', 'guide'
   assign related_products = mf.pdp_related_products.value
+  assign custom_reviews = mf.pdp_reviews.value
   assign review_data = product.metafields.judgeme.review_widget_data.value
   assign reviews = review_data.reviews
   assign micro_review = blank
@@ -58,6 +59,8 @@
   assign day_heading_subtitle = 'altaeron_pdp.day.subtitle_html' | t
   assign reviews_title = 'altaeron_pdp.reviews.title' | t
   assign reviews_subtitle = 'altaeron_pdp.reviews.subtitle' | t: count: review_count
+  assign illustrative_stories_title = 'altaeron_pdp.reviews.illustrative_title' | t
+  assign illustrative_stories_subtitle = 'altaeron_pdp.reviews.illustrative_subtitle' | t
   assign comparison_title = 'altaeron_pdp.comparison.title' | t
   assign expectations_title = 'altaeron_pdp.expectations.title' | t
   assign spacer_title = 'altaeron_pdp.spacer.title' | t
@@ -173,6 +176,8 @@
   assign day_heading_subtitle = 'altaeron_pdp.day.subtitle_html' | t
   assign reviews_title = 'altaeron_pdp.reviews.title' | t
   assign reviews_subtitle = 'altaeron_pdp.reviews.subtitle' | t: count: review_count
+  assign illustrative_stories_title = 'altaeron_pdp.reviews.illustrative_title' | t
+  assign illustrative_stories_subtitle = 'altaeron_pdp.reviews.illustrative_subtitle' | t
   assign comparison_title = 'altaeron_pdp.comparison.title' | t
   assign expectations_title = 'altaeron_pdp.expectations.title' | t
   assign spacer_title = 'altaeron_pdp.spacer.title' | t
@@ -308,7 +313,7 @@
         <p class="apdp-eyebrow"><span>{{ eyebrow }}</span></p>
         <h1 id="AltaeronTitle-{{ section.id }}"><span class="apdp-title-lines">{{ headline }}</span></h1>
         <p class="apdp-narrative__subhead">{{ subheadline }}</p>
-        <a class="apdp-rating" href="#AltaeronReviews-{{ section.id }}" aria-label="{{ hero_rating_label | escape }}">
+        <a class="apdp-rating" href="#AltaeronVerified-{{ section.id }}" aria-label="{{ hero_rating_label | escape }}">
           <span class="apdp-rating__people" aria-hidden="true">
             {%- for i in (1..3) -%}
               {%- capture avatar_key -%}rating_avatar_{{ i }}{%- endcapture -%}
@@ -325,7 +330,7 @@
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ 'altaeron_pdp.accessibility.purchase_product' | t: product: product.title | escape }}">
         <h2 class="apdp-buy__title">{{ 'altaeron_pdp.buy.title' | t }}</h2>
-        <a class="apdp-buy__rating" href="#AltaeronReviews-{{ section.id }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ buy_rating_label }}</strong></a>
+        <a class="apdp-buy__rating" href="#AltaeronVerified-{{ section.id }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ buy_rating_label }}</strong></a>
         <div class="apdp-buy__price-line">
           <div><p class="apdp-buy__from">{{ section.settings.price_label }}</p><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></div></div>
           <span class="apdp-price__save" data-apdp-savings{% if savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp.common.save_amount' | t: amount: savings_money }}</span>
@@ -358,7 +363,7 @@
           <figure class="apdp-micro-review">
             <div>{% render 'altaeron-pdp-stars', rating: micro_review_rating %}<strong>{{ 'altaeron_pdp.reviews.customer_review' | t }}</strong></div>
             <blockquote>“{{ micro_review_body | truncatewords: 28 | escape }}”</blockquote>
-            <figcaption>— {{ micro_review_name | escape }} <a href="#AltaeronReviews-{{ section.id }}">{{ 'altaeron_pdp.reviews.read_all' | t }} <span aria-hidden="true">→</span></a></figcaption>
+            <figcaption>— {{ micro_review_name | escape }} <a href="#AltaeronVerified-{{ section.id }}">{{ 'altaeron_pdp.reviews.read_all' | t }} <span aria-hidden="true">→</span></a></figcaption>
           </figure>
         {%- endif -%}
         <div class="apdp-buy__trust">
@@ -542,7 +547,7 @@
       </div>
 
       <div class="apdp-day__benefits">
-        {%- assign day_icons = 'walk|shoe|run|heart' | split: '|' -%}{%- for icon in day_icons -%}{%- capture day_title_key -%}altaeron_pdp.day.benefit_{{ forloop.index }}_title_html{%- endcapture -%}{%- capture day_text_key -%}altaeron_pdp.day.benefit_{{ forloop.index }}_text{%- endcapture -%}<article><span>{% render 'altaeron-pdp-icon', icon: icon %}</span><div><h3>{{ day_title_key | t }}</h3><p>{{ day_text_key | t }}</p></div></article>{%- endfor -%}
+        {%- assign day_icons = 'spark|sliders|calendar' | split: '|' -%}{%- for icon in day_icons -%}{%- capture day_title_key -%}altaeron_pdp.day.benefit_{{ forloop.index }}_title_html{%- endcapture -%}{%- capture day_text_key -%}altaeron_pdp.day.benefit_{{ forloop.index }}_text{%- endcapture -%}<article><span>{% render 'altaeron-pdp-icon', icon: icon %}</span><div><h3>{{ day_title_key | t }}</h3><p>{{ day_text_key | t }}</p></div></article>{%- endfor -%}
       </div>
 
       <div class="apdp-day__closing">
@@ -552,16 +557,16 @@
     </div>
   </section>
 
-  <section id="AltaeronReviews-{{ section.id }}" class="apdp-tail apdp-tail-reviews alta-pdp-flow-section alta-pdp-flow-section--default" aria-labelledby="AltaeronReviewsTitle-{{ section.id }}" data-apdp-review-slider-group>
+  <section id="AltaeronStories-{{ section.id }}" class="apdp-tail apdp-tail-reviews alta-pdp-flow-section alta-pdp-flow-section--default" aria-labelledby="AltaeronStoriesTitle-{{ section.id }}" data-apdp-review-slider-group>
     <div class="apdp-shell">
       <div class="apdp-tail-review-head">
-        {%- assign chapter_heading_id = 'AltaeronReviewsTitle-' | append: section.id -%}
-        {% render 'altaeron-pdp-section-heading', number: '5', title: reviews_title, subtitle: reviews_subtitle, heading_id: chapter_heading_id %}
+        {%- assign chapter_heading_id = 'AltaeronStoriesTitle-' | append: section.id -%}
+        {% render 'altaeron-pdp-section-heading', number: '5', title: illustrative_stories_title, subtitle: illustrative_stories_subtitle, heading_id: chapter_heading_id %}
         <div class="apdp-tail-review-nav" aria-label="{{ 'altaeron_pdp.reviews.slider_controls' | t | escape }}"><button type="button" data-apdp-review-prev aria-label="{{ 'altaeron_pdp.reviews.previous' | t | escape }}">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button><button type="button" data-apdp-review-next aria-label="{{ 'altaeron_pdp.reviews.next' | t | escape }}">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button></div>
       </div>
       <div class="apdp-tail-review-viewport" data-apdp-review-slider>
       <div class="apdp-tail-review-grid">
-        {% render 'altaeron-pdp-review-cards', reviews: reviews, limit: 8 %}
+        {% render 'altaeron-pdp-review-cards', reviews: custom_reviews, limit: 10, require_mock: true %}
       </div>
       </div>
       <div class="apdp-tail-trust" aria-label="{{ 'altaeron_pdp.accessibility.purchase_reassurance' | t | escape }}">
@@ -656,10 +661,10 @@
         </div>
       </section>
 
-      <section class="apdp-review-summary alta-pdp-subsection alta-pdp-subsection--default-compact" aria-labelledby="AltaeronVerified-{{ section.id }}" data-apdp-review-slider-group>
+      <section id="AltaeronVerified-{{ section.id }}" class="apdp-review-summary alta-pdp-subsection alta-pdp-subsection--default-compact" aria-labelledby="AltaeronVerifiedTitle-{{ section.id }}" data-apdp-review-slider-group>
         {%- assign verified_reviews_title = 'altaeron_pdp.review_summary.title' | t: count: review_count -%}
         {%- assign verified_reviews_subtitle = 'altaeron_pdp.review_summary.rating' | t: rating: review_rating -%}
-        {%- assign chapter_heading_id = 'AltaeronVerified-' | append: section.id -%}
+        {%- assign chapter_heading_id = 'AltaeronVerifiedTitle-' | append: section.id -%}
         <div class="apdp-review-summary__head">
           {% render 'altaeron-pdp-section-heading', number: '11', title: verified_reviews_title, subtitle: verified_reviews_subtitle, heading_id: chapter_heading_id %}
           <div class="apdp-tail-review-nav" aria-label="{{ 'altaeron_pdp.reviews.slider_controls' | t | escape }}"><button type="button" data-apdp-review-prev aria-label="{{ 'altaeron_pdp.reviews.previous' | t | escape }}">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button><button type="button" data-apdp-review-next aria-label="{{ 'altaeron_pdp.reviews.next' | t | escape }}">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button></div>
@@ -685,7 +690,7 @@
     <div class="apdp-final-cta__product apdp-tail-media">{%- if tail_cta_product != blank -%}{{ tail_cta_product | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
     <div class="apdp-final-cta__content"><h2>{{ 'altaeron_pdp.final_cta.title' | t }}</h2><p>{{ 'altaeron_pdp.final_cta.product' | t }}</p><div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>{{ 'altaeron_pdp.final_cta.guarantee_html' | t }}</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>{{ 'altaeron_pdp.final_cta.shipping_html' | t }}</b></span><span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>{{ 'altaeron_pdp.final_cta.support_html' | t }}</b></span></div><div class="apdp-final-payments"><span class="visually-hidden">{{ 'altaeron_pdp.accessibility.accepted_payment_methods' | t }}</span><ul class="list list-payment" role="list">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul></div></div>
     <div class="apdp-final-cta__buy"><div>{% render 'altaeron-pdp-stars', rating: review_rating %}<small>{{ final_cta_rating_label }}</small><em data-apdp-final-savings{% if savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp.common.save_amount' | t: amount: savings_money }}</em></div><p><strong data-apdp-final-price>{{ current_variant.price | money }}</strong><s data-apdp-final-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></p><button type="button" class="apdp-final-button" data-apdp-final-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{{ 'altaeron_pdp.final_cta.button' | t }} <span aria-hidden="true">→</span></button><small data-apdp-installments>{{ 'altaeron_pdp.final_cta.installments' | t }} shop<span>Pay</span></small><p class="apdp-final-fine">{{ 'altaeron_pdp.final_cta.fine_print' | t }}</p></div>
-    <div class="apdp-final-badge"><img src="{{ 'altaeron-risk-free-badge.png' | asset_url }}" width="384" height="384" loading="lazy" alt="{{ 'altaeron_pdp.final_cta.badge_alt' | t | escape }}"></div>
+    <div class="apdp-final-badge"><img src="{{ 'altaeron-90-day-risk-free-badge.svg' | asset_url }}" width="384" height="384" loading="lazy" alt="{{ 'altaeron_pdp.final_cta.badge_alt' | t | escape }}"></div>
   </div></section>
 
   <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small><span>{{ section.settings.price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></small><em data-apdp-sticky-savings{% if savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp.common.save_amount' | t: amount: savings_money }}</em><small class="apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span data-apdp-sticky-text>{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span></button></div>
@@ -708,7 +713,7 @@
     { "type": "image_picker", "id": "rating_avatar_3", "label": "Customer avatar 3" },
     { "type": "text", "id": "identity_heading", "label": "Identity list heading", "default": "You might see yourself here..." },
     { "type": "text", "id": "relief_heading", "label": "Relief card heading", "default": "Finally, Relief You Can Feel" },
-    { "type": "textarea", "id": "relief_text", "label": "Relief card text", "default": "Designed to reduce bunion pressure and gently support big-toe alignment while worn." },
+    { "type": "textarea", "id": "relief_text", "label": "Relief card text", "default": "Designed to reduce bunion pressure and gently support big-toe alignment while worn, so your feet can feel more comfortable during your routine." },
     { "type": "text", "id": "price_label", "label": "Price label", "default": "From" },
     { "type": "text", "id": "variant_label", "label": "Variant label", "default": "Device Pair" },
     { "type": "text", "id": "popular_label", "label": "Variant badge", "default": "Most Popular" },
@@ -722,19 +727,19 @@
     { "type": "video", "id": "placeholder_video", "label": "Placeholder video" },
     { "type": "text", "id": "video_eyebrow", "label": "Video marker", "default": "See the routine" },
     { "type": "text", "id": "story_heading", "label": "Story heading", "default": "Imagine Leaving Home Without Thinking About Your Feet." },
-    { "type": "text", "id": "reviews_heading", "label": "Reviews heading", "default": "Customer Reviews" },
+    { "type": "text", "id": "reviews_heading", "label": "Reviews heading", "default": "See How Altaeron Fits Into Everyday Life" },
     { "type": "text", "id": "how_heading", "label": "How-to heading", "default": "How It Works" },
     { "type": "text", "id": "moments_heading", "label": "Lifestyle heading", "default": "Back To Moments You Missed." },
     { "type": "text", "id": "moments_subtitle", "label": "Lifestyle subtitle", "default": "Not just walking. Living." },
     { "type": "text", "id": "moments_fifth", "label": "Desktop fifth moment", "default": "Everyday plans without planning around foot pain." },
     { "type": "header", "content": "Routine" },
-    { "type": "text", "id": "routine_heading", "label": "Routine heading", "default": "A Simple Routine For Quiet Moments." },
-    { "type": "text", "id": "routine_1_label", "label": "Routine card 1 label", "default": "Quiet-Moment Support" },
-    { "type": "textarea", "id": "routine_1_text", "label": "Routine card 1 description", "default": "Use during low-activity moments with gentle, comfortable tension." },
-    { "type": "text", "id": "routine_2_label", "label": "Routine card 2 label", "default": "Comfort Check" },
-    { "type": "textarea", "id": "routine_2_text", "label": "Routine card 2 description", "default": "Remove the device before sleep unless the included instructions explicitly support overnight use." },
-    { "type": "text", "id": "routine_3_label", "label": "Routine card 3 label", "default": "Gradual Routine" },
-    { "type": "textarea", "id": "routine_3_text", "label": "Routine card 3 description", "default": "Increase session length only as comfort allows." },
+    { "type": "text", "id": "routine_heading", "label": "Routine heading", "default": "Make Comfort Part of Your Routine." },
+    { "type": "text", "id": "routine_1_label", "label": "Routine card 1 label", "default": "Start Slow" },
+    { "type": "textarea", "id": "routine_1_text", "label": "Routine card 1 description", "default": "Begin with a short, comfortable session and see how it feels." },
+    { "type": "text", "id": "routine_2_label", "label": "Routine card 2 label", "default": "Adjust For Comfort" },
+    { "type": "textarea", "id": "routine_2_text", "label": "Routine card 2 description", "default": "Use gentle, comfortable tension. More force isn't better." },
+    { "type": "text", "id": "routine_3_label", "label": "Routine card 3 label", "default": "Build Your Routine" },
+    { "type": "textarea", "id": "routine_3_text", "label": "Routine card 3 description", "default": "Gradually increase session length as comfort allows." },
     { "type": "text", "id": "bundle_label", "label": "Bundle link label", "info": "Only add a percentage when backed by actual pricing.", "default": "Build your support routine" },
     { "type": "url", "id": "bundle_link", "label": "Bundle link" },
     { "type": "header", "content": "Brand reassurance" },
@@ -755,12 +760,12 @@
     { "type": "textarea", "id": "faq_6_answer", "label": "Fallback FAQ 6 answer", "default": "Choose the correct side and follow the product fit guidance. If you have a medical condition or are unsure whether the support is appropriate for you, consult a qualified healthcare professional." },
     { "type": "text", "id": "faq_7_question", "label": "Fallback FAQ 7 question", "default": "What if it doesn’t help me?" },
     { "type": "textarea", "id": "faq_7_answer", "label": "Fallback FAQ 7 answer", "default": "Stop using it if it causes discomfort. Review the store return policy or contact support for help with fit and available options." },
-    { "type": "text", "id": "compatibility_heading", "label": "Compatibility heading", "default": "Designed For Comfortable At-Home Use." },
+    { "type": "text", "id": "compatibility_heading", "label": "Compatibility heading", "default": "Made For The Moments When You Can Slow Down." },
     { "type": "text", "id": "shoe_1", "label": "Use case 1", "default": "Reading" },
     { "type": "text", "id": "shoe_2", "label": "Use case 2", "default": "Watching TV" },
     { "type": "text", "id": "shoe_3", "label": "Use case 3", "default": "Desk Work" },
     { "type": "text", "id": "shoe_4", "label": "Use case 4", "default": "Relaxing at Home" },
-    { "type": "text", "id": "shoe_5", "label": "Use case 5", "default": "Short Sessions" },
+    { "type": "text", "id": "shoe_5", "label": "Use case 5", "default": "Evening Wind-Down" },
     { "type": "text", "id": "guides_heading", "label": "Guides heading", "default": "Helpful Guides" },
     { "type": "blog", "id": "learn_blog", "label": "Learn More blog" }
   ],

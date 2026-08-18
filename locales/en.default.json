@@ -742,7 +742,7 @@
       "detail_alt": "Altaeron toe support detail"
     },
     "day": {
-      "title": "A Simple Routine For Quiet Moments.",
+      "title": "Make Comfort Part of Your Routine.",
       "subtitle_html": "Designed for low-activity periods such as reading, watching TV, desk work, or relaxing at home.",
       "media_label": "A low-activity comfort routine with Altaeron",
       "image_alt": "A woman relaxing at home during a comfort routine",
@@ -752,19 +752,21 @@
       "journey_3_html": "Adjust with<br>gentle tension",
       "journey_4_html": "Begin with a<br>short session",
       "journey_5_html": "Build time<br>gradually",
-      "benefit_1_title_html": "Start<br>slow",
-      "benefit_1_text": "Begin with a short session and check how the fit feels.",
-      "benefit_2_title_html": "Adjust for<br>comfort",
-      "benefit_2_text": "Use gentle tension. More force is not better.",
-      "benefit_3_title_html": "Choose quiet<br>moments",
-      "benefit_3_text": "Use it while reading, watching TV, working at a desk, or relaxing.",
+      "benefit_1_title_html": "Start<br>Slow",
+      "benefit_1_text": "Begin with a short, comfortable session and see how it feels.",
+      "benefit_2_title_html": "Adjust For<br>Comfort",
+      "benefit_2_text": "Use gentle, comfortable tension. More force isn't better.",
+      "benefit_3_title_html": "Build Your<br>Routine",
+      "benefit_3_text": "Gradually increase session length as comfort allows.",
       "benefit_4_title_html": "Build<br>gradually",
       "benefit_4_text": "Increase session length only as comfort allows.",
       "closing_html": "<strong>Comfort is the guide.</strong><br>Remove the device if you feel pain, numbness, tingling, or irritation."
     },
     "reviews": {
-      "title": "Customer Reviews",
+      "title": "See How Altaeron Fits Into Everyday Life",
       "subtitle": "Recent product reviews collected through Judge.me.",
+      "illustrative_title": "See How Altaeron Fits Into Everyday Life",
+      "illustrative_subtitle": "Illustrative examples—not verified purchases or Judge.me reviews.",
       "slider_controls": "Review slider controls",
       "previous": "Previous reviews",
       "next": "Next reviews",
@@ -883,7 +885,7 @@
       "button": "Start Walking More Comfortably",
       "installments": "or 4 interest-free payments of $10.00 with",
       "fine_print": "Try it for up to 90 days. If it’s not right for you, email support@altaeron.com.",
-      "badge_alt": "30-day risk-free guarantee badge"
+      "badge_alt": "Altaeron 90-Day Risk-Free Guarantee"
     }
   },
   "altaeron_home": {
