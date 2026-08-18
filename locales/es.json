@@ -757,6 +757,90 @@
       "item_4_text_html": "<span data-sheets-value='{\"1\":2,\"2\":\"Acolchado suave donde\\\\nimporta\"}' data-sheets-userformat='{\"2\":15297,\"3\":{\"1\":0},\"9\":1,\"10\":1,\"11\":4,\"12\":0,\"14\":{\"1\":2,\"2\":0},\"15\":\"Calibri\",\"16\":11}'>Acolchado suave donde<br>importa</span>",
       "demo_alt": "Demostración de ajuste de Altaeron",
       "detail_alt": "Detalle del soporte para la puntera de Altaeron"
+    },
+    "learn": {
+      "item_4_text": "Señales de que deberías buscar ayuda profesional.",
+      "reading_time": "{{ minutes }} min de lectura"
+    },
+    "review_summary": {
+      "title": "{{ count }}+ reseñas verificadas",
+      "rating": "{{ rating }} de 5",
+      "photo_placeholders": "Marcadores de posición de fotos del cliente",
+      "view_all": "Ver todas las reseñas",
+      "trial": "Pruébalo durante 30 días. Si no es lo que buscas.",
+      "disclaimer": "Tenga en cuenta: Los resultados pueden variar según el tamaño, la duración y la constancia del juanete."
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "question_1": "¿Cuánto tarda el envío?",
+      "answer_1": "Los plazos de entrega se muestran al finalizar la compra y pueden variar según el destino.",
+      "question_2": "¿Es seguro usarlo todos los días?",
+      "answer_2": "Úselo como se indica y suspéndalo si experimenta dolor, entumecimiento o irritación.",
+      "question_3": "¿Cuánto tiempo debo usarlo cada día?",
+      "answer_3": "Empieza con sesiones cortas y aumenta gradualmente el tiempo de uso según las instrucciones incluidas.",
+      "question_4": "¿Puedo usarlo mientras duermo?",
+      "answer_4": "Este soporte ajustable está diseñado para su uso durante actividades. Siga las instrucciones del producto para su uso nocturno.",
+      "question_5": "¿Y si no encaja o no ayuda?",
+      "answer_5": "Contacta a nuestro equipo de soporte para obtener ayuda con el ajuste o revisa la política de devolución para conocer las opciones disponibles.",
+      "question_6": "¿Cómo limpio el producto?",
+      "answer_6": "Lavar a mano suavemente con jabón suave y agua fría, luego secar completamente al aire."
+    },
+    "final_cta": {
+      "label": "Comprar corrector de juanetes ajustable Altaeron",
+      "title": "¿Listo para caminar sin pensar en tus pies?",
+      "product": "Corrector de juanetes con perilla ajustable ALTAERON™",
+      "guarantee_html": "Garantía de 30 días<br>",
+      "shipping_html": "Envío Rápido y Gratis<br>en pedidos de $39+",
+      "support_html": "Personas reales<br>Soporte 24/7",
+      "rating": "{{ rating }} ({{ count }} valoraciones)",
+      "saving": "Ahorre $30.00",
+      "price": "39,99 $",
+      "compare_price": "$69.99",
+      "button": "Empieza a caminar con mayor comodidad",
+      "installments": "o 4 pagos sin intereses de $10.00 con",
+      "fine_print": "Pruébalo durante 30 días. Si es doloroso o no es para ti, devuélvelo.",
+      "badge_alt": "Garantía de 30 días sin riesgo"
+    }
+  },
+  "altaeron_home": {
+    "accessibility": {
+      "store_benefits": "Beneficios de la tienda",
+      "previous_products": "Productos anteriores",
+      "next_products": "Próximos productos",
+      "product_carousel_pagination": "Paginación de carrusel de productos",
+      "question_progress": "Progreso de la pregunta",
+      "play_named": "Reproducir {{ name }}",
+      "close_video": "Cerrar video",
+      "play_testimonial": "Reproducir testimonio de cliente: {{ name }}",
+      "go_to_slide": "Ir a la diapositiva",
+      "product_demonstration": "Demostración de producto"
+    },
+    "quiz": {
+      "next": "Siguiente pregunta",
+      "back": "Atrás",
+      "daytime": "Diurno",
+      "nighttime": "Nocturno",
+      "both": "Ambos",
+      "gentle": "Suave",
+      "adjustable": "Ajustable",
+      "firm": "Firme",
+      "results": "Ver resultados",
+      "disclaimer": "Esta herramienta proporciona orientación general sobre el producto y no es asesoramiento médico."
+    },
+    "reviews": {
+      "reviewed_product": "Producto reseñado",
+      "read_review": "Leer reseña",
+      "rating": "{{ rating }} de 5 estrellas",
+      "summary": "{{ rating }}/5 de {{ count }} opiniones"
+    },
+    "guides": {
+      "reading_time": "{{ minutes }} min de lectura"
+    },
+    "product": {
+      "rating": "{{ rating }} de 5 estrellas de {{ count }} reseñas",
+      "add_to_cart": "Añadir {{ product }} al carrito",
+      "choose_options": "Elige opciones para {{ product }}",
+      "view": "Ver {{ product }}"
     }
   }
 }
