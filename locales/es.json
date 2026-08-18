@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -122,7 +131,15 @@
     "menu_drawer": "Alternar menú",
     "layout_switcher": "{{ col }} columna",
     "play_video": "Reproduce el video",
-    "load_video": "Cargar vídeo: {{ description }}"
+    "load_video": "Cargar vídeo: {{ description }}",
+    "store_announcements": "Anuncios de la tienda",
+    "breadcrumbs": "Migas de pan",
+    "tabs": "Pestañas",
+    "image_comparison": "Comparación de imágenes",
+    "select_variant": "Seleccionar variante",
+    "primary_navigation": "Navegación principal",
+    "create_store_with_shopify": "Crea tu propia tienda online con Shopify",
+    "shopify_logo": "Logotipo de Shopify"
   },
   "blogs": {
     "article": {
@@ -630,6 +647,116 @@
       "max_characters": "{{ max_chars }} caracteres como máximo",
       "send_on": "AAAA-MM-DD",
       "send_on_label": "Enviar (opcional)"
+    }
+  },
+  "altaeron_pdp": {
+    "hero": {
+      "eyebrow_rank": "Número 1 en ventas",
+      "eyebrow_category": "en el Alivio del Juanete",
+      "headline": "Vuelve a caminar sin pensar en tus pies.",
+      "headline_line_1": "Caminar sin",
+      "headline_line_2": "Pensando En",
+      "headline_line_3": "Tus pies otra vez.",
+      "subheadline": "Soporte ajustable que alivia la presión del juanete, mejora la alineación mientras se usa y te ayuda a moverte cómodamente, todos los días.",
+      "rating": "{{ rating }}/5 de {{ count }}+ reseñas",
+      "benefit_1": "Alivia el dolor y la presión del juanete",
+      "benefit_2": "Mejora la alineación mientras se usa",
+      "benefit_3": "Cómodo para usar todo el día"
+    },
+    "buy": {
+      "title": "Corrector de juanetes con perilla ajustable ALTAERON™",
+      "rating": "{{ rating }} ({{ count }} reseñas)",
+      "compare_price": "$49.99",
+      "saving": "Ahorra $10.00",
+      "variant_label": "Emparejamiento de dispositivos",
+      "popular": "Más populares",
+      "variant_1": "1 Par",
+      "variant_2": "2 pares",
+      "variant_3": "3 pares",
+      "cta": "Añadir al carrito",
+      "installments": "o 4 pagos sin intereses de $10.00 con",
+      "guarantee_title": "Garantía de 30 días sin riesgos",
+      "guarantee_line_1": "Úsalo en casa, en el trabajo o mientras te desplazas.",
+      "guarantee_line_2": "Si no es el alivio que esperabas, devuélvelo, sin hacer preguntas.",
+      "returns": "Devoluciones en 30 días",
+      "returns_note": "Ámalo o devuelve tu pedido.",
+      "shipping": "Envío rápido",
+      "shipping_note": "Se envía en 1 a 3 días desde nuestro almacén.",
+      "secure": "Pago Seguro",
+      "secure_note": "Cifrado y 100 % seguro.",
+      "support": "Atención de personas reales",
+      "support_note": "Estamos aquí 24/7."
+    },
+    "expert": {
+      "reviewed_by": "Revisado médicamente por",
+      "name": "Dr. James Peterson, DPM",
+      "role": "Cirujano podólogo — Especialista en pie y tobillo",
+      "experience": "Más de 15 años de experiencia clínica",
+      "signature": "James Peterson",
+      "quote": "Una alineación adecuada y el alivio de la presión son claves para controlar la incomodidad del juanete. Este dispositivo ajustable es una opción inteligente y no invasiva para el apoyo diario y el alivio del dolor mientras se usa.",
+      "criteria_heading": "Como podólogo, busco:",
+      "criterion_1": "Ajustabilidad para un calce personalizado",
+      "criterion_2": "Alineación suave sin molestias",
+      "criterion_3": "Expectativas realistas y uso constante",
+      "criteria_footer": "Este dispositivo cumple con esos criterios."
+    },
+    "common": {
+      "save": "Guardar",
+      "save_amount": "Ahorre {{ amount }}",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "accessibility": {
+      "product_media": "Medios del producto",
+      "purchase_product": "Comprar {{ product }}",
+      "accepted_payment_methods": "Formas de pago aceptadas",
+      "product_guidance": "Orientación del producto",
+      "expert_portrait": "Profesional del cuidado de los pies revisando el producto",
+      "publications": "Publicaciones de salud y estilo de vida",
+      "purchase_reassurance": "Tranquilidad en la compra"
+    },
+    "familiar": {
+      "title": "¿Esto te resulta familiar?",
+      "subtitle": "No estás solo. Estos momentos cotidianos pueden ser más dolorosos de lo que deberían.",
+      "item_1": "Dolor matutino que marca el tono de tu día.",
+      "item_2": "Alivio al sentarte por fin.",
+      "item_3": "Saltarse paseos que antes disfrutaba.",
+      "item_4": "Zapatos que te encantan pero que ya no puedes usar."
+    },
+    "causes": {
+      "title": "¿Por qué salen los juanetes?",
+      "subtitle": "Comprender el problema es el primer paso para sentirse mejor.",
+      "point_1_html": "<strong>Desalineación del dedo del pie</strong> – El dedo gordo del pie se desvía hacia los otros dedos.",
+      "point_2_html": "<strong>Presión y fricción</strong> – Los zapatos y el movimiento diario aumentan el estrés en la articulación.",
+      "point_3_html": "<strong>Dolor progresivo</strong> – Actividades que antes resultaban cómodas se vuelven dolorosas.",
+      "point_4_html": "<strong>Irritation</strong> – El dolor se desarrolla gradualmente con el tiempo.",
+      "guide_link": "Obtenga más información en nuestra Guía sobre los juanetes",
+      "stage_1_title": "Desalineación",
+      "stage_1_text": "El dedo gordo se desplaza hacia los dedos más pequeños.",
+      "stage_1_alt": "Etapa de desalineación del juanete",
+      "stage_2_title": "Presión",
+      "stage_2_text": "Frotar causa presión e inflamación.",
+      "stage_2_alt": "Etapa de presión del juanete",
+      "stage_3_title": "Inflamación",
+      "stage_3_text": "La articulación se irrita e hincha.",
+      "stage_3_alt": "Etapa de inflamación del juanete",
+      "stage_4_title": "Dolor a lo largo del tiempo",
+      "stage_4_text": "La incomodidad interfiere con la vida diaria.",
+      "stage_4_alt": "Etapa del dolor de juanete a lo largo del tiempo"
+    },
+    "support": {
+      "title": "Cómo Altaeron sostiene tu dedo del pie",
+      "subtitle": "Alineación ajustable y soporte suave para el alivio diario.",
+      "item_1_title_html": "Pomo<br>Ajustable",
+      "item_1_text_html": "Ajuste el ángulo<br>y la tensión",
+      "item_2_title_html": "Soporte dual<br>del sistema",
+      "item_2_text_html": "Estabiliza la punta del pie y la<br>articulación",
+      "item_3_title_html": "Presión<br>Alivio",
+      "item_3_text_html": "Reduce el roce<br>y la irritación",
+      "item_4_title_html": "Diseño<br>centrado en el confort",
+      "item_4_text_html": "<span data-sheets-value='{\"1\":2,\"2\":\"Acolchado suave donde\\\\nimporta\"}' data-sheets-userformat='{\"2\":15297,\"3\":{\"1\":0},\"9\":1,\"10\":1,\"11\":4,\"12\":0,\"14\":{\"1\":2,\"2\":0},\"15\":\"Calibri\",\"16\":11}'>Acolchado suave donde<br>importa</span>",
+      "demo_alt": "Demostración de ajuste de Altaeron",
+      "detail_alt": "Detalle del soporte para la puntera de Altaeron"
     }
   }
 }
