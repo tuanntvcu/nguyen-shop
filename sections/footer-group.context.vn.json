@@ -1,0 +1,17 @@
+{
+  "context": {
+    "market": "vn"
+  },
+  "parent": "footer-group.json",
+  "sections": {
+    "footer": {
+      "blocks": {
+        "customer_care": {
+          "settings": {
+            "email": "support@altaeron.com"
+          }
+        }
+      }
+    }
+  }
+}

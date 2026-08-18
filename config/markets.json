@@ -1,1 +1,7 @@
-{"markets":{}}
+{
+  "markets": {
+    "vn": {
+      "parent": "@default"
+    }
+  }
+}

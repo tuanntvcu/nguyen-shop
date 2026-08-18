@@ -1,0 +1,17 @@
+{
+  "context": {
+    "market": "vn"
+  },
+  "parent": "header-group.json",
+  "sections": {
+    "scrolling_promotion_KhdTdc": {
+      "blocks": {
+        "text_t3BcT4": {
+          "settings": {
+            "text": "90-DAY COMFORT GUARANTEE"
+          }
+        }
+      }
+    }
+  }
+}

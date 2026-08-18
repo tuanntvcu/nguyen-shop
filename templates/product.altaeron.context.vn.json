@@ -1,0 +1,30 @@
+{
+  "context": {
+    "market": "vn"
+  },
+  "parent": "product.altaeron.json",
+  "sections": {
+    "altaeron_pdp": {
+      "settings": {
+        "eyebrow": "For Bunion Pain & Pressure",
+        "headline_override": "Walk Without Thinking About Your Feet Again.",
+        "subheadline_override": "Adjustable support designed to reduce bunion pressure and gently support big-toe alignment while worn.",
+        "relief_text": "Designed to reduce bunion pressure and gently support big-toe alignment while worn.",
+        "reviews_heading": "Customer Reviews",
+        "routine_heading": "A Simple Routine For Quiet Moments.",
+        "routine_1_label": "Quiet-Moment Support",
+        "routine_1_text": "Use during low-activity moments with gentle, comfortable tension.",
+        "routine_2_label": "Comfort Check",
+        "routine_2_text": "Remove the device before sleep unless the included instructions explicitly support overnight use.",
+        "routine_3_label": "Gradual Routine",
+        "routine_3_text": "Increase session length only as comfort allows.",
+        "compatibility_heading": "Designed For Comfortable At-Home Use.",
+        "shoe_1": "Reading",
+        "shoe_2": "Watching TV",
+        "shoe_3": "Desk Work",
+        "shoe_4": "Relaxing at Home",
+        "shoe_5": "Short Sessions"
+      }
+    }
+  }
+}
