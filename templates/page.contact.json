@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "breadcrumbs_xYaBHj": {
@@ -30,31 +39,10 @@
             "checkbox_uncheck_value": "No",
             "radio_options": ""
           }
-        },
-        "image_card_yBPyAg": {
-          "type": "image_card",
-          "settings": {
-            "color_scheme": "scheme-inverse",
-            "image_overlay_opacity": 0,
-            "heading": "Your location",
-            "heading_size": "h1",
-            "subheading": "",
-            "description": "<p>+333 (0)123 4567<\/p><p>Mon-Sat: 10am-8pm<\/p>",
-            "button_label": "Button label",
-            "button_style": "btn--primary",
-            "content_position": "bottom-left",
-            "content_alignment": "left",
-            "content_spacing": "large",
-            "card_link": "",
-            "color_scheme_mobile": "scheme-1",
-            "show_text_below": true,
-            "content_alignment_mobile": "left"
-          }
         }
       },
       "block_order": [
-        "custom_field_8AQYaC",
-        "image_card_yBPyAg"
+        "custom_field_8AQYaC"
       ],
       "custom_css": [
         "@media (min-width: 768px) {.card-media {border-radius: 0; }}",
@@ -63,8 +51,9 @@
       "settings": {
         "section_color_scheme": "",
         "color_scheme": "scheme-11",
-        "heading": "Get in Touch",
+        "heading": "Contact us",
         "heading_size": "hd2",
+        "heading_highlight_style": "none",
         "padding_top": 0,
         "padding_bottom": 100,
         "show_section_divider": false,
