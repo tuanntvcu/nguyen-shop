@@ -619,6 +619,49 @@
     else window.addEventListener('load', startObserving, { once: true });
   }
 
+  function initHeroExperience(root) {
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const video = root.querySelector('[data-apdp-hero-video]');
+    const bundleCta = root.querySelector('[data-apdp-bundle-cta]');
+    let videoIsVisible = true;
+
+    const syncVideo = () => {
+      if (!video) return;
+      video.muted = true;
+      video.defaultMuted = true;
+      if (motionPreference.matches) {
+        video.pause();
+        video.controls = true;
+        return;
+      }
+      video.controls = false;
+      if (videoIsVisible && !document.hidden) video.play().catch(() => {});
+      else video.pause();
+    };
+
+    if (video && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        videoIsVisible = entry.isIntersecting;
+        syncVideo();
+      }, { threshold: 0.08 });
+      observer.observe(video);
+    }
+    if (video) {
+      document.addEventListener('visibilitychange', syncVideo);
+      motionPreference.addEventListener?.('change', syncVideo);
+      syncVideo();
+    }
+
+    bundleCta?.addEventListener('click', (event) => {
+      const targetId = bundleCta.getAttribute('href')?.slice(1);
+      const target = targetId ? document.getElementById(targetId) : null;
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: motionPreference.matches ? 'auto' : 'smooth', block: 'start' });
+      target.focus({ preventScroll: true });
+    });
+  }
+
   function initReviewSliders(root) {
     root.querySelectorAll('[data-apdp-review-slider]').forEach((slider) => {
       const group = slider.closest('[data-apdp-review-slider-group]');
@@ -649,6 +692,7 @@
   function init(root) {
     if (!root || root.dataset.apdpReady === 'true') return;
     root.dataset.apdpReady = 'true';
+    initHeroExperience(root);
     const activateMedia = initGallery(root);
     initQuantity(root);
     initVariants(root, activateMedia);

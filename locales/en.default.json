@@ -758,7 +758,12 @@
       "benefit_2_text": "Use gentle, comfortable tension. More force isn't better.",
       "benefit_3_title_html": "Build Your<br>Routine",
       "benefit_3_text": "Gradually increase session length as comfort allows.",
-      "closing_html": "<strong>Comfort is the guide.</strong><br>Remove the device if you feel pain, numbness, tingling, or irritation."
+      "closing_title": "Your Comfort Comes First",
+      "closing_point_1": "Start with gentle tension",
+      "closing_point_2": "Keep your first sessions short",
+      "closing_point_3": "Adjust gradually as comfort allows",
+      "closing_support_intro": "Questions about fit or comfort?",
+      "closing_support_link": "We're here to help."
     },
     "reviews": {
       "title": "See How Altaeron Fits Into Everyday Life",

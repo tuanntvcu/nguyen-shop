@@ -829,7 +829,12 @@
       "benefit_3_text": "Úsalo mientras lees, ves la televisión, trabajas en un escritorio o te relajas.",
       "benefit_4_title_html": "Aumenta<br>gradualmente",
       "benefit_4_text": "Aumenta la duración de la sesión solo si te resulta cómodo.",
-      "closing_html": "<strong>La comodidad es la guía.</strong><br>Retira el dispositivo si sientes dolor, entumecimiento, hormigueo o irritación."
+      "closing_title": "Tu comodidad es lo primero",
+      "closing_point_1": "Comienza con una tensión suave",
+      "closing_point_2": "Haz que tus primeras sesiones sean breves",
+      "closing_point_3": "Ajusta gradualmente según tu comodidad",
+      "closing_support_intro": "¿Tienes preguntas sobre el ajuste o la comodidad?",
+      "closing_support_link": "Estamos aquí para ayudarte."
     },
     "reviews": {
       "title": "Reseñas de clientes",
