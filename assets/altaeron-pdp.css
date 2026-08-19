@@ -762,8 +762,8 @@ bundle-deals-widget input[type="radio"]{
 @media(max-width:767px){.apdp-tail-avatar{height:42px;width:42px}.apdp-tail-avatar__initial{font-size:16px}.apdp-tail-review__image{height:58px;width:58px}}
 @media(max-width:767px){.apdp-review-summary .apdp-tail-review{flex-basis:86%}}
 
-.apdp-day__benefits{grid-template-columns:repeat(3,1fr)}
-@media(max-width:767px){.apdp-day__benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.apdp-day__benefits article+article{border-left:0}.apdp-day__benefits article:nth-child(even){border-left:1px solid #e0e5e1}.apdp-day__benefits article:nth-child(n+3){border-top:1px solid #e0e5e1}}
+.apdp-day__benefits{grid-template-columns:repeat(4,1fr)}
+@media(max-width:767px){.apdp-day__benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.apdp-day__benefits article,.apdp-day__benefits article+article,.apdp-day__benefits article:nth-child(even),.apdp-day__benefits article:nth-child(n+3){border:0}}
 
 /* Surgical CRO hero for the Adjustable Bunion Corrector only. */
 .altaeron-pdp--cro-hero .apdp-hero__copy{min-width:0}

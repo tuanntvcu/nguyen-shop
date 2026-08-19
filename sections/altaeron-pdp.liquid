@@ -614,7 +614,7 @@
       </div>
 
       <div class="apdp-day__benefits">
-        {%- assign day_icons = 'spark|sliders|calendar' | split: '|' -%}{%- for icon in day_icons -%}{%- capture day_title_key -%}altaeron_pdp.day.benefit_{{ forloop.index }}_title_html{%- endcapture -%}{%- capture day_text_key -%}altaeron_pdp.day.benefit_{{ forloop.index }}_text{%- endcapture -%}<article><span>{% render 'altaeron-pdp-icon', icon: icon %}</span><div><h3>{{ day_title_key | t }}</h3><p>{{ day_text_key | t }}</p></div></article>{%- endfor -%}
+        {%- assign day_icons = 'spark|sliders|calendar|return' | split: '|' -%}{%- for icon in day_icons -%}{%- capture day_title_key -%}altaeron_pdp.day.benefit_{{ forloop.index }}_title_html{%- endcapture -%}{%- capture day_text_key -%}altaeron_pdp.day.benefit_{{ forloop.index }}_text{%- endcapture -%}<article><span>{% render 'altaeron-pdp-icon', icon: icon %}</span><div><h3>{{ day_title_key | t }}</h3><p>{{ day_text_key | t }}</p></div></article>{%- endfor -%}
       </div>
 
       <div class="apdp-day__closing">
