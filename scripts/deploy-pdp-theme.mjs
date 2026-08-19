@@ -14,6 +14,7 @@ const filenames = [
   'snippets/altaeron-pdp-card.liquid',
   'snippets/altaeron-pdp-icon.liquid',
   'snippets/altaeron-pdp-media.liquid',
+  'snippets/altaeron-pdp-review-cards.liquid',
   'templates/product.altaeron.json',
 ];
 

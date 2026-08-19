@@ -3,6 +3,7 @@
     assign review_body = review.body.value | default: review.body | strip_html | strip
     assign reviewer_name = review.reviewer_name.value | default: review.reviewer_name | strip
     assign review_rating = review.rating.value | default: review.rating | default: 0 | plus: 0
+    assign configured_review_image = review.review_image.value
     assign review_picture = review.pictures_urls.first.original
     assign reviewer_initial = reviewer_name | slice: 0 | upcase
     assign should_render = true
@@ -16,7 +17,11 @@
         <div class="apdp-tail-avatar">
           <span class="apdp-tail-avatar__initial" aria-hidden="true">{{ reviewer_initial | escape }}</span>
         </div>
-        {%- if review_picture != blank -%}
+        {%- if configured_review_image != blank -%}
+          <div class="apdp-tail-review__image">
+            {{ configured_review_image | image_url: width: 360 | image_tag: loading: 'lazy', widths: '96, 144, 240, 360', sizes: '68px', alt: reviewer_name }}
+          </div>
+        {%- elsif review_picture != blank -%}
           <div class="apdp-tail-review__image">
             <img src="{{ review_picture | escape }}" loading="lazy" width="180" height="180" alt="{{ reviewer_name | escape }}">
           </div>
