@@ -485,6 +485,37 @@ bundle-deals-widget input[type="radio"]{
   .apdp-judgeme-widget #judgeme_product_reviews :where(.jdgm-form-wrapper,.jdgm-question-form-wrapper){padding:18px 16px}
 }
 
+/* Judge.me 3.0 uses jm-* components. Tighten its default 48px widget padding
+   and large stack tokens while retaining accessible 48px controls. */
+.apdp-review-summary .apdp-review-summary__head .alta-pdp-section-heading{margin-bottom:10px}
+.apdp-review-summary .apdp-judgeme-widget{margin-top:0}
+.apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp .jm-review-widget{
+  --jm-space-200:.5em;
+  --jm-space-300:.5em;
+  --jm-space-400:.75em;
+  --jm-space-600:1em;
+  --jm-space-1000:1em;
+  --jm-space-1200:.5em;
+  padding-block:8px;
+}
+.apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp .jm-review-widget__header-and-body{gap:8px}
+.apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp .jm-review-widget-minimal-header__title{line-height:1.25}
+.apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp .jm-media-preview{margin-block-start:16px}
+.apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp .jdgm-review-list{padding-block-start:16px}
+.apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp :where(.jdgm-review-list .jm-review-item,.jm-align-review-item){padding-block-end:16px}
+
+@media(max-width:767px){
+  .apdp-review-summary .apdp-review-summary__head .alta-pdp-section-heading{margin-bottom:6px}
+  .apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp .jm-review-widget{
+    --jm-space-400:.625em;
+    --jm-space-600:.875em;
+    --jm-space-1000:.875em;
+    padding-block:6px;
+  }
+  .apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp .jm-media-preview{margin-block-start:14px}
+  .apdp-judgeme-widget #judgeme_product_reviews.jdgm-widget-revamp .jdgm-review-list{padding-block-start:14px}
+}
+
 @media(max-width:1023px) and (min-width:768px){
   .section-altaeron-pdp{--alta-type-display-xl:42px;--alta-type-heading-xl:26px}
 }
@@ -732,7 +763,7 @@ bundle-deals-widget input[type="radio"]{
 @media(max-width:767px){.apdp-review-summary .apdp-tail-review{flex-basis:86%}}
 
 .apdp-day__benefits{grid-template-columns:repeat(3,1fr)}
-@media(max-width:767px){.apdp-day__benefits{grid-template-columns:1fr}.apdp-day__benefits article+article,.apdp-day__benefits article:nth-child(even){border-left:0}.apdp-day__benefits article:nth-child(n+2){border-top:1px solid #e0e5e1}}
+@media(max-width:767px){.apdp-day__benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.apdp-day__benefits article+article{border-left:0}.apdp-day__benefits article:nth-child(even){border-left:1px solid #e0e5e1}.apdp-day__benefits article:nth-child(n+3){border-top:1px solid #e0e5e1}}
 
 /* Surgical CRO hero for the Adjustable Bunion Corrector only. */
 .altaeron-pdp--cro-hero .apdp-hero__copy{min-width:0}

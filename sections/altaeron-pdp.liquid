@@ -424,7 +424,7 @@
         {%- endif -%}
         <div class="apdp-buy__trust">
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp.buy.returns' | t }}</b><small>{{ 'altaeron_pdp.buy.returns_note' | t }}</small></span></a>
-          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>{{ 'altaeron_pdp.buy.shipping' | t }}</b><small>{{ 'altaeron_pdp.buy.shipping_note' | t }}</small></span></a>
+          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>{{ 'altaeron_pdp.buy.shipping' | t }}</b></span></a>
           <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><b>{{ 'altaeron_pdp.buy.secure' | t }}</b><small>{{ 'altaeron_pdp.buy.secure_note' | t }}</small></span></span>
           <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<span><b>{{ 'altaeron_pdp.buy.support' | t }}</b><small>{{ 'altaeron_pdp.buy.support_note' | t }}</small></span></a>
         </div>
@@ -473,9 +473,20 @@
           {%- capture familiar_key -%}altaeron_pdp.familiar.item_{{ i }}{%- endcapture -%}
           {%- assign copy = familiar_key | t -%}
           {%- liquid
-            assign micro_review_body = micro_review.body.value | default: micro_review.body | strip_html | strip
-            assign micro_review_name = micro_review.reviewer_name.value | default: micro_review.reviewer_name | strip
-            assign micro_review_rating = micro_review.rating.value | default: micro_review.rating | plus: 0
+            case forloop.index
+              when 1
+                assign familiar_image = familiar_image_1
+                assign familiar_video = familiar_video_1
+              when 2
+                assign familiar_image = familiar_image_2
+                assign familiar_video = familiar_video_2
+              when 3
+                assign familiar_image = familiar_image_3
+                assign familiar_video = familiar_video_3
+              when 4
+                assign familiar_image = familiar_image_4
+                assign familiar_video = familiar_video_4
+            endcase
           -%}
           <article class="apdp-familiar-card">
             <div class="apdp-education__placeholder">
