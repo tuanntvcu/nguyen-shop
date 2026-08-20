@@ -422,9 +422,10 @@
             <figcaption>— {{ micro_review_name | escape }} <a href="#AltaeronVerified-{{ section.id }}">{{ 'altaeron_pdp.reviews.read_all' | t }} <span aria-hidden="true">→</span></a></figcaption>
           </figure>
         {%- endif -%}
+        <p class="apdp-buy__bonus"><span aria-hidden="true">🎁</span> <strong>{{ 'altaeron_pdp.buy.guide_bonus' | t }}</strong></p>
         <div class="apdp-buy__trust">
-          <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp.buy.returns' | t }}</b><small>{{ 'altaeron_pdp.buy.returns_note' | t }}</small></span></a>
-          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>{{ 'altaeron_pdp.buy.shipping' | t }}</b></span></a>
+          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>{{ 'altaeron_pdp.buy.shipping' | t }}</b><small>{{ 'altaeron_pdp.buy.shipping_note' | t }}</small></span></a>
+          <span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<span><b>{{ 'altaeron_pdp.buy.warranty' | t }}</b><small>{{ 'altaeron_pdp.buy.warranty_note' | t }}</small></span></span>
           <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><b>{{ 'altaeron_pdp.buy.secure' | t }}</b><small>{{ 'altaeron_pdp.buy.secure_note' | t }}</small></span></span>
           <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<span><b>{{ 'altaeron_pdp.buy.support' | t }}</b><small>{{ 'altaeron_pdp.buy.support_note' | t }}</small></span></a>
         </div>

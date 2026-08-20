@@ -772,6 +772,8 @@ bundle-deals-widget input[type="radio"]{
 .altaeron-pdp--cro-hero .apdp-hero__price span{font-size:14px;font-weight:650}
 .altaeron-pdp--cro-hero .apdp-hero__price strong{font-size:29px;font-weight:800;letter-spacing:-.035em;line-height:1}
 .altaeron-pdp--cro-hero .apdp-hero__cta{color:#fff;max-width:360px}
+.apdp-buy__bonus{align-items:center;background:var(--apdp-soft);border:1px solid #dbe6dc;border-radius:8px;color:var(--alta-text-primary);display:flex;font-size:12px;gap:8px;line-height:1.35;margin:13px 0 0;padding:9px 11px}.apdp-buy__bonus span{font-size:16px;line-height:1}.apdp-buy__bonus strong{font-weight:var(--alta-weight-semibold)}
+@media(max-width:767px){.apdp-buy__trust{grid-template-columns:repeat(2,minmax(0,1fr))}.apdp-buy__trust>:first-child{display:flex}.apdp-buy__bonus{margin-top:12px}}
 .altaeron-pdp--cro-hero .apdp-hero__reassurance{color:#3d5048;font-size:12px;font-weight:650;margin:9px 0 0;max-width:360px;text-align:center}
 .altaeron-pdp--cro-hero bundle-deals-widget{scroll-margin-top:96px}
 .altaeron-pdp--cro-hero bundle-deals-widget:focus-visible{outline:3px solid rgba(3,74,43,.3);outline-offset:5px}

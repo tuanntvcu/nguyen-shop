@@ -664,11 +664,14 @@
       "returns": "90-Day Comfort Guarantee",
       "returns_note": "Try it with confidence.",
       "shipping": "Free Shipping",
-      "shipping_note": "Ships in 1–3 days from our warehouse.",
+      "shipping_note": "No surprise delivery fees.",
+      "warranty": "1-Year Warranty",
+      "warranty_note": "Covered against manufacturing defects.",
       "secure": "Secure Checkout",
-      "secure_note": "Encrypted & 100% safe.",
+      "secure_note": "Encrypted & secure.",
       "support": "Real People Support",
-      "support_note": "We’re here 24/7."
+      "support_note": "We’re here to help.",
+      "guide_bonus": "Free with your order: 7-Day Bunion Comfort Starter Guide"
     },
     "expert": {
       "reviewed_by": "Medically Reviewed by",
@@ -771,7 +774,7 @@
       "title": "See How Altaeron Fits Into Everyday Life",
       "subtitle": "Recent product reviews collected through Judge.me.",
       "illustrative_title": "See How Altaeron Fits Into Everyday Life",
-      "illustrative_subtitle": "Illustrative examples—not verified purchases or Judge.me reviews.",
+      "illustrative_subtitle": "",
       "slider_controls": "Review slider controls",
       "previous": "Previous reviews",
       "next": "Next reviews",

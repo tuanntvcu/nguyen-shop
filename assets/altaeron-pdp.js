@@ -466,12 +466,17 @@
 
         for (const option of candidates) {
           const optionInputs = option.querySelectorAll('input[type="radio"]').length;
-          const priceLabels = option.textContent.match(moneyPattern) || [];
-          if (optionInputs <= 1 && priceLabels.length) {
-            const prices = [...new Set(priceLabels.map(parseDisplayedMoney).filter((price) => price > 0))];
+          const totalPrice = option.querySelector('.bd-tier__price');
+          const comparePrice = option.querySelector('.bd-tier__compare');
+          if (optionInputs <= 1 && totalPrice) {
             const quantityMatch = option.textContent.match(/\b(\d+)\s*(?:correctors?|items?|pieces?|packs?)\b/i);
             const quantity = Number(input.dataset.quantity || quantityMatch?.[1] || 1);
-            return { price: prices[0], compare: prices[1] || 0, quantity, title: bundleTitle(option) };
+            return {
+              price: parseDisplayedMoney(totalPrice.textContent),
+              compare: parseDisplayedMoney(comparePrice?.textContent),
+              quantity,
+              title: bundleTitle(option),
+            };
           }
         }
       }
