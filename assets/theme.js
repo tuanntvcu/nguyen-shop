@@ -820,8 +820,10 @@ class ModalComponent extends HTMLElement {
   }
 
   show(activeElement = null, animate = true) {
-    if (!this.shouleBeShow()) {
-      return;
+    // Never lock the document for a modal that page-specific CSS prevents the
+    // customer from seeing or closing.
+    if (!this.shouleBeShow() || this.isPresentationSuppressed()) {
+      return Promise.resolve(false);
     }
 
     if (!this.open) {
@@ -892,6 +894,21 @@ class ModalComponent extends HTMLElement {
   }
 
   prepareToShow() {}
+
+  isPresentationSuppressed() {
+    // A modal can be intentionally disabled by page-specific CSS. Check it
+    // without the native `hidden` attribute, which would otherwise make every
+    // closed modal report `display: none`.
+    const wasHidden = this.hidden;
+    if (wasHidden) this.hidden = false;
+
+    const styles = window.getComputedStyle(this);
+    const isSuppressed =
+      styles.display === 'none' || styles.visibility === 'hidden' || Number.parseFloat(styles.opacity) === 0;
+
+    if (wasHidden) this.hidden = true;
+    return isSuppressed;
+  }
 
   waitForOverlayTransition() {
     return new Promise((resolve) => {
