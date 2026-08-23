@@ -45,7 +45,7 @@
         {%- if product.available -%}
           {%- form 'product', product, is: 'product-form', class: 'ah-quick-add', data-quick-add: '' -%}
             <input type="hidden" name="id" value="{{ selected_variant.id }}">
-            <button class="ah-cart-button" type="submit" name="add" aria-label="{{ 'altaeron_home.product.add_to_cart' | t: product: product.title | escape }}" data-track="quick_add">{% render 'icon-cart', name: settings.cart_icon %}</button>
+            <button class="ah-cart-button" type="submit" name="add" aria-label="{{ 'altaeron_home.product.add_to_cart' | t: product: product.title | escape }}" data-track="quick_add">{% render 'icon-cart', name: settings.cart_icon %}{% render 'loading-spinner', size: 'small' %}</button>
           {%- endform -%}
         {%- else -%}
           <a class="ah-cart-button" href="{{ product.url }}" aria-label="{{ 'altaeron_home.product.view' | t: product: product.title | escape }}">{% render 'icon-cart', name: settings.cart_icon %}</a>

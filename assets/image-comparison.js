@@ -27,6 +27,10 @@ if (!customElements.get('image-comparison')) {
         this.button.addEventListener('mousedown', this.startDrag);
       }
 
+      disconnectedCallback() {
+        this.onStopDrag();
+      }
+
       animation() {
         this.setAttribute('is-visible', '');
         this.classList.add('is-animating');
@@ -46,6 +50,7 @@ if (!customElements.get('image-comparison')) {
         } else if (e.type === 'touchstart') {
           document.addEventListener('touchmove', this.drag);
           document.addEventListener('touchend', this.stopDrag);
+          document.addEventListener('touchcancel', this.stopDrag);
         }
       }
 
@@ -58,6 +63,7 @@ if (!customElements.get('image-comparison')) {
 
         document.removeEventListener('touchmove', this.drag);
         document.removeEventListener('touchend', this.stopDrag);
+        document.removeEventListener('touchcancel', this.stopDrag);
       }
 
       onDrag(e) {

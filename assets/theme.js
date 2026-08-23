@@ -839,17 +839,25 @@ class ModalComponent extends HTMLElement {
 
   handleAfterHide() {
     setTimeout(() => {
+      // Ignore a stale hide completion if this same modal has already reopened.
+      if (this.open) return;
+
       // Remove trap focus from the active element
       ScaloraTheme.a11y.removeTrapFocus(this.activeElement);
 
       // Conditionally manage locking behavior
       if (this.isLockingNeeded) {
-        // Decrement the lock layer count for the ModalElement
-        const currentModalCount = clearModalComponentCount.get(ModalComponent) - 1;
-        clearModalComponentCount.set(ModalComponent, currentModalCount);
+        document.body.classList.remove(this.classes.showing);
+
+        // Only decrement a lock that this modal successfully registered.
+        if (this.lockRegistered) {
+          const currentModalCount = Math.max(0, (clearModalComponentCount.get(ModalComponent) || 0) - 1);
+          clearModalComponentCount.set(ModalComponent, currentModalCount);
+          this.lockRegistered = false;
+        }
 
         // Toggle the 'open' class on the body based on the current lock count
-        document.body.classList.toggle(this.classes.show, currentModalCount > 0);
+        document.body.classList.toggle(this.classes.show, (clearModalComponentCount.get(ModalComponent) || 0) > 0);
       }
     });
   }
@@ -860,9 +868,18 @@ class ModalComponent extends HTMLElement {
 
     // Check if locking is needed
     if (this.isLockingNeeded) {
+      // A modal can be closed while its opening transition is still pending.
+      if (!this.open) {
+        document.body.classList.remove(this.classes.showing);
+        return;
+      }
+
       // Increment the lock layer count for the ModalElement
-      const currentLockCount = clearModalComponentCount.get(ModalComponent) + 1;
-      clearModalComponentCount.set(ModalComponent, currentLockCount);
+      if (!this.lockRegistered) {
+        const currentLockCount = (clearModalComponentCount.get(ModalComponent) || 0) + 1;
+        clearModalComponentCount.set(ModalComponent, currentLockCount);
+        this.lockRegistered = true;
+      }
 
       // Manage class changes on the document body
       document.body.classList.remove(this.classes.showing);
@@ -876,26 +893,46 @@ class ModalComponent extends HTMLElement {
 
   prepareToShow() {}
 
+  waitForOverlayTransition() {
+    return new Promise((resolve) => {
+      const overlay = this.overlay;
+      if (!overlay) {
+        resolve();
+        return;
+      }
+
+      let finished = false;
+      const finish = (event) => {
+        if (event && event.target !== overlay) return;
+        if (finished) return;
+        finished = true;
+        overlay.removeEventListener('transitionend', finish);
+        overlay.removeEventListener('transitioncancel', finish);
+        clearTimeout(fallbackTimer);
+        resolve();
+      };
+      const fallbackTimer = setTimeout(finish, 700);
+
+      overlay.addEventListener('transitionend', finish);
+      overlay.addEventListener('transitioncancel', finish);
+    });
+  }
+
   handleShowTransition() {
     // Start a timeout to set an attribute
     setTimeout(() => {
       this.setAttribute('active', '');
     }, 75);
 
-    // Return a promise that resolves when the transition ends
-    return new Promise((resolve) => {
-      this.overlay.addEventListener('transitionend', resolve, { once: true });
-    });
+    // Mobile browsers can cancel or omit transitionend; always release the scroll lock.
+    return this.waitForOverlayTransition();
   }
 
   handleHideTransition() {
     // Immediately remove the 'active' attribute
     this.removeAttribute('active');
 
-    // Return a promise that resolves when the transition ends
-    return new Promise((resolve) => {
-      this.overlay.addEventListener('transitionend', resolve, { once: true });
-    });
+    return this.waitForOverlayTransition();
   }
 }
 customElements.define('modal-component', ModalComponent);
