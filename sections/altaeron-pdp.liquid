@@ -11,9 +11,9 @@
   assign headline = section.settings.headline_override | default: mf.pdp_headline.value | default: product.title
   assign subheadline = section.settings.subheadline_override | default: mf.pdp_subheadline.value | default: product.description | strip_html | truncate: 180
   if is_target_hero
-    assign eyebrow = 'For Bunion Pain & Pressure'
-    assign headline = 'Walk Without Thinking About Your Feet Again.'
-    assign subheadline = 'A precision adjustment dial lets you control gentle tension for bunion pressure relief and big-toe support while worn.'
+    assign eyebrow = 'altaeron_pdp.hero.target_eyebrow' | t
+    assign headline = 'altaeron_pdp.hero.headline' | t
+    assign subheadline = 'altaeron_pdp.hero.target_subheadline' | t
   endif
   assign identity_points = mf.pdp_identity_points.value
   assign outcome_cards = mf.pdp_outcome_cards.value
@@ -361,7 +361,7 @@
               {%- assign rating_avatar = section.settings[avatar_key] -%}
               <i>{%- if rating_avatar != blank -%}{{ rating_avatar | image_url: width: 96 | image_tag: loading: 'eager', widths: '48, 72, 96', sizes: '34px', alt: '' }}{%- endif -%}</i>
             {%- endfor -%}
-          </span>{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{% if is_target_hero %}{{ hero_rating_display }}/5 <span aria-hidden="true">&middot;</span> {{ review_count }}+ reviews{% else %}{{ hero_rating_label }}{% endif %}</strong>
+          </span>{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{% if is_target_hero %}{{ 'altaeron_pdp.hero.target_rating_html' | t: rating: hero_rating_display, count: review_count }}{% else %}{{ hero_rating_label }}{% endif %}</strong>
         </a>
         {%- unless is_target_hero -%}<div class="apdp-mobile-product" aria-hidden="true">
           {%- if how_image != blank -%}{{ how_image | image_url: width: 720 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '360, 540, 720', sizes: '55vw', alt: '' }}{%- endif -%}
@@ -371,14 +371,14 @@
       {%- if is_target_hero -%}
         <div class="apdp-hero__conversion">
           <div class="apdp-identity"><ul>
-            <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>Relieves bunion pain &amp; pressure</span></li>
-            <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>Supports big-toe alignment while worn</span></li>
-            <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>Adjustable tension for your comfort</span></li>
+            <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp.hero.target_benefit_1' | t }}</span></li>
+            <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp.hero.target_benefit_2' | t }}</span></li>
+            <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp.hero.target_benefit_3' | t }}</span></li>
           </ul></div>
           <div class="apdp-hero__purchase">
-            <p class="apdp-hero__price"><span>From</span> <strong>{{ product.price_min | money }}</strong></p>
-            <a class="apdp-button apdp-button--primary apdp-hero__cta" href="#AltaeronBundles-{{ section.id }}" data-apdp-bundle-cta>Choose Your Bundle <span aria-hidden="true">&rarr;</span></a>
-            <p class="apdp-hero__reassurance">90-Day Comfort Guarantee <span aria-hidden="true">&middot;</span> Secure Checkout</p>
+            <p class="apdp-hero__price"><span>{{ 'altaeron_pdp.hero.from' | t }}</span> <strong>{{ product.price_min | money }}</strong></p>
+            <a class="apdp-button apdp-button--primary apdp-hero__cta" href="#AltaeronBundles-{{ section.id }}" data-apdp-bundle-cta>{{ 'altaeron_pdp.hero.choose_bundle' | t }} <span aria-hidden="true">&rarr;</span></a>
+            <p class="apdp-hero__reassurance">{{ 'altaeron_pdp.buy.guarantee_title' | t }} <span aria-hidden="true">&middot;</span> {{ 'altaeron_pdp.buy.secure' | t }}</p>
           </div>
         </div>
       </div>
@@ -561,34 +561,29 @@
               {%- capture support_text_key -%}altaeron_pdp.support.item_{{ forloop.index }}_text_html{%- endcapture -%}
               <article>
                 <span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: icon %}</span>
-                {%- if forloop.index == 4 -%}
-                  <h3>Comfort-Focused<br>Design</h3>
-                  <p>Soft padding where<br>it matters</p>
-                {%- else -%}
-                  <h3>{{ support_title_key | t }}</h3>
-                  <p>{{ support_text_key | t }}</p>
-                {%- endif -%}
+                <h3>{{ support_title_key | t }}</h3>
+                <p>{{ support_text_key | t }}</p>
               </article>
             {%- endfor -%}
           </div>
           <aside class="apdp-support__fit" aria-labelledby="AltaeronSupportFit-{{ section.id }}">
-            <p class="apdp-support__fit-eyebrow" id="AltaeronSupportFit-{{ section.id }}">DESIGNED TO FIT YOU</p>
+            <p class="apdp-support__fit-eyebrow" id="AltaeronSupportFit-{{ section.id }}">{{ 'altaeron_pdp.support.fit_heading' | t }}</p>
             <div class="apdp-support__fit-grid">
               <article>
                 <span class="apdp-support__fit-icon">{% render 'altaeron-pdp-icon', icon: 'age-person' %}</span>
-                <p><strong>AGES 13+</strong><small>Teens &amp; adults</small></p>
+                <p><strong>{{ 'altaeron_pdp.support.age_title' | t }}</strong><small>{{ 'altaeron_pdp.support.age_text' | t }}</small></p>
               </article>
               <article>
                 <span class="apdp-support__fit-icon">{% render 'altaeron-pdp-icon', icon: 'people' %}</span>
-                <p><strong>UNISEX</strong><small>Men &amp; women</small></p>
+                <p><strong>{{ 'altaeron_pdp.support.unisex_title' | t }}</strong><small>{{ 'altaeron_pdp.support.unisex_text' | t }}</small></p>
               </article>
               <article>
                 <span class="apdp-support__fit-icon">{% render 'altaeron-pdp-icon', icon: 'sliders' %}</span>
-                <p><strong>ADJUSTABLE FIT</strong><small>Fine-tune to your foot</small></p>
+                <p><strong>{{ 'altaeron_pdp.support.adjustable_title' | t }}</strong><small>{{ 'altaeron_pdp.support.adjustable_text' | t }}</small></p>
               </article>
               <article>
                 <span class="apdp-support__fit-icon">{% render 'altaeron-pdp-icon', icon: 'left-right' %}</span>
-                <p><strong>LEFT OR RIGHT</strong><small>Designed for either foot</small></p>
+                <p><strong>{{ 'altaeron_pdp.support.either_foot_title' | t }}</strong><small>{{ 'altaeron_pdp.support.either_foot_text' | t }}</small></p>
               </article>
             </div>
           </aside>

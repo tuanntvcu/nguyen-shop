@@ -22,9 +22,9 @@
 {%- if product != blank -%}
   <article class="ah-product" data-product-card>
     {%- if is_best_seller or is_on_sale or badge != blank or concern != blank -%}
-      <div class="ah-product__badges" aria-label="Product badges">
-        {%- if is_best_seller -%}<span class="ah-product__badge ah-product__badge--best-seller">Best seller</span>{%- endif -%}
-        {%- if is_on_sale -%}<span class="ah-product__badge ah-product__badge--sale">Sale</span>{%- endif -%}
+      <div class="ah-product__badges" aria-label="{{ 'altaeron_home.accessibility.product_badges' | t | escape }}">
+        {%- if is_best_seller -%}<span class="ah-product__badge ah-product__badge--best-seller">{{ 'altaeron_home.product.best_seller' | t }}</span>{%- endif -%}
+        {%- if is_on_sale -%}<span class="ah-product__badge ah-product__badge--sale">{{ 'products.product.on_sale' | t }}</span>{%- endif -%}
         {%- if badge != blank -%}<span class="ah-product__badge">{{ badge }}</span>{%- elsif concern != blank -%}<span class="ah-product__badge">{{ concern }}</span>{%- endif -%}
       </div>
     {%- endif -%}

@@ -644,7 +644,15 @@
       "rating": "{{ rating }}/5 from {{ count }}+ reviews",
       "benefit_1": "Relieves bunion pain & pressure",
       "benefit_2": "Improves alignment while worn",
-      "benefit_3": "Comfortable for low-activity use"
+      "benefit_3": "Comfortable for low-activity use",
+      "target_eyebrow": "For Bunion Pain & Pressure",
+      "target_subheadline": "A precision adjustment dial lets you control gentle tension for bunion pressure relief and big-toe support while worn.",
+      "target_benefit_1": "Relieves bunion pain & pressure",
+      "target_benefit_2": "Supports big-toe alignment while worn",
+      "target_benefit_3": "Adjustable tension for your comfort",
+      "from": "From",
+      "choose_bundle": "Choose Your Bundle",
+      "target_rating_html": "{{ rating }}/5 <span aria-hidden=\"true\">&middot;</span> {{ count }}+ reviews"
     },
     "buy": {
       "title": "ALTAERON™ Adjustable Knob Bunion Corrector",
@@ -743,7 +751,16 @@
       "item_4_title_html": "Comfort-Focused<br>Design",
       "item_4_text_html": "Soft padding where<br>it matters",
       "demo_alt": "Altaeron adjustment demonstration",
-      "detail_alt": "Altaeron toe support detail"
+      "detail_alt": "Altaeron toe support detail",
+      "fit_heading": "DESIGNED TO FIT YOU",
+      "age_title": "AGES 13+",
+      "age_text": "Teens &amp; adults",
+      "unisex_title": "UNISEX",
+      "unisex_text": "Men &amp; women",
+      "adjustable_title": "ADJUSTABLE FIT",
+      "adjustable_text": "Fine-tune to your foot",
+      "either_foot_title": "LEFT OR RIGHT",
+      "either_foot_text": "Designed for either foot"
     },
     "day": {
       "title": "Make Comfort Part of Your Routine.",
@@ -908,7 +925,8 @@
       "close_video": "Close video",
       "play_testimonial": "Play customer testimonial: {{ name }}",
       "go_to_slide": "Go to slide",
-      "product_demonstration": "Product demonstration"
+      "product_demonstration": "Product demonstration",
+      "product_badges": "Product badges"
     },
     "quiz": {
       "next": "Next Question",
@@ -935,7 +953,8 @@
       "rating": "{{ rating }} out of 5 stars from {{ count }} reviews",
       "add_to_cart": "Add {{ product }} to cart",
       "choose_options": "Choose options for {{ product }}",
-      "view": "View {{ product }}"
+      "view": "View {{ product }}",
+      "best_seller": "Best seller"
     }
   },
   "recipient": {
