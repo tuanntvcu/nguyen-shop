@@ -675,6 +675,7 @@
       "variant_3": "3 Pares",
       "cta": "Adicionar ao Carrinho",
       "installments": "ou 4 pagamentos sem juros de $10.00 com",
+      "social_proof_html": "🔥🔥🔥 {{ count }} clientes escolheram este produto nas últimas 24 horas",
       "guarantee_title": "Garantia de conforto de 90 dias",
       "guarantee_line_1": "Experimente-o em momentos de baixa atividade durante até 90 dias.",
       "guarantee_line_2": "Se não for adequado para si, envie um email para support@altaeron.com para obter ajuda com a devolução.",

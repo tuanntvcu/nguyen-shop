@@ -408,6 +408,14 @@
           <bundle-deals-widget{% if is_target_hero %} id="AltaeronBundles-{{ section.id }}" tabindex="-1"{% endif %} product-id="{{ product.id }}"></bundle-deals-widget>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ 'altaeron_pdp.buy.cta' | t }}">{% if current_variant.available %}{{ 'altaeron_pdp.buy.cta' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><b data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}> — {{ current_variant.price | money }}</b></span>{% render 'altaeron-pdp-icon', icon: 'cart' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp.buy.installments' | t }} <strong>shop<span>Pay</span></strong></div>
+          {%- capture social_proof_count -%}<strong data-apdp-social-proof-count></strong>{%- endcapture -%}
+          <p
+            class="apdp-social-proof"
+            data-apdp-social-proof
+            data-store-date="{{ 'now' | date: '%Y-%m-%d' }}"
+            data-store-utc-offset="{{ 'now' | date: '%z' }}"
+            hidden
+          >{{ 'altaeron_pdp.buy.social_proof_html' | t: count: social_proof_count }}</p>
         {%- endform -%}
         <div class="apdp-buy__policy">{% render 'altaeron-pdp-icon', icon: 'shield' %}<div><strong>{{ 'altaeron_pdp.buy.guarantee_title' | t }}</strong><p>{{ 'altaeron_pdp.buy.guarantee_line_1' | t }}<br>{{ 'altaeron_pdp.buy.guarantee_line_2' | t }}</p></div></div>
         {%- if micro_review != blank -%}

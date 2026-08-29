@@ -631,5 +631,10 @@
       "send_on": "AAAA-MM-DD",
       "send_on_label": "Enviar (opcional)"
     }
+  },
+  "altaeron_pdp": {
+    "buy": {
+      "social_proof_html": "🔥🔥🔥 {{ count }} clientes escolheram este produto nas últimas 24 horas"
+    }
   }
 }

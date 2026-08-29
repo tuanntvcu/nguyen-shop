@@ -7,6 +7,52 @@
     return new Intl.NumberFormat(document.documentElement.lang || 'en-US', { style: 'currency', currency }).format(Number(cents || 0) / 100);
   }
 
+  function initSocialProof(root) {
+    const message = root.querySelector('[data-apdp-social-proof]');
+    const count = message?.querySelector('[data-apdp-social-proof-count]');
+    if (!message || !count) return;
+
+    const offsetMatch = message.dataset.storeUtcOffset?.match(/^([+-])(\d{2}):?(\d{2})$/);
+    const offsetMinutes = offsetMatch
+      ? (offsetMatch[1] === '-' ? -1 : 1) * (Number(offsetMatch[2]) * 60 + Number(offsetMatch[3]))
+      : null;
+
+    const storeDate = () => {
+      if (offsetMinutes === null) return message.dataset.storeDate;
+      return new Date(Date.now() + offsetMinutes * 60_000).toISOString().slice(0, 10);
+    };
+
+    const dailyCount = (date) => {
+      let hash = 2166136261;
+      for (let index = 0; index < date.length; index += 1) {
+        hash ^= date.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      hash ^= hash >>> 16;
+      hash = Math.imul(hash, 2246822507);
+      hash ^= hash >>> 13;
+      return 20 + ((hash >>> 0) % 11);
+    };
+
+    const update = () => {
+      if (!message.isConnected) return;
+      const date = storeDate();
+      if (!date) return;
+      count.textContent = String(dailyCount(date));
+      message.hidden = false;
+
+      const shiftedNow = new Date(Date.now() + (offsetMinutes || 0) * 60_000);
+      const nextStoreMidnight = Date.UTC(
+        shiftedNow.getUTCFullYear(),
+        shiftedNow.getUTCMonth(),
+        shiftedNow.getUTCDate() + 1,
+      );
+      window.setTimeout(update, Math.max(1_000, nextStoreMidnight - shiftedNow.getTime() + 100));
+    };
+
+    update();
+  }
+
   function initGallery(root) {
     const thumbs = [...root.querySelectorAll('[data-apdp-thumb]')];
     const items = [...root.querySelectorAll('[data-apdp-media]')];
@@ -698,6 +744,7 @@
     if (!root || root.dataset.apdpReady === 'true') return;
     root.dataset.apdpReady = 'true';
     initHeroExperience(root);
+    initSocialProof(root);
     const activateMedia = initGallery(root);
     initQuantity(root);
     initVariants(root, activateMedia);
