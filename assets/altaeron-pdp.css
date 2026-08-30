@@ -780,18 +780,18 @@ bundle-deals-widget input[type="radio"]{
 .altaeron-pdp--cro-hero bundle-deals-widget:focus-visible{outline:3px solid rgba(3,74,43,.3);outline-offset:5px}
 
 @media(max-width:767px){
-  .altaeron-pdp .apdp-buy__price-line{align-items:center;display:grid;gap:12px;grid-template-columns:minmax(100px,145px) minmax(0,1fr);justify-content:normal}
+  .altaeron-pdp .apdp-buy__price-line{align-items:center;display:grid;gap:12px;grid-template-columns:max-content minmax(0,1fr);justify-content:normal}
   .altaeron-pdp .apdp-buy__price-line>div{display:block;grid-column:2;grid-row:1;min-width:0}
   .altaeron-pdp .apdp-buy__from{display:block;line-height:1.2;margin:0 0 5px;white-space:nowrap}
   .altaeron-pdp .apdp-price{align-items:flex-start;display:flex;gap:5px 9px;min-width:0}
   .altaeron-pdp .apdp-price__current{font-size:clamp(26px,7.5vw,32px);overflow-wrap:anywhere}
   .altaeron-pdp .apdp-price__compare{flex-basis:100%;line-height:1.2}
-  .altaeron-pdp .apdp-price__save{grid-column:1;grid-row:1;max-width:145px;order:0;overflow-wrap:anywhere;text-align:left}
+  .altaeron-pdp .apdp-price__save{font-size:11px;grid-column:1;grid-row:1;line-height:1.25;max-width:none;order:0;padding:6px 9px;text-align:left;white-space:nowrap;width:fit-content}
 }
 
 @media(max-width:374px){
-  .altaeron-pdp .apdp-buy__price-line{gap:9px;grid-template-columns:minmax(90px,auto) minmax(0,1fr)}
-  .altaeron-pdp .apdp-price__save{max-width:118px}
+  .altaeron-pdp .apdp-buy__price-line{gap:8px;grid-template-columns:max-content minmax(0,1fr)}
+  .altaeron-pdp .apdp-price__save{font-size:10px;padding-inline:8px}
 }
 .altaeron-pdp--cro-hero .apdp-gallery__hero video{object-position:center 50%}
 

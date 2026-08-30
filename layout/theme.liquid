@@ -67,26 +67,6 @@
 
     {{ content_for_header }}
 
-    <script>
-      (() => {
-        // Smart Automatic Discounts appends "checkout" to this root. Shopify's
-        // localized root has no trailing slash (for example, "/fr"), which
-        // otherwise produces an invalid URL such as "/frcheckout".
-        const configNode = document.getElementById('bundle-deals-global-config');
-        if (!configNode) return;
-
-        try {
-          const config = JSON.parse(configNode.textContent);
-          const localizedRoot = {{ routes.root_url | json }};
-          config.routes = config.routes || {};
-          config.routes.root = `${localizedRoot.replace(/\/+$/, '')}/`;
-          configNode.textContent = JSON.stringify(config);
-        } catch (error) {
-          console.warn('Unable to normalize the bundle deals checkout route.', error);
-        }
-      })();
-    </script>
-
     <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
@@ -185,5 +165,25 @@
     {% if settings.pcard_show_quickview_button or settings.pcard_choose_options_actions == 'open_popup' %}
       <script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
     {% endif %}
+
+    <script>
+      (() => {
+        // This must run after Shopify has rendered the app config, but before
+        // the app's deferred bundle-deals script reads it. The app appends
+        // "checkout" directly to routes.root, so localized roots need a slash.
+        const configNode = document.getElementById('bundle-deals-global-config');
+        if (!configNode) return;
+
+        try {
+          const config = JSON.parse(configNode.textContent);
+          const localizedRoot = {{ routes.root_url | json }};
+          config.routes = config.routes || {};
+          config.routes.root = `${localizedRoot.replace(/\/+$/, '')}/`;
+          configNode.textContent = JSON.stringify(config);
+        } catch (error) {
+          console.warn('Unable to normalize the bundle deals checkout route.', error);
+        }
+      })();
+    </script>
   </body>
 </html>

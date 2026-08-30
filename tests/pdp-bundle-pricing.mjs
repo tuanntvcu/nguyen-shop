@@ -54,6 +54,8 @@ for (const file of localeFiles) {
     overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
     priceX: Math.round(document.querySelector('[data-apdp-current-price]').getBoundingClientRect().x),
     savingsX: Math.round(document.querySelector('[data-apdp-savings]').getBoundingClientRect().x),
+    savingsHeight: document.querySelector('[data-apdp-savings]').getBoundingClientRect().height,
+    savingsWhiteSpace: getComputedStyle(document.querySelector('[data-apdp-savings]')).whiteSpace,
   }));
 
   const tier2 = await readState();
@@ -66,6 +68,8 @@ for (const file of localeFiles) {
     const layout = await readState();
     assert.equal(layout.overflow, false, `${file}/${width}px: mobile price row overflow`);
     assert.ok(layout.savingsX < layout.priceX, `${file}/${width}px: savings badge remains left of the price`);
+    assert.ok(layout.savingsHeight < 30, `${file}/${width}px: savings badge remains compact`);
+    assert.equal(layout.savingsWhiteSpace, 'nowrap', `${file}/${width}px: savings badge remains on one line`);
   }
 
   await page.locator('[data-tier-index="2"] input').evaluate((input) => {
