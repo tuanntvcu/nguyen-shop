@@ -1,0 +1,272 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "altaeron_pdp": {
+      "type": "altaeron-pdp",
+      "blocks": {
+        "education_media_b7EGMf": {
+          "type": "education_media",
+          "settings": {
+            "slot": "familiar_1",
+            "video": "shopify://files/videos/Woman_experiencing_morning_foot_…_202608111323 (online-video-cutter.com).mp4"
+          }
+        },
+        "education_media_rdBfxy": {
+          "type": "education_media",
+          "settings": {
+            "slot": "familiar_2",
+            "video": "shopify://files/videos/Woman_sitting_down_with_relief_202608111323 (online-video-cutter.com).mp4"
+          }
+        },
+        "education_media_y8YkzR": {
+          "type": "education_media",
+          "settings": {
+            "slot": "familiar_3",
+            "video": "shopify://files/videos/Man_stopping_walk_due_to_202608111323.mp4"
+          }
+        },
+        "education_media_xCNAYx": {
+          "type": "education_media",
+          "settings": {
+            "slot": "familiar_4",
+            "video": "shopify://files/videos/Woman_experiencing_pain_wearing_…_202608111332 (online-video-cutter.com).mp4"
+          }
+        },
+        "education_media_hNwA7M": {
+          "type": "education_media",
+          "settings": {
+            "slot": "stage_1",
+            "image": "shopify://shop_images/c752ca20-0e00-4172-949f-a526ce4e100b.png"
+          }
+        },
+        "education_media_7NPnFT": {
+          "type": "education_media",
+          "settings": {
+            "slot": "stage_2",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_01_56_53_PM.png"
+          }
+        },
+        "education_media_HBdgYG": {
+          "type": "education_media",
+          "settings": {
+            "slot": "stage_3",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_01_58_42_PM.png"
+          }
+        },
+        "education_media_AaEAa3": {
+          "type": "education_media",
+          "settings": {
+            "slot": "stage_4",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_01_59_36_PM.png"
+          }
+        },
+        "education_media_HdWmkX": {
+          "type": "education_media",
+          "settings": {
+            "slot": "support_demo",
+            "video": "shopify://files/videos/Your feet work hard every day—give them the support they need. This bunion corrector is lightweight, comfortable, and easy to wear at home or on the go. (online-video-cutter.com).mp4"
+          }
+        },
+        "education_media_DM7yez": {
+          "type": "education_media",
+          "settings": {
+            "slot": "support_detail",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png"
+          }
+        },
+        "education_media_DTAHdH": {
+          "type": "education_media",
+          "settings": {
+            "slot": "day_story",
+            "video": "shopify://files/videos/Woman_walking_through_daily_routine_202608111534 (online-video-cutter.com).mp4"
+          }
+        },
+        "guide_1": {
+          "type": "guide",
+          "settings": {
+            "title": "How To Wear It",
+            "text": "Step-by-step guidance for best results.",
+            "url": ""
+          }
+        },
+        "guide_2": {
+          "type": "guide",
+          "settings": {
+            "title": "Morning Heel Pain?",
+            "text": "What it means and what can help.",
+            "url": ""
+          }
+        },
+        "guide_3": {
+          "type": "guide",
+          "settings": {
+            "title": "Bunion vs. Hallux Valgus",
+            "text": "Understanding the difference.",
+            "url": ""
+          }
+        },
+        "tail_media_tfdtiU": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "spacer",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_54_15_PM.png"
+          }
+        },
+        "tail_media_jjfyFD": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "support",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_59_48_PM.png"
+          }
+        },
+        "tail_media_7HAByV": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "doctor",
+            "image": "shopify://shop_images/SHYHMT6XQaE_Wbc6UW3daASG0Y6cJ8LG_Gd4h_FY0ALS9V9obgK2vzZshJV8QY9iTB113J4KVufupcLUkaXiLvSlaCjmxGFCwYbQqnxvMLHoHV4G89Znhn4Yqhc5ZpiAm45ucD4m8aKAkdoG6Hgs3ly5jtwH1Xlmetd9xeYrZ83_l9QF4N8Z4xN.jpg"
+          }
+        },
+        "tail_media_zAU4QY": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_1",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_09_56_PM.png"
+          }
+        },
+        "tail_media_YraHNf": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_2",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_11_05_PM.png"
+          }
+        },
+        "tail_media_WfJCPe": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_3",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_12_07_PM.png"
+          }
+        },
+        "tail_media_HjQykf": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_4",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_16_07_PM.png"
+          }
+        },
+        "tail_media_MtBhaR": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "moment_5",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_04_17_09_PM.png"
+          }
+        },
+        "tail_media_BQ3TdY": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "cta_product",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_14_2026_01_46_46_PM.png"
+          }
+        }
+      },
+      "block_order": [
+        "education_media_b7EGMf",
+        "education_media_rdBfxy",
+        "education_media_y8YkzR",
+        "education_media_xCNAYx",
+        "education_media_hNwA7M",
+        "education_media_7NPnFT",
+        "education_media_HBdgYG",
+        "education_media_AaEAa3",
+        "education_media_HdWmkX",
+        "education_media_DM7yez",
+        "education_media_DTAHdH",
+        "guide_1",
+        "guide_2",
+        "guide_3",
+        "tail_media_tfdtiU",
+        "tail_media_jjfyFD",
+        "tail_media_7HAByV",
+        "tail_media_zAU4QY",
+        "tail_media_YraHNf",
+        "tail_media_WfJCPe",
+        "tail_media_HjQykf",
+        "tail_media_MtBhaR",
+        "tail_media_BQ3TdY"
+      ],
+      "settings": {
+        "cro_v1": true,
+        "eyebrow": "For Bunion Pain & Pressure",
+        "headline_override": "Walk Without Thinking About Your Feet Again.",
+        "subheadline_override": "A precision adjustment dial lets you control gentle tension for bunion pressure relief and big-toe support while worn.",
+        "rating_avatar_1": "shopify://shop_images/760341870_122093094465430024_1430747234869843375_n.jpg",
+        "rating_avatar_2": "shopify://shop_images/735776443_122133553425194233_4764786141039304462_n.jpg",
+        "rating_avatar_3": "shopify://shop_images/558312976_10111481540078518_146096806356904784_n.jpg",
+        "identity_heading": "You might see yourself here...",
+        "relief_heading": "Finally, Relief You Can Feel",
+        "relief_text": "Designed to reduce bunion pressure and gently support big-toe alignment while worn, so your feet can feel more comfortable during your routine.",
+        "price_label": "From",
+        "variant_label": "Device Pair",
+        "popular_label": "Most Popular",
+        "cta_label": "Add to Cart",
+        "order_help_heading": "Questions before ordering?",
+        "order_help_text": "Check the fit notes and policies, or contact us for help.",
+        "familiar_heading": "Does this feel familiar?",
+        "reassurance_heading": "If any of these feel familiar, you’re not imagining it.",
+        "reassurance_text": "People dealing with the same frustration inspired the way Altaeron was designed.",
+        "video_eyebrow": "See the routine",
+        "story_heading": "Imagine Leaving Home Without Thinking About Your Feet.",
+        "reviews_heading": "See How Altaeron Fits Into Everyday Life",
+        "how_heading": "How It Works",
+        "moments_heading": "Back To Moments You Missed.",
+        "moments_subtitle": "Not just walking. Living.",
+        "moments_fifth": "Everyday plans without planning around foot pain.",
+        "routine_heading": "Make Comfort Part of Your Routine.",
+        "routine_1_label": "Start Slow",
+        "routine_1_text": "Begin with a short, comfortable session and see how it feels.",
+        "routine_2_label": "Adjust For Comfort",
+        "routine_2_text": "Use gentle, comfortable tension. More force isn't better.",
+        "routine_3_label": "Build Your Routine",
+        "routine_3_text": "Gradually increase session length as comfort allows.",
+        "bundle_label": "Build your support routine",
+        "bundle_link": "",
+        "values_heading": "No Miracles. Just Small Changes That Add Up.",
+        "value_1_title": "Helpful by design",
+        "value_1_text": "We design helpful products that support real people.",
+        "value_2_title": "Consistency first",
+        "value_2_text": "We focus on consistency, not quick fixes.",
+        "value_3_title": "Always improving",
+        "value_3_text": "We listen, learn, and keep improving.",
+        "value_4_title": "Honest support",
+        "value_4_text": "We’re here with honest guidance and real support.",
+        "guarantee_heading": "Order With Confidence",
+        "guarantee_text": "Review our store policies and contact us if you need help before ordering.",
+        "faq_heading": "You Ask, We Answer",
+        "faq_intro": "The answers to the questions we hear most about fit, comfort, safety, and results.",
+        "faq_6_question": "Is it suitable for both men and women?",
+        "faq_6_answer": "Choose the correct side and follow the product fit guidance. If you have a medical condition or are unsure whether the support is appropriate for you, consult a qualified healthcare professional.",
+        "faq_7_question": "What if it doesn’t help me?",
+        "faq_7_answer": "Stop using it if it causes discomfort. Review the store return policy or contact support for help with fit and available options.",
+        "compatibility_heading": "Made For The Moments When You Can Slow Down.",
+        "shoe_1": "Reading",
+        "shoe_2": "Watching TV",
+        "shoe_3": "Desk Work",
+        "shoe_4": "Relaxing at Home",
+        "shoe_5": "Evening Wind-Down",
+        "guides_heading": "Helpful Guides",
+        "learn_blog": ""
+      }
+    }
+  },
+  "order": [
+    "altaeron_pdp"
+  ]
+}

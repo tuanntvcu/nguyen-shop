@@ -357,6 +357,7 @@
     const stickyBundleTitle = root.querySelector('[data-apdp-sticky-bundle-title]');
     const installmentTerms = [...root.querySelectorAll('[data-apdp-installments]')];
     const finalPrice = root.querySelector('[data-apdp-final-price]');
+    const finalButtonPrice = root.querySelector('[data-apdp-final-button-price]');
     const finalCompare = root.querySelector('[data-apdp-final-compare]');
     const finalSavings = root.querySelector('[data-apdp-final-savings]');
     const variantsNode = root.querySelector('[data-apdp-product-json]');
@@ -377,6 +378,7 @@
       const hasSavings = compare > price;
       const saved = Math.max(compare - price, 0);
       if (finalPrice) finalPrice.textContent = money(price, format);
+      if (finalButtonPrice) finalButtonPrice.textContent = ` — ${money(price, format)}`;
       if (finalCompare) {
         finalCompare.hidden = !hasSavings;
         if (hasSavings) finalCompare.textContent = money(compare, format);
@@ -455,6 +457,7 @@
         ctaPrice.hidden = !available;
         if (available) ctaPrice.textContent = ` — ${money(price, format)}`;
       }
+      if (finalButtonPrice) finalButtonPrice.hidden = !available;
       if (stickyText) stickyText.textContent = label;
       updateRelatedPrices(price, compare);
       if (mediaId) activateMedia(mediaId);
@@ -530,6 +533,14 @@
     };
 
     const syncBundlePricing = () => {
+      if (root.dataset.croV1 === 'true' && bundleWidget) {
+        const widgetRoot = bundleWidget.shadowRoot || bundleWidget;
+        const firstTierSubtitle = widgetRoot.querySelector('[data-tier-index="0"] .bd-tier__sub');
+        if (firstTierSubtitle?.textContent.trim() === 'Perfect for getting started') {
+          firstTierSubtitle.textContent = 'Best for one foot';
+        }
+      }
+
       const bundle = selectedBundle();
       const control = chosenControl();
       if (!bundle?.price || !control) return;

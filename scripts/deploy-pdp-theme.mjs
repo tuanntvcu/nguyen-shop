@@ -10,12 +10,14 @@ if (!shop || !clientId || !clientSecret) throw new Error('Missing Shopify creden
 const filenames = [
   'assets/altaeron-pdp.css',
   'assets/altaeron-pdp.js',
+  'locales/en.default.json',
   'sections/altaeron-pdp.liquid',
   'snippets/altaeron-pdp-card.liquid',
   'snippets/altaeron-pdp-icon.liquid',
   'snippets/altaeron-pdp-media.liquid',
   'snippets/altaeron-pdp-review-cards.liquid',
   'templates/product.altaeron.json',
+  'templates/product.altaeron-cro-v1.json',
 ];
 
 const oauth = await fetch(`https://${shop}/admin/oauth/access_token`, {
