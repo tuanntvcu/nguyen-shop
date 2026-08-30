@@ -460,37 +460,6 @@
     </div>
   </section>
 
-  <section class="apdp-expert alta-pdp-flow-section alta-pdp-flow-section--hero-authority" aria-label="{{ 'altaeron_pdp.accessibility.product_guidance' | t | escape }}">
-    <div class="apdp-shell apdp-expert__panel">
-      <div class="apdp-expert__portrait">
-        <img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}">
-      </div>
-      <div class="apdp-expert__profile">
-        <small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small>
-        <h2>{{ 'altaeron_pdp.expert.name' | t }}</h2>
-        <p>{{ 'altaeron_pdp.expert.role' | t }}</p>
-        <strong>{{ 'altaeron_pdp.expert.experience' | t }}</strong>
-        <span class="apdp-expert__signature">{{ 'altaeron_pdp.expert.signature' | t }}</span>
-      </div>
-      <blockquote>
-        <span aria-hidden="true">“</span>
-        <p>{{ 'altaeron_pdp.expert.quote' | t }} <b aria-hidden="true">”</b></p>
-      </blockquote>
-      <div class="apdp-expert__criteria">
-        <strong>{{ 'altaeron_pdp.expert.criteria_heading' | t }}</strong>
-        <ul>
-          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_1' | t }}</li>
-          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_2' | t }}</li>
-          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_3' | t }}</li>
-        </ul>
-        <p>{{ 'altaeron_pdp.expert.criteria_footer' | t }}</p>
-      </div>
-      <div class="apdp-expert__press" aria-label="{{ 'altaeron_pdp.accessibility.publications' | t | escape }}">
-        <span>WebMD</span><span>healthline</span><span>Verywell<span>health</span></span><span>yahoo!<b>life</b></span><span>CNN</span>
-      </div>
-    </div>
-  </section>
-
   <section class="apdp-education apdp-education--familiar alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronFamiliar-{{ section.id }}">
     <div class="apdp-shell">
       {%- assign chapter_heading_id = 'AltaeronFamiliar-' | append: section.id -%}
@@ -612,6 +581,37 @@
           </div>
           <div class="apdp-education__placeholder">{%- if support_detail_image != blank -%}{{ support_detail_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1400', sizes: '(min-width: 768px) 42vw, 100vw', alt: support_detail_image.alt | default: support_detail_alt }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="apdp-expert alta-pdp-flow-section alta-pdp-flow-section--hero-authority" aria-label="{{ 'altaeron_pdp.accessibility.product_guidance' | t | escape }}">
+    <div class="apdp-shell apdp-expert__panel">
+      <div class="apdp-expert__portrait">
+        <img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}">
+      </div>
+      <div class="apdp-expert__profile">
+        <small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small>
+        <h2>{{ 'altaeron_pdp.expert.name' | t }}</h2>
+        <p>{{ 'altaeron_pdp.expert.role' | t }}</p>
+        <strong>{{ 'altaeron_pdp.expert.experience' | t }}</strong>
+        <span class="apdp-expert__signature">{{ 'altaeron_pdp.expert.signature' | t }}</span>
+      </div>
+      <blockquote>
+        <span aria-hidden="true">“</span>
+        <p>{{ 'altaeron_pdp.expert.quote' | t }} <b aria-hidden="true">”</b></p>
+      </blockquote>
+      <div class="apdp-expert__criteria">
+        <strong>{{ 'altaeron_pdp.expert.criteria_heading' | t }}</strong>
+        <ul>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_1' | t }}</li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_2' | t }}</li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_3' | t }}</li>
+        </ul>
+        <p>{{ 'altaeron_pdp.expert.criteria_footer' | t }}</p>
+      </div>
+      <div class="apdp-expert__press" aria-label="{{ 'altaeron_pdp.accessibility.publications' | t | escape }}">
+        <span>WebMD</span><span>healthline</span><span>Verywell<span>health</span></span><span>yahoo!<b>life</b></span><span>CNN</span>
       </div>
     </div>
   </section>
