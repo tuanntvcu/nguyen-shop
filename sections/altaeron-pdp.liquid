@@ -12,6 +12,9 @@
   if section.settings.cro_v1
     assign is_cro_v1 = true
     assign copy_prefix = 'altaeron_pdp_cro_v1'
+    unless request.locale.iso_code == 'en'
+      assign copy_prefix = 'altaeron_pdp'
+    endunless
     assign expectations_number = '6'
     assign spacer_number = '7'
     assign moments_number = '8'
@@ -294,7 +297,26 @@
 {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'altaeron-pdp.js' | asset_url }}" defer="defer"></script>
 
-<div id="AltaeronPdp-{{ section.id }}" class="altaeron-pdp{% if is_target_hero %} altaeron-pdp--cro-hero{% endif %}" data-section="{{ section.id }}" data-product-id="{{ product.id }}" data-product-url="{{ product.url }}" data-money-format="{{ shop.money_format | escape }}" data-save-label="{{ copy_prefix | append: '.common.save' | t | escape }}" data-add-to-cart-label="{{ 'products.product.add_to_cart' | t | escape }}" data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"{% if is_cro_v1 %} data-cro-v1="true"{% endif %}>
+<div
+  id="AltaeronPdp-{{ section.id }}"
+  class="altaeron-pdp{% if is_target_hero %} altaeron-pdp--cro-hero{% endif %}"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-product-url="{{ product.url }}"
+  data-money-format="{{ shop.money_format | escape }}"
+  data-save-label="{{ copy_prefix | append: '.common.save' | t | escape }}"
+  data-save-template="{{ copy_prefix | append: '.common.save_amount' | t: amount: '[amount]' | escape }}"
+  data-add-to-cart-label="{{ 'products.product.add_to_cart' | t | escape }}"
+  data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"
+  data-bundle-title="{{ copy_prefix | append: '.bundle.title' | t | escape }}"
+  data-bundle-one="{{ copy_prefix | append: '.bundle.one_corrector' | t | escape }}"
+  data-bundle-many-template="{{ copy_prefix | append: '.bundle.many_correctors' | t: count: '[count]' | escape }}"
+  data-bundle-one-foot="{{ copy_prefix | append: '.bundle.one_foot' | t | escape }}"
+  data-bundle-popular="{{ copy_prefix | append: '.bundle.most_popular' | t | escape }}"
+  data-bundle-best-value="{{ copy_prefix | append: '.bundle.best_value' | t | escape }}"
+  data-bundle-subtitle-template="{{ copy_prefix | append: '.bundle.only_each_save' | t: price: '[price]', percent: '[percent]' | escape }}"
+  {% if is_cro_v1 %}data-cro-v1="true"{% endif %}
+>
   <section class="apdp-hero" aria-labelledby="AltaeronTitle-{{ section.id }}">
     <div class="apdp-shell apdp-hero__grid">
       <div class="apdp-gallery" data-apdp-gallery>

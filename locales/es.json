@@ -653,7 +653,7 @@
     "hero": {
       "eyebrow_rank": "Para",
       "eyebrow_category": "Dolor y presión del juanete",
-      "headline": "Vuelve a caminar sin pensar en tus pies.",
+      "headline": "Dale más espacio al dedo gordo, con un soporte que tú controlas.",
       "headline_line_1": "Caminar sin",
       "headline_line_2": "Pensando En",
       "headline_line_3": "Tus pies otra vez.",
@@ -661,7 +661,15 @@
       "rating": "{{ rating }}/5 de {{ count }}+ reseñas",
       "benefit_1": "Alivia el dolor y la presión del juanete",
       "benefit_2": "Mejora la alineación mientras se usa",
-      "benefit_3": "Cómodo para actividades de baja intensidad"
+      "benefit_3": "Cómodo para actividades de baja intensidad",
+      "target_eyebrow": "Para la presión del juanete y el soporte del dedo gordo",
+      "target_subheadline": "Gira el dial para ajustar el soporte direccional que guía suavemente el dedo gordo lejos de los dedos vecinos, ayudando a crear espacio y reducir la presión mientras lo llevas puesto.",
+      "target_benefit_1": "Controla el nivel de soporte",
+      "target_benefit_2": "Guía el dedo gordo y crea espacio",
+      "target_benefit_3": "Ayuda a reducir la presión y el roce",
+      "from": "Desde",
+      "choose_bundle": "Elige tu lote",
+      "target_rating_html": "{{ rating }}/5 <span aria-hidden=\"true\">&middot;</span> más de {{ count }} reseñas"
     },
     "buy": {
       "title": "Corrector de juanetes con perilla ajustable ALTAERON™",
@@ -686,7 +694,10 @@
       "secure": "Pago Seguro",
       "secure_note": "Cifrado y 100 % seguro.",
       "support": "Atención de personas reales",
-      "support_note": "Estamos aquí 24/7."
+      "support_note": "Estamos aquí 24/7.",
+      "warranty": "Garantía de 1 año",
+      "warranty_note": "Cobertura contra defectos de fabricación.",
+      "guide_bonus": "GRATIS con tu pedido: guía de comodidad y ajuste de 7 días"
     },
     "expert": {
       "reviewed_by": "Revisado médicamente por",
@@ -702,10 +713,19 @@
       "criteria_footer": "Este dispositivo cumple con esos criterios."
     },
     "common": {
-      "save": "Guardar",
-      "save_amount": "Ahorre {{ amount }}",
+      "save": "Ahorra",
+      "save_amount": "Ahorra {{ amount }}",
       "yes": "Sí",
       "no": "No"
+    },
+    "bundle": {
+      "title": "Compra más y ahorra más",
+      "one_corrector": "1 corrector",
+      "many_correctors": "{{ count }} correctores",
+      "one_foot": "Ideal para un pie",
+      "most_popular": "Más popular",
+      "best_value": "Mejor precio",
+      "only_each_save": "Solo {{ price }} cada uno · Ahorra un {{ percent }} %"
     },
     "accessibility": {
       "product_media": "Medios del producto",
@@ -757,7 +777,16 @@
       "item_4_title_html": "Diseño<br>centrado en el confort",
       "item_4_text_html": "<span data-sheets-value='{\"1\":2,\"2\":\"Acolchado suave donde\\\\nimporta\"}' data-sheets-userformat='{\"2\":15297,\"3\":{\"1\":0},\"9\":1,\"10\":1,\"11\":4,\"12\":0,\"14\":{\"1\":2,\"2\":0},\"15\":\"Calibri\",\"16\":11}'>Acolchado suave donde<br>importa</span>",
       "demo_alt": "Demostración de ajuste de Altaeron",
-      "detail_alt": "Detalle del soporte para la puntera de Altaeron"
+      "detail_alt": "Detalle del soporte para la puntera de Altaeron",
+      "fit_heading": "DISEÑADO PARA ADAPTARSE A TI",
+      "age_title": "A PARTIR DE 13 AÑOS",
+      "age_text": "Adolescentes y adultos",
+      "unisex_title": "UNISEX",
+      "unisex_text": "Hombres y mujeres",
+      "adjustable_title": "AJUSTE REGULABLE",
+      "adjustable_text": "Adáptalo a tu pie",
+      "either_foot_title": "PIE IZQUIERDO O DERECHO",
+      "either_foot_text": "Diseñado para ambos pies"
     },
     "learn": {
       "item_4_text": "Señales de que deberías buscar ayuda profesional.",
@@ -848,7 +877,8 @@
       "five_stars": "5 de 5 estrellas",
       "verified_buyer": "Comprador verificado",
       "customer_review": "Reseña de cliente",
-      "read_all": "Leer todas las reseñas"
+      "read_all": "Leer todas las reseñas",
+      "read_all_verified": "Leer todas las reseñas verificadas"
     },
     "trust": {
       "warranty": "Garantía de 1 año",

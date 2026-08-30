@@ -653,7 +653,7 @@
     "hero": {
       "eyebrow_rank": "Pour",
       "eyebrow_category": "Douleur et pression de l’oignon",
-      "headline": "Marchez sans plus penser à vos pieds.",
+      "headline": "Offrez plus d’espace à votre gros orteil, avec un soutien que vous contrôlez.",
       "headline_line_1": "Marchez sans",
       "headline_line_2": "plus penser à",
       "headline_line_3": "vos pieds.",
@@ -662,11 +662,11 @@
       "benefit_1": "Soulage la douleur et la pression de l’oignon",
       "benefit_2": "Améliore l’alignement pendant le port",
       "benefit_3": "Confortable lors d’activités légères",
-      "target_eyebrow": "Pour la douleur et la pression de l’oignon",
-      "target_subheadline": "Une molette de réglage précise vous permet de contrôler une tension légère afin de soulager la pression de l’oignon et de soutenir le gros orteil pendant le port.",
-      "target_benefit_1": "Soulage la douleur et la pression de l’oignon",
-      "target_benefit_2": "Soutient l’alignement du gros orteil pendant le port",
-      "target_benefit_3": "Tension réglable pour votre confort",
+      "target_eyebrow": "Pour la pression de l’oignon et le soutien du gros orteil",
+      "target_subheadline": "Tournez la molette pour régler le soutien directionnel qui guide doucement le gros orteil à l’écart des orteils voisins, afin de créer de l’espace et de réduire la pression pendant le port.",
+      "target_benefit_1": "Contrôlez le niveau de soutien",
+      "target_benefit_2": "Guidez le gros orteil et créez de l’espace",
+      "target_benefit_3": "Aide à réduire la pression et les frottements",
       "from": "À partir de",
       "choose_bundle": "Choisissez votre lot",
       "target_rating_html": "{{ rating }}/5 <span aria-hidden=\"true\">&middot;</span> plus de {{ count }} avis"
@@ -717,6 +717,15 @@
       "save_amount": "Économisez {{ amount }}",
       "yes": "Oui",
       "no": "Non"
+    },
+    "bundle": {
+      "title": "Achetez plus, économisez plus",
+      "one_corrector": "1 correcteur",
+      "many_correctors": "{{ count }} correcteurs",
+      "one_foot": "Idéal pour un pied",
+      "most_popular": "Le plus populaire",
+      "best_value": "Meilleur rapport qualité-prix",
+      "only_each_save": "Seulement {{ price }} l’unité · Économisez {{ percent }} %"
     },
     "accessibility": {
       "product_media": "Médias du produit",

@@ -644,7 +644,7 @@
     "hero": {
       "eyebrow_rank": "対象",
       "eyebrow_category": "外反母趾の痛みと圧迫感",
-      "headline": "足を気にせず、もう一度歩こう。",
+      "headline": "自分で調節できるサポートで、足の親指にもっとゆとりを。",
       "headline_line_1": "足を気にせず、",
       "headline_line_2": "もう一度",
       "headline_line_3": "歩こう。",
@@ -653,11 +653,11 @@
       "benefit_1": "外反母趾の痛みと圧迫感を軽減",
       "benefit_2": "着用中のアライメントを改善",
       "benefit_3": "活動量の少ない時間も快適",
-      "target_eyebrow": "外反母趾の痛みと圧迫感に",
-      "target_subheadline": "精密調節ダイヤルでやさしい張力をコントロールし、着用中の外反母趾への圧力を軽減しながら足の親指をサポートします。",
-      "target_benefit_1": "外反母趾の痛みと圧迫感を軽減",
-      "target_benefit_2": "着用中に足の親指のアライメントをサポート",
-      "target_benefit_3": "快適さに合わせて張力を調節可能",
+      "target_eyebrow": "外反母趾の圧迫感と足の親指のサポートに",
+      "target_subheadline": "ダイヤルを回して方向性のあるサポートを調節し、足の親指を隣の指からやさしく離すよう導くことで、着用中のスペースを確保し圧迫感を軽減します。",
+      "target_benefit_1": "サポートの強さを調節",
+      "target_benefit_2": "足の親指を導いてスペースを確保",
+      "target_benefit_3": "圧迫と摩擦の軽減をサポート",
       "from": "価格",
       "choose_bundle": "セットを選ぶ",
       "target_rating_html": "{{ rating }}/5 <span aria-hidden=\"true\">&middot;</span> {{ count }}件以上のレビュー"
@@ -708,6 +708,15 @@
       "save_amount": "{{ amount }}お得",
       "yes": "はい",
       "no": "いいえ"
+    },
+    "bundle": {
+      "title": "まとめ買いでもっとお得",
+      "one_corrector": "1個",
+      "many_correctors": "{{ count }}個",
+      "one_foot": "片足に最適",
+      "most_popular": "一番人気",
+      "best_value": "最もお得",
+      "only_each_save": "1個あたり{{ price }}・{{ percent }}%お得"
     },
     "accessibility": {
       "product_media": "商品メディア",

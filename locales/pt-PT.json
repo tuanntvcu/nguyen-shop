@@ -653,7 +653,7 @@
     "hero": {
       "eyebrow_rank": "Para",
       "eyebrow_category": "Dor e pressão do joanete",
-      "headline": "Andar sem voltar a pensar nos seus pés.",
+      "headline": "Dê mais espaço ao dedo grande — com apoio controlado por si.",
       "headline_line_1": "Caminhar Sem",
       "headline_line_2": "A Pensar Em",
       "headline_line_3": "Os Seus Pés Outra Vez.",
@@ -661,7 +661,15 @@
       "rating": "{{ rating }}/5 de {{ count }}+ avaliações",
       "benefit_1": "Alivia a dor e pressão do joanete",
       "benefit_2": "Melhora o alinhamento quando usado",
-      "benefit_3": "Confortável para atividades de baixa intensidade"
+      "benefit_3": "Confortável para atividades de baixa intensidade",
+      "target_eyebrow": "Para a pressão do joanete e o apoio do dedo grande",
+      "target_subheadline": "Rode o seletor para ajustar o apoio direcional que orienta suavemente o dedo grande para longe dos dedos vizinhos, ajudando a criar espaço e a reduzir a pressão durante a utilização.",
+      "target_benefit_1": "Controle o nível de apoio",
+      "target_benefit_2": "Oriente o dedo grande e crie espaço",
+      "target_benefit_3": "Ajude a reduzir a pressão e a fricção",
+      "from": "Desde",
+      "choose_bundle": "Escolha o seu conjunto",
+      "target_rating_html": "{{ rating }}/5 <span aria-hidden=\"true\">&middot;</span> mais de {{ count }} avaliações"
     },
     "buy": {
       "title": "ALTAERON™ Corretor de Joanete com Botão Ajustável",
@@ -686,7 +694,10 @@
       "secure": "Finalizar Compra Segura",
       "secure_note": "Cifrado e 100% seguro.",
       "support": "Apoio de Pessoas Reais",
-      "support_note": "Estamos disponíveis 24 horas por dia, 7 dias por semana."
+      "support_note": "Estamos disponíveis 24 horas por dia, 7 dias por semana.",
+      "warranty": "Garantia de 1 ano",
+      "warranty_note": "Cobertura contra defeitos de fabrico.",
+      "guide_bonus": "GRÁTIS com a sua encomenda: Guia de conforto e ajuste de 7 dias"
     },
     "expert": {
       "reviewed_by": "Com Revisão Médica de",
@@ -702,10 +713,19 @@
       "criteria_footer": "Este dispositivo cumpre esses critérios."
     },
     "common": {
-      "save": "Guardar",
-      "save_amount": "Guardar {{ amount }}",
+      "save": "Poupe",
+      "save_amount": "Poupe {{ amount }}",
       "yes": "Sim",
       "no": "Não"
+    },
+    "bundle": {
+      "title": "Compre mais, poupe mais",
+      "one_corrector": "1 corretor",
+      "many_correctors": "{{ count }} corretores",
+      "one_foot": "Ideal para um pé",
+      "most_popular": "Mais popular",
+      "best_value": "Melhor valor",
+      "only_each_save": "Apenas {{ price }} cada · Poupe {{ percent }}%"
     },
     "accessibility": {
       "product_media": "Conteúdo multimédia do produto",
@@ -757,7 +777,16 @@
       "item_4_title_html": "Design Centrado<br>no Conforto",
       "item_4_text_html": "Acolchoamento macio onde<br>interessa",
       "demo_alt": "Demonstração de ajuste de Altaeron",
-      "detail_alt": "Detalhe de apoio do dedo do pé Altaeron"
+      "detail_alt": "Detalhe de apoio do dedo do pé Altaeron",
+      "fit_heading": "CONCEBIDO PARA SE ADAPTAR A SI",
+      "age_title": "A PARTIR DOS 13 ANOS",
+      "age_text": "Adolescentes e adultos",
+      "unisex_title": "UNISSEXO",
+      "unisex_text": "Homens e mulheres",
+      "adjustable_title": "AJUSTE REGULÁVEL",
+      "adjustable_text": "Ajuste ao seu pé",
+      "either_foot_title": "PÉ ESQUERDO OU DIREITO",
+      "either_foot_text": "Concebido para ambos os pés"
     },
     "learn": {
       "item_4_text": "Sinais de que deve procurar ajuda profissional.",
@@ -848,7 +877,8 @@
       "five_stars": "5 em 5 estrelas",
       "verified_buyer": "Comprador verificado",
       "customer_review": "Avaliação de cliente",
-      "read_all": "Ler todas as avaliações"
+      "read_all": "Ler todas as avaliações",
+      "read_all_verified": "Ler todas as avaliações verificadas"
     },
     "trust": {
       "warranty": "Garantia de 1 Ano",

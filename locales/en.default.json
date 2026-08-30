@@ -701,6 +701,15 @@
       "yes": "Yes",
       "no": "No"
     },
+    "bundle": {
+      "title": "Buy More, Save More",
+      "one_corrector": "1 Corrector",
+      "many_correctors": "{{ count }} Correctors",
+      "one_foot": "Best for one foot",
+      "most_popular": "Most Popular",
+      "best_value": "Best Value",
+      "only_each_save": "Only {{ price }} each · Save {{ percent }}%"
+    },
     "accessibility": {
       "product_media": "Product media",
       "purchase_product": "Purchase {{ product }}",
@@ -1042,6 +1051,15 @@
       "save_amount": "Save {{ amount }}",
       "yes": "Yes",
       "no": "No"
+    },
+    "bundle": {
+      "title": "Buy More, Save More",
+      "one_corrector": "1 Corrector",
+      "many_correctors": "{{ count }} Correctors",
+      "one_foot": "Best for one foot",
+      "most_popular": "Most Popular",
+      "best_value": "Best Value",
+      "only_each_save": "Only {{ price }} each · Save {{ percent }}%"
     },
     "accessibility": {
       "product_media": "Product media",

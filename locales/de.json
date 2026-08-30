@@ -644,7 +644,7 @@
     "hero": {
       "eyebrow_rank": "Für",
       "eyebrow_category": "Ballenzehschmerzen und Druck",
-      "headline": "Gehen Sie wieder, ohne an Ihre Füße zu denken.",
+      "headline": "Geben Sie Ihrem großen Zeh mehr Raum – mit Unterstützung, die Sie selbst steuern.",
       "headline_line_1": "Gehen Sie wieder,",
       "headline_line_2": "ohne an",
       "headline_line_3": "Ihre Füße zu denken.",
@@ -653,11 +653,11 @@
       "benefit_1": "Lindert Schmerzen und Druck am Ballenzeh",
       "benefit_2": "Verbessert die Ausrichtung während des Tragens",
       "benefit_3": "Bequem bei geringer Aktivität",
-      "target_eyebrow": "Bei Ballenzehschmerzen und Druck",
-      "target_subheadline": "Mit einem präzisen Einstellrad bestimmen Sie die sanfte Spannung zur Entlastung des Ballenzehs und zur Unterstützung des großen Zehs während des Tragens.",
-      "target_benefit_1": "Lindert Schmerzen und Druck am Ballenzeh",
-      "target_benefit_2": "Unterstützt die Ausrichtung des großen Zehs während des Tragens",
-      "target_benefit_3": "Verstellbare Spannung für Ihren Komfort",
+      "target_eyebrow": "Bei Ballenzehdruck und zur Unterstützung des großen Zehs",
+      "target_subheadline": "Drehen Sie das Einstellrad, um die gerichtete Unterstützung anzupassen. So wird der große Zeh sanft von den benachbarten Zehen weggeführt, wodurch beim Tragen mehr Platz entsteht und Druck reduziert wird.",
+      "target_benefit_1": "Stärke der Unterstützung kontrollieren",
+      "target_benefit_2": "Großen Zeh führen und Platz schaffen",
+      "target_benefit_3": "Hilft, Druck und Reibung zu reduzieren",
       "from": "Ab",
       "choose_bundle": "Paket auswählen",
       "target_rating_html": "{{ rating }}/5 <span aria-hidden=\"true\">&middot;</span> über {{ count }} Bewertungen"
@@ -708,6 +708,15 @@
       "save_amount": "{{ amount }} sparen",
       "yes": "Ja",
       "no": "Nein"
+    },
+    "bundle": {
+      "title": "Mehr kaufen, mehr sparen",
+      "one_corrector": "1 Korrektor",
+      "many_correctors": "{{ count }} Korrektoren",
+      "one_foot": "Ideal für einen Fuß",
+      "most_popular": "Am beliebtesten",
+      "best_value": "Bestes Preis-Leistungs-Verhältnis",
+      "only_each_save": "Nur {{ price }} pro Stück · {{ percent }} % sparen"
     },
     "accessibility": {
       "product_media": "Produktmedien",

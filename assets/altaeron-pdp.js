@@ -364,6 +364,8 @@
     const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
     const format = root.dataset.moneyFormat;
     const bundleWidget = root.querySelector('bundle-deals-widget');
+    const savingsText = (amount) => (root.dataset.saveTemplate || `${root.dataset.saveLabel} [amount]`)
+      .replaceAll('[amount]', money(amount, format));
 
     const updateInstallments = (price) => {
       const installment = money(Math.round(price / 4), format);
@@ -385,7 +387,7 @@
       }
       if (finalSavings) {
         finalSavings.hidden = !hasSavings;
-        if (hasSavings) finalSavings.textContent = `${root.dataset.saveLabel} ${money(saved, format)}`;
+        if (hasSavings) finalSavings.textContent = savingsText(saved);
       }
       updateInstallments(price);
     };
@@ -438,12 +440,12 @@
           savings.textContent = savings.dataset.staticSavings;
         } else {
           savings.hidden = compare <= price;
-          if (compare > price) savings.textContent = `${root.dataset.saveLabel} ${money(compare - price, format)}`;
+          if (compare > price) savings.textContent = savingsText(compare - price);
         }
       }
       if (stickySavings) {
         stickySavings.hidden = compare <= price;
-        if (compare > price) stickySavings.textContent = `${root.dataset.saveLabel} ${money(compare - price, format)}`;
+        if (compare > price) stickySavings.textContent = savingsText(compare - price);
       }
       [submit, stickySubmit, finalSubmit].forEach((button) => {
         if (!button) return;
@@ -486,6 +488,8 @@
       const checkedInputs = [...widgetRoot.querySelectorAll('input[type="radio"]:checked, [role="radio"][aria-checked="true"]')];
       const moneyPattern = /(?:[$€£¥₹₩]\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|CAD|AUD|VND|₫))/gi;
       const bundleTitle = (option) => {
+        const explicitTitle = option.querySelector('.bd-tier__name')?.textContent.replace(/\s+/g, ' ').trim();
+        if (explicitTitle) return explicitTitle;
         const ignoredPattern = /^(?:recommended|best value|save\b|from\b|for\b)/i;
         const titlePattern = /\b(?:bundle|pack|correctors?|items?|pieces?|left|right)\b/i;
         const preferredTitlePattern = /(?:\b\d+\b.*\b(?:bundle|pack|correctors?|items?|pieces?|left|right)\b|\b(?:bundle|pack|correctors?|items?|pieces?)\b)/i;
@@ -519,7 +523,8 @@
           const comparePrice = option.querySelector('.bd-tier__compare');
           if (optionInputs <= 1 && totalPrice) {
             const quantityMatch = option.textContent.match(/\b(\d+)\s*(?:correctors?|items?|pieces?|packs?)\b/i);
-            const quantity = Number(input.dataset.quantity || quantityMatch?.[1] || 1);
+            const tierQuantity = Number(option.dataset.tierIndex) + 1;
+            const quantity = Number(input.dataset.quantity || quantityMatch?.[1] || tierQuantity || 1);
             return {
               price: parseDisplayedMoney(totalPrice.textContent),
               compare: parseDisplayedMoney(comparePrice?.textContent),
@@ -532,22 +537,57 @@
       return null;
     };
 
-    const syncBundlePricing = () => {
-      if (root.dataset.croV1 === 'true' && bundleWidget) {
-        const widgetRoot = bundleWidget.shadowRoot || bundleWidget;
-        const firstTierSubtitle = widgetRoot.querySelector('[data-tier-index="0"] .bd-tier__sub');
-        if (firstTierSubtitle?.textContent.trim() === 'Perfect for getting started') {
-          firstTierSubtitle.textContent = 'Best for one foot';
-        }
-      }
+    const syncBundleTiers = (widgetRoot, baseCompare) => {
+      const setText = (element, value) => {
+        if (element && value && element.textContent !== value) element.textContent = value;
+      };
+      const fillTemplate = (template, replacements) => Object.entries(replacements)
+        .reduce((result, [key, value]) => result.replaceAll(`[${key}]`, value), template || '');
 
-      const bundle = selectedBundle();
+      setText(widgetRoot.querySelector('.bd-title'), root.dataset.bundleTitle);
+      [...widgetRoot.querySelectorAll('[data-tier-index]')].forEach((tier, index) => {
+        const quantity = Number(tier.dataset.tierIndex) + 1 || index + 1;
+        const priceElement = tier.querySelector('.bd-tier__price');
+        const tierPrice = parseDisplayedMoney(priceElement?.textContent);
+        setText(priceElement, money(tierPrice, format));
+        const name = quantity === 1
+          ? root.dataset.bundleOne
+          : fillTemplate(root.dataset.bundleManyTemplate, { count: String(quantity) });
+        setText(tier.querySelector('.bd-tier__name'), name);
+
+        const label = tier.querySelector('.bd-tier__label');
+        if (quantity === 2) setText(label, root.dataset.bundlePopular);
+        if (quantity === 3) setText(label, root.dataset.bundleBestValue);
+
+        if (quantity === 1) {
+          setText(tier.querySelector('.bd-tier__sub'), root.dataset.bundleOneFoot);
+          return;
+        }
+
+        const originalTotal = baseCompare > 0 ? baseCompare * quantity : 0;
+        const saved = Math.max(originalTotal - tierPrice, 0);
+        const percent = originalTotal > 0 ? Math.round((saved / originalTotal) * 100) : 0;
+        setText(tier.querySelector('.bd-tier__compare'), originalTotal > 0 ? money(originalTotal, format) : '');
+        setText(tier.querySelector('.bd-tier__sub'), fillTemplate(root.dataset.bundleSubtitleTemplate, {
+          price: money(Math.round(tierPrice / quantity), format),
+          percent: String(percent),
+        }));
+      });
+    };
+
+    const syncBundlePricing = () => {
       const control = chosenControl();
-      if (!bundle?.price || !control) return;
+      if (!control) return;
 
       const basePrice = Number(control.dataset.price || 0);
       const baseCompare = Number(control.dataset.compare || 0);
-      const bundleCompare = bundle.compare || (bundle.quantity > 1 ? basePrice * bundle.quantity : baseCompare);
+      if (bundleWidget) syncBundleTiers(bundleWidget.shadowRoot || bundleWidget, baseCompare);
+
+      const bundle = selectedBundle();
+      if (!bundle?.price) return;
+      const bundleCompare = baseCompare > basePrice
+        ? baseCompare * bundle.quantity
+        : (bundle.compare || basePrice * bundle.quantity);
       const bundleSavings = Math.max(bundleCompare - bundle.price, 0);
 
       if (stickyBundleTitle) {
@@ -565,7 +605,7 @@
       [savings, stickySavings].forEach((element) => {
         if (!element) return;
         element.hidden = bundleSavings <= 0;
-        if (bundleSavings > 0) element.textContent = `${root.dataset.saveLabel} ${money(bundleSavings, format)}`;
+        if (bundleSavings > 0) element.textContent = savingsText(bundleSavings);
       });
       if (ctaPrice) ctaPrice.textContent = ` — ${money(bundle.price, format)}`;
       updateRelatedPrices(bundle.price, bundleCompare);
