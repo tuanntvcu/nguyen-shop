@@ -3,6 +3,11 @@
     assign review_body = review.body.value | default: review.body | strip_html | strip
     assign reviewer_name = review.reviewer_name.value | default: review.reviewer_name | strip
     assign review_rating = review.rating.value | default: review.rating | default: 0 | plus: 0
+    assign displayed_review_body = review_body
+    assign excerpt_word_limit = excerpt_words | default: 0 | plus: 0
+    if excerpt_word_limit > 0
+      assign displayed_review_body = review_body | truncatewords: excerpt_word_limit, '…'
+    endif
     assign configured_review_image = review.review_image.value
     assign review_picture = review.pictures_urls.first.original
     assign reviewer_initial = reviewer_name | slice: 0 | upcase
@@ -29,7 +34,7 @@
       </div>
       <div>
         {% render 'altaeron-pdp-stars', rating: review_rating %}
-        <blockquote>“{{ review_body | escape }}”</blockquote>
+        <blockquote>“{{ displayed_review_body | escape }}”</blockquote>
         <p>– {{ reviewer_name | escape }}</p>
       </div>
     </article>

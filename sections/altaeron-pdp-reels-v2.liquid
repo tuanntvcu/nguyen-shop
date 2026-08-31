@@ -9,13 +9,25 @@
   assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
   assign review_rating = review_data.average_rating | default: 0 | plus: 0
   assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
-  assign verified_micro_review = blank
-  for candidate_review in reviews
-    if candidate_review.verified_buyer
-      assign verified_micro_review = candidate_review
+  assign published_micro_review = blank
+  for candidate_review in reviews limit: 10
+    assign candidate_body = candidate_review.body.value | default: candidate_review.body | strip_html | strip
+    assign candidate_name = candidate_review.reviewer_name.value | default: candidate_review.reviewer_name | strip
+    assign candidate_rating = candidate_review.rating.value | default: candidate_review.rating | plus: 0
+    assign candidate_words = candidate_body | split: ' ' | size
+    assign candidate_body_downcase = candidate_body | downcase
+    assign candidate_is_relevant = false
+    if candidate_body_downcase contains 'comfort' or candidate_body_downcase contains 'adjust' or candidate_body_downcase contains 'fit' or candidate_body_downcase contains 'routine' or candidate_body_downcase contains 'pressure'
+      assign candidate_is_relevant = true
+    endif
+    if candidate_is_relevant and candidate_rating >= 4 and candidate_words >= 8 and candidate_words <= 45 and candidate_body != blank and candidate_name != blank
+      assign published_micro_review = candidate_review
       break
     endif
   endfor
+  if published_micro_review == blank
+    assign published_micro_review = reviews.first
+  endif
   assign product_form_id = 'product-form-' | append: section.id
   assign compare_price = current_variant.compare_at_price
   assign savings = 0
@@ -77,6 +89,13 @@
   #AltaeronPdp-{{ section.id }} .apdp-day__visual :where(video,img,svg){display:block;height:100%;object-fit:cover;width:100%}
   #AltaeronPdp-{{ section.id }} .apdp-tail-faq{padding-bottom:56px}
   #AltaeronPdp-{{ section.id }} .apdp-tail-faq+.apdp-final-cta{margin-top:0}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review{align-items:center;background:#f7faf7;border:1px solid #dfe7e1;border-radius:10px;display:grid;gap:10px;grid-template-columns:38px minmax(0,1fr);margin:0 0 12px;padding:11px 12px}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review .apdp-tail-avatar{height:38px;margin:0;width:38px}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review .apdp-tail-avatar__initial{font-size:14px}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review__body{display:block;min-width:0}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review .apdp-stars{font-size:12px;margin:0 0 3px}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review blockquote{font-size:12px;line-height:1.4;margin:0}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review figcaption{font-size:10px;line-height:1.35;margin-top:3px}
   @media(min-width:1100px){
     #AltaeronPdp-{{ section.id }} .apdp-hero__grid{align-items:start;grid-template-columns:minmax(0,43fr) minmax(300px,29fr) minmax(360px,28fr);min-height:0;row-gap:0}
     #AltaeronPdp-{{ section.id }} .apdp-gallery{align-self:start;display:grid;gap:12px;grid-column:1;grid-row:1;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;min-width:0}
@@ -126,6 +145,8 @@
     #AltaeronPdp-{{ section.id }} .apdp-reels-section{padding-top:var(--alta-pdp-section-gap-tight-mobile)}
     #AltaeronPdp-{{ section.id }} .apdp-reels-full{width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-tail-faq{padding-bottom:40px}
+    #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review{grid-template-columns:36px minmax(0,1fr);padding:10px 11px}
+    #AltaeronPdp-{{ section.id }} .apdp-reels-micro-review .apdp-tail-avatar{height:36px;width:36px}
   }
 </style>
 
@@ -242,26 +263,30 @@
           <div class="apdp-payment-terms" data-apdp-installments>or 4 interest-free payments of {{ current_variant.price | divided_by: 4 | money }} with <strong>shop<span>Pay</span></strong></div>
         {%- endform -%}
         <div class="apdp-buy__policy">{% render 'altaeron-pdp-icon', icon: 'shield' %}<div><strong>90-Day Comfort Guarantee</strong><p>Try it during low-activity moments for up to 90 days.<br>If it is not right for you, contact support for return help.</p></div></div>
-        {%- if verified_micro_review != blank -%}
-          {%- liquid
-            assign micro_review_body = verified_micro_review.body.value | default: verified_micro_review.body | strip_html | strip
-            assign micro_review_name = verified_micro_review.reviewer_name.value | default: verified_micro_review.reviewer_name | strip
-            assign micro_review_rating = verified_micro_review.rating.value | default: verified_micro_review.rating | plus: 0
-          -%}
-          {%- if micro_review_body != blank and micro_review_name != blank -%}
-            <figure class="apdp-micro-review">
-              <div>{% render 'altaeron-pdp-stars', rating: micro_review_rating %}<strong>Verified buyer review</strong></div>
-              <blockquote>“{{ micro_review_body | truncatewords: 28 | escape }}”</blockquote>
-              <figcaption>— {{ micro_review_name | escape }} <a href="#AltaeronVerified-{{ section.id }}">Read all reviews <span aria-hidden="true">→</span></a></figcaption>
-            </figure>
-          {%- endif -%}
-        {%- endif -%}
         <div class="apdp-buy__trust">
           <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>Free Shipping</b><small>No surprise delivery fees.</small></span></a>
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>90-Day Guarantee</b><small>Eligible comfort and fit returns.</small></span></a>
           <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><b>Secure Checkout</b><small>Encrypted and secure.</small></span></span>
           <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<span><b>Real Support</b><small>Help before or after ordering.</small></span></a>
         </div>
+        {%- if published_micro_review != blank -%}
+          {%- liquid
+            assign micro_review_body = published_micro_review.body.value | default: published_micro_review.body | strip_html | strip
+            assign micro_review_name = published_micro_review.reviewer_name.value | default: published_micro_review.reviewer_name | strip
+            assign micro_review_rating = published_micro_review.rating.value | default: published_micro_review.rating | plus: 0
+            assign micro_review_initial = micro_review_name | slice: 0 | upcase
+          -%}
+          {%- if micro_review_body != blank and micro_review_name != blank -%}
+            <figure class="apdp-micro-review apdp-reels-micro-review">
+              <div class="apdp-tail-avatar"><span class="apdp-tail-avatar__initial" aria-hidden="true">{{ micro_review_initial | escape }}</span></div>
+              <div class="apdp-reels-micro-review__body">
+                {% render 'altaeron-pdp-stars', rating: micro_review_rating %}
+                <blockquote>“{{ micro_review_body | truncatewords: 28 | escape }}”</blockquote>
+                <figcaption>{{ micro_review_name | escape }} · Customer feedback</figcaption>
+              </div>
+            </figure>
+          {%- endif -%}
+        {%- endif -%}
         {%- if shop.enabled_payment_types.size > 0 -%}
           {%- liquid
             assign buy_payment_prefix = 'apdp-buy-' | append: section.id | append: '-'
@@ -304,15 +329,15 @@
     <div class="apdp-tail-card apdp-can-cant">
       <div class="apdp-can-cant__grid">
         <div><h3>WHAT TO EXPECT</h3><ul>
-          <li><strong>Fit:</strong> It is adjustable and designed for either foot; fine-tune it to a comfortable fit.</li>
-          <li><strong>Comfort:</strong> Start with light tension. Reduce tension or stop if you feel pain, numbness, or significant irritation.</li>
-          <li><strong>Walking and shoes:</strong> It is primarily for seated or relaxed, low-activity use. Follow the included instructions before walking in it, and do not assume it will fit regular shoes.</li>
-          <li><strong>Wear time:</strong> Begin with short sessions and build gradually as comfort allows.</li>
+          <li><strong>Fit:</strong> Adjustable and designed for either foot. Fine-tune it until the fit feels comfortable.</li>
+          <li><strong>Comfort:</strong> Start with light tension. Reduce it or stop if you feel pain, numbness, or significant irritation.</li>
+          <li><strong>Walking:</strong> Intended mainly for seated or relaxed, low-activity use. Follow the included instructions before walking.</li>
+          <li><strong>Shoes:</strong> Do not assume it will fit regular shoes. Check available space and follow the included instructions.</li>
         </ul></div>
         <div><h3>WHAT IT CANNOT DO</h3><ul>
-          <li>It supports and guides the big toe only while worn; it does not guarantee permanent correction.</li>
-          <li>It cannot remove an underlying bony deformity or replace professional medical care.</li>
-          <li>If it is not right for you, contact support within 90 days of delivery for the applicable return instructions.</li>
+          <li><strong>Wear time:</strong> Begin with short sessions and increase gradually based on comfort.</li>
+          <li><strong>Realistic results:</strong> It helps support and guide the toe while worn. It does not cure bunions or guarantee permanent correction.</li>
+          <li><strong>If it is not right:</strong> Contact support within 90 days of delivery for the applicable return instructions.</li>
         </ul></div>
       </div>
       <p class="apdp-consistency">{% render 'altaeron-pdp-icon', icon: 'guide' %}<span>More force is not better. Use comfortable tension and follow the included product instructions.</span></p>
@@ -325,7 +350,7 @@
         {% render 'altaeron-pdp-section-heading', number: '3', title: 'Customer Reviews', subtitle: 'Published feedback from the product’s Judge.me review feed.', heading_id: stories_heading_id %}
         <div class="apdp-tail-review-nav" aria-label="Review slider controls"><button type="button" data-apdp-review-prev aria-label="Previous reviews">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button><button type="button" data-apdp-review-next aria-label="Next reviews">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button></div>
       </div>
-      <div class="apdp-tail-review-viewport" data-apdp-review-slider><div class="apdp-tail-review-grid">{% render 'altaeron-pdp-review-cards', reviews: reviews, limit: 4 %}</div></div>
+      <div class="apdp-tail-review-viewport" data-apdp-review-slider><div class="apdp-tail-review-grid">{% render 'altaeron-pdp-review-cards', reviews: reviews, limit: 4, excerpt_words: 40 %}</div></div>
     </div>
   </section>
 
