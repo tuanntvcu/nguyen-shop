@@ -222,7 +222,21 @@
           <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><b>Secure Checkout</b><small>Encrypted and secure.</small></span></span>
           <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<span><b>Real Support</b><small>Help before or after ordering.</small></span></a>
         </div>
-        {%- if shop.enabled_payment_types.size > 0 -%}<ul class="apdp-payment-icons list list-payment" role="list" aria-label="Accepted payment methods">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul>{%- endif -%}
+        {%- if shop.enabled_payment_types.size > 0 -%}
+          {%- liquid
+            assign buy_payment_prefix = 'apdp-buy-' | append: section.id | append: '-'
+            assign buy_payment_id = ' id="' | append: buy_payment_prefix
+            assign buy_payment_labelledby = 'aria-labelledby="' | append: buy_payment_prefix
+            assign buy_payment_url = 'url(#' | append: buy_payment_prefix
+            assign buy_payment_href = 'href="#' | append: buy_payment_prefix
+          -%}
+          <ul class="apdp-payment-icons list list-payment" role="list" aria-label="Accepted payment methods">
+            {%- for type in shop.enabled_payment_types -%}
+              {%- capture payment_svg -%}{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}{%- endcapture -%}
+              <li class="list-payment__item">{{ payment_svg | replace: ' id="', buy_payment_id | replace: 'aria-labelledby="', buy_payment_labelledby | replace: 'url(#', buy_payment_url | replace: 'href="#', buy_payment_href }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       </aside>
     </div>
   </section>
@@ -346,7 +360,26 @@
 
   <section class="apdp-final-cta alta-pdp-flow-section" aria-label="Final purchase call to action"><div class="apdp-shell apdp-final-cta__inner">
     <div class="apdp-final-cta__product apdp-tail-media">{%- if tail_cta_product != blank -%}{{ tail_cta_product | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
-    <div class="apdp-final-cta__content"><h2>Give Your Big Toe More Room</h2><p>Adjustable support. Controlled by you.</p><div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>90-Day Comfort Guarantee</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>Free Shipping</b></span><span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>Real People Support</b></span></div><div class="apdp-final-payments"><span class="visually-hidden">Accepted payment methods</span><ul class="list list-payment" role="list">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul></div></div>
+    <div class="apdp-final-cta__content">
+      <h2>Give Your Big Toe More Room</h2><p>Adjustable support. Controlled by you.</p>
+      <div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>90-Day Comfort Guarantee</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>Free Shipping</b></span><span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>Real People Support</b></span></div>
+      <div class="apdp-final-payments">
+        <span class="visually-hidden">Accepted payment methods</span>
+        {%- liquid
+          assign final_payment_prefix = 'apdp-final-' | append: section.id | append: '-'
+          assign final_payment_id = ' id="' | append: final_payment_prefix
+          assign final_payment_labelledby = 'aria-labelledby="' | append: final_payment_prefix
+          assign final_payment_url = 'url(#' | append: final_payment_prefix
+          assign final_payment_href = 'href="#' | append: final_payment_prefix
+        -%}
+        <ul class="list list-payment" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            {%- capture payment_svg -%}{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}{%- endcapture -%}
+            <li class="list-payment__item">{{ payment_svg | replace: ' id="', final_payment_id | replace: 'aria-labelledby="', final_payment_labelledby | replace: 'url(#', final_payment_url | replace: 'href="#', final_payment_href }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
     <div class="apdp-final-cta__buy"><div>{% render 'altaeron-pdp-stars', rating: review_rating %}<small>{{ review_rating_display }}/5 ({{ review_count }} reviews)</small><em data-apdp-final-savings{% if savings <= 0 %} hidden{% endif %}>Save {{ savings_money }}</em></div><p><strong data-apdp-final-price>{{ current_variant.price | money }}</strong><s data-apdp-final-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></p><button type="button" class="apdp-final-button" data-apdp-final-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{{ section.settings.cta_label }}<span data-apdp-final-button-price{% unless current_variant.available %} hidden{% endunless %}> — {{ current_variant.price | money }}</span></button><small data-apdp-installments>or 4 interest-free payments of {{ current_variant.price | divided_by: 4 | money }} with shop<span>Pay</span></small><p class="apdp-final-fine">Try it for up to 90 days. Contact support if it is not right for you.</p></div>
     <div class="apdp-final-badge"><img src="{{ 'altaeron-90-day-risk-free-badge.svg' | asset_url }}" width="384" height="384" loading="lazy" alt="90-Day Comfort Guarantee"></div>
   </div></section>
