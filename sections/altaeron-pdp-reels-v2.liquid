@@ -70,6 +70,14 @@
   #AltaeronPdp-{{ section.id }} .apdp-day__benefits{grid-template-columns:repeat(3,minmax(0,1fr))}
   #AltaeronPdp-{{ section.id }} .apdp-reels-section{padding-top:var(--alta-pdp-section-gap-tight)}
   #AltaeronPdp-{{ section.id }} .apdp-reels-full{width:min(1440px,calc(100% - 80px))}
+  @media(min-width:1100px){
+    #AltaeronPdp-{{ section.id }} .apdp-gallery{display:contents}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{grid-column:1;grid-row:1}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative{align-self:center;grid-column:2;grid-row:1}
+    #AltaeronPdp-{{ section.id }} .apdp-buy{grid-column:3;grid-row:1}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{grid-column:1;grid-row:2}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{flex-direction:row;grid-column:1;grid-row:3;max-height:none;overflow-x:auto;overflow-y:hidden}
+  }
   @media(max-width:1099px) and (min-width:768px){
     #AltaeronPdp-{{ section.id }} .apdp-spacer-grid{grid-template-columns:1fr 28px 1fr}
     #AltaeronPdp-{{ section.id }} .apdp-reels-full{width:calc(100% - 36px)}
