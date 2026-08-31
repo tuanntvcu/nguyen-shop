@@ -647,6 +647,7 @@
   function initSticky(root) {
     const sticky = root.querySelector('[data-apdp-sticky]');
     const purchaseButton = root.querySelector('[data-apdp-submit]');
+    const primaryPurchase = root.querySelector('[data-apdp-primary-purchase]');
     const stickyButton = root.querySelector('[data-apdp-sticky-submit]');
     const finalButton = root.querySelector('[data-apdp-final-submit]');
     const form = root.querySelector('.apdp-form');
@@ -658,10 +659,10 @@
     let finalCtaIsVisible = false;
     const updateVisibility = () => { sticky.hidden = !mobile.matches || !purchaseIsPast || finalCtaIsVisible; };
     const observer = new IntersectionObserver(([entry]) => {
-      purchaseIsPast = !entry.isIntersecting;
+      purchaseIsPast = !entry.isIntersecting && (!primaryPurchase || entry.boundingClientRect.bottom <= 0);
       updateVisibility();
     }, { threshold: 0 });
-    observer.observe(purchaseButton);
+    observer.observe(primaryPurchase || purchaseButton);
     if (finalCta) {
       const finalCtaObserver = new IntersectionObserver(([entry]) => {
         finalCtaIsVisible = entry.isIntersecting;
@@ -764,6 +765,22 @@
     });
   }
 
+  function initMedicalReviewLink(root) {
+    const link = root.querySelector('[data-apdp-medical-review-link]');
+    if (!link) return;
+    const target = root.querySelector(link.hash);
+    if (!target) return;
+
+    link.addEventListener('click', (event) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      window.history.pushState(null, '', link.hash);
+      target.focus({ preventScroll: true });
+    });
+  }
+
   function initReviewSliders(root) {
     root.querySelectorAll('[data-apdp-review-slider]').forEach((slider) => {
       const group = slider.closest('[data-apdp-review-slider-group]');
@@ -800,6 +817,7 @@
     initQuantity(root);
     initVariants(root, activateMedia);
     initSticky(root);
+    initMedicalReviewLink(root);
     initLazyVideos(root);
     initReviewSliders(root);
   }

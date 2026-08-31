@@ -701,7 +701,8 @@
       "criterion_1": "一人ひとりに合わせられる調節機能",
       "criterion_2": "不快感のないやさしいアライメント",
       "criterion_3": "現実的な期待と継続的な使用",
-      "criteria_footer": "この器具はこれらの基準を満たしています。"
+      "criteria_footer": "この器具はこれらの基準を満たしています。",
+      "read_review": "医学的レビューを読む"
     },
     "common": {
       "save": "割引",

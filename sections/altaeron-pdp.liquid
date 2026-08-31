@@ -424,7 +424,7 @@
       </div>
       {%- endif -%}
 
-      <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ copy_prefix | append: '.accessibility.purchase_product' | t: product: product.title | escape }}">
+      <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ copy_prefix | append: '.accessibility.purchase_product' | t: product: product.title | escape }}"{% if is_target_hero %} data-apdp-primary-purchase{% endif %}>
         <h2 class="apdp-buy__title">{{ copy_prefix | append: '.buy.title' | t }}</h2>
         <a class="apdp-buy__rating" href="#AltaeronVerified-{{ section.id }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ buy_rating_label }}</strong></a>
         <div class="apdp-buy__price-line">
@@ -481,6 +481,22 @@
       </aside>
     </div>
   </section>
+
+  {%- if is_target_hero -%}
+    <aside class="apdp-compact-expert" aria-label="{{ 'altaeron_pdp.accessibility.product_guidance' | t | escape }}">
+      <div class="apdp-shell apdp-compact-expert__inner">
+        <div class="apdp-compact-expert__portrait">
+          <img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}">
+        </div>
+        <div class="apdp-compact-expert__profile">
+          <small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small>
+          <strong>{{ 'altaeron_pdp.expert.name' | t }}</strong>
+          <span>{{ 'altaeron_pdp.expert.role' | t }}</span>
+        </div>
+        <a href="#AltaeronMedicalReview-{{ section.id }}" data-apdp-medical-review-link>{{ 'altaeron_pdp.expert.read_review' | t }} <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </aside>
+  {%- endif -%}
 
   <section class="apdp-education apdp-education--familiar alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronFamiliar-{{ section.id }}">
     <div class="apdp-shell">
@@ -607,7 +623,7 @@
     </div>
   </section>
 
-  <section class="apdp-expert alta-pdp-flow-section alta-pdp-flow-section--hero-authority" aria-label="{{ 'altaeron_pdp.accessibility.product_guidance' | t | escape }}">
+  <section{% if is_target_hero %} id="AltaeronMedicalReview-{{ section.id }}" tabindex="-1"{% endif %} class="apdp-expert alta-pdp-flow-section alta-pdp-flow-section--hero-authority" aria-label="{{ 'altaeron_pdp.accessibility.product_guidance' | t | escape }}">
     <div class="apdp-shell apdp-expert__panel">
       <div class="apdp-expert__portrait">
         <img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}">
@@ -738,7 +754,7 @@
         <div class="apdp-tail-media">{%- if tail_support != blank -%}{{ tail_support | image_url: width: 600 | image_tag: loading: 'lazy', widths: '280, 420, 600', sizes: '(min-width: 768px) 220px, 40vw', alt: spacer_altaeron_alt }}{%- else -%}{{ 'product-2' | placeholder_svg_tag }}{%- endif -%}</div>
         <div><h3>{{ copy_prefix | append: '.spacer.altaeron_title' | t }}</h3><ul>{%- for i in (1..4) -%}{%- capture altaeron_key -%}{{ copy_prefix }}.spacer.altaeron_{{ i }}{%- endcapture -%}<li>{{ altaeron_key | t }}</li>{%- endfor -%}</ul></div>
       </article>
-      <aside class="apdp-doctor-note"><div class="apdp-tail-media">{%- if tail_doctor != blank -%}{{ tail_doctor | image_url: width: 400 | image_tag: loading: 'lazy', widths: '180, 280, 400', sizes: '150px', alt: spacer_expert_alt }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div><p>{{ copy_prefix | append: '.spacer.expert_note_html' | t }}</p></aside>
+      <aside class="apdp-doctor-note"><div class="apdp-tail-media">{%- if is_target_hero -%}<img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}">{%- elsif tail_doctor != blank -%}{{ tail_doctor | image_url: width: 400 | image_tag: loading: 'lazy', widths: '180, 280, 400', sizes: '150px', alt: spacer_expert_alt }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div><p>{%- if is_target_hero -%}{{ 'altaeron_pdp.expert.quote' | t }}<strong>{{ 'altaeron_pdp.expert.name' | t }}</strong><small>{{ 'altaeron_pdp.expert.role' | t }}</small>{%- else -%}{{ copy_prefix | append: '.spacer.expert_note_html' | t }}{%- endif -%}</p></aside>
     </div>
   </div></section>
 
