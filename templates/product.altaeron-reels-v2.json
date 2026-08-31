@@ -1,0 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "altaeron_pdp_reels_v2": {
+      "type": "altaeron-pdp-reels-v2",
+      "blocks": {
+        "support_demo": {
+          "type": "education_media",
+          "settings": {
+            "slot": "support_demo",
+            "video": "shopify://files/videos/Your feet work hard every day—give them the support they need. This bunion corrector is lightweight, comfortable, and easy to wear at home or on the go. (online-video-cutter.com).mp4"
+          }
+        },
+        "day_story": {
+          "type": "education_media",
+          "settings": {
+            "slot": "day_story",
+            "video": "shopify://files/videos/Woman_walking_through_daily_routine_202608111534 (online-video-cutter.com).mp4"
+          }
+        },
+        "spacer": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "spacer",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_54_15_PM.png"
+          }
+        },
+        "support": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "support",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_59_48_PM.png"
+          }
+        },
+        "cta_product": {
+          "type": "tail_media",
+          "settings": {
+            "slot": "cta_product",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_14_2026_01_46_46_PM.png"
+          }
+        }
+      },
+      "block_order": [
+        "support_demo",
+        "day_story",
+        "spacer",
+        "support",
+        "cta_product"
+      ],
+      "settings": {
+        "eyebrow": "Adjustable Bunion Corrector",
+        "headline": "Give Your Big Toe More Room",
+        "subheadline": "Adjustable support gently guides your big toe into a more comfortable position and helps reduce pressure around the bunion while worn.",
+        "price_label": "From",
+        "cta_label": "Add to Cart"
+      }
+    }
+  },
+  "order": [
+    "altaeron_pdp_reels_v2"
+  ]
+}

@@ -1,0 +1,399 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign mf = product.metafields.altaeron
+  assign hero_video = mf.pdp_hero_video.value
+  assign hero_image = mf.pdp_hero_image.value | default: product.featured_image
+  assign review_data = product.metafields.judgeme.review_widget_data.value
+  assign reviews = review_data.reviews
+  assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
+  assign review_rating = review_data.average_rating | default: 0 | plus: 0
+  assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
+  assign verified_micro_review = blank
+  for candidate_review in reviews
+    if candidate_review.verified_buyer
+      assign verified_micro_review = candidate_review
+      break
+    endif
+  endfor
+  assign product_form_id = 'product-form-' | append: section.id
+  assign compare_price = current_variant.compare_at_price
+  assign savings = 0
+  if compare_price > current_variant.price
+    assign savings = compare_price | minus: current_variant.price
+  endif
+  assign savings_money = savings | money
+  assign support_demo_alt = 'Adjustable bunion corrector support demonstration'
+  assign day_image_alt = 'How to put on and gently adjust the bunion corrector'
+  assign spacer_basic_alt = 'Basic toe spacer'
+  assign spacer_altaeron_alt = 'Altaeron adjustable bunion corrector'
+  assign support_heading_id = 'AltaeronSupport-' | append: section.id
+  assign expectations_heading_id = 'AltaeronCanCant-' | append: section.id
+  assign stories_heading_id = 'AltaeronStoriesTitle-' | append: section.id
+  assign spacer_heading_id = 'AltaeronSpacer-' | append: section.id
+  assign day_heading_id = 'AltaeronDay-' | append: section.id
+  assign expert_heading_id = 'AltaeronExpertTitle-' | append: section.id
+  assign reviews_heading_id = 'AltaeronVerifiedTitle-' | append: section.id
+  assign faq_heading_id = 'AltaeronFaq-' | append: section.id
+  assign full_reviews_subtitle = review_rating_display | append: '/5 from ' | append: review_count | append: ' Judge.me reviews'
+  for block in section.blocks
+    if block.type == 'education_media'
+      case block.settings.slot
+        when 'support_demo'
+          assign support_demo_image = block.settings.image
+          assign support_demo_video = block.settings.video
+        when 'day_story'
+          assign day_story_image = block.settings.image
+          assign day_story_video = block.settings.video
+      endcase
+    elsif block.type == 'tail_media'
+      case block.settings.slot
+        when 'spacer'
+          assign tail_spacer = block.settings.image
+        when 'support'
+          assign tail_support = block.settings.image
+        when 'cta_product'
+          assign tail_cta_product = block.settings.image
+      endcase
+    endif
+  endfor
+-%}
+
+{{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'altaeron-pdp.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  #AltaeronPdp-{{ section.id }} .apdp-support__features{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #AltaeronPdp-{{ section.id }} .apdp-support__media{grid-template-columns:1fr}
+  #AltaeronPdp-{{ section.id }} .apdp-spacer-grid{grid-template-columns:minmax(0,1fr) 34px minmax(0,1.15fr)}
+  #AltaeronPdp-{{ section.id }} .apdp-day__benefits{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-section{padding-top:var(--alta-pdp-section-gap-tight)}
+  #AltaeronPdp-{{ section.id }} .apdp-reels-full{width:min(1440px,calc(100% - 80px))}
+  @media(max-width:1099px) and (min-width:768px){
+    #AltaeronPdp-{{ section.id }} .apdp-spacer-grid{grid-template-columns:1fr 28px 1fr}
+    #AltaeronPdp-{{ section.id }} .apdp-reels-full{width:calc(100% - 36px)}
+  }
+  @media(max-width:767px){
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{margin-top:0;order:1}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative{order:2}
+    #AltaeronPdp-{{ section.id }} .apdp-buy{order:3}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{order:4}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{order:5}
+    #AltaeronPdp-{{ section.id }} .apdp-support__features{grid-template-columns:1fr}
+    #AltaeronPdp-{{ section.id }} .apdp-support__features article+article{margin-left:0;margin-top:8px}
+    #AltaeronPdp-{{ section.id }} .apdp-day__benefits{grid-template-columns:1fr}
+    #AltaeronPdp-{{ section.id }} .apdp-spacer-grid{display:block}
+    #AltaeronPdp-{{ section.id }} .apdp-reels-section{padding-top:var(--alta-pdp-section-gap-tight-mobile)}
+    #AltaeronPdp-{{ section.id }} .apdp-reels-full{width:calc(100% - 30px)}
+  }
+</style>
+
+<div
+  id="AltaeronPdp-{{ section.id }}"
+  class="altaeron-pdp altaeron-pdp--cro-hero altaeron-pdp--reels-v2"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-product-url="{{ product.url }}"
+  data-money-format="{{ shop.money_format | escape }}"
+  data-save-label="Save"
+  data-save-template="Save [amount]"
+  data-add-to-cart-label="{{ 'products.product.add_to_cart' | t | escape }}"
+  data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"
+  data-bundle-title="Choose Your Bundle"
+  data-bundle-one="1 Corrector"
+  data-bundle-many-template="[count] Correctors"
+  data-bundle-one-foot="For one foot"
+  data-bundle-popular="Most Popular"
+  data-bundle-best-value="Best Value"
+  data-bundle-subtitle-template="Only [price] each · Save [percent]%"
+>
+  <section class="apdp-hero" aria-labelledby="AltaeronTitle-{{ section.id }}">
+    <div class="apdp-shell apdp-hero__grid">
+      <div class="apdp-gallery" data-apdp-gallery>
+        <div class="apdp-gallery__thumbs" role="tablist" aria-label="Product media">
+          {%- for media in product.media -%}
+            <button type="button" class="apdp-gallery__thumb{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tab" aria-selected="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" aria-controls="AltaeronMedia-{{ section.id }}-{{ media.id }}" data-apdp-thumb="{{ media.id }}" data-apdp-preview-src="{{ media.preview_image | image_url: width: 1600 }}" data-apdp-preview-alt="{{ media.alt | default: product.title | escape }}">
+              {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '58px', alt: media.alt | default: product.title }}
+              {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}<span class="apdp-gallery__play" aria-hidden="true">▶</span>{%- endif -%}
+            </button>
+          {%- endfor -%}
+        </div>
+        <div class="apdp-gallery__stage apdp-gallery__hero">
+          {%- if hero_video != blank -%}
+            {%- liquid
+              assign hero_mobile_source = blank
+              assign hero_desktop_source = blank
+              for hero_source in hero_video.sources
+                if hero_source.format == 'mp4'
+                  if hero_desktop_source == blank or hero_source.height > hero_desktop_source.height
+                    assign hero_desktop_source = hero_source
+                  endif
+                  if hero_source.height <= 720
+                    if hero_mobile_source == blank or hero_source.height > hero_mobile_source.height
+                      assign hero_mobile_source = hero_source
+                    endif
+                  endif
+                endif
+              endfor
+              assign hero_desktop_source = hero_desktop_source | default: hero_video.sources.first
+              assign hero_mobile_source = hero_mobile_source | default: hero_desktop_source
+              assign hero_poster = hero_video.preview_image | image_url: width: 900
+            -%}
+            <video data-apdp-hero-video muted playsinline loop preload="metadata" poster="{{ hero_poster }}" aria-label="Adjustable bunion corrector product demonstration">
+              {%- if hero_desktop_source.url == hero_mobile_source.url -%}
+                <source src="{{ hero_desktop_source.url }}" type="{{ hero_desktop_source.mime_type | default: 'video/mp4' }}">
+              {%- else -%}
+                <source src="{{ hero_mobile_source.url }}" type="{{ hero_mobile_source.mime_type | default: 'video/mp4' }}" media="(max-width: 767px)">
+                <source src="{{ hero_desktop_source.url }}" type="{{ hero_desktop_source.mime_type | default: 'video/mp4' }}" media="(min-width: 768px)">
+              {%- endif -%}
+            </video>
+          {%- elsif hero_image != blank -%}
+            {{ hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1500, 1800', sizes: '(min-width: 1280px) 37vw, (min-width: 768px) 55vw, 100vw', alt: hero_image.alt | default: product.title }}
+          {%- else -%}
+            <div class="apdp-gallery__empty">{{ 'product-1' | placeholder_svg_tag }}</div>
+          {%- endif -%}
+        </div>
+        <div class="apdp-gallery__viewer" aria-live="polite">
+          {%- for media in product.media -%}
+            <div id="AltaeronMedia-{{ section.id }}-{{ media.id }}" class="apdp-gallery__item{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tabpanel" data-apdp-media="{{ media.id }}"{% if media.media_type == 'image' %} data-apdp-zoom-src="{{ media.preview_image | image_url: width: 2400 }}" data-apdp-zoom-width="{{ media.preview_image.width }}" data-apdp-zoom-height="{{ media.preview_image.height }}"{% endif %}{% unless media.id == product.featured_media.id %} hidden{% endunless %}>
+              {% render 'altaeron-pdp-media', media: media, product: product, loading: 'lazy', fetchpriority: 'auto', sizes: '(min-width: 1024px) 560px, 55vw' %}
+              {%- if media.media_type == 'image' -%}
+                <button type="button" class="apdp-gallery__zoom" data-apdp-zoom aria-haspopup="dialog" aria-label="Open product image {{ forloop.index }}"><span aria-hidden="true">{% render 'icon-zoom' %}</span></button>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <div class="apdp-gallery__empty">{{ 'product-1' | placeholder_svg_tag }}</div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="apdp-narrative">
+        <p class="apdp-eyebrow"><span>{{ section.settings.eyebrow }}</span></p>
+        <h1 id="AltaeronTitle-{{ section.id }}"><span class="apdp-title-lines">{{ section.settings.headline }}</span></h1>
+        <p class="apdp-narrative__subhead">{{ section.settings.subheadline }}</p>
+        <a class="apdp-rating" href="#AltaeronVerified-{{ section.id }}" aria-label="Rated {{ review_rating_display }} out of 5 from {{ review_count }} Judge.me reviews">
+          {% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ review_rating_display }}/5 · {{ review_count }} reviews</strong>
+        </a>
+      </div>
+
+      <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="Purchase {{ product.title | escape }}" data-apdp-primary-purchase>
+        <h2 class="apdp-buy__title">Choose Your Bundle</h2>
+        <div class="apdp-buy__price-line">
+          <div><p class="apdp-buy__from">{{ section.settings.price_label }}</p><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></div></div>
+          <span class="apdp-price__save" data-apdp-savings{% if savings <= 0 %} hidden{% endif %}>Save {{ savings_money }}</span>
+        </div>
+        {%- form 'product', product, id: product_form_id, class: 'apdp-form main-product-form', is: 'product-form', data-product-id: product.id -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-apdp-variant-id>
+          <div class="product-form__error-message-wrapper" role="alert" hidden><div class="product-form__error-message alert alert--error" role="alert" hidden></div></div>
+          {%- unless product.has_only_default_variant -%}
+            <fieldset class="apdp-variants">
+              <legend>Choose an option</legend>
+              {%- if product.variants.size > 6 -%}
+                <label class="visually-hidden" for="AltaeronVariant-{{ section.id }}">Product option</label>
+                <select id="AltaeronVariant-{{ section.id }}" data-apdp-variant-select>{%- for variant in product.variants -%}<option value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}" data-available="{{ variant.available }}" data-media-id="{{ variant.featured_media.id }}"{% if variant.id == current_variant.id %} selected{% endif %}>{{ variant.title }} — {{ variant.price | money }}</option>{%- endfor -%}</select>
+              {%- else -%}
+                <div class="apdp-variants__grid">{%- for variant in product.variants limit: 3 -%}<input class="visually-hidden" type="radio" id="AltaeronVariant-{{ section.id }}-{{ variant.id }}" name="apdp-variant" value="{{ variant.id }}" data-apdp-variant-option data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}" data-available="{{ variant.available }}" data-media-id="{{ variant.featured_media.id }}"{% if variant.id == current_variant.id %} checked{% endif %}><label for="AltaeronVariant-{{ section.id }}-{{ variant.id }}">{{ variant.title }}</label>{%- endfor -%}</div>
+              {%- endif -%}
+            </fieldset>
+          {%- endunless -%}
+          <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
+          <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ section.settings.cta_label }}">{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><b data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}> — {{ current_variant.price | money }}</b></span>{% render 'altaeron-pdp-icon', icon: 'cart' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
+          <div class="apdp-payment-terms" data-apdp-installments>or 4 interest-free payments of {{ current_variant.price | divided_by: 4 | money }} with <strong>shop<span>Pay</span></strong></div>
+        {%- endform -%}
+        <div class="apdp-buy__policy">{% render 'altaeron-pdp-icon', icon: 'shield' %}<div><strong>90-Day Comfort Guarantee</strong><p>Try it during low-activity moments for up to 90 days.<br>If it is not right for you, contact support for return help.</p></div></div>
+        {%- if verified_micro_review != blank -%}
+          {%- liquid
+            assign micro_review_body = verified_micro_review.body.value | default: verified_micro_review.body | strip_html | strip
+            assign micro_review_name = verified_micro_review.reviewer_name.value | default: verified_micro_review.reviewer_name | strip
+            assign micro_review_rating = verified_micro_review.rating.value | default: verified_micro_review.rating | plus: 0
+          -%}
+          {%- if micro_review_body != blank and micro_review_name != blank -%}
+            <figure class="apdp-micro-review">
+              <div>{% render 'altaeron-pdp-stars', rating: micro_review_rating %}<strong>Verified buyer review</strong></div>
+              <blockquote>“{{ micro_review_body | truncatewords: 28 | escape }}”</blockquote>
+              <figcaption>— {{ micro_review_name | escape }} <a href="#AltaeronVerified-{{ section.id }}">Read all reviews <span aria-hidden="true">→</span></a></figcaption>
+            </figure>
+          {%- endif -%}
+        {%- endif -%}
+        <div class="apdp-buy__trust">
+          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>Free Shipping</b><small>No surprise delivery fees.</small></span></a>
+          <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>90-Day Guarantee</b><small>Eligible comfort and fit returns.</small></span></a>
+          <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><b>Secure Checkout</b><small>Encrypted and secure.</small></span></span>
+          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<span><b>Real Support</b><small>Help before or after ordering.</small></span></a>
+        </div>
+        {%- if shop.enabled_payment_types.size > 0 -%}<ul class="apdp-payment-icons list list-payment" role="list" aria-label="Accepted payment methods">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul>{%- endif -%}
+      </aside>
+    </div>
+  </section>
+
+  <section class="apdp-education apdp-education--support alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronSupport-{{ section.id }}">
+    <div class="apdp-shell">
+      {% render 'altaeron-pdp-section-heading', number: '1', title: 'How It Works', subtitle: 'Three simple parts work together while the corrector is worn.', heading_id: support_heading_id %}
+      <div class="apdp-support-grid">
+        <div class="apdp-support__info">
+          <div class="apdp-support__features">
+            <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'knob' %}</span><h3>Adjustable Support</h3><p>Control the level of tension to your comfort.</p></article>
+            <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'dual-support' %}</span><h3>Gentle Guidance</h3><p>Helps support the big toe in a more comfortable position while worn.</p></article>
+            <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'pressure-relief' %}</span><h3>More Space</h3><p>Helps reduce crowding and pressure around the bunion area.</p></article>
+          </div>
+        </div>
+        <div class="apdp-support__media">
+          <div class="apdp-support__video"><div class="apdp-education__placeholder">{%- if support_demo_video != blank -%}{%- capture support_video_markup -%}{{ support_demo_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1200x' }}{%- endcapture -%}{{- support_video_markup | replace: '<video ', '<video data-apdp-lazy-video ' | replace: '<source src="', '<source data-src="' -}}{%- elsif support_demo_image != blank -%}{{ support_demo_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200', sizes: '(min-width: 768px) 52vw, 100vw', alt: support_demo_image.alt | default: support_demo_alt }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="apdp-tail apdp-tail-panel apdp-shell apdp-reels-full alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronCanCant-{{ section.id }}">
+    {% render 'altaeron-pdp-section-heading', number: '2', title: 'Fit, Comfort & Realistic Use', subtitle: 'The practical answers to check before you buy.', heading_id: expectations_heading_id %}
+    <div class="apdp-tail-card apdp-can-cant">
+      <div class="apdp-can-cant__grid">
+        <div><h3>WHAT TO EXPECT</h3><ul>
+          <li><strong>Fit:</strong> It is adjustable and designed for either foot; fine-tune it to a comfortable fit.</li>
+          <li><strong>Comfort:</strong> Start with light tension. Reduce tension or stop if you feel pain, numbness, or significant irritation.</li>
+          <li><strong>Walking and shoes:</strong> It is primarily for seated or relaxed, low-activity use. Follow the included instructions before walking in it, and do not assume it will fit regular shoes.</li>
+          <li><strong>Wear time:</strong> Begin with short sessions and build gradually as comfort allows.</li>
+        </ul></div>
+        <div><h3>WHAT IT CANNOT DO</h3><ul>
+          <li>It supports and guides the big toe only while worn; it does not guarantee permanent correction.</li>
+          <li>It cannot remove an underlying bony deformity or replace professional medical care.</li>
+          <li>If it is not right for you, contact support within 90 days of delivery for the applicable return instructions.</li>
+        </ul></div>
+      </div>
+      <p class="apdp-consistency">{% render 'altaeron-pdp-icon', icon: 'guide' %}<span>More force is not better. Use comfortable tension and follow the included product instructions.</span></p>
+    </div>
+  </section>
+
+  <section id="AltaeronStories-{{ section.id }}" class="apdp-tail apdp-tail-reviews alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronStoriesTitle-{{ section.id }}" data-apdp-review-slider-group>
+    <div class="apdp-shell">
+      <div class="apdp-tail-review-head">
+        {% render 'altaeron-pdp-section-heading', number: '3', title: 'Customer Reviews', subtitle: 'Published feedback from the product’s Judge.me review feed.', heading_id: stories_heading_id %}
+        <div class="apdp-tail-review-nav" aria-label="Review slider controls"><button type="button" data-apdp-review-prev aria-label="Previous reviews">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button><button type="button" data-apdp-review-next aria-label="Next reviews">{% render 'altaeron-pdp-icon', icon: 'arrow' %}</button></div>
+      </div>
+      <div class="apdp-tail-review-viewport" data-apdp-review-slider><div class="apdp-tail-review-grid">{% render 'altaeron-pdp-review-cards', reviews: reviews, limit: 4 %}</div></div>
+    </div>
+  </section>
+
+  <section class="apdp-tail apdp-spacer alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronSpacer-{{ section.id }}"><div class="apdp-shell">
+    {% render 'altaeron-pdp-section-heading', number: '4', title: 'Why Not a Basic Toe Spacer?', subtitle: 'Spacing alone is different from adjustable positioning support.', heading_id: spacer_heading_id %}
+    <div class="apdp-spacer-grid">
+      <article class="apdp-spacer-product">
+        <div class="apdp-tail-media">{%- if tail_spacer != blank -%}{{ tail_spacer | image_url: width: 500 | image_tag: loading: 'lazy', widths: '240, 360, 500', sizes: '(min-width: 768px) 170px, 34vw', alt: spacer_basic_alt }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
+        <div><h3>Basic Toe Spacer</h3><ul><li>Creates spacing</li><li>Fixed positioning</li><li>Limited adjustment</li></ul></div>
+      </article>
+      <span class="apdp-versus">VS</span>
+      <article class="apdp-spacer-product apdp-spacer-product--altaeron">
+        <div class="apdp-tail-media">{%- if tail_support != blank -%}{{ tail_support | image_url: width: 600 | image_tag: loading: 'lazy', widths: '280, 420, 600', sizes: '(min-width: 768px) 220px, 40vw', alt: spacer_altaeron_alt }}{%- else -%}{{ 'product-2' | placeholder_svg_tag }}{%- endif -%}</div>
+        <div><h3>Altaeron</h3><ul><li>Adjustable support</li><li>Controllable tension</li><li>Spacing plus positioning support</li></ul></div>
+      </article>
+    </div>
+  </div></section>
+
+  <section class="apdp-education apdp-education--day alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronDay-{{ section.id }}">
+    <div class="apdp-shell">
+      {% render 'altaeron-pdp-section-heading', number: '5', title: 'Start Gentle. Adjust Slowly.', subtitle: 'Use comfortable tension and build your routine gradually.', heading_id: day_heading_id %}
+      <div class="apdp-day__media" aria-label="How to use the corrector">
+        <div class="apdp-day__visual apdp-education__placeholder">
+          {%- if day_story_video != blank -%}{%- capture day_video_markup -%}{{ day_story_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1800x' }}{%- endcapture -%}{{- day_video_markup | replace: '<video ', '<video data-apdp-lazy-video ' | replace: '<source src="', '<source data-src="' -}}
+          {%- elsif day_story_image != blank -%}{{ day_story_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750, 1100, 1500, 1800, 2200', sizes: '(min-width: 1800px) 1740px, calc(100vw - 40px)', alt: day_story_image.alt | default: day_image_alt }}
+          {%- else -%}{{ 'lifestyle-1' | placeholder_svg_tag }}{%- endif -%}
+        </div>
+      </div>
+      <div class="apdp-day__benefits">
+        <article><span>{% render 'altaeron-pdp-icon', icon: 'spark' %}</span><div><h3>1. Put It On</h3><p>Position the device comfortably on the correct foot.</p></div></article>
+        <article><span>{% render 'altaeron-pdp-icon', icon: 'sliders' %}</span><div><h3>2. Adjust Gently</h3><p>Use comfortable tension. More force is not better.</p></div></article>
+        <article><span>{% render 'altaeron-pdp-icon', icon: 'calendar' %}</span><div><h3>3. Build Gradually</h3><p>Begin with shorter sessions and increase duration as comfort allows.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="AltaeronMedicalReview-{{ section.id }}" tabindex="-1" class="apdp-expert alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronExpertTitle-{{ section.id }}">
+    <div class="apdp-shell">
+      {% render 'altaeron-pdp-section-heading', number: '6', title: 'Expert Validation', subtitle: 'A review of the mechanism and realistic-use criteria.', heading_id: expert_heading_id %}
+      <div class="apdp-expert__panel">
+        <div class="apdp-expert__portrait"><img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}"></div>
+        <div class="apdp-expert__profile"><small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small><h2>{{ 'altaeron_pdp.expert.name' | t }}</h2><p>{{ 'altaeron_pdp.expert.role' | t }}</p><strong>{{ 'altaeron_pdp.expert.experience' | t }}</strong><span class="apdp-expert__signature">{{ 'altaeron_pdp.expert.signature' | t }}</span></div>
+        <blockquote><span aria-hidden="true">“</span><p>{{ 'altaeron_pdp.expert.quote' | t }} <b aria-hidden="true">”</b></p></blockquote>
+        <div class="apdp-expert__criteria"><strong>{{ 'altaeron_pdp.expert.criteria_heading' | t }}</strong><ul><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_1' | t }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_2' | t }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_3' | t }}</li></ul><p>{{ 'altaeron_pdp.expert.criteria_footer' | t }}</p></div>
+        <div class="apdp-expert__press" aria-label="Publications"><span>WebMD</span><span>healthline</span><span>Verywell<span>health</span></span><span>yahoo!<b>life</b></span><span>CNN</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="AltaeronVerified-{{ section.id }}" class="apdp-tail apdp-review-summary apdp-shell apdp-reels-full alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronVerifiedTitle-{{ section.id }}" data-apdp-review-slider-group>
+    <div class="apdp-review-summary__head">{% render 'altaeron-pdp-section-heading', number: '7', title: 'Full Customer Reviews', subtitle: full_reviews_subtitle, heading_id: reviews_heading_id %}</div>
+    {%- assign has_legacy_judgeme_widget = false -%}
+    {%- if product.metafields.judgeme.widget.size > 20 -%}{%- assign has_legacy_judgeme_widget = true -%}{%- endif -%}
+    <div class="apdp-judgeme-widget">
+      <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ product.title | escape }}" data-id="{{ product.id }}" data-product-id="{{ product.id }}" data-widget="review" data-auto-install="false" data-shop-reviews-count="{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}" data-entry-point="review_widget.js" data-entry-key="review-widget/main.js">{%- if has_legacy_judgeme_widget -%}<div class="jdgm-legacy-widget-content" style="display:none">{{ product.metafields.judgeme.widget }}</div>{%- endif -%}</div>
+      {%- if product.metafields.judgeme.review_widget_data -%}<script>window.jdgm=window.jdgm||{};window.jdgm.data=window.jdgm.data||{};window.jdgm.data.reviewWidget=window.jdgm.data.reviewWidget||{};window.jdgm.data.reviewWidget[{{ product.id | json }}]={{ product.metafields.judgeme.review_widget_data }};</script>{%- endif -%}
+      <noscript><div class="apdp-tail-review-viewport"><div class="apdp-tail-review-grid">{% render 'altaeron-pdp-review-cards', reviews: reviews, limit: 10 %}</div></div></noscript>
+    </div>
+  </section>
+
+  <section class="apdp-tail apdp-tail-faq apdp-shell apdp-reels-full alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronFaq-{{ section.id }}">
+    {% render 'altaeron-pdp-section-heading', number: '8', title: 'Frequently Asked Questions', subtitle: 'Sizing, safe use, shipping, and returns.', heading_id: faq_heading_id %}
+    <div class="apdp-tail-accordion">
+      <details><summary>Can I use it on either foot?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Yes. The corrector is designed for either foot. Fine-tune the adjustable fit to your comfort and follow the included fit guidance.</p></details>
+      <details><summary>How tightly should I adjust the dial?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Start with gentle tension and increase only until it feels comfortable. More force is not better. Reduce tension or stop use if you experience pain, numbness, or significant irritation.</p></details>
+      <details><summary>How long should I wear it each day?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Start with short, low-activity sessions and increase gradually as comfort allows. Follow the included product instructions.</p></details>
+      <details><summary>Can I walk or sleep while wearing it?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Altaeron is designed primarily for low-activity use. Do not sleep in the device unless the included instructions explicitly support overnight use. Follow the included instructions before walking in it.</p></details>
+      <details><summary>How long does shipping take?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Shipping options and delivery estimates are shown at checkout. Delivery times vary by destination, carrier operations, and customs processing.</p></details>
+      <details><summary>What if it does not fit or feel right?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Contact support for fit help. The 90-Day Comfort Guarantee covers eligible comfort, fit, or change-of-mind returns when you contact us within 90 days of delivery and follow the return instructions provided.</p></details>
+    </div>
+  </section>
+
+  <section class="apdp-final-cta alta-pdp-flow-section" aria-label="Final purchase call to action"><div class="apdp-shell apdp-final-cta__inner">
+    <div class="apdp-final-cta__product apdp-tail-media">{%- if tail_cta_product != blank -%}{{ tail_cta_product | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
+    <div class="apdp-final-cta__content"><h2>Give Your Big Toe More Room</h2><p>Adjustable support. Controlled by you.</p><div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>90-Day Comfort Guarantee</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>Free Shipping</b></span><span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>Real People Support</b></span></div><div class="apdp-final-payments"><span class="visually-hidden">Accepted payment methods</span><ul class="list list-payment" role="list">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul></div></div>
+    <div class="apdp-final-cta__buy"><div>{% render 'altaeron-pdp-stars', rating: review_rating %}<small>{{ review_rating_display }}/5 ({{ review_count }} reviews)</small><em data-apdp-final-savings{% if savings <= 0 %} hidden{% endif %}>Save {{ savings_money }}</em></div><p><strong data-apdp-final-price>{{ current_variant.price | money }}</strong><s data-apdp-final-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></p><button type="button" class="apdp-final-button" data-apdp-final-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{{ section.settings.cta_label }}<span data-apdp-final-button-price{% unless current_variant.available %} hidden{% endunless %}> — {{ current_variant.price | money }}</span></button><small data-apdp-installments>or 4 interest-free payments of {{ current_variant.price | divided_by: 4 | money }} with shop<span>Pay</span></small><p class="apdp-final-fine">Try it for up to 90 days. Contact support if it is not right for you.</p></div>
+    <div class="apdp-final-badge"><img src="{{ 'altaeron-90-day-risk-free-badge.svg' | asset_url }}" width="384" height="384" loading="lazy" alt="90-Day Comfort Guarantee"></div>
+  </div></section>
+
+  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small><span>{{ section.settings.price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></small><em data-apdp-sticky-savings{% if savings <= 0 %} hidden{% endif %}>Save {{ savings_money }}</em><small class="apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span data-apdp-sticky-text>{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span></button></div>
+  <script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script>
+</div>
+
+{% schema %}
+{
+  "name": "Altaeron Reels V2 PDP",
+  "tag": "section",
+  "class": "section-altaeron-pdp section-altaeron-pdp-reels-v2",
+  "settings": [
+    { "type": "header", "content": "Reels hero" },
+    { "type": "text", "id": "eyebrow", "label": "Product label", "default": "Adjustable Bunion Corrector" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Give Your Big Toe More Room" },
+    { "type": "textarea", "id": "subheadline", "label": "Outcome sentence", "default": "Adjustable support gently guides your big toe into a more comfortable position and helps reduce pressure around the bunion while worn." },
+    { "type": "text", "id": "price_label", "label": "Price label", "default": "From" },
+    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "Add to Cart" }
+  ],
+  "blocks": [
+    {
+      "type": "education_media",
+      "name": "Demonstration media",
+      "settings": [
+        { "type": "select", "id": "slot", "label": "Media position", "options": [
+          { "value": "support_demo", "label": "How it works demo" },
+          { "value": "day_story", "label": "How to use demo" }
+        ], "default": "support_demo" },
+        { "type": "image_picker", "id": "image", "label": "Image fallback" },
+        { "type": "video", "id": "video", "label": "Video" }
+      ]
+    },
+    {
+      "type": "tail_media",
+      "name": "Product media",
+      "settings": [
+        { "type": "select", "id": "slot", "label": "Media position", "options": [
+          { "value": "spacer", "label": "Basic toe spacer" },
+          { "value": "support", "label": "Altaeron support" },
+          { "value": "cta_product", "label": "Final CTA product" }
+        ], "default": "spacer" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Altaeron Reels V2 PDP" }]
+}
+{% endschema %}
