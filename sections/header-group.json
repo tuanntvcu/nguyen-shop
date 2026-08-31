@@ -14,33 +14,24 @@
     "announcement_bar_P4MRmx": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement_bar_wjU7D9": {
-          "type": "announcement_bar",
-          "settings": {
-            "text": "Support for everyday foot comfort",
-            "icon": "heart",
-            "link": ""
-          }
-        },
         "announcement_bar_yELyjf": {
           "type": "announcement_bar",
           "settings": {
             "text": "90-DAY COMFORT GUARANTEE",
-            "icon": "shield",
-            "link": ""
+            "link": "",
+            "icon": "shield"
           }
         },
         "announcement_bar_tracking": {
           "type": "announcement_bar",
           "settings": {
-            "text": "Order tracking available",
-            "icon": "shipping",
-            "link": "/account/orders"
+            "text": "free shipping worldwide",
+            "link": "/account/orders",
+            "icon": "shipping"
           }
         }
       },
       "block_order": [
-        "announcement_bar_wjU7D9",
         "announcement_bar_yELyjf",
         "announcement_bar_tracking"
       ],
@@ -57,7 +48,6 @@
     },
     "scrolling_promotion_KhdTdc": {
       "type": "scrolling-promotion",
-      "disabled": true,
       "blocks": {
         "text_niHbzP": {
           "type": "text",
@@ -110,6 +100,7 @@
         "text_t3BcT4",
         "text_QCAxbn"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-inverse",
         "vertical_alignment": "center",
