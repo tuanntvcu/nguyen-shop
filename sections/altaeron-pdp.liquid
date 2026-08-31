@@ -479,24 +479,24 @@
         </div>
         {%- if shop.enabled_payment_types.size > 0 -%}<ul class="apdp-payment-icons list list-payment" role="list" aria-label="{{ copy_prefix | append: '.accessibility.accepted_payment_methods' | t | escape }}">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul>{%- endif -%}
       </aside>
+
+      {%- if is_target_hero -%}
+        <aside class="apdp-compact-expert" aria-label="{{ 'altaeron_pdp.accessibility.product_guidance' | t | escape }}">
+          <div class="apdp-shell apdp-compact-expert__inner">
+            <div class="apdp-compact-expert__portrait">
+              <img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}">
+            </div>
+            <div class="apdp-compact-expert__profile">
+              <small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small>
+              <strong>{{ 'altaeron_pdp.expert.name' | t }}</strong>
+              <span>{{ 'altaeron_pdp.expert.role' | t }}</span>
+            </div>
+            <a href="#AltaeronMedicalReview-{{ section.id }}" data-apdp-medical-review-link>{{ 'altaeron_pdp.expert.read_review' | t }} <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </aside>
+      {%- endif -%}
     </div>
   </section>
-
-  {%- if is_target_hero -%}
-    <aside class="apdp-compact-expert" aria-label="{{ 'altaeron_pdp.accessibility.product_guidance' | t | escape }}">
-      <div class="apdp-shell apdp-compact-expert__inner">
-        <div class="apdp-compact-expert__portrait">
-          <img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}">
-        </div>
-        <div class="apdp-compact-expert__profile">
-          <small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small>
-          <strong>{{ 'altaeron_pdp.expert.name' | t }}</strong>
-          <span>{{ 'altaeron_pdp.expert.role' | t }}</span>
-        </div>
-        <a href="#AltaeronMedicalReview-{{ section.id }}" data-apdp-medical-review-link>{{ 'altaeron_pdp.expert.read_review' | t }} <span aria-hidden="true">&rarr;</span></a>
-      </div>
-    </aside>
-  {%- endif -%}
 
   <section class="apdp-education apdp-education--familiar alta-pdp-flow-section alta-pdp-flow-section--tight" aria-labelledby="AltaeronFamiliar-{{ section.id }}">
     <div class="apdp-shell">
