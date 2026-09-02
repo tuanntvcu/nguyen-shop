@@ -866,3 +866,33 @@ bundle-deals-widget input[type="radio"]{
   .altaeron-pdp--cro-hero .apdp-narrative .apdp-narrative__subhead,
   .altaeron-pdp--cro-hero .apdp-narrative .apdp-rating{max-width:none}
 }
+
+/* Let long localized purchase copy shrink and wrap throughout mobile. */
+@media(max-width:767px){
+  .altaeron-pdp .apdp-buy{max-width:100%;min-width:0;width:100%}
+  .altaeron-pdp :where(.apdp-form,bundle-deals-widget,.bd-widget,.bd-tiers,.bd-tier,.bd-tier__body,.bd-tier__main,.bd-tier__info,.bd-tier__name-row,.bd-tier__prices){max-width:100%;min-width:0}
+  .altaeron-pdp .bd-tier__info{overflow-wrap:anywhere}
+  .altaeron-pdp .bd-tier__prices{flex:0 1 auto}
+  .altaeron-pdp .apdp-promotion__footer{align-items:center}
+  .altaeron-pdp .apdp-promotion__ends{flex:1 1 110px;min-width:0;white-space:normal}
+  .altaeron-pdp [data-apdp-submit-text]{align-items:baseline;display:flex;flex-wrap:wrap;justify-content:center;min-width:0}
+  .altaeron-pdp [data-apdp-submit-label]{overflow-wrap:anywhere}
+  .altaeron-pdp [data-apdp-cta-price]{white-space:nowrap}
+  .altaeron-pdp .apdp-button[data-apdp-submit]>svg{flex:0 0 18px}
+  .altaeron-pdp .apdp-final-benefits{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .altaeron-pdp .apdp-final-benefits>span{min-width:0}
+  .altaeron-pdp .apdp-final-benefits b{overflow-wrap:anywhere}
+}
+
+/* Reflow dense controls instead of clipping them below 345px. */
+@media(max-width:344px){
+  .altaeron-pdp .bd-tier{--bd-tier-pad:10px 10px}
+  .altaeron-pdp .bd-tier__main{gap:8px}
+  .altaeron-pdp.altaeron-pdp .apdp-buy__price-line{grid-template-columns:minmax(0,1fr)}
+  .altaeron-pdp.altaeron-pdp .apdp-price__save{grid-column:1;grid-row:1;white-space:normal}
+  .altaeron-pdp.altaeron-pdp .apdp-buy__price-line>div{grid-column:1;grid-row:2}
+  .altaeron-pdp .apdp-button[data-apdp-submit]{font-size:15px;padding-inline:10px}
+  .altaeron-pdp .apdp-final-benefits{grid-template-columns:1fr;max-width:220px}
+  .altaeron-pdp .apdp-sticky__product{display:none}
+  .altaeron-pdp .apdp-sticky .apdp-button{flex:1 1 100%;max-width:none;width:100%}
+}
