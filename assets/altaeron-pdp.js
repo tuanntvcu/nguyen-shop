@@ -7,6 +7,102 @@
     return new Intl.NumberFormat(document.documentElement.lang || 'en-US', { style: 'currency', currency }).format(Number(cents || 0) / 100);
   }
 
+  const promotion = {
+    enabled: true,
+    name: 'Labor Day Sale',
+    discount: 15,
+    timeZone: 'America/Los_Angeles',
+    cta: 'Get My Labor Day Deal',
+  };
+
+  const promotionDateFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: promotion.timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hourCycle: 'h23',
+  });
+
+  function promotionDateParts(timestamp) {
+    return Object.fromEntries(
+      promotionDateFormatter.formatToParts(new Date(timestamp))
+        .filter(({ type }) => type !== 'literal')
+        .map(({ type, value }) => [type, Number(value)]),
+    );
+  }
+
+  function promotionTimeZoneOffset(timestamp) {
+    const parts = promotionDateParts(timestamp);
+    const timestampWithoutMilliseconds = Math.floor(timestamp / 1000) * 1000;
+    return Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second)
+      - timestampWithoutMilliseconds;
+  }
+
+  function nextPromotionMidnight(timestamp) {
+    const parts = promotionDateParts(timestamp);
+    const midnightAsUtc = Date.UTC(parts.year, parts.month - 1, parts.day + 1);
+    let deadline = midnightAsUtc;
+
+    // Resolve the IANA time-zone offset twice so this remains correct across PST/PDT changes.
+    for (let pass = 0; pass < 2; pass += 1) {
+      deadline = midnightAsUtc - promotionTimeZoneOffset(deadline);
+    }
+    return deadline;
+  }
+
+  function initPromotion(root) {
+    const card = root.querySelector('[data-apdp-promotion-card]');
+    if (!card || !promotion.enabled) return;
+
+    const countdown = card.querySelector('[data-apdp-promotion-countdown]');
+    const units = {
+      days: card.querySelector('[data-apdp-promotion-days]'),
+      hours: card.querySelector('[data-apdp-promotion-hours]'),
+      minutes: card.querySelector('[data-apdp-promotion-minutes]'),
+      seconds: card.querySelector('[data-apdp-promotion-seconds]'),
+    };
+    const submitLabel = root.querySelector('[data-apdp-submit-label]');
+    const stickyPromotion = root.querySelector('[data-apdp-promotion-sticky]');
+    const announcement = document.querySelector('.announcement-bar');
+
+    const update = () => {
+      const now = Date.now();
+      const deadline = nextPromotionMidnight(now);
+      const remaining = deadline - now;
+      const totalSeconds = Math.max(0, Math.floor(remaining / 1000));
+      const values = {
+        days: Math.floor(totalSeconds / 86400),
+        hours: Math.floor((totalSeconds % 86400) / 3600),
+        minutes: Math.floor((totalSeconds % 3600) / 60),
+        seconds: totalSeconds % 60,
+      };
+      Object.entries(values).forEach(([key, value]) => {
+        if (units[key]) units[key].textContent = String(value).padStart(2, '0');
+      });
+      countdown?.setAttribute('aria-label', `${values.days} days, ${values.hours} hours, ${values.minutes} minutes, ${values.seconds} seconds remaining until midnight Pacific Time`);
+    };
+
+    card.hidden = false;
+    if (stickyPromotion) stickyPromotion.hidden = false;
+    if (submitLabel) {
+      submitLabel.textContent = promotion.cta;
+      submitLabel.dataset.availableText = promotion.cta;
+    }
+    if (announcement) {
+      announcement.classList.add('announcement-bar--labor-day');
+      const announcementPromotion = document.createElement('div');
+      announcementPromotion.dataset.apdpPromoAnnouncement = '';
+      announcementPromotion.className = 'apdp-promo-announcement';
+      announcementPromotion.innerHTML = '<span class="apdp-promo-announcement__desktop">🇺🇸 Labor Day Sale — Extra 15% Off — Automatically Applied</span><span class="apdp-promo-announcement__mobile">Labor Day Sale — Extra 15% Off</span>';
+      announcement.append(announcementPromotion);
+    }
+    update();
+    window.setInterval(update, 1000);
+  }
+
   function initSocialProof(root) {
     const message = root.querySelector('[data-apdp-social-proof]');
     const count = message?.querySelector('[data-apdp-social-proof-count]');
@@ -811,6 +907,7 @@
   function init(root) {
     if (!root || root.dataset.apdpReady === 'true') return;
     root.dataset.apdpReady = 'true';
+    initPromotion(root);
     initHeroExperience(root);
     initSocialProof(root);
     const activateMedia = initGallery(root);

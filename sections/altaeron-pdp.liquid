@@ -425,8 +425,9 @@
       {%- endif -%}
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ copy_prefix | append: '.accessibility.purchase_product' | t: product: product.title | escape }}"{% if is_target_hero %} data-apdp-primary-purchase{% endif %}>
-        <h2 class="apdp-buy__title">{{ copy_prefix | append: '.buy.title' | t }}</h2>
         <a class="apdp-buy__rating" href="#AltaeronVerified-{{ section.id }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ buy_rating_label }}</strong></a>
+        {%- if product.handle == 'adjustable-bunion-corrector' -%}{%- render 'altaeron-labor-day-promotion', section: section -%}{%- endif -%}
+        <h2 class="apdp-buy__title">{{ copy_prefix | append: '.buy.title' | t }}</h2>
         <div class="apdp-buy__price-line">
           <div><p class="apdp-buy__from">{{ section.settings.price_label }}</p><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></div></div>
           <span class="apdp-price__save" data-apdp-savings{% if savings <= 0 %} hidden{% endif %}>{{ copy_prefix | append: '.common.save_amount' | t: amount: savings_money }}</span>
@@ -874,7 +875,7 @@
     </div>
   </div></section>
 
-  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small><span>{{ section.settings.price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></small><em data-apdp-sticky-savings{% if savings <= 0 %} hidden{% endif %}>{{ copy_prefix | append: '.common.save_amount' | t: amount: savings_money }}</em><small class="apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span data-apdp-sticky-text>{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span></button></div>
+  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small><span>{{ section.settings.price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></small><em data-apdp-sticky-savings{% if savings <= 0 %} hidden{% endif %}>{{ copy_prefix | append: '.common.save_amount' | t: amount: savings_money }}</em><small class="apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-sticky-text>{% if current_variant.available %}{{ section.settings.cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span></button></div>
   <script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script>
 </div>
 
