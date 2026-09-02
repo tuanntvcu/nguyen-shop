@@ -983,5 +983,159 @@
       "view": "Voir {{ product }}",
       "best_seller": "Meilleure vente"
     }
+  },
+  "altaeron_pdp_reels_v2": {
+    "common": {
+      "save": "Économisez",
+      "save_template": "Économisez [amount]",
+      "save_amount": "Économisez {{ amount }}",
+      "from": "À partir de",
+      "choose_bundle": "Choisissez votre lot",
+      "one_corrector": "1 correcteur",
+      "many_correctors": "[count] correcteurs",
+      "one_foot": "Pour un pied",
+      "most_popular": "Le plus populaire",
+      "best_value": "Meilleur rapport qualité-prix",
+      "bundle_subtitle": "Seulement [price] l’unité · Économisez [percent] %",
+      "rating": "{{ rating }}/5 · {{ count }} avis",
+      "rating_parenthetical": "{{ rating }}/5 ({{ count }} avis)"
+    },
+    "accessibility": {
+      "product_media": "Médias du produit",
+      "hero_video": "Démonstration du correcteur d’hallux valgus réglable",
+      "open_image": "Ouvrir l’image produit {{ index }}",
+      "return_demo": "Revenir à la vidéo de démonstration du produit",
+      "back_to_demo": "Retour à la démo",
+      "rating": "Noté {{ rating }} sur 5 d’après {{ count }} avis Judge.me",
+      "purchase": "Acheter {{ product }}",
+      "verified_reviewer": "Auteur vérifié",
+      "payment_methods": "Moyens de paiement acceptés",
+      "support_demo": "Démonstration du soutien réglable pour hallux valgus",
+      "day_media": "Comment mettre et régler doucement le correcteur d’hallux valgus",
+      "day_video": "Comment mettre et régler doucement le correcteur d’hallux valgus",
+      "how_to_use": "Comment utiliser le correcteur",
+      "basic_spacer": "Écarteur d’orteils basique",
+      "altaeron_corrector": "Correcteur d’hallux valgus réglable Altaeron",
+      "review_controls": "Commandes du carrousel d’avis",
+      "previous_reviews": "Avis précédents",
+      "next_reviews": "Avis suivants",
+      "publications": "Publications",
+      "final_cta": "Dernier appel à l’achat",
+      "badge": "Garantie confort de 90 jours"
+    },
+    "hero": {
+      "eyebrow": "Correcteur d’hallux valgus réglable",
+      "headline": "Offrez plus d’espace à votre gros orteil",
+      "subheadline_html": "<strong>Hallux valgus douloureux ?</strong> Réalignez votre gros orteil, soulagez la douleur et la pression, aidez à freiner la progression de l’hallux valgus et réduisez visiblement la bosse, sans chirurgie.",
+      "benefit_1": "Évitez la chirurgie et soulagez rapidement la douleur",
+      "benefit_2": "Convient à toutes les pointures – pour le pied gauche ou droit",
+      "benefit_3": "Renforce les muscles pour réaligner votre orteil",
+      "benefit_4": "Efficacité prouvée auprès de plus de 10 000 clients"
+    },
+    "story": {
+      "title_html": "Vous n’êtes plus qu’à un pas de <strong>vous LIBÉRER de l’inconfort lié à l’hallux valgus</strong>, des orteils gonflés et des douleurs aux pieds...",
+      "paragraph_1_html": "Si vous lisez ceci, il est probable que vous souffriez d’un <span class=\"apdp-gallery-story__alert\">inconfort persistant lié à l’hallux valgus.</span>",
+      "paragraph_2": "Conséquence : la douleur et l’inconfort affectent vos activités quotidiennes.",
+      "paragraph_3": "Sans traitement, la situation peut s’aggraver. Vos orteils peuvent se chevaucher et des orteils en marteau ou des excroissances osseuses peuvent apparaître.",
+      "paragraph_4_html": "L’hallux valgus est un <span class=\"apdp-gallery-story__alert\">trouble évolutif</span> qui ne disparaît pas de lui-même.",
+      "paragraph_5_html": "Au fil du temps, il peut entraîner des problèmes plus graves, comme <span class=\"apdp-gallery-story__consequence\">une chirurgie invasive, des problèmes aux hanches, aux genoux et au bas du dos, voire une perte de mobilité.</span>",
+      "paragraph_6": "Grâce aux bienfaits d’une thérapie d’alignement avancée éprouvée cliniquement et à un mécanisme d’articulation breveté, le Bunion Fix Alateron cible efficacement l’inconfort lié à l’hallux valgus et aide votre pied à retrouver son bien-être avec seulement 30 minutes d’utilisation quotidienne.",
+      "result_html": "91 % des utilisateurs ont signalé une <strong>réduction de la douleur au pied</strong> dès la première semaine"
+    },
+    "buy": {
+      "choose_option": "Choisissez une option",
+      "product_option": "Option du produit",
+      "installments": "ou 4 paiements sans intérêts de {{ amount }} avec",
+      "guarantee": "Garantie confort de 90 jours",
+      "guarantee_line_1": "Essayez-le pendant vos moments de faible activité pendant jusqu’à 90 jours.",
+      "guarantee_line_2": "S’il ne vous convient pas, contactez l’assistance pour obtenir de l’aide concernant le retour.",
+      "shipping": "Livraison gratuite",
+      "shipping_note": "Aucuns frais de livraison imprévus.",
+      "returns": "Garantie de 90 jours",
+      "returns_note": "Retours admissibles pour confort ou ajustement.",
+      "secure": "Paiement sécurisé",
+      "secure_note": "Chiffré et sécurisé.",
+      "support": "Assistance humaine",
+      "support_note": "De l’aide avant ou après votre commande.",
+      "review_body": "Mon podologue m’avait dit qu’une opération était nécessaire pour corriger mes hallux valgus douloureux. À la place, j’ai commandé le Bunion Fix d’Alateron. Après un mois d’utilisation, la douleur a nettement diminué et mon orteil a commencé à revenir vers sa position naturelle ! Cela a fait une grande différence.",
+      "verified_review": "Avis vérifié"
+    },
+    "support": {
+      "title": "Comment ça marche",
+      "subtitle": "Trois éléments simples agissent ensemble lorsque le correcteur est porté.",
+      "item_1_title": "Soutien réglable",
+      "item_1_text": "Réglez le niveau de tension selon votre confort.",
+      "item_2_title": "Guidage en douceur",
+      "item_2_text": "Aide à maintenir le gros orteil dans une position plus confortable pendant le port.",
+      "item_3_title": "Plus d’espace",
+      "item_3_text": "Aide à réduire la compression et la pression autour de l’hallux valgus."
+    },
+    "expectations": {
+      "title": "Ajustement, confort et utilisation réaliste",
+      "subtitle": "Les réponses pratiques à vérifier avant votre achat.",
+      "expect_title": "À QUOI S’ATTENDRE",
+      "fit_html": "<strong>Ajustement :</strong> Réglable et conçu pour les deux pieds. Affinez le réglage jusqu’à obtenir un ajustement confortable.",
+      "comfort_html": "<strong>Confort :</strong> Commencez avec une tension légère. Réduisez-la ou arrêtez en cas de douleur, d’engourdissement ou d’irritation importante.",
+      "walking_html": "<strong>Marche :</strong> Principalement destiné à une utilisation assise, détendue ou peu active. Suivez les instructions fournies avant de marcher.",
+      "shoes_html": "<strong>Chaussures :</strong> Ne supposez pas qu’il entrera dans des chaussures classiques. Vérifiez l’espace disponible et suivez les instructions fournies.",
+      "cannot_title": "CE QU’IL NE PEUT PAS FAIRE",
+      "wear_time_html": "<strong>Durée de port :</strong> Commencez par de courtes séances et augmentez progressivement selon votre confort.",
+      "results_html": "<strong>Résultats réalistes :</strong> Il aide à soutenir et guider l’orteil pendant le port. Il ne guérit pas l’hallux valgus et ne garantit pas une correction permanente.",
+      "not_right_html": "<strong>S’il ne convient pas :</strong> Contactez l’assistance dans les 90 jours suivant la livraison pour connaître les instructions de retour applicables.",
+      "consistency": "Une tension plus forte n’est pas meilleure. Utilisez une tension confortable et suivez les instructions fournies avec le produit."
+    },
+    "reviews": {
+      "title": "Avis clients",
+      "subtitle": "Avis publiés provenant du flux Judge.me du produit.",
+      "full_title": "Tous les avis clients",
+      "full_subtitle": "{{ rating }}/5 d’après {{ count }} avis Judge.me"
+    },
+    "spacer": {
+      "title": "Pourquoi ne pas utiliser un simple écarteur d’orteils ?",
+      "subtitle": "Créer de l’espace n’est pas la même chose qu’un soutien de positionnement réglable.",
+      "basic_title": "Écarteur d’orteils basique",
+      "basic_1": "Crée de l’espace",
+      "basic_2": "Positionnement fixe",
+      "basic_3": "Réglage limité",
+      "versus": "VS",
+      "altaeron_1": "Soutien réglable",
+      "altaeron_2": "Tension contrôlable",
+      "altaeron_3": "Espacement et soutien du positionnement"
+    },
+    "day": {
+      "title": "Commencez doucement. Réglez progressivement.",
+      "subtitle": "Utilisez une tension confortable et construisez progressivement votre routine.",
+      "step_1_title": "1. Mettez-le en place",
+      "step_1_text": "Positionnez confortablement le dispositif sur le bon pied.",
+      "step_2_title": "2. Réglez doucement",
+      "step_2_text": "Utilisez une tension confortable. Une tension plus forte n’est pas meilleure.",
+      "step_3_title": "3. Progressez graduellement",
+      "step_3_text": "Commencez par de courtes séances et augmentez la durée selon votre confort."
+    },
+    "expert": {
+      "title": "Validation par un expert",
+      "subtitle": "Analyse du mécanisme et des critères d’utilisation réalistes."
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "subtitle": "Taille, utilisation sûre, livraison et retours.",
+      "question_1": "Puis-je l’utiliser sur l’un ou l’autre pied ?",
+      "answer_1": "Oui. Le correcteur est conçu pour les deux pieds. Affinez le réglage selon votre confort et suivez les conseils d’ajustement fournis.",
+      "question_2": "À quel point dois-je serrer la molette ?",
+      "answer_2": "Commencez par une tension douce et augmentez-la uniquement jusqu’à ce qu’elle soit confortable. Une tension plus forte n’est pas meilleure. Réduisez-la ou arrêtez en cas de douleur, d’engourdissement ou d’irritation importante.",
+      "question_3": "Combien de temps dois-je le porter chaque jour ?",
+      "answer_3": "Commencez par de courtes séances peu actives et augmentez progressivement selon votre confort. Suivez les instructions fournies avec le produit.",
+      "question_4": "Puis-je marcher ou dormir en le portant ?",
+      "answer_4": "Altaeron est principalement conçu pour les périodes de faible activité. Ne dormez pas avec le dispositif sauf si les instructions fournies autorisent explicitement une utilisation nocturne. Consultez-les avant de marcher avec.",
+      "question_5": "Quels sont les délais de livraison ?",
+      "answer_5": "Les options et estimations de livraison sont affichées lors du paiement. Les délais varient selon la destination, le transporteur et le traitement douanier.",
+      "question_6": "Que faire s’il ne convient pas ou n’est pas confortable ?",
+      "answer_6": "Contactez l’assistance pour obtenir de l’aide sur l’ajustement. La Garantie confort de 90 jours couvre les retours admissibles liés au confort, à l’ajustement ou à un changement d’avis, à condition de nous contacter dans les 90 jours suivant la livraison et de suivre les instructions de retour."
+    },
+    "final_cta": {
+      "title": "Offrez plus d’espace à votre gros orteil",
+      "subtitle": "Un soutien réglable, contrôlé par vous.",
+      "fine_print": "Essayez-le pendant jusqu’à 90 jours. S’il ne vous convient pas, contactez l’assistance."
+    }
   }
 }

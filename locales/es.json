@@ -981,5 +981,159 @@
       "choose_options": "Elige opciones para {{ product }}",
       "view": "Ver {{ product }}"
     }
+  },
+  "altaeron_pdp_reels_v2": {
+    "common": {
+      "save": "Ahorra",
+      "save_template": "Ahorra [amount]",
+      "save_amount": "Ahorra {{ amount }}",
+      "from": "Desde",
+      "choose_bundle": "Elige tu paquete",
+      "one_corrector": "1 corrector",
+      "many_correctors": "[count] correctores",
+      "one_foot": "Para un pie",
+      "most_popular": "Más popular",
+      "best_value": "Mejor relación calidad-precio",
+      "bundle_subtitle": "Solo [price] cada uno · Ahorra un [percent] %",
+      "rating": "{{ rating }}/5 · {{ count }} reseñas",
+      "rating_parenthetical": "{{ rating }}/5 ({{ count }} reseñas)"
+    },
+    "accessibility": {
+      "product_media": "Contenido multimedia del producto",
+      "hero_video": "Demostración del corrector ajustable para juanetes",
+      "open_image": "Abrir imagen {{ index }} del producto",
+      "return_demo": "Volver al vídeo de demostración del producto",
+      "back_to_demo": "Volver a la demostración",
+      "rating": "Valorado con {{ rating }} de 5 según {{ count }} reseñas de Judge.me",
+      "purchase": "Comprar {{ product }}",
+      "verified_reviewer": "Autor verificado",
+      "payment_methods": "Métodos de pago aceptados",
+      "support_demo": "Demostración del soporte ajustable para juanetes",
+      "day_media": "Cómo colocar y ajustar suavemente el corrector para juanetes",
+      "day_video": "Cómo colocar y ajustar suavemente el corrector para juanetes",
+      "how_to_use": "Cómo usar el corrector",
+      "basic_spacer": "Separador de dedos básico",
+      "altaeron_corrector": "Corrector ajustable para juanetes Altaeron",
+      "review_controls": "Controles del carrusel de reseñas",
+      "previous_reviews": "Reseñas anteriores",
+      "next_reviews": "Reseñas siguientes",
+      "publications": "Publicaciones",
+      "final_cta": "Llamada final a la compra",
+      "badge": "Garantía de comodidad de 90 días"
+    },
+    "hero": {
+      "eyebrow": "Corrector ajustable para juanetes",
+      "headline": "Dale más espacio al dedo gordo del pie",
+      "subheadline_html": "<strong>¿Juanetes dolorosos?</strong> Realinea el dedo gordo, alivia el dolor y la presión, ayuda a frenar la progresión del juanete y reduce visiblemente el bulto, sin cirugía.",
+      "benefit_1": "Evita la cirugía y alivia el dolor rápidamente",
+      "benefit_2": "Se adapta a todos los pies – úsalo en cualquiera de los dos",
+      "benefit_3": "Fortalece los músculos para realinear el dedo",
+      "benefit_4": "Eficacia comprobada en más de 10 000 clientes"
+    },
+    "story": {
+      "title_html": "Estás a un solo paso de <strong>LIBERARTE de las molestias de los juanetes</strong>, los dedos hinchados y el dolor de pies...",
+      "paragraph_1_html": "Si estás leyendo esto, probablemente sufres <span class=\"apdp-gallery-story__alert\">molestias persistentes por los juanetes.</span>",
+      "paragraph_2": "¿El resultado? El dolor y las molestias afectan a tus actividades diarias.",
+      "paragraph_3": "Si no se trata, puede empeorar. Los dedos pueden cruzarse y pueden aparecer dedos en martillo y espolones óseos.",
+      "paragraph_4_html": "Los juanetes son un <span class=\"apdp-gallery-story__alert\">trastorno progresivo</span> y no desaparecen por sí solos.",
+      "paragraph_5_html": "Con el tiempo, pueden provocar problemas más graves, como <span class=\"apdp-gallery-story__consequence\">cirugía invasiva, problemas en las caderas, las rodillas y la zona lumbar, e incluso inmovilidad.</span>",
+      "paragraph_6": "Gracias a una terapia avanzada de alineación clínicamente probada y a un mecanismo de articulación patentado, Bunion Fix de Alateron trata eficazmente las molestias del juanete en la zona afectada y ayuda a recuperar el bienestar del pie con tan solo 30 minutos de uso diario.",
+      "result_html": "El 91 % de los usuarios indicó una <strong>reducción del dolor de pies</strong> desde la primera semana"
+    },
+    "buy": {
+      "choose_option": "Elige una opción",
+      "product_option": "Opción del producto",
+      "installments": "o 4 pagos sin intereses de {{ amount }} con",
+      "guarantee": "Garantía de comodidad de 90 días",
+      "guarantee_line_1": "Pruébalo en momentos de poca actividad durante un máximo de 90 días.",
+      "guarantee_line_2": "Si no es adecuado para ti, contacta con soporte para recibir ayuda con la devolución.",
+      "shipping": "Envío gratuito",
+      "shipping_note": "Sin gastos de envío inesperados.",
+      "returns": "Garantía de 90 días",
+      "returns_note": "Devoluciones elegibles por comodidad o ajuste.",
+      "secure": "Pago seguro",
+      "secure_note": "Cifrado y seguro.",
+      "support": "Asistencia personal",
+      "support_note": "Ayuda antes o después de tu pedido.",
+      "review_body": "Mi podólogo me dijo que necesitaba cirugía para corregir mis dolorosos juanetes. En su lugar, pedí Bunion Fix de Alateron y, después de usarlo durante un mes, el dolor del juanete se redujo considerablemente y el dedo empezó a volver a su posición natural. ¡Ha supuesto una gran diferencia!",
+      "verified_review": "Reseña verificada"
+    },
+    "support": {
+      "title": "Cómo funciona",
+      "subtitle": "Tres piezas sencillas trabajan juntas mientras llevas puesto el corrector.",
+      "item_1_title": "Soporte ajustable",
+      "item_1_text": "Controla el nivel de tensión según tu comodidad.",
+      "item_2_title": "Guía suave",
+      "item_2_text": "Ayuda a mantener el dedo gordo en una posición más cómoda mientras lo llevas puesto.",
+      "item_3_title": "Más espacio",
+      "item_3_text": "Ayuda a reducir la compresión y la presión alrededor del juanete."
+    },
+    "expectations": {
+      "title": "Ajuste, comodidad y uso realista",
+      "subtitle": "Las respuestas prácticas que debes revisar antes de comprar.",
+      "expect_title": "QUÉ PUEDES ESPERAR",
+      "fit_html": "<strong>Ajuste:</strong> Ajustable y diseñado para cualquiera de los dos pies. Regúlalo hasta que resulte cómodo.",
+      "comfort_html": "<strong>Comodidad:</strong> Empieza con una tensión ligera. Redúcela o deja de usarlo si sientes dolor, entumecimiento o una irritación importante.",
+      "walking_html": "<strong>Caminar:</strong> Pensado principalmente para usar sentado, relajado o con poca actividad. Sigue las instrucciones incluidas antes de caminar.",
+      "shoes_html": "<strong>Calzado:</strong> No des por hecho que cabrá en un zapato normal. Comprueba el espacio disponible y sigue las instrucciones incluidas.",
+      "cannot_title": "LO QUE NO PUEDE HACER",
+      "wear_time_html": "<strong>Tiempo de uso:</strong> Empieza con sesiones cortas y aumenta gradualmente según tu comodidad.",
+      "results_html": "<strong>Resultados realistas:</strong> Ayuda a sostener y guiar el dedo mientras se usa. No cura los juanetes ni garantiza una corrección permanente.",
+      "not_right_html": "<strong>Si no es adecuado:</strong> Contacta con soporte dentro de los 90 días posteriores a la entrega para recibir las instrucciones de devolución aplicables.",
+      "consistency": "Más fuerza no es mejor. Usa una tensión cómoda y sigue las instrucciones incluidas con el producto."
+    },
+    "reviews": {
+      "title": "Reseñas de clientes",
+      "subtitle": "Opiniones publicadas desde el feed de reseñas de Judge.me del producto.",
+      "full_title": "Todas las reseñas de clientes",
+      "full_subtitle": "{{ rating }}/5 según {{ count }} reseñas de Judge.me"
+    },
+    "spacer": {
+      "title": "¿Por qué no usar un separador de dedos básico?",
+      "subtitle": "Crear espacio no es lo mismo que ofrecer soporte de posicionamiento ajustable.",
+      "basic_title": "Separador de dedos básico",
+      "basic_1": "Crea espacio",
+      "basic_2": "Posición fija",
+      "basic_3": "Ajuste limitado",
+      "versus": "VS",
+      "altaeron_1": "Soporte ajustable",
+      "altaeron_2": "Tensión controlable",
+      "altaeron_3": "Separación y soporte de posicionamiento"
+    },
+    "day": {
+      "title": "Empieza suavemente. Ajusta poco a poco.",
+      "subtitle": "Usa una tensión cómoda e incorpora el corrector gradualmente a tu rutina.",
+      "step_1_title": "1. Colócalo",
+      "step_1_text": "Coloca el dispositivo cómodamente en el pie correcto.",
+      "step_2_title": "2. Ajústalo suavemente",
+      "step_2_text": "Usa una tensión cómoda. Más fuerza no es mejor.",
+      "step_3_title": "3. Aumenta gradualmente",
+      "step_3_text": "Empieza con sesiones cortas y aumenta la duración según tu comodidad."
+    },
+    "expert": {
+      "title": "Validación de expertos",
+      "subtitle": "Una revisión del mecanismo y de los criterios de uso realistas."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "subtitle": "Talla, uso seguro, envío y devoluciones.",
+      "question_1": "¿Puedo usarlo en cualquiera de los dos pies?",
+      "answer_1": "Sí. El corrector está diseñado para cualquiera de los dos pies. Ajusta el encaje según tu comodidad y sigue las indicaciones incluidas.",
+      "question_2": "¿Cuánto debo apretar la rueda?",
+      "answer_2": "Empieza con una tensión suave y auméntala solo hasta que resulte cómoda. Más fuerza no es mejor. Reduce la tensión o deja de usarlo si sientes dolor, entumecimiento o una irritación importante.",
+      "question_3": "¿Cuánto tiempo debo usarlo cada día?",
+      "answer_3": "Empieza con sesiones cortas y de poca actividad, y aumenta gradualmente según tu comodidad. Sigue las instrucciones incluidas con el producto.",
+      "question_4": "¿Puedo caminar o dormir mientras lo llevo puesto?",
+      "answer_4": "Altaeron está diseñado principalmente para periodos de poca actividad. No duermas con el dispositivo a menos que las instrucciones incluidas permitan expresamente el uso nocturno. Consúltalas antes de caminar con él.",
+      "question_5": "¿Cuánto tarda el envío?",
+      "answer_5": "Las opciones y estimaciones de entrega aparecen durante el pago. Los plazos varían según el destino, el transportista y la tramitación aduanera.",
+      "question_6": "¿Qué ocurre si no se ajusta bien o no resulta cómodo?",
+      "answer_6": "Contacta con soporte para recibir ayuda con el ajuste. La Garantía de comodidad de 90 días cubre las devoluciones elegibles por comodidad, ajuste o cambio de opinión si nos contactas dentro de los 90 días posteriores a la entrega y sigues las instrucciones de devolución."
+    },
+    "final_cta": {
+      "title": "Dale más espacio al dedo gordo del pie",
+      "subtitle": "Soporte ajustable. Tú tienes el control.",
+      "fine_print": "Pruébalo durante un máximo de 90 días. Si no es adecuado para ti, contacta con soporte."
+    }
   }
 }

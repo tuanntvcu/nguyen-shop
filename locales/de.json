@@ -974,5 +974,159 @@
       "view": "{{ product }} ansehen",
       "best_seller": "Bestseller"
     }
+  },
+  "altaeron_pdp_reels_v2": {
+    "common": {
+      "save": "Sparen",
+      "save_template": "[amount] sparen",
+      "save_amount": "{{ amount }} sparen",
+      "from": "Ab",
+      "choose_bundle": "Set auswählen",
+      "one_corrector": "1 Korrektor",
+      "many_correctors": "[count] Korrektoren",
+      "one_foot": "Für einen Fuß",
+      "most_popular": "Am beliebtesten",
+      "best_value": "Bestes Preis-Leistungs-Verhältnis",
+      "bundle_subtitle": "Nur [price] pro Stück · [percent] % sparen",
+      "rating": "{{ rating }}/5 · {{ count }} Bewertungen",
+      "rating_parenthetical": "{{ rating }}/5 ({{ count }} Bewertungen)"
+    },
+    "accessibility": {
+      "product_media": "Produktmedien",
+      "hero_video": "Produktdemonstration der verstellbaren Hallux-valgus-Schiene",
+      "open_image": "Produktbild {{ index }} öffnen",
+      "return_demo": "Zum Produktdemonstrationsvideo zurückkehren",
+      "back_to_demo": "Zurück zur Demo",
+      "rating": "Mit {{ rating }} von 5 Sternen aus {{ count }} Judge.me-Bewertungen bewertet",
+      "purchase": "{{ product }} kaufen",
+      "verified_reviewer": "Verifizierte Bewertung",
+      "payment_methods": "Akzeptierte Zahlungsmethoden",
+      "support_demo": "Demonstration der verstellbaren Hallux-valgus-Unterstützung",
+      "day_media": "Hallux-valgus-Korrektor anlegen und sanft einstellen",
+      "day_video": "Hallux-valgus-Korrektor anlegen und sanft einstellen",
+      "how_to_use": "So verwenden Sie den Korrektor",
+      "basic_spacer": "Einfacher Zehenspreizer",
+      "altaeron_corrector": "Verstellbarer Altaeron Hallux-valgus-Korrektor",
+      "review_controls": "Steuerung des Bewertungs-Sliders",
+      "previous_reviews": "Vorherige Bewertungen",
+      "next_reviews": "Nächste Bewertungen",
+      "publications": "Publikationen",
+      "final_cta": "Abschließender Kaufaufruf",
+      "badge": "90-Tage-Komfortgarantie"
+    },
+    "hero": {
+      "eyebrow": "Verstellbarer Hallux-valgus-Korrektor",
+      "headline": "Geben Sie Ihrem großen Zeh mehr Platz",
+      "subheadline_html": "<strong>Schmerzhafter Hallux valgus?</strong> Richten Sie Ihren großen Zeh neu aus, lindern Sie Schmerzen und Druck, helfen Sie, das Fortschreiten aufzuhalten, und reduzieren Sie die Wölbung sichtbar – ganz ohne Operation.",
+      "benefit_1": "Operation vermeiden und Schmerzen schnell lindern",
+      "benefit_2": "Für alle Fußgrößen – links oder rechts tragbar",
+      "benefit_3": "Stärkt die Muskeln zur Neuausrichtung des Zehs",
+      "benefit_4": "Bei über 10.000 Kunden bewährt"
+    },
+    "story": {
+      "title_html": "Sie sind nur noch einen Schritt davon entfernt, <strong>Hallux-valgus-Beschwerden, geschwollene Zehen und Fußschmerzen LOSZUWERDEN</strong>...",
+      "paragraph_1_html": "Wenn Sie das lesen, leiden Sie wahrscheinlich unter anhaltenden <span class=\"apdp-gallery-story__alert\">Hallux-valgus-Beschwerden.</span>",
+      "paragraph_2": "Die Folge: Schmerzen und Beschwerden beeinträchtigen Ihren Alltag.",
+      "paragraph_3": "Ohne Behandlung kann es schlimmer werden. Die Zehen können sich überkreuzen und Hammerzehen oder Knochensporne können entstehen.",
+      "paragraph_4_html": "Hallux valgus ist eine <span class=\"apdp-gallery-story__alert\">fortschreitende Erkrankung</span>, die nicht von selbst verschwindet.",
+      "paragraph_5_html": "Mit der Zeit kann dies zu ernsteren Problemen führen, darunter <span class=\"apdp-gallery-story__consequence\">invasive Operationen, Beschwerden an Hüfte, Knien und unterem Rücken sowie sogar eingeschränkte Beweglichkeit.</span>",
+      "paragraph_6": "Durch eine klinisch erprobte, fortschrittliche Ausrichtungstherapie und einen patentierten Gelenkmechanismus lindert der Alateron Bunion Fix Beschwerden im betroffenen Fußbereich und unterstützt die Fußgesundheit bei nur 30 Minuten täglicher Anwendung.",
+      "result_html": "91 % der Anwender berichteten bereits in der ersten Woche über <strong>weniger Fußschmerzen</strong>"
+    },
+    "buy": {
+      "choose_option": "Option auswählen",
+      "product_option": "Produktoption",
+      "installments": "oder 4 zinsfreie Zahlungen von {{ amount }} mit",
+      "guarantee": "90-Tage-Komfortgarantie",
+      "guarantee_line_1": "Testen Sie ihn bis zu 90 Tage lang in ruhigen Momenten.",
+      "guarantee_line_2": "Wenn er nicht zu Ihnen passt, wenden Sie sich für Hilfe bei der Rückgabe an den Support.",
+      "shipping": "Kostenloser Versand",
+      "shipping_note": "Keine überraschenden Lieferkosten.",
+      "returns": "90-Tage-Garantie",
+      "returns_note": "Berechtigte Rückgaben bei Komfort- oder Passformproblemen.",
+      "secure": "Sicherer Checkout",
+      "secure_note": "Verschlüsselt und sicher.",
+      "support": "Persönlicher Support",
+      "support_note": "Hilfe vor und nach der Bestellung.",
+      "review_body": "Mein Podologe sagte mir, dass ich meine schmerzhaften Ballenzehen operieren lassen müsse. Stattdessen bestellte ich den Bunion Fix von Alateron. Nach einem Monat waren die Schmerzen deutlich geringer und mein Zeh begann, sich wieder in seine natürliche Position zu bewegen. Das hat einen großen Unterschied gemacht!",
+      "verified_review": "Verifizierte Bewertung"
+    },
+    "support": {
+      "title": "So funktioniert es",
+      "subtitle": "Drei einfache Komponenten arbeiten beim Tragen des Korrektors zusammen.",
+      "item_1_title": "Verstellbare Unterstützung",
+      "item_1_text": "Passen Sie die Spannung an Ihren Komfort an.",
+      "item_2_title": "Sanfte Führung",
+      "item_2_text": "Unterstützt den großen Zeh beim Tragen in einer bequemeren Position.",
+      "item_3_title": "Mehr Platz",
+      "item_3_text": "Hilft, Enge und Druck im Bereich des Ballens zu reduzieren."
+    },
+    "expectations": {
+      "title": "Passform, Komfort und realistische Anwendung",
+      "subtitle": "Praktische Antworten, die Sie vor dem Kauf kennen sollten.",
+      "expect_title": "WAS SIE ERWARTEN KÖNNEN",
+      "fit_html": "<strong>Passform:</strong> Verstellbar und für beide Füße geeignet. Stellen Sie ihn so ein, dass er bequem sitzt.",
+      "comfort_html": "<strong>Komfort:</strong> Beginnen Sie mit leichter Spannung. Verringern Sie sie oder beenden Sie die Anwendung bei Schmerzen, Taubheit oder deutlicher Reizung.",
+      "walking_html": "<strong>Gehen:</strong> Hauptsächlich für sitzende, entspannte oder wenig aktive Phasen vorgesehen. Beachten Sie vor dem Gehen die beiliegende Anleitung.",
+      "shoes_html": "<strong>Schuhe:</strong> Gehen Sie nicht davon aus, dass der Korrektor in normale Schuhe passt. Prüfen Sie den Platz und beachten Sie die Anleitung.",
+      "cannot_title": "WAS ER NICHT KANN",
+      "wear_time_html": "<strong>Tragedauer:</strong> Beginnen Sie mit kurzen Sitzungen und verlängern Sie sie je nach Komfort schrittweise.",
+      "results_html": "<strong>Realistische Ergebnisse:</strong> Er unterstützt und führt den Zeh während des Tragens. Er heilt Hallux valgus nicht und garantiert keine dauerhafte Korrektur.",
+      "not_right_html": "<strong>Wenn er nicht passt:</strong> Kontaktieren Sie den Support innerhalb von 90 Tagen nach Lieferung, um die geltenden Rückgabehinweise zu erhalten.",
+      "consistency": "Mehr Kraft ist nicht besser. Verwenden Sie eine angenehme Spannung und beachten Sie die beiliegende Produktanleitung."
+    },
+    "reviews": {
+      "title": "Kundenbewertungen",
+      "subtitle": "Veröffentlichte Rückmeldungen aus dem Judge.me-Bewertungsfeed des Produkts.",
+      "full_title": "Alle Kundenbewertungen",
+      "full_subtitle": "{{ rating }}/5 aus {{ count }} Judge.me-Bewertungen"
+    },
+    "spacer": {
+      "title": "Warum nicht einfach ein Zehenspreizer?",
+      "subtitle": "Reiner Abstand ist etwas anderes als verstellbare Positionierungsunterstützung.",
+      "basic_title": "Einfacher Zehenspreizer",
+      "basic_1": "Schafft Abstand",
+      "basic_2": "Feste Positionierung",
+      "basic_3": "Begrenzte Anpassung",
+      "versus": "VS",
+      "altaeron_1": "Verstellbare Unterstützung",
+      "altaeron_2": "Regulierbare Spannung",
+      "altaeron_3": "Abstand plus Positionierungsunterstützung"
+    },
+    "day": {
+      "title": "Sanft beginnen. Langsam anpassen.",
+      "subtitle": "Verwenden Sie eine angenehme Spannung und bauen Sie Ihre Routine schrittweise auf.",
+      "step_1_title": "1. Anlegen",
+      "step_1_text": "Positionieren Sie das Gerät bequem am richtigen Fuß.",
+      "step_2_title": "2. Sanft einstellen",
+      "step_2_text": "Verwenden Sie eine angenehme Spannung. Mehr Kraft ist nicht besser.",
+      "step_3_title": "3. Langsam steigern",
+      "step_3_text": "Beginnen Sie mit kürzeren Sitzungen und verlängern Sie sie, wenn es angenehm bleibt."
+    },
+    "expert": {
+      "title": "Bestätigung durch Experten",
+      "subtitle": "Prüfung des Mechanismus und realistischer Anwendungskriterien."
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "subtitle": "Größe, sichere Anwendung, Versand und Rückgabe.",
+      "question_1": "Kann ich ihn an beiden Füßen verwenden?",
+      "answer_1": "Ja. Der Korrektor ist für beide Füße geeignet. Passen Sie die verstellbare Passform an Ihren Komfort an und beachten Sie die beiliegenden Hinweise.",
+      "question_2": "Wie fest soll ich den Drehknopf einstellen?",
+      "answer_2": "Beginnen Sie mit sanfter Spannung und erhöhen Sie sie nur, solange es angenehm bleibt. Mehr Kraft ist nicht besser. Reduzieren Sie die Spannung oder beenden Sie die Anwendung bei Schmerzen, Taubheit oder deutlicher Reizung.",
+      "question_3": "Wie lange sollte ich ihn täglich tragen?",
+      "answer_3": "Beginnen Sie mit kurzen, wenig aktiven Sitzungen und steigern Sie die Dauer je nach Komfort. Beachten Sie die beiliegende Produktanleitung.",
+      "question_4": "Kann ich damit gehen oder schlafen?",
+      "answer_4": "Altaeron ist hauptsächlich für wenig aktive Phasen gedacht. Schlafen Sie nicht mit dem Gerät, sofern die beiliegende Anleitung die Nutzung über Nacht nicht ausdrücklich erlaubt. Lesen Sie die Anleitung, bevor Sie damit gehen.",
+      "question_5": "Wie lange dauert der Versand?",
+      "answer_5": "Versandoptionen und Lieferzeitangaben werden beim Checkout angezeigt. Die Dauer variiert je nach Zielort, Versanddienstleister und Zollabwicklung.",
+      "question_6": "Was, wenn es nicht passt oder sich nicht richtig anfühlt?",
+      "answer_6": "Wenden Sie sich für Hilfe bei der Passform an den Support. Die 90-Tage-Komfortgarantie gilt für berechtigte Rückgaben wegen Komfort, Passform oder Meinungsänderung, wenn Sie uns innerhalb von 90 Tagen nach Lieferung kontaktieren und die Rückgabehinweise befolgen."
+    },
+    "final_cta": {
+      "title": "Geben Sie Ihrem großen Zeh mehr Platz",
+      "subtitle": "Verstellbare Unterstützung. Von Ihnen kontrolliert.",
+      "fine_print": "Testen Sie ihn bis zu 90 Tage. Wenn er nicht zu Ihnen passt, kontaktieren Sie den Support."
+    }
   }
 }
