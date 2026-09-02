@@ -1,20 +1,28 @@
-<section class="apdp-promotion" data-apdp-promotion-card aria-labelledby="AltaeronPromotionTitle-{{ section.id }}">
+<section
+  class="apdp-promotion"
+  data-apdp-promotion-card
+  data-apdp-promotion-cta="{{ 'altaeron_pdp_reels_v2.promotion.cta' | t | escape }}"
+  data-apdp-promotion-announcement-desktop="{{ 'altaeron_pdp_reels_v2.promotion.announcement_desktop' | t | escape }}"
+  data-apdp-promotion-announcement-mobile="{{ 'altaeron_pdp_reels_v2.promotion.announcement_mobile' | t | escape }}"
+  data-apdp-promotion-timer-label="{{ 'altaeron_pdp_reels_v2.promotion.timer_remaining' | t: days: '[days]', hours: '[hours]', minutes: '[minutes]', seconds: '[seconds]' | escape }}"
+  aria-labelledby="AltaeronPromotionTitle-{{ section.id }}"
+>
   <div class="apdp-promotion__copy">
-    <p class="apdp-promotion__eyebrow">🔥 Labor Day Sale</p>
-    <h3 id="AltaeronPromotionTitle-{{ section.id }}">Get More Relief. Pay Less.</h3>
-    <p class="apdp-promotion__offer"><strong>Extra 15% Off</strong> <span>— Automatically Applied</span></p>
+    <p class="apdp-promotion__eyebrow">🔥 {{ 'altaeron_pdp_reels_v2.promotion.eyebrow' | t }}</p>
+    <h3 id="AltaeronPromotionTitle-{{ section.id }}">{{ 'altaeron_pdp_reels_v2.promotion.title' | t }}</h3>
+    <p class="apdp-promotion__offer"><strong>{{ 'altaeron_pdp_reels_v2.promotion.offer' | t }}</strong> <span>{{ 'altaeron_pdp_reels_v2.promotion.automatically_applied' | t }}</span></p>
   </div>
   <div class="apdp-promotion__footer">
-    <p class="apdp-promotion__ends">Ends Today at 11:59 PM PT</p>
-    <div class="apdp-promotion__countdown" data-apdp-promotion-countdown role="timer" aria-label="Time remaining until midnight Pacific Time">
+    <p class="apdp-promotion__ends">{{ 'altaeron_pdp_reels_v2.promotion.ends_today' | t }}</p>
+    <div class="apdp-promotion__countdown" data-apdp-promotion-countdown role="timer" aria-label="{{ 'altaeron_pdp_reels_v2.promotion.timer_initial' | t | escape }}">
       {%- for unit in (1..4) -%}
         {%- case unit -%}
-          {%- when 1 -%}{%- assign unit_name = 'Days' -%}{%- assign unit_key = 'days' -%}
-          {%- when 2 -%}{%- assign unit_name = 'Hours' -%}{%- assign unit_key = 'hours' -%}
-          {%- when 3 -%}{%- assign unit_name = 'Minutes' -%}{%- assign unit_key = 'minutes' -%}
-          {%- when 4 -%}{%- assign unit_name = 'Seconds' -%}{%- assign unit_key = 'seconds' -%}
+          {%- when 1 -%}{%- assign unit_key = 'days' -%}
+          {%- when 2 -%}{%- assign unit_key = 'hours' -%}
+          {%- when 3 -%}{%- assign unit_key = 'minutes' -%}
+          {%- when 4 -%}{%- assign unit_key = 'seconds' -%}
         {%- endcase -%}
-        <span class="apdp-promotion__time"><strong data-apdp-promotion-{{ unit_key }}>00</strong><small>{{ unit_name }}</small></span>
+        <span class="apdp-promotion__time"><strong data-apdp-promotion-{{ unit_key }}>00</strong><small>{{ 'altaeron_pdp_reels_v2.promotion.' | append: unit_key | t }}</small></span>
         {%- unless forloop.last -%}<span class="apdp-promotion__separator" aria-hidden="true">:</span>{%- endunless -%}
       {%- endfor -%}
     </div>

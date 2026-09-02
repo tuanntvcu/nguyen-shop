@@ -985,6 +985,22 @@
     }
   },
   "altaeron_pdp_reels_v2": {
+    "promotion": {
+      "eyebrow": "Labor-Day-Angebot",
+      "title": "Mehr Entlastung. Weniger bezahlen.",
+      "offer": "Zusätzlich 15 % Rabatt",
+      "automatically_applied": "— Wird automatisch angewendet",
+      "ends_today": "Endet heute um 23:59 Uhr PT",
+      "timer_initial": "Verbleibende Zeit bis Mitternacht (pazifische Zeit)",
+      "timer_remaining": "Noch {{ days }} Tage, {{ hours }} Stunden, {{ minutes }} Minuten und {{ seconds }} Sekunden bis Mitternacht (pazifische Zeit)",
+      "days": "Tage",
+      "hours": "Stunden",
+      "minutes": "Minuten",
+      "seconds": "Sekunden",
+      "cta": "Labor-Day-Angebot sichern",
+      "announcement_desktop": "🇺🇸 Labor-Day-Angebot — Zusätzlich 15 % Rabatt — Wird automatisch angewendet",
+      "announcement_mobile": "Labor-Day-Angebot — Zusätzlich 15 % Rabatt"
+    },
     "common": {
       "save": "Sparen",
       "save_template": "[amount] sparen",

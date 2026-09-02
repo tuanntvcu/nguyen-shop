@@ -9,10 +9,7 @@
 
   const promotion = {
     enabled: true,
-    name: 'Labor Day Sale',
-    discount: 15,
     timeZone: 'America/Los_Angeles',
-    cta: 'Get My Labor Day Deal',
   };
 
   const promotionDateFormatter = new Intl.DateTimeFormat('en-US', {
@@ -67,6 +64,12 @@
     const submitLabel = root.querySelector('[data-apdp-submit-label]');
     const stickyPromotion = root.querySelector('[data-apdp-promotion-sticky]');
     const announcement = document.querySelector('.announcement-bar');
+    const translations = {
+      cta: card.dataset.apdpPromotionCta,
+      announcementDesktop: card.dataset.apdpPromotionAnnouncementDesktop,
+      announcementMobile: card.dataset.apdpPromotionAnnouncementMobile,
+      timerLabel: card.dataset.apdpPromotionTimerLabel,
+    };
 
     const update = () => {
       const now = Date.now();
@@ -82,21 +85,32 @@
       Object.entries(values).forEach(([key, value]) => {
         if (units[key]) units[key].textContent = String(value).padStart(2, '0');
       });
-      countdown?.setAttribute('aria-label', `${values.days} days, ${values.hours} hours, ${values.minutes} minutes, ${values.seconds} seconds remaining until midnight Pacific Time`);
+      const timerLabel = translations.timerLabel
+        ?.replace('[days]', values.days)
+        .replace('[hours]', values.hours)
+        .replace('[minutes]', values.minutes)
+        .replace('[seconds]', values.seconds);
+      if (timerLabel) countdown?.setAttribute('aria-label', timerLabel);
     };
 
     card.hidden = false;
     if (stickyPromotion) stickyPromotion.hidden = false;
-    if (submitLabel) {
-      submitLabel.textContent = promotion.cta;
-      submitLabel.dataset.availableText = promotion.cta;
+    if (submitLabel && translations.cta) {
+      submitLabel.textContent = translations.cta;
+      submitLabel.dataset.availableText = translations.cta;
     }
     if (announcement) {
       announcement.classList.add('announcement-bar--labor-day');
       const announcementPromotion = document.createElement('div');
       announcementPromotion.dataset.apdpPromoAnnouncement = '';
       announcementPromotion.className = 'apdp-promo-announcement';
-      announcementPromotion.innerHTML = '<span class="apdp-promo-announcement__desktop">🇺🇸 Labor Day Sale — Extra 15% Off — Automatically Applied</span><span class="apdp-promo-announcement__mobile">Labor Day Sale — Extra 15% Off</span>';
+      const desktopCopy = document.createElement('span');
+      desktopCopy.className = 'apdp-promo-announcement__desktop';
+      desktopCopy.textContent = translations.announcementDesktop;
+      const mobileCopy = document.createElement('span');
+      mobileCopy.className = 'apdp-promo-announcement__mobile';
+      mobileCopy.textContent = translations.announcementMobile;
+      announcementPromotion.append(desktopCopy, mobileCopy);
       announcement.append(announcementPromotion);
     }
     update();

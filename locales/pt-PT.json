@@ -983,6 +983,22 @@
     }
   },
   "altaeron_pdp_reels_v2": {
+    "promotion": {
+      "eyebrow": "Promoção do Dia do Trabalho",
+      "title": "Mais alívio. Pague menos.",
+      "offer": "15% de desconto adicional",
+      "automatically_applied": "— Aplicado automaticamente",
+      "ends_today": "Termina hoje às 23:59 (hora do Pacífico)",
+      "timer_initial": "Tempo restante até à meia-noite, hora do Pacífico",
+      "timer_remaining": "Faltam {{ days }} dias, {{ hours }} horas, {{ minutes }} minutos e {{ seconds }} segundos até à meia-noite, hora do Pacífico",
+      "days": "Dias",
+      "hours": "Horas",
+      "minutes": "Minutos",
+      "seconds": "Segundos",
+      "cta": "Obter a promoção do Dia do Trabalho",
+      "announcement_desktop": "🇺🇸 Promoção do Dia do Trabalho — 15% de desconto adicional — Aplicado automaticamente",
+      "announcement_mobile": "Dia do Trabalho — 15% de desconto adicional"
+    },
     "common": {
       "save": "Poupe",
       "save_template": "Poupe [amount]",

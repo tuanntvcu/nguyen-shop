@@ -983,6 +983,22 @@
     }
   },
   "altaeron_pdp_reels_v2": {
+    "promotion": {
+      "eyebrow": "Oferta del Día del Trabajo",
+      "title": "Más alivio. Paga menos.",
+      "offer": "15 % de descuento adicional",
+      "automatically_applied": "— Se aplica automáticamente",
+      "ends_today": "Termina hoy a las 11:59 p. m. PT",
+      "timer_initial": "Tiempo restante hasta la medianoche, hora del Pacífico",
+      "timer_remaining": "Quedan {{ days }} días, {{ hours }} horas, {{ minutes }} minutos y {{ seconds }} segundos hasta la medianoche, hora del Pacífico",
+      "days": "Días",
+      "hours": "Horas",
+      "minutes": "Minutos",
+      "seconds": "Segundos",
+      "cta": "Conseguir mi oferta del Día del Trabajo",
+      "announcement_desktop": "🇺🇸 Oferta del Día del Trabajo — 15 % de descuento adicional — Se aplica automáticamente",
+      "announcement_mobile": "Oferta del Día del Trabajo — 15 % de descuento adicional"
+    },
     "common": {
       "save": "Ahorra",
       "save_template": "Ahorra [amount]",

@@ -664,6 +664,22 @@
     }
   },
   "altaeron_pdp_reels_v2": {
+    "promotion": {
+      "eyebrow": "Oferta de Labor Day",
+      "title": "Mais alívio. Menos gasto.",
+      "offer": "15% de desconto extra",
+      "automatically_applied": "— Aplicado automaticamente",
+      "ends_today": "Termina hoje às 23h59 (horário do Pacífico)",
+      "timer_initial": "Tempo restante até a meia-noite no horário do Pacífico",
+      "timer_remaining": "Faltam {{ days }} dias, {{ hours }} horas, {{ minutes }} minutos e {{ seconds }} segundos até a meia-noite no horário do Pacífico",
+      "days": "Dias",
+      "hours": "Horas",
+      "minutes": "Minutos",
+      "seconds": "Segundos",
+      "cta": "Quero minha oferta de Labor Day",
+      "announcement_desktop": "🇺🇸 Oferta de Labor Day — 15% de desconto extra — Aplicado automaticamente",
+      "announcement_mobile": "Oferta de Labor Day — 15% de desconto extra"
+    },
     "common": {
       "save": "Economize",
       "save_template": "Economize [amount]",

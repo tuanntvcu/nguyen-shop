@@ -1276,6 +1276,22 @@
     }
   },
   "altaeron_pdp_reels_v2": {
+    "promotion": {
+      "eyebrow": "Labor Day Sale",
+      "title": "Get More Relief. Pay Less.",
+      "offer": "Extra 15% Off",
+      "automatically_applied": "— Automatically Applied",
+      "ends_today": "Ends Today at 11:59 PM PT",
+      "timer_initial": "Time remaining until midnight Pacific Time",
+      "timer_remaining": "{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds remaining until midnight Pacific Time",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "cta": "Get My Labor Day Deal",
+      "announcement_desktop": "🇺🇸 Labor Day Sale — Extra 15% Off — Automatically Applied",
+      "announcement_mobile": "Labor Day Sale — Extra 15% Off"
+    },
     "common": {
       "save": "Save",
       "save_template": "Save [amount]",

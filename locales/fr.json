@@ -985,6 +985,22 @@
     }
   },
   "altaeron_pdp_reels_v2": {
+    "promotion": {
+      "eyebrow": "Promotion de la fête du Travail",
+      "title": "Plus de soulagement. Payez moins.",
+      "offer": "15 % de réduction supplémentaire",
+      "automatically_applied": "— Appliquée automatiquement",
+      "ends_today": "Se termine aujourd’hui à 23 h 59 (HP)",
+      "timer_initial": "Temps restant avant minuit, heure du Pacifique",
+      "timer_remaining": "Il reste {{ days }} jours, {{ hours }} heures, {{ minutes }} minutes et {{ seconds }} secondes avant minuit, heure du Pacifique",
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Minutes",
+      "seconds": "Secondes",
+      "cta": "Profiter de l’offre de la fête du Travail",
+      "announcement_desktop": "🇺🇸 Promotion de la fête du Travail — 15 % de réduction supplémentaire — Appliquée automatiquement",
+      "announcement_mobile": "Fête du Travail — 15 % de réduction supplémentaire"
+    },
     "common": {
       "save": "Économisez",
       "save_template": "Économisez [amount]",

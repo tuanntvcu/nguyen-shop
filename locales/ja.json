@@ -985,6 +985,22 @@
     }
   },
   "altaeron_pdp_reels_v2": {
+    "promotion": {
+      "eyebrow": "レイバー・デーセール",
+      "title": "もっと快適に。もっとお得に。",
+      "offer": "さらに15%オフ",
+      "automatically_applied": "— 自動的に適用されます",
+      "ends_today": "本日午後11:59（太平洋時間）まで",
+      "timer_initial": "太平洋時間の午前0時までの残り時間",
+      "timer_remaining": "太平洋時間の午前0時まで残り{{ days }}日{{ hours }}時間{{ minutes }}分{{ seconds }}秒",
+      "days": "日",
+      "hours": "時間",
+      "minutes": "分",
+      "seconds": "秒",
+      "cta": "レイバー・デー特典を利用する",
+      "announcement_desktop": "🇺🇸 レイバー・デーセール — さらに15%オフ — 自動的に適用",
+      "announcement_mobile": "レイバー・デーセール — さらに15%オフ"
+    },
     "common": {
       "save": "割引",
       "save_template": "[amount]お得",
