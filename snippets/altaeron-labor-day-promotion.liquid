@@ -4,6 +4,7 @@
   data-apdp-promotion-cta="{{ 'altaeron_pdp_reels_v2.promotion.cta' | t | escape }}"
   data-apdp-promotion-announcement-desktop="{{ 'altaeron_pdp_reels_v2.promotion.announcement_desktop' | t | escape }}"
   data-apdp-promotion-announcement-mobile="{{ 'altaeron_pdp_reels_v2.promotion.announcement_mobile' | t | escape }}"
+  data-apdp-promotion-sync-announcement="{% if sync_announcement == false %}false{% else %}true{% endif %}"
   data-apdp-promotion-timer-label="{{ 'altaeron_pdp_reels_v2.promotion.timer_remaining' | t: days: '[days]', hours: '[hours]', minutes: '[minutes]', seconds: '[seconds]' | escape }}"
   aria-labelledby="AltaeronPromotionTitle-{{ section.id }}"
 >

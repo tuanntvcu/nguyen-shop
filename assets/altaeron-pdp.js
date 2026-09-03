@@ -99,7 +99,7 @@
       submitLabel.textContent = translations.cta;
       submitLabel.dataset.availableText = translations.cta;
     }
-    if (announcement) {
+    if (announcement && card.dataset.apdpPromotionSyncAnnouncement !== 'false') {
       announcement.classList.add('announcement-bar--labor-day');
       const announcementPromotion = document.createElement('div');
       announcementPromotion.dataset.apdpPromoAnnouncement = '';

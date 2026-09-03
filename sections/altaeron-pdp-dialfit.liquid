@@ -212,7 +212,7 @@
       </div>
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="Purchase {{ product.title | escape }}" data-apdp-primary-purchase>
-        {%- render 'altaeron-labor-day-promotion', section: section -%}
+        {%- render 'altaeron-labor-day-promotion', section: section, sync_announcement: false -%}
         <h2 class="apdp-buy__title">Choose Your DialFit</h2>
         <div class="apdp-buy__price-line"><div><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if current_compare <= current_variant.price %} hidden{% endif %}>{{ current_compare | money }}</s></div></div><span class="apdp-price__save" data-apdp-savings hidden></span></div>
         {%- form 'product', product, id: product_form_id, class: 'apdp-form main-product-form', is: 'product-form', data-product-id: product.id -%}
