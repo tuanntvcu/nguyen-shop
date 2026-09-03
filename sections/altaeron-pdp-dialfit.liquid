@@ -33,7 +33,11 @@
 <style>
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-section{padding-top:var(--alta-pdp-section-gap-tight)}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-full{width:min(1180px,calc(100% - 80px))}
-  #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{display:none}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{aspect-ratio:1;display:block}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery__stage :where(img,video){display:block;height:100%;object-fit:cover;width:100%}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{display:none}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery.is-viewer-active .apdp-gallery__stage{display:none}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery.is-viewer-active .apdp-gallery__viewer{display:block}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{display:grid;gap:9px;list-style:none;margin:16px 0 0;padding:0}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{align-items:flex-start;color:#173f32;display:flex;font-size:14px;font-weight:650;gap:9px;line-height:1.4}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits svg{background:#08724b;border-radius:50%;color:#fff;flex:0 0 19px;height:19px;margin-top:1px;padding:4px;width:19px}
@@ -111,7 +115,7 @@
   @media(min-width:1100px){
     #AltaeronPdp-{{ section.id }} .apdp-hero__grid{align-items:start;grid-template-columns:minmax(0,43fr) minmax(300px,29fr) minmax(360px,28fr);min-height:0}
     #AltaeronPdp-{{ section.id }} .apdp-gallery{align-self:start;display:grid;gap:12px;grid-column:1;grid-row:1;grid-template-columns:1fr;grid-template-rows:auto auto;min-width:0}
-    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{display:none}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{aspect-ratio:1;display:block;grid-column:1;grid-row:1;height:auto;max-height:720px}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{aspect-ratio:1;grid-column:1;grid-row:1;height:auto;max-height:720px}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{display:flex;flex-direction:row;grid-column:1;grid-row:2;max-height:none;overflow-x:auto;overflow-y:hidden;padding:1px 2px 4px}
     #AltaeronPdp-{{ section.id }} .apdp-narrative{align-self:center;grid-column:2;grid-row:1}
@@ -137,7 +141,7 @@
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee{grid-template-columns:1fr;padding:22px;text-align:center}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee svg{margin:auto}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-copy{text-align:left}
-    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{display:none}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{display:block;margin:12px 15px 0;order:1;width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{margin:12px 15px 0;order:1;width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{margin:0 15px;order:2;width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-narrative{order:3;padding:5px 15px 0}
@@ -182,7 +186,8 @@
         </div>
         <div class="apdp-gallery__stage apdp-gallery__hero"{% if hero_poster != blank %} style="--apdp-hero-poster:url('{{ hero_poster }}')"{% endif %}>
           {%- if hero_video != blank -%}
-            {{ hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, preload: 'metadata', image_size: '1200x' }}
+            {%- capture hero_video_markup -%}{{ hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '1200x' }}{%- endcapture -%}
+            {{- hero_video_markup | replace: '<video ', '<video data-apdp-hero-video ' -}}
           {%- elsif hero_image != blank -%}
             {{ hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1500, 1800', sizes: '(min-width: 1280px) 37vw, (min-width: 768px) 55vw, 100vw', alt: hero_image.alt | default: 'Altaeron DialFit adjustable knee brace with dial tightening system' }}
           {%- else -%}
@@ -196,6 +201,7 @@
               {%- if media.media_type == 'image' -%}<button type="button" class="apdp-gallery__zoom" data-apdp-zoom aria-haspopup="dialog" aria-label="Open product image {{ forloop.index }}"><span aria-hidden="true">{% render 'icon-zoom' %}</span></button>{%- endif -%}
             </div>
           {%- endfor -%}
+          <button type="button" class="apdp-gallery__return" data-apdp-return-demo aria-label="Return to DialFit demonstration video"><span aria-hidden="true">←</span> Back to demo</button>
         </div>
         <article class="apdp-gallery-story" aria-labelledby="DialFitGalleryStory-{{ section.id }}">
           <h2 id="DialFitGalleryStory-{{ section.id }}">You’re One Turn Away From <strong>More Confident, Supported Movement.</strong></h2>
@@ -403,10 +409,23 @@
       const dialog = root.querySelector('[data-dialfit-size-dialog]');
       const openButton = root.querySelector('[data-dialfit-size-open]');
       const closeButton = root.querySelector('[data-dialfit-size-close]');
+      const gallery = root.querySelector('[data-apdp-gallery]');
+      const heroVideo = gallery?.querySelector('[data-apdp-hero-video]');
+      const returnButton = gallery?.querySelector('[data-apdp-return-demo]');
       openButton?.addEventListener('click', () => dialog?.showModal());
       closeButton?.addEventListener('click', () => dialog?.close());
       dialog?.addEventListener('click', (event) => {
         if (event.target === dialog) dialog.close();
+      });
+      gallery?.querySelectorAll('[data-apdp-thumb]').forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          gallery.classList.add('is-viewer-active');
+          heroVideo?.pause();
+        });
+      });
+      returnButton?.addEventListener('click', () => {
+        gallery.classList.remove('is-viewer-active');
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) heroVideo?.play().catch(() => {});
       });
     })();
   </script>
