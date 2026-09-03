@@ -1,5 +1,6 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
+  assign current_compare = current_variant.compare_at_price | default: 0
   assign mf = product.metafields.altaeron
   assign hero_video = mf.pdp_hero_video.value
   assign hero_image = mf.pdp_hero_image.value | default: product.featured_image
@@ -26,31 +27,6 @@
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{align-items:flex-start;color:#173f32;display:flex;font-size:14px;font-weight:650;gap:9px;line-height:1.4}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits svg{background:#08724b;border-radius:50%;color:#fff;flex:0 0 19px;height:19px;margin-top:1px;padding:4px;width:19px}
   #AltaeronPdp-{{ section.id }} .apdp-rating[hidden]{display:none}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-options{display:grid;gap:13px;margin-bottom:16px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-option{border:0;margin:0;padding:0}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-option legend{align-items:center;color:#173f32;display:flex;font-size:13px;font-weight:750;justify-content:space-between;margin-bottom:7px;width:100%}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-option legend a{color:#08724b;font-size:12px;text-decoration:underline;text-underline-offset:3px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-option__choices{display:grid;gap:7px;grid-template-columns:repeat(var(--option-count,2),minmax(0,1fr))}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-option label{align-items:center;background:#fff;border:1px solid #cfd8d2;border-radius:7px;color:#173f32;cursor:pointer;display:flex;font-size:13px;font-weight:700;justify-content:center;min-height:43px;padding:8px;text-align:center}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-option input:checked+label{background:#075c3b;border-color:#075c3b;color:#fff}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-option input:focus-visible+label{outline:3px solid rgba(3,74,43,.28);outline-offset:2px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-option input:disabled+label{cursor:not-allowed;opacity:.42;text-decoration:line-through}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-side-note,#AltaeronPdp-{{ section.id }} .apdp-dialfit-bundle-note{color:#52655d;font-size:11px;line-height:1.45;margin:6px 0 0}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles{display:block;margin:4px 0 14px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-title{color:#17211d;font-size:14px;font-weight:750;margin-bottom:8px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tiers{display:grid;gap:8px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier{background:#fff;border:1px solid #d9e1dd;border-radius:8px;cursor:pointer;padding:11px 14px;position:relative}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier:has(input:checked){background:#f2f8f5;border:2px solid #075c3b;padding:10px 13px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__main{align-items:center;display:grid;gap:10px;grid-template-columns:18px minmax(0,1fr) auto}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__dot{border:2px solid #a7b4ae;border-radius:50%;height:15px;width:15px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles input:checked~.bd-tier__body .bd-tier__dot{border:5px solid #075c3b}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__name-row{align-items:center;display:flex;flex-wrap:wrap;gap:6px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__name{font-size:14px;font-weight:700}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__label{background:#e7f3ec;border-radius:4px;color:#075c3b;font-size:9px;font-weight:800;padding:3px 6px;text-transform:uppercase}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__sub{color:#66736d;font-size:11px;margin-top:3px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__prices{text-align:right}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__price{font-size:16px;font-weight:800}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-bundles .bd-tier__compare{color:#89958f;font-size:11px}
   #AltaeronPdp-{{ section.id }} .apdp-hero__reassurance{color:#3d5048;font-size:12px;font-weight:650;margin:9px 0 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-review{align-items:start;background:#f7faf7;border:1px solid #dfe7e1;border-radius:10px;display:grid;gap:10px;grid-template-columns:38px minmax(0,1fr);margin:12px 0;padding:12px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-review blockquote{color:#29483d;font-size:12px;line-height:1.5;margin:3px 0 0}
@@ -75,8 +51,14 @@
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size{background:#f2f8f5;border:1px solid #d7e4dc;border-radius:10px;padding:18px;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size strong{color:#075c3b;display:block;font-size:24px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size span{display:block;font-size:13px;margin-top:5px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-steps{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0 0}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-steps span{background:#fff;border:1px solid #dfe7e1;border-radius:999px;font-size:12px;padding:8px 12px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-trigger{display:flex;justify-content:flex-end;margin:-2px 0 10px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-trigger button{background:none;border:0;color:#075c3b;cursor:pointer;font:inherit;font-size:13px;font-weight:750;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog{border:0;border-radius:16px;box-shadow:0 18px 60px rgba(12,35,25,.24);color:#173f32;margin:auto;max-height:min(720px,calc(100vh - 32px));max-width:620px;padding:0;width:calc(100% - 30px)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog::backdrop{background:rgba(8,25,18,.64);backdrop-filter:blur(2px)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog__inner{padding:30px;position:relative}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog__close{align-items:center;background:#eef7f1;border:0;border-radius:50%;color:#075c3b;cursor:pointer;display:flex;font-size:25px;height:38px;justify-content:center;line-height:1;padding:0;position:absolute;right:16px;top:16px;width:38px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog h2{color:#173f32;font-size:26px;margin:0;padding-right:44px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog__intro{color:#52655d;font-size:14px;margin:7px 0 0}
   #AltaeronPdp-{{ section.id }} .apdp-tail-faq{padding-bottom:48px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee{background:#eef7f1;border-radius:14px;display:grid;gap:22px;grid-template-columns:auto 1fr auto;margin-top:28px;padding:28px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee svg{color:#075c3b;height:54px;width:54px}
@@ -102,10 +84,9 @@
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-full{width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-grid{grid-template-columns:1fr}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-grid{grid-template-columns:repeat(2,1fr)}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog__inner{padding:24px 18px}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee{grid-template-columns:1fr;padding:22px;text-align:center}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee svg{margin:auto}
-    #AltaeronPdp-{{ section.id }} .apdp-dialfit-option__choices{gap:6px}
-    #AltaeronPdp-{{ section.id }} .apdp-dialfit-option label{font-size:12px;min-height:41px;padding:7px 5px}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-copy{text-align:left}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{display:none}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{margin:12px 15px 0;order:1;width:calc(100% - 30px)}
@@ -126,14 +107,13 @@
   data-save-template="Save [amount]"
   data-add-to-cart-label="{{ cta_label | escape }}"
   data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"
-  data-bundle-mode="fixed"
   data-bundle-title="Choose Your Bundle"
   data-bundle-one="1 Brace"
   data-bundle-many-template="[count] Braces"
   data-bundle-one-foot="One DialFit brace"
   data-bundle-popular="BEST VALUE"
   data-bundle-best-value="BIGGEST SAVINGS"
-  data-bundle-subtitle-template="[price] each"
+  data-bundle-subtitle-template="[price] each · Save [amount]"
   data-bundle-cta-one="GET MY DIALFIT — [price]"
   data-bundle-cta-many="GET [count] DIALFIT BRACES — [price]"
 >
@@ -183,42 +163,13 @@
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="Purchase {{ product.title | escape }}" data-apdp-primary-purchase>
         <h2 class="apdp-buy__title">Choose Your DialFit</h2>
-        <div class="apdp-buy__price-line"><div><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>$59.95</span><s class="apdp-price__compare" data-apdp-compare-price>$79.90</s></div></div><span class="apdp-price__save" data-apdp-savings>Save $19.95</span></div>
+        <div class="apdp-buy__price-line"><div><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if current_compare <= current_variant.price %} hidden{% endif %}>{{ current_compare | money }}</s></div></div><span class="apdp-price__save" data-apdp-savings hidden></span></div>
         {%- form 'product', product, id: product_form_id, class: 'apdp-form main-product-form', is: 'product-form', data-product-id: product.id -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" data-apdp-variant-id>
-          <input type="hidden" name="quantity" value="2" data-apdp-bundle-quantity>
           <div class="product-form__error-message-wrapper" role="alert" hidden><div class="product-form__error-message alert alert--error" role="alert" hidden></div></div>
-          <select class="visually-hidden" aria-hidden="true" tabindex="-1" data-apdp-variant-select>
-            {%- for variant in product.variants -%}<option value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}" data-available="{{ variant.available }}" data-media-id="{{ variant.featured_media.id }}"{% if variant.id == current_variant.id %} selected{% endif %}>{{ variant.title }}</option>{%- endfor -%}
-          </select>
-          <div class="apdp-dialfit-options" data-dialfit-options>
-            {%- for option in product.options_with_values -%}
-              {%- assign option_key = option.name | handleize -%}
-              <fieldset class="apdp-dialfit-option" data-dialfit-option-group="{{ option.name | escape }}">
-                <legend>
-                  <span>{% if option.name == 'Side' %}Choose Your Knee{% elsif option.name == 'Color' %}Choose Your Color{% elsif option.name == 'Size' %}Choose Your Size{% else %}Choose {{ option.name }}{% endif %}</span>
-                  {%- if option.name == 'Size' -%}<a href="#DialFitSizeGuide-{{ section.id }}">View Size Guide</a>{%- endif -%}
-                </legend>
-                <div class="apdp-dialfit-option__choices" style="--option-count:{{ option.values.size | at_most: 4 }}">
-                  {%- for value in option.values -%}
-                    <input class="visually-hidden" type="radio" id="DialFitOption-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" name="dialfit-{{ option_key }}" value="{{ value | escape }}" data-dialfit-option-value data-option-name="{{ option.name | escape }}"{% if option.selected_value == value %} checked{% endif %}>
-                    <label for="DialFitOption-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
-                  {%- endfor -%}
-                </div>
-                {%- if option.name == 'Side' -%}<p class="apdp-dialfit-side-note">Each brace is made for the selected side. Choose the knee you plan to support.</p>{%- endif -%}
-              </fieldset>
-            {%- endfor -%}
-          </div>
-          <div class="apdp-dialfit-bundles bd-widget" data-apdp-bundle-widget>
-            <div class="bd-title">Choose Your Bundle</div>
-            <div class="bd-tiers">
-              <label class="bd-tier" data-tier-index="0"><input class="visually-hidden" type="radio" name="dialfit-bundle" value="1" data-quantity="1"><span class="bd-tier__body"><span class="bd-tier__main"><span class="bd-tier__dot"></span><span class="bd-tier__info"><span class="bd-tier__name-row"><span class="bd-tier__name">1 Brace</span></span><span class="bd-tier__sub">$39.95 each · Save $0.00</span></span><span class="bd-tier__prices"><span class="bd-tier__price">$39.95</span></span></span></span></label>
-              <label class="bd-tier" data-tier-index="1"><input class="visually-hidden" type="radio" name="dialfit-bundle" value="2" data-quantity="2" checked><span class="bd-tier__body"><span class="bd-tier__main"><span class="bd-tier__dot"></span><span class="bd-tier__info"><span class="bd-tier__name-row"><span class="bd-tier__name">2 Braces</span><span class="bd-tier__label">BEST VALUE</span></span><span class="bd-tier__sub">$29.98 each · Save $19.95</span></span><span class="bd-tier__prices"><span class="bd-tier__price">$59.95</span><s class="bd-tier__compare">$79.90</s></span></span></span></label>
-              <label class="bd-tier" data-tier-index="2"><input class="visually-hidden" type="radio" name="dialfit-bundle" value="3" data-quantity="3"><span class="bd-tier__body"><span class="bd-tier__main"><span class="bd-tier__dot"></span><span class="bd-tier__info"><span class="bd-tier__name-row"><span class="bd-tier__name">3 Braces</span><span class="bd-tier__label">BIGGEST SAVINGS</span></span><span class="bd-tier__sub">$24.98 each · Save $44.90</span></span><span class="bd-tier__prices"><span class="bd-tier__price">$74.95</span><s class="bd-tier__compare">$119.85</s></span></span></span></label>
-            </div>
-            <p class="apdp-dialfit-bundle-note">The selected Side, Color and Size apply to all braces in this bundle.</p>
-          </div>
-          <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ cta_label | escape }}">GET 2 DIALFIT BRACES</span><b data-apdp-cta-price> — $59.95</b></span>{% render 'altaeron-pdp-icon', icon: 'cart' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
+          <div class="apdp-dialfit-size-trigger"><button type="button" data-dialfit-size-open aria-haspopup="dialog">View Size Guide</button></div>
+          <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
+          <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ cta_label | escape }}">{{ cta_label }}</span><b data-apdp-cta-price> — {{ current_variant.price | money }}</b></span>{% render 'altaeron-pdp-icon', icon: 'cart' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
           <p class="apdp-hero__reassurance">Free Shipping • 30-Day Guarantee • Secure Checkout</p>
         {%- endform -%}
         <figure class="apdp-dialfit-review">
@@ -234,6 +185,16 @@
       </aside>
     </div>
   </section>
+
+  <dialog class="apdp-dialfit-size-dialog" data-dialfit-size-dialog aria-labelledby="DialFitSizeDialogTitle-{{ section.id }}">
+    <div class="apdp-dialfit-size-dialog__inner">
+      <button type="button" class="apdp-dialfit-size-dialog__close" data-dialfit-size-close aria-label="Close size guide">×</button>
+      <h2 id="DialFitSizeDialogTitle-{{ section.id }}">Find Your DialFit Size</h2>
+      <p class="apdp-dialfit-size-dialog__intro">Choose your size based on body weight.</p>
+      <div class="apdp-dialfit-size-grid"><div class="apdp-dialfit-size"><strong>M</strong><span>80–120 lb</span><span>36–54 kg</span></div><div class="apdp-dialfit-size"><strong>L</strong><span>120–150 lb</span><span>54–68 kg</span></div><div class="apdp-dialfit-size"><strong>XL</strong><span>150–190 lb</span><span>68–86 kg</span></div><div class="apdp-dialfit-size"><strong>XXL</strong><span>190–220 lb</span><span>86–100 kg</span></div></div>
+      <p class="apdp-dialfit-size-dialog__intro">Sizing follows the manufacturer's body-weight guide.</p>
+    </div>
+  </dialog>
 
   <section class="apdp-education alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="DialFitMove-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
     {% render 'altaeron-pdp-section-heading', number: '1', title: "Your Knee Shouldn't Decide How Much You Move.", subtitle: 'Walking, stairs, workouts and long hours on your feet put repeated stress through your knees.', heading_id: 'DialFitMove' %}
@@ -283,15 +244,9 @@
     <div class="apdp-dialfit-grid"><article class="apdp-dialfit-card"><h3>Adjust It Anytime</h3><p>Go tighter or looser as your activity changes.</p></article><article class="apdp-dialfit-card"><h3>Support Without the Bulk</h3><p>More structured support than a basic sleeve without locking your knee inside a heavy rigid brace.</p></article><article class="apdp-dialfit-card"><h3>Made to Move</h3><p>Stretch, bend, walk, work and train without feeling unnecessarily restricted.</p></article></div>
   </div></section>
 
-  <section id="DialFitSizeGuide-{{ section.id }}" class="apdp-tail alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="DialFitSize-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
-    {% render 'altaeron-pdp-section-heading', number: '9', title: 'Find Your DialFit Size', subtitle: 'Choose your size based on body weight.', heading_id: 'DialFitSize' %}
-    <div class="apdp-dialfit-size-grid"><div class="apdp-dialfit-size"><strong>M</strong><span>80–120 lb</span><span>36–54 kg</span></div><div class="apdp-dialfit-size"><strong>L</strong><span>120–150 lb</span><span>54–68 kg</span></div><div class="apdp-dialfit-size"><strong>XL</strong><span>150–190 lb</span><span>68–86 kg</span></div><div class="apdp-dialfit-size"><strong>XXL</strong><span>190–220 lb</span><span>86–100 kg</span></div></div>
-    <div class="apdp-dialfit-size-steps"><span><b>1.</b> Choose your size</span><span><b>2.</b> Choose Left Knee or Right Knee</span><span><b>3.</b> Choose Black or White</span></div><p class="apdp-dialfit-copy" style="font-size:12px;margin-top:14px">Sizing follows the manufacturer's body-weight guide.</p>
-  </div></section>
-
   <section id="AltaeronMedicalReview-{{ section.id }}" tabindex="-1" class="apdp-expert alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="AltaeronExpertTitle-{{ section.id }}">
     <div class="apdp-shell">
-      {% render 'altaeron-pdp-section-heading', number: '10', title: 'Medical Review', subtitle: 'Expert-reviewed product guidance.', heading_id: 'AltaeronExpertTitle' %}
+      {% render 'altaeron-pdp-section-heading', number: '9', title: 'Medical Review', subtitle: 'Expert-reviewed product guidance.', heading_id: 'AltaeronExpertTitle' %}
       <div class="apdp-expert__panel">
         <div class="apdp-expert__portrait"><img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}"></div>
         <div class="apdp-expert__profile"><small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small><h2>{{ 'altaeron_pdp.expert.name' | t }}</h2><p>{{ 'altaeron_pdp.expert.role' | t }}</p><strong>{{ 'altaeron_pdp.expert.experience' | t }}</strong><span class="apdp-expert__signature">{{ 'altaeron_pdp.expert.signature' | t }}</span></div>
@@ -303,7 +258,7 @@
   </section>
 
   <section class="apdp-tail apdp-tail-faq apdp-shell apdp-dialfit-full alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="AltaeronFaq-{{ section.id }}">
-    {% render 'altaeron-pdp-section-heading', number: '11', title: 'Frequently Asked Questions', subtitle: 'Everything you need to choose and use DialFit with confidence.', heading_id: 'AltaeronFaq' %}
+    {% render 'altaeron-pdp-section-heading', number: '10', title: 'Frequently Asked Questions', subtitle: 'Everything you need to choose and use DialFit with confidence.', heading_id: 'AltaeronFaq' %}
     <div class="apdp-tail-accordion">
       <details><summary>Is this the same knee brace shown in the video?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Yes. This is the Altaeron™ DialFit Knee Brace featuring the same dial-adjustment mechanism shown in our videos.</p></details>
       <details><summary>Do I need the Left or Right version?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Choose the side that matches the knee you plan to wear it on. DialFit has separate Left Knee and Right Knee versions.</p></details>
@@ -323,57 +278,28 @@
     {% render 'altaeron-pdp-icon', icon: 'shield' %}<div><h2>Try DialFit for 30 Days</h2><p>We want you to actually wear it, walk in it and see how it feels during your normal routine. If DialFit isn't right for you, contact us within 30 days and you're covered by our money-back guarantee.</p><p><strong>Secure Checkout • Free Shipping • 30-Day Guarantee</strong></p></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-final-submit>TRY DIALFIT RISK-FREE →</button>
   </div></div></section>
 
-  <section class="apdp-dialfit-bottom alta-pdp-flow-section" aria-labelledby="DialFitBottom-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full"><h2 id="DialFitBottom-{{ section.id }}">Ready to Give Your Knee More Support?</h2><p>Turn the dial. Find your fit. Get moving.</p><div class="apdp-dialfit-bottom__selection"><div class="apdp-dialfit-bottom__summary" aria-live="polite"><span>Side: <b data-dialfit-summary="Side"></b></span><span>Color: <b data-dialfit-summary="Color"></b></span><span>Size: <b data-dialfit-summary="Size"></b></span><span>Bundle: <b data-dialfit-summary="Bundle">2 Braces</b></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-bottom-submit>GET 2 DIALFIT BRACES — $59.95</button><p class="apdp-dialfit-bundle-note" style="text-align:center">Selections stay synchronized with the purchase module above.</p></div></div></section>
+  <section class="apdp-dialfit-bottom alta-pdp-flow-section" aria-labelledby="DialFitBottom-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full"><h2 id="DialFitBottom-{{ section.id }}">Ready to Give Your Knee More Support?</h2><p>Turn the dial. Find your fit. Get moving.</p><div class="apdp-dialfit-bottom__selection"><a class="apdp-button apdp-button--primary" href="#AltaeronBuy-{{ section.id }}">CHOOSE YOUR DIALFIT →</a></div></div></section>
 
   <section id="AltaeronVerified-{{ section.id }}" class="apdp-tail apdp-review-summary apdp-shell apdp-dialfit-full alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="AltaeronVerifiedTitle-{{ section.id }}">
-    <div class="apdp-review-summary__head">{% render 'altaeron-pdp-section-heading', number: '12', title: 'Real Customers. Real Movement.', subtitle: 'See what DialFit customers say about using it for walking, workouts, long shifts and everyday support.', heading_id: 'AltaeronVerifiedTitle' %}</div>
+    <div class="apdp-review-summary__head">{% render 'altaeron-pdp-section-heading', number: '11', title: 'Real Customers. Real Movement.', subtitle: 'See what DialFit customers say about using it for walking, workouts, long shifts and everyday support.', heading_id: 'AltaeronVerifiedTitle' %}</div>
     {%- assign has_legacy_judgeme_widget = false -%}{%- if product.metafields.judgeme.widget.size > 20 -%}{%- assign has_legacy_judgeme_widget = true -%}{%- endif -%}
     <div class="apdp-judgeme-widget"><div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ product.title | escape }}" data-id="{{ product.id }}" data-product-id="{{ product.id }}" data-widget="review" data-auto-install="false" data-shop-reviews-count="{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}" data-entry-point="review_widget.js" data-entry-key="review-widget/main.js">{%- if has_legacy_judgeme_widget -%}<div class="jdgm-legacy-widget-content" style="display:none">{{ product.metafields.judgeme.widget }}</div>{%- endif -%}</div>{%- if product.metafields.judgeme.review_widget_data -%}<script>window.jdgm=window.jdgm||{};window.jdgm.data=window.jdgm.data||{};window.jdgm.data.reviewWidget=window.jdgm.data.reviewWidget||{};window.jdgm.data.reviewWidget[{{ product.id | json }}]={{ product.metafields.judgeme.review_widget_data }};</script>{%- endif -%}<noscript><div class="apdp-tail-review-grid">{% render 'altaeron-pdp-review-cards', reviews: reviews, limit: 10 %}</div></noscript></div>
   </section>
 
-  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small>Altaeron™ DialFit <b data-apdp-sticky-price>$59.95</b></small><small class="apdp-sticky__bundle-title" data-apdp-sticky-bundle-title>2 Braces</small></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-sticky-text>GET 2 DIALFIT BRACES — $59.95</span></button></div>
+  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small>Altaeron™ DialFit <b data-apdp-sticky-price>{{ current_variant.price | money }}</b></small><small class="apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-sticky-text>GET MY DIALFIT — {{ current_variant.price | money }}</span></button></div>
   <script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script>
   <script>
     (() => {
       const root = document.getElementById('AltaeronPdp-{{ section.id }}');
       if (!root) return;
-      const variants = JSON.parse(root.querySelector('[data-apdp-product-json]')?.textContent || '[]');
-      const variantSelect = root.querySelector('[data-apdp-variant-select]');
-      const optionInputs = [...root.querySelectorAll('[data-dialfit-option-value]')];
-      const quantityInput = root.querySelector('[data-apdp-bundle-quantity]');
-      const bundleInputs = [...root.querySelectorAll('[name="dialfit-bundle"]')];
-      const bottomButton = root.querySelector('[data-apdp-bottom-submit]');
-      const form = root.querySelector('.apdp-form');
-      const selectedOptions = () => Object.fromEntries(optionInputs.filter((input) => input.checked).map((input) => [input.dataset.optionName, input.value]));
-      const matches = (variant, selected, except = '') => variant.options.every((value, index) => {
-        const name = {{ product.options | json }}[index];
-        return name === except || !selected[name] || selected[name] === value;
+      const dialog = root.querySelector('[data-dialfit-size-dialog]');
+      const openButton = root.querySelector('[data-dialfit-size-open]');
+      const closeButton = root.querySelector('[data-dialfit-size-close]');
+      openButton?.addEventListener('click', () => dialog?.showModal());
+      closeButton?.addEventListener('click', () => dialog?.close());
+      dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
       });
-      const syncSummary = () => {
-        const selected = selectedOptions();
-        Object.entries(selected).forEach(([name, value]) => { const node = root.querySelector(`[data-dialfit-summary="${name}"]`); if (node) node.textContent = value; });
-        const bundle = bundleInputs.find((input) => input.checked);
-        const tier = bundle?.closest('.bd-tier');
-        const title = tier?.querySelector('.bd-tier__name')?.textContent || '';
-        const price = tier?.querySelector('.bd-tier__price')?.textContent || '';
-        const bundleNode = root.querySelector('[data-dialfit-summary="Bundle"]');
-        if (bundleNode) bundleNode.textContent = title;
-        if (bottomButton) bottomButton.textContent = `${Number(bundle?.value) === 1 ? 'GET MY DIALFIT' : `GET ${bundle?.value} DIALFIT BRACES`} — ${price}`;
-      };
-      const updateOptionAvailability = () => {
-        const selected = selectedOptions();
-        optionInputs.forEach((input) => { input.disabled = !variants.some((variant) => variant.available && matches(variant, {...selected, [input.dataset.optionName]: input.value})); });
-      };
-      const selectVariant = () => {
-        const selected = selectedOptions();
-        const variant = variants.find((item) => item.options.every((value, index) => selected[{{ product.options | json }}[index]] === value));
-        if (variant && variantSelect) { variantSelect.value = String(variant.id); variantSelect.dispatchEvent(new Event('change', { bubbles: true })); }
-        updateOptionAvailability(); syncSummary();
-      };
-      optionInputs.forEach((input) => input.addEventListener('change', selectVariant));
-      bundleInputs.forEach((input) => input.addEventListener('change', () => { if (quantityInput) quantityInput.value = input.value; syncSummary(); }));
-      bottomButton?.addEventListener('click', () => form?.requestSubmit());
-      syncSummary(); updateOptionAvailability();
     })();
   </script>
 </div>

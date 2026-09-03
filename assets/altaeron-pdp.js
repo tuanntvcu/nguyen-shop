@@ -649,7 +649,7 @@
       return null;
     };
 
-    const syncBundleTiers = (widgetRoot, baseCompare) => {
+    const syncBundleTiers = (widgetRoot, baseCompare, basePrice) => {
       if (root.dataset.bundleMode === 'fixed') return;
       const setText = (element, value) => {
         if (element && value && element.textContent !== value) element.textContent = value;
@@ -674,13 +674,14 @@
           return;
         }
 
-        const originalTotal = baseCompare > 0 ? baseCompare * quantity : 0;
+        const originalTotal = (baseCompare > basePrice ? baseCompare : basePrice) * quantity;
         const saved = Math.max(originalTotal - tierPrice, 0);
         const percent = originalTotal > 0 ? Math.round((saved / originalTotal) * 100) : 0;
         setText(tier.querySelector('.bd-tier__compare'), originalTotal > 0 ? money(originalTotal, format) : '');
         setText(tier.querySelector('.bd-tier__sub'), fillTemplate(root.dataset.bundleSubtitleTemplate, {
           price: money(Math.round(tierPrice / quantity), format),
           percent: String(percent),
+          amount: money(saved, format),
         }));
       });
     };
@@ -691,7 +692,7 @@
 
       const basePrice = Number(control.dataset.price || 0);
       const baseCompare = Number(control.dataset.compare || 0);
-      if (bundleWidget) syncBundleTiers(bundleWidget.shadowRoot || bundleWidget, baseCompare);
+      if (bundleWidget) syncBundleTiers(bundleWidget.shadowRoot || bundleWidget, baseCompare, basePrice);
 
       const bundle = selectedBundle();
       if (!bundle?.price) return;
