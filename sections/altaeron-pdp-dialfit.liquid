@@ -141,6 +141,7 @@
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee h2{font-size:26px;margin:0 0 7px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee p{color:#52655d;line-height:1.55;margin:0}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee .apdp-button{align-self:center;min-width:230px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-gifting{color:#63756d;font-size:13px;line-height:1.5;margin:14px auto 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-bottom{background:#003d29;color:#fff;padding:44px 0}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-bottom h2,#AltaeronPdp-{{ section.id }} .apdp-dialfit-bottom p{color:#fff;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-bottom__selection{background:#fff;border-radius:12px;color:#173f32;margin:24px auto 0;max-width:680px;padding:22px}
@@ -413,7 +414,7 @@
 
   <section class="apdp-tail alta-pdp-flow-section apdp-dialfit-section"><div class="apdp-shell apdp-dialfit-full"><div class="apdp-dialfit-guarantee">
     {% render 'altaeron-pdp-icon', icon: 'shield' %}<div><h2>Try DialFit for 30 Days</h2><p>Wear it. Walk in it. Use it through your normal routine.</p><p>If DialFit isn't right for you, contact us within 30 days and you're covered by our money-back guarantee.</p><p><strong>Secure Checkout • Free Shipping • 30-Day Guarantee</strong></p></div><a class="apdp-button apdp-button--primary" href="#DialFitFinalPurchase-{{ section.id }}">TRY DIALFIT RISK-FREE →</a>
-  </div></div></section>
+  </div><p class="apdp-dialfit-gifting">A thoughtful gift for family and friends who could use a little extra knee support.</p></div></section>
 
   <section id="DialFitFinalPurchase-{{ section.id }}" class="apdp-final-cta alta-pdp-flow-section" aria-label="Final DialFit purchase call to action"><div class="apdp-shell apdp-final-cta__inner">
     <div class="apdp-final-cta__product apdp-tail-media">{%- if final_cta_image != blank -%}{{ final_cta_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 70vw', alt: 'Physician endorsement for Altaeron products' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
