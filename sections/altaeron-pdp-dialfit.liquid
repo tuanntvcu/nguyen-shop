@@ -47,8 +47,20 @@
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare span{align-items:center;display:flex;font-size:13px;min-height:48px;padding:10px 16px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare span+span{background:#f2f8f5;border-left:1px solid #dfe3df;color:#075c3b;font-weight:700}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare__head span{background:#f6f7f5;font-weight:800}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-trigger{display:flex;justify-content:flex-end;margin:-2px 0 10px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-trigger button{background:none;border:0;color:#075c3b;cursor:pointer;font:inherit;font-size:13px;font-weight:750;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+  #AltaeronPdp-{{ section.id }} .apdp-buy__price-line{margin-bottom:8px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-trigger{align-items:center;display:flex;justify-content:flex-end;margin:0 0 3px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-trigger button{align-items:center;background:none;border:0;color:#075c3b;cursor:pointer;display:inline-flex;font:inherit;font-size:13px;font-weight:750;height:auto;line-height:1.25;min-height:0;padding:2px 0;text-decoration:underline;text-underline-offset:3px}
+  #AltaeronPdp-{{ section.id }} bundle-deals-widget .bd-widget{margin-top:7px}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story{border-top:1px solid #d8e1db;grid-column:1;grid-row:3;margin-top:8px;padding:24px 4px 8px}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story h2{color:#10251d;font-family:var(--alta-font-family);font-size:clamp(26px,2.1vw,34px);font-weight:800;letter-spacing:-.025em;line-height:1.18;margin:0 0 24px}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story h2 strong{color:#08724b;font-weight:800}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story__copy{color:#29483d;font-size:15px;line-height:1.62}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story__copy p{margin:0 0 18px}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story__alert{color:#d6573f;font-weight:750}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story__consequence{color:#29483d;text-decoration:underline;text-decoration-color:#08724b;text-decoration-thickness:1px;text-underline-offset:3px}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result{align-items:flex-start;background:#eef7f1;border-radius:10px;color:#173f32;display:flex;font-size:14px;font-style:italic;font-weight:600;gap:10px;line-height:1.5;margin:22px 0 0;padding:13px 14px}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result>span:first-child{align-items:center;background:#08724b;border-radius:50%;color:#fff;display:flex;flex:0 0 20px;height:20px;justify-content:center;margin-top:1px;width:20px}
+  #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result svg{height:13px;stroke-width:2.5;width:13px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog{border:0;border-radius:16px;box-shadow:0 18px 60px rgba(12,35,25,.24);color:#173f32;margin:auto;max-height:min(760px,calc(100vh - 32px));max-width:900px;padding:0;width:calc(100% - 30px)}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog::backdrop{background:rgba(8,25,18,.64);backdrop-filter:blur(2px)}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog__inner{padding:30px;position:relative}
@@ -116,6 +128,9 @@
     #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{margin:0 15px;order:2;width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-narrative{order:3;padding:5px 15px 0}
     #AltaeronPdp-{{ section.id }} .apdp-buy{order:4}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery-story{grid-row:auto;margin:0 15px 20px;order:5;padding:22px 0 0}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery-story h2{font-size:clamp(27px,8vw,34px);line-height:1.16;margin-bottom:22px}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery-story__copy{font-size:15px;line-height:1.62}
   }
 </style>
 
@@ -168,6 +183,18 @@
             </div>
           {%- endfor -%}
         </div>
+        <article class="apdp-gallery-story" aria-labelledby="DialFitGalleryStory-{{ section.id }}">
+          <h2 id="DialFitGalleryStory-{{ section.id }}">You’re One Turn Away From <strong>More Confident, Supported Movement.</strong></h2>
+          <div class="apdp-gallery-story__copy">
+            <p>If you’re reading this, chances are <span class="apdp-gallery-story__alert">knee discomfort is already changing the way you move.</span></p>
+            <p>You notice it on stairs. During long shifts. Halfway through a walk. Or just as you start the workout you were looking forward to.</p>
+            <p>The result? You slow down, avoid certain movements, or cut the day short because your knee doesn’t feel as steady as you want it to.</p>
+            <p>Basic compression sleeves give you one fixed level of pressure. <span class="apdp-gallery-story__consequence">Too loose can feel unsupportive. Too tight can become uncomfortable fast.</span></p>
+            <p>DialFit puts the adjustment in your hands. Its dial-controlled tension, cushioned patella ring and flexible side stabilization work together to provide a more secure, supported feel without the bulk of a rigid brace.</p>
+            <p>Wear it for walks, workouts, errands or long hours on your feet—and adjust the tension whenever your activity changes.</p>
+            <p class="apdp-gallery-story__result"><span aria-hidden="true">{% render 'altaeron-pdp-icon', icon: 'check' %}</span><span><strong>Turn the dial anytime</strong> to find the level of support that feels right for the moment.</span></p>
+          </div>
+        </article>
       </div>
 
       <div class="apdp-narrative">
