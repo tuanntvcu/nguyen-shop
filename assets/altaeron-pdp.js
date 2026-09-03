@@ -771,7 +771,7 @@
     const stickyButton = root.querySelector('[data-apdp-sticky-submit]');
     const finalButton = root.querySelector('[data-apdp-final-submit]');
     const form = root.querySelector('.apdp-form');
-    const finalCta = root.querySelector('.apdp-final-cta');
+    const finalCta = root.querySelector('.apdp-final-cta, .apdp-dialfit-bottom');
     if (!sticky || !purchaseButton || !stickyButton || !form) return;
 
     const mobile = window.matchMedia('(max-width: 749px)');

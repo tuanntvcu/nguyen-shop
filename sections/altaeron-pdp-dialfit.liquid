@@ -362,7 +362,7 @@
       };
       const updateOptionAvailability = () => {
         const selected = selectedOptions();
-        optionInputs.forEach((input) => { input.disabled = !variants.some((variant) => variant.available && matches(variant, {...selected, [input.dataset.optionName]: input.value}, input.dataset.optionName)); });
+        optionInputs.forEach((input) => { input.disabled = !variants.some((variant) => variant.available && matches(variant, {...selected, [input.dataset.optionName]: input.value})); });
       };
       const selectVariant = () => {
         const selected = selectedOptions();
