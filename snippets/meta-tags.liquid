@@ -6,6 +6,12 @@
 
   if request.page_type == 'product'
     assign og_type = 'product'
+    if product.metafields.altaeron.share_title.value != blank
+      assign og_title = product.metafields.altaeron.share_title.value
+    endif
+    if product.metafields.altaeron.share_description.value != blank
+      assign og_description = product.metafields.altaeron.share_description.value
+    endif
   elsif request.page_type == 'article'
     assign og_type = 'article'
   elsif request.page_type == 'password'

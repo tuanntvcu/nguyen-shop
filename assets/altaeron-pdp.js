@@ -473,9 +473,11 @@
     const variantsNode = root.querySelector('[data-apdp-product-json]');
     const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
     const format = root.dataset.moneyFormat;
-    const bundleWidget = root.querySelector('bundle-deals-widget');
+    const bundleWidget = root.querySelector('bundle-deals-widget, [data-apdp-bundle-widget]');
     const savingsText = (amount) => (root.dataset.saveTemplate || `${root.dataset.saveLabel} [amount]`)
       .replaceAll('[amount]', money(amount, format));
+    const fillTemplate = (template, replacements) => Object.entries(replacements)
+      .reduce((result, [key, value]) => result.replaceAll(`[${key}]`, value), template || '');
 
     const updateInstallments = (price) => {
       const installment = money(Math.round(price / 4), format);
@@ -648,12 +650,10 @@
     };
 
     const syncBundleTiers = (widgetRoot, baseCompare) => {
+      if (root.dataset.bundleMode === 'fixed') return;
       const setText = (element, value) => {
         if (element && value && element.textContent !== value) element.textContent = value;
       };
-      const fillTemplate = (template, replacements) => Object.entries(replacements)
-        .reduce((result, [key, value]) => result.replaceAll(`[${key}]`, value), template || '');
-
       setText(widgetRoot.querySelector('.bd-title'), root.dataset.bundleTitle);
       [...widgetRoot.querySelectorAll('[data-tier-index]')].forEach((tier, index) => {
         const quantity = Number(tier.dataset.tierIndex) + 1 || index + 1;
@@ -718,6 +718,14 @@
         if (bundleSavings > 0) element.textContent = savingsText(bundleSavings);
       });
       if (ctaPrice) ctaPrice.textContent = ` — ${money(bundle.price, format)}`;
+      if (root.dataset.bundleCtaOne || root.dataset.bundleCtaMany) {
+        const ctaText = bundle.quantity === 1
+          ? fillTemplate(root.dataset.bundleCtaOne, { price: money(bundle.price, format) })
+          : fillTemplate(root.dataset.bundleCtaMany, { count: String(bundle.quantity), price: money(bundle.price, format) });
+        const ctaTextWithoutPrice = ctaText.replace(/\s*[—-]\s*[^—-]+$/, '').trim();
+        if (submitLabel) submitLabel.textContent = ctaTextWithoutPrice;
+        if (stickyText) stickyText.textContent = ctaText;
+      }
       updateRelatedPrices(bundle.price, bundleCompare);
     };
 
@@ -745,10 +753,12 @@
 
       observeBundleRoot(bundleWidget);
       observeBundleRoot(bundleWidget.shadowRoot);
-      window.customElements?.whenDefined(bundleWidget.localName).then(() => {
-        observeBundleRoot(bundleWidget.shadowRoot);
-        scheduleBundlePricing();
-      });
+      if (bundleWidget.localName.includes('-')) {
+        window.customElements?.whenDefined(bundleWidget.localName).then(() => {
+          observeBundleRoot(bundleWidget.shadowRoot);
+          scheduleBundlePricing();
+        });
+      }
     }
     update(false);
     scheduleBundlePricing();
