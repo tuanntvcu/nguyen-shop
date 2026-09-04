@@ -48,6 +48,18 @@
     </div>
   </section>
 
+  {%- if popular_collection != blank and popular_collection.products_count > 0 -%}
+    <section class="ah-section ah-popular" aria-labelledby="PopularHeading-{{ section.id }}">
+      <div class="ah-shell">
+        <div class="ah-section-head"><h2 id="PopularHeading-{{ section.id }}">{{ section.settings.popular_heading }}</h2><a href="{{ popular_collection.url }}"><span>{{ section.settings.view_all_label }}</span><span aria-hidden="true">→</span></a></div>
+        <div class="ah-carousel-wrap"><button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="{{ 'altaeron_home.accessibility.previous_products' | t | escape }}">{% render 'icon-slider-prev' %}</button><div class="ah-products ah-slider" data-slider tabindex="0" aria-label="{{ section.settings.popular_heading | escape }}">
+          {%- for product in popular_collection.products limit: 8 -%}{% render 'altaeron-home-product', product: product %}{%- endfor -%}
+        </div><button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="{{ 'altaeron_home.accessibility.next_products' | t | escape }}">{% render 'icon-slider-next' %}</button></div>
+        <div class="ah-dots" data-slider-dots aria-label="{{ 'altaeron_home.accessibility.product_carousel_pagination' | t | escape }}"></div>
+      </div>
+    </section>
+  {%- endif -%}
+
   <section id="AltaeronConcerns" class="ah-section ah-concerns" aria-labelledby="ConcernHeading-{{ section.id }}">
     <div class="ah-shell">
       <h2 id="ConcernHeading-{{ section.id }}">{{ section.settings.concern_heading }}</h2>
@@ -70,18 +82,6 @@
       </div>
     </div>
   </section>
-
-  {%- if popular_collection != blank and popular_collection.products_count > 0 -%}
-    <section class="ah-section ah-popular" aria-labelledby="PopularHeading-{{ section.id }}">
-      <div class="ah-shell">
-        <div class="ah-section-head"><h2 id="PopularHeading-{{ section.id }}">{{ section.settings.popular_heading }}</h2><a href="{{ popular_collection.url }}"><span>{{ section.settings.view_all_label }}</span><span aria-hidden="true">→</span></a></div>
-        <div class="ah-carousel-wrap"><button class="ah-slider-arrow ah-slider-arrow--prev" type="button" data-slider-prev aria-label="{{ 'altaeron_home.accessibility.previous_products' | t | escape }}">{% render 'icon-slider-prev' %}</button><div class="ah-products ah-slider" data-slider tabindex="0" aria-label="{{ section.settings.popular_heading | escape }}">
-          {%- for product in popular_collection.products limit: 8 -%}{% render 'altaeron-home-product', product: product %}{%- endfor -%}
-        </div><button class="ah-slider-arrow ah-slider-arrow--next" type="button" data-slider-next aria-label="{{ 'altaeron_home.accessibility.next_products' | t | escape }}">{% render 'icon-slider-next' %}</button></div>
-        <div class="ah-dots" data-slider-dots aria-label="{{ 'altaeron_home.accessibility.product_carousel_pagination' | t | escape }}"></div>
-      </div>
-    </section>
-  {%- endif -%}
 
   <section id="AltaeronQuiz-{{ section.id }}" class="ah-section ah-quiz-section" aria-labelledby="QuizHeading-{{ section.id }}">
     <div class="ah-shell ah-quiz">

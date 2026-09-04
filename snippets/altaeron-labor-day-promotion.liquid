@@ -18,12 +18,12 @@
     <div class="apdp-promotion__countdown" data-apdp-promotion-countdown role="timer" aria-label="{{ 'altaeron_pdp_reels_v2.promotion.timer_initial' | t | escape }}">
       {%- for unit in (1..4) -%}
         {%- case unit -%}
-          {%- when 1 -%}{%- assign unit_key = 'days' -%}
-          {%- when 2 -%}{%- assign unit_key = 'hours' -%}
-          {%- when 3 -%}{%- assign unit_key = 'minutes' -%}
-          {%- when 4 -%}{%- assign unit_key = 'seconds' -%}
+          {%- when 1 -%}{%- assign unit_key = 'days' -%}{%- assign unit_label = 'altaeron_pdp_reels_v2.promotion.days' | t -%}
+          {%- when 2 -%}{%- assign unit_key = 'hours' -%}{%- assign unit_label = 'altaeron_pdp_reels_v2.promotion.hours' | t -%}
+          {%- when 3 -%}{%- assign unit_key = 'minutes' -%}{%- assign unit_label = 'altaeron_pdp_reels_v2.promotion.minutes' | t -%}
+          {%- when 4 -%}{%- assign unit_key = 'seconds' -%}{%- assign unit_label = 'altaeron_pdp_reels_v2.promotion.seconds' | t -%}
         {%- endcase -%}
-        <span class="apdp-promotion__time"><strong data-apdp-promotion-{{ unit_key }}>00</strong><small>{{ 'altaeron_pdp_reels_v2.promotion.' | append: unit_key | t }}</small></span>
+        <span class="apdp-promotion__time"><strong data-apdp-promotion-{{ unit_key }}>00</strong><small>{{ unit_label }}</small></span>
         {%- unless forloop.last -%}<span class="apdp-promotion__separator" aria-hidden="true">:</span>{%- endunless -%}
       {%- endfor -%}
     </div>

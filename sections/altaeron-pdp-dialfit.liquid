@@ -2,8 +2,8 @@
   assign current_variant = product.selected_or_first_available_variant
   assign current_compare = current_variant.compare_at_price | default: 0
   assign mf = product.metafields.altaeron
-  assign hero_video = mf.pdp_hero_video.value
-  assign hero_image = mf.pdp_hero_image.value | default: product.featured_image
+  assign hero_video = section.settings.hero_video | default: mf.pdp_hero_video.value
+  assign hero_image = section.settings.hero_image | default: mf.pdp_hero_image.value | default: product.featured_image
   assign hero_poster = hero_video.preview_image | image_url: width: 1200
   assign review_data = product.metafields.judgeme.review_widget_data.value
   assign reviews = review_data.reviews
@@ -11,7 +11,7 @@
   assign review_rating = review_data.average_rating | default: 0 | plus: 0
   assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
   assign product_form_id = 'product-form-' | append: section.id
-  assign cta_label = section.settings.cta_label | default: 'GET MY DIALFIT →'
+  assign cta_label = 'altaeron_pdp_dialfit.buy.cta' | t
   assign compare_price = current_variant.compare_at_price | default: 0
   assign savings = 0
   if compare_price > current_variant.price
@@ -19,6 +19,25 @@
   endif
   assign savings_money = savings | money
   assign installment_amount = current_variant.price | divided_by: 4 | money
+  assign story_media_fallback = product.media[4].preview_image | default: product.featured_image
+  assign story_media = section.settings.point_1_image | default: story_media_fallback
+  assign mechanism_media_fallback = product.media[2].preview_image | default: product.featured_image
+  assign mechanism_media = section.settings.point_2_image | default: mechanism_media_fallback
+  assign proof_video = section.settings.point_6_video | default: hero_video
+  assign proof_image_1 = section.settings.point_6_image_1 | default: product.media[6].preview_image
+  assign proof_image_2 = section.settings.point_6_image_2 | default: product.media[7].preview_image
+  assign expert_image = section.settings.point_7_image
+  assign expert_fallback_alt = 'altaeron_pdp.accessibility.expert_portrait' | t
+  assign expert_alt = expert_image.alt | default: expert_fallback_alt
+  assign story_heading_id = 'DialFitGalleryStory-' | append: section.id
+  assign mechanism_heading_id = 'DialFitMechanism-' | append: section.id
+  assign benefits_heading_id = 'DialFitBenefits-' | append: section.id
+  assign uses_heading_id = 'DialFitUses-' | append: section.id
+  assign compare_heading_id = 'DialFitCompare-' | append: section.id
+  assign how_heading_id = 'DialFitHow-' | append: section.id
+  assign medical_heading_id = 'AltaeronExpertTitle-' | append: section.id
+  assign faq_heading_id = 'AltaeronFaq-' | append: section.id
+  assign reviews_heading_id = 'AltaeronVerifiedTitle-' | append: section.id
   assign final_cta_image = section.settings.final_cta_image
   if final_cta_image == blank
     assign final_cta_image = images['ChatGPT_Image_Aug_14_2026_01_46_46_PM.png']
@@ -84,6 +103,12 @@
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog__close{align-items:center;background:#eef7f1;border:0;border-radius:50%;color:#075c3b;cursor:pointer;display:flex;font-size:25px;height:38px;justify-content:center;line-height:1;padding:0;position:absolute;right:16px;top:16px;width:38px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog h2{color:#173f32;font-size:26px;margin:0;padding-right:44px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog__intro{color:#52655d;font-size:14px;margin:7px 0 0}
+  #AltaeronPdp-{{ section.id }} .apdp-size-chart__controls{align-items:center;display:flex;gap:12px;justify-content:space-between;margin:20px 0 12px}
+  #AltaeronPdp-{{ section.id }} .apdp-size-chart__controls>span{color:#29483d;font-size:12px;font-weight:750}
+  #AltaeronPdp-{{ section.id }} .apdp-size-chart__toggle{background:#e8f0eb;border:1px solid #d2dfd7;border-radius:9px;display:inline-grid;grid-template-columns:1fr 1fr;padding:3px}
+  #AltaeronPdp-{{ section.id }} .apdp-size-chart__toggle button{background:transparent;border:0;border-radius:6px;color:#52655d;cursor:pointer;font:inherit;font-size:12px;font-weight:800;line-height:1;min-height:40px;padding:0 14px;transition:background-color .18s ease,box-shadow .18s ease,color .18s ease}
+  #AltaeronPdp-{{ section.id }} .apdp-size-chart__toggle button[aria-pressed="true"]{background:#075c3b;box-shadow:0 1px 3px rgba(7,92,59,.22);color:#fff}
+  #AltaeronPdp-{{ section.id }} .apdp-size-chart__toggle button:focus-visible{outline:2px solid #1268d3;outline-offset:2px}
   #AltaeronPdp-{{ section.id }} .apdp-size-chart__tip{align-items:center;background:#eef7f1;border-radius:9px;color:#29483d;display:flex;font-size:13px;gap:9px;line-height:1.45;margin:18px 0 14px;padding:10px 12px}
   #AltaeronPdp-{{ section.id }} .apdp-size-chart__tip strong{align-items:center;background:#075c3b;border-radius:5px;color:#fff;display:flex;flex:0 0 34px;font-size:10px;height:25px;justify-content:center;letter-spacing:.06em}
   #AltaeronPdp-{{ section.id }} .apdp-size-chart{border:1px solid #d8e3dc;border-radius:12px;overflow:hidden}
@@ -141,7 +166,7 @@
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-audience-strip p{color:#075c3b;font-size:13px;font-weight:800;margin:13px 0 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps{counter-reset:dialfit-step;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:25px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article{border-top:1px solid #b7cabe;padding:31px 22px 10px;position:relative}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article:before{align-items:center;background:#075c3b;border:4px solid #fff;border-radius:50%;color:#fff;content:counter(dialfit-step);counter-increment:dialfit-step;display:flex;font-size:12px;font-weight:800;height:34px;justify-content:center;left:20px;position:absolute;top:-18px;width:34px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article:before{align-items:center;background:#075c3b;border:3px solid #fff;border-radius:50%;color:#fff;content:counter(dialfit-step);counter-increment:dialfit-step;display:flex;font-size:10px;font-weight:800;height:28px;justify-content:center;left:20px;position:absolute;top:-15px;width:28px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps h3{font-size:15px;margin:0 0 7px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps p{color:#52655d;font-size:13px;line-height:1.5;margin:0}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-proof{background:#eff5f1;padding:46px 0}
@@ -171,7 +196,7 @@
     #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{aspect-ratio:1;display:block;grid-column:1;grid-row:1;height:auto;max-height:720px}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{aspect-ratio:1;grid-column:1;grid-row:1;height:auto;max-height:720px}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{display:flex;flex-direction:row;grid-column:1;grid-row:2;max-height:none;overflow-x:auto;overflow-y:hidden;padding:1px 2px 4px}
-    #AltaeronPdp-{{ section.id }} .apdp-narrative{align-self:center;grid-column:2;grid-row:1}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative{align-self:start;grid-column:2;grid-row:1}
     #AltaeronPdp-{{ section.id }} .apdp-buy{grid-column:3;grid-row:1;min-height:0}
   }
   @media(max-width:767px){
@@ -180,6 +205,10 @@
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-grid{grid-template-columns:1fr}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog__inner{padding:24px 18px}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-size-dialog h2{font-size:24px}
+    #AltaeronPdp-{{ section.id }} .apdp-size-chart__controls{align-items:flex-start;flex-direction:column;gap:8px;margin-top:18px}
+    #AltaeronPdp-{{ section.id }} .apdp-size-chart__toggle{width:100%}
+    #AltaeronPdp-{{ section.id }} .apdp-size-chart__toggle button{padding:0 10px}
+    #AltaeronPdp-{{ section.id }} .apdp-size-chart__tip{margin-top:12px}
     #AltaeronPdp-{{ section.id }} .apdp-size-chart{background:#f5f9f6;border:0;border-radius:0;overflow:visible}
     #AltaeronPdp-{{ section.id }} .apdp-size-chart table,#AltaeronPdp-{{ section.id }} .apdp-size-chart tbody{display:block}
     #AltaeronPdp-{{ section.id }} .apdp-size-chart thead{display:none}
@@ -220,8 +249,8 @@
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-use-cases article{padding:18px}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-audience-strip{padding:16px}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps{gap:0;grid-template-columns:1fr;margin-left:16px}
-    #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article{border-left:1px solid #b7cabe;border-top:0;padding:4px 12px 24px 35px}
-    #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article:before{height:30px;left:-16px;top:0;width:30px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article{border-left:1px solid #b7cabe;border-top:0;padding:4px 12px 24px 30px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article:before{font-size:9px;height:24px;left:-13px;top:0;width:24px}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-proof{padding:30px 0}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-proof__grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-proof__video{aspect-ratio:1;grid-column:1/-1;grid-row:auto}
@@ -236,24 +265,24 @@
   data-product-id="{{ product.id }}"
   data-product-url="{{ product.url }}"
   data-money-format="{{ shop.money_format | escape }}"
-  data-save-label="Save"
-  data-save-template="Save [amount]"
+  data-save-label="{{ 'altaeron_pdp_dialfit.common.save' | t | escape }}"
+  data-save-template="{{ 'altaeron_pdp_dialfit.common.save_amount' | t: amount: '[amount]' | escape }}"
   data-add-to-cart-label="{{ cta_label | escape }}"
   data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"
-  data-bundle-title="Choose Your Bundle"
-  data-bundle-one="1 Brace"
-  data-bundle-many-template="[count] Braces"
-  data-bundle-one-foot="One DialFit brace"
-  data-bundle-popular="BEST VALUE"
-  data-bundle-best-value="BIGGEST SAVINGS"
-  data-bundle-subtitle-template="[price] each · Save [amount]"
-  data-bundle-cta-one="GET MY DIALFIT — [price]"
-  data-bundle-cta-many="GET [count] DIALFIT BRACES — [price]"
+  data-bundle-title="{{ 'altaeron_pdp_dialfit.bundle.title' | t | escape }}"
+  data-bundle-one="{{ 'altaeron_pdp_dialfit.bundle.one' | t | escape }}"
+  data-bundle-many-template="{{ 'altaeron_pdp_dialfit.bundle.many' | t: count: '[count]' | escape }}"
+  data-bundle-one-foot="{{ 'altaeron_pdp_dialfit.bundle.one_description' | t | escape }}"
+  data-bundle-popular="{{ 'altaeron_pdp_dialfit.bundle.best_value' | t | escape }}"
+  data-bundle-best-value="{{ 'altaeron_pdp_dialfit.bundle.biggest_savings' | t | escape }}"
+  data-bundle-subtitle-template="{{ 'altaeron_pdp_dialfit.bundle.unit_price' | t: price: '[price]', amount: '[amount]' | escape }}"
+  data-bundle-cta-one="{{ 'altaeron_pdp_dialfit.bundle.cta_one' | t: price: '[price]' | escape }}"
+  data-bundle-cta-many="{{ 'altaeron_pdp_dialfit.bundle.cta_many' | t: count: '[count]', price: '[price]' | escape }}"
 >
   <section class="apdp-hero" aria-labelledby="AltaeronTitle-{{ section.id }}">
     <div class="apdp-shell apdp-hero__grid">
       <div class="apdp-gallery" data-apdp-gallery>
-        <div class="apdp-gallery__thumbs" role="tablist" aria-label="Altaeron DialFit product media">
+        <div class="apdp-gallery__thumbs" role="tablist" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.product_media' | t | escape }}">
           {%- for media in product.media -%}
             <button type="button" class="apdp-gallery__thumb{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tab" aria-selected="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" aria-controls="AltaeronMedia-{{ section.id }}-{{ media.id }}" data-apdp-thumb="{{ media.id }}" data-apdp-preview-src="{{ media.preview_image | image_url: width: 1600 }}" data-apdp-preview-alt="{{ media.alt | default: product.title | escape }}">
               {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '58px', alt: media.alt | default: product.title }}
@@ -266,7 +295,7 @@
             {%- capture hero_video_markup -%}{{ hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '1200x' }}{%- endcapture -%}
             {{- hero_video_markup | replace: '<video ', '<video data-apdp-hero-video ' -}}
           {%- elsif hero_image != blank -%}
-            {{ hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1500, 1800', sizes: '(min-width: 1280px) 37vw, (min-width: 768px) 55vw, 100vw', alt: hero_image.alt | default: 'Altaeron DialFit adjustable knee brace with dial tightening system' }}
+            {{ hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1500, 1800', sizes: '(min-width: 1280px) 37vw, (min-width: 768px) 55vw, 100vw', alt: hero_image.alt | default: product.title }}
           {%- else -%}
             <div class="apdp-gallery__empty">{{ 'product-1' | placeholder_svg_tag }}</div>
           {%- endif -%}
@@ -275,48 +304,48 @@
           {%- for media in product.media -%}
             <div id="AltaeronMedia-{{ section.id }}-{{ media.id }}" class="apdp-gallery__item{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tabpanel" data-apdp-media="{{ media.id }}"{% if media.media_type == 'image' %} data-apdp-zoom-src="{{ media.preview_image | image_url: width: 2400 }}" data-apdp-zoom-width="{{ media.preview_image.width }}" data-apdp-zoom-height="{{ media.preview_image.height }}"{% endif %}{% unless media.id == product.featured_media.id %} hidden{% endunless %}>
               {% render 'altaeron-pdp-media', media: media, product: product, loading: 'lazy', fetchpriority: 'auto', sizes: '(min-width: 1024px) 560px, 100vw' %}
-              {%- if media.media_type == 'image' -%}<button type="button" class="apdp-gallery__zoom" data-apdp-zoom aria-haspopup="dialog" aria-label="Open product image {{ forloop.index }}"><span aria-hidden="true">{% render 'icon-zoom' %}</span></button>{%- endif -%}
+              {%- if media.media_type == 'image' -%}<button type="button" class="apdp-gallery__zoom" data-apdp-zoom aria-haspopup="dialog" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.open_image' | t: index: forloop.index | escape }}"><span aria-hidden="true">{% render 'icon-zoom' %}</span></button>{%- endif -%}
             </div>
           {%- endfor -%}
-          <button type="button" class="apdp-gallery__return" data-apdp-return-demo aria-label="Return to DialFit demonstration video"><span aria-hidden="true">←</span> Back to demo</button>
+          <button type="button" class="apdp-gallery__return" data-apdp-return-demo aria-label="{{ 'altaeron_pdp_dialfit.accessibility.return_demo' | t | escape }}"><span aria-hidden="true">←</span> {{ 'altaeron_pdp_dialfit.accessibility.back_demo' | t }}</button>
         </div>
       </div>
 
       <div class="apdp-narrative">
-        <p class="apdp-eyebrow"><span>{{ section.settings.eyebrow }}</span></p>
+        <p class="apdp-eyebrow"><span>{{ 'altaeron_pdp_dialfit.hero.eyebrow' | t }}</span></p>
         {%- if review_count > 0 -%}
-          <a class="apdp-rating" href="#AltaeronVerified-{{ section.id }}" aria-label="{{ review_rating_display }} out of 5 from {{ review_count }} reviews">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ review_rating_display }}/5 · {{ review_count }} Reviews</strong></a>
+          <a class="apdp-rating" href="#AltaeronVerified-{{ section.id }}" aria-label="{{ 'altaeron_pdp_dialfit.hero.rating' | t: rating: review_rating_display, count: review_count | escape }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ 'altaeron_pdp_dialfit.hero.rating_short' | t: rating: review_rating_display, count: review_count }}</strong></a>
         {%- endif -%}
-        <h1 id="AltaeronTitle-{{ section.id }}"><span class="apdp-title-lines">{{ section.settings.headline }}</span></h1>
-        <p class="apdp-narrative__subhead">{{ section.settings.subheadline }}</p>
+        <h1 id="AltaeronTitle-{{ section.id }}"><span class="apdp-title-lines">{{ 'altaeron_pdp_dialfit.hero.headline' | t }}</span></h1>
+        <p class="apdp-narrative__subhead">{{ 'altaeron_pdp_dialfit.hero.subheadline' | t }}</p>
         <ul class="apdp-narrative__benefits" role="list">
-          <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>Turn the dial for precise, adjustable support</span></li>
-          <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>Cushioned patella support helps absorb impact</span></li>
-          <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>Flexible side stabilization without a bulky brace</span></li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_dialfit.hero.benefit_1' | t }}</span></li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_dialfit.hero.benefit_2' | t }}</span></li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_dialfit.hero.benefit_3' | t }}</span></li>
         </ul>
       </div>
 
-      <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="Purchase {{ product.title | escape }}" data-apdp-primary-purchase>
+      <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.purchase' | t: product: product.title | escape }}" data-apdp-primary-purchase>
         {%- render 'altaeron-labor-day-promotion', section: section, sync_announcement: false -%}
-        <h2 class="apdp-buy__title">Choose Your DialFit</h2>
+        <h2 class="apdp-buy__title">{{ 'altaeron_pdp_dialfit.buy.title' | t }}</h2>
         <div class="apdp-buy__price-line"><div><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if current_compare <= current_variant.price %} hidden{% endif %}>{{ current_compare | money }}</s></div></div><span class="apdp-price__save" data-apdp-savings hidden></span></div>
         {%- form 'product', product, id: product_form_id, class: 'apdp-form main-product-form', is: 'product-form', data-product-id: product.id -%}
           <input type="hidden" name="id" value="{{ current_variant.id }}" data-apdp-variant-id>
           <div class="product-form__error-message-wrapper" role="alert" hidden><div class="product-form__error-message alert alert--error" role="alert" hidden></div></div>
-          <div class="apdp-dialfit-size-trigger"><button type="button" data-dialfit-size-open aria-haspopup="dialog">View Size Guide</button></div>
+          <div class="apdp-dialfit-size-trigger"><button type="button" data-dialfit-size-open aria-haspopup="dialog">{{ 'altaeron_pdp_dialfit.buy.size_guide' | t }}</button></div>
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ cta_label | escape }}">{{ cta_label }}</span><b data-apdp-cta-price> — {{ current_variant.price | money }}</b></span>{% render 'altaeron-pdp-icon', icon: 'cart' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
-          <p class="apdp-hero__reassurance">Free Shipping • 30-Day Guarantee • Secure Checkout</p>
+          <p class="apdp-hero__reassurance">{{ 'altaeron_pdp_dialfit.buy.reassurance' | t }}</p>
         {%- endform -%}
         <figure class="apdp-dialfit-review">
           <div class="apdp-tail-avatar"><span class="apdp-tail-avatar__initial" aria-hidden="true">J</span></div>
-          <div>{% render 'altaeron-pdp-stars', rating: 5 %}<blockquote><strong>Finally, a brace I can adjust while I'm wearing it.</strong>I'm on my feet most of the day, so I like being able to tighten the dial when my knee needs more support and loosen it again when I'm sitting. It feels secure without the bulk of my old knee brace.<strong>The dial is what makes the difference.</strong></blockquote><figcaption><strong>Jordan M.</strong> · Verified customer</figcaption></div>
+          <div>{% render 'altaeron-pdp-stars', rating: 5 %}<blockquote><strong>{{ 'altaeron_pdp_dialfit.buy.review_title' | t }}</strong>{{ 'altaeron_pdp_dialfit.buy.review_body' | t }}<strong>{{ 'altaeron_pdp_dialfit.buy.review_close' | t }}</strong></blockquote><figcaption><strong>Jordan M.</strong> · {{ 'altaeron_pdp_dialfit.buy.verified_customer' | t }}</figcaption></div>
         </figure>
         <div class="apdp-buy__trust">
-          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>FREE SHIPPING</b><small>On every order</small></span></a>
-          <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>30-DAY GUARANTEE</b><small>Try it risk-free</small></span></a>
-          <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><b>SECURE CHECKOUT</b><small>Encrypted payment</small></span></span>
-          <span>{% render 'altaeron-pdp-icon', icon: 'support' %}<span><b>TRACKED DELIVERY</b><small>Follow your order</small></span></span>
+          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>{{ 'altaeron_pdp_dialfit.buy.free_shipping' | t }}</b><small>{{ 'altaeron_pdp_dialfit.buy.every_order' | t }}</small></span></a>
+          <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp_dialfit.buy.guarantee' | t }}</b><small>{{ 'altaeron_pdp_dialfit.buy.risk_free' | t }}</small></span></a>
+          <span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<span><b>{{ 'altaeron_pdp_dialfit.buy.secure_checkout' | t }}</b><small>{{ 'altaeron_pdp_dialfit.buy.encrypted_payment' | t }}</small></span></span>
+          <span>{% render 'altaeron-pdp-icon', icon: 'support' %}<span><b>{{ 'altaeron_pdp_dialfit.buy.tracked_delivery' | t }}</b><small>{{ 'altaeron_pdp_dialfit.buy.follow_order' | t }}</small></span></span>
         </div>
       </aside>
     </div>
@@ -324,138 +353,130 @@
 
   <dialog class="apdp-dialfit-size-dialog" data-dialfit-size-dialog aria-labelledby="DialFitSizeDialogTitle-{{ section.id }}">
     <div class="apdp-dialfit-size-dialog__inner">
-      <button type="button" class="apdp-dialfit-size-dialog__close" data-dialfit-size-close aria-label="Close size guide">×</button>
-      <h2 id="DialFitSizeDialogTitle-{{ section.id }}">Find Your DialFit Size</h2>
-      <p class="apdp-dialfit-size-dialog__intro">Use your recommended weight range, then confirm the fit with your upper and lower knee measurements.</p>
-      <div class="apdp-size-chart__tip"><strong>CM</strong><span>Brace and circumference measurements are shown in centimeters. Recommended weight is shown in kilograms.</span></div>
+      <button type="button" class="apdp-dialfit-size-dialog__close" data-dialfit-size-close aria-label="{{ 'altaeron_pdp_dialfit.size.close' | t | escape }}">×</button>
+      <h2 id="DialFitSizeDialogTitle-{{ section.id }}">{{ 'altaeron_pdp_dialfit.size.title' | t }}</h2>
+      <p class="apdp-dialfit-size-dialog__intro">{{ 'altaeron_pdp_dialfit.size.intro' | t }}</p>
+      <div class="apdp-size-chart__controls">
+        <span id="DialFitUnitLabel-{{ section.id }}">{{ 'altaeron_pdp_dialfit.size.units' | t }}</span>
+        <div class="apdp-size-chart__toggle" role="group" aria-labelledby="DialFitUnitLabel-{{ section.id }}">
+          <button type="button" data-size-unit="us" aria-pressed="true">{{ 'altaeron_pdp_dialfit.size.us' | t }}</button>
+          <button type="button" data-size-unit="metric" aria-pressed="false">{{ 'altaeron_pdp_dialfit.size.metric' | t }}</button>
+        </div>
+      </div>
+      <div class="apdp-size-chart__tip" aria-live="polite" data-us-copy="{{ 'altaeron_pdp_dialfit.size.us_copy' | t | escape }}" data-metric-copy="{{ 'altaeron_pdp_dialfit.size.metric_copy' | t | escape }}"><strong data-size-unit-badge>US</strong><span data-size-unit-copy>{{ 'altaeron_pdp_dialfit.size.us_copy' | t }}</span></div>
       <div class="apdp-size-chart">
         <table>
-          <caption class="visually-hidden">Altaeron DialFit knee brace size measurements</caption>
-          <thead><tr><th scope="col">Size</th><th scope="col">Brace length<small>cm</small></th><th scope="col">Brace width<small>cm</small></th><th scope="col">Recommended weight<small>kg</small></th><th scope="col">Upper knee circumference<small>cm</small></th><th scope="col">Lower knee circumference<small>cm</small></th></tr></thead>
+          <caption class="visually-hidden">{{ 'altaeron_pdp_dialfit.size.caption' | t }}</caption>
+          <thead><tr><th scope="col">{{ 'altaeron_pdp_dialfit.size.size' | t }}</th><th scope="col">{{ 'altaeron_pdp_dialfit.size.brace_length' | t }}<small data-length-unit>in</small></th><th scope="col">{{ 'altaeron_pdp_dialfit.size.brace_width' | t }}<small data-length-unit>in</small></th><th scope="col">{{ 'altaeron_pdp_dialfit.size.weight' | t }}<small data-weight-unit>lb</small></th><th scope="col">{{ 'altaeron_pdp_dialfit.size.upper_knee' | t }}<small data-length-unit>in</small></th><th scope="col">{{ 'altaeron_pdp_dialfit.size.lower_knee' | t }}<small data-length-unit>in</small></th></tr></thead>
           <tbody>
-            <tr><th scope="row"><span class="apdp-size-chart__size">M</span></th><td data-label="Brace length">31</td><td data-label="Brace width">16</td><td data-label="Recommended weight">45–65</td><td data-label="Upper knee">30–40</td><td data-label="Lower knee">25–30</td></tr>
-            <tr><th scope="row"><span class="apdp-size-chart__size">L</span></th><td data-label="Brace length">31</td><td data-label="Brace width">17</td><td data-label="Recommended weight">65–85</td><td data-label="Upper knee">32–48</td><td data-label="Lower knee">28–38</td></tr>
-            <tr><th scope="row"><span class="apdp-size-chart__size">XL</span></th><td data-label="Brace length">31</td><td data-label="Brace width">18</td><td data-label="Recommended weight">85–105</td><td data-label="Upper knee">36–56</td><td data-label="Lower knee">32–45</td></tr>
-            <tr><th scope="row"><span class="apdp-size-chart__size">XXL</span></th><td data-label="Brace length">31</td><td data-label="Brace width">19</td><td data-label="Recommended weight">105–125</td><td data-label="Upper knee">42–64</td><td data-label="Lower knee">37–51</td></tr>
+            {%- assign size_names = 'M,L,XL,XXL' | split: ',' -%}
+            {%- assign size_values = '31|16|45–65|30–40|25–30|12.2|6.3|99–143|11.8–15.7|9.8–11.8,31|17|65–85|32–48|28–38|12.2|6.7|143–187|12.6–18.9|11.0–15.0,31|18|85–105|36–56|32–45|12.2|7.1|187–231|14.2–22.0|12.6–17.7,31|19|105–125|42–64|37–51|12.2|7.5|231–276|16.5–25.2|14.6–20.1' | split: ',' -%}
+            {%- for size_name in size_names -%}{%- assign values = size_values[forloop.index0] | split: '|' -%}
+              <tr><th scope="row"><span class="apdp-size-chart__size">{{ size_name }}</span></th>{%- for value in values limit: 5 -%}{%- assign us_index = forloop.index0 | plus: 5 -%}{%- case forloop.index0 -%}{%- when 0 -%}{%- assign label = 'altaeron_pdp_dialfit.size.brace_length' | t -%}{%- when 1 -%}{%- assign label = 'altaeron_pdp_dialfit.size.brace_width' | t -%}{%- when 2 -%}{%- assign label = 'altaeron_pdp_dialfit.size.weight' | t -%}{%- when 3 -%}{%- assign label = 'altaeron_pdp_dialfit.size.upper_knee_short' | t -%}{%- else -%}{%- assign label = 'altaeron_pdp_dialfit.size.lower_knee_short' | t -%}{%- endcase -%}<td data-label="{{ label | escape }} ({% if forloop.index0 == 2 %}lb{% else %}in{% endif %})" data-label-base="{{ label | escape }}" data-metric="{{ value }}" data-us="{{ values[us_index] }}">{{ values[us_index] }}</td>{%- endfor -%}</tr>
+            {%- endfor -%}
           </tbody>
         </table>
       </div>
-      <p class="apdp-size-chart__footer">For the most reliable fit, compare both circumference measurements with the chart before selecting your size.</p>
+      <p class="apdp-size-chart__footer">{{ 'altaeron_pdp_dialfit.size.footer' | t }}</p>
     </div>
   </dialog>
 
   <section class="apdp-dialfit-story alta-pdp-flow-section" aria-labelledby="DialFitGalleryStory-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full apdp-dialfit-story__layout">
-    <div class="apdp-dialfit-story__media apdp-tail-media">{%- assign story_media = product.media[4].preview_image | default: product.featured_image -%}{%- if story_media != blank -%}{{ story_media | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1400', sizes: '(min-width: 768px) 46vw, 100vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
+    <div class="apdp-dialfit-story__media apdp-tail-media">{%- if story_media != blank -%}{{ story_media | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1400', sizes: '(min-width: 768px) 46vw, 100vw', alt: story_media.alt | default: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
     <div class="apdp-dialfit-story__copy">
-      <h2 id="DialFitGalleryStory-{{ section.id }}">You’re One Turn Away From <strong>More Confident, Supported Movement.</strong></h2>
-      <p>Walking, stairs, workouts and long hours on your feet can put repeated stress through your knees.</p>
-      <p>DialFit gives you adjustable support when you need it — helping your knee feel more secure through everyday movement without locking your leg inside a bulky rigid brace.</p>
-      <p class="apdp-dialfit-highlight">Tighten it when you want more support. Ease it when you don't.</p>
+      {%- capture story_title -%}{{ 'altaeron_pdp_dialfit.story.title' | t }} <strong>{{ 'altaeron_pdp_dialfit.story.title_emphasis' | t }}</strong>{%- endcapture -%}
+      {% render 'altaeron-pdp-section-heading', number: '1', title: story_title, heading_id: story_heading_id %}
+      <p>{{ 'altaeron_pdp_dialfit.story.paragraph_1' | t }}</p>
+      <p>{{ 'altaeron_pdp_dialfit.story.paragraph_2' | t }}</p>
+      <p class="apdp-dialfit-highlight">{{ 'altaeron_pdp_dialfit.story.highlight' | t }}</p>
     </div>
   </div></section>
 
   <section class="apdp-education alta-pdp-flow-section apdp-dialfit-section apdp-dialfit-mechanism" aria-labelledby="DialFitMechanism-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
     <div class="apdp-dialfit-mechanism__layout">
       <div class="apdp-dialfit-mechanism__copy">
-        {% render 'altaeron-pdp-section-heading', number: '2', title: 'The Difference Is in the Dial.', subtitle: 'A normal knee sleeve decides the compression for you. DialFit lets you decide.', heading_id: 'DialFitMechanism' %}
-        <p>Turn the dial and the tension system draws the brace more securely around your knee.</p>
-        <p>Need more support before a workout, a long walk, stairs or a busy shift? Tighten it.</p>
-        <p>Sitting down or want less pressure? Ease it back.</p>
-        <div class="apdp-dialfit-support-states" aria-label="Adjustable support levels">
-          <div><strong>LIGHT SUPPORT</strong><span>For relaxed everyday movement.</span></div>
-          <div><strong>MORE SUPPORT</strong><span>Before a long walk or busy shift.</span></div>
-          <div><strong>FIRMER FEEL</strong><span>For training, stairs or more demanding activity.</span></div>
-          <div><strong>EASE IT BACK</strong><span>When sitting, resting or when you want less tension.</span></div>
+        {%- assign mechanism_title = 'altaeron_pdp_dialfit.mechanism.title' | t -%}{%- assign mechanism_subtitle = 'altaeron_pdp_dialfit.mechanism.subtitle' | t -%}
+        {% render 'altaeron-pdp-section-heading', number: '2', title: mechanism_title, subtitle: mechanism_subtitle, heading_id: mechanism_heading_id %}
+        <p>{{ 'altaeron_pdp_dialfit.mechanism.paragraph_1' | t }}</p>
+        <p>{{ 'altaeron_pdp_dialfit.mechanism.paragraph_2' | t }}</p>
+        <p>{{ 'altaeron_pdp_dialfit.mechanism.paragraph_3' | t }}</p>
+        <div class="apdp-dialfit-support-states" aria-label="{{ 'altaeron_pdp_dialfit.mechanism.levels_label' | t | escape }}">
+          {%- for level_index in (1..4) -%}{%- capture level_title_key -%}altaeron_pdp_dialfit.mechanism.level_{{ level_index }}_title{%- endcapture -%}{%- capture level_body_key -%}altaeron_pdp_dialfit.mechanism.level_{{ level_index }}_body{%- endcapture -%}<div><strong>{{ level_title_key | t }}</strong><span>{{ level_body_key | t }}</span></div>{%- endfor -%}
         </div>
-        <p class="apdp-dialfit-highlight">One brace. Multiple levels of support.</p>
-        <p class="apdp-dialfit-mechanism__secondary">Dial in the support you want — without constantly removing and readjusting the brace.</p>
+        <p class="apdp-dialfit-highlight">{{ 'altaeron_pdp_dialfit.mechanism.highlight' | t }}</p>
+        <p class="apdp-dialfit-mechanism__secondary">{{ 'altaeron_pdp_dialfit.mechanism.secondary' | t }}</p>
       </div>
-      <div class="apdp-dialfit-mechanism__visual"><div class="apdp-dialfit-mechanism__media apdp-tail-media">{%- assign mechanism_media = product.media[2].preview_image | default: product.featured_image -%}{%- if mechanism_media != blank -%}{{ mechanism_media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200', sizes: '(min-width: 768px) 48vw, 100vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div><div class="apdp-dialfit-mechanism__labels" aria-label="DialFit mechanism benefits"><span>MICRO-ADJUSTABLE TENSION</span><span>ADJUST WITHOUT TAKING IT OFF</span><span>SUPPORT ON DEMAND</span><span>LESS STRAP FUSS</span></div></div>
+      <div class="apdp-dialfit-mechanism__visual"><div class="apdp-dialfit-mechanism__media apdp-tail-media">{%- if mechanism_media != blank -%}{{ mechanism_media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200', sizes: '(min-width: 768px) 48vw, 100vw', alt: mechanism_media.alt | default: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div><div class="apdp-dialfit-mechanism__labels" aria-label="{{ 'altaeron_pdp_dialfit.mechanism.benefits_label' | t | escape }}">{%- for tag_index in (1..4) -%}{%- capture tag_key -%}altaeron_pdp_dialfit.mechanism.tag_{{ tag_index }}{%- endcapture -%}<span>{{ tag_key | t }}</span>{%- endfor -%}</div></div>
     </div>
   </div></section>
 
   <section class="apdp-education alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="DialFitBenefits-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
-    {% render 'altaeron-pdp-section-heading', number: '3', title: 'Why Your Knees Will Love DialFit', heading_id: 'DialFitBenefits' %}
+    {%- assign benefits_title = 'altaeron_pdp_dialfit.benefits.title' | t -%}{% render 'altaeron-pdp-section-heading', number: '3', title: benefits_title, heading_id: benefits_heading_id %}
     <div class="apdp-dialfit-benefits">
-      <article><h3>Dial-Controlled Support</h3><p>Fine-tune the tension in seconds instead of being stuck with one fixed level of compression all day.</p><small>Adjust while you're wearing it.</small></article>
-      <article><h3>Targeted Patella Cushioning</h3><p>Dedicated cushioning around the kneecap helps soften repeated impact and pressure during walking, stairs and active movement.</p></article>
-      <article><h3>Flexible Side Stability</h3><p>Added support along both sides helps the knee feel steadier without locking your leg inside a bulky rigid brace.</p></article>
-      <article><h3>Lightweight, Flexible Construction</h3><p>Flexible stretch construction moves with your leg and is designed for active everyday wear.</p></article>
+      {%- for benefit_index in (1..4) -%}{%- capture benefit_title_key -%}altaeron_pdp_dialfit.benefits.item_{{ benefit_index }}_title{%- endcapture -%}{%- capture benefit_body_key -%}altaeron_pdp_dialfit.benefits.item_{{ benefit_index }}_body{%- endcapture -%}<article><h3>{{ benefit_title_key | t }}</h3><p>{{ benefit_body_key | t }}</p>{%- if benefit_index == 1 -%}<small>{{ 'altaeron_pdp_dialfit.benefits.item_1_note' | t }}</small>{%- endif -%}</article>{%- endfor -%}
     </div>
   </div></section>
 
   <section class="apdp-education alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="DialFitUses-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
-    {% render 'altaeron-pdp-section-heading', number: '4', title: 'From Morning Walks to 12-Hour Shifts', heading_id: 'DialFitUses' %}
+    {%- assign uses_title = 'altaeron_pdp_dialfit.uses.title' | t -%}{% render 'altaeron-pdp-section-heading', number: '4', title: uses_title, heading_id: uses_heading_id %}
     <div class="apdp-dialfit-use-cases">
-      <article><h3>Walking, Stairs & Everyday Movement</h3><p>For knees that feel tired, strained or less confident through repeated steps, inclines, stairs, errands and everyday movement.</p></article>
-      <article><h3>Training, Sports & Active Days</h3><p>Adjustable support for running, squats, gym sessions, hiking, recreational sports and days when your knees are working harder than usual.</p></article>
-      <article><h3>Long Shifts on Your Feet</h3><p>For nurses, teachers, retail staff, warehouse workers, factory workers, hospitality staff, cooks, hairdressers, cleaners, security staff, delivery workers and anyone spending hours standing or walking.</p><p class="apdp-dialfit-card-note">When your shift doesn't give your knees a break, DialFit gives you adjustable backup.</p><p class="apdp-dialfit-card-note">For knees that take repeated load from lifting, carrying, bending, climbing and long hours on the job.</p><small class="apdp-dialfit-work-audiences">Construction workers · Movers · Mechanics · Landscapers · Tradespeople</small></article>
-      <article><h3>Work, Travel & Life on the Move</h3><p>For lifting, carrying, bending, climbing, commuting, airport walking, sightseeing, gardening, housework and other days when your knees take more load than usual.</p><p class="apdp-dialfit-card-note">Useful for airport walking, sightseeing, long days out and trips where sitting down isn't always an option.</p></article>
+      <article><h3>{{ 'altaeron_pdp_dialfit.uses.item_1_title' | t }}</h3><p>{{ 'altaeron_pdp_dialfit.uses.item_1_body' | t }}</p></article>
+      <article><h3>{{ 'altaeron_pdp_dialfit.uses.item_2_title' | t }}</h3><p>{{ 'altaeron_pdp_dialfit.uses.item_2_body' | t }}</p></article>
+      <article><h3>{{ 'altaeron_pdp_dialfit.uses.item_3_title' | t }}</h3><p>{{ 'altaeron_pdp_dialfit.uses.item_3_body' | t }}</p><p class="apdp-dialfit-card-note">{{ 'altaeron_pdp_dialfit.uses.item_3_note_1' | t }}</p><p class="apdp-dialfit-card-note">{{ 'altaeron_pdp_dialfit.uses.item_3_note_2' | t }}</p><small class="apdp-dialfit-work-audiences">{{ 'altaeron_pdp_dialfit.uses.item_3_audiences' | t }}</small></article>
+      <article><h3>{{ 'altaeron_pdp_dialfit.uses.item_4_title' | t }}</h3><p>{{ 'altaeron_pdp_dialfit.uses.item_4_body' | t }}</p><p class="apdp-dialfit-card-note">{{ 'altaeron_pdp_dialfit.uses.item_4_note' | t }}</p></article>
     </div>
-    <div class="apdp-dialfit-audience-strip"><h3>DialFit Can Also Be Useful When...</h3><ul><li>Your knees feel tired after standing all day</li><li>Stairs feel harder than they used to</li><li>You're getting back into regular walking or exercise</li><li>Extra body weight makes everyday movement feel more demanding on your knees</li><li>Long days of work, travel or errands leave your knees feeling overworked</li><li>You want extra external support without wearing a heavy rigid brace</li></ul><p>Extra support for knees that don't feel as young as they used to.</p></div>
+    <div class="apdp-dialfit-audience-strip"><h3>{{ 'altaeron_pdp_dialfit.uses.also_title' | t }}</h3><ul>{%- for audience_index in (1..6) -%}{%- capture audience_key -%}altaeron_pdp_dialfit.uses.also_{{ audience_index }}{%- endcapture -%}<li>{{ audience_key | t }}</li>{%- endfor -%}</ul><p>{{ 'altaeron_pdp_dialfit.uses.also_footer' | t }}</p></div>
   </div></section>
 
   <section class="apdp-tail alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="DialFitCompare-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
-    {% render 'altaeron-pdp-section-heading', number: '5', title: 'Not Just Another Knee Sleeve', subtitle: 'More control than a basic sleeve. Less bulk than a rigid brace.', heading_id: 'DialFitCompare' %}
-    <div class="apdp-dialfit-compare" role="table" aria-label="Basic knee sleeve and traditional rigid brace compared with DialFit"><div class="apdp-dialfit-compare__head" role="row"><span role="columnheader">Basic Knee Sleeve</span><span role="columnheader">DialFit</span></div><div role="row"><span role="cell">Fixed compression</span><span role="cell">Adjustable dial-controlled tension</span></div><div role="row"><span role="cell">One feel all day</span><span role="cell">Change support as your activity changes</span></div><div role="row"><span role="cell">Basic stretch fabric around the kneecap</span><span role="cell">Targeted patella cushioning</span></div><div role="row"><span role="cell">Limited structure</span><span role="cell">Added flexible side stability</span></div><div role="row"><span class="apdp-dialfit-compare__rigid" role="cell"><small>Traditional Rigid Brace</small>Can feel bulky and restrictive for everyday use</span><span role="cell">Flexible support designed to move with your leg</span></div></div>
-    <p class="apdp-dialfit-highlight">Your activity changes throughout the day. Your knee support should too.</p>
+    {%- assign compare_title = 'altaeron_pdp_dialfit.compare.title' | t -%}{%- assign compare_subtitle = 'altaeron_pdp_dialfit.compare.subtitle' | t -%}{% render 'altaeron-pdp-section-heading', number: '5', title: compare_title, subtitle: compare_subtitle, heading_id: compare_heading_id %}
+    <div class="apdp-dialfit-compare" role="table" aria-label="{{ 'altaeron_pdp_dialfit.compare.label' | t | escape }}"><div class="apdp-dialfit-compare__head" role="row"><span role="columnheader">{{ 'altaeron_pdp_dialfit.compare.basic' | t }}</span><span role="columnheader">DialFit</span></div>{%- for compare_index in (1..4) -%}{%- capture basic_key -%}altaeron_pdp_dialfit.compare.row_{{ compare_index }}_basic{%- endcapture -%}{%- capture dialfit_key -%}altaeron_pdp_dialfit.compare.row_{{ compare_index }}_dialfit{%- endcapture -%}<div role="row"><span role="cell">{{ basic_key | t }}</span><span role="cell">{{ dialfit_key | t }}</span></div>{%- endfor -%}<div role="row"><span class="apdp-dialfit-compare__rigid" role="cell"><small>{{ 'altaeron_pdp_dialfit.compare.rigid' | t }}</small>{{ 'altaeron_pdp_dialfit.compare.rigid_body' | t }}</span><span role="cell">{{ 'altaeron_pdp_dialfit.compare.flexible' | t }}</span></div></div>
+    <p class="apdp-dialfit-highlight">{{ 'altaeron_pdp_dialfit.compare.highlight' | t }}</p>
   </div></section>
 
   <section class="apdp-education alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="DialFitHow-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
-    {% render 'altaeron-pdp-section-heading', number: '6', title: 'Support Your Knee in Seconds', heading_id: 'DialFitHow' %}
-    <div class="apdp-dialfit-steps"><article><h3>SLIDE IT ON</h3><p>Pull the brace onto the correct knee.</p></article><article><h3>CENTER YOUR KNEECAP</h3><p>Position the cushioned support around the kneecap.</p></article><article><h3>TURN THE DIAL</h3><p>Adjust until it feels secure and supportive.</p></article><article><h3>MOVE</h3><p>Walk, work or train — and readjust the tension when needed.</p></article></div>
+    {%- assign how_title = 'altaeron_pdp_dialfit.how.title' | t -%}{% render 'altaeron-pdp-section-heading', number: '6', title: how_title, heading_id: how_heading_id %}
+    <div class="apdp-dialfit-steps">{%- for step_index in (1..4) -%}{%- capture step_title_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_title{%- endcapture -%}{%- capture step_body_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_body{%- endcapture -%}<article><h3>{{ step_title_key | t }}</h3><p>{{ step_body_key | t }}</p></article>{%- endfor -%}</div>
   </div></section>
 
-  <section class="apdp-dialfit-proof alta-pdp-flow-section" aria-label="DialFit product in use"><div class="apdp-shell apdp-dialfit-full apdp-dialfit-proof__grid">
-    {%- if hero_video != blank -%}<div class="apdp-dialfit-proof__video">{{ hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, preload: 'metadata', image_size: '1200x' }}</div>{%- endif -%}
-    {%- for proof_index in (4..7) -%}{%- assign proof_media = product.media[proof_index].preview_image -%}{%- if proof_media != blank -%}<div class="apdp-dialfit-proof__image">{{ proof_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 768px) 25vw, 50vw', alt: product.title }}</div>{%- endif -%}{%- endfor -%}
+  <section class="apdp-dialfit-proof alta-pdp-flow-section" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.product_in_use' | t | escape }}"><div class="apdp-shell apdp-dialfit-full apdp-dialfit-proof__grid">
+    {%- if proof_video != blank -%}<div class="apdp-dialfit-proof__video">{{ proof_video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, preload: 'metadata', image_size: '1200x' }}</div>{%- endif -%}
+    {%- if proof_image_1 != blank -%}<div class="apdp-dialfit-proof__image">{{ proof_image_1 | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 768px) 25vw, 50vw', alt: proof_image_1.alt | default: product.title }}</div>{%- endif -%}
+    {%- if proof_image_2 != blank -%}<div class="apdp-dialfit-proof__image">{{ proof_image_2 | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 768px) 25vw, 50vw', alt: proof_image_2.alt | default: product.title }}</div>{%- endif -%}
   </div></section>
 
   <section id="AltaeronMedicalReview-{{ section.id }}" tabindex="-1" class="apdp-expert alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="AltaeronExpertTitle-{{ section.id }}">
     <div class="apdp-shell">
-      {% render 'altaeron-pdp-section-heading', number: '9', title: 'Medical Review', subtitle: 'Expert-reviewed product guidance.', heading_id: 'AltaeronExpertTitle' %}
+      {%- assign medical_title = 'altaeron_pdp_dialfit.medical.title' | t -%}{%- assign medical_subtitle = 'altaeron_pdp_dialfit.medical.subtitle' | t -%}{% render 'altaeron-pdp-section-heading', number: '7', title: medical_title, subtitle: medical_subtitle, heading_id: medical_heading_id %}
       <div class="apdp-expert__panel">
-        <div class="apdp-expert__portrait"><img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ 'altaeron_pdp.accessibility.expert_portrait' | t | escape }}"></div>
+        <div class="apdp-expert__portrait">{%- if expert_image != blank -%}{{ expert_image | image_url: width: 1024 | image_tag: loading: 'lazy', widths: '320, 480, 720, 1024', sizes: '(min-width: 768px) 18vw, 35vw', alt: expert_alt }}{%- else -%}<img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ expert_fallback_alt | escape }}">{%- endif -%}</div>
         <div class="apdp-expert__profile"><small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small><h2>{{ 'altaeron_pdp.expert.name' | t }}</h2><p>{{ 'altaeron_pdp.expert.role' | t }}</p><strong>{{ 'altaeron_pdp.expert.experience' | t }}</strong><span class="apdp-expert__signature">{{ 'altaeron_pdp.expert.signature' | t }}</span></div>
         <blockquote><span aria-hidden="true">“</span><p>{{ 'altaeron_pdp.expert.quote' | t }} <b aria-hidden="true">”</b></p></blockquote>
         <div class="apdp-expert__criteria"><strong>{{ 'altaeron_pdp.expert.criteria_heading' | t }}</strong><ul><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_1' | t }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_2' | t }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_3' | t }}</li></ul><p>{{ 'altaeron_pdp.expert.criteria_footer' | t }}</p></div>
-        <div class="apdp-expert__press" aria-label="Publications"><span>WebMD</span><span>healthline</span><span>Verywell<span>health</span></span><span>yahoo!<b>life</b></span><span>CNN</span></div>
+        <div class="apdp-expert__press" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.publications' | t | escape }}"><span>WebMD</span><span>healthline</span><span>Verywell<span>health</span></span><span>yahoo!<b>life</b></span><span>CNN</span></div>
       </div>
     </div>
   </section>
 
   <section class="apdp-tail apdp-tail-faq apdp-shell apdp-dialfit-full alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="AltaeronFaq-{{ section.id }}">
-    {% render 'altaeron-pdp-section-heading', number: '10', title: 'Frequently Asked Questions', heading_id: 'AltaeronFaq' %}
+    {%- assign faq_title = 'altaeron_pdp_dialfit.faq.title' | t -%}{% render 'altaeron-pdp-section-heading', number: '8', title: faq_title, heading_id: faq_heading_id %}
     <div class="apdp-tail-accordion">
-      <details><summary>What does the dial actually do?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>The dial adjusts the tension around the brace, letting you fine-tune how secure and supportive it feels around your knee.</p></details>
-      <details><summary>Do I need the Left or Right version?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Choose the side that matches the knee you plan to wear it on. DialFit has separate Left Knee and Right Knee versions.</p></details>
-      <details><summary>How do I choose my size?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Use the Size Guide and choose according to the manufacturer's body-weight range.</p></details>
-      <details><summary>Can I use it for walking, stairs or workouts?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Yes. DialFit is designed for active movement such as walking, stairs, gym training, running, hiking and everyday activities.</p></details>
-      <details><summary>Can I wear it during a long work shift?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Yes. The adjustable design is useful for people who spend long periods standing or walking, including nurses, teachers, retail workers, hospitality staff and other on-your-feet jobs.</p><p>You can adjust the tension as your comfort needs change throughout the day.</p></details>
-      <details><summary>How tight should I wear it?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>DialFit should feel snug and supportive, not painfully tight.</p><p>If you experience numbness, tingling, unusual swelling or discomfort, loosen or remove it.</p></details>
-      <details><summary>Is it bulky?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>No. DialFit uses a lightweight stretch construction designed to provide support without the bulk of many traditional rigid knee braces.</p></details>
-      <details><summary>What if I have arthritis, stiffness or an existing knee problem?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>For knees that feel stiff, achy or less confident during walking, stairs or everyday movement, DialFit provides adjustable external support that can help the knee feel more secure while worn.</p><p>It is not intended to diagnose, cure or repair an underlying joint condition or injury.</p></details>
-      <details><summary>What if I also have varicose veins or heavy legs?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>DialFit is designed for knee support rather than vein treatment.</p><p>People who spend long periods standing or walking — including those who also experience tired or heavy legs — may use it for additional knee-focused support during the day.</p></details>
-      <details><summary>Who is DialFit designed for?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>DialFit is designed for people who want extra adjustable knee support during everyday movement.</p><p>That includes walking, stairs, workouts, long work shifts, travel, housework, gardening and physically demanding jobs involving standing, lifting, carrying or bending.</p></details>
-      <details><summary>Is DialFit suitable for physically demanding work?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>It can be used for additional knee support during jobs involving long periods of standing, walking, lifting, carrying, bending or climbing.</p><p>The dial lets you adjust the tension as the demands of your day change.</p></details>
-      <details><summary>Can extra body weight make knee support useful?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Extra body weight can make everyday walking and stairs feel more demanding on the knees.</p><p>DialFit provides adjustable external support that can help the knee feel more secure during movement.</p></details>
-      <details><summary>Can DialFit be used during pregnancy?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>Pregnancy can change body weight and how everyday movement feels.</p><p>If your healthcare professional says a knee support is appropriate for you, DialFit provides adjustable external support for walking and daily activity.</p></details>
-      <details><summary>What if it doesn't work for me?{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>You're covered by our 30-Day Money-Back Guarantee. Try DialFit during your normal routine and contact us within the guarantee period if it isn't right for you.</p></details>
+      {%- for faq_index in (1..14) -%}{%- capture question_key -%}altaeron_pdp_dialfit.faq.item_{{ faq_index }}_question{%- endcapture -%}{%- capture answer_1_key -%}altaeron_pdp_dialfit.faq.item_{{ faq_index }}_answer_1{%- endcapture -%}{%- capture answer_2_key -%}altaeron_pdp_dialfit.faq.item_{{ faq_index }}_answer_2{%- endcapture -%}{%- assign answer_2 = answer_2_key | t -%}<details><summary>{{ question_key | t }}{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>{{ answer_1_key | t }}</p>{%- if answer_2 != blank -%}<p>{{ answer_2 }}</p>{%- endif -%}</details>{%- endfor -%}
     </div>
   </section>
 
   <section class="apdp-tail alta-pdp-flow-section apdp-dialfit-section"><div class="apdp-shell apdp-dialfit-full"><div class="apdp-dialfit-guarantee">
-    {% render 'altaeron-pdp-icon', icon: 'shield' %}<div><h2>Try DialFit for 30 Days</h2><p>Wear it. Walk in it. Use it through your normal routine.</p><p>If DialFit isn't right for you, contact us within 30 days and you're covered by our money-back guarantee.</p><p><strong>Secure Checkout • Free Shipping • 30-Day Guarantee</strong></p></div><a class="apdp-button apdp-button--primary" href="#DialFitFinalPurchase-{{ section.id }}">TRY DIALFIT RISK-FREE →</a>
-  </div><p class="apdp-dialfit-gifting">{% render 'icons', icon: 'gift', size: 'small' %}<span>A practical gift for parents, family and friends who spend a lot of time on their feet.</span></p></div></section>
+    {% render 'altaeron-pdp-icon', icon: 'shield' %}<div><h2>{{ 'altaeron_pdp_dialfit.guarantee.title' | t }}</h2><p>{{ 'altaeron_pdp_dialfit.guarantee.paragraph_1' | t }}</p><p>{{ 'altaeron_pdp_dialfit.guarantee.paragraph_2' | t }}</p><p><strong>{{ 'altaeron_pdp_dialfit.guarantee.reassurance' | t }}</strong></p></div><a class="apdp-button apdp-button--primary" href="#DialFitFinalPurchase-{{ section.id }}">{{ 'altaeron_pdp_dialfit.guarantee.cta' | t }}</a>
+  </div><p class="apdp-dialfit-gifting">{% render 'icons', icon: 'gift', size: 'small' %}<span>{{ 'altaeron_pdp_dialfit.guarantee.gift' | t }}</span></p></div></section>
 
-  <section id="DialFitFinalPurchase-{{ section.id }}" class="apdp-final-cta alta-pdp-flow-section" aria-label="Final DialFit purchase call to action"><div class="apdp-shell apdp-final-cta__inner">
-    <div class="apdp-final-cta__product apdp-tail-media">{%- if final_cta_image != blank -%}{{ final_cta_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 70vw', alt: 'Physician endorsement for Altaeron products' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
+  <section id="DialFitFinalPurchase-{{ section.id }}" class="apdp-final-cta alta-pdp-flow-section" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.final_purchase' | t | escape }}"><div class="apdp-shell apdp-final-cta__inner">
+    <div class="apdp-final-cta__product apdp-tail-media">{%- if final_cta_image != blank -%}{{ final_cta_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 70vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
     <div class="apdp-final-cta__content">
-      <h2>Ready to Give Your Knee More Support?</h2>
-      <p>Turn the dial. Find your fit. Keep moving.</p>
-      <div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>30-Day<br>Guarantee</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>Free<br>Shipping</b></span><span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<b>Secure<br>Checkout</b></span></div>
+      <h2>{{ 'altaeron_pdp_dialfit.final.title' | t }}</h2>
+      <p>{{ 'altaeron_pdp_dialfit.final.subtitle' | t }}</p>
+      <div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>{{ 'altaeron_pdp_dialfit.final.guarantee_html' | t }}</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>{{ 'altaeron_pdp_dialfit.final.shipping_html' | t }}</b></span><span>{% render 'altaeron-pdp-icon', icon: 'lock' %}<b>{{ 'altaeron_pdp_dialfit.final.checkout_html' | t }}</b></span></div>
       <div class="apdp-final-payments">
-        <span class="visually-hidden">Accepted payment methods</span>
+        <span class="visually-hidden">{{ 'altaeron_pdp_dialfit.accessibility.payment_methods' | t }}</span>
         {%- liquid
           assign final_payment_prefix = 'apdp-dialfit-final-' | append: section.id | append: '-'
           assign final_payment_id = ' id="' | append: final_payment_prefix
@@ -472,21 +493,21 @@
       </div>
     </div>
     <div class="apdp-final-cta__buy">
-      <div>{%- if review_count > 0 -%}{% render 'altaeron-pdp-stars', rating: review_rating %}<small>{{ review_rating_display }}/5 ({{ review_count }} reviews)</small>{%- endif -%}<em data-apdp-final-savings{% if savings <= 0 %} hidden{% endif %}>Save {{ savings_money }}</em></div>
+      <div>{%- if review_count > 0 -%}{% render 'altaeron-pdp-stars', rating: review_rating %}<small>{{ 'altaeron_pdp_dialfit.hero.rating_short' | t: rating: review_rating_display, count: review_count }}</small>{%- endif -%}<em data-apdp-final-savings{% if savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp_dialfit.common.save_amount' | t: amount: savings_money }}</em></div>
       <p><strong data-apdp-final-price>{{ current_variant.price | money }}</strong><s data-apdp-final-compare{% if savings <= 0 %} hidden{% endif %}>{{ compare_price | money }}</s></p>
       <button type="button" class="apdp-final-button" data-apdp-final-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{{ cta_label }}<span data-apdp-final-button-price{% unless current_variant.available %} hidden{% endunless %}> — {{ current_variant.price | money }}</span></button>
-      <small data-apdp-installments>or 4 interest-free payments of {{ installment_amount }} with shop<span>Pay</span></small>
+      <small data-apdp-installments>{{ 'altaeron_pdp_dialfit.final.installments' | t: amount: installment_amount }} shop<span>Pay</span></small>
     </div>
-    <div class="apdp-final-badge"><div class="apdp-dialfit-seal" aria-label="30-Day Money-Back Guarantee"><strong>30-DAY</strong><span>MONEY-BACK</span>GUARANTEE</div></div>
+    <div class="apdp-final-badge"><div class="apdp-dialfit-seal" aria-label="{{ 'altaeron_pdp_dialfit.guarantee.money_back' | t | escape }}"><strong>{{ 'altaeron_pdp_dialfit.final.badge_days' | t }}</strong><span>{{ 'altaeron_pdp_dialfit.final.badge_money_back' | t }}</span>{{ 'altaeron_pdp_dialfit.final.badge_guarantee' | t }}</div></div>
   </div></section>
 
   <section id="AltaeronVerified-{{ section.id }}" class="apdp-tail apdp-review-summary apdp-shell apdp-dialfit-full alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="AltaeronVerifiedTitle-{{ section.id }}">
-    <div class="apdp-review-summary__head">{% render 'altaeron-pdp-section-heading', number: '11', title: 'Real Customers. Real Movement.', subtitle: 'See what DialFit customers say about using it for walking, workouts, long shifts and everyday support.', heading_id: 'AltaeronVerifiedTitle' %}</div>
+    <div class="apdp-review-summary__head">{%- assign reviews_title = 'altaeron_pdp_dialfit.reviews.title' | t -%}{%- assign reviews_subtitle = 'altaeron_pdp_dialfit.reviews.subtitle' | t -%}{% render 'altaeron-pdp-section-heading', number: '9', title: reviews_title, subtitle: reviews_subtitle, heading_id: reviews_heading_id %}</div>
     {%- assign has_legacy_judgeme_widget = false -%}{%- if product.metafields.judgeme.widget.size > 20 -%}{%- assign has_legacy_judgeme_widget = true -%}{%- endif -%}
     <div class="apdp-judgeme-widget"><div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ product.title | escape }}" data-id="{{ product.id }}" data-product-id="{{ product.id }}" data-widget="review" data-auto-install="false" data-shop-reviews-count="{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}" data-entry-point="review_widget.js" data-entry-key="review-widget/main.js">{%- if has_legacy_judgeme_widget -%}<div class="jdgm-legacy-widget-content" style="display:none">{{ product.metafields.judgeme.widget }}</div>{%- endif -%}</div>{%- if product.metafields.judgeme.review_widget_data -%}<script>window.jdgm=window.jdgm||{};window.jdgm.data=window.jdgm.data||{};window.jdgm.data.reviewWidget=window.jdgm.data.reviewWidget||{};window.jdgm.data.reviewWidget[{{ product.id | json }}]={{ product.metafields.judgeme.review_widget_data }};</script>{%- endif -%}<noscript><div class="apdp-tail-review-grid">{% render 'altaeron-pdp-review-cards', reviews: reviews, limit: 10 %}</div></noscript></div>
   </section>
 
-  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small>Altaeron™ DialFit <b data-apdp-sticky-price>{{ current_variant.price | money }}</b></small><small class="apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-sticky-text>GET MY DIALFIT — {{ current_variant.price | money }}</span></button></div>
+  <div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small>Altaeron™ DialFit <b data-apdp-sticky-price>{{ current_variant.price | money }}</b></small><small class="apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="apdp-button apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-sticky-text>{{ cta_label }} — {{ current_variant.price | money }}</span></button></div>
   <script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script>
   <script>
     (() => {
@@ -495,6 +516,10 @@
       const dialog = root.querySelector('[data-dialfit-size-dialog]');
       const openButton = root.querySelector('[data-dialfit-size-open]');
       const closeButton = root.querySelector('[data-dialfit-size-close]');
+      const unitButtons = dialog?.querySelectorAll('[data-size-unit]');
+      const unitBadge = dialog?.querySelector('[data-size-unit-badge]');
+      const unitCopy = dialog?.querySelector('[data-size-unit-copy]');
+      const unitTip = dialog?.querySelector('.apdp-size-chart__tip');
       const gallery = root.querySelector('[data-apdp-gallery]');
       const heroVideo = gallery?.querySelector('[data-apdp-hero-video]');
       const returnButton = gallery?.querySelector('[data-apdp-return-demo]');
@@ -502,6 +527,25 @@
       closeButton?.addEventListener('click', () => dialog?.close());
       dialog?.addEventListener('click', (event) => {
         if (event.target === dialog) dialog.close();
+      });
+      unitButtons?.forEach((button) => {
+        button.addEventListener('click', () => {
+          const unit = button.dataset.sizeUnit;
+          unitButtons.forEach((option) => option.setAttribute('aria-pressed', String(option === button)));
+          dialog.querySelectorAll('[data-metric][data-us]').forEach((cell) => {
+            cell.textContent = cell.dataset[unit];
+            const unitLabel = cell.cellIndex === 3 ? (unit === 'us' ? 'lb' : 'kg') : (unit === 'us' ? 'in' : 'cm');
+            cell.dataset.label = `${cell.dataset.labelBase} (${unitLabel})`;
+          });
+          dialog.querySelectorAll('[data-length-unit]').forEach((label) => {
+            label.textContent = unit === 'us' ? 'in' : 'cm';
+          });
+          dialog.querySelectorAll('[data-weight-unit]').forEach((label) => {
+            label.textContent = unit === 'us' ? 'lb' : 'kg';
+          });
+          unitBadge.textContent = unit === 'us' ? 'US' : 'CM';
+          unitCopy.textContent = unit === 'us' ? unitTip.dataset.usCopy : unitTip.dataset.metricCopy;
+        });
       });
       gallery?.querySelectorAll('[data-apdp-thumb]').forEach((thumb) => {
         thumb.addEventListener('click', () => {
@@ -527,6 +571,20 @@
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "Turn the Dial. Lock In Knee Support." },
     { "type": "textarea", "id": "subheadline", "label": "Outcome sentence", "default": "Fine-tune the support around your knee in seconds to reduce strain, absorb impact and move with more confidence." },
     { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "GET MY DIALFIT →" },
+    { "type": "header", "content": "Hero media" },
+    { "type": "video", "id": "hero_video", "label": "Hero video" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image fallback" },
+    { "type": "header", "content": "Point 1 media" },
+    { "type": "image_picker", "id": "point_1_image", "label": "Story image" },
+    { "type": "header", "content": "Point 2 media" },
+    { "type": "image_picker", "id": "point_2_image", "label": "Mechanism image" },
+    { "type": "header", "content": "Point 6 media" },
+    { "type": "video", "id": "point_6_video", "label": "Proof video" },
+    { "type": "image_picker", "id": "point_6_image_1", "label": "Proof image 1" },
+    { "type": "image_picker", "id": "point_6_image_2", "label": "Proof image 2" },
+    { "type": "header", "content": "Point 7 media" },
+    { "type": "image_picker", "id": "point_7_image", "label": "Expert portrait" },
+    { "type": "header", "content": "Final CTA media" },
     { "type": "image_picker", "id": "final_cta_image", "label": "Final CTA image" }
   ],
   "presets": [{ "name": "Altaeron DialFit PDP" }]
