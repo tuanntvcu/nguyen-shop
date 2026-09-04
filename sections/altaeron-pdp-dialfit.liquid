@@ -63,11 +63,21 @@
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{align-items:flex-start;color:#173f32;display:flex;font-size:14px;font-weight:650;gap:9px;line-height:1.4}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits svg{background:#08724b;border-radius:50%;color:#fff;flex:0 0 19px;height:19px;margin-top:1px;padding:4px;width:19px}
   #AltaeronPdp-{{ section.id }} .apdp-rating[hidden]{display:none}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating{gap:9px;font-size:15px;margin:12px 0 14px}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating .apdp-stars{font-size:21px}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating strong{font-size:15px}
   #AltaeronPdp-{{ section.id }} .apdp-hero__reassurance{color:#3d5048;font-size:12px;font-weight:650;margin:9px 0 0;text-align:center}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review{align-items:start;background:#f7faf7;border:1px solid #dfe7e1;border-radius:10px;display:grid;gap:10px;grid-template-columns:38px minmax(0,1fr);margin:12px 0;padding:12px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review blockquote{color:#29483d;font-size:12px;line-height:1.5;margin:3px 0 0}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review{align-items:start;background:#f7faf7;border:1px solid #dfe7e1;border-radius:10px;display:grid;gap:13px;grid-template-columns:56px minmax(0,1fr);margin:16px 0 0;padding:16px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review .apdp-tail-avatar{height:56px;width:56px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review .apdp-stars{font-size:20px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review blockquote{color:#29483d;font-size:14px;line-height:1.55;margin:5px 0 0}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-review blockquote strong{color:#075c3b;display:block;margin-bottom:3px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review figcaption{font-size:11px;margin-top:7px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review figcaption{font-size:12px;margin-top:9px}
+  #AltaeronPdp-{{ section.id }} .apdp-payment-icons{border-top:0;padding:10px 0 0}
+  #AltaeronPdp-{{ section.id }} .apdp-social-proof{margin-top:8px}
+  #AltaeronPdp-{{ section.id }} .apdp-promotion__offer strong,
+  #AltaeronPdp-{{ section.id }} .apdp-promotion__time strong,
+  #AltaeronPdp-{{ section.id }} .apdp-promotion__separator{color:#b83b31}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-copy{color:#29483d;font-size:16px;line-height:1.65;margin:0 auto;max-width:760px;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-copy p{margin:0 0 14px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-highlight{background:#eef7f1;border-radius:10px;color:#075c3b;font-weight:750;margin:18px auto 0;padding:13px 16px}
@@ -262,6 +272,11 @@
     #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{margin:12px 15px 0;order:1;width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{margin:0 15px;order:2;width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-narrative{order:3;padding:5px 15px 0}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating{font-size:14px;gap:8px;margin:12px 0 14px}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating .apdp-stars{font-size:20px}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating strong{font-size:14px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-review{grid-template-columns:50px minmax(0,1fr);padding:14px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-review .apdp-tail-avatar{height:50px;width:50px}
     #AltaeronPdp-{{ section.id }} .apdp-buy{order:4}
     #AltaeronPdp-{{ section.id }} .apdp-gallery-story{grid-row:auto;margin:0 15px 20px;order:5;padding:22px 0 0}
     #AltaeronPdp-{{ section.id }} .apdp-gallery-story h2{font-size:clamp(27px,8vw,34px);line-height:1.16;margin-bottom:22px}
@@ -381,6 +396,12 @@
           <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_dialfit.hero.benefit_2' | t }}</span></li>
           <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_dialfit.hero.benefit_3' | t }}</span></li>
         </ul>
+        <figure class="apdp-dialfit-review">
+          <div class="apdp-tail-avatar">
+            {%- if section.settings.review_avatar != blank -%}{{ section.settings.review_avatar | image_url: width: 160 | image_tag: loading: 'eager', widths: '80, 120, 160', sizes: '56px', alt: section.settings.review_avatar.alt | default: 'Jordan M.' }}{%- else -%}<span class="apdp-tail-avatar__initial" aria-hidden="true">J</span>{%- endif -%}
+          </div>
+          <div>{% render 'altaeron-pdp-stars', rating: 5 %}<blockquote><strong>{{ 'altaeron_pdp_dialfit.buy.review_title' | t }}</strong>{{ 'altaeron_pdp_dialfit.buy.review_body' | t }}<strong>{{ 'altaeron_pdp_dialfit.buy.review_close' | t }}</strong></blockquote><figcaption><strong>Jordan M.</strong> &middot; {{ 'altaeron_pdp_dialfit.buy.verified_customer' | t }}</figcaption></div>
+        </figure>
       </div>
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.purchase' | t: product: product.title | escape }}" data-apdp-primary-purchase>
@@ -393,12 +414,11 @@
           <div class="apdp-dialfit-size-trigger"><button type="button" data-dialfit-size-open aria-haspopup="dialog">{{ 'altaeron_pdp_dialfit.buy.size_guide' | t }}</button></div>
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ cta_label | escape }}">{{ cta_label }}</span><b data-apdp-cta-price> — {{ current_variant.price | money }}</b></span>{% render 'altaeron-pdp-icon', icon: 'cart' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
+          {%- if shop.enabled_payment_types.size > 0 -%}<ul class="apdp-payment-icons list list-payment" role="list" aria-label="{{ 'altaeron_pdp.accessibility.accepted_payment_methods' | t | escape }}">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul>{%- endif -%}
           <p class="apdp-hero__reassurance">{{ 'altaeron_pdp_dialfit.buy.reassurance' | t }}</p>
+          {%- capture social_proof_count -%}<strong data-apdp-social-proof-count></strong>{%- endcapture -%}
+          <p class="apdp-social-proof" data-apdp-social-proof data-store-date="{{ 'now' | date: '%Y-%m-%d' }}" data-store-utc-offset="{{ 'now' | date: '%z' }}" hidden>{{ 'altaeron_pdp.buy.social_proof_html' | t: count: social_proof_count }}</p>
         {%- endform -%}
-        <figure class="apdp-dialfit-review">
-          <div class="apdp-tail-avatar"><span class="apdp-tail-avatar__initial" aria-hidden="true">J</span></div>
-          <div>{% render 'altaeron-pdp-stars', rating: 5 %}<blockquote><strong>{{ 'altaeron_pdp_dialfit.buy.review_title' | t }}</strong>{{ 'altaeron_pdp_dialfit.buy.review_body' | t }}<strong>{{ 'altaeron_pdp_dialfit.buy.review_close' | t }}</strong></blockquote><figcaption><strong>Jordan M.</strong> · {{ 'altaeron_pdp_dialfit.buy.verified_customer' | t }}</figcaption></div>
-        </figure>
         <div class="apdp-buy__trust">
           <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span><b>{{ 'altaeron_pdp_dialfit.buy.free_shipping' | t }}</b><small>{{ 'altaeron_pdp_dialfit.buy.every_order' | t }}</small></span></a>
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp_dialfit.buy.guarantee' | t }}</b><small>{{ 'altaeron_pdp_dialfit.buy.risk_free' | t }}</small></span></a>
@@ -647,6 +667,8 @@
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "Turn the Dial. Lock In Knee Support." },
     { "type": "textarea", "id": "subheadline", "label": "Outcome sentence", "default": "Fine-tune the support around your knee in seconds to reduce strain, absorb impact and move with more confidence." },
     { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "GET MY DIALFIT →" },
+    { "type": "header", "content": "Above-the-fold review" },
+    { "type": "image_picker", "id": "review_avatar", "label": "Reviewer avatar" },
     { "type": "header", "content": "Hero media" },
     { "type": "video", "id": "hero_video", "label": "Hero video" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero image fallback" },
