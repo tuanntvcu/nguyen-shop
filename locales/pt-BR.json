@@ -850,7 +850,7 @@
       "payment_methods": "Métodos de pagamento aceitos"
     },
     "bundle": {
-      "title": "Escolha o seu pacote",
+      "title": "Compre mais, economize mais",
       "one": "1 joelheira",
       "many": "{{ count }} joelheiras",
       "one_description": "Uma joelheira DialFit",

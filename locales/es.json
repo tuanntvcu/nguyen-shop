@@ -1169,7 +1169,7 @@
       "payment_methods": "Métodos de pago aceptados"
     },
     "bundle": {
-      "title": "Elige tu paquete",
+      "title": "Compra más, ahorra más",
       "one": "1 rodillera",
       "many": "{{ count }} rodilleras",
       "one_description": "Una rodillera DialFit",

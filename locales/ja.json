@@ -1171,7 +1171,7 @@
       "payment_methods": "受け入れられる支払い方法"
     },
     "bundle": {
-      "title": "バンドルを選択してください",
+      "title": "まとめ買いでもっとお得",
       "one": "膝サポーター1個",
       "many": "膝サポーター{{ count }}個",
       "one_description": "DialFit ブレース 1 個",

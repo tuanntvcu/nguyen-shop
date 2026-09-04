@@ -1171,7 +1171,7 @@
       "payment_methods": "Akzeptierte Zahlungsmethoden"
     },
     "bundle": {
-      "title": "Wählen Sie Ihr Paket",
+      "title": "Mehr kaufen, mehr sparen",
       "one": "1 Kniebandage",
       "many": "{{ count }} Kniebandagen",
       "one_description": "Eine DialFit-Kniebandage",

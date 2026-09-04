@@ -1171,7 +1171,7 @@
       "payment_methods": "Modes de paiement acceptés"
     },
     "bundle": {
-      "title": "Choisissez votre forfait",
+      "title": "Achetez plus, économisez plus",
       "one": "1 attelle",
       "many": "{{ count }} Bretelles",
       "one_description": "Une attelle DialFit",
