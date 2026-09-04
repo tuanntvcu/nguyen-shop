@@ -902,6 +902,66 @@
     });
   }
 
+  function initStepTimelines(root) {
+    root.querySelectorAll('[data-apdp-step-timeline]').forEach((timeline) => {
+      if (timeline.dataset.timelineReady === 'true') return;
+      timeline.dataset.timelineReady = 'true';
+
+      const steps = [...timeline.querySelectorAll('[data-apdp-step]')];
+      if (!steps.length) return;
+      const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let timers = [];
+
+      const clearTimers = () => {
+        timers.forEach(window.clearTimeout);
+        timers = [];
+      };
+      const setStepState = (step, state) => {
+        step.dataset.stepState = state;
+        if (state === 'current') step.setAttribute('aria-current', 'step');
+        else step.removeAttribute('aria-current');
+      };
+      const finish = () => {
+        clearTimers();
+        timeline.classList.add('is-animation-ready');
+        steps.forEach((step) => setStepState(step, 'complete'));
+      };
+      const play = () => {
+        clearTimers();
+        timeline.classList.add('is-animation-ready');
+        steps.forEach((step) => setStepState(step, 'upcoming'));
+
+        steps.forEach((step, index) => {
+          timers.push(window.setTimeout(() => {
+            if (index > 0) setStepState(steps[index - 1], 'complete');
+            setStepState(step, 'current');
+          }, index * 650));
+        });
+        timers.push(window.setTimeout(() => {
+          setStepState(steps[steps.length - 1], 'complete');
+        }, steps.length * 650));
+      };
+
+      if (motionPreference.matches || !('IntersectionObserver' in window)) {
+        finish();
+        return;
+      }
+
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        play();
+      }, { threshold: 0.35 });
+      observer.observe(timeline);
+
+      motionPreference.addEventListener?.('change', (event) => {
+        if (!event.matches) return;
+        observer.disconnect();
+        finish();
+      }, { once: true });
+    });
+  }
+
   function initReviewSliders(root) {
     root.querySelectorAll('[data-apdp-review-slider]').forEach((slider) => {
       const group = slider.closest('[data-apdp-review-slider-group]');
@@ -942,6 +1002,7 @@
     initMedicalReviewLink(root);
     initLazyVideos(root);
     initReviewSliders(root);
+    initStepTimelines(root);
   }
 
   const initAll = (scope = document) => scope.querySelectorAll(SELECTOR).forEach(init);

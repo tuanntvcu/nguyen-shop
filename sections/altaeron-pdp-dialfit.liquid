@@ -66,7 +66,6 @@
   #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating{gap:9px;font-size:15px;margin:12px 0 14px}
   #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating .apdp-stars{font-size:21px}
   #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating strong{font-size:15px}
-  #AltaeronPdp-{{ section.id }} .apdp-hero__reassurance{color:#3d5048;font-size:12px;font-weight:650;margin:9px 0 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-review{align-items:start;background:#f7faf7;border:1px solid #dfe7e1;border-radius:10px;display:grid;gap:13px;grid-template-columns:56px minmax(0,1fr);margin:16px 0 0;padding:16px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-review .apdp-tail-avatar{height:56px;width:56px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-review .apdp-stars{font-size:20px}
@@ -95,6 +94,9 @@
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare__rigid{align-items:flex-start!important;flex-direction:column;justify-content:center}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare span+span{background:#f2f8f5;border-left:1px solid #dfe3df;color:#075c3b;font-weight:700}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare__head span{background:#f6f7f5;font-weight:800}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare>div:not(.apdp-dialfit-compare__head):not(.apdp-dialfit-compare__media-row)>span{padding-left:48px;position:relative}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare>div:not(.apdp-dialfit-compare__head):not(.apdp-dialfit-compare__media-row)>span:before{color:#e3312b;content:'×';font-family:Arial,sans-serif;font-size:27px;font-weight:900;left:17px;line-height:1;position:absolute;top:50%;transform:translateY(-50%)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare>div:not(.apdp-dialfit-compare__head):not(.apdp-dialfit-compare__media-row)>span+span:before{color:#00834f;content:'✓';font-size:25px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare__media-row{background:#fff}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare__media{aspect-ratio:4/3;background:#f4f7f5;margin:0;min-width:0;overflow:hidden}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare__media+.apdp-dialfit-compare__media{border-left:1px solid #dfe3df}
@@ -208,9 +210,20 @@
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-audience-strip li{align-items:center;background:#f2f7f4;border:1px solid #d7e3dc;border-radius:12px;color:#173f32;display:flex;font-size:13px;font-weight:650;gap:9px;justify-content:center;line-height:1.25;min-height:56px;padding:10px;position:static;text-align:left}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-audience-strip li:before{content:none}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-audience-strip li svg{fill:none;flex:0 0 28px;height:28px;stroke:#075c3b;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;width:28px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps{counter-reset:dialfit-step;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:25px}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article{border-top:1px solid #b7cabe;padding:31px 22px 10px;position:relative}
-  #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article:before{align-items:center;background:#075c3b;border:3px solid #fff;border-radius:50%;color:#fff;content:counter(dialfit-step);counter-increment:dialfit-step;display:flex;font-size:10px;font-weight:800;height:28px;justify-content:center;left:20px;position:absolute;top:-15px;width:28px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:25px 0 0;padding:0}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step{padding:31px 22px 10px;position:relative}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step__number{align-items:center;background:#075c3b;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 1px rgba(7,92,59,.12);color:#fff;display:flex;font-size:10px;font-weight:800;height:28px;justify-content:center;left:20px;position:absolute;top:-15px;transition:background-color .35s ease,box-shadow .35s ease,transform .35s cubic-bezier(.2,.8,.2,1);width:28px;z-index:2}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step__connector{background:#c7d6cd;height:2px;left:34px;overflow:hidden;position:absolute;right:-34px;top:-1px;z-index:1}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step__connector:after{background:linear-gradient(90deg,#0a6948,#23a06f);content:'';inset:0;position:absolute;transform:scaleX(0);transform-origin:left;transition:transform .55s cubic-bezier(.65,0,.35,1)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step:last-child .apdp-dialfit-step__connector{display:none}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step__copy{transition:opacity .4s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps.is-animation-ready .apdp-dialfit-step__copy{opacity:.42;transform:translateY(5px)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps.is-animation-ready .apdp-dialfit-step__number{background:#aebeb5;box-shadow:0 0 0 1px rgba(82,101,93,.12)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step[data-step-state="current"] .apdp-dialfit-step__copy,
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step[data-step-state="complete"] .apdp-dialfit-step__copy{opacity:1;transform:none}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step[data-step-state="current"] .apdp-dialfit-step__number{background:#0a6948;box-shadow:0 0 0 6px rgba(35,160,111,.15),0 6px 16px rgba(7,92,59,.2);transform:scale(1.12)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step[data-step-state="complete"] .apdp-dialfit-step__number{background:#0a6948;box-shadow:0 0 0 1px rgba(7,92,59,.14)}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-step[data-step-state="complete"] .apdp-dialfit-step__connector:after{transform:scaleX(1)}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps h3{font-size:15px;margin:0 0 7px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps p{color:#52655d;font-size:13px;line-height:1.5;margin:0}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-proof{background:#eff5f1;padding:46px 0}
@@ -261,9 +274,9 @@
     #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody tr{background:#fff;border:1px solid #d8e3dc;border-radius:11px;display:grid;gap:7px;grid-template-columns:1fr 1fr;padding:12px}
     #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody tr+tr{border-top:1px solid #d8e3dc}
     #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody th{border:0;grid-column:1/-1;padding:0 0 3px;text-align:left;width:auto}
-    #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody td,#AltaeronPdp-{{ section.id }} .apdp-size-chart tbody td:nth-child(4){align-items:center;background:#f5f9f6;border:0;border-radius:7px;color:#29483d;display:flex;font-size:12px;justify-content:space-between;min-height:42px;padding:8px 9px;text-align:right}
-    #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody td:before{color:#63756d;content:attr(data-label);font-size:9px;font-weight:700;line-height:1.2;max-width:58%;text-align:left;text-transform:uppercase}
-    #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody td:last-child{grid-column:1/-1}
+    #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody td,#AltaeronPdp-{{ section.id }} .apdp-size-chart tbody td:nth-child(4){align-items:center;background:#f5f9f6;border:0;border-radius:7px;color:#29483d;column-gap:8px;display:grid;font-size:12px;grid-template-columns:minmax(0,1fr) auto;min-height:42px;padding:8px 9px;text-align:right}
+    #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody td:before{color:#63756d;content:attr(data-label);font-size:9px;font-weight:700;line-height:1.2;min-width:0;overflow-wrap:anywhere;text-align:left;text-transform:uppercase}
+    #AltaeronPdp-{{ section.id }} .apdp-size-chart tbody td:nth-child(4){grid-column:1/-1}
     #AltaeronPdp-{{ section.id }} .apdp-size-chart__size{font-size:16px;height:34px;min-width:44px}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee{grid-template-columns:1fr;padding:22px;text-align:center}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-guarantee svg{margin:auto}
@@ -322,8 +335,11 @@
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-audience-strip li svg{flex-basis:25px;height:25px;width:25px}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-compare__media{aspect-ratio:1/1}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps{gap:0;grid-template-columns:1fr;margin-left:16px}
-    #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article{border-left:1px solid #b7cabe;border-top:0;padding:4px 12px 24px 30px}
-    #AltaeronPdp-{{ section.id }} .apdp-dialfit-steps article:before{font-size:9px;height:24px;left:-13px;top:0;width:24px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-step{min-height:88px;padding:3px 12px 27px 30px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-step__number{font-size:9px;height:24px;left:-12px;top:0;width:24px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-step__connector{bottom:-1px;height:auto;left:-1px;right:auto;top:12px;width:2px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-step__connector:after{background:linear-gradient(180deg,#0a6948,#23a06f);transform:scaleY(0);transform-origin:top}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-step[data-step-state="complete"] .apdp-dialfit-step__connector:after{transform:scaleY(1)}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-proof{padding:30px 0}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-proof__grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-proof__video{aspect-ratio:1;grid-column:1/-1;grid-row:auto}
@@ -415,7 +431,6 @@
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ cta_label | escape }}">{{ cta_label }}</span><b data-apdp-cta-price> — {{ current_variant.price | money }}</b></span>{% render 'altaeron-pdp-icon', icon: 'cart' %}<span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
           {%- if shop.enabled_payment_types.size > 0 -%}<ul class="apdp-payment-icons list list-payment" role="list" aria-label="{{ 'altaeron_pdp.accessibility.accepted_payment_methods' | t | escape }}">{%- for type in shop.enabled_payment_types -%}<li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul>{%- endif -%}
-          <p class="apdp-hero__reassurance">{{ 'altaeron_pdp_dialfit.buy.reassurance' | t }}</p>
           {%- capture social_proof_count -%}<strong data-apdp-social-proof-count></strong>{%- endcapture -%}
           <p class="apdp-social-proof" data-apdp-social-proof data-store-date="{{ 'now' | date: '%Y-%m-%d' }}" data-store-utc-offset="{{ 'now' | date: '%z' }}" hidden>{{ 'altaeron_pdp.buy.social_proof_html' | t: count: social_proof_count }}</p>
         {%- endform -%}
@@ -532,7 +547,7 @@
 
   <section class="apdp-education alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="DialFitHow-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
     {%- assign how_title = 'altaeron_pdp_dialfit.how.title' | t -%}{% render 'altaeron-pdp-section-heading', number: '6', title: how_title, heading_id: how_heading_id %}
-    <div class="apdp-dialfit-steps">{%- for step_index in (1..4) -%}{%- capture step_title_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_title{%- endcapture -%}{%- capture step_body_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_body{%- endcapture -%}<article><h3>{{ step_title_key | t }}</h3><p>{{ step_body_key | t }}</p></article>{%- endfor -%}</div>
+    <ol class="apdp-dialfit-steps" data-apdp-step-timeline>{%- for step_index in (1..4) -%}{%- capture step_title_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_title{%- endcapture -%}{%- capture step_body_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_body{%- endcapture -%}<li class="apdp-dialfit-step" data-apdp-step><span class="apdp-dialfit-step__number" aria-hidden="true">{{ step_index }}</span><span class="apdp-dialfit-step__connector" aria-hidden="true"></span><div class="apdp-dialfit-step__copy"><h3>{{ step_title_key | t }}</h3><p>{{ step_body_key | t }}</p></div></li>{%- endfor -%}</ol>
   </div></section>
 
   <section class="apdp-dialfit-proof alta-pdp-flow-section" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.product_in_use' | t | escape }}"><div class="apdp-shell apdp-dialfit-full apdp-dialfit-proof__grid">
