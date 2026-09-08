@@ -69,7 +69,11 @@
     "color_swatch_trigger": "Color",
     "cart_type": "drawer",
     "cart_icon": "shopping-bag",
-    "free_shipping_minimum_amount": "39",
+    "free_shipping_minimum_amount": "19",
+    "cart_empty_message": "<p>Maybe you also like</p>",
+    "collection_list": [
+      "best-sellers"
+    ],
     "social_facebook_link": "https://www.facebook.com/",
     "social_instagram_link": "https://www.instagram.com/",
     "social_youtube_link": "https://www.youtube.com/",

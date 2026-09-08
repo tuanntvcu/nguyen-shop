@@ -987,7 +987,7 @@
       "eyebrow": "Oferta del Día del Trabajo",
       "title": "Más alivio. Paga menos.",
       "offer": "15 % de descuento adicional",
-      "automatically_applied": "— Se aplica automáticamente",
+      "automatically_applied": "",
       "ends_today": "Termina hoy a las 11:59 p. m. PT",
       "timer_initial": "Tiempo restante hasta la medianoche, hora del Pacífico",
       "timer_remaining": "Quedan {{ days }} días, {{ hours }} horas, {{ minutes }} minutos y {{ seconds }} segundos hasta la medianoche, hora del Pacífico",
@@ -996,7 +996,7 @@
       "minutes": "Minutos",
       "seconds": "Segundos",
       "cta": "Conseguir mi oferta del Día del Trabajo",
-      "announcement_desktop": "🇺🇸 Oferta del Día del Trabajo — 15 % de descuento adicional — Se aplica automáticamente",
+      "announcement_desktop": "🇺🇸 Oferta del Día del Trabajo — 15 % de descuento adicional",
       "announcement_mobile": "Oferta del Día del Trabajo — 15 % de descuento adicional"
     },
     "common": {

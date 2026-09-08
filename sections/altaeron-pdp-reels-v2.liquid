@@ -65,6 +65,9 @@
         when 'support_demo'
           assign support_demo_image = block.settings.image
           assign support_demo_video = block.settings.video
+          if product.metafields.altaeron.pdp_video.value != blank
+            assign support_demo_video = product.metafields.altaeron.pdp_video.value
+          endif
         when 'day_story'
           assign day_story_image = block.settings.image
           assign day_story_video = block.settings.video

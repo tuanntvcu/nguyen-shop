@@ -989,7 +989,7 @@
       "eyebrow": "Labor-Day-Angebot",
       "title": "Mehr Entlastung. Weniger bezahlen.",
       "offer": "Zusätzlich 15 % Rabatt",
-      "automatically_applied": "— Wird automatisch angewendet",
+      "automatically_applied": "",
       "ends_today": "Endet heute um 23:59 Uhr PT",
       "timer_initial": "Verbleibende Zeit bis Mitternacht (pazifische Zeit)",
       "timer_remaining": "Noch {{ days }} Tage, {{ hours }} Stunden, {{ minutes }} Minuten und {{ seconds }} Sekunden bis Mitternacht (pazifische Zeit)",
@@ -998,7 +998,7 @@
       "minutes": "Minuten",
       "seconds": "Sekunden",
       "cta": "Labor-Day-Angebot sichern",
-      "announcement_desktop": "🇺🇸 Labor-Day-Angebot — Zusätzlich 15 % Rabatt — Wird automatisch angewendet",
+      "announcement_desktop": "🇺🇸 Labor-Day-Angebot — Zusätzlich 15 % Rabatt",
       "announcement_mobile": "Labor-Day-Angebot — Zusätzlich 15 % Rabatt"
     },
     "common": {
@@ -1153,7 +1153,8 @@
       "subtitle": "Verstellbare Unterstützung. Von Ihnen kontrolliert.",
       "fine_print": "Testen Sie ihn bis zu 90 Tage. Wenn er nicht zu Ihnen passt, kontaktieren Sie den Support."
     }
-  },
+  }
+,
   "altaeron_pdp_dialfit": {
     "common": {
       "save": "Sparen",
