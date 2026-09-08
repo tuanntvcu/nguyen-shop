@@ -1,6 +1,8 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign mf = product.metafields.altaeron
+  assign tail_support = mf.pdp_how_image.value
+  assign day_story_video = product.metafields.custom.legend_video.value
   assign hero_video = mf.pdp_hero_video.value
   assign hero_image = mf.pdp_hero_image.value | default: product.featured_image
   assign hero_poster = hero_video.preview_image | image_url: width: 1200
@@ -70,14 +72,11 @@
           endif
         when 'day_story'
           assign day_story_image = block.settings.image
-          assign day_story_video = block.settings.video
       endcase
     elsif block.type == 'tail_media'
       case block.settings.slot
         when 'spacer'
           assign tail_spacer = block.settings.image
-        when 'support'
-          assign tail_support = block.settings.image
         when 'cta_product'
           assign tail_cta_product = block.settings.image
       endcase
