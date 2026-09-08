@@ -92,6 +92,9 @@
 <style>
   #AltaeronPdp-{{ section.id }} .apdp-support__features{grid-template-columns:repeat(3,minmax(0,1fr))}
   #AltaeronPdp-{{ section.id }} .apdp-support__media{grid-template-columns:1fr}
+  #AltaeronPdp-{{ section.id }} .apdp-support__media--portrait{height:auto;margin-inline:auto;max-width:420px;width:100%}
+  #AltaeronPdp-{{ section.id }} .apdp-support__media--portrait .apdp-support__video{aspect-ratio:9/16}
+  #AltaeronPdp-{{ section.id }} .apdp-support__media--portrait video{object-fit:contain}
   #AltaeronPdp-{{ section.id }} .apdp-spacer-grid{grid-template-columns:minmax(0,1fr) 34px minmax(0,1.15fr)}
   #AltaeronPdp-{{ section.id }} .apdp-day__benefits{grid-template-columns:repeat(3,minmax(0,1fr))}
   #AltaeronPdp-{{ section.id }} .apdp-reels-section{padding-top:var(--alta-pdp-section-gap-tight)}
@@ -364,7 +367,7 @@
             <article><span class="apdp-support__icon">{% render 'altaeron-pdp-icon', icon: 'pressure-relief' %}</span><h3>{{ 'altaeron_pdp_reels_v2.support.item_3_title' | t }}</h3><p>{{ 'altaeron_pdp_reels_v2.support.item_3_text' | t }}</p></article>
           </div>
         </div>
-        <div class="apdp-support__media">
+        <div class="apdp-support__media{% if support_demo_video != blank %} apdp-support__media--portrait{% endif %}">
           <div class="apdp-support__video"><div class="apdp-education__placeholder">{%- if support_demo_video != blank -%}{%- capture support_video_markup -%}{{ support_demo_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1200x' }}{%- endcapture -%}{{- support_video_markup | replace: '<video ', '<video data-apdp-lazy-video ' | replace: '<source src="', '<source data-src="' -}}{%- elsif support_demo_image != blank -%}{{ support_demo_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200', sizes: '(min-width: 768px) 52vw, 100vw', alt: support_demo_image.alt | default: support_demo_alt }}{%- else -%}{{ 'image' | placeholder_svg_tag }}{%- endif -%}</div></div>
         </div>
       </div>
