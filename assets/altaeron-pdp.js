@@ -649,40 +649,22 @@
       return null;
     };
 
-    const syncBundleTiers = (widgetRoot, baseCompare, basePrice) => {
+    // Bundle option names, descriptions and badges belong to the app.
+    // Only normalize the price fields used by the PDP pricing display.
+    const syncBundleTierPrices = (widgetRoot, baseCompare, basePrice) => {
       if (root.dataset.bundleMode === 'fixed') return;
       const setText = (element, value) => {
         if (element && value && element.textContent !== value) element.textContent = value;
       };
-      setText(widgetRoot.querySelector('.bd-title'), root.dataset.bundleTitle);
       [...widgetRoot.querySelectorAll('[data-tier-index]')].forEach((tier, index) => {
         const quantity = Number(tier.dataset.tierIndex) + 1 || index + 1;
         const priceElement = tier.querySelector('.bd-tier__price');
         const tierPrice = parseDisplayedMoney(priceElement?.textContent);
         setText(priceElement, money(tierPrice, format));
-        const name = quantity === 1
-          ? root.dataset.bundleOne
-          : fillTemplate(root.dataset.bundleManyTemplate, { count: String(quantity) });
-        setText(tier.querySelector('.bd-tier__name'), name);
-
-        const label = tier.querySelector('.bd-tier__label');
-        if (quantity === 2) setText(label, root.dataset.bundlePopular);
-        if (quantity === 3) setText(label, root.dataset.bundleBestValue);
-
-        if (quantity === 1) {
-          setText(tier.querySelector('.bd-tier__sub'), root.dataset.bundleOneFoot);
-          return;
-        }
+        if (quantity === 1) return;
 
         const originalTotal = (baseCompare > basePrice ? baseCompare : basePrice) * quantity;
-        const saved = Math.max(originalTotal - tierPrice, 0);
-        const percent = originalTotal > 0 ? Math.round((saved / originalTotal) * 100) : 0;
         setText(tier.querySelector('.bd-tier__compare'), originalTotal > 0 ? money(originalTotal, format) : '');
-        setText(tier.querySelector('.bd-tier__sub'), fillTemplate(root.dataset.bundleSubtitleTemplate, {
-          price: money(Math.round(tierPrice / quantity), format),
-          percent: String(percent),
-          amount: money(saved, format),
-        }));
       });
     };
 
@@ -692,7 +674,7 @@
 
       const basePrice = Number(control.dataset.price || 0);
       const baseCompare = Number(control.dataset.compare || 0);
-      if (bundleWidget) syncBundleTiers(bundleWidget.shadowRoot || bundleWidget, baseCompare, basePrice);
+      if (bundleWidget) syncBundleTierPrices(bundleWidget.shadowRoot || bundleWidget, baseCompare, basePrice);
 
       const bundle = selectedBundle();
       if (!bundle?.price) return;

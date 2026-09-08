@@ -308,13 +308,6 @@
   data-save-template="{{ copy_prefix | append: '.common.save_amount' | t: amount: '[amount]' | escape }}"
   data-add-to-cart-label="{{ 'products.product.add_to_cart' | t | escape }}"
   data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"
-  data-bundle-title="{{ copy_prefix | append: '.bundle.title' | t | escape }}"
-  data-bundle-one="{{ copy_prefix | append: '.bundle.one_corrector' | t | escape }}"
-  data-bundle-many-template="{{ copy_prefix | append: '.bundle.many_correctors' | t: count: '[count]' | escape }}"
-  data-bundle-one-foot="{{ copy_prefix | append: '.bundle.one_foot' | t | escape }}"
-  data-bundle-popular="{{ copy_prefix | append: '.bundle.most_popular' | t | escape }}"
-  data-bundle-best-value="{{ copy_prefix | append: '.bundle.best_value' | t | escape }}"
-  data-bundle-subtitle-template="{{ copy_prefix | append: '.bundle.only_each_save' | t: price: '[price]', percent: '[percent]' | escape }}"
   {% if is_cro_v1 %}data-cro-v1="true"{% endif %}
 >
   <section class="apdp-hero" aria-labelledby="AltaeronTitle-{{ section.id }}">
@@ -865,6 +858,8 @@
       </div>
     </section>
   </div>
+
+  {% if is_cro_v1 %}{% render 'altaeron-pdp-popular', section: section %}{% endif %}
 
   <section class="apdp-final-cta alta-pdp-flow-section alta-pdp-flow-section--spacious" aria-label="{{ copy_prefix | append: '.final_cta.label' | t | escape }}"><div class="apdp-shell apdp-final-cta__inner">
     <div class="apdp-final-cta__product apdp-tail-media">{%- if tail_cta_product != blank -%}{{ tail_cta_product | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>

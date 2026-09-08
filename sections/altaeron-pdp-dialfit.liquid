@@ -358,13 +358,6 @@
   data-save-template="{{ 'altaeron_pdp_dialfit.common.save_amount' | t: amount: '[amount]' | escape }}"
   data-add-to-cart-label="{{ cta_label | escape }}"
   data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"
-  data-bundle-title="{{ 'altaeron_pdp_dialfit.bundle.title' | t | escape }}"
-  data-bundle-one="{{ 'altaeron_pdp_dialfit.bundle.one' | t | escape }}"
-  data-bundle-many-template="{{ 'altaeron_pdp_dialfit.bundle.many' | t: count: '[count]' | escape }}"
-  data-bundle-one-foot="{{ 'altaeron_pdp_dialfit.bundle.one_description' | t | escape }}"
-  data-bundle-popular="{{ 'altaeron_pdp_dialfit.bundle.best_value' | t | escape }}"
-  data-bundle-best-value="{{ 'altaeron_pdp_dialfit.bundle.biggest_savings' | t | escape }}"
-  data-bundle-subtitle-template="{{ 'altaeron_pdp_dialfit.bundle.unit_price' | t: price: '[price]', amount: '[amount]' | escape }}"
   data-bundle-cta-one="{{ 'altaeron_pdp_dialfit.bundle.cta_one' | t: price: '[price]' | escape }}"
   data-bundle-cta-many="{{ 'altaeron_pdp_dialfit.bundle.cta_many' | t: count: '[count]', price: '[price]' | escape }}"
 >
@@ -575,6 +568,8 @@
       {%- for faq_index in (1..14) -%}{%- capture question_key -%}altaeron_pdp_dialfit.faq.item_{{ faq_index }}_question{%- endcapture -%}{%- capture answer_1_key -%}altaeron_pdp_dialfit.faq.item_{{ faq_index }}_answer_1{%- endcapture -%}{%- capture answer_2_key -%}altaeron_pdp_dialfit.faq.item_{{ faq_index }}_answer_2{%- endcapture -%}{%- assign answer_2 = answer_2_key | t -%}<details><summary>{{ question_key | t }}{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>{{ answer_1_key | t }}</p>{%- if answer_2 != blank -%}<p>{{ answer_2 }}</p>{%- endif -%}</details>{%- endfor -%}
     </div>
   </section>
+
+  {% render 'altaeron-pdp-popular', section: section %}
 
   <section class="apdp-tail alta-pdp-flow-section apdp-dialfit-section apdp-dialfit-guarantee-section"><div class="apdp-shell apdp-dialfit-full"><div class="apdp-dialfit-guarantee">
     {% render 'altaeron-pdp-icon', icon: 'shield' %}<div><h2>{{ 'altaeron_pdp_dialfit.guarantee.title' | t }}</h2><p>{{ 'altaeron_pdp_dialfit.guarantee.paragraph_1' | t }}</p><p>{{ 'altaeron_pdp_dialfit.guarantee.paragraph_2' | t }}</p><p><strong>{{ 'altaeron_pdp_dialfit.guarantee.reassurance' | t }}</strong></p></div><a class="apdp-button apdp-button--primary" href="#DialFitFinalPurchase-{{ section.id }}">{{ 'altaeron_pdp_dialfit.guarantee.cta' | t }}</a>

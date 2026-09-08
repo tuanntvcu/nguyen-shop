@@ -195,13 +195,6 @@
   data-save-template="{{ 'altaeron_pdp_reels_v2.common.save_template' | t | escape }}"
   data-add-to-cart-label="{{ 'products.product.add_to_cart' | t | escape }}"
   data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}"
-  data-bundle-title="{{ 'altaeron_pdp_reels_v2.common.choose_bundle' | t | escape }}"
-  data-bundle-one="{{ 'altaeron_pdp_reels_v2.common.one_corrector' | t | escape }}"
-  data-bundle-many-template="{{ 'altaeron_pdp_reels_v2.common.many_correctors' | t | escape }}"
-  data-bundle-one-foot="{{ 'altaeron_pdp_reels_v2.common.one_foot' | t | escape }}"
-  data-bundle-popular="{{ 'altaeron_pdp_reels_v2.common.most_popular' | t | escape }}"
-  data-bundle-best-value="{{ 'altaeron_pdp_reels_v2.common.best_value' | t | escape }}"
-  data-bundle-subtitle-template="{{ 'altaeron_pdp_reels_v2.common.bundle_subtitle' | t | escape }}"
 >
   <section class="apdp-hero" aria-labelledby="AltaeronTitle-{{ section.id }}">
     <div class="apdp-shell apdp-hero__grid">
@@ -476,6 +469,8 @@
       <details><summary>{{ 'altaeron_pdp_reels_v2.faq.question_6' | t }}{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>{{ 'altaeron_pdp_reels_v2.faq.answer_6' | t }}</p></details>
     </div>
   </section>
+
+  {% render 'altaeron-pdp-popular', section: section %}
 
   <section class="apdp-final-cta alta-pdp-flow-section" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.final_cta' | t | escape }}"><div class="apdp-shell apdp-final-cta__inner">
     <div class="apdp-final-cta__product apdp-tail-media">{%- if tail_cta_product != blank -%}{{ tail_cta_product | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
