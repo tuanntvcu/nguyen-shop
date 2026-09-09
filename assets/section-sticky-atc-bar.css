@@ -55,6 +55,24 @@ body.sticky-atc-bar-enabled {
   flex-wrap: nowrap;
   align-items: center;
 }
+.sticky-atc-bar .product-form__submit {
+  border-color: var(--altaeron-primary, #006B5E);
+  background: var(--altaeron-primary, #006B5E);
+  color: #fff;
+}
+.sticky-atc-bar .product-form__submit:hover,
+.sticky-atc-bar .product-form__submit:active {
+  border-color: var(--altaeron-primary-hover, #00594F);
+  background: var(--altaeron-primary-hover, #00594F);
+  color: #fff;
+}
+.sticky-atc-bar .product-form__submit:focus-visible {
+  outline: 0.3rem solid rgba(0, 107, 94, 0.3);
+  outline-offset: 0.2rem;
+}
+.sticky-atc-bar__product-title,
+.sticky-atc-bar__product .price__regular { color: var(--altaeron-navy, #102A43); }
+.sticky-atc-bar__product .price__compare { color: var(--altaeron-muted, #667085); }
 
 @media (max-width: 1023.98px) {
   .sticky-atc-bar .product-form__submit {

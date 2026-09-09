@@ -1,0 +1,54 @@
+{%- liquid
+  assign product_in_cart = false
+  if product != blank
+    for item in cart.items
+      if item.product_id == product.id
+        assign product_in_cart = true
+        break
+      endif
+    endfor
+    assign selected_variant = product.selected_or_first_available_variant
+    assign complete_care_form_id = 'CompleteCareForm-' | append: section_id
+  endif
+-%}
+
+{%- if product != blank and product_in_cart == false -%}
+  <div class="cart-drawer__care">
+    <a class="cart-drawer__care-media media-wrapper" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+      {%- if product.featured_image != blank -%}
+        {{ product.featured_image | image_url: width: 320 | image_tag: loading: 'lazy', widths: '120, 180, 240, 320', sizes: '96px', alt: product.featured_image.alt | default: product.title, data-care-image: '' }}
+      {%- endif -%}
+    </a>
+    <div class="cart-drawer__care-content">
+      <p class="cart-drawer__care-eyebrow">{{ heading | escape }}</p>
+      <a href="{{ product.url }}" class="cart-drawer__care-title">{{ product.title | escape }}</a>
+      {%- if description != blank -%}<p class="cart-drawer__care-description">{{ description | escape }}</p>{%- endif -%}
+      <div class="cart-drawer__care-bottom">
+        <div class="cart-drawer__care-price">
+          <strong data-care-price>{{ selected_variant.price | money }}</strong>
+          <s data-care-compare{% unless selected_variant.compare_at_price > selected_variant.price %} hidden{% endunless %}>{{ selected_variant.compare_at_price | money }}</s>
+        </div>
+        {%- form 'product', product, id: complete_care_form_id, class: 'cart-drawer__care-form', is: 'product-form', data-hide-errors: 'false' -%}
+          {%- unless product.has_only_default_variant -%}
+            <label class="visually-hidden" for="CompleteCareVariant-{{ section_id }}">{{ 'accessibility.select_variant' | t }}</label>
+            <select id="CompleteCareVariant-{{ section_id }}" name="id" class="cart-drawer__care-select" data-complete-care-variant>
+              {%- for variant in product.variants -%}
+                {%- assign variant_image = variant.featured_image | default: product.featured_image -%}
+                <option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | escape }}{% endif %}" data-image="{{ variant_image | image_url: width: 320 }}"{% if variant.id == selected_variant.id %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>
+                  {{ variant.title | escape }}{% unless variant.available %} — Sold out{% endunless %}
+                </option>
+              {%- endfor -%}
+            </select>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ selected_variant.id }}">
+          {%- endunless -%}
+          <button type="submit" class="btn cart-drawer__care-add"{% unless selected_variant.available %} disabled aria-disabled="true"{% endunless %}>
+            <span>{% if selected_variant.available %}Add to Cart{% else %}Sold out{% endif %}</span>
+            {%- render 'loading-spinner' -%}
+          </button>
+          <div class="product-form__error-message" role="alert" hidden></div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

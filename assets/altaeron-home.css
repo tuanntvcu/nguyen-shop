@@ -78,6 +78,28 @@
 .ah-faq__grid{align-items:start;row-gap:10px}
 .ah-faq__item+.ah-faq__item{margin-top:0}
 
+/* Altaeron semantic storefront colors */
+.altaeron-home{
+  --ah-green:var(--altaeron-primary,#006B5E);
+  --ah-green-dark:var(--altaeron-primary-hover,#00594F);
+  --ah-ink:var(--altaeron-navy,#102A43);
+  --ah-muted:var(--altaeron-muted,#667085);
+  --ah-cream:var(--altaeron-off-white,#F8FAF9);
+  --ah-sage:var(--altaeron-soft-teal,#EAF5F2);
+  --ah-line:var(--altaeron-border,#E4E7EC);
+  color:var(--altaeron-body,#344054);
+}
+.altaeron-home :where(h1,h2,h3,.ah-product__price,.ah-faq__item summary){color:var(--altaeron-navy,#102A43)}
+.altaeron-home :where(.ah-hero__text,.ah-concern p,.ah-centered p,.ah-value p,.ah-guide p,.ah-faq__item>div,.ah-newsletter p){color:var(--altaeron-body,#344054)}
+.altaeron-home .ah-product__badge--sale{border-color:var(--altaeron-soft-teal,#EAF5F2);background:var(--altaeron-soft-teal,#EAF5F2);color:var(--altaeron-primary,#006B5E)}
+.altaeron-home .ah-button:hover,
+.altaeron-home .ah-cart-button:hover,
+.altaeron-home .ah-newsletter__form button:hover{background:var(--altaeron-primary-hover,#00594F)}
+.altaeron-home :where(.ah-button,.ah-cart-button,.ah-newsletter__form button):focus-visible{outline:3px solid rgba(0,107,94,.3);outline-offset:3px}
+.altaeron-home .ah-faq__item{border-color:var(--altaeron-border,#E4E7EC);background:#fff}
+.altaeron-home .ah-faq__item[open] summary{color:var(--altaeron-primary,#006B5E)}
+.index-template .footer{background:var(--altaeron-navy,#102A43)}
+
 @media(max-width:749px){.ah-faq__grid{row-gap:8px}}
 .ah-guide__media{height:180px}
 .ah-guide__body{display:flex;min-width:0;align-self:stretch;flex-direction:column;justify-content:center}

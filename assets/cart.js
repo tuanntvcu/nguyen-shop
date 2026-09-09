@@ -20,13 +20,42 @@ class CartDrawer extends DrawerComponent {
 
     document.addEventListener('cart:grouped-sections', this.getSectionToRenderListener);
     document.addEventListener('cart:refresh', this.onCartRefreshListener);
+    this.addEventListener('click', this.onDrawerAction);
+    this.addEventListener('change', this.onCareVariantChange);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('cart:grouped-sections', this.getSectionToRenderListener);
     document.removeEventListener('cart:refresh', this.onCartRefreshListener);
+    this.removeEventListener('click', this.onDrawerAction);
+    this.removeEventListener('change', this.onCareVariantChange);
   }
+
+  onDrawerAction = (event) => {
+    if (event.target.closest('[data-cart-drawer-close]')) this.hide();
+  };
+
+  onCareVariantChange = (event) => {
+    const select = event.target.closest('[data-complete-care-variant]');
+    if (!select) return;
+
+    const care = select.closest('.cart-drawer__care');
+    const option = select.selectedOptions[0];
+    const price = care?.querySelector('[data-care-price]');
+    const compare = care?.querySelector('[data-care-compare]');
+    const image = care?.querySelector('[data-care-image]');
+
+    if (price) price.textContent = option.dataset.price;
+    if (compare) {
+      compare.textContent = option.dataset.compare;
+      compare.toggleAttribute('hidden', !option.dataset.compare);
+    }
+    if (image && option.dataset.image) {
+      image.removeAttribute('srcset');
+      image.src = option.dataset.image;
+    }
+  };
 
   getSectionToRender(event) {
     event.detail.sections.push(ScaloraTheme.utils.getSectionId(this));
@@ -191,6 +220,7 @@ class CartItems extends HTMLElement {
     const cartDrawerBody = document.querySelector(`#CartDrawerBody-${sectionId}`);
     const cartDrawerFooter = document.querySelector(`#CartDrawerFooter-${sectionId}`);
     const cartDrawerEmpty = document.querySelector(`#CartDrawerEmpty-${sectionId}`);
+    const cartDrawerScrollTop = cartDrawerBody?.scrollTop || 0;
     if (cartDrawer) {
       // const updatedElement = sectionToRender.querySelector(`#CartDrawer-${sectionId}`);
       // if (updatedElement) {
@@ -209,6 +239,13 @@ class CartItems extends HTMLElement {
 
       if (cartDrawerEmptyUpdate) {
         cartDrawerEmpty.innerHTML = cartDrawerEmptyUpdate.innerHTML;
+      }
+
+      if (cartDrawerBody) {
+        requestAnimationFrame(() => {
+          const maximumScroll = Math.max(cartDrawerBody.scrollHeight - cartDrawerBody.clientHeight, 0);
+          cartDrawerBody.scrollTop = Math.min(cartDrawerScrollTop, maximumScroll);
+        });
       }
 
       if (event.cart.item_count > 0) {

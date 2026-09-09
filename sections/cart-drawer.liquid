@@ -28,12 +28,12 @@
         class="drawer__close-btn z-1"
         aria-controls="CartDrawer"
         type="button"
-        aria-label="{{ 'templates.cart.cart' | t }}"
+        aria-label="{{ 'accessibility.close' | t }}"
       >
         {% render 'icon-close', size: 'large' %}
       </button>
       <div id="CartDrawer-{{ section.id }}" class="drawer__content flex flex-col h-full w-full">
-        <div class="drawer__header cart-drawer__header flex flex-col gap-5 items-start">
+        <div class="drawer__header cart-drawer__header flex flex-col items-start">
           <h2 class="drawer__heading h3 flex items-center gap-3">
             <span>{{ 'general.cart.title' | t }}</span>
             <cart-count
@@ -50,6 +50,7 @@
               {%- endif -%}
             </cart-count>
           </h2>
+          <p class="cart-drawer__intro">You’re one step closer to more comfortable movement.</p>
           {%- liquid
             if section.settings.show_free_shipping_goal and settings.free_shipping_minimum_amount != blank
               assign minimum_amount = settings.free_shipping_minimum_amount | remove: ' '
@@ -147,7 +148,7 @@
               endif
             -%}
             <cart-items>
-              <ul role="list" class="flex flex-col gap-8">
+              <ul role="list" class="cart-drawer__items flex flex-col">
                 {%- for item in cart.items -%}
                   {%- liquid
                     assign is_gift_wrap_item = false
@@ -207,26 +208,33 @@
                             </div>
                           {%- endif -%}
                           <div class="cart-item__prices">
-                            <div class="price font-body-bolder{% if item.original_price != item.final_price %} price--on-sale{% endif %}">
+                            {%- liquid
+                              assign display_price = item.final_price
+                              assign display_compare_price = 0
+                              if item.original_price > item.final_price
+                                assign display_compare_price = item.original_price
+                              elsif item.variant.compare_at_price > item.final_price
+                                assign display_compare_price = item.variant.compare_at_price
+                              endif
+                              assign has_display_savings = false
+                              if display_compare_price > display_price
+                                assign has_display_savings = true
+                              endif
+                            -%}
+                            <div class="price font-body-bolder{% if has_display_savings %} price--on-sale{% endif %}">
                               {%- liquid
-                                assign money_price = item.original_price | money
+                                assign money_price = display_price | money
                                 if settings.currency_code_enabled
-                                  assign money_price = item.original_price | money_with_currency
+                                  assign money_price = display_price | money_with_currency
                                 endif
                               -%}
-                              {%- if item.original_price != item.final_price -%}
+                              {%- if has_display_savings -%}
                                 <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-                                <s class="price__sale font-body text-sm text-subtext">{{ money_price }}</s>
+                                <s class="price__sale font-body text-sm text-subtext">
+                                  {%- if settings.currency_code_enabled -%}{{ display_compare_price | money_with_currency }}{%- else -%}{{ display_compare_price | money }}{%- endif -%}
+                                </s>
                                 <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
-                                <span class="price__regular">
-                                  {%- liquid 
-                                    if settings.currency_code_enabled
-                                      echo item.final_price | money_with_currency
-                                    else
-                                      echo item.final_price | money
-                                    endif  
-                                  -%}
-                                </span>
+                                <span class="price__regular">{{ money_price }}</span>
                               {%- else -%}
                                 {{- money_price -}}
                               {%- endif -%}
@@ -253,17 +261,20 @@
                                 </div>
                               {%- endif -%}
                           </div>
+                          {%- liquid
+                            assign savings_percent = 0
+                            if has_display_savings
+                              assign savings_amount = display_compare_price | minus: display_price
+                              assign savings_percent = savings_amount | times: 100.0 | divided_by: display_compare_price | round
+                            endif
+                          -%}
+                          {%- if savings_percent > 0 -%}
+                            <div class="cart-item__saving-badge">
+                              {% render 'icon-discount' %}
+                              <span>Save {{ savings_percent }}%</span>
+                            </div>
+                          {%- endif -%}
                         </div>
-                        {%- if item.line_level_discount_allocations != blank -%}
-                          <ul class="cart-item__discounts discounts list-unstyled flex flex-wrap gap-1" role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                            {%- for discount_allocation in item.line_level_discount_allocations -%}
-                              <li class="discount text-sm inline-flex items-center">
-                                {% render 'icon-discount' %}
-                                <span>{{ discount_allocation.discount_application.title }}</span>
-                              </li>
-                            {%- endfor -%}
-                          </ul>
-                        {%- endif -%}
                       </div>
                       <div class="cart-item__action flex flex-col items-end justify-end gap-4">
                         <a id="Loader-{{ section.id }}-{{ item.index | plus: 1 }}"{% unless is_gift_wrap_item %} is="cart-remove-item"{% else %} is="gift-wrap-remove-item"{% endunless %} class="cart-item__remove flex items-center justify-center relative" href="{{ item.url_to_remove }}" data-index="{{ item.index | plus: 1 }}" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
@@ -461,25 +472,6 @@
                         </div>
                       </div>
                     </div>
-                    {%- if section.settings.enable_cart_recommendations -%}
-                      {%- render 'cart-drawer-products-recommendation',
-                        section_id: section.id
-                        product_id: item.product_id,
-                        heading: section.settings.cart_recommendations_heading,
-                        limit: section.settings.cart_recommendations_limit
-                      -%}
-                    {%- endif -%}
-                    {% liquid
-                      assign collections = ''
-                      for collection in item.product.collections
-                        assign collections = collections | append: collection.id | append: ','
-                      endfor
-                    %}
-                    <foxkit-incart-upsell
-                      data-collections="{{ collections | remove_last: ',' }}"
-                      data-product-title="{{ item.product.title }}"
-                      data-product-id="{{ item.product_id }}"
-                    ></foxkit-incart-upsell>
                   </li>
                 {%- endcapture -%}
 
@@ -498,6 +490,29 @@
                 -%}
               </ul>
             </cart-items>
+            <div class="cart-drawer__trust" aria-label="Order benefits">
+              <div class="cart-drawer__trust-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h3l4 4v3h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
+                <strong>Free Shipping</strong><span>On every order</span>
+              </div>
+              <div class="cart-drawer__trust-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 2.8 8.1 7 10 4.2-1.9 7-5.2 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-5"/></svg>
+                <strong>30-Day Guarantee</strong><span>Try it with confidence</span>
+              </div>
+              <div class="cart-drawer__trust-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 13H2v5h4v-5H4ZM20 13h2v5h-4v-5h2ZM18 19c-1 1.3-3 2-6 2"/></svg>
+                <strong>Dedicated Support</strong><span>Here to help</span>
+              </div>
+            </div>
+            {%- if section.settings.enable_complete_care -%}
+              {%- render 'cart-drawer-complete-care',
+                product: section.settings.complete_care_product,
+                heading: section.settings.complete_care_heading,
+                description: section.settings.complete_care_description,
+                section_id: section.id,
+                cart: cart
+              -%}
+            {%- endif -%}
           </div>
         </div>
         <div
@@ -716,9 +731,37 @@
                 class="drawer__footer-buttons flex flex-wrap gap-2"
               >
                 <button class="btn btn--primary flex-grow" type="submit" name="checkout">
-                  {{ 'sections.cart.checkout' | t }}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                  <span>{{ 'sections.cart.checkout' | t }}</span>
+                  <span aria-hidden="true">→</span>
                 </button>
               </form>
+              <button type="button" class="cart-drawer__continue" data-cart-drawer-close>
+                {{ 'general.cart.continue_shopping' | t }}
+              </button>
+              <div class="cart-drawer__payments">
+                <div class="cart-drawer__payments-title"><span>Secure checkout</span></div>
+                <ul role="list" aria-label="Accepted payment methods">
+                  {%- liquid
+                    assign preferred_payment_types = 'visa,mastercard,american_express,apple_pay,google_pay,discover' | split: ','
+                    assign rendered_payment_count = 0
+                  -%}
+                  {%- for payment_type in preferred_payment_types -%}
+                    {%- if shop.enabled_payment_types contains payment_type and rendered_payment_count < 6 -%}
+                      <li>{{ payment_type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+                      {%- assign rendered_payment_count = rendered_payment_count | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if rendered_payment_count == 0 -%}
+                    {%- for payment_type in shop.enabled_payment_types limit: 6 -%}
+                      {%- assign payment_key = payment_type | downcase -%}
+                      {%- unless payment_key contains 'paypal' -%}
+                        <li>{{ payment_type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+                      {%- endunless -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -759,28 +802,30 @@
     },
     {
       "type": "header",
-      "content": "t:sections.cart-drawer.settings.header__1.content"
+      "content": "Complete Your Care"
     },
     {
       "type": "checkbox",
-      "id": "enable_cart_recommendations",
-      "label": "t:sections.cart-drawer.settings.enable_cart_recommendations.label",
+      "id": "enable_complete_care",
+      "label": "Show Complete Your Care",
       "default": true
     },
     {
-      "type": "text",
-      "id": "cart_recommendations_heading",
-      "label": "t:sections.cart-drawer.settings.cart_recommendations_heading.label",
-      "default": "You may also like"
+      "type": "product",
+      "id": "complete_care_product",
+      "label": "Complete Your Care product"
     },
     {
-      "type": "range",
-      "id": "cart_recommendations_limit",
-      "label": "t:sections.cart-drawer.settings.cart_recommendations_limit.label",
-      "min": 1,
-      "max": 10,
-      "step": 1,
-      "default": 3
+      "type": "text",
+      "id": "complete_care_heading",
+      "label": "Heading",
+      "default": "COMPLETE YOUR CARE"
+    },
+    {
+      "type": "textarea",
+      "id": "complete_care_description",
+      "label": "Complete Your Care description",
+      "default": "Adjustable knee support for walking, active days and long hours on your feet."
     }
   ]
 }

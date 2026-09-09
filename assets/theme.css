@@ -2921,6 +2921,25 @@ input:is([type=radio])::after {
   box-sizing: border-box;
 }
 
+/* Altaeron storefront hierarchy for the primary light scheme. */
+.color-scheme-1 :where(h1,h2,h3,h4,.h1,.h2,.h3,.h4,.product__title,.card__heading),
+.header.color-scheme-1 :where(.header__navigation,.header__buttons){color:var(--altaeron-navy,#102A43)}
+.header.color-scheme-1 a:hover,
+.header.color-scheme-1 a[aria-current="page"]{color:var(--altaeron-primary,#006B5E)}
+.color-scheme-1 :where(input,select,textarea):focus-visible{border-color:var(--altaeron-primary,#006B5E);outline-color:var(--altaeron-primary,#006B5E)}
+.color-scheme-1 .f-price-item--sale,
+.color-scheme-1 .f-price__regular{color:var(--altaeron-navy,#102A43)}
+.color-scheme-1 .f-price--on-sale .f-price-item--regular{color:var(--altaeron-muted,#667085)}
+.color-scheme-1 .product-form__submit{
+  border-color:var(--altaeron-primary,#006B5E);
+  background:var(--altaeron-primary,#006B5E);
+  color:#fff;
+}
+.color-scheme-1 .product-form__submit:hover:not(:disabled),
+.color-scheme-1 .product-form__submit:active:not(:disabled){border-color:var(--altaeron-primary-hover,#00594F);background:var(--altaeron-primary-hover,#00594F);color:#fff}
+.color-scheme-1 .product-form__submit:focus-visible{outline:3px solid rgba(0,107,94,.3);outline-offset:2px}
+.footer.color-scheme-inverse a:hover{color:#7ED4C7}
+
 .bd-variant-select {
   min-width: 100px !important;
 }
