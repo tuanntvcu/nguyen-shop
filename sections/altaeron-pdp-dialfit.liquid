@@ -11,7 +11,7 @@
   assign review_rating = review_data.average_rating | default: 0 | plus: 0
   assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
   assign product_form_id = 'product-form-' | append: section.id
-  assign cta_label = 'altaeron_pdp_dialfit.buy.cta' | t
+  assign cta_label = 'altaeron_pdp_dialfit.buy.cta' | t | remove: '→' | strip
   assign compare_price = current_variant.compare_at_price | default: 0
   assign savings = 0
   if compare_price > current_variant.price
@@ -676,7 +676,7 @@
     { "type": "text", "id": "eyebrow", "label": "Product label", "default": "Altaeron™ DialFit Knee Brace" },
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "Turn the Dial. Lock In Knee Support." },
     { "type": "textarea", "id": "subheadline", "label": "Outcome sentence", "default": "Fine-tune the support around your knee in seconds to reduce strain, absorb impact and move with more confidence." },
-    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "GET MY DIALFIT →" },
+    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "GET MY DIALFIT" },
     { "type": "header", "content": "Above-the-fold review" },
     { "type": "image_picker", "id": "review_avatar", "label": "Reviewer avatar" },
     { "type": "header", "content": "Hero media" },

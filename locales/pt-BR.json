@@ -716,7 +716,7 @@
       "next_reviews": "Próximas avaliações",
       "publications": "Publicações",
       "final_cta": "Chamada final para compra",
-      "badge": "Garantia de conforto de 90 dias"
+      "badge": "Garantia de conforto de 30 dias"
     },
     "hero": {
       "eyebrow": "Corretor ajustável para joanetes",
@@ -741,12 +741,12 @@
       "choose_option": "Escolha uma opção",
       "product_option": "Opção do produto",
       "installments": "ou 4 pagamentos sem juros de {{ amount }} com",
-      "guarantee": "Garantia de conforto de 90 dias",
-      "guarantee_line_1": "Experimente em momentos de pouca atividade por até 90 dias.",
+      "guarantee": "Garantia de conforto de 30 dias",
+      "guarantee_line_1": "Experimente em momentos de pouca atividade por até 30 dias.",
       "guarantee_line_2": "Se não for ideal para você, fale com o suporte para receber ajuda com a devolução.",
       "shipping": "Frete grátis",
       "shipping_note": "Sem custos de entrega inesperados.",
-      "returns": "Garantia de 90 dias",
+      "returns": "Garantia de 30 dias",
       "returns_note": "Devoluções elegíveis por conforto ou ajuste.",
       "secure": "Pagamento seguro",
       "secure_note": "Criptografado e seguro.",
@@ -776,7 +776,7 @@
       "cannot_title": "O QUE ELE NÃO PODE FAZER",
       "wear_time_html": "<strong>Tempo de uso:</strong> Comece com sessões curtas e aumente gradualmente de acordo com seu conforto.",
       "results_html": "<strong>Resultados realistas:</strong> Ajuda a apoiar e orientar o dedo durante o uso. Não cura joanetes nem garante correção permanente.",
-      "not_right_html": "<strong>Se não for ideal:</strong> Entre em contato com o suporte em até 90 dias após a entrega para receber as instruções de devolução aplicáveis.",
+      "not_right_html": "<strong>Se não for ideal:</strong> Entre em contato com o suporte em até 30 dias após a entrega para receber as instruções de devolução aplicáveis.",
       "consistency": "Mais força não é melhor. Use uma tensão confortável e siga as instruções incluídas com o produto."
     },
     "reviews": {
@@ -825,12 +825,12 @@
       "question_5": "Quanto tempo leva a entrega?",
       "answer_5": "As opções e estimativas de entrega aparecem no checkout. Os prazos variam conforme o destino, a transportadora e o processamento alfandegário.",
       "question_6": "E se não servir ou não ficar confortável?",
-      "answer_6": "Fale com o suporte para receber ajuda com o ajuste. A Garantia de conforto de 90 dias cobre devoluções elegíveis por conforto, ajuste ou mudança de ideia, desde que você entre em contato em até 90 dias após a entrega e siga as instruções de devolução."
+      "answer_6": "Fale com o suporte para receber ajuda com o ajuste. A Garantia de conforto de 30 dias cobre devoluções elegíveis por conforto, ajuste ou mudança de ideia, desde que você entre em contato em até 30 dias após a entrega e siga as instruções de devolução."
     },
     "final_cta": {
       "title": "Dê mais espaço ao dedão do pé",
       "subtitle": "Suporte ajustável. Você tem o controle.",
-      "fine_print": "Experimente por até 90 dias. Se não for ideal para você, fale com o suporte."
+      "fine_print": "Experimente por até 30 dias. Se não for ideal para você, fale com o suporte."
     }
   },
   "altaeron_pdp_dialfit": {

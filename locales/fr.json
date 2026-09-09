@@ -684,10 +684,10 @@
       "cta": "Ajouter au panier",
       "installments": "ou 4 paiements sans intérêt de 10,00 $ avec",
       "social_proof_html": "🔥🔥🔥 {{ count }} clients ont choisi ce produit au cours des dernières 24 heures",
-      "guarantee_title": "Garantie confort de 90 jours",
-      "guarantee_line_1": "Essayez-le pendant vos moments de faible activité pendant une période allant jusqu’à 90 jours.",
+      "guarantee_title": "Garantie confort de 30 jours",
+      "guarantee_line_1": "Essayez-le pendant vos moments de faible activité pendant une période allant jusqu’à 30 jours.",
       "guarantee_line_2": "S’il ne vous convient pas, écrivez à support@altaeron.com pour obtenir de l’aide concernant le retour.",
-      "returns": "Garantie confort de 90 jours",
+      "returns": "Garantie confort de 30 jours",
       "returns_note": "Essayez-le en toute confiance.",
       "shipping": "Livraison gratuite",
       "shipping_note": "Aucuns frais de livraison imprévus.",
@@ -832,7 +832,7 @@
     "trust": {
       "warranty": "Garantie d’un an",
       "secure_checkout": "Paiement sécurisé",
-      "returns": "Garantie confort de 90 jours",
+      "returns": "Garantie confort de 30 jours",
       "support": "Une assistance humaine"
     },
     "comparison": {
@@ -845,7 +845,7 @@
       "row_3": "Confortable lors d’activités légères",
       "row_4": "Conception durable et réutilisable",
       "row_5": "Guide détaillé inclus",
-      "row_6": "Garantie confort de 90 jours"
+      "row_6": "Garantie confort de 30 jours"
     },
     "expectations": {
       "title": "Ce que ce dispositif peut — et ne peut pas — faire",
@@ -906,7 +906,7 @@
       "rating": "{{ rating }} sur 5",
       "photo_placeholders": "Emplacements réservés aux photos des clients",
       "view_all": "Voir tous les avis",
-      "trial": "Essayez-le pendant une période allant jusqu’à 90 jours. S’il ne vous convient pas, contactez-nous.",
+      "trial": "Essayez-le pendant une période allant jusqu’à 30 jours. S’il ne vous convient pas, contactez-nous.",
       "disclaimer": "Remarque : les résultats peuvent varier selon la taille de l’oignon, la durée et la régularité d’utilisation."
     },
     "faq": {
@@ -928,7 +928,7 @@
       "label": "Acheter le correcteur d’oignon réglable Altaeron",
       "title": "Prêt à marcher sans plus penser à vos pieds ?",
       "product": "Correcteur d’oignon à molette réglable ALTAERON™",
-      "guarantee_html": "Garantie confort<br>de 90 jours",
+      "guarantee_html": "Garantie confort<br>de 30 jours",
       "shipping_html": "Livraison rapide et gratuite<br>dès 29 $ d’achat",
       "support_html": "Une assistance humaine<br>24 h/24, 7 j/7",
       "rating": "{{ rating }} ({{ count }} avis)",
@@ -937,8 +937,8 @@
       "compare_price": "69,99 $",
       "button": "Commencez à marcher plus confortablement",
       "installments": "ou 4 paiements sans intérêt de 10,00 $ avec",
-      "fine_print": "Essayez-le pendant une période allant jusqu’à 90 jours. S’il ne vous convient pas, écrivez à support@altaeron.com.",
-      "badge_alt": "Garantie Altaeron de 90 jours sans risque"
+      "fine_print": "Essayez-le pendant une période allant jusqu’à 30 jours. S’il ne vous convient pas, écrivez à support@altaeron.com.",
+      "badge_alt": "Garantie Altaeron de 30 jours sans risque"
     }
   },
   "altaeron_home": {
@@ -1037,7 +1037,7 @@
       "next_reviews": "Avis suivants",
       "publications": "Publications",
       "final_cta": "Dernier appel à l’achat",
-      "badge": "Garantie confort de 90 jours"
+      "badge": "Garantie confort de 30 jours"
     },
     "hero": {
       "eyebrow": "Correcteur d’hallux valgus réglable",
@@ -1062,12 +1062,12 @@
       "choose_option": "Choisissez une option",
       "product_option": "Option du produit",
       "installments": "ou 4 paiements sans intérêts de {{ amount }} avec",
-      "guarantee": "Garantie confort de 90 jours",
-      "guarantee_line_1": "Essayez-le pendant vos moments de faible activité pendant jusqu’à 90 jours.",
+      "guarantee": "Garantie confort de 30 jours",
+      "guarantee_line_1": "Essayez-le pendant vos moments de faible activité pendant jusqu’à 30 jours.",
       "guarantee_line_2": "S’il ne vous convient pas, contactez l’assistance pour obtenir de l’aide concernant le retour.",
       "shipping": "Livraison gratuite",
       "shipping_note": "Aucuns frais de livraison imprévus.",
-      "returns": "Garantie de 90 jours",
+      "returns": "Garantie de 30 jours",
       "returns_note": "Retours admissibles pour confort ou ajustement.",
       "secure": "Paiement sécurisé",
       "secure_note": "Chiffré et sécurisé.",
@@ -1097,7 +1097,7 @@
       "cannot_title": "CE QU’IL NE PEUT PAS FAIRE",
       "wear_time_html": "<strong>Durée de port :</strong> Commencez par de courtes séances et augmentez progressivement selon votre confort.",
       "results_html": "<strong>Résultats réalistes :</strong> Il aide à soutenir et guider l’orteil pendant le port. Il ne guérit pas l’hallux valgus et ne garantit pas une correction permanente.",
-      "not_right_html": "<strong>S’il ne convient pas :</strong> Contactez l’assistance dans les 90 jours suivant la livraison pour connaître les instructions de retour applicables.",
+      "not_right_html": "<strong>S’il ne convient pas :</strong> Contactez l’assistance dans les 30 jours suivant la livraison pour connaître les instructions de retour applicables.",
       "consistency": "Une tension plus forte n’est pas meilleure. Utilisez une tension confortable et suivez les instructions fournies avec le produit."
     },
     "reviews": {
@@ -1146,12 +1146,12 @@
       "question_5": "Quels sont les délais de livraison ?",
       "answer_5": "Les options et estimations de livraison sont affichées lors du paiement. Les délais varient selon la destination, le transporteur et le traitement douanier.",
       "question_6": "Que faire s’il ne convient pas ou n’est pas confortable ?",
-      "answer_6": "Contactez l’assistance pour obtenir de l’aide sur l’ajustement. La Garantie confort de 90 jours couvre les retours admissibles liés au confort, à l’ajustement ou à un changement d’avis, à condition de nous contacter dans les 90 jours suivant la livraison et de suivre les instructions de retour."
+      "answer_6": "Contactez l’assistance pour obtenir de l’aide sur l’ajustement. La Garantie confort de 30 jours couvre les retours admissibles liés au confort, à l’ajustement ou à un changement d’avis, à condition de nous contacter dans les 30 jours suivant la livraison et de suivre les instructions de retour."
     },
     "final_cta": {
       "title": "Offrez plus d’espace à votre gros orteil",
       "subtitle": "Un soutien réglable, contrôlé par vous.",
-      "fine_print": "Essayez-le pendant jusqu’à 90 jours. S’il ne vous convient pas, contactez l’assistance."
+      "fine_print": "Essayez-le pendant jusqu’à 30 jours. S’il ne vous convient pas, contactez l’assistance."
     }
   },
   "altaeron_pdp_dialfit": {

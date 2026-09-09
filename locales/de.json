@@ -684,10 +684,10 @@
       "cta": "In den Warenkorb",
       "installments": "oder 4 zinsfreie Raten à 10,00 $ mit",
       "social_proof_html": "🔥🔥🔥 {{ count }} Kunden haben sich in den letzten 24 Stunden dafür entschieden",
-      "guarantee_title": "90-Tage-Komfortgarantie",
-      "guarantee_line_1": "Testen Sie es bis zu 90 Tage lang in Momenten mit geringer Aktivität.",
+      "guarantee_title": "30-Tage-Komfortgarantie",
+      "guarantee_line_1": "Testen Sie es bis zu 30 Tage lang in Momenten mit geringer Aktivität.",
       "guarantee_line_2": "Wenn es nicht das Richtige für Sie ist, schreiben Sie für Hilfe bei der Rückgabe an support@altaeron.com.",
-      "returns": "90-Tage-Komfortgarantie",
+      "returns": "30-Tage-Komfortgarantie",
       "returns_note": "Unbesorgt ausprobieren.",
       "shipping": "Kostenloser Versand",
       "shipping_note": "Keine unerwarteten Liefergebühren.",
@@ -832,7 +832,7 @@
     "trust": {
       "warranty": "1 Jahr Garantie",
       "secure_checkout": "Sicherer Checkout",
-      "returns": "90-Tage-Komfortgarantie",
+      "returns": "30-Tage-Komfortgarantie",
       "support": "Persönlicher Kundenservice"
     },
     "comparison": {
@@ -845,7 +845,7 @@
       "row_3": "Bequem bei geringer Aktivität",
       "row_4": "Langlebiges und wiederverwendbares Design",
       "row_5": "Inklusive Schritt-für-Schritt-Anleitung",
-      "row_6": "90-Tage-Komfortgarantie"
+      "row_6": "30-Tage-Komfortgarantie"
     },
     "expectations": {
       "title": "Was dieses Hilfsmittel kann — und was nicht",
@@ -906,7 +906,7 @@
       "rating": "{{ rating }} von 5",
       "photo_placeholders": "Platzhalter für Kundenfotos",
       "view_all": "Alle Bewertungen anzeigen",
-      "trial": "Testen Sie es bis zu 90 Tage lang. Wenn es nicht das Richtige für Sie ist, kontaktieren Sie uns.",
+      "trial": "Testen Sie es bis zu 30 Tage lang. Wenn es nicht das Richtige für Sie ist, kontaktieren Sie uns.",
       "disclaimer": "Bitte beachten: Die Ergebnisse können je nach Größe des Ballenzehs sowie Dauer und Regelmäßigkeit der Anwendung variieren."
     },
     "faq": {
@@ -928,7 +928,7 @@
       "label": "Verstellbare Altaeron-Ballenzehkorrektur kaufen",
       "title": "Bereit, wieder zu gehen, ohne an Ihre Füße zu denken?",
       "product": "ALTAERON™ verstellbare Ballenzehkorrektur mit Drehknopf",
-      "guarantee_html": "90-Tage-<br>Komfortgarantie",
+      "guarantee_html": "30-Tage-<br>Komfortgarantie",
       "shipping_html": "Schneller und kostenloser<br>Versand ab 29 $ Bestellwert",
       "support_html": "Persönlicher Kundenservice<br>rund um die Uhr",
       "rating": "{{ rating }} ({{ count }} Bewertungen)",
@@ -937,8 +937,8 @@
       "compare_price": "69,99 $",
       "button": "Jetzt bequemer gehen",
       "installments": "oder 4 zinsfreie Raten à 10,00 $ mit",
-      "fine_print": "Testen Sie es bis zu 90 Tage lang. Wenn es nicht das Richtige für Sie ist, schreiben Sie an support@altaeron.com.",
-      "badge_alt": "Altaeron 90-Tage-Garantie ohne Risiko"
+      "fine_print": "Testen Sie es bis zu 30 Tage lang. Wenn es nicht das Richtige für Sie ist, schreiben Sie an support@altaeron.com.",
+      "badge_alt": "Altaeron 30-Tage-Garantie ohne Risiko"
     }
   },
   "altaeron_home": {
@@ -1037,7 +1037,7 @@
       "next_reviews": "Nächste Bewertungen",
       "publications": "Publikationen",
       "final_cta": "Abschließender Kaufaufruf",
-      "badge": "90-Tage-Komfortgarantie"
+      "badge": "30-Tage-Komfortgarantie"
     },
     "hero": {
       "eyebrow": "Verstellbarer Hallux-valgus-Korrektor",
@@ -1062,12 +1062,12 @@
       "choose_option": "Option auswählen",
       "product_option": "Produktoption",
       "installments": "oder 4 zinsfreie Zahlungen von {{ amount }} mit",
-      "guarantee": "90-Tage-Komfortgarantie",
-      "guarantee_line_1": "Testen Sie ihn bis zu 90 Tage lang in ruhigen Momenten.",
+      "guarantee": "30-Tage-Komfortgarantie",
+      "guarantee_line_1": "Testen Sie ihn bis zu 30 Tage lang in ruhigen Momenten.",
       "guarantee_line_2": "Wenn er nicht zu Ihnen passt, wenden Sie sich für Hilfe bei der Rückgabe an den Support.",
       "shipping": "Kostenloser Versand",
       "shipping_note": "Keine überraschenden Lieferkosten.",
-      "returns": "90-Tage-Garantie",
+      "returns": "30-Tage-Garantie",
       "returns_note": "Berechtigte Rückgaben bei Komfort- oder Passformproblemen.",
       "secure": "Sicherer Checkout",
       "secure_note": "Verschlüsselt und sicher.",
@@ -1097,7 +1097,7 @@
       "cannot_title": "WAS ER NICHT KANN",
       "wear_time_html": "<strong>Tragedauer:</strong> Beginnen Sie mit kurzen Sitzungen und verlängern Sie sie je nach Komfort schrittweise.",
       "results_html": "<strong>Realistische Ergebnisse:</strong> Er unterstützt und führt den Zeh während des Tragens. Er heilt Hallux valgus nicht und garantiert keine dauerhafte Korrektur.",
-      "not_right_html": "<strong>Wenn er nicht passt:</strong> Kontaktieren Sie den Support innerhalb von 90 Tagen nach Lieferung, um die geltenden Rückgabehinweise zu erhalten.",
+      "not_right_html": "<strong>Wenn er nicht passt:</strong> Kontaktieren Sie den Support innerhalb von 30 Tagen nach Lieferung, um die geltenden Rückgabehinweise zu erhalten.",
       "consistency": "Mehr Kraft ist nicht besser. Verwenden Sie eine angenehme Spannung und beachten Sie die beiliegende Produktanleitung."
     },
     "reviews": {
@@ -1146,12 +1146,12 @@
       "question_5": "Wie lange dauert der Versand?",
       "answer_5": "Versandoptionen und Lieferzeitangaben werden beim Checkout angezeigt. Die Dauer variiert je nach Zielort, Versanddienstleister und Zollabwicklung.",
       "question_6": "Was, wenn es nicht passt oder sich nicht richtig anfühlt?",
-      "answer_6": "Wenden Sie sich für Hilfe bei der Passform an den Support. Die 90-Tage-Komfortgarantie gilt für berechtigte Rückgaben wegen Komfort, Passform oder Meinungsänderung, wenn Sie uns innerhalb von 90 Tagen nach Lieferung kontaktieren und die Rückgabehinweise befolgen."
+      "answer_6": "Wenden Sie sich für Hilfe bei der Passform an den Support. Die 30-Tage-Komfortgarantie gilt für berechtigte Rückgaben wegen Komfort, Passform oder Meinungsänderung, wenn Sie uns innerhalb von 30 Tagen nach Lieferung kontaktieren und die Rückgabehinweise befolgen."
     },
     "final_cta": {
       "title": "Geben Sie Ihrem großen Zeh mehr Platz",
       "subtitle": "Verstellbare Unterstützung. Von Ihnen kontrolliert.",
-      "fine_print": "Testen Sie ihn bis zu 90 Tage. Wenn er nicht zu Ihnen passt, kontaktieren Sie den Support."
+      "fine_print": "Testen Sie ihn bis zu 30 Tage. Wenn er nicht zu Ihnen passt, kontaktieren Sie den Support."
     }
   }
 ,

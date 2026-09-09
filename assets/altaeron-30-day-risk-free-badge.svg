@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 384 384" role="img" aria-labelledby="title desc">
-  <title id="title">90-Day Risk-Free Guarantee</title>
-  <desc id="desc">Circular Altaeron 90-day guarantee seal</desc>
+  <title id="title">30-Day Risk-Free Guarantee</title>
+  <desc id="desc">Circular Altaeron 30-day guarantee seal</desc>
   <g fill="none" stroke="#fff">
     <circle cx="192" cy="192" r="170" stroke-width="4"/>
     <circle cx="192" cy="192" r="160" stroke-width="1.5" opacity=".9"/>
@@ -8,7 +8,7 @@
     <path d="M94 116h44M246 116h44M94 292h54M236 292h54" stroke-width="3" stroke-linecap="round"/>
   </g>
   <g fill="#fff" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900">
-    <text x="192" y="174" font-size="70" letter-spacing="-2">90-DAY</text>
+    <text x="192" y="174" font-size="70" letter-spacing="-2">30-DAY</text>
     <text x="192" y="238" font-size="52" letter-spacing="-2">RISK-FREE</text>
     <text x="192" y="281" font-size="27" letter-spacing="3">GUARANTEE</text>
   </g>

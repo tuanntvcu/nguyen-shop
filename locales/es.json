@@ -684,10 +684,10 @@
       "cta": "Añadir al carrito",
       "installments": "o 4 pagos sin intereses de $10.00 con",
       "social_proof_html": "🔥🔥🔥 {{ count }} clientes eligieron este producto en las últimas 24 horas",
-      "guarantee_title": "Garantía de comodidad de 90 días",
-      "guarantee_line_1": "Pruébalo durante momentos de baja actividad por hasta 90 días.",
+      "guarantee_title": "Garantía de comodidad de 30 días",
+      "guarantee_line_1": "Pruébalo durante momentos de baja actividad por hasta 30 días.",
       "guarantee_line_2": "Si no es adecuado para ti, escribe a support@altaeron.com para recibir ayuda con la devolución.",
-      "returns": "Garantía de comodidad de 90 días",
+      "returns": "Garantía de comodidad de 30 días",
       "returns_note": "Pruébalo con confianza.",
       "shipping": "Envío rápido",
       "shipping_note": "Se envía en 1 a 3 días desde nuestro almacén.",
@@ -807,7 +807,7 @@
       "rating": "{{ rating }} de 5",
       "photo_placeholders": "Marcadores de posición de fotos del cliente",
       "view_all": "Ver todas las reseñas",
-      "trial": "Pruébalo durante un máximo de 90 días. Si no es adecuado para ti, contáctanos.",
+      "trial": "Pruébalo durante un máximo de 30 días. Si no es adecuado para ti, contáctanos.",
       "disclaimer": "Tenga en cuenta: Los resultados pueden variar según el tamaño, la duración y la constancia del juanete."
     },
     "faq": {
@@ -829,7 +829,7 @@
       "label": "Comprar corrector de juanetes ajustable Altaeron",
       "title": "¿Listo para caminar sin pensar en tus pies?",
       "product": "Corrector de juanetes con perilla ajustable ALTAERON™",
-      "guarantee_html": "Garantía de comodidad<br>de 90 días",
+      "guarantee_html": "Garantía de comodidad<br>de 30 días",
       "shipping_html": "Envío Rápido y Gratis<br>en pedidos de $39+",
       "support_html": "Personas reales<br>Soporte 24/7",
       "rating": "{{ rating }} ({{ count }} valoraciones)",
@@ -838,8 +838,8 @@
       "compare_price": "$69.99",
       "button": "Empieza a caminar con mayor comodidad",
       "installments": "o 4 pagos sin intereses de $10.00 con",
-      "fine_print": "Pruébalo durante un máximo de 90 días. Si no es adecuado para ti, escribe a support@altaeron.com.",
-      "badge_alt": "Garantía sin riesgo de 90 días de Altaeron"
+      "fine_print": "Pruébalo durante un máximo de 30 días. Si no es adecuado para ti, escribe a support@altaeron.com.",
+      "badge_alt": "Garantía sin riesgo de 30 días de Altaeron"
     },
     "day": {
       "title": "Una rutina sencilla para momentos tranquilos.",
@@ -884,7 +884,7 @@
     "trust": {
       "warranty": "Garantía de 1 año",
       "secure_checkout": "Pago Seguro",
-      "returns": "Garantía de comodidad de 90 días",
+      "returns": "Garantía de comodidad de 30 días",
       "support": "Soporte de Personas Reales"
     },
     "comparison": {
@@ -897,7 +897,7 @@
       "row_3": "Cómodo para actividades de baja intensidad",
       "row_4": "Diseño duradero y reutilizable",
       "row_5": "Incluye guía paso a paso",
-      "row_6": "Garantía de comodidad de 90 días"
+      "row_6": "Garantía de comodidad de 30 días"
     },
     "expectations": {
       "title": "Qué puede — y qué no puede — hacer",
@@ -1035,7 +1035,7 @@
       "next_reviews": "Reseñas siguientes",
       "publications": "Publicaciones",
       "final_cta": "Llamada final a la compra",
-      "badge": "Garantía de comodidad de 90 días"
+      "badge": "Garantía de comodidad de 30 días"
     },
     "hero": {
       "eyebrow": "Corrector ajustable para juanetes",
@@ -1060,12 +1060,12 @@
       "choose_option": "Elige una opción",
       "product_option": "Opción del producto",
       "installments": "o 4 pagos sin intereses de {{ amount }} con",
-      "guarantee": "Garantía de comodidad de 90 días",
-      "guarantee_line_1": "Pruébalo en momentos de poca actividad durante un máximo de 90 días.",
+      "guarantee": "Garantía de comodidad de 30 días",
+      "guarantee_line_1": "Pruébalo en momentos de poca actividad durante un máximo de 30 días.",
       "guarantee_line_2": "Si no es adecuado para ti, contacta con soporte para recibir ayuda con la devolución.",
       "shipping": "Envío gratuito",
       "shipping_note": "Sin gastos de envío inesperados.",
-      "returns": "Garantía de 90 días",
+      "returns": "Garantía de 30 días",
       "returns_note": "Devoluciones elegibles por comodidad o ajuste.",
       "secure": "Pago seguro",
       "secure_note": "Cifrado y seguro.",
@@ -1095,7 +1095,7 @@
       "cannot_title": "LO QUE NO PUEDE HACER",
       "wear_time_html": "<strong>Tiempo de uso:</strong> Empieza con sesiones cortas y aumenta gradualmente según tu comodidad.",
       "results_html": "<strong>Resultados realistas:</strong> Ayuda a sostener y guiar el dedo mientras se usa. No cura los juanetes ni garantiza una corrección permanente.",
-      "not_right_html": "<strong>Si no es adecuado:</strong> Contacta con soporte dentro de los 90 días posteriores a la entrega para recibir las instrucciones de devolución aplicables.",
+      "not_right_html": "<strong>Si no es adecuado:</strong> Contacta con soporte dentro de los 30 días posteriores a la entrega para recibir las instrucciones de devolución aplicables.",
       "consistency": "Más fuerza no es mejor. Usa una tensión cómoda y sigue las instrucciones incluidas con el producto."
     },
     "reviews": {
@@ -1144,12 +1144,12 @@
       "question_5": "¿Cuánto tarda el envío?",
       "answer_5": "Las opciones y estimaciones de entrega aparecen durante el pago. Los plazos varían según el destino, el transportista y la tramitación aduanera.",
       "question_6": "¿Qué ocurre si no se ajusta bien o no resulta cómodo?",
-      "answer_6": "Contacta con soporte para recibir ayuda con el ajuste. La Garantía de comodidad de 90 días cubre las devoluciones elegibles por comodidad, ajuste o cambio de opinión si nos contactas dentro de los 90 días posteriores a la entrega y sigues las instrucciones de devolución."
+      "answer_6": "Contacta con soporte para recibir ayuda con el ajuste. La Garantía de comodidad de 30 días cubre las devoluciones elegibles por comodidad, ajuste o cambio de opinión si nos contactas dentro de los 30 días posteriores a la entrega y sigues las instrucciones de devolución."
     },
     "final_cta": {
       "title": "Dale más espacio al dedo gordo del pie",
       "subtitle": "Soporte ajustable. Tú tienes el control.",
-      "fine_print": "Pruébalo durante un máximo de 90 días. Si no es adecuado para ti, contacta con soporte."
+      "fine_print": "Pruébalo durante un máximo de 30 días. Si no es adecuado para ti, contacta con soporte."
     }
   },
   "altaeron_pdp_dialfit": {

@@ -667,10 +667,10 @@
       "cta": "Add to Cart",
       "installments": "or 4 interest-free payments of $10.00 with",
       "social_proof_html": "🔥🔥🔥 {{ count }} customers chose this in the last 24 hours",
-      "guarantee_title": "90-Day Comfort Guarantee",
-      "guarantee_line_1": "Try it during low-activity moments for up to 90 days.",
+      "guarantee_title": "30-Day Comfort Guarantee",
+      "guarantee_line_1": "Try it during low-activity moments for up to 30 days.",
       "guarantee_line_2": "If it’s not right for you, email support@altaeron.com for return help.",
-      "returns": "90-Day Comfort Guarantee",
+      "returns": "30-Day Comfort Guarantee",
       "returns_note": "Try it with confidence.",
       "shipping": "Free Shipping",
       "shipping_note": "No surprise delivery fees.",
@@ -815,7 +815,7 @@
     "trust": {
       "warranty": "1-Year Warranty",
       "secure_checkout": "Secure Checkout",
-      "returns": "90-Day Comfort Guarantee",
+      "returns": "30-Day Comfort Guarantee",
       "support": "Real People Support"
     },
     "comparison": {
@@ -828,7 +828,7 @@
       "row_3": "Comfortable for low-activity use",
       "row_4": "Durable & reusable design",
       "row_5": "Includes step-by-step guide",
-      "row_6": "90-Day Comfort Guarantee"
+      "row_6": "30-Day Comfort Guarantee"
     },
     "expectations": {
       "title": "What This Can — and Can’t — Do",
@@ -889,7 +889,7 @@
       "rating": "{{ rating }} out of 5",
       "photo_placeholders": "Customer photo placeholders",
       "view_all": "View All Reviews",
-      "trial": "Try it for up to 90 days. If it’s not right for you, contact us.",
+      "trial": "Try it for up to 30 days. If it’s not right for you, contact us.",
       "disclaimer": "Please note: Results can vary depending on bunion size, duration and consistency."
     },
     "faq": {
@@ -911,7 +911,7 @@
       "label": "Buy Altaeron adjustable bunion corrector",
       "title": "Ready to Walk Without Thinking About Your Feet?",
       "product": "ALTAERON™ Adjustable Knob Bunion Corrector",
-      "guarantee_html": "90-Day Comfort<br>Guarantee",
+      "guarantee_html": "30-Day Comfort<br>Guarantee",
       "shipping_html": "Fast & Free<br>Shipping on $29+ orders",
       "support_html": "Real People<br>Support 24/7",
       "rating": "{{ rating }} ({{ count }} reviews)",
@@ -920,8 +920,8 @@
       "compare_price": "$69.99",
       "button": "Start Walking More Comfortably",
       "installments": "or 4 interest-free payments of $10.00 with",
-      "fine_print": "Try it for up to 90 days. If it’s not right for you, email support@altaeron.com.",
-      "badge_alt": "Altaeron 90-Day Risk-Free Guarantee"
+      "fine_print": "Try it for up to 30 days. If it’s not right for you, email support@altaeron.com.",
+      "badge_alt": "Altaeron 30-Day Risk-Free Guarantee"
     }
   },
   "altaeron_home": {
@@ -1019,10 +1019,10 @@
       "cta": "Add to Cart",
       "installments": "or 4 interest-free payments of $10.00 with",
       "social_proof_html": "🔥🔥🔥 {{ count }} customers chose this in the last 24 hours",
-      "guarantee_title": "90-Day Comfort Guarantee",
-      "guarantee_line_1": "Try it during low-activity moments for up to 90 days.",
+      "guarantee_title": "30-Day Comfort Guarantee",
+      "guarantee_line_1": "Try it during low-activity moments for up to 30 days.",
       "guarantee_line_2": "If it’s not right for you, email support@altaeron.com for return help.",
-      "returns": "90-Day Comfort Guarantee",
+      "returns": "30-Day Comfort Guarantee",
       "returns_note": "Try it with confidence.",
       "shipping": "Free Shipping",
       "shipping_note": "No surprise delivery fees.",
@@ -1166,7 +1166,7 @@
     "trust": {
       "warranty": "1-Year Warranty",
       "secure_checkout": "Secure Checkout",
-      "returns": "90-Day Comfort Guarantee",
+      "returns": "30-Day Comfort Guarantee",
       "support": "Real People Support"
     },
     "comparison": {
@@ -1179,7 +1179,7 @@
       "row_3": "Comfortable for low-activity use",
       "row_4": "Durable & reusable design",
       "row_5": "Includes step-by-step guide",
-      "row_6": "90-Day Comfort Guarantee"
+      "row_6": "30-Day Comfort Guarantee"
     },
     "expectations": {
       "title": "What Altaeron Can — and Can't — Do",
@@ -1240,7 +1240,7 @@
       "rating": "{{ rating }} out of 5",
       "photo_placeholders": "Customer photo placeholders",
       "view_all": "View All Reviews",
-      "trial": "Try it for up to 90 days. If it’s not right for you, contact us.",
+      "trial": "Try it for up to 30 days. If it’s not right for you, contact us.",
       "disclaimer": "Please note: Results can vary depending on bunion size, duration and consistency."
     },
     "faq": {
@@ -1256,13 +1256,13 @@
       "question_5": "How long does shipping take?",
       "answer_5": "Shipping options and delivery estimates are shown at checkout. Delivery times vary by destination, carrier operations and customs processing.",
       "question_6": "What if it doesn't fit or feel right?",
-      "answer_6": "Contact support@altaeron.com for fit help. The 90-Day Comfort Guarantee covers eligible comfort, fit or change-of-mind returns when you contact us within 90 days of delivery. Include your order number and follow the return instructions provided."
+      "answer_6": "Contact support@altaeron.com for fit help. The 30-Day Comfort Guarantee covers eligible comfort, fit or change-of-mind returns when you contact us within 30 days of delivery. Include your order number and follow the return instructions provided."
     },
     "final_cta": {
       "label": "Buy Altaeron adjustable bunion corrector",
       "title": "Ready to Give Your Big Toe More Room?",
       "product": "Adjustable support. Controlled by you.",
-      "guarantee_html": "90-Day Comfort<br>Guarantee",
+      "guarantee_html": "30-Day Comfort<br>Guarantee",
       "shipping_html": "Free<br>Shipping",
       "support_html": "Real People<br>Support",
       "rating": "{{ rating }} ({{ count }} reviews)",
@@ -1271,8 +1271,8 @@
       "compare_price": "$69.99",
       "button": "Add to Cart",
       "installments": "or 4 interest-free payments of $10.00 with",
-      "fine_print": "Try it for up to 90 days. If it’s not right for you, email support@altaeron.com.",
-      "badge_alt": "Altaeron 90-Day Comfort Guarantee badge"
+      "fine_print": "Try it for up to 30 days. If it’s not right for you, email support@altaeron.com.",
+      "badge_alt": "Altaeron 30-Day Comfort Guarantee badge"
     }
   },
   "altaeron_pdp_reels_v2": {
@@ -1328,7 +1328,7 @@
       "next_reviews": "Next reviews",
       "publications": "Publications",
       "final_cta": "Final purchase call to action",
-      "badge": "90-Day Comfort Guarantee"
+      "badge": "30-Day Comfort Guarantee"
     },
     "hero": {
       "eyebrow": "Adjustable Bunion Corrector",
@@ -1353,12 +1353,12 @@
       "choose_option": "Choose an option",
       "product_option": "Product option",
       "installments": "or 4 interest-free payments of {{ amount }} with",
-      "guarantee": "90-Day Comfort Guarantee",
-      "guarantee_line_1": "Try it during low-activity moments for up to 90 days.",
+      "guarantee": "30-Day Comfort Guarantee",
+      "guarantee_line_1": "Try it during low-activity moments for up to 30 days.",
       "guarantee_line_2": "If it is not right for you, contact support for return help.",
       "shipping": "Free Shipping",
       "shipping_note": "No surprise delivery fees.",
-      "returns": "90-Day Guarantee",
+      "returns": "30-Day Guarantee",
       "returns_note": "Eligible comfort and fit returns.",
       "secure": "Secure Checkout",
       "secure_note": "Encrypted and secure.",
@@ -1388,7 +1388,7 @@
       "cannot_title": "WHAT IT CANNOT DO",
       "wear_time_html": "<strong>Wear time:</strong> Begin with short sessions and increase gradually based on comfort.",
       "results_html": "<strong>Realistic results:</strong> It helps support and guide the toe while worn. It does not cure bunions or guarantee permanent correction.",
-      "not_right_html": "<strong>If it is not right:</strong> Contact support within 90 days of delivery for the applicable return instructions.",
+      "not_right_html": "<strong>If it is not right:</strong> Contact support within 30 days of delivery for the applicable return instructions.",
       "consistency": "More force is not better. Use comfortable tension and follow the included product instructions."
     },
     "reviews": {
@@ -1437,12 +1437,12 @@
       "question_5": "How long does shipping take?",
       "answer_5": "Shipping options and delivery estimates are shown at checkout. Delivery times vary by destination, carrier operations, and customs processing.",
       "question_6": "What if it does not fit or feel right?",
-      "answer_6": "Contact support for fit help. The 90-Day Comfort Guarantee covers eligible comfort, fit, or change-of-mind returns when you contact us within 90 days of delivery and follow the return instructions provided."
+      "answer_6": "Contact support for fit help. The 30-Day Comfort Guarantee covers eligible comfort, fit, or change-of-mind returns when you contact us within 30 days of delivery and follow the return instructions provided."
     },
     "final_cta": {
       "title": "Give Your Big Toe More Room",
       "subtitle": "Adjustable support. Controlled by you.",
-      "fine_print": "Try it for up to 90 days. Contact support if it is not right for you."
+      "fine_print": "Try it for up to 30 days. Contact support if it is not right for you."
     }
   },
   "altaeron_pdp_dialfit": {

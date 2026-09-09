@@ -684,10 +684,10 @@
       "cta": "Adicionar ao Carrinho",
       "installments": "ou 4 pagamentos sem juros de $10.00 com",
       "social_proof_html": "🔥🔥🔥 {{ count }} clientes escolheram este produto nas últimas 24 horas",
-      "guarantee_title": "Garantia de conforto de 90 dias",
-      "guarantee_line_1": "Experimente-o em momentos de baixa atividade durante até 90 dias.",
+      "guarantee_title": "Garantia de conforto de 30 dias",
+      "guarantee_line_1": "Experimente-o em momentos de baixa atividade durante até 30 dias.",
       "guarantee_line_2": "Se não for adequado para si, envie um email para support@altaeron.com para obter ajuda com a devolução.",
-      "returns": "Garantia de conforto de 90 dias",
+      "returns": "Garantia de conforto de 30 dias",
       "returns_note": "Experimente com confiança.",
       "shipping": "Envio Rápido",
       "shipping_note": "Envio em 1 a 3 dias a partir do nosso armazém.",
@@ -807,7 +807,7 @@
       "rating": "{{ rating }} em 5",
       "photo_placeholders": "Marcadores de posição de fotos do cliente",
       "view_all": "Ver Todas as Críticas",
-      "trial": "Experimente durante até 90 dias. Se não for adequado para si, contacte-nos.",
+      "trial": "Experimente durante até 30 dias. Se não for adequado para si, contacte-nos.",
       "disclaimer": "Por favor, note: Os resultados podem variar dependendo do tamanho do joanete, duração e consistência."
     },
     "faq": {
@@ -829,7 +829,7 @@
       "label": "Comprar corretor de joanete ajustável Altaeron",
       "title": "Pronto para Caminhar Sem Pensar nos Seus Pés?",
       "product": "Corretor de Joanetes ALTAERON™ com Botão Ajustável",
-      "guarantee_html": "Garantia de conforto<br>de 90 dias",
+      "guarantee_html": "Garantia de conforto<br>de 30 dias",
       "shipping_html": "Envio Rápido e Grátis<br>em encomendas de 39€ ou mais",
       "support_html": "Pessoas Reais<br>Apoio 24/7",
       "rating": "{{ rating }} ({{ count }} avaliações)",
@@ -838,8 +838,8 @@
       "compare_price": "69,99 €",
       "button": "Comece a Caminhar Mais Confortavelmente",
       "installments": "ou 4 pagamentos sem juros de 10,00 $ com",
-      "fine_print": "Experimente durante até 90 dias. Se não for adequado para si, envie um email para support@altaeron.com.",
-      "badge_alt": "Garantia sem risco de 90 dias da Altaeron"
+      "fine_print": "Experimente durante até 30 dias. Se não for adequado para si, envie um email para support@altaeron.com.",
+      "badge_alt": "Garantia sem risco de 30 dias da Altaeron"
     },
     "day": {
       "title": "Uma rotina simples para momentos tranquilos.",
@@ -884,7 +884,7 @@
     "trust": {
       "warranty": "Garantia de 1 Ano",
       "secure_checkout": "Finalizar Compra Segura",
-      "returns": "Garantia de conforto de 90 dias",
+      "returns": "Garantia de conforto de 30 dias",
       "support": "Apoio por Pessoas Reais"
     },
     "comparison": {
@@ -897,7 +897,7 @@
       "row_3": "Confortável para atividades de baixa intensidade",
       "row_4": "Design durável e reutilizável",
       "row_5": "Inclui um guia passo a passo",
-      "row_6": "Garantia de conforto de 90 dias"
+      "row_6": "Garantia de conforto de 30 dias"
     },
     "expectations": {
       "title": "O Que Isto Consegue — e Não Consegue — Fazer",
@@ -1035,7 +1035,7 @@
       "next_reviews": "Avaliações seguintes",
       "publications": "Publicações",
       "final_cta": "Apelo final à compra",
-      "badge": "Garantia de conforto de 90 dias"
+      "badge": "Garantia de conforto de 30 dias"
     },
     "hero": {
       "eyebrow": "Corretor ajustável para joanetes",
@@ -1060,12 +1060,12 @@
       "choose_option": "Escolha uma opção",
       "product_option": "Opção do produto",
       "installments": "ou 4 pagamentos sem juros de {{ amount }} com",
-      "guarantee": "Garantia de conforto de 90 dias",
-      "guarantee_line_1": "Experimente-o em momentos de pouca atividade durante até 90 dias.",
+      "guarantee": "Garantia de conforto de 30 dias",
+      "guarantee_line_1": "Experimente-o em momentos de pouca atividade durante até 30 dias.",
       "guarantee_line_2": "Se não for adequado para si, contacte o apoio para obter ajuda com a devolução.",
       "shipping": "Envio gratuito",
       "shipping_note": "Sem custos de entrega inesperados.",
-      "returns": "Garantia de 90 dias",
+      "returns": "Garantia de 30 dias",
       "returns_note": "Devoluções elegíveis por conforto ou ajuste.",
       "secure": "Pagamento seguro",
       "secure_note": "Encriptado e seguro.",
@@ -1095,7 +1095,7 @@
       "cannot_title": "O QUE NÃO PODE FAZER",
       "wear_time_html": "<strong>Tempo de utilização:</strong> Comece com sessões curtas e aumente gradualmente de acordo com o seu conforto.",
       "results_html": "<strong>Resultados realistas:</strong> Ajuda a apoiar e orientar o dedo durante a utilização. Não cura joanetes nem garante uma correção permanente.",
-      "not_right_html": "<strong>Se não for adequado:</strong> Contacte o apoio no prazo de 90 dias após a entrega para receber as instruções de devolução aplicáveis.",
+      "not_right_html": "<strong>Se não for adequado:</strong> Contacte o apoio no prazo de 30 dias após a entrega para receber as instruções de devolução aplicáveis.",
       "consistency": "Mais força não significa melhores resultados. Utilize uma tensão confortável e siga as instruções incluídas com o produto."
     },
     "reviews": {
@@ -1144,12 +1144,12 @@
       "question_5": "Quanto tempo demora o envio?",
       "answer_5": "As opções e estimativas de entrega são apresentadas no checkout. Os prazos variam consoante o destino, a transportadora e o processamento alfandegário.",
       "question_6": "E se não servir ou não for confortável?",
-      "answer_6": "Contacte o apoio para obter ajuda com o ajuste. A Garantia de conforto de 90 dias cobre devoluções elegíveis por conforto, ajuste ou mudança de ideias, desde que nos contacte no prazo de 90 dias após a entrega e siga as instruções de devolução."
+      "answer_6": "Contacte o apoio para obter ajuda com o ajuste. A Garantia de conforto de 30 dias cobre devoluções elegíveis por conforto, ajuste ou mudança de ideias, desde que nos contacte no prazo de 30 dias após a entrega e siga as instruções de devolução."
     },
     "final_cta": {
       "title": "Dê mais espaço ao dedo grande do pé",
       "subtitle": "Suporte ajustável. Controlado por si.",
-      "fine_print": "Experimente-o durante até 90 dias. Se não for adequado para si, contacte o apoio."
+      "fine_print": "Experimente-o durante até 30 dias. Se não for adequado para si, contacte o apoio."
     }
   },
   "altaeron_pdp_dialfit": {
