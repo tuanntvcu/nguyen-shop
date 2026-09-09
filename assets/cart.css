@@ -445,8 +445,10 @@
 }
 .cart-drawer__care-form {
   display: grid;
+  grid-column: 1 / -1;
   grid-template-columns: minmax(9rem, 1fr) auto;
   gap: 0.7rem;
+  margin-top: 0.1rem;
 }
 .cart-drawer__care-select {
   min-width: 0;
@@ -469,6 +471,9 @@
   font-size: 1.2rem;
   font-weight: 700;
   white-space: nowrap;
+}
+.cart-drawer__care-form:not(:has(.cart-drawer__care-select)) .cart-drawer__care-add {
+  grid-column: 1 / -1;
 }
 .cart-drawer__care-form .product-form__error-message {
   grid-column: 1 / -1;

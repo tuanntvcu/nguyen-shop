@@ -28,7 +28,9 @@
           <strong data-care-price>{{ selected_variant.price | money }}</strong>
           <s data-care-compare{% unless selected_variant.compare_at_price > selected_variant.price %} hidden{% endunless %}>{{ selected_variant.compare_at_price | money }}</s>
         </div>
-        {%- form 'product', product, id: complete_care_form_id, class: 'cart-drawer__care-form', is: 'product-form', data-hide-errors: 'false' -%}
+      </div>
+    </div>
+    {%- form 'product', product, id: complete_care_form_id, class: 'cart-drawer__care-form', is: 'product-form', data-hide-errors: 'false' -%}
           {%- unless product.has_only_default_variant -%}
             <label class="visually-hidden" for="CompleteCareVariant-{{ section_id }}">{{ 'accessibility.select_variant' | t }}</label>
             <select id="CompleteCareVariant-{{ section_id }}" name="id" class="cart-drawer__care-select" data-complete-care-variant>
@@ -47,8 +49,6 @@
             {%- render 'loading-spinner' -%}
           </button>
           <div class="product-form__error-message" role="alert" hidden></div>
-        {%- endform -%}
-      </div>
-    </div>
+    {%- endform -%}
   </div>
 {%- endif -%}
