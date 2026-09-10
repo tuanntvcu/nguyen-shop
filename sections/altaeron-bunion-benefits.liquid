@@ -1,6 +1,16 @@
 {%- liquid
   assign progression_blocks = section.blocks | where: 'type', 'progression'
   assign benefit_blocks = section.blocks | where: 'type', 'benefit'
+  assign eyebrow = section.settings.eyebrow
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign reassurance = section.settings.reassurance
+  unless request.locale.iso_code == 'en'
+    assign eyebrow = 'altaeron_pdp_reels_v3.bunion.eyebrow' | t
+    assign heading = 'altaeron_pdp_reels_v3.bunion.heading' | t
+    assign subheading = 'altaeron_pdp_reels_v3.bunion.subheading' | t
+    assign reassurance = 'altaeron_pdp_reels_v3.bunion.reassurance' | t
+  endunless
 -%}
 
 <style>
@@ -67,15 +77,29 @@
 <section id="AltaeronBunion-{{ section.id }}" class="alta-custom alta-bunion" aria-labelledby="AltaeronBunionHeading-{{ section.id }}">
   <div class="alta-custom__shell">
     <header class="alta-custom__header">
-      {%- if section.settings.eyebrow != blank -%}<p class="alta-custom__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-      <h2 id="AltaeronBunionHeading-{{ section.id }}" class="alta-custom__heading">{{ section.settings.heading | escape }}</h2>
-      {%- if section.settings.subheading != blank -%}<p class="alta-custom__subheading">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+      {%- if eyebrow != blank -%}<p class="alta-custom__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AltaeronBunionHeading-{{ section.id }}" class="alta-custom__heading">{{ heading | escape }}</h2>
+      {%- if subheading != blank -%}<p class="alta-custom__subheading">{{ subheading | escape }}</p>{%- endif -%}
     </header>
 
     {%- if progression_blocks.size > 0 -%}
-      <div class="alta-bunion__progression" aria-label="{{ section.settings.eyebrow | escape }}">
+      <div class="alta-bunion__progression" aria-label="{{ eyebrow | escape }}">
         {%- for block in progression_blocks -%}
-          {%- assign image_alt = block.settings.image.alt | default: block.settings.title -%}
+          {%- liquid
+            assign block_title = block.settings.title
+            assign block_caption = block.settings.caption
+            unless request.locale.iso_code == 'en'
+              capture title_key
+                echo 'altaeron_pdp_reels_v3.bunion.progression_' | append: forloop.index | append: '_title'
+              endcapture
+              capture caption_key
+                echo 'altaeron_pdp_reels_v3.bunion.progression_' | append: forloop.index | append: '_caption'
+              endcapture
+              assign block_title = title_key | t
+              assign block_caption = caption_key | t
+            endunless
+            assign image_alt = block.settings.image.alt | default: block_title
+          -%}
           <article class="alta-bunion__step" {{ block.shopify_attributes }}>
             <div class="alta-bunion__step-media">
               {%- if block.settings.image != blank -%}
@@ -84,7 +108,7 @@
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
             </div>
-            <div class="alta-bunion__step-copy"><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.caption | escape }}</p></div>
+            <div class="alta-bunion__step-copy"><h3>{{ block_title | escape }}</h3><p>{{ block_caption | escape }}</p></div>
           </article>
         {%- endfor -%}
       </div>
@@ -93,7 +117,21 @@
     {%- if benefit_blocks.size > 0 -%}
       <div class="alta-custom__cards">
         {%- for block in benefit_blocks -%}
-          {%- assign image_alt = block.settings.image.alt | default: block.settings.title -%}
+          {%- liquid
+            assign block_title = block.settings.title
+            assign block_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture title_key
+                echo 'altaeron_pdp_reels_v3.bunion.benefit_' | append: forloop.index | append: '_title'
+              endcapture
+              capture body_key
+                echo 'altaeron_pdp_reels_v3.bunion.benefit_' | append: forloop.index | append: '_body'
+              endcapture
+              assign block_title = title_key | t
+              assign block_body = body_key | t
+            endunless
+            assign image_alt = block.settings.image.alt | default: block_title
+          -%}
           <article class="alta-custom-card" {{ block.shopify_attributes }}>
             <div class="alta-custom-card__media">
               {%- if block.settings.image != blank -%}
@@ -102,16 +140,16 @@
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
             </div>
-            <div class="alta-custom-card__copy"><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.body | escape }}</p></div>
+            <div class="alta-custom-card__copy"><h3>{{ block_title | escape }}</h3><p>{{ block_body | escape }}</p></div>
           </article>
         {%- endfor -%}
       </div>
     {%- endif -%}
 
-    {%- if section.settings.reassurance != blank -%}
+    {%- if reassurance != blank -%}
       <p class="alta-custom__reassurance">
         <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor"><path d="M26.5 4.5C16 5.4 8.2 10.8 7.2 19.2c-.5 4.2 2.4 7.5 6.6 7 8.4-1 12.9-9.8 12.7-21.7Z"/><path d="M5.5 28.5c3.8-7.4 8.6-12.2 15.2-16.1"/></svg>
-        <span>{{ section.settings.reassurance | escape }}</span>
+        <span>{{ reassurance | escape }}</span>
       </p>
     {%- endif -%}
   </div>

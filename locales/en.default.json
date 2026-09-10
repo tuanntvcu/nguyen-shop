@@ -1462,6 +1462,70 @@
     }
   },
   "altaeron_pdp_reels_v3": {
+    "reviews_eyebrow": "Customer reviews",
+    "faq_eyebrow": "FAQ",
+    "bunion": {
+      "eyebrow": "WHAT IT DOES FOR YOUR BUNION",
+      "heading": "Support your big toe in a more natural position.",
+      "subheading": "As the big toe shifts inward, pressure and crowding can build. Altaeron supports a straighter position while worn.",
+      "reassurance": "Gentle support should feel controlled — never painful.",
+      "progression_1_title": "Bunion position",
+      "progression_1_caption": "Big toe shifted inward",
+      "progression_2_title": "Product support",
+      "progression_2_caption": "Guides the toe outward",
+      "progression_3_title": "Supported position",
+      "progression_3_caption": "Big toe sits more naturally",
+      "benefit_1_title": "Better Toe Alignment",
+      "benefit_1_body": "Supports a straighter position while worn.",
+      "benefit_2_title": "Less Crowding & Pressure",
+      "benefit_2_body": "Creates more space around the bunion area."
+    },
+    "adjustable": {
+      "eyebrow": "ADJUSTABLE SUPPORT",
+      "heading": "Every bunion feels different. Your support should too.",
+      "subheading": "Unlike fixed spacers, Altaeron lets you choose the level of support that feels right for your foot.",
+      "reassurance": "Your foot sets the pace — not the device.",
+      "benefit_1_title": "You Control the Support",
+      "benefit_1_body": "Adjust to your comfort.",
+      "benefit_2_title": "Start Gentle",
+      "benefit_2_body": "Begin light. Increase gradually.",
+      "benefit_3_title": "No Fixed-Tension Guesswork",
+      "benefit_3_body": "Find the level that suits your foot."
+    },
+    "muscle": {
+      "eyebrow": "MUSCLE SUPPORT / ANATOMY",
+      "heading": "Better alignment supports more balanced toe function.",
+      "subheading": "Supporting the big toe in a more natural position can encourage more balanced muscle engagement over time.",
+      "reassurance": "Better positioning. More balanced support.",
+      "benefit_1_title": "Balanced Position",
+      "benefit_1_body": "Supports a more natural alignment.",
+      "benefit_2_title": "Repeated Support",
+      "benefit_2_body": "Regular sessions support better positioning."
+    },
+    "timeline": {
+      "eyebrow": "WHAT TO EXPECT OVER TIME",
+      "heading": "What consistent support can look like over time.",
+      "subheading": "Altaeron is designed to move from comfortable relief toward regular alignment support as part of your routine.",
+      "reassurance_heading": "Consistency matters more than force.",
+      "reassurance_text": "Start gently. Adjust gradually. Use regularly.",
+      "stage_1_label": "FIRST FEW WEARS",
+      "stage_1_title": "Relieve",
+      "stage_1_body": "Ease pressure, crowding & rubbing while worn.",
+      "stage_2_label": "CONTINUED USE",
+      "stage_2_title": "Reinforce",
+      "stage_2_body": "Encourage more balanced positioning over time."
+    },
+    "try_home": {
+      "eyebrow": "TRY IT AT HOME",
+      "heading": "Give your feet time to decide.",
+      "body": "Take time to find the support level and routine that feel right for you. If Altaeron isn’t right for your feet, return it within 30 days.",
+      "handwritten_message": "Support a more comfortable tomorrow",
+      "cta_text": "TRY ALTAERON →",
+      "cta_reassurance": "Secure checkout · 30-day easy returns",
+      "banner_text": "A small step for today.\nGreater comfort for tomorrow.",
+      "trust_1_title": "30-Day Easy Returns",
+      "trust_1_body": "Try it as part of your normal at-home routine."
+    },
     "faq": {
       "title": "Still deciding?",
       "subtitle": "Here’s what to know before your first wear.",

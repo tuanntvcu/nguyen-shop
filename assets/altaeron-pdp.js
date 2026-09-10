@@ -463,6 +463,9 @@
     const ctaPrice = root.querySelector('[data-apdp-cta-price]');
     const stickySubmit = root.querySelector('[data-apdp-sticky-submit]');
     const finalSubmit = root.querySelector('[data-apdp-final-submit]') || externalFinal?.querySelector('[data-apdp-final-submit]');
+    const trySubmit = root.classList.contains('altaeron-pdp--reels-v3')
+      ? document.querySelector('[data-apdp-try-submit]')
+      : null;
     const stickyText = root.querySelector('[data-apdp-sticky-text]');
     const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
     const stickyCompare = root.querySelector('[data-apdp-sticky-compare]');
@@ -565,7 +568,7 @@
         stickySavings.hidden = compare <= price;
         if (compare > price) stickySavings.textContent = savingsText(compare - price);
       }
-      [submit, stickySubmit, finalSubmit].forEach((button) => {
+      [submit, stickySubmit, finalSubmit, trySubmit].forEach((button) => {
         if (!button) return;
         button.disabled = !available;
         if (available) button.removeAttribute('aria-disabled');
@@ -762,6 +765,9 @@
     const primaryPurchase = root.querySelector('[data-apdp-primary-purchase]');
     const stickyButton = root.querySelector('[data-apdp-sticky-submit]');
     const finalButton = root.querySelector('[data-apdp-final-submit]') || externalFinal?.querySelector('[data-apdp-final-submit]');
+    const tryButton = root.classList.contains('altaeron-pdp--reels-v3')
+      ? document.querySelector('[data-apdp-try-submit]')
+      : null;
     const form = root.querySelector('.apdp-form');
     const finalCta = root.querySelector('.apdp-final-cta, .apdp-dialfit-bottom') || externalFinal?.querySelector('.apdp-final-cta');
     if (!sticky || !purchaseButton || !stickyButton || !form) return;
@@ -788,6 +794,9 @@
     });
     finalButton?.addEventListener('click', () => {
       if (!finalButton.disabled) form.requestSubmit(purchaseButton);
+    });
+    tryButton?.addEventListener('click', () => {
+      if (!tryButton.disabled) form.requestSubmit(purchaseButton);
     });
   }
 

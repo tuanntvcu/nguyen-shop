@@ -1,5 +1,23 @@
-{%- assign hero_alt = section.settings.hero_image.alt | default: section.settings.heading -%}
-{%- assign cta_link = section.settings.cta_link | default: product.url -%}
+{%- liquid
+  assign eyebrow = section.settings.eyebrow
+  assign heading = section.settings.heading
+  assign body = section.settings.body
+  assign handwritten_message = section.settings.handwritten_message
+  assign cta_text = section.settings.cta_text
+  assign cta_reassurance = section.settings.cta_reassurance
+  assign banner_text = section.settings.banner_text
+  unless request.locale.iso_code == 'en'
+    assign eyebrow = 'altaeron_pdp_reels_v3.try_home.eyebrow' | t
+    assign heading = 'altaeron_pdp_reels_v3.try_home.heading' | t
+    assign body = 'altaeron_pdp_reels_v3.try_home.body' | t
+    assign handwritten_message = 'altaeron_pdp_reels_v3.try_home.handwritten_message' | t
+    assign cta_text = 'altaeron_pdp_reels_v3.try_home.cta_text' | t
+    assign cta_reassurance = 'altaeron_pdp_reels_v3.try_home.cta_reassurance' | t
+    assign banner_text = 'altaeron_pdp_reels_v3.try_home.banner_text' | t
+  endunless
+  assign hero_alt = section.settings.hero_image.alt | default: heading
+  assign cta_link = section.settings.cta_link
+-%}
 
 <style>
   #AltaeronTryHome-{{ section.id }} {
@@ -31,9 +49,10 @@
   #AltaeronTryHome-{{ section.id }} .alta-try-trust h3 { color: var(--alta-try-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: 17px; font-weight: 750; letter-spacing: -.015em; line-height: 1.25; margin: 0 0 4px; }
   #AltaeronTryHome-{{ section.id }} .alta-try-trust p { color: var(--alta-try-body); font-size: 13px; line-height: 1.45; margin: 0; }
   #AltaeronTryHome-{{ section.id }} .alta-try__action { margin: 22px auto 0; max-width: 900px; text-align: center; }
-  #AltaeronTryHome-{{ section.id }} .alta-try__cta { align-items: center; background: var(--alta-try-accent); border: 1px solid var(--alta-try-accent); border-radius: 12px; color: #fff; display: flex; font-size: 16px; font-weight: 750; justify-content: center; letter-spacing: .035em; min-height: 58px; padding: 15px 24px; text-decoration: none; transition: background-color .2s ease, border-color .2s ease, transform .2s ease; width: 100%; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__cta { align-items: center; background: var(--alta-try-accent); border: 1px solid var(--alta-try-accent); border-radius: 12px; color: #fff; cursor: pointer; display: flex; font-family: inherit; font-size: 16px; font-weight: 750; justify-content: center; letter-spacing: .035em; min-height: 58px; padding: 15px 24px; text-decoration: none; transition: background-color .2s ease, border-color .2s ease, transform .2s ease; width: 100%; }
   #AltaeronTryHome-{{ section.id }} .alta-try__cta:hover { background: var(--alta-try-accent-dark); border-color: var(--alta-try-accent-dark); color: #fff; transform: translateY(-1px); }
   #AltaeronTryHome-{{ section.id }} .alta-try__cta:focus-visible { outline: 3px solid rgba(0,107,94,.3); outline-offset: 3px; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__cta:disabled { cursor: not-allowed; opacity: .55; transform: none; }
   #AltaeronTryHome-{{ section.id }} .alta-try__checkout-note { align-items: center; color: #667085; display: flex; font-size: 12px; gap: 7px; justify-content: center; line-height: 1.4; margin: 10px 0 0; }
   #AltaeronTryHome-{{ section.id }} .alta-try__checkout-note svg { flex: 0 0 14px; height: 14px; width: 14px; }
   #AltaeronTryHome-{{ section.id }} .alta-try__banner { background: linear-gradient(90deg, #edf8f7, #f4f8f5); border: 1px solid rgba(0,107,94,.08); border-radius: 15px; margin-top: 24px; overflow: hidden; }
@@ -73,11 +92,11 @@
   <div class="alta-try__shell">
     <div class="alta-try__hero">
       <div class="alta-try__content">
-        {%- if section.settings.eyebrow != blank -%}<p class="alta-try__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-        <h2 id="AltaeronTryHomeHeading-{{ section.id }}" class="alta-try__heading">{{ section.settings.heading | escape }}</h2>
-        {%- if section.settings.body != blank -%}<p class="alta-try__body">{{ section.settings.body | escape }}</p>{%- endif -%}
-        {%- if section.settings.show_handwritten and section.settings.handwritten_message != blank -%}
-          <p class="alta-try__note">{{ section.settings.handwritten_message | escape | newline_to_br }}</p>
+        {%- if eyebrow != blank -%}<p class="alta-try__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="AltaeronTryHomeHeading-{{ section.id }}" class="alta-try__heading">{{ heading | escape }}</h2>
+        {%- if body != blank -%}<p class="alta-try__body">{{ body | escape }}</p>{%- endif -%}
+        {%- if section.settings.show_handwritten and handwritten_message != blank -%}
+          <p class="alta-try__note">{{ handwritten_message | escape | newline_to_br }}</p>
         {%- endif -%}
       </div>
       <div class="alta-try__hero-media">
@@ -92,7 +111,21 @@
     {%- if section.blocks.size > 0 -%}
       <div class="alta-try__trust">
         {%- for block in section.blocks -%}
-          {%- assign icon_alt = block.settings.image.alt | default: block.settings.title -%}
+          {%- liquid
+            assign block_title = block.settings.title
+            assign block_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture title_key
+                echo 'altaeron_pdp_reels_v3.try_home.trust_' | append: forloop.index | append: '_title'
+              endcapture
+              capture body_key
+                echo 'altaeron_pdp_reels_v3.try_home.trust_' | append: forloop.index | append: '_body'
+              endcapture
+              assign block_title = title_key | t
+              assign block_body = body_key | t
+            endunless
+            assign icon_alt = block.settings.image.alt | default: block_title
+          -%}
           <article class="alta-try-trust" {{ block.shopify_attributes }}>
             <div class="alta-try-trust__icon">
               {%- if block.settings.image != blank -%}
@@ -101,23 +134,29 @@
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
             </div>
-            <div><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.body | escape }}</p></div>
+            <div><h3>{{ block_title | escape }}</h3><p>{{ block_body | escape }}</p></div>
           </article>
         {%- endfor -%}
       </div>
     {%- endif -%}
 
     <div class="alta-try__action">
-      {%- if section.settings.cta_text != blank -%}<a class="alta-try__cta" href="{{ cta_link | escape }}">{{ section.settings.cta_text | escape }}</a>{%- endif -%}
-      {%- if section.settings.cta_reassurance != blank -%}
-        <p class="alta-try__checkout-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>{{ section.settings.cta_reassurance | escape }}</span></p>
+      {%- if cta_text != blank -%}
+        {%- if cta_link != blank -%}
+          <a class="alta-try__cta" href="{{ cta_link | escape }}">{{ cta_text | escape }}</a>
+        {%- else -%}
+          <button type="button" class="alta-try__cta" data-apdp-try-submit{% unless product.selected_or_first_available_variant.available %} disabled aria-disabled="true"{% endunless %}>{{ cta_text | escape }}</button>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if cta_reassurance != blank -%}
+        <p class="alta-try__checkout-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>{{ cta_reassurance | escape }}</span></p>
       {%- endif -%}
     </div>
 
     {%- if section.settings.show_banner -%}
       <div class="alta-try__banner">
         <div class="alta-try__banner-copy">
-          <p>{{ section.settings.banner_text | escape }}</p>
+          <p>{{ banner_text | escape }}</p>
         </div>
       </div>
     {%- endif -%}

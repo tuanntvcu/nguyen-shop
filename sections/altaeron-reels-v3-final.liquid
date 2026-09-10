@@ -13,6 +13,9 @@
   assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
   assign product_image = section.settings.product_image | default: product.featured_image
   assign cta_label = section.settings.cta_label | default: 'GET YOURS NOW →'
+  unless request.locale.iso_code == 'en'
+    assign cta_label = 'altaeron_pdp_reels_v2.buy.atf_cta' | t
+  endunless
 -%}
 
 {{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}

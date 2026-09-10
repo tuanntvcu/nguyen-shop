@@ -1,3 +1,16 @@
+{%- liquid
+  assign eyebrow = section.settings.eyebrow
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign reassurance = section.settings.reassurance
+  unless request.locale.iso_code == 'en'
+    assign eyebrow = 'altaeron_pdp_reels_v3.muscle.eyebrow' | t
+    assign heading = 'altaeron_pdp_reels_v3.muscle.heading' | t
+    assign subheading = 'altaeron_pdp_reels_v3.muscle.subheading' | t
+    assign reassurance = 'altaeron_pdp_reels_v3.muscle.reassurance' | t
+  endunless
+-%}
+
 <style>
   #AltaeronMuscle-{{ section.id }} {
     --alta-muscle-ink: var(--altaeron-navy, #102a43);
@@ -56,12 +69,12 @@
 <section id="AltaeronMuscle-{{ section.id }}" class="alta-muscle-support" aria-labelledby="AltaeronMuscleHeading-{{ section.id }}">
   <div class="alta-muscle__shell">
     <header class="alta-muscle__header">
-      {%- if section.settings.eyebrow != blank -%}<p class="alta-muscle__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-      <h2 id="AltaeronMuscleHeading-{{ section.id }}" class="alta-muscle__heading">{{ section.settings.heading | escape }}</h2>
-      {%- if section.settings.subheading != blank -%}<p class="alta-muscle__subheading">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+      {%- if eyebrow != blank -%}<p class="alta-muscle__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AltaeronMuscleHeading-{{ section.id }}" class="alta-muscle__heading">{{ heading | escape }}</h2>
+      {%- if subheading != blank -%}<p class="alta-muscle__subheading">{{ subheading | escape }}</p>{%- endif -%}
     </header>
 
-    {%- assign anatomy_alt = section.settings.anatomy_image.alt | default: section.settings.heading -%}
+    {%- assign anatomy_alt = section.settings.anatomy_image.alt | default: heading -%}
     <div class="alta-muscle__anatomy">
       <div class="alta-muscle__anatomy-media">
         {%- if section.settings.anatomy_image != blank -%}
@@ -75,7 +88,21 @@
     {%- if section.blocks.size > 0 -%}
       <div class="alta-muscle__cards">
         {%- for block in section.blocks -%}
-          {%- assign card_alt = block.settings.image.alt | default: block.settings.title -%}
+          {%- liquid
+            assign block_title = block.settings.title
+            assign block_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture title_key
+                echo 'altaeron_pdp_reels_v3.muscle.benefit_' | append: forloop.index | append: '_title'
+              endcapture
+              capture body_key
+                echo 'altaeron_pdp_reels_v3.muscle.benefit_' | append: forloop.index | append: '_body'
+              endcapture
+              assign block_title = title_key | t
+              assign block_body = body_key | t
+            endunless
+            assign card_alt = block.settings.image.alt | default: block_title
+          -%}
           <article class="alta-muscle-card" {{ block.shopify_attributes }}>
             <div class="alta-muscle-card__media">
               {%- if block.settings.image != blank -%}
@@ -84,16 +111,16 @@
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
             </div>
-            <div class="alta-muscle-card__copy"><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.body | escape }}</p></div>
+            <div class="alta-muscle-card__copy"><h3>{{ block_title | escape }}</h3><p>{{ block_body | escape }}</p></div>
           </article>
         {%- endfor -%}
       </div>
     {%- endif -%}
 
-    {%- if section.settings.reassurance != blank -%}
+    {%- if reassurance != blank -%}
       <p class="alta-muscle__reassurance">
         <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor"><path d="M26.5 4.5C16 5.4 8.2 10.8 7.2 19.2c-.5 4.2 2.4 7.5 6.6 7 8.4-1 12.9-9.8 12.7-21.7Z"/><path d="M5.5 28.5c3.8-7.4 8.6-12.2 15.2-16.1"/></svg>
-        <span>{{ section.settings.reassurance | escape }}</span>
+        <span>{{ reassurance | escape }}</span>
       </p>
     {%- endif -%}
   </div>

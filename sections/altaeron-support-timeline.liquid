@@ -1,3 +1,18 @@
+{%- liquid
+  assign eyebrow = section.settings.eyebrow
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign reassurance_heading = section.settings.reassurance_heading
+  assign reassurance_text = section.settings.reassurance_text
+  unless request.locale.iso_code == 'en'
+    assign eyebrow = 'altaeron_pdp_reels_v3.timeline.eyebrow' | t
+    assign heading = 'altaeron_pdp_reels_v3.timeline.heading' | t
+    assign subheading = 'altaeron_pdp_reels_v3.timeline.subheading' | t
+    assign reassurance_heading = 'altaeron_pdp_reels_v3.timeline.reassurance_heading' | t
+    assign reassurance_text = 'altaeron_pdp_reels_v3.timeline.reassurance_text' | t
+  endunless
+-%}
+
 <style>
   #AltaeronTimeline-{{ section.id }} {
     --alta-timeline-ink: var(--altaeron-navy, #102a43);
@@ -55,20 +70,39 @@
 <section id="AltaeronTimeline-{{ section.id }}" class="alta-support-timeline" aria-labelledby="AltaeronTimelineHeading-{{ section.id }}">
   <div class="alta-timeline__shell">
     <header class="alta-timeline__header">
-      {%- if section.settings.eyebrow != blank -%}<p class="alta-timeline__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-      <h2 id="AltaeronTimelineHeading-{{ section.id }}" class="alta-timeline__heading">{{ section.settings.heading | escape }}</h2>
-      {%- if section.settings.subheading != blank -%}<p class="alta-timeline__subheading">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+      {%- if eyebrow != blank -%}<p class="alta-timeline__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AltaeronTimelineHeading-{{ section.id }}" class="alta-timeline__heading">{{ heading | escape }}</h2>
+      {%- if subheading != blank -%}<p class="alta-timeline__subheading">{{ subheading | escape }}</p>{%- endif -%}
     </header>
 
     {%- if section.blocks.size > 0 -%}
       <div class="alta-timeline__stages">
         {%- for block in section.blocks -%}
-          {%- assign stage_alt = block.settings.image.alt | default: block.settings.title -%}
+          {%- liquid
+            assign stage_label = block.settings.label
+            assign stage_title = block.settings.title
+            assign stage_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture label_key
+                echo 'altaeron_pdp_reels_v3.timeline.stage_' | append: forloop.index | append: '_label'
+              endcapture
+              capture title_key
+                echo 'altaeron_pdp_reels_v3.timeline.stage_' | append: forloop.index | append: '_title'
+              endcapture
+              capture body_key
+                echo 'altaeron_pdp_reels_v3.timeline.stage_' | append: forloop.index | append: '_body'
+              endcapture
+              assign stage_label = label_key | t
+              assign stage_title = title_key | t
+              assign stage_body = body_key | t
+            endunless
+            assign stage_alt = block.settings.image.alt | default: stage_title
+          -%}
           <article class="alta-timeline-card" {{ block.shopify_attributes }}>
             <div class="alta-timeline-card__copy">
-              <p class="alta-timeline-card__label">{{ block.settings.label | escape }}</p>
-              <h3>{{ block.settings.title | escape }}</h3>
-              <p class="alta-timeline-card__body">{{ block.settings.body | escape }}</p>
+              <p class="alta-timeline-card__label">{{ stage_label | escape }}</p>
+              <h3>{{ stage_title | escape }}</h3>
+              <p class="alta-timeline-card__body">{{ stage_body | escape }}</p>
             </div>
             <div class="alta-timeline-card__media">
               {%- if block.settings.video != blank -%}
@@ -84,11 +118,11 @@
       </div>
     {%- endif -%}
 
-    {%- if section.settings.reassurance_heading != blank or section.settings.reassurance_text != blank -%}
+    {%- if reassurance_heading != blank or reassurance_text != blank -%}
       <div class="alta-timeline__reassurance">
         <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor"><rect x="4.5" y="7.5" width="23" height="20" rx="2"/><path d="M10 4v7M22 4v7M4.5 13h23M9 18h3M15 18h3M21 18h3M9 23h3M15 23h3M21 23h3"/></svg>
-        {%- if section.settings.reassurance_heading != blank -%}<strong>{{ section.settings.reassurance_heading | escape }}</strong>{%- endif -%}
-        {%- if section.settings.reassurance_text != blank -%}<span>{{ section.settings.reassurance_text | escape }}</span>{%- endif -%}
+        {%- if reassurance_heading != blank -%}<strong>{{ reassurance_heading | escape }}</strong>{%- endif -%}
+        {%- if reassurance_text != blank -%}<span>{{ reassurance_text | escape }}</span>{%- endif -%}
       </div>
     {%- endif -%}
   </div>

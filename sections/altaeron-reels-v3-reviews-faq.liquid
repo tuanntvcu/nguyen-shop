@@ -6,6 +6,8 @@
   assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
   assign reviews_title = 'altaeron_pdp_reels_v2.reviews.full_title' | t
   assign reviews_subtitle = 'altaeron_pdp_reels_v2.reviews.full_subtitle' | t: rating: review_rating_display, count: review_count
+  assign reviews_eyebrow = 'altaeron_pdp_reels_v3.reviews_eyebrow' | t
+  assign faq_eyebrow = 'altaeron_pdp_reels_v3.faq_eyebrow' | t
   assign faq_title = 'altaeron_pdp_reels_v3.faq.title' | t
   assign faq_subtitle = 'altaeron_pdp_reels_v3.faq.subtitle' | t
   assign has_legacy_judgeme_widget = false
@@ -51,7 +53,7 @@
   <section id="AltaeronV3Reviews" class="alta-v3-tail__section alta-v3-tail__section--reviews" aria-labelledby="AltaeronV3ReviewsHeading-{{ section.id }}" data-apdp-review-slider-group>
     <div class="alta-v3-tail__shell apdp-review-summary">
       <header class="alta-custom__header">
-        <p class="alta-custom__eyebrow">Customer reviews</p>
+        <p class="alta-custom__eyebrow">{{ reviews_eyebrow }}</p>
         <h2 id="AltaeronV3ReviewsHeading-{{ section.id }}" class="alta-custom__heading">{{ reviews_title }}</h2>
         <p class="alta-custom__subheading">{{ reviews_subtitle }}</p>
       </header>
@@ -66,7 +68,7 @@
   <section class="alta-v3-tail__section" aria-labelledby="AltaeronV3FaqHeading-{{ section.id }}">
     <div class="alta-v3-tail__shell">
       <header class="alta-custom__header">
-        <p class="alta-custom__eyebrow">FAQ</p>
+        <p class="alta-custom__eyebrow">{{ faq_eyebrow }}</p>
         <h2 id="AltaeronV3FaqHeading-{{ section.id }}" class="alta-custom__heading">{{ faq_title }}</h2>
         <p class="alta-custom__subheading">{{ faq_subtitle }}</p>
       </header>

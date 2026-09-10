@@ -1,3 +1,16 @@
+{%- liquid
+  assign eyebrow = section.settings.eyebrow
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign reassurance = section.settings.reassurance
+  unless request.locale.iso_code == 'en'
+    assign eyebrow = 'altaeron_pdp_reels_v3.adjustable.eyebrow' | t
+    assign heading = 'altaeron_pdp_reels_v3.adjustable.heading' | t
+    assign subheading = 'altaeron_pdp_reels_v3.adjustable.subheading' | t
+    assign reassurance = 'altaeron_pdp_reels_v3.adjustable.reassurance' | t
+  endunless
+-%}
+
 <style>
   #AltaeronAdjustable-{{ section.id }} {
     --alta-custom-ink: var(--altaeron-navy, #102a43);
@@ -49,12 +62,12 @@
 <section id="AltaeronAdjustable-{{ section.id }}" class="alta-custom alta-adjustable" aria-labelledby="AltaeronAdjustableHeading-{{ section.id }}">
   <div class="alta-custom__shell">
     <header class="alta-custom__header">
-      {%- if section.settings.eyebrow != blank -%}<p class="alta-custom__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-      <h2 id="AltaeronAdjustableHeading-{{ section.id }}" class="alta-custom__heading">{{ section.settings.heading | escape }}</h2>
-      {%- if section.settings.subheading != blank -%}<p class="alta-custom__subheading">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+      {%- if eyebrow != blank -%}<p class="alta-custom__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AltaeronAdjustableHeading-{{ section.id }}" class="alta-custom__heading">{{ heading | escape }}</h2>
+      {%- if subheading != blank -%}<p class="alta-custom__subheading">{{ subheading | escape }}</p>{%- endif -%}
     </header>
 
-    {%- assign hero_alt = section.settings.hero_image.alt | default: section.settings.heading -%}
+    {%- assign hero_alt = section.settings.hero_image.alt | default: heading -%}
     <div class="alta-adjustable__hero">
       {%- if section.settings.hero_image != blank -%}
         {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1500, 1800', sizes: '(min-width: 1440px) 1360px, (min-width: 750px) calc(100vw - 80px), calc(100vw - 30px)', alt: hero_alt }}
@@ -66,7 +79,21 @@
     {%- if section.blocks.size > 0 -%}
       <div class="alta-custom__cards">
         {%- for block in section.blocks -%}
-          {%- assign image_alt = block.settings.image.alt | default: block.settings.title -%}
+          {%- liquid
+            assign block_title = block.settings.title
+            assign block_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture title_key
+                echo 'altaeron_pdp_reels_v3.adjustable.benefit_' | append: forloop.index | append: '_title'
+              endcapture
+              capture body_key
+                echo 'altaeron_pdp_reels_v3.adjustable.benefit_' | append: forloop.index | append: '_body'
+              endcapture
+              assign block_title = title_key | t
+              assign block_body = body_key | t
+            endunless
+            assign image_alt = block.settings.image.alt | default: block_title
+          -%}
           <article class="alta-custom-card" {{ block.shopify_attributes }}>
             <div class="alta-custom-card__media">
               {%- if block.settings.image != blank -%}
@@ -75,16 +102,16 @@
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
             </div>
-            <div class="alta-custom-card__copy"><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.body | escape }}</p></div>
+            <div class="alta-custom-card__copy"><h3>{{ block_title | escape }}</h3><p>{{ block_body | escape }}</p></div>
           </article>
         {%- endfor -%}
       </div>
     {%- endif -%}
 
-    {%- if section.settings.reassurance != blank -%}
+    {%- if reassurance != blank -%}
       <p class="alta-custom__reassurance">
         <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor"><path d="M16 27.3 5.1 16.8C-1 10.8 2.7 3.8 9 3.8c3.2 0 5.3 1.8 7 4.1 1.7-2.3 3.8-4.1 7-4.1 6.3 0 10 7 3.9 13L16 27.3Z"/></svg>
-        <span>{{ section.settings.reassurance | escape }}</span>
+        <span>{{ reassurance | escape }}</span>
       </p>
     {%- endif -%}
   </div>
