@@ -1,0 +1,137 @@
+<style>
+  #AltaeronMuscle-{{ section.id }} {
+    --alta-muscle-ink: var(--altaeron-navy, #102a43);
+    --alta-muscle-body: var(--altaeron-body, #344054);
+    --alta-muscle-accent: var(--altaeron-primary, #006b5e);
+    --alta-muscle-soft: var(--altaeron-soft-teal, #eaf5f2);
+    --alta-muscle-line: var(--altaeron-border, #e4e7ec);
+    background: #fff;
+    color: var(--alta-muscle-body);
+    padding: 36px 0 72px;
+  }
+  #AltaeronMuscle-{{ section.id }} * { box-sizing: border-box; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__shell { margin-inline: auto; width: min(1360px, calc(100% - 80px)); }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__header { margin-bottom: 24px; max-width: 1080px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__eyebrow { align-items: center; color: var(--alta-muscle-accent); display: flex; font-size: 12px; font-weight: 750; gap: 12px; letter-spacing: .24em; line-height: 1.3; margin: 0 0 10px; text-transform: uppercase; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__heading { color: var(--alta-muscle-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(30px, 3vw, 46px); font-weight: 750; letter-spacing: -.035em; line-height: 1.08; margin: 0; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__subheading { color: var(--alta-muscle-body); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; margin: 10px 0 0; max-width: 1000px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy { min-height: 560px; position: relative; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { background: #f3f5f4; border: 1px solid var(--alta-muscle-line); border-radius: 18px; height: 560px; margin-inline: auto; overflow: hidden; width: min(100%, 960px); }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media :is(img, svg),
+  #AltaeronMuscle-{{ section.id }} .alta-muscle-card__media :is(img, svg) { display: block; height: 100%; object-fit: cover; width: 100%; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__cards { display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 20px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle-card { background: #fff; border: 1px solid var(--alta-muscle-line); border-radius: 15px; min-width: 0; overflow: hidden; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle-card__media { aspect-ratio: 16 / 8.4; background: #eef2f3; overflow: hidden; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle-card__copy { padding: 18px 20px 22px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle-card h3 { color: var(--alta-muscle-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: 19px; font-weight: 750; letter-spacing: -.02em; line-height: 1.25; margin: 0 0 5px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle-card p { color: var(--alta-muscle-body); font-size: 15px; line-height: 1.45; margin: 0; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__reassurance { align-items: center; background: linear-gradient(90deg, #edf8f7, #e4f4f2, #edf8f7); border-radius: 13px; color: #0b6270; display: flex; font-size: 18px; font-weight: 700; gap: 16px; justify-content: center; line-height: 1.4; margin: 20px 0 0; min-height: 68px; padding: 14px 22px; text-align: center; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__reassurance svg { flex: 0 0 30px; height: 30px; stroke-width: 1.8; width: 30px; }
+  @media (max-width: 989px) {
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy { min-height: 480px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { height: 480px; width: 76%; }
+  }
+  @media (max-width: 749px) {
+    #AltaeronMuscle-{{ section.id }} { padding: 24px 0 48px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__shell { width: calc(100% - 30px); }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__header { margin-bottom: 18px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__eyebrow { font-size: 10px; gap: 9px; letter-spacing: .2em; margin-bottom: 8px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__eyebrow::before { flex-basis: 28px; height: 2px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__heading { font-size: 29px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__subheading { font-size: 15px; line-height: 1.45; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy { min-height: 0; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { aspect-ratio: 4 / 5; border-radius: 13px; height: auto; width: 100%; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__cards { gap: 12px; grid-template-columns: 1fr; margin-top: 14px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle-card { border-radius: 12px; display: grid; grid-template-columns: minmax(120px, 42%) 1fr; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle-card__media { aspect-ratio: auto; min-height: 132px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle-card__copy { align-self: center; padding: 16px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle-card h3 { font-size: 16px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle-card p { font-size: 13px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__reassurance { font-size: 14px; gap: 10px; margin-top: 14px; min-height: 58px; padding: 12px 14px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__reassurance svg { flex-basis: 25px; height: 25px; width: 25px; }
+  }
+</style>
+
+<section id="AltaeronMuscle-{{ section.id }}" class="alta-muscle-support" aria-labelledby="AltaeronMuscleHeading-{{ section.id }}">
+  <div class="alta-muscle__shell">
+    <header class="alta-muscle__header">
+      {%- if section.settings.eyebrow != blank -%}<p class="alta-muscle__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AltaeronMuscleHeading-{{ section.id }}" class="alta-muscle__heading">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.subheading != blank -%}<p class="alta-muscle__subheading">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+    </header>
+
+    {%- assign anatomy_alt = section.settings.anatomy_image.alt | default: section.settings.heading -%}
+    <div class="alta-muscle__anatomy">
+      <div class="alta-muscle__anatomy-media">
+        {%- if section.settings.anatomy_image != blank -%}
+          {{ section.settings.anatomy_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1500, 1800', sizes: '(min-width: 990px) 960px, (min-width: 750px) 76vw, calc(100vw - 30px)', alt: anatomy_alt }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="alta-muscle__cards">
+        {%- for block in section.blocks -%}
+          {%- assign card_alt = block.settings.image.alt | default: block.settings.title -%}
+          <article class="alta-muscle-card" {{ block.shopify_attributes }}>
+            <div class="alta-muscle-card__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240, 360, 520, 700, 900', sizes: '(min-width: 750px) 32vw, 42vw', alt: card_alt }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="alta-muscle-card__copy"><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.body | escape }}</p></div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.reassurance != blank -%}
+      <p class="alta-muscle__reassurance">
+        <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor"><path d="M26.5 4.5C16 5.4 8.2 10.8 7.2 19.2c-.5 4.2 2.4 7.5 6.6 7 8.4-1 12.9-9.8 12.7-21.7Z"/><path d="M5.5 28.5c3.8-7.4 8.6-12.2 15.2-16.1"/></svg>
+        <span>{{ section.settings.reassurance | escape }}</span>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron: Muscle Support",
+  "tag": "section",
+  "class": "section-altaeron-custom",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MUSCLE SUPPORT / ANATOMY" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Better alignment supports more balanced toe function." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Supporting the big toe in a more natural position can encourage more balanced muscle engagement over time." },
+    { "type": "image_picker", "id": "anatomy_image", "label": "Main anatomy image" },
+    { "type": "text", "id": "reassurance", "label": "Reassurance", "default": "Better positioning. More balanced support." }
+  ],
+  "blocks": [
+    {
+      "type": "support_card",
+      "name": "Supporting card",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Support benefit" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Short supporting explanation." }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [{
+    "name": "Altaeron: Muscle Support",
+    "blocks": [
+      { "type": "support_card", "settings": { "title": "Balanced Position", "body": "Supports a more natural alignment." } },
+      { "type": "support_card", "settings": { "title": "Repeated Support", "body": "Regular sessions support better positioning." } },
+      { "type": "support_card", "settings": { "title": "Beyond Cushioning", "body": "Designed to support position, not just cushion." } }
+    ]
+  }]
+}
+{% endschema %}

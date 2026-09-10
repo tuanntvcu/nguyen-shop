@@ -447,6 +447,9 @@
   }
 
   function initVariants(root, activateMedia) {
+    const externalFinal = root.classList.contains('altaeron-pdp--reels-v3')
+      ? document.querySelector('[data-apdp-v3-final]')
+      : null;
     const form = root.querySelector('.apdp-form');
     const idInput = root.querySelector('[data-apdp-variant-id]');
     const select = root.querySelector('[data-apdp-variant-select]');
@@ -459,17 +462,17 @@
     const submitLabel = root.querySelector('[data-apdp-submit-label]');
     const ctaPrice = root.querySelector('[data-apdp-cta-price]');
     const stickySubmit = root.querySelector('[data-apdp-sticky-submit]');
-    const finalSubmit = root.querySelector('[data-apdp-final-submit]');
+    const finalSubmit = root.querySelector('[data-apdp-final-submit]') || externalFinal?.querySelector('[data-apdp-final-submit]');
     const stickyText = root.querySelector('[data-apdp-sticky-text]');
     const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
     const stickyCompare = root.querySelector('[data-apdp-sticky-compare]');
     const stickySavings = root.querySelector('[data-apdp-sticky-savings]');
     const stickyBundleTitle = root.querySelector('[data-apdp-sticky-bundle-title]');
-    const installmentTerms = [...root.querySelectorAll('[data-apdp-installments]')];
-    const finalPrice = root.querySelector('[data-apdp-final-price]');
-    const finalButtonPrice = root.querySelector('[data-apdp-final-button-price]');
-    const finalCompare = root.querySelector('[data-apdp-final-compare]');
-    const finalSavings = root.querySelector('[data-apdp-final-savings]');
+    const installmentTerms = [...root.querySelectorAll('[data-apdp-installments]'), ...(externalFinal ? externalFinal.querySelectorAll('[data-apdp-installments]') : [])];
+    const finalPrice = root.querySelector('[data-apdp-final-price]') || externalFinal?.querySelector('[data-apdp-final-price]');
+    const finalButtonPrice = root.querySelector('[data-apdp-final-button-price]') || externalFinal?.querySelector('[data-apdp-final-button-price]');
+    const finalCompare = root.querySelector('[data-apdp-final-compare]') || externalFinal?.querySelector('[data-apdp-final-compare]');
+    const finalSavings = root.querySelector('[data-apdp-final-savings]') || externalFinal?.querySelector('[data-apdp-final-savings]');
     const variantsNode = root.querySelector('[data-apdp-product-json]');
     const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
     const format = root.dataset.moneyFormat;
@@ -492,7 +495,10 @@
       const hasSavings = compare > price;
       const saved = Math.max(compare - price, 0);
       if (finalPrice) finalPrice.textContent = money(price, format);
-      if (finalButtonPrice) finalButtonPrice.textContent = ` — ${money(price, format)}`;
+      if (finalButtonPrice) {
+        const priceSeparator = finalButtonPrice.hasAttribute('data-apdp-no-separator') ? ' ' : ' — ';
+        finalButtonPrice.textContent = `${priceSeparator}${money(price, format)}`;
+      }
       if (finalCompare) {
         finalCompare.hidden = !hasSavings;
         if (hasSavings) finalCompare.textContent = money(compare, format);
@@ -748,13 +754,16 @@
   }
 
   function initSticky(root) {
+    const externalFinal = root.classList.contains('altaeron-pdp--reels-v3')
+      ? document.querySelector('[data-apdp-v3-final]')
+      : null;
     const sticky = root.querySelector('[data-apdp-sticky]');
     const purchaseButton = root.querySelector('[data-apdp-submit]');
     const primaryPurchase = root.querySelector('[data-apdp-primary-purchase]');
     const stickyButton = root.querySelector('[data-apdp-sticky-submit]');
-    const finalButton = root.querySelector('[data-apdp-final-submit]');
+    const finalButton = root.querySelector('[data-apdp-final-submit]') || externalFinal?.querySelector('[data-apdp-final-submit]');
     const form = root.querySelector('.apdp-form');
-    const finalCta = root.querySelector('.apdp-final-cta, .apdp-dialfit-bottom');
+    const finalCta = root.querySelector('.apdp-final-cta, .apdp-dialfit-bottom') || externalFinal?.querySelector('.apdp-final-cta');
     if (!sticky || !purchaseButton || !stickyButton || !form) return;
 
     const mobile = window.matchMedia('(max-width: 749px)');

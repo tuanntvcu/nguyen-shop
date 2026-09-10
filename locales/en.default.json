@@ -1461,6 +1461,26 @@
       "fine_print": "Try it for up to 30 days. Contact support if it is not right for you."
     }
   },
+  "altaeron_pdp_reels_v3": {
+    "faq": {
+      "title": "Still deciding?",
+      "subtitle": "Here’s what to know before your first wear.",
+      "question_1": "Is it suitable for men and women?",
+      "answer_1": "Yes. Altaeron is designed as a unisex corrector for adult feet.",
+      "question_2": "Will it fit either foot?",
+      "answer_2": "Yes. One design can be used on the left or right foot.",
+      "question_3": "How much should I adjust it?",
+      "answer_3": "Start gently. Increase support only until you reach a level that feels controlled and comfortable.",
+      "question_4": "How long should I wear it at first?",
+      "answer_4": "Begin with shorter seated sessions and gradually increase wear time as your foot becomes comfortable.",
+      "question_5": "Can I walk in it?",
+      "answer_5": "Altaeron can be worn for light walking around the home, but is designed primarily for comfortable use while seated, resting, or relaxing.",
+      "question_6": "How quickly should I expect changes?",
+      "answer_6": "Every foot is different. Focus first on comfortable support and consistent use rather than forcing correction.",
+      "question_7": "Can I use it permanently to straighten my toe?",
+      "answer_7": "Altaeron is designed to support alignment, relieve crowding and encourage better positioning through regular use. Individual results can vary depending on your foot and bunion severity."
+    }
+  },
   "altaeron_pdp_dialfit": {
     "common": { "save": "Save", "save_amount": "Save {{ amount }}" },
     "accessibility": { "product_media": "Altaeron DialFit product media", "open_image": "Open product image {{ index }}", "return_demo": "Return to DialFit demonstration video", "back_demo": "Back to demo", "purchase": "Purchase {{ product }}", "product_in_use": "DialFit product in use", "publications": "Publications", "final_purchase": "Final DialFit purchase call to action", "payment_methods": "Accepted payment methods" },
