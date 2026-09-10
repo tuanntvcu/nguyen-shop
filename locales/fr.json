@@ -1014,7 +1014,8 @@
       "best_value": "Meilleur rapport qualité-prix",
       "bundle_subtitle": "Seulement [price] l’unité · Économisez [percent] %",
       "rating": "{{ rating }}/5 · {{ count }} avis",
-      "rating_parenthetical": "{{ rating }}/5 ({{ count }} avis)"
+      "rating_parenthetical": "{{ rating }}/5 ({{ count }} avis)",
+      "atf_rating": "{{ rating }} · {{ count }} avis"
     },
     "accessibility": {
       "product_media": "Médias du produit",
@@ -1046,7 +1047,16 @@
       "benefit_1": "Évitez la chirurgie et soulagez rapidement la douleur",
       "benefit_2": "Convient à toutes les pointures – pour le pied gauche ou droit",
       "benefit_3": "Renforce les muscles pour réaligner votre orteil",
-      "benefit_4": "Efficacité prouvée auprès de plus de 10 000 clients"
+      "benefit_4": "Efficacité prouvée auprès de plus de 10 000 clients",
+      "atf_product_name": "Altaeron™ Correcteur d’hallux valgus réglable",
+      "atf_headline": "Un soutien doux pour un meilleur alignement du gros orteil.",
+      "atf_explanation": "Aide à guider le gros orteil vers une position plus naturelle tout en réduisant la pression et la compression autour de l’hallux valgus.",
+      "atf_benefit_1": "Soutien réglable",
+      "atf_benefit_1_note": "Réglez le niveau qui convient à votre pied.",
+      "atf_benefit_2": "Unisexe · Pied gauche ou droit",
+      "atf_benefit_2_note": "Conçu pour les femmes et les hommes, pour le pied gauche ou droit.",
+      "atf_benefit_3": "Retours faciles sous 30 jours",
+      "atf_benefit_3_note": "Essayez-le chez vous en toute sérénité."
     },
     "story": {
       "title_html": "Vous n’êtes plus qu’à un pas de <strong>vous LIBÉRER de l’inconfort lié à l’hallux valgus</strong>, des orteils gonflés et des douleurs aux pieds...",
@@ -1074,7 +1084,13 @@
       "support": "Assistance humaine",
       "support_note": "De l’aide avant ou après votre commande.",
       "review_body": "Mon podologue m’avait dit qu’une opération était nécessaire pour corriger mes hallux valgus douloureux. À la place, j’ai commandé le Bunion Fix d’Alateron. Après un mois d’utilisation, la douleur a nettement diminué et mon orteil a commencé à revenir vers sa position naturelle ! Cela a fait une grande différence.",
-      "verified_review": "Avis vérifié"
+      "verified_review": "Avis vérifié",
+      "atf_cta": "COMMANDEZ MAINTENANT →",
+      "reassurance": "Paiement sécurisé · Livraison suivie · Retours faciles sous 30 jours",
+      "more_payment_options": "Plus d’options de paiement",
+      "tracked_shipping": "Livraison suivie",
+      "returns_30": "Retours sous 30 jours",
+      "responsive_support": "Assistance réactive"
     },
     "support": {
       "title": "Comment ça marche",

@@ -1012,7 +1012,8 @@
       "best_value": "Mejor relación calidad-precio",
       "bundle_subtitle": "Solo [price] cada uno · Ahorra un [percent] %",
       "rating": "{{ rating }}/5 · {{ count }} reseñas",
-      "rating_parenthetical": "{{ rating }}/5 ({{ count }} reseñas)"
+      "rating_parenthetical": "{{ rating }}/5 ({{ count }} reseñas)",
+      "atf_rating": "{{ rating }} · {{ count }} reseñas"
     },
     "accessibility": {
       "product_media": "Contenido multimedia del producto",
@@ -1044,7 +1045,16 @@
       "benefit_1": "Evita la cirugía y alivia el dolor rápidamente",
       "benefit_2": "Se adapta a todos los pies – úsalo en cualquiera de los dos",
       "benefit_3": "Fortalece los músculos para realinear el dedo",
-      "benefit_4": "Eficacia comprobada en más de 10 000 clientes"
+      "benefit_4": "Eficacia comprobada en más de 10 000 clientes",
+      "atf_product_name": "Altaeron™ Corrector ajustable para juanetes",
+      "atf_headline": "Soporte suave para mejorar la alineación del dedo gordo.",
+      "atf_explanation": "Ayuda a guiar el dedo gordo hacia una posición más natural mientras reduce la presión y la compresión alrededor del juanete.",
+      "atf_benefit_1": "Soporte ajustable",
+      "atf_benefit_1_note": "Ajusta el nivel que resulte adecuado para tu pie.",
+      "atf_benefit_2": "Unisex · Pie izquierdo o derecho",
+      "atf_benefit_2_note": "Diseñado para hombres y mujeres, para el pie izquierdo o derecho.",
+      "atf_benefit_3": "Devoluciones fáciles durante 30 días",
+      "atf_benefit_3_note": "Pruébalo en casa con menos riesgo."
     },
     "story": {
       "title_html": "Estás a un solo paso de <strong>LIBERARTE de las molestias de los juanetes</strong>, los dedos hinchados y el dolor de pies...",
@@ -1072,7 +1082,13 @@
       "support": "Asistencia personal",
       "support_note": "Ayuda antes o después de tu pedido.",
       "review_body": "Mi podólogo me dijo que necesitaba cirugía para corregir mis dolorosos juanetes. En su lugar, pedí Bunion Fix de Alateron y, después de usarlo durante un mes, el dolor del juanete se redujo considerablemente y el dedo empezó a volver a su posición natural. ¡Ha supuesto una gran diferencia!",
-      "verified_review": "Reseña verificada"
+      "verified_review": "Reseña verificada",
+      "atf_cta": "CONSIGUE EL TUYO AHORA →",
+      "reassurance": "Pago seguro · Envío con seguimiento · Devoluciones fáciles durante 30 días",
+      "more_payment_options": "Más opciones de pago",
+      "tracked_shipping": "Envío con seguimiento",
+      "returns_30": "Devoluciones durante 30 días",
+      "responsive_support": "Atención rápida"
     },
     "support": {
       "title": "Cómo funciona",

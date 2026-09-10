@@ -1014,7 +1014,8 @@
       "best_value": "Bestes Preis-Leistungs-Verhältnis",
       "bundle_subtitle": "Nur [price] pro Stück · [percent] % sparen",
       "rating": "{{ rating }}/5 · {{ count }} Bewertungen",
-      "rating_parenthetical": "{{ rating }}/5 ({{ count }} Bewertungen)"
+      "rating_parenthetical": "{{ rating }}/5 ({{ count }} Bewertungen)",
+      "atf_rating": "{{ rating }} · {{ count }} Bewertungen"
     },
     "accessibility": {
       "product_media": "Produktmedien",
@@ -1046,7 +1047,16 @@
       "benefit_1": "Operation vermeiden und Schmerzen schnell lindern",
       "benefit_2": "Für alle Fußgrößen – links oder rechts tragbar",
       "benefit_3": "Stärkt die Muskeln zur Neuausrichtung des Zehs",
-      "benefit_4": "Bei über 10.000 Kunden bewährt"
+      "benefit_4": "Bei über 10.000 Kunden bewährt",
+      "atf_product_name": "Altaeron™ Verstellbarer Hallux-valgus-Korrektor",
+      "atf_headline": "Sanfte Unterstützung für eine bessere Ausrichtung des großen Zehs.",
+      "atf_explanation": "Hilft, den großen Zeh in eine natürlichere Position zu führen und gleichzeitig Druck und Enge rund um den Ballen zu lindern.",
+      "atf_benefit_1": "Verstellbare Unterstützung",
+      "atf_benefit_1_note": "Stellen Sie die Stärke so ein, wie sie sich für Ihren Fuß richtig anfühlt.",
+      "atf_benefit_2": "Unisex · Links oder rechts",
+      "atf_benefit_2_note": "Für Damen und Herren, am linken oder rechten Fuß.",
+      "atf_benefit_3": "30 Tage einfache Rückgabe",
+      "atf_benefit_3_note": "Testen Sie ihn zu Hause mit weniger Risiko."
     },
     "story": {
       "title_html": "Sie sind nur noch einen Schritt davon entfernt, <strong>Hallux-valgus-Beschwerden, geschwollene Zehen und Fußschmerzen LOSZUWERDEN</strong>...",
@@ -1074,7 +1084,13 @@
       "support": "Persönlicher Support",
       "support_note": "Hilfe vor und nach der Bestellung.",
       "review_body": "Mein Podologe sagte mir, dass ich meine schmerzhaften Ballenzehen operieren lassen müsse. Stattdessen bestellte ich den Bunion Fix von Alateron. Nach einem Monat waren die Schmerzen deutlich geringer und mein Zeh begann, sich wieder in seine natürliche Position zu bewegen. Das hat einen großen Unterschied gemacht!",
-      "verified_review": "Verifizierte Bewertung"
+      "verified_review": "Verifizierte Bewertung",
+      "atf_cta": "JETZT SICHERN →",
+      "reassurance": "Sicherer Checkout · Versand mit Sendungsverfolgung · 30 Tage einfache Rückgabe",
+      "more_payment_options": "Weitere Zahlungsoptionen",
+      "tracked_shipping": "Versand mit Sendungsverfolgung",
+      "returns_30": "30 Tage Rückgabe",
+      "responsive_support": "Schneller Support"
     },
     "support": {
       "title": "So funktioniert es",

@@ -693,7 +693,8 @@
       "best_value": "Melhor custo-benefício",
       "bundle_subtitle": "Apenas [price] cada · Economize [percent]%",
       "rating": "{{ rating }}/5 · {{ count }} avaliações",
-      "rating_parenthetical": "{{ rating }}/5 ({{ count }} avaliações)"
+      "rating_parenthetical": "{{ rating }}/5 ({{ count }} avaliações)",
+      "atf_rating": "{{ rating }} · {{ count }} avaliações"
     },
     "accessibility": {
       "product_media": "Mídia do produto",
@@ -725,7 +726,16 @@
       "benefit_1": "Evite a cirurgia e alivie a dor rapidamente",
       "benefit_2": "Serve em todos os tamanhos – use em qualquer pé",
       "benefit_3": "Fortalece os músculos para realinhar o dedo",
-      "benefit_4": "Eficácia comprovada por mais de 10.000 clientes"
+      "benefit_4": "Eficácia comprovada por mais de 10.000 clientes",
+      "atf_product_name": "Altaeron™ Corretor ajustável para joanetes",
+      "atf_headline": "Suporte suave para melhorar o alinhamento do dedão do pé.",
+      "atf_explanation": "Ajuda a guiar o dedão para uma posição mais natural, aliviando a pressão e o aperto ao redor do joanete.",
+      "atf_benefit_1": "Suporte ajustável",
+      "atf_benefit_1_note": "Defina o nível mais confortável para o seu pé.",
+      "atf_benefit_2": "Unissex · Pé esquerdo ou direito",
+      "atf_benefit_2_note": "Desenvolvido para homens e mulheres, para o pé esquerdo ou direito.",
+      "atf_benefit_3": "Devoluções fáceis em até 30 dias",
+      "atf_benefit_3_note": "Experimente em casa com menos risco."
     },
     "story": {
       "title_html": "Você está a apenas um passo de <strong>se LIVRAR do desconforto dos joanetes</strong>, dos dedos inchados e das dores nos pés...",
@@ -753,7 +763,13 @@
       "support": "Suporte humano",
       "support_note": "Ajuda antes ou depois do pedido.",
       "review_body": "Meu podólogo disse que eu precisaria de cirurgia para corrigir meus joanetes doloridos. Em vez disso, pedi o Bunion Fix da Alateron e, depois de um mês de uso, a dor diminuiu bastante e meu dedo começou a voltar à posição natural. Fez uma grande diferença!",
-      "verified_review": "Avaliação verificada"
+      "verified_review": "Avaliação verificada",
+      "atf_cta": "GARANTA O SEU AGORA →",
+      "reassurance": "Pagamento seguro · Envio com rastreamento · Devoluções fáceis em até 30 dias",
+      "more_payment_options": "Mais opções de pagamento",
+      "tracked_shipping": "Envio com rastreamento",
+      "returns_30": "Devoluções em até 30 dias",
+      "responsive_support": "Suporte ágil"
     },
     "support": {
       "title": "Como funciona",

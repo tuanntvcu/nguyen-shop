@@ -1305,7 +1305,8 @@
       "best_value": "Best Value",
       "bundle_subtitle": "Only [price] each · Save [percent]%",
       "rating": "{{ rating }}/5 · {{ count }} reviews",
-      "rating_parenthetical": "{{ rating }}/5 ({{ count }} reviews)"
+      "rating_parenthetical": "{{ rating }}/5 ({{ count }} reviews)",
+      "atf_rating": "{{ rating }} · {{ count }} Reviews"
     },
     "accessibility": {
       "product_media": "Product media",
@@ -1337,7 +1338,16 @@
       "benefit_1": "Avoid Surgery & Relieve Pain Fast",
       "benefit_2": "Fits All Foot Sizes – Use on Either Foot",
       "benefit_3": "Strengthens Muscles to Realign Your Toe",
-      "benefit_4": "Proven Effective on 10,000+ Customers"
+      "benefit_4": "Proven Effective on 10,000+ Customers",
+      "atf_product_name": "Altaeron™ Adjustable Bunion Corrector",
+      "atf_headline": "Gentle support for better big-toe alignment.",
+      "atf_explanation": "Helps guide the big toe toward a more natural position while easing pressure and crowding around the bunion.",
+      "atf_benefit_1": "Adjustable Support",
+      "atf_benefit_1_note": "Set the level that feels right for your foot.",
+      "atf_benefit_2": "Unisex · Either Foot",
+      "atf_benefit_2_note": "Designed for men and women, left or right foot.",
+      "atf_benefit_3": "30-Day Easy Returns",
+      "atf_benefit_3_note": "Try it at home with less risk."
     },
     "story": {
       "title_html": "You Are Just One Foot Away From <strong>Being FREE of Bunion Discomfort</strong>, Swollen Toes, or Foot Aches...",
@@ -1365,7 +1375,13 @@
       "support": "Real Support",
       "support_note": "Help before or after ordering.",
       "review_body": "I was told by my podiatrist that I needed surgery to fix my painful bunions. Instead I ordered the Bunion Fix from Alateron and after using it for a month my bunion pain has reduced significantly and my toe has started moving back to its natural position! It has made a big difference.",
-      "verified_review": "Verified Review"
+      "verified_review": "Verified Review",
+      "atf_cta": "GET YOURS NOW →",
+      "reassurance": "Secure checkout · Tracked shipping · 30-day easy returns",
+      "more_payment_options": "More payment options",
+      "tracked_shipping": "Tracked Shipping",
+      "returns_30": "30-Day Returns",
+      "responsive_support": "Responsive Support"
     },
     "support": {
       "title": "How It Works",
