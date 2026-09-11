@@ -87,6 +87,9 @@
     #AltaeronBunion-{{ section.id }} .alta-custom__reassurance { font-size: 14px; gap: 10px; margin-top: 14px; min-height: 58px; padding: 12px 14px; }
     #AltaeronBunion-{{ section.id }} .alta-custom__reassurance svg { flex-basis: 24px; height: 24px; width: 24px; }
   }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'altaeron-reels-v3-responsive-section', section_kind: 'bunion', section_id: section.id %}
+  {%- endif -%}
 </style>
 
 <section id="AltaeronBunion-{{ section.id }}" class="alta-custom alta-bunion" aria-labelledby="AltaeronBunionHeading-{{ section.id }}">

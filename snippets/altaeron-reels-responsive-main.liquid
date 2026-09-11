@@ -1,0 +1,127 @@
+{%- comment -%}
+  Tablet and desktop layout overrides for the Reel V2/V3 product templates.
+  This snippet is rendered only by those templates and every rule is additionally
+  guarded by the real template-suffix body class. Mobile intentionally has no rules.
+{%- endcomment -%}
+{%- assign reel_root = 'body.' | append: template_class | append: ' #AltaeronPdp-' | append: section_id -%}
+
+@media (min-width: 768px) {
+  {{ reel_root }} .apdp-shell { width: min(1040px, calc(100% - 48px)); }
+  {{ reel_root }} .apdp-reels-full,
+  {{ reel_root }} .apdp-review-summary { width: min(1180px, calc(100% - 48px)); }
+  {{ reel_root }} .apdp-reels-section { padding-top: 48px; }
+  {{ reel_root }} :where(img, video) { display: block; max-width: 100%; }
+  {{ reel_root }} :where(.apdp-narrative, .apdp-buy, .apdp-support__info, .apdp-tail-card, .apdp-gallery-story__copy) { min-width: 0; }
+  {{ reel_root }} :where(.apdp-narrative, .apdp-buy, .apdp-support__media, .apdp-day__media, .apdp-expert__panel) { height: auto; min-height: 0; }
+  {{ reel_root }} :where(.apdp-narrative h1, .alta-pdp-section-heading__title) { overflow-wrap: anywhere; }
+  {{ reel_root }} .alta-pdp-section-heading { max-width: 760px; }
+  {{ reel_root }} .alta-pdp-section-heading__title { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+  {{ reel_root }} .alta-pdp-section-heading__subtitle { max-width: 700px; }
+
+  {{ reel_root }} .apdp-hero { padding-block: 28px 16px; }
+  {{ reel_root }} .apdp-hero__grid { gap: 28px; min-height: 0; }
+  {{ reel_root }} .apdp-gallery { min-width: 0; }
+  {{ reel_root }} :where(.apdp-gallery__stage, .apdp-gallery__viewer) { aspect-ratio: 4 / 3; height: auto; max-height: 620px; min-height: 0; width: 100%; }
+  {{ reel_root }} :where(.apdp-gallery__hero > img, .apdp-gallery__hero > video, .apdp-gallery__item img, .apdp-gallery__item video) { object-fit: contain; }
+  {{ reel_root }} .apdp-gallery__thumbs { max-height: none; }
+  {{ reel_root }} .apdp-narrative { overflow: visible; }
+  {{ reel_root }} .apdp-narrative h1 { font-size: clamp(30px, 4vw, 42px); line-height: 1.1; max-width: 680px; }
+  {{ reel_root }} .apdp-narrative__explanation { font-size: 16px; line-height: 1.6; max-width: 680px; }
+  {{ reel_root }} .apdp-buy { padding: clamp(22px, 3vw, 30px); }
+
+  {{ reel_root }} .apdp-support-grid { gap: 28px; grid-template-columns: 1fr; }
+  {{ reel_root }} .apdp-support__features { gap: 12px; }
+  {{ reel_root }} .apdp-support__features article,
+  {{ reel_root }} .apdp-support__features article + article { margin-left: 0; }
+  {{ reel_root }} .apdp-support__media--portrait { height: auto; max-width: 420px; }
+  {{ reel_root }} .apdp-support__media--portrait .apdp-support__video { aspect-ratio: 9 / 16; }
+  {{ reel_root }} .apdp-support__media--portrait video { height: 100%; object-fit: contain; }
+
+  {{ reel_root }} :where(.apdp-tail-panel, .apdp-spacer, .apdp-education--day .apdp-shell, .apdp-expert .apdp-shell, .apdp-tail-faq) { max-width: 1040px; }
+  {{ reel_root }} .apdp-can-cant__grid { gap: 16px; }
+  {{ reel_root }} .apdp-can-cant__grid > div { height: auto; min-height: 0; }
+  {{ reel_root }} .apdp-spacer-product,
+  {{ reel_root }} .apdp-doctor-note { height: auto; min-height: 0; }
+  {{ reel_root }} .apdp-spacer-product .apdp-tail-media :where(img, svg) { height: auto; max-height: 220px; object-fit: contain; }
+  {{ reel_root }} .apdp-day__visual :where(video, img, svg) { object-fit: contain; }
+  {{ reel_root }} .apdp-day__benefits article { height: auto; min-height: 0; }
+
+  {{ reel_root }} .apdp-expert__panel { grid-template-columns: minmax(160px, .7fr) minmax(0, 1.3fr); overflow: visible; }
+  {{ reel_root }} .apdp-expert__panel > * { height: auto; min-height: 0; }
+  {{ reel_root }} .apdp-expert__portrait { align-self: stretch; }
+  {{ reel_root }} .apdp-expert__profile,
+  {{ reel_root }} .apdp-expert blockquote,
+  {{ reel_root }} .apdp-expert__criteria { padding: 24px; }
+  {{ reel_root }} .apdp-expert__press { grid-column: 1 / -1; height: auto; min-height: 64px; padding: 14px; }
+
+  {{ reel_root }} .apdp-judgeme-widget,
+  {{ reel_root }} .apdp-judgeme-widget #judgeme_product_reviews { max-width: 1180px; width: 100%; }
+  {{ reel_root }} .apdp-judgeme-widget #judgeme_product_reviews :where(.jdgm-rev__body, .jdgm-rev__content) { max-width: 900px; }
+  {{ reel_root }} .apdp-tail-accordion { height: auto; }
+  {{ reel_root }} .apdp-tail-accordion :where(summary, p) { white-space: normal; }
+  {{ reel_root }} .apdp-gallery-story-wrap { padding-block: 48px; }
+  {{ reel_root }} .apdp-gallery-story { height: auto; }
+  {{ reel_root }} .apdp-gallery-story__copy { max-width: 720px; }
+
+  {{ reel_root }} .altaeron-home .ah-popular { padding-block: 48px; }
+  {{ reel_root }} .altaeron-home .ah-shell { max-width: 1040px; width: calc(100% - 48px); }
+  {{ reel_root }} .altaeron-home .ah-products { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; padding-bottom: 0; }
+  {{ reel_root }} .altaeron-home .ah-product { flex: none; min-width: 0; width: auto; }
+  {{ reel_root }} .altaeron-home :where(.ah-slider-arrow, .ah-dots) { display: none; }
+
+  {{ reel_root }} .apdp-final-cta__inner { height: auto; min-height: 0; width: min(1040px, calc(100% - 48px)); }
+  {{ reel_root }} .apdp-final-cta__product { height: auto; min-height: 0; }
+  {{ reel_root }} .apdp-final-cta__product img { height: auto; max-height: 330px; object-fit: contain; }
+  {{ reel_root }} .apdp-final-cta__content,
+  {{ reel_root }} .apdp-final-cta__buy { min-width: 0; }
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  {{ reel_root }} .apdp-shell,
+  {{ reel_root }} .apdp-reels-full,
+  {{ reel_root }} .apdp-review-summary { max-width: 720px; width: calc(100% - 48px); }
+  {{ reel_root }} .apdp-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+  {{ reel_root }} :where(.apdp-gallery, .apdp-narrative, .apdp-buy) { grid-column: 1; grid-row: auto; }
+  {{ reel_root }} .apdp-gallery { margin-inline: auto; max-width: 620px; width: 100%; }
+  {{ reel_root }} .apdp-narrative__benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  {{ reel_root }} .apdp-day__layout { display: grid; gap: 24px; grid-template-columns: 1fr; }
+  {{ reel_root }} .apdp-day__media { margin-inline: auto; max-width: 420px; width: 100%; }
+  {{ reel_root }} .apdp-day__benefits { grid-template-columns: 1fr; margin: 0; }
+  {{ reel_root }} .apdp-day__benefits article,
+  {{ reel_root }} .apdp-day__benefits article + article { border: 1px solid #dfe7e1; border-radius: 12px; padding: 20px; }
+  {{ reel_root }} .apdp-spacer-grid { grid-template-columns: 1fr; }
+  {{ reel_root }} .apdp-versus { margin-inline: auto; }
+  {{ reel_root }} .apdp-final-cta__inner { grid-template-columns: minmax(180px, .75fr) minmax(0, 1.25fr); }
+  {{ reel_root }} .apdp-final-cta__buy { grid-column: 1 / -1; padding: 24px; }
+}
+
+@media (min-width: 900px) {
+  {{ reel_root }} .apdp-hero__grid { align-items: start; column-gap: 36px; grid-template-columns: minmax(0, 1.12fr) minmax(360px, .88fr); row-gap: 24px; }
+  {{ reel_root }} .apdp-gallery { grid-column: 1; grid-row: 1 / span 2; }
+  {{ reel_root }} .apdp-narrative { grid-column: 2; grid-row: 1; }
+  {{ reel_root }} .apdp-buy { grid-column: 2; grid-row: 2; }
+  {{ reel_root }} .apdp-day__layout { align-items: start; gap: 32px; grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); }
+  {{ reel_root }} .apdp-day__media { max-width: 380px; }
+  {{ reel_root }} .apdp-day__benefits { grid-template-columns: 1fr; margin: 0; }
+  {{ reel_root }} .altaeron-home .ah-products { grid-template-columns: repeat(3, minmax(0, 280px)); justify-content: center; }
+}
+
+@media (min-width: 1200px) {
+  {{ reel_root }} .apdp-shell { width: min(1040px, calc(100% - 64px)); }
+  {{ reel_root }} .apdp-hero__grid { column-gap: 44px; width: min(1180px, calc(100% - 64px)); }
+  {{ reel_root }} .apdp-reels-full,
+  {{ reel_root }} .apdp-review-summary { width: min(1180px, calc(100% - 64px)); }
+  {{ reel_root }} .apdp-reels-section { padding-top: 64px; }
+  {{ reel_root }} .apdp-expert__panel { grid-template-columns: 18% 24% 31% 27%; }
+  {{ reel_root }} .apdp-expert__profile,
+  {{ reel_root }} .apdp-expert blockquote,
+  {{ reel_root }} .apdp-expert__criteria { padding: 24px 26px; }
+  {{ reel_root }} .apdp-final-cta__inner { grid-template-columns: minmax(190px, 24%) minmax(260px, 34%) minmax(310px, 34%) minmax(88px, 8%); width: min(1180px, calc(100% - 64px)); }
+}
+
+@media (min-width: 1600px) {
+  {{ reel_root }} .apdp-hero__grid,
+  {{ reel_root }} .apdp-reels-full,
+  {{ reel_root }} .apdp-review-summary,
+  {{ reel_root }} .apdp-final-cta__inner { max-width: 1280px; }
+}

@@ -60,6 +60,9 @@
     #AltaeronV3Tail-{{ section.id }} .alta-custom__heading { font-size: 29px; }
     #AltaeronV3Tail-{{ section.id }} .alta-custom__subheading { font-size: 15px; line-height: 1.45; }
   }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'altaeron-reels-v3-responsive-section', section_kind: 'reviews_faq', section_id: section.id %}
+  {%- endif -%}
 </style>
 
 <div id="AltaeronV3Tail-{{ section.id }}" class="altaeron-pdp alta-v3-tail">

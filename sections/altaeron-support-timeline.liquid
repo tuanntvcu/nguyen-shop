@@ -79,6 +79,9 @@
     #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance strong { font-size: 14px; }
     #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance span { font-size: 12px; }
   }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'altaeron-reels-v3-responsive-section', section_kind: 'timeline', section_id: section.id %}
+  {%- endif -%}
 </style>
 
 <section id="AltaeronTimeline-{{ section.id }}" class="alta-support-timeline" aria-labelledby="AltaeronTimelineHeading-{{ section.id }}">

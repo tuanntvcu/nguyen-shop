@@ -73,6 +73,9 @@
     #AltaeronAdjustable-{{ section.id }} .alta-custom__reassurance { font-size: 14px; gap: 10px; margin-top: 14px; min-height: 58px; padding: 12px 14px; }
     #AltaeronAdjustable-{{ section.id }} .alta-custom__reassurance svg { flex-basis: 26px; height: 26px; width: 26px; }
   }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'altaeron-reels-v3-responsive-section', section_kind: 'adjustable', section_id: section.id %}
+  {%- endif -%}
 </style>
 
 <section id="AltaeronAdjustable-{{ section.id }}" class="alta-custom alta-adjustable" aria-labelledby="AltaeronAdjustableHeading-{{ section.id }}">

@@ -1,0 +1,146 @@
+{%- comment -%}Desktop/tablet-only overrides for V3's modular lower-page sections.{%- endcomment -%}
+{%- case section_kind -%}
+  {%- when 'bunion' -%}{%- assign root = 'body.altaeron-reels-v3 #AltaeronBunion-' | append: section_id -%}
+  {%- when 'adjustable' -%}{%- assign root = 'body.altaeron-reels-v3 #AltaeronAdjustable-' | append: section_id -%}
+  {%- when 'muscle' -%}{%- assign root = 'body.altaeron-reels-v3 #AltaeronMuscle-' | append: section_id -%}
+  {%- when 'timeline' -%}{%- assign root = 'body.altaeron-reels-v3 #AltaeronTimeline-' | append: section_id -%}
+  {%- when 'try_home' -%}{%- assign root = 'body.altaeron-reels-v3 #AltaeronTryHome-' | append: section_id -%}
+  {%- when 'reviews_faq' -%}{%- assign root = 'body.altaeron-reels-v3 #AltaeronV3Tail-' | append: section_id -%}
+  {%- when 'final' -%}{%- assign root = 'body.altaeron-reels-v3 #AltaeronV3Final-' | append: section_id -%}
+{%- endcase -%}
+
+@media (min-width: 768px) {
+  {{ root }} :where(img, video) { display: block; max-width: 100%; }
+
+  {%- case section_kind -%}
+    {%- when 'bunion' -%}
+      {{ root }} { padding-block: 48px 24px; }
+      {{ root }} .alta-custom__shell { max-width: 1040px; width: calc(100% - 48px); }
+      {{ root }} .alta-custom__header { max-width: 760px; }
+      {{ root }} .alta-custom__heading { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+      {{ root }} .alta-custom__subheading { font-size: 16px; line-height: 1.6; max-width: 700px; }
+      {{ root }} .alta-bunion__step-copy { height: auto; min-height: 0; }
+      {{ root }} :is(.alta-bunion__step-media, .alta-custom-card__media) :is(img, svg) { object-fit: contain; }
+      {{ root }} .alta-custom__cards { grid-template-columns: repeat(2, minmax(0, 320px)); justify-content: center; }
+    {%- when 'adjustable' -%}
+      {{ root }} { padding-block: 24px 48px; }
+      {{ root }} .alta-custom__shell { max-width: 1040px; width: calc(100% - 48px); }
+      {{ root }} .alta-custom__header { max-width: 760px; }
+      {{ root }} .alta-custom__heading { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+      {{ root }} .alta-custom__subheading { font-size: 16px; line-height: 1.6; max-width: 700px; }
+      {{ root }} .alta-adjustable__hero { margin-inline: auto; max-height: none; max-width: 900px; }
+      {{ root }} .alta-adjustable__hero :is(img, svg) { height: auto; max-height: none; object-fit: contain; }
+      {{ root }} .alta-custom__cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      {{ root }} .alta-custom-card__copy { height: auto; }
+    {%- when 'muscle' -%}
+      {{ root }} { padding-block: 48px; }
+      {{ root }} .alta-muscle__shell { max-width: 1040px; width: calc(100% - 48px); }
+      {{ root }} .alta-muscle__header { max-width: 760px; }
+      {{ root }} .alta-muscle__heading { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+      {{ root }} .alta-muscle__subheading { font-size: 16px; line-height: 1.6; max-width: 700px; }
+      {{ root }} .alta-muscle__anatomy { min-height: 0; }
+      {{ root }} .alta-muscle__anatomy-media { aspect-ratio: auto; height: auto; max-height: none; max-width: 620px; width: 100%; }
+      {{ root }} .alta-muscle__anatomy-media :is(img, svg) { height: auto; object-fit: contain; }
+      {{ root }} .alta-muscle__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-inline: auto; max-width: 780px; }
+      {{ root }} .alta-muscle-card__media :is(img, svg) { object-fit: contain; }
+    {%- when 'timeline' -%}
+      {{ root }} { padding-block: 48px; }
+      {{ root }} .alta-timeline__shell { max-width: 1040px; width: calc(100% - 48px); }
+      {{ root }} .alta-timeline__header { max-width: 760px; }
+      {{ root }} .alta-timeline__heading { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+      {{ root }} .alta-timeline__subheading { font-size: 16px; line-height: 1.6; max-width: 700px; }
+      {{ root }} .alta-timeline__stages { grid-template-columns: 1fr; }
+      {{ root }} .alta-timeline-card__copy { height: auto; min-height: 0; }
+      {{ root }} .alta-timeline-card:not(:last-child)::after { display: none; }
+      {{ root }} .alta-timeline-card__media :is(img, video, svg) { object-fit: contain; }
+    {%- when 'try_home' -%}
+      {{ root }} { padding-block: 48px; }
+      {{ root }} .alta-try__shell { max-width: 1040px; width: calc(100% - 48px); }
+      {{ root }} .alta-try__hero { grid-template-columns: 1fr; }
+      {{ root }} .alta-try__content { padding: 34px; }
+      {{ root }} .alta-try__heading { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+      {{ root }} .alta-try__body { font-size: 16px; line-height: 1.6; }
+      {{ root }} .alta-try__hero-media { aspect-ratio: 16 / 9; height: auto; min-height: 0; }
+      {{ root }} .alta-try__hero-media :is(img, svg) { object-fit: cover; }
+      {{ root }} .alta-try__trust { grid-template-columns: minmax(280px, 520px); justify-content: center; }
+    {%- when 'reviews_faq' -%}
+      {{ root }} .alta-v3-tail__section { padding-block: 48px; }
+      {{ root }} .alta-v3-tail__shell { max-width: 1180px; width: calc(100% - 48px); }
+      {{ root }} .alta-custom__heading { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+      {{ root }} .alta-custom__subheading { font-size: 16px; line-height: 1.6; max-width: 700px; }
+      {{ root }} .alta-v3-tail__section:not(.alta-v3-tail__section--reviews) .alta-v3-tail__shell { display: grid; grid-template-columns: 1fr; }
+      {{ root }} .alta-v3-tail__section:not(.alta-v3-tail__section--reviews) .alta-custom__header { position: static; }
+      {{ root }} .apdp-judgeme-widget #judgeme_product_reviews { max-width: none; width: 100%; }
+      {{ root }} .apdp-judgeme-widget #judgeme_product_reviews :where(.jdgm-rev__body, .jdgm-rev__content) { max-width: 900px; }
+      {{ root }} .apdp-tail-accordion :where(summary, p) { white-space: normal; }
+    {%- when 'final' -%}
+      {{ root }} .apdp-reels-full { max-width: 1040px; width: calc(100% - 48px); }
+      {{ root }} .apdp-gallery-story-wrap { padding-block: 48px; }
+      {{ root }} .apdp-gallery-story { display: grid; gap: 24px; grid-template-columns: 1fr; }
+      {{ root }} .apdp-gallery-story h2 { font-size: clamp(28px, 3vw, 38px); max-width: 720px; position: static; }
+      {{ root }} .apdp-gallery-story__copy { max-width: 720px; }
+      {{ root }} .apdp-final-cta__inner { height: auto; min-height: 0; width: min(1040px, calc(100% - 48px)); }
+      {{ root }} .apdp-final-cta__product { height: auto; min-height: 0; }
+      {{ root }} .apdp-final-cta__product img { height: auto; max-height: 330px; object-fit: contain; }
+      {{ root }} .apdp-final-cta__content,
+      {{ root }} .apdp-final-cta__buy { min-width: 0; }
+      {{ root }} .altaeron-home .ah-popular { padding-block: 48px; }
+      {{ root }} .altaeron-home .ah-shell { max-width: 1040px; width: calc(100% - 48px); }
+      {{ root }} .altaeron-home .ah-products { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; padding-bottom: 0; }
+      {{ root }} .altaeron-home .ah-product { flex: none; min-width: 0; width: auto; }
+      {{ root }} .altaeron-home :where(.ah-slider-arrow, .ah-dots) { display: none; }
+  {%- endcase -%}
+}
+
+@media (min-width: 900px) {
+  {%- case section_kind -%}
+    {%- when 'timeline' -%}
+      {{ root }} .alta-timeline__stages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    {%- when 'try_home' -%}
+      {{ root }} .alta-try__hero { grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); }
+      {{ root }} .alta-try__hero-media { aspect-ratio: auto; height: clamp(340px, 38vw, 410px); }
+    {%- when 'reviews_faq' -%}
+      {{ root }} .alta-v3-tail__section:not(.alta-v3-tail__section--reviews) .alta-v3-tail__shell { gap: 48px; grid-template-columns: minmax(280px, 43fr) minmax(0, 57fr); }
+    {%- when 'final' -%}
+      {{ root }} .apdp-gallery-story { gap: 48px; grid-template-columns: minmax(280px, 42fr) minmax(0, 58fr); }
+      {{ root }} .apdp-final-cta__inner { grid-template-columns: minmax(190px, 25%) minmax(240px, 35%) minmax(300px, 40%); }
+      {{ root }} .altaeron-home .ah-products { grid-template-columns: repeat(3, minmax(0, 280px)); justify-content: center; }
+  {%- endcase -%}
+}
+
+@media (min-width: 1200px) {
+  {%- case section_kind -%}
+    {%- when 'bunion' -%}
+      {{ root }} { padding-block: 64px 32px; }
+      {{ root }} .alta-custom__shell { width: min(1040px, calc(100% - 64px)); }
+    {%- when 'adjustable' -%}
+      {{ root }} { padding-block: 32px 64px; }
+      {{ root }} .alta-custom__shell { width: min(1040px, calc(100% - 64px)); }
+    {%- when 'muscle' -%}
+      {{ root }} { padding-block: 64px; }
+      {{ root }} .alta-muscle__shell { width: min(1040px, calc(100% - 64px)); }
+    {%- when 'timeline' -%}
+      {{ root }} { padding-block: 64px; }
+      {{ root }} .alta-timeline__shell { width: min(1040px, calc(100% - 64px)); }
+    {%- when 'try_home' -%}
+      {{ root }} { padding-block: 64px; }
+      {{ root }} .alta-try__shell { width: min(1040px, calc(100% - 64px)); }
+    {%- when 'reviews_faq' -%}
+      {{ root }} .alta-v3-tail__section { padding-block: 72px; }
+      {{ root }} .alta-v3-tail__shell { width: min(1180px, calc(100% - 64px)); }
+    {%- when 'final' -%}
+      {{ root }} .apdp-reels-full,
+      {{ root }} .apdp-final-cta__inner { width: min(1180px, calc(100% - 64px)); }
+      {{ root }} .apdp-final-cta__inner { grid-template-columns: minmax(190px, 24%) minmax(260px, 34%) minmax(310px, 34%) minmax(88px, 8%); }
+  {%- endcase -%}
+}
+
+@media (min-width: 1600px) {
+  {%- case section_kind -%}
+    {%- when 'reviews_faq' -%}
+      {{ root }} .alta-v3-tail__shell { max-width: 1280px; }
+    {%- when 'final' -%}
+      {{ root }} .apdp-reels-full,
+      {{ root }} .apdp-final-cta__inner { max-width: 1280px; }
+  {%- endcase -%}
+}

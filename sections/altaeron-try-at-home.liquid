@@ -102,6 +102,9 @@
     #AltaeronTryHome-{{ section.id }} .alta-try__banner-copy { padding: 18px 16px; }
     #AltaeronTryHome-{{ section.id }} .alta-try__banner-copy p { font-size: 17px; }
   }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'altaeron-reels-v3-responsive-section', section_kind: 'try_home', section_id: section.id %}
+  {%- endif -%}
 </style>
 
 <section id="AltaeronTryHome-{{ section.id }}" class="altaeron-try-at-home" aria-labelledby="AltaeronTryHomeHeading-{{ section.id }}">

@@ -84,6 +84,9 @@
     #AltaeronMuscle-{{ section.id }} .alta-muscle__reassurance { font-size: 14px; gap: 10px; margin-top: 14px; min-height: 58px; padding: 12px 14px; }
     #AltaeronMuscle-{{ section.id }} .alta-muscle__reassurance svg { flex-basis: 25px; height: 25px; width: 25px; }
   }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'altaeron-reels-v3-responsive-section', section_kind: 'muscle', section_id: section.id %}
+  {%- endif -%}
 </style>
 
 <section id="AltaeronMuscle-{{ section.id }}" class="alta-muscle-support" aria-labelledby="AltaeronMuscleHeading-{{ section.id }}">
