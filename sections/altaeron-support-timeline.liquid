@@ -43,6 +43,20 @@
   #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance svg { grid-row: 1 / 3; height: 34px; stroke-width: 1.7; width: 34px; }
   #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance strong { color: #0b5663; font-size: 18px; line-height: 1.25; }
   #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance span { color: #226375; font-size: 15px; line-height: 1.35; }
+  @media (min-width: 750px) {
+    #AltaeronTimeline-{{ section.id }} { padding: 40px 0 clamp(64px, 6vw, 88px); }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__header { margin-bottom: 32px; max-width: 850px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__subheading { max-width: 780px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__stages { gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline-card { box-shadow: 0 14px 38px rgba(16,42,67,.055); }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline-card:not(:last-child)::after { height: 42px; right: -34px; top: calc(50% - 21px); width: 42px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline-card__copy { align-items: center; display: flex; flex-direction: column; justify-content: center; }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__shell { width: min(1240px, calc(100% - 80px)); }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline-card__media { aspect-ratio: 16 / 10; }
+  }
   @media (max-width: 749px) {
     #AltaeronTimeline-{{ section.id }} { padding: 24px 0 56px; }
     #AltaeronTimeline-{{ section.id }} .alta-timeline__shell { width: calc(100% - 30px); }

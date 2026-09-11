@@ -58,6 +58,22 @@
   #AltaeronTryHome-{{ section.id }} .alta-try__banner { background: linear-gradient(90deg, #edf8f7, #f4f8f5); border: 1px solid rgba(0,107,94,.08); border-radius: 15px; margin-top: 24px; overflow: hidden; }
   #AltaeronTryHome-{{ section.id }} .alta-try__banner-copy { align-items: center; display: flex; justify-content: center; padding: 24px 38px; text-align: center; }
   #AltaeronTryHome-{{ section.id }} .alta-try__banner-copy p { color: var(--alta-try-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(21px, 2.3vw, 31px); font-weight: 700; letter-spacing: -.025em; line-height: 1.22; margin: 0; white-space: pre-line; }
+  @media (min-width: 750px) {
+    #AltaeronTryHome-{{ section.id }} { padding: 40px 0 clamp(72px, 6.5vw, 96px); }
+    #AltaeronTryHome-{{ section.id }} .alta-try__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronTryHome-{{ section.id }} .alta-try__hero { box-shadow: 0 20px 56px rgba(16,42,67,.07); grid-template-columns: minmax(0, 48fr) minmax(0, 52fr); }
+    #AltaeronTryHome-{{ section.id }} .alta-try__content { padding: clamp(34px, 4.2vw, 62px); }
+    #AltaeronTryHome-{{ section.id }} .alta-try__hero-media { min-height: 480px; }
+    #AltaeronTryHome-{{ section.id }} .alta-try__trust { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    #AltaeronTryHome-{{ section.id }} .alta-try__trust:has(> :only-child) { grid-template-columns: minmax(280px, 520px); justify-content: center; }
+    #AltaeronTryHome-{{ section.id }} .alta-try-trust { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+    #AltaeronTryHome-{{ section.id }} .alta-try-trust:hover { border-color: rgba(0,107,94,.3); box-shadow: 0 14px 34px rgba(16,42,67,.08); transform: translateY(-2px); }
+    #AltaeronTryHome-{{ section.id }} .alta-try__action { max-width: 620px; }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronTryHome-{{ section.id }} .alta-try__shell { width: min(1240px, calc(100% - 80px)); }
+    #AltaeronTryHome-{{ section.id }} .alta-try__hero-media { min-height: 540px; }
+  }
   @media (max-width: 899px) {
     #AltaeronTryHome-{{ section.id }} .alta-try__hero { grid-template-columns: 1fr 1fr; }
     #AltaeronTryHome-{{ section.id }} .alta-try__content { padding: 34px 28px; }

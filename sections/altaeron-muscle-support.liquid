@@ -41,9 +41,29 @@
   #AltaeronMuscle-{{ section.id }} .alta-muscle-card p { color: var(--alta-muscle-body); font-size: 15px; line-height: 1.45; margin: 0; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__reassurance { align-items: center; background: linear-gradient(90deg, #edf8f7, #e4f4f2, #edf8f7); border-radius: 13px; color: #0b6270; display: flex; font-size: 18px; font-weight: 700; gap: 16px; justify-content: center; line-height: 1.4; margin: 20px 0 0; min-height: 68px; padding: 14px 22px; text-align: center; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__reassurance svg { flex: 0 0 30px; height: 30px; stroke-width: 1.8; width: 30px; }
+  @media (min-width: 750px) {
+    #AltaeronMuscle-{{ section.id }} { padding: 40px 0 clamp(64px, 6vw, 88px); }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__header { margin-bottom: 32px; max-width: 850px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__subheading { max-width: 780px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy { min-height: 0; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { aspect-ratio: 16 / 9; box-shadow: 0 18px 50px rgba(16,42,67,.06); height: auto; width: 100%; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media :is(img, svg) { object-fit: contain; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__cards { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle-card { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle-card:hover { border-color: rgba(0,107,94,.3); box-shadow: 0 14px 34px rgba(16,42,67,.08); transform: translateY(-2px); }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__shell { width: min(1240px, calc(100% - 80px)); }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { max-height: 620px; }
+  }
   @media (max-width: 989px) {
     #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy { min-height: 480px; }
     #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { height: 480px; width: 76%; }
+  }
+  @media (min-width: 750px) and (max-width: 989px) {
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy { min-height: 0; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { height: auto; width: 100%; }
   }
   @media (max-width: 749px) {
     #AltaeronMuscle-{{ section.id }} { padding: 24px 0 48px; }

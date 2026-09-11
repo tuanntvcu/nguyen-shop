@@ -37,6 +37,19 @@
   #AltaeronV3Tail-{{ section.id }} .apdp-review-summary { margin-top: 0; }
   #AltaeronV3Tail-{{ section.id }} .apdp-judgeme-widget { margin-top: 0; }
   #AltaeronV3Tail-{{ section.id }} .apdp-tail-accordion { background: #fff; }
+  @media (min-width: 750px) {
+    #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__section { padding: clamp(64px, 6vw, 88px) 0; }
+    #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronV3Tail-{{ section.id }} .alta-custom__header { margin-bottom: 32px; max-width: 850px; }
+    #AltaeronV3Tail-{{ section.id }} .alta-custom__subheading { max-width: 780px; }
+    #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__section:not(.alta-v3-tail__section--reviews) .alta-v3-tail__shell { align-items:start; display:grid; gap:clamp(32px,5vw,72px); grid-template-columns:minmax(240px,.72fr) minmax(400px,1.28fr); }
+    #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__section:not(.alta-v3-tail__section--reviews) .alta-custom__header { margin:4px 0 0; position:sticky; top:110px; }
+    #AltaeronV3Tail-{{ section.id }} .apdp-tail-accordion { border:1px solid #e4e7ec; border-radius:16px; overflow:hidden; }
+    #AltaeronV3Tail-{{ section.id }} .apdp-tail-accordion details { padding-inline:22px; }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__shell { width: min(1240px, calc(100% - 80px)); }
+  }
 
   @media (max-width: 749px) {
     #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__section { padding: 50px 0; }

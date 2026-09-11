@@ -49,6 +49,21 @@
   #AltaeronBunion-{{ section.id }} .alta-custom-card p { color: var(--alta-custom-body); font-size: 15px; line-height: 1.45; margin: 0; }
   #AltaeronBunion-{{ section.id }} .alta-custom__reassurance { align-items: center; background: linear-gradient(90deg, #edf8f7, #e4f4f2, #edf8f7); border-radius: 13px; color: #0b6270; display: flex; font-size: 17px; font-weight: 650; gap: 16px; justify-content: center; line-height: 1.4; margin: 20px 0 0; min-height: 66px; padding: 14px 22px; text-align: center; }
   #AltaeronBunion-{{ section.id }} .alta-custom__reassurance svg { flex: 0 0 29px; height: 29px; stroke-width: 1.8; width: 29px; }
+  @media (min-width: 750px) {
+    #AltaeronBunion-{{ section.id }} { padding: clamp(64px, 6vw, 88px) 0 40px; }
+    #AltaeronBunion-{{ section.id }} .alta-custom__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronBunion-{{ section.id }} .alta-custom__header { margin-bottom: 32px; max-width: 850px; }
+    #AltaeronBunion-{{ section.id }} .alta-custom__subheading { max-width: 780px; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__progression { box-shadow: 0 18px 50px rgba(16,42,67,.06); }
+    #AltaeronBunion-{{ section.id }} .alta-custom__cards { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    #AltaeronBunion-{{ section.id }} .alta-custom-card { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+    #AltaeronBunion-{{ section.id }} .alta-custom-card:hover { border-color: rgba(0,107,94,.3); box-shadow: 0 14px 34px rgba(16,42,67,.08); transform: translateY(-2px); }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronBunion-{{ section.id }} .alta-custom__shell { width: min(1240px, calc(100% - 80px)); }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__step-media { aspect-ratio: 16 / 10; }
+    #AltaeronBunion-{{ section.id }} .alta-custom-card__media { aspect-ratio: 16 / 7.8; }
+  }
   @media (max-width: 749px) {
     #AltaeronBunion-{{ section.id }} { padding: 48px 0 24px; }
     #AltaeronBunion-{{ section.id }} .alta-custom__shell { width: calc(100% - 30px); }

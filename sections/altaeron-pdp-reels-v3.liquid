@@ -138,8 +138,25 @@
   #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result svg{height:13px;stroke-width:2.5;width:13px}
   #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result strong{color:#08724b}
   #AltaeronPdp-{{ section.id }} .apdp-payment-icons--mobile{display:none}
+  @media(min-width:768px){
+    #AltaeronPdp-{{ section.id }} .apdp-hero{padding:28px 0 42px}
+    #AltaeronPdp-{{ section.id }} .apdp-hero__grid{gap:24px;margin-inline:auto;width:min(1320px,calc(100% - 48px))}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery{align-self:start;display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;min-width:0}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage,
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{aspect-ratio:9/16;background:#eef2ef;border-radius:16px;grid-column:1;grid-row:1;height:auto;justify-self:center;max-height:720px;width:min(100%,405px)}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{opacity:1;transition:opacity .2s ease,visibility .2s ease;visibility:visible}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{opacity:0;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;visibility:hidden;z-index:3}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery.is-viewer-active .apdp-gallery__stage{opacity:0;pointer-events:none;visibility:hidden}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery.is-viewer-active .apdp-gallery__viewer{opacity:1;pointer-events:auto;visibility:visible}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery.is-viewer-active .apdp-gallery__return{display:flex}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{display:flex;flex-direction:row;grid-column:1;grid-row:2;max-height:none;overflow-x:auto;overflow-y:hidden;padding:2px 2px 5px}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__thumb{flex-basis:64px;height:64px}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__hero>video{background:transparent;object-fit:contain;position:relative;z-index:1}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative{align-self:center;min-width:0;padding:8px 0}
+    #AltaeronPdp-{{ section.id }} .apdp-buy{align-self:start;min-height:0;padding:24px}
+  }
   @media(min-width:1100px){
-    #AltaeronPdp-{{ section.id }} .apdp-hero__grid{align-items:start;grid-template-columns:minmax(0,43fr) minmax(300px,29fr) minmax(360px,28fr);min-height:0;row-gap:0}
+    #AltaeronPdp-{{ section.id }} .apdp-hero__grid{align-items:start;gap:clamp(22px,2.2vw,34px);grid-template-columns:minmax(330px,32fr) minmax(260px,27fr) minmax(360px,41fr);min-height:0;row-gap:0;width:min(1320px,calc(100% - 64px))}
     #AltaeronPdp-{{ section.id }} .apdp-gallery{align-self:start;display:grid;gap:12px;grid-column:1;grid-row:1;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;min-width:0}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{aspect-ratio:9/16;grid-column:1;grid-row:1;height:auto;max-height:900px;opacity:1;transition:opacity .2s ease,visibility .2s ease;visibility:visible}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__stage:before{background:var(--apdp-hero-poster) center/cover no-repeat;content:"";filter:blur(18px);inset:-26px;opacity:.44;position:absolute;transform:scale(1.08)}
@@ -152,6 +169,11 @@
     #AltaeronPdp-{{ section.id }} .apdp-gallery.is-viewer-active .apdp-gallery__viewer{opacity:1;pointer-events:auto;visibility:visible}
     #AltaeronPdp-{{ section.id }} .apdp-gallery.is-viewer-active .apdp-gallery__return{display:flex}
     #AltaeronPdp-{{ section.id }} .apdp-gallery__thumbs{display:flex;flex-direction:row;grid-column:1;grid-row:2;max-height:none;overflow-x:auto;overflow-y:hidden;padding:1px 2px 4px}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{grid-template-columns:1fr}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{align-items:center;display:grid;gap:2px 11px;grid-template-columns:34px minmax(0,1fr);min-height:58px;padding:10px 12px;text-align:left}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li>svg{grid-row:1}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits b{font-size:12px}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits small{font-size:10px;margin-top:2px}
     #AltaeronPdp-{{ section.id }} .apdp-day__layout{align-items:stretch;display:grid;gap:34px;grid-template-columns:minmax(300px,390px) minmax(0,1fr)}
     #AltaeronPdp-{{ section.id }} .apdp-day__media{aspect-ratio:9/16;height:auto;margin:0;max-width:390px;width:100%}
     #AltaeronPdp-{{ section.id }} .apdp-day__benefits{align-content:stretch;gap:14px;grid-template-columns:1fr;margin:0}
@@ -162,10 +184,20 @@
     #AltaeronPdp-{{ section.id }} .apdp-day__benefits p{font-size:15px;max-width:520px}
   }
   @media(max-width:1099px) and (min-width:768px){
+    #AltaeronPdp-{{ section.id }} .apdp-hero__grid{align-items:start;grid-template-columns:minmax(280px,43fr) minmax(0,57fr);min-height:0}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery{grid-column:1;grid-row:1}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative{grid-column:2;grid-row:1}
+    #AltaeronPdp-{{ section.id }} .apdp-buy{grid-column:1/-1;grid-row:2;margin-top:8px;width:100%}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__stage,
+    #AltaeronPdp-{{ section.id }} .apdp-gallery__viewer{max-height:640px;width:min(100%,360px)}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative h1{font-size:clamp(31px,4.2vw,40px)}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{grid-template-columns:1fr}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{align-items:center;display:grid;gap:2px 10px;grid-template-columns:30px minmax(0,1fr);min-height:54px;padding:9px 11px;text-align:left}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li>svg{grid-row:1}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits small{font-size:10px}
     #AltaeronPdp-{{ section.id }} .apdp-spacer-grid{grid-template-columns:1fr 28px 1fr}
     #AltaeronPdp-{{ section.id }} .apdp-reels-full{width:calc(100% - 36px)}
-    #AltaeronPdp-{{ section.id }} .apdp-gallery-story{grid-column:1/-1;grid-row:4;margin:8px 0 0;padding:24px 4px 8px}
-    #AltaeronPdp-{{ section.id }} .apdp-buy{grid-row:5}
+    #AltaeronPdp-{{ section.id }} .apdp-gallery-story{grid-column:1/-1;grid-row:3;margin:8px 0 0;padding:24px 4px 8px}
   }
   @media(max-width:767px){
     #AltaeronPdp-{{ section.id }} .apdp-gallery__stage{margin-top:0;order:1}

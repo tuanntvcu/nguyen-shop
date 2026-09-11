@@ -28,6 +28,8 @@
   assign proof_video = section.settings.point_6_video | default: hero_video
   assign proof_image_1 = section.settings.point_6_image_1 | default: product.media[6].preview_image
   assign proof_image_2 = section.settings.point_6_image_2 | default: product.media[7].preview_image
+  assign proof_image_3 = section.settings.point_6_image_3
+  assign proof_image_4 = section.settings.point_6_image_4
   assign expert_image = section.settings.point_7_image
   assign expert_fallback_alt = 'altaeron_pdp.accessibility.expert_portrait' | t
   assign expert_alt = expert_image.alt | default: expert_fallback_alt
@@ -555,6 +557,8 @@
     {%- if proof_video != blank -%}<div class="apdp-dialfit-proof__video">{{ proof_video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, preload: 'metadata', image_size: '1200x' }}</div>{%- endif -%}
     {%- if proof_image_1 != blank -%}<div class="apdp-dialfit-proof__image">{{ proof_image_1 | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 768px) 25vw, 50vw', alt: proof_image_1.alt | default: product.title }}</div>{%- endif -%}
     {%- if proof_image_2 != blank -%}<div class="apdp-dialfit-proof__image">{{ proof_image_2 | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 768px) 25vw, 50vw', alt: proof_image_2.alt | default: product.title }}</div>{%- endif -%}
+    {%- if proof_image_3 != blank -%}<div class="apdp-dialfit-proof__image">{{ proof_image_3 | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 768px) 25vw, 50vw', alt: proof_image_3.alt | default: product.title }}</div>{%- endif -%}
+    {%- if proof_image_4 != blank -%}<div class="apdp-dialfit-proof__image">{{ proof_image_4 | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 768px) 25vw, 50vw', alt: proof_image_4.alt | default: product.title }}</div>{%- endif -%}
   </div></section>
 
   <section id="AltaeronMedicalReview-{{ section.id }}" tabindex="-1" class="apdp-expert alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="AltaeronExpertTitle-{{ section.id }}">
@@ -701,6 +705,8 @@
     { "type": "video", "id": "point_6_video", "label": "Proof video" },
     { "type": "image_picker", "id": "point_6_image_1", "label": "Proof image 1" },
     { "type": "image_picker", "id": "point_6_image_2", "label": "Proof image 2" },
+    { "type": "image_picker", "id": "point_6_image_3", "label": "Proof image 3" },
+    { "type": "image_picker", "id": "point_6_image_4", "label": "Proof image 4" },
     { "type": "header", "content": "Point 7 media" },
     { "type": "image_picker", "id": "point_7_image", "label": "Expert portrait" },
     { "type": "header", "content": "Final CTA media" },
