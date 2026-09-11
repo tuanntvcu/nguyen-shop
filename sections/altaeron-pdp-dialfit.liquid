@@ -550,7 +550,8 @@
 
   <section class="apdp-education alta-pdp-flow-section apdp-dialfit-section" aria-labelledby="DialFitHow-{{ section.id }}"><div class="apdp-shell apdp-dialfit-full">
     {%- assign how_title = 'altaeron_pdp_dialfit.how.title' | t -%}{% render 'altaeron-pdp-section-heading', number: '6', title: how_title, heading_id: how_heading_id %}
-    <ol class="apdp-dialfit-steps" data-apdp-step-timeline>{%- for step_index in (1..4) -%}{%- capture step_title_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_title{%- endcapture -%}{%- capture step_body_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_body{%- endcapture -%}<li class="apdp-dialfit-step" data-apdp-step><span class="apdp-dialfit-step__number" aria-hidden="true">{{ step_index }}</span><span class="apdp-dialfit-step__connector" aria-hidden="true"></span><div class="apdp-dialfit-step__copy"><h3>{{ step_title_key | t }}</h3><p>{{ step_body_key | t }}</p></div></li>{%- endfor -%}</ol>
+    {%- assign step_labels = 'A,B,C,D' | split: ',' -%}
+    <ol class="apdp-dialfit-steps" data-apdp-step-timeline>{%- for step_index in (1..4) -%}{%- capture step_title_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_title{%- endcapture -%}{%- capture step_body_key -%}altaeron_pdp_dialfit.how.step_{{ step_index }}_body{%- endcapture -%}<li class="apdp-dialfit-step" data-apdp-step><span class="apdp-dialfit-step__number" aria-hidden="true">{{ step_labels[forloop.index0] }}</span><span class="apdp-dialfit-step__connector" aria-hidden="true"></span><div class="apdp-dialfit-step__copy"><h3>{{ step_title_key | t }}</h3><p>{{ step_body_key | t }}</p></div></li>{%- endfor -%}</ol>
   </div></section>
 
   <section class="apdp-dialfit-proof alta-pdp-flow-section" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.product_in_use' | t | escape }}"><div class="apdp-shell apdp-dialfit-full apdp-dialfit-proof__grid">

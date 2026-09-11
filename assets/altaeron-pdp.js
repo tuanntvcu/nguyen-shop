@@ -911,6 +911,7 @@
       if (!steps.length) return;
       const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
       let timers = [];
+      let isVisible = false;
 
       const clearTimers = () => {
         timers.forEach(window.clearTimeout);
@@ -927,6 +928,7 @@
         steps.forEach((step) => setStepState(step, 'complete'));
       };
       const play = () => {
+        if (!isVisible || motionPreference.matches) return;
         clearTimers();
         timeline.classList.add('is-animation-ready');
         steps.forEach((step) => setStepState(step, 'upcoming'));
@@ -939,26 +941,28 @@
         });
         timers.push(window.setTimeout(() => {
           setStepState(steps[steps.length - 1], 'complete');
+          timers.push(window.setTimeout(play, 1200));
         }, steps.length * 650));
       };
 
-      if (motionPreference.matches || !('IntersectionObserver' in window)) {
+      if (!('IntersectionObserver' in window)) {
         finish();
         return;
       }
 
       const observer = new IntersectionObserver(([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        play();
+        isVisible = entry.isIntersecting;
+        if (isVisible && !motionPreference.matches) play();
+        else clearTimers();
       }, { threshold: 0.35 });
       observer.observe(timeline);
 
+      if (motionPreference.matches) finish();
+
       motionPreference.addEventListener?.('change', (event) => {
-        if (!event.matches) return;
-        observer.disconnect();
-        finish();
-      }, { once: true });
+        if (event.matches) finish();
+        else if (isVisible) play();
+      });
     });
   }
 
