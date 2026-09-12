@@ -54,7 +54,7 @@
       {{ root }} .alta-timeline__stages { grid-template-columns: 1fr; }
       {{ root }} .alta-timeline-card__copy { height: auto; min-height: 0; }
       {{ root }} .alta-timeline-card:not(:last-child)::after { display: none; }
-      {{ root }} .alta-timeline-card__media :is(img, video, svg) { height: 100%; object-fit: cover; object-position: center; width: 100%; }
+      {{ root }} .alta-timeline-card__media :is(img, video, svg) { height: 100%; object-fit: contain; object-position: center; width: 100%; }
     {%- when 'try_home' -%}
       {{ root }} { padding-block: 44px; }
       {{ root }} .alta-try__shell { max-width: 1180px; width: calc(100% - 48px); }
@@ -96,6 +96,17 @@
 
 @media (min-width: 900px) {
   {%- case section_kind -%}
+    {%- when 'adjustable' -%}
+      {{ root }} .alta-custom__shell { align-items: stretch; display: grid; gap: 22px 24px; grid-template-columns: minmax(340px, 42fr) minmax(0, 58fr); }
+      {{ root }} .alta-custom__header { grid-column: 1 / -1; margin-bottom: 4px; }
+      {{ root }} .alta-adjustable__hero { align-self: stretch; aspect-ratio: 3 / 4; background: #fff; grid-column: 1; grid-row: 2; max-height: none; }
+      {{ root }} .alta-adjustable__hero :is(img, svg) { object-fit: contain; }
+      {{ root }} .alta-custom__cards { align-content: stretch; display: grid; gap: 16px; grid-column: 2; grid-row: 2; grid-template-columns: 1fr; grid-template-rows: repeat(3, minmax(0, 1fr)); margin: 0; }
+      {{ root }} .alta-custom-card { display: grid; grid-template-columns: minmax(150px, 38%) minmax(0, 1fr); }
+      {{ root }} .alta-custom-card__media { aspect-ratio: auto; min-height: 0; }
+      {{ root }} .alta-custom-card__media :is(img, svg) { object-fit: contain; }
+      {{ root }} .alta-custom-card__copy { align-self: center; padding: 16px 18px; }
+      {{ root }} .alta-custom__reassurance { grid-column: 1 / -1; margin-top: 0; }
     {%- when 'muscle' -%}
       {{ root }} .alta-muscle__shell { align-items: stretch; display: grid; gap: 22px 24px; grid-template-columns: minmax(0, 58fr) minmax(300px, 42fr); }
       {{ root }} .alta-muscle__header { grid-column: 1 / -1; margin-bottom: 4px; }
