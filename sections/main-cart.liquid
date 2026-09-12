@@ -1,3 +1,5 @@
+{%- assign checkout_discount_code = settings.checkout_discount_code | strip -%}
+
 {%- style -%}
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
@@ -724,7 +726,7 @@
                       {{ 'sections.cart.checkout' | t }}
                     </button>
 
-                    {% if additional_checkout_buttons %}
+                    {% if additional_checkout_buttons and checkout_discount_code == blank %}
                       <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
                     {% endif %}
                   </div>

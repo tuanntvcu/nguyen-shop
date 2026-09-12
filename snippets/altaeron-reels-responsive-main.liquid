@@ -125,3 +125,10 @@
   {{ reel_root }} .apdp-review-summary,
   {{ reel_root }} .apdp-final-cta__inner { max-width: 1280px; }
 }
+
+{%- if template_class == 'altaeron-reels-v3' -%}
+  @media (min-width: 768px) {
+    {{ reel_root }} :where(.apdp-gallery__stage, .apdp-gallery__viewer) { aspect-ratio: 1 / 1; }
+    {{ reel_root }} :where(.apdp-gallery__hero > img, .apdp-gallery__item img) { height: 100%; object-fit: cover; object-position: center; width: 100%; }
+  }
+{%- endif -%}

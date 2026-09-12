@@ -68,6 +68,10 @@
     {{ content_for_header }}
 
     <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+    {%- assign checkout_discount_code = settings.checkout_discount_code | strip -%}
+    {%- if checkout_discount_code != blank -%}
+      <script src="{{ 'checkout-discount.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
     <script>

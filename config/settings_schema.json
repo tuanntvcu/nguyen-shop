@@ -1375,6 +1375,16 @@
       },
       {
         "type": "header",
+        "content": "Checkout discount"
+      },
+      {
+        "type": "text",
+        "id": "checkout_discount_code",
+        "label": "Automatic checkout discount code",
+        "info": "Optional. Enter an active Shopify discount code to apply when customers check out from the cart drawer or cart page. Leave blank to disable."
+      },
+      {
+        "type": "header",
         "content": "t:settings_schema.cart.settings.header__1.content"
       },
       {
