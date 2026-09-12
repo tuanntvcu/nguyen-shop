@@ -4,6 +4,10 @@
   assign tail_support = mf.pdp_how_image.value
   assign day_story_video = product.metafields.custom.legend_video.value
   assign hero_video = mf.pdp_hero_video.value
+  assign show_hero_video = false
+  if section.settings.show_hero_video and hero_video != blank
+    assign show_hero_video = true
+  endif
   assign hero_image = mf.pdp_hero_image.value | default: product.featured_image
   assign hero_poster = hero_video.preview_image | image_url: width: 1200
   assign hero_thumbnail = hero_video.preview_image | default: hero_image
@@ -272,8 +276,9 @@
 >
   <section class="apdp-hero" aria-labelledby="AltaeronTitle-{{ section.id }}">
     <div class="apdp-shell apdp-hero__grid">
-      <div class="apdp-gallery" data-apdp-gallery>
+      <div class="apdp-gallery{% unless show_hero_video %} is-viewer-active{% endunless %}" data-apdp-gallery>
         <div class="apdp-gallery__thumbs" role="tablist" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.product_media' | t | escape }}">
+          {%- if show_hero_video -%}
           <button type="button" class="apdp-gallery__thumb is-active" role="tab" aria-selected="true" aria-controls="AltaeronDemo-{{ section.id }}" data-apdp-thumb="demo" data-apdp-demo-thumb>
             {%- if hero_thumbnail != blank -%}
               {{ hero_thumbnail | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '58px', alt: support_demo_alt }}
@@ -282,13 +287,15 @@
             {%- endif -%}
             {%- if hero_video != blank -%}<span class="apdp-gallery__play" aria-hidden="true">▶</span>{%- endif -%}
           </button>
+          {%- endif -%}
           {%- for media in product.media -%}
-            <button type="button" class="apdp-gallery__thumb" role="tab" aria-selected="false" aria-controls="AltaeronMedia-{{ section.id }}-{{ media.id }}" data-apdp-thumb="{{ media.id }}" data-apdp-preview-src="{{ media.preview_image | image_url: width: 1600 }}" data-apdp-preview-alt="{{ media.alt | default: product.title | escape }}">
+            <button type="button" class="apdp-gallery__thumb{% if show_hero_video == false and forloop.first %} is-active{% endif %}" role="tab" aria-selected="{% if show_hero_video == false and forloop.first %}true{% else %}false{% endif %}" aria-controls="AltaeronMedia-{{ section.id }}-{{ media.id }}" data-apdp-thumb="{{ media.id }}" data-apdp-preview-src="{{ media.preview_image | image_url: width: 1600 }}" data-apdp-preview-alt="{{ media.alt | default: product.title | escape }}">
               {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '58px', alt: media.alt | default: product.title }}
               {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}<span class="apdp-gallery__play" aria-hidden="true">▶</span>{%- endif -%}
             </button>
           {%- endfor -%}
         </div>
+        {%- if show_hero_video -%}
         <div id="AltaeronDemo-{{ section.id }}" class="apdp-gallery__stage apdp-gallery__hero is-active" role="tabpanel" data-apdp-media="demo" aria-hidden="false"{% if hero_poster != blank %} style="--apdp-hero-poster:url('{{ hero_poster }}')"{% endif %}>
           {%- if hero_video != blank -%}
             {%- liquid
@@ -323,9 +330,10 @@
             <div class="apdp-gallery__empty">{{ 'product-1' | placeholder_svg_tag }}</div>
           {%- endif -%}
         </div>
+        {%- endif -%}
         <div class="apdp-gallery__viewer" aria-live="polite">
           {%- for media in product.media -%}
-            <div id="AltaeronMedia-{{ section.id }}-{{ media.id }}" class="apdp-gallery__item" role="tabpanel" data-apdp-media="{{ media.id }}" aria-hidden="true"{% if media.media_type == 'image' %} data-apdp-zoom-src="{{ media.preview_image | image_url: width: 2400 }}" data-apdp-zoom-width="{{ media.preview_image.width }}" data-apdp-zoom-height="{{ media.preview_image.height }}"{% endif %} hidden>
+            <div id="AltaeronMedia-{{ section.id }}-{{ media.id }}" class="apdp-gallery__item{% if show_hero_video == false and forloop.first %} is-active{% endif %}" role="tabpanel" data-apdp-media="{{ media.id }}" aria-hidden="{% if show_hero_video == false and forloop.first %}false{% else %}true{% endif %}"{% if media.media_type == 'image' %} data-apdp-zoom-src="{{ media.preview_image | image_url: width: 2400 }}" data-apdp-zoom-width="{{ media.preview_image.width }}" data-apdp-zoom-height="{{ media.preview_image.height }}"{% endif %}{% unless show_hero_video == false and forloop.first %} hidden{% endunless %}>
               {% render 'altaeron-pdp-media', media: media, product: product, loading: 'lazy', fetchpriority: 'auto', sizes: '(min-width: 1024px) 560px, 55vw' %}
               {%- if media.media_type == 'image' -%}
                 <button type="button" class="apdp-gallery__zoom" data-apdp-zoom aria-haspopup="dialog" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.open_image' | t: index: forloop.index | escape }}"><span aria-hidden="true">{% render 'icon-zoom' %}</span></button>
@@ -334,7 +342,9 @@
           {%- else -%}
             <div class="apdp-gallery__empty">{{ 'product-1' | placeholder_svg_tag }}</div>
           {%- endfor -%}
-          <button type="button" class="apdp-gallery__return" data-apdp-return-demo aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.return_demo' | t | escape }}"><span aria-hidden="true">←</span> {{ 'altaeron_pdp_reels_v2.accessibility.back_to_demo' | t }}</button>
+          {%- if show_hero_video -%}
+            <button type="button" class="apdp-gallery__return" data-apdp-return-demo aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.return_demo' | t | escape }}"><span aria-hidden="true">←</span> {{ 'altaeron_pdp_reels_v2.accessibility.back_to_demo' | t }}</button>
+          {%- endif -%}
         </div>
       </div>
 
@@ -605,6 +615,7 @@
   "class": "section-altaeron-pdp section-altaeron-pdp-reels-v3",
   "settings": [
     { "type": "header", "content": "Reels hero" },
+    { "type": "checkbox", "id": "show_hero_video", "label": "Show metafield video first in gallery", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Product name", "default": "Altaeron™ Adjustable Bunion Corrector" },
     { "type": "textarea", "id": "headline", "label": "Core benefit", "default": "Gentle support for better big-toe alignment." },
     { "type": "textarea", "id": "subheadline", "label": "Explanation", "default": "Helps guide the big toe toward a more natural position while easing pressure and crowding around the bunion." },

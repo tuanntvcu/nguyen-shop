@@ -56,6 +56,7 @@
         "cta_product"
       ],
       "settings": {
+        "show_hero_video": false,
         "eyebrow": "Altaeron™ Adjustable Bunion Corrector",
         "headline": "Gentle support for better big-toe alignment.",
         "subheadline": "Helps guide the big toe toward a more natural position while easing pressure and crowding around the bunion.",
