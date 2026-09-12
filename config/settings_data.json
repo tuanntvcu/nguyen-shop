@@ -73,6 +73,7 @@
     "color_swatch_trigger": "Color",
     "cart_type": "drawer",
     "cart_icon": "shopping-bag",
+    "checkout_discount_code": "WELCOME",
     "free_shipping_minimum_amount": "19",
     "cart_empty_message": "<p>Maybe you also like</p>",
     "collection_list": [
