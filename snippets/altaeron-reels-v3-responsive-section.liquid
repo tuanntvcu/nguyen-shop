@@ -54,7 +54,7 @@
       {{ root }} .alta-timeline__stages { grid-template-columns: 1fr; }
       {{ root }} .alta-timeline-card__copy { height: auto; min-height: 0; }
       {{ root }} .alta-timeline-card:not(:last-child)::after { display: none; }
-      {{ root }} .alta-timeline-card__media :is(img, video, svg) { height: 100%; object-fit: contain; object-position: center; width: 100%; }
+      {{ root }} .alta-timeline-card__media :is(img, video, svg) { height: 100%; object-fit: cover; object-position: center; width: 100%; }
     {%- when 'try_home' -%}
       {{ root }} { padding-block: 44px; }
       {{ root }} .alta-try__shell { max-width: 1180px; width: calc(100% - 48px); }
@@ -118,8 +118,8 @@
       {{ root }} .alta-muscle-card__copy { padding: 16px 18px 18px; }
       {{ root }} .alta-muscle__reassurance { grid-column: 1 / -1; margin-top: 0; }
     {%- when 'timeline' -%}
-      {{ root }} .alta-timeline__stages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      {{ root }} .alta-timeline-card__media { aspect-ratio: 16 / 10; }
+      {{ root }} .alta-timeline__stages { grid-template-columns: repeat(2, minmax(0, 440px)); justify-content: center; }
+      {{ root }} .alta-timeline-card__media { aspect-ratio: 4 / 3; }
     {%- when 'try_home' -%}
       {{ root }} .alta-try__hero { grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); }
       {{ root }} .alta-try__hero-media { aspect-ratio: auto; height: clamp(340px, 38vw, 410px); }
