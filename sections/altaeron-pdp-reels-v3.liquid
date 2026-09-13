@@ -141,7 +141,6 @@
   #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result>span:first-child{align-items:center;background:#08724b;border-radius:50%;color:#fff;display:flex;flex:0 0 20px;height:20px;justify-content:center;margin-top:1px;width:20px}
   #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result svg{height:13px;stroke-width:2.5;width:13px}
   #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result strong{color:#08724b}
-  #AltaeronPdp-{{ section.id }} .apdp-payment-icons--mobile{display:none}
   @media(min-width:768px){
     #AltaeronPdp-{{ section.id }} .apdp-hero{padding:28px 0 42px}
     #AltaeronPdp-{{ section.id }} .apdp-hero__grid{gap:24px;margin-inline:auto;width:min(1320px,calc(100% - 48px))}
@@ -245,8 +244,6 @@
     #AltaeronPdp-{{ section.id }} .apdp-gallery-story h2{font-size:clamp(27px,8vw,34px);line-height:1.16;margin-bottom:22px}
     #AltaeronPdp-{{ section.id }} .apdp-gallery-story__copy{font-size:15px;line-height:1.62}
     #AltaeronPdp-{{ section.id }} .apdp-payment-terms{display:none}
-    #AltaeronPdp-{{ section.id }} .apdp-payment-icons--mobile{display:flex}
-    #AltaeronPdp-{{ section.id }} .apdp-payment-icons--desktop{display:none}
   }
   @media(max-width:390px){
     #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits small{display:none}
@@ -398,7 +395,7 @@
             -%}
             <details class="apdp-payment-options">
               <summary>{{ 'altaeron_pdp_reels_v2.buy.more_payment_options' | t: default: 'More payment options' }}</summary>
-              <ul class="apdp-payment-icons apdp-payment-icons--mobile list list-payment" role="list" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.payment_methods' | t | escape }}">
+              <ul class="apdp-payment-icons list list-payment" role="list" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.payment_methods' | t | escape }}">
               {%- for type in shop.enabled_payment_types -%}
                 {%- capture payment_svg -%}{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}{%- endcapture -%}
                 <li class="list-payment__item">{{ payment_svg | replace: ' id="', mobile_payment_id | replace: 'aria-labelledby="', mobile_payment_labelledby | replace: 'url(#', mobile_payment_url | replace: 'href="#', mobile_payment_href }}</li>

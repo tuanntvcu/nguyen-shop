@@ -122,6 +122,53 @@
         "reassurance": "Gentle support should feel controlled — never painful."
       }
     },
+    "altaeron_right_fit": {
+      "type": "altaeron-right-fit",
+      "blocks": {
+        "fit_1": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You have a mild to moderate bunion",
+            "body": "and your big toe has started drifting toward the other toes."
+          }
+        },
+        "fit_2": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You regularly experience aching, pressure, or discomfort",
+            "body": "that interferes with walking, relaxing, or everyday activities."
+          }
+        },
+        "fit_3": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You're looking for a conservative, non-surgical way to manage discomfort at home",
+            "body": "before considering more invasive treatment."
+          }
+        },
+        "fit_4": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You want adjustable support rather than a fixed toe spacer",
+            "body": "so you can gradually control the amount of correction and pressure based on your comfort."
+          }
+        }
+      },
+      "block_order": [
+        "fit_1",
+        "fit_2",
+        "fit_3",
+        "fit_4"
+      ],
+      "settings": {
+        "eyebrow": "FIND YOUR RIGHT FIT",
+        "heading": "Is Altaeron™ <strong>Right for You?</strong>",
+        "subheading": "The Adjustable Bunion Corrector may be a good fit if:",
+        "show_callout": true,
+        "callout_heading": "A more comfortable tomorrow can start today.",
+        "callout_body": "Support your feet. Keep doing what you love."
+      }
+    },
     "altaeron_adjustable_support": {
       "type": "altaeron-adjustable-support",
       "blocks": {
@@ -273,6 +320,7 @@
   "order": [
     "altaeron_pdp_reels_v3",
     "altaeron_bunion_benefits",
+    "altaeron_right_fit",
     "altaeron_adjustable_support",
     "altaeron_muscle_support",
     "altaeron_support_timeline",
