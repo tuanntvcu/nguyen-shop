@@ -100,12 +100,11 @@
       {{ root }} .alta-custom__shell { align-items: stretch; display: grid; gap: 22px 24px; grid-template-columns: minmax(0, 42fr) minmax(0, 58fr); }
       {{ root }} .alta-custom__header { grid-column: 1 / -1; margin-bottom: 4px; }
       {{ root }} .alta-adjustable__hero { align-self: stretch; aspect-ratio: 3 / 4; background: #fff; grid-column: 1; grid-row: 2; margin: 0; max-height: none; min-width: 0; overflow: hidden; width: 100%; }
-      {{ root }} .alta-adjustable__hero :is(img, svg) { object-fit: contain; }
+      {{ root }} .alta-adjustable__hero :is(img, svg) { object-fit: cover; object-position: center; }
       {{ root }} .alta-custom__cards { align-content: stretch; display: grid; gap: 16px; grid-column: 2; grid-row: 2; grid-template-columns: 1fr; grid-template-rows: repeat(3, minmax(0, 1fr)); margin: 0; min-width: 0; width: 100%; }
-      {{ root }} .alta-custom-card { display: grid; grid-template-columns: minmax(0, 38fr) minmax(0, 62fr); min-width: 0; width: 100%; }
+      {{ root }} .alta-custom-card { display: grid; grid-template-columns: clamp(170px, 31%, 210px) minmax(0, 1fr); min-width: 0; width: 100%; }
       {{ root }} .alta-custom-card__media { aspect-ratio: auto; min-height: 0; min-width: 0; }
       {{ root }} .alta-custom-card__media :is(img, svg) { object-fit: contain; }
-      {{ root }} .alta-custom-card:first-child .alta-custom-card__media img { transform: scale(1.22); transform-origin: center; }
       {{ root }} .alta-custom-card__copy { align-self: center; padding: 16px 18px; }
       {{ root }} .alta-custom__reassurance { grid-column: 1 / -1; margin-top: 0; }
     {%- when 'muscle' -%}
