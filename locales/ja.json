@@ -1012,6 +1012,7 @@
       "one_foot": "片足用",
       "most_popular": "一番人気",
       "best_value": "最もお得",
+      "atf_rating": "5点中{{ rating }} · {{ count }}件のレビュー",
       "bundle_subtitle": "1個あたり[price] · [percent]%お得",
       "rating": "5点中{{ rating }} · {{ count }}件のレビュー",
       "rating_parenthetical": "5点中{{ rating }}（{{ count }}件のレビュー）"
@@ -1040,6 +1041,15 @@
       "badge": "30日間快適保証"
     },
     "hero": {
+      "atf_product_name": "Altaeron™ 調節式外反母趾矯正器",
+      "atf_headline": "足の親指をやさしく、より自然な位置へ。",
+      "atf_explanation": "外反母趾周辺の圧迫感や窮屈さを和らげながら、装着中の親指をより自然な位置へ導きます。",
+      "atf_benefit_1": "調節可能なサポート",
+      "atf_benefit_1_note": "快適さに合わせて強さを調節",
+      "atf_benefit_2": "左右どちらの足にも対応",
+      "atf_benefit_2_note": "大人の足に合うユニセックス設計",
+      "atf_benefit_3": "座っている時や休憩中も快適",
+      "atf_benefit_3_note": "短時間から始めて徐々に延長",
       "eyebrow": "調節式外反母趾矯正器",
       "headline": "親指にもっとゆとりを",
       "subheadline_html": "<strong>外反母趾の痛みにお悩みですか？</strong> 足の親指を整え、痛みや圧迫感を和らげ、外反母趾の進行を抑えながら、手術をせずに出っ張りを目立ちにくくします。",
@@ -1059,6 +1069,12 @@
       "result_html": "利用者の91%が、最初の1週間から<strong>足の痛みの軽減</strong>を実感したと回答"
     },
     "buy": {
+      "atf_cta": "今すぐ購入 →",
+      "reassurance": "安全な決済 · 30日間の簡単返品",
+      "more_payment_options": "その他のお支払い方法",
+      "tracked_shipping": "追跡可能な配送",
+      "returns_30": "30日間返品保証",
+      "responsive_support": "丁寧なカスタマーサポート",
       "choose_option": "オプションを選択",
       "product_option": "商品オプション",
       "installments": "{{ amount }}の金利0%・4回払い、",
@@ -1155,6 +1171,17 @@
     }
   }
 ,
+  "altaeron_pdp_reels_v3": {
+    "reviews_eyebrow": "お客様のレビュー",
+    "faq_eyebrow": "よくあるご質問",
+    "right_fit": { "eyebrow": "あなたに合うかチェック", "heading_html": "Altaeron™は<strong>あなたに合っていますか？</strong>", "subheading": "調節式外反母趾矯正器は、次のような方に適しています：", "card_1_title": "軽度から中等度の外反母趾がある", "card_1_body": "足の親指が他の指の方向へ曲がり始めている。", "card_2_title": "痛み、圧迫感、不快感を繰り返し感じる", "card_2_body": "歩行、休息、日常生活に支障が出ている。", "card_3_title": "自宅でできる保存的かつ非外科的なケアを探している", "card_3_body": "より侵襲的な治療を検討する前に対処したい。", "card_4_title": "固定式のトゥスペーサーより調節可能なサポートがほしい", "card_4_body": "快適さに合わせて矯正力と圧力を少しずつ調節したい。", "callout_heading": "より快適な明日は、今日から始められます。", "callout_body": "足をサポートして、好きなことを続けましょう。" },
+    "bunion": { "eyebrow": "外反母趾への働き", "heading": "足の親指をより自然な位置でサポートします。", "subheading": "足の親指が内側に曲がると、圧迫感や窮屈さが増すことがあります。Altaeronは装着中、親指をよりまっすぐな位置で支えます。", "reassurance": "やさしいサポートは、無理なく調節でき、痛みを感じないことが大切です。", "progression_1_title": "外反母趾の位置", "progression_1_caption": "親指が内側に曲がった状態", "progression_2_title": "製品によるサポート", "progression_2_caption": "親指を外側へ導く", "progression_3_title": "サポートされた位置", "progression_3_caption": "親指がより自然な位置に", "benefit_1_title": "親指のより良いアライメント", "benefit_1_body": "装着中、よりまっすぐな位置をサポートします。", "benefit_2_title": "窮屈さと圧迫感を軽減", "benefit_2_body": "外反母趾周辺にゆとりをつくります。" },
+    "adjustable": { "eyebrow": "調節できるサポート", "heading": "外反母趾の状態は一人ひとり異なります。サポートも同じです。", "subheading": "固定式スペーサーとは異なり、Altaeronは足に合ったサポートの強さを選べます。", "reassurance": "ペースを決めるのは装置ではなく、あなたの足です。", "benefit_1_title": "サポートを自分で調節", "benefit_1_body": "快適さに合わせて調節できます。", "benefit_2_title": "やさしく始める", "benefit_2_body": "弱い強さから始め、徐々に上げます。", "benefit_3_title": "固定された強さに悩まない", "benefit_3_body": "足に合う強さを見つけられます。" },
+    "muscle": { "eyebrow": "筋肉サポート / 解剖", "heading": "より良いアライメントが、親指のバランスの取れた働きを支えます。", "subheading": "足の親指をより自然な位置で支えることで、時間をかけて筋肉のバランスの取れた働きを促します。", "reassurance": "より良い位置へ。よりバランスの取れたサポート。", "benefit_1_title": "バランスの取れた位置", "benefit_1_body": "より自然なアライメントを支えます。", "benefit_2_title": "継続的なサポート", "benefit_2_body": "定期的な使用がより良い位置を支えます。" },
+    "timeline": { "eyebrow": "時間の経過とともに期待できること", "heading": "継続的なサポートによる変化の目安。", "subheading": "Altaeronは、心地よい負担軽減から日常的なアライメントサポートへと移行できるよう設計されています。", "reassurance_heading": "強さよりも継続が大切です。", "reassurance_text": "やさしく始め、徐々に調節し、定期的に使用してください。", "stage_1_label": "最初の数回", "stage_1_title": "負担を軽減", "stage_1_body": "装着中の圧迫感、窮屈さ、摩擦を和らげます。", "stage_2_label": "継続使用", "stage_2_title": "安定を促す", "stage_2_body": "時間をかけて、よりバランスの取れた位置を促します。" },
+    "try_home": { "eyebrow": "ご自宅でお試しください", "heading": "足に合うか、ゆっくり確かめてください。", "body": "ご自身に合うサポートの強さと使用習慣を見つけてください。Altaeronが足に合わない場合は、30日以内に返品できます。", "handwritten_message": "より快適な明日をサポート", "cta_text": "ALTAERONを試す →", "cta_reassurance": "安全な決済 · 30日間の簡単返品", "banner_text": "今日の小さな一歩。\n明日のより大きな快適さへ。", "trust_1_title": "30日間の簡単返品", "trust_1_body": "ご自宅で普段の生活に取り入れてお試しください。" },
+    "faq": { "title": "まだ迷っていますか？", "subtitle": "初めて装着する前に知っておきたいこと。", "question_1": "男女どちらでも使えますか？", "answer_1": "はい。Altaeronは大人の足向けに設計されたユニセックスの矯正器です。", "question_2": "左右どちらの足にも使えますか？", "answer_2": "はい。同じ製品を左足にも右足にも使用できます。", "question_3": "どの程度まで調節すればよいですか？", "answer_3": "弱い強さから始めてください。無理なく快適に感じる範囲でのみサポートを強めてください。", "question_4": "最初はどのくらいの時間装着すればよいですか？", "answer_4": "まずは座った状態で短時間使用し、足が慣れるにつれて装着時間を徐々に延ばしてください。", "question_5": "装着したまま歩けますか？", "answer_5": "Altaeronは室内での軽い歩行には使用できますが、主に座っている時、休憩中、リラックス中の快適な使用を想定しています。", "question_6": "どのくらいで変化を期待できますか？", "answer_6": "足の状態は一人ひとり異なります。無理に矯正するのではなく、まずは快適なサポートと継続的な使用を心がけてください。", "question_7": "親指をまっすぐにするために永久的に使えますか？", "answer_7": "Altaeronは、継続的な使用によってアライメントを支え、窮屈さを和らげ、より良い位置を促すよう設計されています。結果は足の状態や外反母趾の程度によって異なります。" }
+  },
   "altaeron_pdp_dialfit": {
     "common": {
       "save": "割引",

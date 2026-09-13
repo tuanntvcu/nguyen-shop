@@ -1,3 +1,18 @@
+{%- liquid
+  assign eyebrow = section.settings.eyebrow
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign callout_heading = section.settings.callout_heading
+  assign callout_body = section.settings.callout_body
+  unless request.locale.iso_code == 'en'
+    assign eyebrow = 'altaeron_pdp_reels_v3.right_fit.eyebrow' | t
+    assign heading = 'altaeron_pdp_reels_v3.right_fit.heading_html' | t
+    assign subheading = 'altaeron_pdp_reels_v3.right_fit.subheading' | t
+    assign callout_heading = 'altaeron_pdp_reels_v3.right_fit.callout_heading' | t
+    assign callout_body = 'altaeron_pdp_reels_v3.right_fit.callout_body' | t
+  endunless
+-%}
+
 <style>
   #AltaeronRightFit-{{ section.id }} {
     --alta-fit-ink: var(--altaeron-navy, #102a43);
@@ -53,19 +68,33 @@
 <section id="AltaeronRightFit-{{ section.id }}" class="alta-fit" aria-labelledby="AltaeronRightFitHeading-{{ section.id }}">
   <div class="alta-fit__shell">
     <header class="alta-fit__header">
-      {%- if section.settings.eyebrow != blank -%}<p class="alta-fit__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-      <h2 id="AltaeronRightFitHeading-{{ section.id }}" class="alta-fit__heading">{{ section.settings.heading }}</h2>
-      {%- if section.settings.subheading != blank -%}<p class="alta-fit__subheading">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+      {%- if eyebrow != blank -%}<p class="alta-fit__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AltaeronRightFitHeading-{{ section.id }}" class="alta-fit__heading">{{ heading }}</h2>
+      {%- if subheading != blank -%}<p class="alta-fit__subheading">{{ subheading | escape }}</p>{%- endif -%}
     </header>
 
     {%- if section.blocks.size > 0 -%}
       <div class="alta-fit__cards">
         {%- for block in section.blocks -%}
+          {%- liquid
+            assign card_title = block.settings.title
+            assign card_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture title_key
+                echo 'altaeron_pdp_reels_v3.right_fit.card_' | append: forloop.index | append: '_title'
+              endcapture
+              capture body_key
+                echo 'altaeron_pdp_reels_v3.right_fit.card_' | append: forloop.index | append: '_body'
+              endcapture
+              assign card_title = title_key | t
+              assign card_body = body_key | t
+            endunless
+          -%}
           <article class="alta-fit-card" {{ block.shopify_attributes }}>
             <span class="alta-fit-card__number" aria-hidden="true">{{ forloop.index }}</span>
             <div class="alta-fit-card__copy">
-              {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
-              {%- if block.settings.body != blank -%}<p>{{ block.settings.body | escape }}</p>{%- endif -%}
+              {%- if card_title != blank -%}<h3>{{ card_title }}</h3>{%- endif -%}
+              {%- if card_body != blank -%}<p>{{ card_body | escape }}</p>{%- endif -%}
             </div>
           </article>
         {%- endfor -%}
@@ -74,8 +103,8 @@
 
     {%- if section.settings.show_callout -%}
       <aside class="alta-fit__callout">
-        {%- if section.settings.callout_heading != blank -%}<h3>{{ section.settings.callout_heading | escape }}</h3>{%- endif -%}
-        {%- if section.settings.callout_body != blank -%}<p>{{ section.settings.callout_body | escape }}</p>{%- endif -%}
+        {%- if callout_heading != blank -%}<h3>{{ callout_heading | escape }}</h3>{%- endif -%}
+        {%- if callout_body != blank -%}<p>{{ callout_body | escape }}</p>{%- endif -%}
       </aside>
     {%- endif -%}
   </div>

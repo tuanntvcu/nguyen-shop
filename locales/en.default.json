@@ -1462,6 +1462,7 @@
     }
   },
   "altaeron_pdp_reels_v3": {
+    "right_fit": { "eyebrow": "FIND YOUR RIGHT FIT", "heading_html": "Is Altaeron™ <strong>Right for You?</strong>", "subheading": "The Adjustable Bunion Corrector may be a good fit if:", "card_1_title": "You have a mild to moderate bunion", "card_1_body": "and your big toe has started drifting toward the other toes.", "card_2_title": "You regularly experience aching, pressure, or discomfort", "card_2_body": "that interferes with walking, relaxing, or everyday activities.", "card_3_title": "You're looking for a conservative, non-surgical way to manage discomfort at home", "card_3_body": "before considering more invasive treatment.", "card_4_title": "You want adjustable support rather than a fixed toe spacer", "card_4_body": "so you can gradually control the amount of correction and pressure based on your comfort.", "callout_heading": "A more comfortable tomorrow can start today.", "callout_body": "Support your feet. Keep doing what you love." },
     "reviews_eyebrow": "Customer reviews",
     "faq_eyebrow": "FAQ",
     "bunion": {
