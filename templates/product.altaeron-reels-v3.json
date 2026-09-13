@@ -9,61 +9,6 @@
  */
 {
   "sections": {
-    "altaeron_pdp_reels_v3": {
-      "type": "altaeron-pdp-reels-v3",
-      "blocks": {
-        "support_demo": {
-          "type": "education_media",
-          "settings": {
-            "slot": "support_demo",
-            "video": "shopify://files/videos/0909 (3).mp4"
-          }
-        },
-        "day_story": {
-          "type": "education_media",
-          "settings": {
-            "slot": "day_story",
-            "video": "shopify://files/videos/0822-copy.mp4"
-          }
-        },
-        "spacer": {
-          "type": "tail_media",
-          "settings": {
-            "slot": "spacer",
-            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_54_15_PM.png"
-          }
-        },
-        "support": {
-          "type": "tail_media",
-          "settings": {
-            "slot": "support",
-            "image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_03_59_48_PM.png"
-          }
-        },
-        "cta_product": {
-          "type": "tail_media",
-          "settings": {
-            "slot": "cta_product",
-            "image": "shopify://shop_images/ChatGPT_Image_Aug_14_2026_01_46_46_PM.png"
-          }
-        }
-      },
-      "block_order": [
-        "support_demo",
-        "day_story",
-        "spacer",
-        "support",
-        "cta_product"
-      ],
-      "settings": {
-        "show_hero_video": false,
-        "eyebrow": "Altaeron™ Adjustable Bunion Corrector",
-        "headline": "Gentle support for better big-toe alignment.",
-        "subheadline": "Helps guide the big toe toward a more natural position while easing pressure and crowding around the bunion.",
-        "price_label": "From",
-        "cta_label": "GET YOURS NOW →"
-      }
-    },
     "altaeron_bunion_benefits": {
       "type": "altaeron-bunion-benefits",
       "blocks": {
@@ -129,7 +74,7 @@
           "type": "fit_card",
           "settings": {
             "title": "You have a mild to moderate bunion",
-            "body": "and your big toe has started drifting toward the other toes."
+            "body": "and your big toe is drifting toward the other toes"
           }
         },
         "fit_2": {
@@ -318,7 +263,6 @@
     }
   },
   "order": [
-    "altaeron_pdp_reels_v3",
     "altaeron_bunion_benefits",
     "altaeron_right_fit",
     "altaeron_adjustable_support",
