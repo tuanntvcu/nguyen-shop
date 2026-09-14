@@ -572,6 +572,7 @@
   gap: 0.4rem;
 }
 .cart-drawer__discount-summary {
+  display: none;
   color: var(--cart-muted);
   font-size: 1.3rem;
   line-height: 1.4;
