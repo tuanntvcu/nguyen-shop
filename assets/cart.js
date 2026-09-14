@@ -220,6 +220,7 @@ class CartItems extends HTMLElement {
     const cartDrawerBody = document.querySelector(`#CartDrawerBody-${sectionId}`);
     const cartDrawerFooter = document.querySelector(`#CartDrawerFooter-${sectionId}`);
     const cartDrawerEmpty = document.querySelector(`#CartDrawerEmpty-${sectionId}`);
+    const cartDrawerRewards = document.querySelector(`#CartDrawerRewards-${sectionId}`);
     const cartDrawerScrollTop = cartDrawerBody?.scrollTop || 0;
     if (cartDrawer) {
       // const updatedElement = sectionToRender.querySelector(`#CartDrawer-${sectionId}`);
@@ -252,10 +253,12 @@ class CartItems extends HTMLElement {
         cartDrawerBody.classList.remove('hidden');
         cartDrawerFooter.classList.remove('hidden');
         cartDrawerEmpty.classList.add('hidden');
+        cartDrawerRewards?.removeAttribute('hidden');
       } else {
         cartDrawerBody.classList.add('hidden');
         cartDrawerFooter.classList.add('hidden');
         cartDrawerEmpty.classList.remove('hidden');
+        cartDrawerRewards?.setAttribute('hidden', '');
       }
     }
 

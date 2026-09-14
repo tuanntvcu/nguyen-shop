@@ -256,6 +256,9 @@
   height: 4.2rem;
   margin-block-start: 0.2rem;
 }
+.cart-drawer__rewards[hidden] {
+  display: none;
+}
 .cart-drawer__rewards-line {
   position: absolute;
   top: 1.1rem;
@@ -276,7 +279,7 @@
   transform: translateX(-50%);
 }
 .cart-drawer__reward--shipping {
-  left: 56%;
+  left: calc((100% - 2.5rem) / 2);
 }
 .cart-drawer__reward--discount {
   right: 0;
@@ -563,6 +566,19 @@
 }
 .cart-drawer__footer-body > .grid > .grid {
   gap: 0.5rem;
+}
+.cart-drawer__discounts {
+  display: grid;
+  gap: 0.4rem;
+}
+.cart-drawer__discount-summary {
+  color: var(--cart-muted);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+.cart-drawer__discount-value {
+  color: var(--cart-primary);
+  letter-spacing: 0.04em;
 }
 .cart-drawer__footer .totals__subtotal,
 .cart-drawer__footer .totals__subtotal-value {

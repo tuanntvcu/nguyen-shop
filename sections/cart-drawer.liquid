@@ -51,7 +51,15 @@
             </cart-count>
           </h2>
           <p class="cart-drawer__intro">You’re one step closer to more comfortable movement.</p>
-          <div class="cart-drawer__rewards{% if cart == empty %} hidden{% endif %}" role="list" aria-label="Cart rewards">
+          <div
+            id="CartDrawerRewards-{{ section.id }}"
+            class="cart-drawer__rewards"
+            role="list"
+            aria-label="Cart rewards"
+            {% if cart == empty %}
+              hidden
+            {% endif %}
+          >
             <span class="cart-drawer__rewards-line" aria-hidden="true"></span>
             <div class="cart-drawer__reward cart-drawer__reward--shipping" role="listitem">
               <span class="cart-drawer__reward-icon" aria-hidden="true">
@@ -698,19 +706,24 @@
             <div class="grid gap-4">
               <div class="grid gap-2">
                 {%- if cart.cart_level_discount_applications.size > 0 -%}
-                  <ul
-                    class="discounts list-unstyled flex gap-1"
+                  <div
+                    class="cart-drawer__discounts"
                     role="list"
                     aria-label="{{ 'customer.order.discount' | t }}"
                   >
                     {%- for discount in cart.cart_level_discount_applications -%}
-                      <li class="discount text-sm flex items-center">
-                        {% render 'icon-discount' %}
-                        <span>{{- discount.title -}}</span>
-                        <span class="font-body-bold">(-{{ discount.total_allocated_amount | money }})</span>
-                      </li>
+                      <div class="cart-drawer__discount-summary flex justify-between items-center" role="listitem">
+                        <span>Discount</span>
+                        <span class="cart-drawer__discount-value font-body-bold">
+                          {%- if discount.value_type == 'percentage' -%}
+                            {{- discount.value | round: 2 -}}% OFF
+                          {%- else -%}
+                            -{{ discount.total_allocated_amount | money }}
+                          {%- endif -%}
+                        </span>
+                      </div>
                     {%- endfor -%}
-                  </ul>
+                  </div>
                 {%- endif -%}
                 <div class="totals flex justify-between items-center">
                   <span class="totals__subtotal h4">
