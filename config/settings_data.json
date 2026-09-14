@@ -74,7 +74,7 @@
     "cart_type": "drawer",
     "cart_icon": "shopping-bag",
     "checkout_discount_code": "WELCOME",
-    "cart_drawer_discount_percentage": 5,
+    "cart_drawer_discount_percentage": 0,
     "free_shipping_minimum_amount": "19",
     "cart_empty_message": "<p>Maybe you also like</p>",
     "collection_list": [
