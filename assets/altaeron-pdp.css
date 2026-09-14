@@ -788,6 +788,7 @@ bundle-deals-widget input[type="radio"]{
 .altaeron-pdp--cro-hero .apdp-hero__reassurance{color:#3d5048;font-size:12px;font-weight:650;margin:9px 0 0;max-width:360px;text-align:center}
 .altaeron-pdp--cro-hero bundle-deals-widget{scroll-margin-top:96px}
 .altaeron-pdp--cro-hero bundle-deals-widget:focus-visible{outline:3px solid rgba(3,74,43,.3);outline-offset:5px}
+.altaeron-pdp--reels-v3 bundle-deals-widget [data-tier-index="1"] .bd-tier__compare{display:none!important}
 
 @media(max-width:767px){
   .altaeron-pdp .apdp-buy__price-line{align-items:center;display:grid;gap:12px;grid-template-columns:max-content minmax(0,1fr);justify-content:normal}

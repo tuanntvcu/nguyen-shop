@@ -4,9 +4,11 @@ import path from 'node:path';
 import { chromium } from '../tmp/pw/node_modules/playwright/index.mjs';
 
 const section = await fs.readFile('sections/altaeron-pdp-reels-v3.liquid', 'utf8');
+const stylesheet = await fs.readFile('assets/altaeron-pdp.css', 'utf8');
 const template = JSON.parse((await fs.readFile('templates/product.altaeron-reels-v3.json', 'utf8')).replace(/^\/\*[\s\S]*?\*\//, ''));
 
 assert.match(section, /data-apdp-submit-label[\s\S]*data-apdp-cta-price/);
+assert.match(stylesheet, /\.altaeron-pdp--reels-v3 bundle-deals-widget \[data-tier-index="1"\] \.bd-tier__compare\{display:none!important\}/);
 assert.equal(template.sections.altaeron_pdp_reels_v3.settings.cta_label, 'ADD TO CART');
 
 const browser = await chromium.launch({ headless: true });
