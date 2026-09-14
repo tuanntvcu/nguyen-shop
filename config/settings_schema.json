@@ -1384,6 +1384,17 @@
         "info": "Optional. Enter an active Shopify discount code to apply when customers check out from the cart drawer or cart page. Leave blank to disable."
       },
       {
+        "type": "range",
+        "id": "cart_drawer_discount_percentage",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Cart drawer discount",
+        "default": 5,
+        "info": "Percentage displayed above the estimated total in the cart drawer."
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cart.settings.header__1.content"
       },
