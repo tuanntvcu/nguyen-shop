@@ -12,7 +12,7 @@
   assign review_rating = review_data.average_rating | default: 0 | plus: 0
   assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
   assign product_image = section.settings.product_image | default: product.featured_image
-  assign cta_label = section.settings.cta_label | default: 'GET YOURS NOW →'
+  assign cta_label = section.settings.cta_label | default: 'ADD TO CART'
   unless request.locale.iso_code == 'en'
     assign cta_label = 'altaeron_pdp_reels_v2.buy.atf_cta' | t
   endunless
@@ -130,7 +130,7 @@
   "enabled_on": { "templates": ["product"] },
   "settings": [
     { "type": "image_picker", "id": "product_image", "label": "CTA product image" },
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "GET YOURS NOW →" }
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "ADD TO CART" }
   ],
   "presets": [{ "name": "Altaeron: Story & CTA" }]
 }

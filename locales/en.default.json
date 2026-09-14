@@ -925,6 +925,27 @@
     }
   },
   "altaeron_home": {
+    "content": {
+      "hero_heading": "Support Every Step.", "hero_text_html": "<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>", "hero_image_alt": "Foot support products for everyday comfort",
+      "primary_label": "Shop by Concern", "secondary_label": "Find Your Match", "concern_heading": "Where Does It Hurt?", "explore_label": "Explore", "popular_heading": "Most Popular Solutions", "view_all_label": "View all",
+      "quiz_heading": "Find the Right Support", "quiz_text": "Answer 3 quick questions and get a personalized collection recommendation.", "quiz_question_one": "Where do you feel discomfort?", "quiz_question_two": "When would you use support most?", "quiz_question_three": "What support feel do you prefer?", "quiz_result_prefix": "A useful place to start:", "quiz_result_label": "View recommendations",
+      "demo_heading": "Real Demonstrations", "demo_text": "See how our products work in real life.", "values_heading": "Why Altaeron?", "reviews_heading": "Loved by Real Customers", "guides_heading": "Foot Care Tips & Guides", "faq_heading": "Frequently Asked Questions",
+      "newsletter_heading": "Take Better Steps.", "newsletter_text": "Tips, guides and product updates straight to your inbox.", "newsletter_placeholder": "Your email address", "newsletter_button": "Subscribe", "newsletter_privacy": "No spam. Unsubscribe anytime.",
+      "trust_1": "Everyday foot support", "trust_2": "Mobile-friendly guidance", "trust_3": "Carefully selected", "trust_4": "Shipping at checkout",
+      "concern_1_title": "Bunions & Toe Alignment", "concern_1_text": "Adjustable support for toe alignment and everyday comfort.", "concern_1_quiz_label": "Toe",
+      "concern_2_title": "Heel & Plantar Fascia", "concern_2_text": "Support options for heel and plantar fascia comfort.", "concern_2_quiz_label": "Heel",
+      "concern_3_title": "Ankle Support", "concern_3_text": "Stabilizing support for everyday movement.", "concern_3_quiz_label": "Ankle",
+      "concern_4_title": "Recovery & Massage", "concern_4_text": "Portable tools for post-activity relaxation.", "concern_4_quiz_label": "Entire Foot",
+      "demo_1_title": "How to Adjust", "demo_2_title": "Daytime Use", "demo_3_title": "Nighttime Support", "demo_4_title": "Ankle Support", "demo_5_title": "Massage & Recovery",
+      "value_1_title": "Not Another Marketplace", "value_1_text": "Products chosen for specific foot concerns.", "value_2_title": "Real Expectations", "value_2_text": "Simple guidance so you know what to expect.", "value_3_title": "Everyday Comfort", "value_3_text": "Support that fits your routine and lifestyle.",
+      "testimonial_1_quote": "I’ve been wearing it at night for a couple of weeks now. It took me a night or two to get used to, but I really like the gentle stretch. My feet feel much more comfortable when I first get out of bed.", "testimonial_1_persona": "Morning foot discomfort", "testimonial_1_media_alt": "Customer wearing the night splint sock at home",
+      "testimonial_2_quote": "I’m on my feet most of the day for work, so mornings used to be the part I dreaded. This is surprisingly simple to put on and I can adjust the tension depending on how I’m feeling. Definitely glad I gave it a try.", "testimonial_2_persona": "On her feet all day", "testimonial_2_media_alt": "Customer using the night splint sock before bed",
+      "testimonial_3_quote": "I bought this after getting tired of constantly stretching my foot before getting out of bed. I was worried it would feel bulky while sleeping, but it’s lighter than I expected. I’ve worked it into my nightly routine and so far I’m really happy with it.", "testimonial_3_persona": "Active lifestyle", "testimonial_3_media_alt": "Customer demonstrating the night splint sock",
+      "faq_1_question": "How long does shipping take?", "faq_1_answer_html": "<p>Available delivery estimates and costs are shown during checkout for your address.</p>",
+      "faq_3_question": "How should I choose the right product?", "faq_3_answer_html": "<p>Start with the area where you need support, then compare wear time, adjustability, and available variants on each product page.</p>",
+      "faq_4_question": "Is it safe to use every day?", "faq_4_answer_html": "<p>Follow the product-specific usage guidance. Stop use if pain, numbness, or irritation increases and seek professional advice when needed.</p>",
+      "faq_5_question": "How do I clean the products?", "faq_5_answer_html": "<p>Follow the care instructions shown on the product page or packaging. Keep powered products away from water unless their instructions state otherwise.</p>"
+    },
     "accessibility": {
       "store_benefits": "Store benefits",
       "previous_products": "Previous products",
@@ -1462,6 +1483,7 @@
     }
   },
   "altaeron_pdp_reels_v3": {
+    "hero": { "review_content_html": "<p>Easy to adjust, <strong>comfortable to wear</strong>, and it gives my big toe the <strong>support I was looking for.</strong></p>" },
     "right_fit": { "eyebrow": "FIND YOUR RIGHT FIT", "heading_html": "Is Altaeron™ <strong>Right for You?</strong>", "subheading": "The Adjustable Bunion Corrector may be a good fit if:", "card_1_title": "You have a mild to moderate bunion", "card_1_body": "and your big toe has started drifting toward the other toes.", "card_2_title": "You regularly experience aching, pressure, or discomfort", "card_2_body": "that interferes with walking, relaxing, or everyday activities.", "card_3_title": "You're looking for a conservative, non-surgical way to manage discomfort at home", "card_3_body": "before considering more invasive treatment.", "card_4_title": "You want adjustable support rather than a fixed toe spacer", "card_4_body": "so you can gradually control the amount of correction and pressure based on your comfort.", "callout_heading": "A more comfortable tomorrow can start today.", "callout_body": "Support your feet. Keep doing what you love." },
     "reviews_eyebrow": "Customer reviews",
     "faq_eyebrow": "FAQ",

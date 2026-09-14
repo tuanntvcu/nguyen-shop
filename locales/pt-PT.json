@@ -942,6 +942,14 @@
     }
   },
   "altaeron_home": {
+    "content": {
+      "hero_heading":"Apoio em cada passo.","hero_text_html":"<p>Encontre o apoio certo para joanetes, dor no calcanhar, instabilidade do tornozelo e desconforto quotidiano nos pés.</p>","hero_image_alt":"Produtos de apoio para o conforto diário dos pés","primary_label":"Comprar por necessidade","secondary_label":"Encontre a opção certa","concern_heading":"Onde sente dor?","explore_label":"Explorar","popular_heading":"Soluções mais populares","view_all_label":"Ver tudo",
+      "quiz_heading":"Encontre o apoio certo","quiz_text":"Responda a 3 perguntas rápidas e receba uma recomendação personalizada.","quiz_question_one":"Onde sente desconforto?","quiz_question_two":"Quando usaria mais o apoio?","quiz_question_three":"Que tipo de apoio prefere?","quiz_result_prefix":"Um bom ponto de partida:","quiz_result_label":"Ver recomendações","demo_heading":"Demonstrações reais","demo_text":"Veja como os nossos produtos funcionam no dia a dia.","values_heading":"Porquê Altaeron?","reviews_heading":"Aprovado por clientes reais","guides_heading":"Dicas e guias de cuidados dos pés","faq_heading":"Perguntas frequentes","newsletter_heading":"Dê passos melhores.","newsletter_text":"Dicas, guias e novidades diretamente no seu e-mail.","newsletter_placeholder":"O seu endereço de e-mail","newsletter_button":"Subscrever","newsletter_privacy":"Sem spam. Cancele quando quiser.",
+      "trust_1":"Apoio diário para os pés","trust_2":"Orientação adaptada ao telemóvel","trust_3":"Seleção cuidada","trust_4":"Envio calculado no checkout","concern_1_title":"Joanetes e alinhamento do dedo","concern_1_text":"Apoio ajustável para o alinhamento do dedo e conforto diário.","concern_1_quiz_label":"Dedo","concern_2_title":"Calcanhar e fáscia plantar","concern_2_text":"Opções de apoio para o conforto do calcanhar e da fáscia plantar.","concern_2_quiz_label":"Calcanhar","concern_3_title":"Apoio do tornozelo","concern_3_text":"Apoio estabilizador para o movimento diário.","concern_3_quiz_label":"Tornozelo","concern_4_title":"Recuperação e massagem","concern_4_text":"Ferramentas portáteis para relaxar após a atividade.","concern_4_quiz_label":"Pé inteiro",
+      "demo_1_title":"Como ajustar","demo_2_title":"Utilização diurna","demo_3_title":"Apoio noturno","demo_4_title":"Apoio do tornozelo","demo_5_title":"Massagem e recuperação","value_1_title":"Mais do que um marketplace","value_1_text":"Produtos escolhidos para necessidades específicas dos pés.","value_2_title":"Expectativas reais","value_2_text":"Orientação simples para saber o que esperar.","value_3_title":"Conforto diário","value_3_text":"Apoio adaptado à sua rotina e estilo de vida.",
+      "testimonial_1_quote":"Uso-o à noite há algumas semanas. Demorei uma ou duas noites a habituar-me, mas gosto muito do alongamento suave. Os meus pés ficam muito mais confortáveis quando me levanto.","testimonial_1_persona":"Desconforto nos pés de manhã","testimonial_1_media_alt":"Cliente a usar a tala noturna em casa","testimonial_2_quote":"Passo quase todo o dia de pé no trabalho, por isso as manhãs eram a parte que mais receava. É muito simples de colocar e posso ajustar a tensão conforme me sinto. Ainda bem que experimentei.","testimonial_2_persona":"De pé todo o dia","testimonial_2_media_alt":"Cliente a usar a tala noturna antes de dormir","testimonial_3_quote":"Comprei-o porque estava cansada de alongar constantemente o pé antes de me levantar. Receava que fosse volumoso durante o sono, mas é mais leve do que esperava. Já faz parte da minha rotina noturna e estou muito satisfeita.","testimonial_3_persona":"Estilo de vida ativo","testimonial_3_media_alt":"Cliente a demonstrar a utilização da tala noturna",
+      "faq_1_question":"Quanto tempo demora o envio?","faq_1_answer_html":"<p>Os prazos e custos de entrega disponíveis para a sua morada são apresentados durante o checkout.</p>","faq_3_question":"Como devo escolher o produto certo?","faq_3_answer_html":"<p>Comece pela área que precisa de apoio e compare o tempo de utilização, a capacidade de ajuste e as variantes disponíveis em cada página de produto.</p>","faq_4_question":"É seguro utilizar todos os dias?","faq_4_answer_html":"<p>Siga as orientações específicas do produto. Pare de utilizar se a dor, dormência ou irritação aumentar e procure aconselhamento profissional quando necessário.</p>","faq_5_question":"Como limpo os produtos?","faq_5_answer_html":"<p>Siga as instruções de cuidado na página do produto ou embalagem. Mantenha os produtos elétricos afastados da água, salvo indicação em contrário.</p>"
+    },
     "accessibility": {
       "store_benefits": "Benefícios da loja",
       "previous_products": "Produtos anteriores",
@@ -952,7 +960,8 @@
       "close_video": "Fechar vídeo",
       "play_testimonial": "Reproduzir testemunho do cliente: {{ name }}",
       "go_to_slide": "Vá para o slide",
-      "product_demonstration": "Demonstração do produto"
+      "product_demonstration": "Demonstração do produto",
+      "product_badges": "Distintivos do produto"
     },
     "quiz": {
       "next": "Próxima Pergunta",
@@ -979,7 +988,8 @@
       "rating": "{{ rating }} em 5 estrelas de {{ count }} avaliações",
       "add_to_cart": "Adicionar {{ product }} ao carrinho",
       "choose_options": "Escolha as opções para {{ product }}",
-      "view": "Ver {{ product }}"
+      "view": "Ver {{ product }}",
+      "best_seller": "Mais vendido"
     }
   },
   "altaeron_pdp_reels_v2": {
@@ -1169,6 +1179,7 @@
     }
   },
   "altaeron_pdp_reels_v3": {
+    "hero": { "review_content_html": "<p>Fácil de ajustar, <strong>confortável de usar</strong> e dá ao meu dedo grande o <strong>apoio que eu procurava.</strong></p>" },
     "right_fit": { "eyebrow": "ENCONTRE O AJUSTE CERTO", "heading_html": "Altaeron™ é <strong>adequado para si?</strong>", "subheading": "O corretor ajustável para joanetes pode ser uma boa opção se:", "card_1_title": "Tem um joanete ligeiro a moderado", "card_1_body": "e o dedo grande começou a desviar-se em direção aos outros dedos.", "card_2_title": "Sente regularmente dor, pressão ou desconforto", "card_2_body": "que interferem com caminhar, relaxar ou realizar atividades quotidianas.", "card_3_title": "Procura uma forma conservadora e não cirúrgica de aliviar o desconforto em casa", "card_3_body": "antes de considerar um tratamento mais invasivo.", "card_4_title": "Prefere apoio ajustável a um separador de dedos fixo", "card_4_body": "para controlar gradualmente a correção e a pressão de acordo com o seu conforto.", "callout_heading": "Um amanhã mais confortável pode começar hoje.", "callout_body": "Apoie os seus pés. Continue a fazer o que gosta." },
     "reviews_eyebrow": "Avaliações de clientes",
     "faq_eyebrow": "PERGUNTAS FREQUENTES",

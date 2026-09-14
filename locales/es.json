@@ -942,6 +942,14 @@
     }
   },
   "altaeron_home": {
+    "content": {
+      "hero_heading":"Apoyo en cada paso.","hero_text_html":"<p>Encuentra el soporte adecuado para juanetes, dolor de talón, inestabilidad del tobillo y molestias cotidianas en los pies.</p>","hero_image_alt":"Productos de soporte para la comodidad diaria de los pies","primary_label":"Comprar por molestia","secondary_label":"Encuentra tu opción","concern_heading":"¿Dónde te duele?","explore_label":"Explorar","popular_heading":"Soluciones más populares","view_all_label":"Ver todo",
+      "quiz_heading":"Encuentra el soporte adecuado","quiz_text":"Responde 3 preguntas rápidas y recibe una recomendación personalizada.","quiz_question_one":"¿Dónde sientes molestias?","quiz_question_two":"¿Cuándo usarías más el soporte?","quiz_question_three":"¿Qué tipo de soporte prefieres?","quiz_result_prefix":"Un buen punto de partida:","quiz_result_label":"Ver recomendaciones","demo_heading":"Demostraciones reales","demo_text":"Descubre cómo funcionan nuestros productos en la vida diaria.","values_heading":"¿Por qué Altaeron?","reviews_heading":"Clientes reales lo recomiendan","guides_heading":"Consejos y guías para el cuidado de los pies","faq_heading":"Preguntas frecuentes","newsletter_heading":"Da mejores pasos.","newsletter_text":"Consejos, guías y novedades de productos en tu correo.","newsletter_placeholder":"Tu correo electrónico","newsletter_button":"Suscribirme","newsletter_privacy":"Sin spam. Cancela cuando quieras.",
+      "trust_1":"Soporte diario para tus pies","trust_2":"Orientación adaptada al móvil","trust_3":"Selección cuidadosa","trust_4":"Envío calculado al pagar","concern_1_title":"Juanetes y alineación del dedo","concern_1_text":"Soporte ajustable para la alineación del dedo y la comodidad diaria.","concern_1_quiz_label":"Dedo","concern_2_title":"Talón y fascia plantar","concern_2_text":"Opciones de soporte para el confort del talón y la fascia plantar.","concern_2_quiz_label":"Talón","concern_3_title":"Soporte para el tobillo","concern_3_text":"Soporte estabilizador para el movimiento diario.","concern_3_quiz_label":"Tobillo","concern_4_title":"Recuperación y masaje","concern_4_text":"Herramientas portátiles para relajarte después de la actividad.","concern_4_quiz_label":"Todo el pie",
+      "demo_1_title":"Cómo ajustarlo","demo_2_title":"Uso diurno","demo_3_title":"Soporte nocturno","demo_4_title":"Soporte para el tobillo","demo_5_title":"Masaje y recuperación","value_1_title":"No somos otro marketplace","value_1_text":"Productos elegidos para necesidades específicas de los pies.","value_2_title":"Expectativas reales","value_2_text":"Orientación sencilla para saber qué esperar.","value_3_title":"Comodidad diaria","value_3_text":"Soporte que se adapta a tu rutina y estilo de vida.",
+      "testimonial_1_quote":"Lo llevo por la noche desde hace un par de semanas. Tardé una o dos noches en acostumbrarme, pero me gusta mucho el estiramiento suave. Mis pies se sienten mucho más cómodos al levantarme.","testimonial_1_persona":"Molestias matutinas en los pies","testimonial_1_media_alt":"Clienta usando la férula nocturna en casa","testimonial_2_quote":"Paso casi todo el día de pie por trabajo, así que antes temía las mañanas. Es sorprendentemente fácil de poner y puedo ajustar la tensión según cómo me sienta. Me alegro de haberlo probado.","testimonial_2_persona":"De pie todo el día","testimonial_2_media_alt":"Clienta usando la férula nocturna antes de dormir","testimonial_3_quote":"Lo compré porque estaba cansada de estirar constantemente el pie antes de levantarme. Pensé que sería aparatoso para dormir, pero es más ligero de lo esperado. Ya forma parte de mi rutina nocturna y estoy muy contenta.","testimonial_3_persona":"Estilo de vida activo","testimonial_3_media_alt":"Clienta mostrando cómo usar la férula nocturna",
+      "faq_1_question":"¿Cuánto tarda el envío?","faq_1_answer_html":"<p>Las estimaciones y los costes de entrega disponibles para tu dirección se muestran durante el pago.</p>","faq_3_question":"¿Cómo elijo el producto adecuado?","faq_3_answer_html":"<p>Empieza por la zona que necesita soporte y compara el tiempo de uso, el ajuste y las variantes disponibles en cada página de producto.</p>","faq_4_question":"¿Es seguro usarlo todos los días?","faq_4_answer_html":"<p>Sigue las indicaciones específicas del producto. Deja de usarlo si aumentan el dolor, el entumecimiento o la irritación y consulta a un profesional cuando sea necesario.</p>","faq_5_question":"¿Cómo limpio los productos?","faq_5_answer_html":"<p>Sigue las instrucciones de cuidado de la página del producto o del embalaje. Mantén los productos eléctricos alejados del agua salvo que sus instrucciones indiquen lo contrario.</p>"
+    },
     "accessibility": {
       "store_benefits": "Beneficios de la tienda",
       "previous_products": "Productos anteriores",
@@ -952,7 +960,8 @@
       "close_video": "Cerrar video",
       "play_testimonial": "Reproducir testimonio de cliente: {{ name }}",
       "go_to_slide": "Ir a la diapositiva",
-      "product_demonstration": "Demostración de producto"
+      "product_demonstration": "Demostración de producto",
+      "product_badges": "Insignias del producto"
     },
     "quiz": {
       "next": "Siguiente pregunta",
@@ -979,7 +988,8 @@
       "rating": "{{ rating }} de 5 estrellas de {{ count }} reseñas",
       "add_to_cart": "Añadir {{ product }} al carrito",
       "choose_options": "Elige opciones para {{ product }}",
-      "view": "Ver {{ product }}"
+      "view": "Ver {{ product }}",
+      "best_seller": "Más vendido"
     }
   },
   "altaeron_pdp_reels_v2": {
@@ -1169,6 +1179,7 @@
     }
   },
   "altaeron_pdp_reels_v3": {
+    "hero": { "review_content_html": "<p>Es fácil de ajustar, <strong>cómodo de llevar</strong> y le da a mi dedo gordo el <strong>soporte que estaba buscando.</strong></p>" },
     "right_fit": { "eyebrow": "ENCUENTRA EL AJUSTE ADECUADO", "heading_html": "¿Es Altaeron™ <strong>adecuado para ti?</strong>", "subheading": "El corrector ajustable para juanetes puede ser una buena opción si:", "card_1_title": "Tienes un juanete leve o moderado", "card_1_body": "y el dedo gordo ha empezado a desviarse hacia los demás dedos.", "card_2_title": "Sientes habitualmente dolor, presión o molestias", "card_2_body": "que interfieren al caminar, descansar o realizar actividades cotidianas.", "card_3_title": "Buscas una forma conservadora y no quirúrgica de aliviar las molestias en casa", "card_3_body": "antes de considerar un tratamiento más invasivo.", "card_4_title": "Prefieres un soporte ajustable a un separador fijo", "card_4_body": "para controlar gradualmente la corrección y la presión según tu comodidad.", "callout_heading": "Un mañana más cómodo puede empezar hoy.", "callout_body": "Cuida tus pies. Sigue haciendo lo que te gusta." },
     "reviews_eyebrow": "Opiniones de clientes",
     "faq_eyebrow": "PREGUNTAS FRECUENTES",

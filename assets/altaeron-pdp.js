@@ -665,6 +665,7 @@
       const setText = (element, value) => {
         if (element && value && element.textContent !== value) element.textContent = value;
       };
+      const firstTierPrice = parseDisplayedMoney(widgetRoot.querySelector('[data-tier-index="0"] .bd-tier__price')?.textContent);
       [...widgetRoot.querySelectorAll('[data-tier-index]')].forEach((tier, index) => {
         const quantity = Number(tier.dataset.tierIndex) + 1 || index + 1;
         const priceElement = tier.querySelector('.bd-tier__price');
@@ -672,7 +673,9 @@
         setText(priceElement, money(tierPrice, format));
         if (quantity === 1) return;
 
-        const originalTotal = (baseCompare > basePrice ? baseCompare : basePrice) * quantity;
+        const originalTotal = root.classList.contains('altaeron-pdp--reels-v3') && quantity === 2 && firstTierPrice
+          ? firstTierPrice * 2
+          : (baseCompare > basePrice ? baseCompare : basePrice) * quantity;
         setText(tier.querySelector('.bd-tier__compare'), originalTotal > 0 ? money(originalTotal, format) : '');
       });
     };

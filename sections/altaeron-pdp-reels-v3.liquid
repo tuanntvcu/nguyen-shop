@@ -21,12 +21,14 @@
   assign reel_explanation = section.settings.subheadline
   assign reel_price_label = section.settings.price_label
   assign reel_cta_label = section.settings.cta_label
+  assign reel_review_content = section.settings.review_content
   unless request.locale.iso_code == 'en'
     assign reel_product_name = 'altaeron_pdp_reels_v2.hero.atf_product_name' | t
     assign reel_benefit_headline = 'altaeron_pdp_reels_v2.hero.atf_headline' | t
     assign reel_explanation = 'altaeron_pdp_reels_v2.hero.atf_explanation' | t
     assign reel_price_label = 'altaeron_pdp_reels_v2.common.from' | t
     assign reel_cta_label = 'altaeron_pdp_reels_v2.buy.atf_cta' | t
+    assign reel_review_content = 'altaeron_pdp_reels_v3.hero.review_content_html' | t
   endunless
   assign product_form_id = 'product-form-' | append: section.id
   assign compare_price = current_variant.compare_at_price
@@ -380,8 +382,8 @@
           </div>
           <div>
             {% render 'altaeron-pdp-stars', rating: 5 %}
-            <blockquote>{{ section.settings.review_content }}</blockquote>
-            <figcaption><strong>{{ section.settings.reviewer_name }}</strong> &middot; Verified Buyer</figcaption>
+            <blockquote>{{ reel_review_content }}</blockquote>
+            <figcaption><strong>{{ section.settings.reviewer_name }}</strong> &middot; {{ 'altaeron_pdp.reviews.verified_buyer' | t }}</figcaption>
           </div>
         </figure>
       </div>
@@ -407,7 +409,7 @@
             </fieldset>
           {%- endunless -%}
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
-          <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ reel_cta_label }}">{% if current_variant.available %}{{ reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span></span><span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
+          <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ reel_cta_label }}">{% if current_variant.available %}{{ reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><span data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}>{% if current_variant.available %} — {{ current_variant.price | money }}{% endif %}</span></span><span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
           <p class="apdp-cta-reassurance">{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>{{ 'altaeron_pdp_reels_v2.buy.reassurance' | t: default: 'Secure checkout · Tracked shipping · 30-day easy returns' }}</span></p>
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp_reels_v2.buy.installments' | t: amount: installment_amount }} <strong>shop<span>Pay</span></strong></div>
           {%- if shop.enabled_payment_types.size > 0 -%}
@@ -646,7 +648,7 @@
     { "type": "richtext", "id": "review_content", "label": "Review content", "default": "<p>I started with gentle tension and adjusted it until it felt comfortable. Simple to use and surprisingly supportive</p>" },
     { "type": "text", "id": "reviewer_name", "label": "Reviewer name", "default": "Karen M." },
     { "type": "text", "id": "price_label", "label": "Price label", "default": "From" },
-    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "GET YOURS NOW →" }
+    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "ADD TO CART" }
   ],
   "blocks": [
     {

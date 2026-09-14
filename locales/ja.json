@@ -942,6 +942,14 @@
     }
   },
   "altaeron_home": {
+    "content": {
+      "hero_heading":"一歩一歩をサポート。","hero_text_html":"<p>外反母趾、かかとの痛み、足首の不安定感、日常的な足の不快感に合ったサポートを見つけましょう。</p>","hero_image_alt":"毎日の足の快適さを支えるサポート製品","primary_label":"お悩み別に探す","secondary_label":"自分に合う製品を探す","concern_heading":"どこにお悩みがありますか？","explore_label":"詳しく見る","popular_heading":"人気のサポート製品","view_all_label":"すべて見る",
+      "quiz_heading":"あなたに合うサポートを見つける","quiz_text":"3つの簡単な質問に答えて、おすすめのコレクションをご確認ください。","quiz_question_one":"どこに不快感がありますか？","quiz_question_two":"主にいつサポートを使用しますか？","quiz_question_three":"どのような装着感をお好みですか？","quiz_result_prefix":"まずはこちらがおすすめです：","quiz_result_label":"おすすめを見る","demo_heading":"実際の使用方法","demo_text":"製品を日常でどのように使うかご覧ください。","values_heading":"Altaeronが選ばれる理由","reviews_heading":"お客様から高評価","guides_heading":"フットケアのヒントとガイド","faq_heading":"よくあるご質問","newsletter_heading":"もっと快適な一歩を。","newsletter_text":"ヒント、ガイド、製品情報をメールでお届けします。","newsletter_placeholder":"メールアドレス","newsletter_button":"登録する","newsletter_privacy":"迷惑メールは送りません。いつでも解除できます。",
+      "trust_1":"毎日の足をサポート","trust_2":"スマートフォンで簡単ガイド","trust_3":"厳選した製品","trust_4":"送料はお会計時に表示","concern_1_title":"外反母趾と親指のアライメント","concern_1_text":"親指のアライメントと毎日の快適さを支える調節可能なサポート。","concern_1_quiz_label":"足指","concern_2_title":"かかとと足底筋膜","concern_2_text":"かかとと足底筋膜の快適さを支える製品。","concern_2_quiz_label":"かかと","concern_3_title":"足首サポート","concern_3_text":"毎日の動きを安定させるサポート。","concern_3_quiz_label":"足首","concern_4_title":"リカバリーとマッサージ","concern_4_text":"運動後のリラックスに使える携帯ツール。","concern_4_quiz_label":"足全体",
+      "demo_1_title":"調節方法","demo_2_title":"日中の使用","demo_3_title":"夜間サポート","demo_4_title":"足首サポート","demo_5_title":"マッサージとリカバリー","value_1_title":"ただのマーケットプレイスではありません","value_1_text":"足の具体的なお悩みに合わせて製品を厳選。","value_2_title":"現実的な目安","value_2_text":"使用前に知っておきたいことを分かりやすくご案内。","value_3_title":"毎日の快適さ","value_3_text":"日々の習慣やライフスタイルに合うサポート。",
+      "testimonial_1_quote":"数週間、夜に装着しています。慣れるまで1〜2晩かかりましたが、やさしく伸びる感覚が気に入っています。朝ベッドから出るとき、足がずっと快適になりました。","testimonial_1_persona":"朝の足の不快感","testimonial_1_media_alt":"自宅で夜用スプリントソックスを着用するお客様","testimonial_2_quote":"仕事で一日のほとんどを立って過ごすため、以前は朝が憂うつでした。驚くほど簡単に装着でき、その日の感覚に合わせて張力を調節できます。試してよかったです。","testimonial_2_persona":"一日中立ち仕事","testimonial_2_media_alt":"就寝前に夜用スプリントソックスを使用するお客様","testimonial_3_quote":"起きる前に毎回足を伸ばすのが大変で購入しました。寝るときにかさばるか心配でしたが、思ったより軽いです。今では夜の習慣になり、とても満足しています。","testimonial_3_persona":"アクティブな生活","testimonial_3_media_alt":"夜用スプリントソックスの使い方を示すお客様",
+      "faq_1_question":"配送にはどのくらいかかりますか？","faq_1_answer_html":"<p>お届け先で利用できる配送予定日と料金は、お会計時に表示されます。</p>","faq_3_question":"自分に合う製品はどう選べばよいですか？","faq_3_answer_html":"<p>まずサポートが必要な部位を確認し、各製品ページで装着時間、調節機能、利用可能な種類を比較してください。</p>","faq_4_question":"毎日使用しても大丈夫ですか？","faq_4_answer_html":"<p>製品ごとの使用方法に従ってください。痛み、しびれ、刺激が強くなった場合は使用を中止し、必要に応じて専門家にご相談ください。</p>","faq_5_question":"製品のお手入れ方法は？","faq_5_answer_html":"<p>製品ページまたはパッケージのお手入れ方法に従ってください。防水の記載がない電動製品は水から遠ざけてください。</p>"
+    },
     "accessibility": {
       "store_benefits": "ストアのメリット",
       "previous_products": "前の商品",
@@ -1172,6 +1180,7 @@
   }
 ,
   "altaeron_pdp_reels_v3": {
+    "hero": { "review_content_html": "<p>調節しやすく、<strong>快適に装着でき</strong>、足の親指に<strong>求めていたサポート</strong>を与えてくれます。</p>" },
     "reviews_eyebrow": "お客様のレビュー",
     "faq_eyebrow": "よくあるご質問",
     "right_fit": { "eyebrow": "あなたに合うかチェック", "heading_html": "Altaeron™は<strong>あなたに合っていますか？</strong>", "subheading": "調節式外反母趾矯正器は、次のような方に適しています：", "card_1_title": "軽度から中等度の外反母趾がある", "card_1_body": "足の親指が他の指の方向へ曲がり始めている。", "card_2_title": "痛み、圧迫感、不快感を繰り返し感じる", "card_2_body": "歩行、休息、日常生活に支障が出ている。", "card_3_title": "自宅でできる保存的かつ非外科的なケアを探している", "card_3_body": "より侵襲的な治療を検討する前に対処したい。", "card_4_title": "固定式のトゥスペーサーより調節可能なサポートがほしい", "card_4_body": "快適さに合わせて矯正力と圧力を少しずつ調節したい。", "callout_heading": "より快適な明日は、今日から始められます。", "callout_body": "足をサポートして、好きなことを続けましょう。" },

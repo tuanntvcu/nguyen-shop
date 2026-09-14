@@ -64,7 +64,7 @@
         "review_content": "<p>Easy to adjust, <strong>comfortable to wear</strong>, and it gives my big toe the <strong>support I was looking for.</strong></p>",
         "reviewer_name": "Karen M.",
         "price_label": "From",
-        "cta_label": "GET YOURS NOW →"
+        "cta_label": "ADD TO CART"
       }
     },
     "altaeron_bunion_benefits": {
@@ -316,14 +316,14 @@
       "type": "altaeron-reels-v3-final",
       "settings": {
         "product_image": "shopify://shop_images/ChatGPT_Image_Aug_14_2026_01_46_46_PM.png",
-        "cta_label": "GET YOURS NOW →"
+        "cta_label": "ADD TO CART"
       }
     }
   },
   "order": [
     "altaeron_pdp_reels_v3",
-    "altaeron_bunion_benefits",
     "altaeron_right_fit",
+    "altaeron_bunion_benefits",
     "altaeron_adjustable_support",
     "altaeron_muscle_support",
     "altaeron_support_timeline",
