@@ -51,12 +51,22 @@
             </cart-count>
           </h2>
           <p class="cart-drawer__intro">You’re one step closer to more comfortable movement.</p>
-          {%- liquid
-            if section.settings.show_free_shipping_goal and settings.free_shipping_minimum_amount != blank
-              assign minimum_amount = settings.free_shipping_minimum_amount | remove: ' '
-              render 'free-shipping-goal', minimum_amount: minimum_amount, classes: 'w-full'
-            endif
-          -%}
+          <div class="cart-drawer__rewards{% if cart == empty %} hidden{% endif %}" role="list" aria-label="Cart rewards">
+            <span class="cart-drawer__rewards-line" aria-hidden="true"></span>
+            <div class="cart-drawer__reward cart-drawer__reward--shipping" role="listitem">
+              <span class="cart-drawer__reward-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" focusable="false">
+                  <path d="M3.5 6.5h10.8v9H3.5zM14.3 9.7h3.2l3 3.1v2.7h-6.2z"/>
+                  <circle cx="7" cy="17.2" r="1.5"/><circle cx="17.8" cy="17.2" r="1.5"/>
+                </svg>
+              </span>
+              <span class="cart-drawer__reward-label">Free shipping</span>
+            </div>
+            <div class="cart-drawer__reward cart-drawer__reward--discount" role="listitem">
+              <span class="cart-drawer__reward-icon cart-drawer__reward-icon--percent" aria-hidden="true">%</span>
+              <span class="cart-drawer__reward-label">5% OFF</span>
+            </div>
+          </div>
         </div>
         <div
           id="CartDrawerEmpty-{{ section.id }}"

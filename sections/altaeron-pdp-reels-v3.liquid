@@ -118,6 +118,13 @@
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li>svg{color:var(--altaeron-primary,#006B5E);flex:0 0 22px;height:22px;stroke-width:1.8;width:22px}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits b{display:block;font-size:11px;line-height:1.25}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits small{color:var(--altaeron-body,#344054);display:block;font-size:9px;font-weight:400;line-height:1.35;margin-top:3px}
+  #AltaeronPdp-{{ section.id }} .apdp-hero-review{align-items:start;background:var(--altaeron-off-white,#F8FAF9);border:1px solid var(--altaeron-border,#E4E7EC);border-radius:10px;display:grid;gap:13px;grid-template-columns:56px minmax(0,1fr);margin:16px 0 0;padding:16px}
+  #AltaeronPdp-{{ section.id }} .apdp-hero-review .apdp-tail-avatar{height:56px;width:56px}
+  #AltaeronPdp-{{ section.id }} .apdp-hero-review .apdp-stars{font-size:20px}
+  #AltaeronPdp-{{ section.id }} .apdp-hero-review blockquote{color:var(--altaeron-body,#344054);font-size:14px;line-height:1.55;margin:5px 0 0}
+  #AltaeronPdp-{{ section.id }} .apdp-hero-review blockquote p{margin:0}
+  #AltaeronPdp-{{ section.id }} .apdp-hero-review blockquote strong{color:var(--altaeron-primary,#006B5E)}
+  #AltaeronPdp-{{ section.id }} .apdp-hero-review figcaption{font-size:12px;margin-top:9px}
   #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance{align-items:center;color:var(--altaeron-body,#344054);display:flex;font-size:10px;gap:6px;justify-content:center;line-height:1.4;margin:9px 0 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance svg{color:var(--altaeron-primary,#006B5E);flex:0 0 14px;height:14px;width:14px}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options{border:0;margin:11px 0 0;text-align:center}
@@ -177,6 +184,8 @@
     #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li>svg{grid-row:1}
     #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits b{font-size:12px}
     #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits small{font-size:10px;margin-top:2px}
+    #AltaeronPdp-{{ section.id }} .apdp-hero-review{grid-template-columns:50px minmax(0,1fr);padding:14px}
+    #AltaeronPdp-{{ section.id }} .apdp-hero-review .apdp-tail-avatar{height:50px;width:50px}
     #AltaeronPdp-{{ section.id }} .apdp-day__layout{align-items:stretch;display:grid;gap:34px;grid-template-columns:minmax(300px,390px) minmax(0,1fr)}
     #AltaeronPdp-{{ section.id }} .apdp-day__media{aspect-ratio:9/16;height:auto;margin:0;max-width:390px;width:100%}
     #AltaeronPdp-{{ section.id }} .apdp-day__benefits{align-content:stretch;gap:14px;grid-template-columns:1fr;margin:0}
@@ -216,6 +225,8 @@
     #AltaeronPdp-{{ section.id }} .apdp-narrative__explanation{font-size:14px}
     #AltaeronPdp-{{ section.id }} .apdp-narrative .apdp-rating{max-width:none}
     #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{margin-top:16px}
+    #AltaeronPdp-{{ section.id }} .apdp-hero-review{grid-template-columns:50px minmax(0,1fr);padding:14px}
+    #AltaeronPdp-{{ section.id }} .apdp-hero-review .apdp-tail-avatar{height:50px;width:50px}
     #AltaeronPdp-{{ section.id }} .apdp-buy{padding-top:13px}
     #AltaeronPdp-{{ section.id }} .apdp-buy__trust>:first-child{display:flex}
     #AltaeronPdp-{{ section.id }} .apdp-support__features{background:#f4faf8;border:1px solid #e4e7e2;border-radius:13px;display:block;overflow:hidden;padding:0 12px}
@@ -359,6 +370,20 @@
           <li>{% render 'altaeron-pdp-icon', icon: 'left-right' %}<span><b>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_2' | t: default: 'Unisex · Either Foot' }}</b><small>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_2_note' | t: default: 'Designed for men and women, left or right foot.' }}</small></span></li>
           <li>{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_3' | t: default: '30-Day Easy Returns' }}</b><small>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_3_note' | t: default: 'Try it at home with less risk.' }}</small></span></li>
         </ul>
+        <figure class="apdp-hero-review">
+          <div class="apdp-tail-avatar">
+            {%- if section.settings.review_avatar != blank -%}
+              {{ section.settings.review_avatar | image_url: width: 160 | image_tag: loading: 'eager', widths: '80, 120, 160', sizes: '56px', alt: section.settings.review_avatar.alt | default: section.settings.reviewer_name }}
+            {%- else -%}
+              <span class="apdp-tail-avatar__initial" aria-hidden="true">{{ section.settings.reviewer_name | slice: 0 }}</span>
+            {%- endif -%}
+          </div>
+          <div>
+            {% render 'altaeron-pdp-stars', rating: 5 %}
+            <blockquote>{{ section.settings.review_content }}</blockquote>
+            <figcaption><strong>{{ section.settings.reviewer_name }}</strong> &middot; {{ 'altaeron_pdp_dialfit.buy.verified_customer' | t }}</figcaption>
+          </div>
+        </figure>
       </div>
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.purchase' | t: product: product.title | escape }}" data-apdp-primary-purchase>
@@ -407,7 +432,7 @@
         <div class="apdp-buy__trust apdp-buy__trust--three">
           <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>{{ 'altaeron_pdp_reels_v2.buy.shipping' | t }}</b></a>
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<b>{{ 'altaeron_pdp_reels_v2.buy.returns_30' | t: default: '30-Day Returns' }}</b></a>
-          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<b>{{ 'altaeron_pdp_reels_v2.buy.responsive_support' | t: default: 'Responsive Support' }}</b></a>
+          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<b>Fast shipping</b></a>
         </div>
       </aside>
     </div>
@@ -616,6 +641,10 @@
     { "type": "text", "id": "eyebrow", "label": "Product name", "default": "Altaeron™ Adjustable Bunion Corrector" },
     { "type": "textarea", "id": "headline", "label": "Core benefit", "default": "Gentle support for better big-toe alignment." },
     { "type": "textarea", "id": "subheadline", "label": "Explanation", "default": "Helps guide the big toe toward a more natural position while easing pressure and crowding around the bunion." },
+    { "type": "header", "content": "Above-the-fold review" },
+    { "type": "image_picker", "id": "review_avatar", "label": "Reviewer image" },
+    { "type": "richtext", "id": "review_content", "label": "Review content", "default": "<p>I started with gentle tension and adjusted it until it felt comfortable. Simple to use and surprisingly supportive</p>" },
+    { "type": "text", "id": "reviewer_name", "label": "Reviewer name", "default": "Karen M." },
     { "type": "text", "id": "price_label", "label": "Price label", "default": "From" },
     { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "GET YOURS NOW →" }
   ],

@@ -246,6 +246,69 @@
   font-size: 1.45rem;
   line-height: 1.4;
 }
+.cart-drawer__rewards {
+  position: relative;
+  width: 100%;
+  height: 4.8rem;
+  margin-block-start: 0.8rem;
+}
+.cart-drawer__rewards-line {
+  position: absolute;
+  top: 1.1rem;
+  left: 0;
+  width: 100%;
+  height: 0.3rem;
+  border-radius: 99rem;
+  background: var(--cart-ink);
+}
+.cart-drawer__reward {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--cart-ink);
+  transform: translateX(-50%);
+}
+.cart-drawer__reward--shipping {
+  left: 56%;
+}
+.cart-drawer__reward--discount {
+  left: 100%;
+}
+.cart-drawer__reward-icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 2.5rem;
+  border-radius: 50%;
+  background: var(--cart-ink);
+  color: #fff;
+}
+.cart-drawer__reward-icon svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cart-drawer__reward-icon--percent {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.cart-drawer__reward-label {
+  color: var(--cart-muted);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
 .cart-drawer__body {
   min-height: 0;
   padding: 0 2rem 2.8rem;
