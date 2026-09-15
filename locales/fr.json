@@ -992,6 +992,9 @@
       "best_seller": "Meilleure vente"
     }
   },
+  "altaeron_pdp_offer": {
+    "new_customer_html": "Nouveau client ? <strong>Économisez 5 %</strong> — appliqué automatiquement"
+  },
   "altaeron_pdp_reels_v2": {
     "promotion": {
       "eyebrow": "Promotion de la fête du Travail",

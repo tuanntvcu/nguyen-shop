@@ -1005,6 +1005,9 @@
       "best_seller": "Bestseller"
     }
   },
+  "altaeron_pdp_offer": {
+    "new_customer_html": "Neukunde? <strong>5 % sparen</strong> — wird automatisch angewendet"
+  },
   "altaeron_pdp_reels_v2": {
     "promotion": {
       "eyebrow": "Labor-Day-Angebot",

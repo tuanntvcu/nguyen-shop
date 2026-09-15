@@ -992,6 +992,9 @@
       "best_seller": "Más vendido"
     }
   },
+  "altaeron_pdp_offer": {
+    "new_customer_html": "¿Eres nuevo cliente? <strong>Ahorra un 5 %</strong> — se aplica automáticamente"
+  },
   "altaeron_pdp_reels_v2": {
     "promotion": {
       "eyebrow": "Oferta del Día del Trabajo",

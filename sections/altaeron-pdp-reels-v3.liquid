@@ -409,6 +409,7 @@
             </fieldset>
           {%- endunless -%}
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
+          <p class="apdp-new-customer-offer">{{ 'altaeron_pdp_offer.new_customer_html' | t }}</p>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ reel_cta_label }}">{% if current_variant.available %}{{ reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><span data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}>{% if current_variant.available %} — {{ current_variant.price | money }}{% endif %}</span></span><span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
           <p class="apdp-cta-reassurance">{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>{{ 'altaeron_pdp_reels_v2.buy.reassurance' | t: default: 'Secure checkout · Tracked shipping · 30-day easy returns' }}</span></p>
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp_reels_v2.buy.installments' | t: amount: installment_amount }} <strong>shop<span>Pay</span></strong></div>

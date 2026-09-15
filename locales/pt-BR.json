@@ -680,6 +680,9 @@
     "guides": {"reading_time":"{{ minutes }} min de leitura"},
     "product": {"rating":"{{ rating }} de 5 estrelas em {{ count }} avaliações","add_to_cart":"Adicionar {{ product }} ao carrinho","choose_options":"Escolher opções para {{ product }}","view":"Ver {{ product }}","best_seller":"Mais vendido"}
   },
+  "altaeron_pdp_offer": {
+    "new_customer_html": "Cliente novo? <strong>Economize 5%</strong> — aplicado automaticamente"
+  },
   "altaeron_pdp_reels_v2": {
     "promotion": {
       "eyebrow": "Oferta de Labor Day",

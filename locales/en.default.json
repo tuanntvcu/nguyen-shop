@@ -1296,6 +1296,9 @@
       "badge_alt": "Altaeron 30-Day Comfort Guarantee badge"
     }
   },
+  "altaeron_pdp_offer": {
+    "new_customer_html": "New customer? <strong>Save 5%</strong> — applied automatically"
+  },
   "altaeron_pdp_reels_v2": {
     "promotion": {
       "eyebrow": "Labor Day Sale",

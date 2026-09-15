@@ -992,6 +992,9 @@
       "best_seller": "ベストセラー"
     }
   },
+  "altaeron_pdp_offer": {
+    "new_customer_html": "初めてのお客様は<strong>5%オフ</strong> — 自動的に適用されます"
+  },
   "altaeron_pdp_reels_v2": {
     "promotion": {
       "eyebrow": "レイバー・デーセール",
