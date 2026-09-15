@@ -14,6 +14,14 @@
     "announcement_bar_P4MRmx": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_bar_kLmPnx": {
+          "type": "announcement_bar",
+          "settings": {
+            "text": "First order: 5% off",
+            "link": "",
+            "icon": "shipping"
+          }
+        },
         "announcement_bar_yELyjf": {
           "type": "announcement_bar",
           "settings": {
@@ -32,6 +40,7 @@
         }
       },
       "block_order": [
+        "announcement_bar_kLmPnx",
         "announcement_bar_yELyjf",
         "announcement_bar_tracking"
       ],
