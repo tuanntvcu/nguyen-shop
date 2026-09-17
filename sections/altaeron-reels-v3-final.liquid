@@ -16,6 +16,7 @@
   unless request.locale.iso_code == 'en'
     assign cta_label = 'altaeron_pdp_reels_v2.buy.atf_cta' | t
   endunless
+  assign cta_label = cta_label | remove: '→' | strip
 -%}
 
 {{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}

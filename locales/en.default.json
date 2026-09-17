@@ -12,7 +12,7 @@
     "announcement": { "first_order_discount": "First order: 5% off", "comfort_guarantee": "30-DAY COMFORT GUARANTEE", "free_shipping_worldwide": "FREE SHIPPING WORLDWIDE", "free_shipping_threshold": "FREE SHIPPING ON ORDERS $39+" },
     "cart_drawer": { "intro": "You’re one step closer to more comfortable movement.", "rewards": "Cart rewards", "free_shipping": "Free shipping", "discount": "{{ percent }}% OFF", "order_benefits": "Order benefits", "on_every_order": "On every order", "guarantee": "30-Day Guarantee", "try_with_confidence": "Try it with confidence", "dedicated_support": "Dedicated Support", "here_to_help": "Here to help", "secure_checkout": "Secure checkout", "accepted_payment_methods": "Accepted payment methods", "complete_care": "COMPLETE YOUR CARE", "complete_care_description": "Adjustable knee support for walking, active days and long hours on your feet." },
     "home": { "review_placeholder": "Customer review content will appear here once added.", "sample_customer": "Sample customer", "preview_content": "Preview content" },
-    "pdp": { "fast_shipping": "Fast shipping" },
+    "pdp": { "fast_shipping": "USA Fast Shipping" },
     "footer": { "brand_html": "<h2>ALTAERON</h2><p>Thoughtfully selected support for everyday foot comfort.</p>", "help": "Help", "company": "Company", "customer_care": "Customer Care" },
     "navigation": { "shop_by_concern": "Shop by Concern", "bunion_toe_alignment": "Bunions & Toe Alignment", "heel_plantar_fascia": "Heel & Plantar Fascia", "ankle_support": "Ankle Support", "recovery_massage": "Recovery & Massage", "shop_all": "Shop All", "about_us": "About Us", "our_story": "Our Story", "reviews": "Reviews", "faq": "FAQ", "shipping": "Shipping", "returns": "Returns", "support": "Support", "contact_us": "Contact Us", "track_order": "Track Order", "blog": "Blog" }
   },
@@ -1583,7 +1583,7 @@
       "question_7": "What comes with one order?",
       "answer_7": "Each unit includes one adjustable Altaeron™ Bunion Corrector. It can be used on either the left or right foot, one foot at a time.",
       "question_8": "What are the product specifications?",
-      "answer_8": "Approx. size: 10 × 8 × 2.5 cm\nFit: Adjustable for adult feet\nFrame: ABS support structure\nPadding: Soft fabric + silicone contact areas\nAdjustment: Dial-controlled steel-wire tension system\nHinge: Rotating design",
+      "answer_8": "Approx. size: 3.94 × 3.15 × 0.98 in (10 × 8 × 2.5 cm)\nFit: Adjustable for adult feet\nFrame: ABS support structure\nPadding: Soft fabric + silicone contact areas\nAdjustment: Dial-controlled steel-wire tension system\nHinge: Rotating design",
       "question_9": "Does Altaeron permanently straighten a bunion?",
       "answer_9": "Altaeron is designed to provide adjustable positioning support while you wear it. It does not permanently change the underlying bone structure of a bunion."
     }

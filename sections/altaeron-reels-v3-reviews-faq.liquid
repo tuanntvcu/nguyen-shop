@@ -52,7 +52,7 @@
   }
 
   @media (max-width: 749px) {
-    #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__section { padding: 50px 0; }
+    #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__section { padding: 25px 0; }
     #AltaeronV3Tail-{{ section.id }} .alta-v3-tail__shell { width: calc(100% - 30px); }
     #AltaeronV3Tail-{{ section.id }} .alta-custom__header { margin-bottom: 20px; }
     #AltaeronV3Tail-{{ section.id }} .alta-custom__eyebrow { font-size: 10px; gap: 9px; letter-spacing: .2em; margin-bottom: 8px; }
@@ -89,7 +89,8 @@
         <p class="alta-custom__subheading">{{ faq_subtitle }}</p>
       </header>
       <div class="apdp-tail-accordion">
-        {%- for faq_index in (1..8) -%}
+        {%- assign faq_indices = '1,2,3,4,5,7,8' | split: ',' -%}
+        {%- for faq_index in faq_indices -%}
           {%- capture question_key -%}altaeron_pdp_reels_v3.faq.question_{{ faq_index }}{%- endcapture -%}
           {%- capture answer_key -%}altaeron_pdp_reels_v3.faq.answer_{{ faq_index }}{%- endcapture -%}
           <details><summary>{{ question_key | t }}{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>{{ answer_key | t | newline_to_br }}</p></details>

@@ -30,6 +30,7 @@
     assign reel_cta_label = 'altaeron_pdp_reels_v2.buy.atf_cta' | t
     assign reel_review_content = 'altaeron_pdp_reels_v3.hero.review_content_html' | t
   endunless
+  assign reel_cta_label = reel_cta_label | remove: '→' | strip
   assign product_form_id = 'product-form-' | append: section.id
   assign compare_price = current_variant.compare_at_price
   assign savings = 0
@@ -249,7 +250,7 @@
     #AltaeronPdp-{{ section.id }} .apdp-day__benefits h3{font-size:15px;line-height:1.3;margin:0 0 5px}
     #AltaeronPdp-{{ section.id }} .apdp-day__benefits p{font-size:13px;line-height:1.45;margin:0 auto;max-width:160px}
     #AltaeronPdp-{{ section.id }} .apdp-spacer-grid{display:block}
-    #AltaeronPdp-{{ section.id }} .apdp-reels-section{padding-top:var(--alta-pdp-section-gap-tight-mobile)}
+    #AltaeronPdp-{{ section.id }} .apdp-reels-section{padding-top:calc(var(--alta-pdp-section-gap-tight-mobile) / 2)}
     #AltaeronPdp-{{ section.id }} .apdp-reels-full{width:calc(100% - 30px)}
     #AltaeronPdp-{{ section.id }} .apdp-tail-faq{padding-bottom:40px}
     #AltaeronPdp-{{ section.id }} .apdp-gallery-story{grid-row:auto;margin:0 15px 20px;order:5;padding:22px 0 0}
@@ -545,7 +546,8 @@
   <section class="apdp-tail apdp-tail-faq apdp-shell apdp-reels-full alta-pdp-flow-section apdp-reels-section" aria-labelledby="AltaeronFaq-{{ section.id }}">
     {% render 'altaeron-pdp-section-heading', number: '7', title: faq_title, subtitle: faq_subtitle, heading_id: faq_heading_id %}
     <div class="apdp-tail-accordion">
-      {%- for faq_index in (1..7) -%}
+      {%- assign faq_indices = '1,2,3,4,5,7,8' | split: ',' -%}
+      {%- for faq_index in faq_indices -%}
         {%- capture question_key -%}altaeron_pdp_reels_v3.faq.question_{{ faq_index }}{%- endcapture -%}
         {%- capture answer_key -%}altaeron_pdp_reels_v3.faq.answer_{{ faq_index }}{%- endcapture -%}
         <details><summary>{{ question_key | t }}{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>{{ answer_key | t }}</p></details>
