@@ -67,6 +67,63 @@
         "cta_label": "ADD TO CART"
       }
     },
+    "altaeron_right_fit": {
+      "type": "altaeron-right-fit",
+      "blocks": {
+        "fit_1": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You have a mild to moderate bunion",
+            "body": "Your big toe has started drifting toward the neighboring toes."
+          }
+        },
+        "fit_2": {
+          "type": "fit_card",
+          "settings": {
+            "title": "Bunion discomfort is affecting your everyday comfort",
+            "body": "Pressure, rubbing or aching bothers you when walking, standing or relaxing."
+          }
+        },
+        "fit_3": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You want a conservative, non-surgical approach",
+            "body": "To help manage everyday bunion discomfort at home."
+          }
+        },
+        "fit_4": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You prefer adjustable support over a fixed toe spacer",
+            "body": "So you can choose the level of support that feels right for your foot."
+          }
+        }
+      },
+      "block_order": [
+        "fit_1",
+        "fit_2",
+        "fit_3",
+        "fit_4"
+      ],
+      "settings": {
+        "eyebrow": "FIND YOUR RIGHT FIT",
+        "heading": "Is Altaeron™ <strong>Right for You?</strong>",
+        "subheading": "The Adjustable Bunion Corrector may be a good fit if:",
+        "show_callout": true,
+        "callout_heading": "Adjust the support to your foot instead of settling for one fixed level of pressure.",
+        "callout_body": ""
+      }
+    },
+    "altaeron_research_evidence": {
+      "type": "altaeron-research-evidence",
+      "settings": {
+        "show_section": true,
+        "eyebrow": "EVIDENCE-BASED SUPPORT",
+        "heading": "What Does the Research Say?",
+        "intro": "Clinical research on conservative bunion supports suggests that orthoses and toe-alignment devices may help support better alignment and reduce bunion-related discomfort.",
+        "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"
+      }
+    },
     "altaeron_bunion_benefits": {
       "type": "altaeron-bunion-benefits",
       "blocks": {
@@ -123,62 +180,6 @@
         "heading": "Support your big toe in a more natural position.",
         "subheading": "As the big toe shifts inward, pressure and crowding can build. Altaeron supports a straighter position while worn.",
         "reassurance": "Support should feel controlled and comfortable — never forced."
-      }
-    },
-    "altaeron_right_fit": {
-      "type": "altaeron-right-fit",
-      "blocks": {
-        "fit_1": {
-          "type": "fit_card",
-          "settings": {
-            "title": "You have a mild to moderate bunion",
-            "body": "Your big toe has started drifting toward the neighboring toes."
-          }
-        },
-        "fit_2": {
-          "type": "fit_card",
-          "settings": {
-            "title": "Bunion discomfort is affecting your everyday comfort",
-            "body": "Pressure, rubbing or aching bothers you when walking, standing or relaxing."
-          }
-        },
-        "fit_3": {
-          "type": "fit_card",
-          "settings": {
-            "title": "You want a conservative, non-surgical approach",
-            "body": "To help manage everyday bunion discomfort at home."
-          }
-        },
-        "fit_4": {
-          "type": "fit_card",
-          "settings": {
-            "title": "You prefer adjustable support over a fixed toe spacer",
-            "body": "So you can choose the level of support that feels right for your foot."
-          }
-        }
-      },
-      "block_order": [
-        "fit_1",
-        "fit_2",
-        "fit_3",
-        "fit_4"
-      ],
-      "settings": {
-        "eyebrow": "FIND YOUR RIGHT FIT",
-        "heading": "Is Altaeron™ <strong>Right for You?</strong>",
-        "subheading": "The Adjustable Bunion Corrector may be a good fit if:",
-        "show_callout": true,
-        "callout_heading": "Adjust the support to your foot instead of settling for one fixed level of pressure.",
-        "callout_body": ""
-      }
-    },
-    "altaeron_research_evidence": {
-      "type": "altaeron-research-evidence",
-      "settings": {
-        "show_section": true,
-        "eyebrow": "EVIDENCE-BASED SUPPORT",
-        "heading": "What Does the Research Say?",
-        "intro": "Clinical research on conservative bunion supports suggests that orthoses and toe-alignment devices may help support better alignment and reduce bunion-related discomfort."
       }
     },
     "altaeron_adjustable_support": {
