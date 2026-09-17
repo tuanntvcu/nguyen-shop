@@ -250,6 +250,8 @@
         item.classList.toggle('is-active', active);
         if (!active) item.querySelectorAll('video').forEach((video) => video.pause());
       });
+      const activeVideo = activeItem.querySelector('video[autoplay]');
+      if (activeVideo && !document.hidden) activeVideo.play().catch(() => {});
     };
 
     thumbs.forEach((thumb, index) => {

@@ -2,18 +2,34 @@
   assign media_alt = media.alt | default: product.title
   assign image_loading = loading | default: 'lazy'
   assign image_priority = fetchpriority | default: 'auto'
+  assign video_autoplay = false
+  assign video_loop = false
+  assign video_muted = false
+  assign video_controls = true
   if loading == true
     assign image_loading = 'eager'
   endif
   if fetchpriority == true
     assign image_priority = 'high'
   endif
+  if autoplay == true
+    assign video_autoplay = true
+  endif
+  if loop == true
+    assign video_loop = true
+  endif
+  if muted == true
+    assign video_muted = true
+  endif
+  if controls == false
+    assign video_controls = false
+  endif
 -%}
 {%- case media.media_type -%}
   {%- when 'image' -%}
     {{ media.preview_image | image_url: width: 1600 | image_tag: loading: image_loading, fetchpriority: image_priority, widths: '320, 480, 640, 900, 1200, 1600', sizes: sizes, alt: media_alt }}
   {%- when 'video' -%}
-    {%- capture video_markup -%}{{ media | video_tag: controls: true, preload: 'none', playsinline: true, muted: false, image_size: '1200x' }}{%- endcapture -%}
+    {%- capture video_markup -%}{{ media | video_tag: autoplay: video_autoplay, loop: video_loop, controls: video_controls, preload: 'none', playsinline: true, muted: video_muted, image_size: '1200x' }}{%- endcapture -%}
     {{- video_markup | replace: '<video ', '<video data-apdp-lazy-video ' | replace: '<source src="', '<source data-src="' -}}
   {%- when 'external_video' -%}
     {%- capture external_video_markup -%}{{ media | external_video_tag: loading: 'lazy' }}{%- endcapture -%}

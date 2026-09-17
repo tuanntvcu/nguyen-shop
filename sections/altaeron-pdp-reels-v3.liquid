@@ -327,7 +327,7 @@
               assign hero_desktop_source = hero_desktop_source | default: hero_video.sources.first
               assign hero_mobile_source = hero_mobile_source | default: hero_desktop_source
             -%}
-            <video data-apdp-hero-video muted playsinline loop preload="metadata" poster="{{ hero_poster }}" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.hero_video' | t | escape }}">
+            <video data-apdp-hero-video autoplay muted playsinline loop preload="metadata" poster="{{ hero_poster }}" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.hero_video' | t | escape }}">
               {%- if hero_desktop_source.url == hero_mobile_source.url -%}
                 <source src="{{ hero_desktop_source.url }}" type="{{ hero_desktop_source.mime_type | default: 'video/mp4' }}">
               {%- else -%}
@@ -345,7 +345,7 @@
         <div class="apdp-gallery__viewer" aria-live="polite">
           {%- for media in product.media -%}
             <div id="AltaeronMedia-{{ section.id }}-{{ media.id }}" class="apdp-gallery__item{% if show_hero_video == false and forloop.first %} is-active{% endif %}" role="tabpanel" data-apdp-media="{{ media.id }}" aria-hidden="{% if show_hero_video == false and forloop.first %}false{% else %}true{% endif %}"{% if media.media_type == 'image' %} data-apdp-zoom-src="{{ media.preview_image | image_url: width: 2400 }}" data-apdp-zoom-width="{{ media.preview_image.width }}" data-apdp-zoom-height="{{ media.preview_image.height }}"{% endif %}{% unless show_hero_video == false and forloop.first %} hidden{% endunless %}>
-              {% render 'altaeron-pdp-media', media: media, product: product, loading: 'lazy', fetchpriority: 'auto', sizes: '(min-width: 1024px) 560px, 55vw' %}
+              {% render 'altaeron-pdp-media', media: media, product: product, loading: 'lazy', fetchpriority: 'auto', sizes: '(min-width: 1024px) 560px, 55vw', autoplay: true, loop: true, muted: true %}
               {%- if media.media_type == 'image' -%}
                 <button type="button" class="apdp-gallery__zoom" data-apdp-zoom aria-haspopup="dialog" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.open_image' | t: index: forloop.index | escape }}"><span aria-hidden="true">{% render 'icon-zoom' %}</span></button>
               {%- endif -%}
