@@ -938,6 +938,7 @@ bundle-deals-widget input[type="radio"]{
 .altaeron-pdp .apdp-tail-accordion details[open] summary,
 .altaeron-pdp .apdp-tail-accordion details[open] .apdp-tail-accordion__chevron{color:var(--altaeron-primary,#006B5E)}
 .altaeron-pdp .apdp-tail-review small b{color:var(--altaeron-primary,#006B5E)}
+.altaeron-pdp .altaeron-home{display:none!important}
 .altaeron-pdp .apdp-final-cta{background:var(--altaeron-navy,#102A43)}
 .altaeron-pdp .apdp-final-cta__buy em{background:var(--altaeron-soft-teal,#EAF5F2);color:var(--altaeron-primary,#006B5E)}
 .altaeron-pdp .apdp-final-cta__buy>p s{color:#D0D5DD}

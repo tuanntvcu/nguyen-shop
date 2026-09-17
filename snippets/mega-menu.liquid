@@ -42,7 +42,7 @@
   <summary data-link="{{ link.url }}" class="z-2 font-navigation">
     <span class="menu__item flex items-center relative">
       <span class="reversed-link flex items-center">
-        {{- link.title | escape }}
+        {%- render 'localized-menu-title', link: link -%}
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M9.75 4.5L6 8.25L2.25 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -73,14 +73,14 @@
                   <div class="mega-menu__item-wrapper">
                 {%- endif -%}
                 <a href="{{ childlink.url }}" class="h4 mega-menu__link mega-menu__link--top font-heading">
-                  {{- childlink.title | escape -}}
+                  {%- render 'localized-menu-title', link: childlink -%}
                 </a>
                 {%- if childlink.links != blank -%}
                   <ul class="mega-menu__item-child">
                     {%- for grandchildlink in childlink.links -%}
                       <li>
                         <a href="{{ grandchildlink.url }}" class="reversed-link mega-menu__link">
-                          {{- grandchildlink.title | escape -}}
+                          {%- render 'localized-menu-title', link: grandchildlink -%}
                         </a>
                       </li>
                     {%- endfor -%}

@@ -14,7 +14,7 @@
                   {%- render 'altaeron-icon', type: block.settings.icon -%}
                 </span>
                 {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{%- endif -%}
-                {{ block.settings.text }}
+                {% render 'localized-marketing-text', text: block.settings.text %}
                 {%- if block.settings.link != blank -%}</a>{%- endif -%}
               </div>
             {%- endif -%}
@@ -27,7 +27,9 @@
                 <span class="announcement-bar__promise-icon" aria-hidden="true">
                   {%- render 'altaeron-icon', type: block.settings.icon -%}
                 </span>
-                <span>{{ block.settings.text }}</span>
+                {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" tabindex="-1">{%- endif -%}
+                {% render 'localized-marketing-text', text: block.settings.text %}
+                {%- if block.settings.link != blank -%}</a>{%- endif -%}
               </div>
             {%- endif -%}
           {%- endfor -%}
@@ -53,7 +55,7 @@
                 <div class="announcement-bar__content rte text-center">
               {%- endif -%}
               {%- if block.settings.text != blank -%}
-                <p class="announcement-bar__text">{{ block.settings.text }}</p>
+                <p class="announcement-bar__text">{% render 'localized-marketing-text', text: block.settings.text %}</p>
               {%- endif -%}
               {%- if block.settings.link != blank -%}
                 </a>
@@ -63,7 +65,7 @@
             {%- when 'timer' -%}
               <div class="countdown__wrapper announcement-bar__content announcement-bar__timer flex items-center justify-between sm:justify-center gap-2 md:gap-4">
                 {%- if block.settings.text != blank -%}
-                  <div class="md:text-base text-sm-extra">{{ block.settings.text }}</div>
+                  <div class="md:text-base text-sm-extra">{% render 'localized-marketing-text', text: block.settings.text %}</div>
                 {%- endif -%}
                 {%- if block.settings.type == 'evergreen' or block.settings.time != blank -%}
                   {%- render 'countdown-timer',
@@ -174,10 +176,17 @@
       stroke-linejoin: round;
     }
     #shopify-section-{{ section.id }} .announcement-bar__marquee:hover .announcement-bar__marquee-track { animation-play-state: paused; }
-    @keyframes altaeron-announcement-marquee { to { transform: translateX(-50%); } }
+    @keyframes altaeron-announcement-marquee {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-50%, 0, 0); }
+    }
     @media (max-width: 767px) {
       #shopify-section-{{ section.id }} .announcement-bar__marquee-track { animation-duration: 18s; }
-      #shopify-section-{{ section.id }} .announcement-bar__marquee-group { gap: 38px; padding-right: 38px; }
+      #shopify-section-{{ section.id }} .announcement-bar__marquee-group {
+        gap: 19px;
+        justify-content: flex-start;
+        padding-right: 19px;
+      }
       #shopify-section-{{ section.id }} .announcement-bar__promise { gap: 7px; padding: 7px 0; font-size: 11px; }
       #shopify-section-{{ section.id }} .announcement-bar__promise-icon { width: 19px; height: 19px; flex-basis: 19px; }
     }

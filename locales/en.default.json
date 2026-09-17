@@ -8,6 +8,14 @@
  * ------------------------------------------------------------
  */
 {
+  "storefront": {
+    "announcement": { "first_order_discount": "First order: 5% off", "comfort_guarantee": "30-DAY COMFORT GUARANTEE", "free_shipping_worldwide": "FREE SHIPPING WORLDWIDE", "free_shipping_threshold": "FREE SHIPPING ON ORDERS $39+" },
+    "cart_drawer": { "intro": "You’re one step closer to more comfortable movement.", "rewards": "Cart rewards", "free_shipping": "Free shipping", "discount": "{{ percent }}% OFF", "order_benefits": "Order benefits", "on_every_order": "On every order", "guarantee": "30-Day Guarantee", "try_with_confidence": "Try it with confidence", "dedicated_support": "Dedicated Support", "here_to_help": "Here to help", "secure_checkout": "Secure checkout", "accepted_payment_methods": "Accepted payment methods", "complete_care": "COMPLETE YOUR CARE", "complete_care_description": "Adjustable knee support for walking, active days and long hours on your feet." },
+    "home": { "review_placeholder": "Customer review content will appear here once added.", "sample_customer": "Sample customer", "preview_content": "Preview content" },
+    "pdp": { "fast_shipping": "Fast shipping" },
+    "footer": { "brand_html": "<h2>ALTAERON</h2><p>Thoughtfully selected support for everyday foot comfort.</p>", "help": "Help", "company": "Company", "customer_care": "Customer Care" },
+    "navigation": { "shop_by_concern": "Shop by Concern", "bunion_toe_alignment": "Bunions & Toe Alignment", "heel_plantar_fascia": "Heel & Plantar Fascia", "ankle_support": "Ankle Support", "recovery_massage": "Recovery & Massage", "shop_all": "Shop All", "about_us": "About Us", "our_story": "Our Story", "reviews": "Reviews", "faq": "FAQ", "shipping": "Shipping", "returns": "Returns", "support": "Support", "contact_us": "Contact Us", "track_order": "Track Order", "blog": "Blog" }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Enter store using password:",
@@ -1486,37 +1494,37 @@
     }
   },
   "altaeron_pdp_reels_v3": {
-    "hero": { "review_content_html": "<p>Easy to adjust, <strong>comfortable to wear</strong>, and it gives my big toe the <strong>support I was looking for.</strong></p>" },
-    "right_fit": { "eyebrow": "FIND YOUR RIGHT FIT", "heading_html": "Is Altaeron™ <strong>Right for You?</strong>", "subheading": "The Adjustable Bunion Corrector may be a good fit if:", "card_1_title": "You have a mild to moderate bunion", "card_1_body": "and your big toe has started drifting toward the other toes.", "card_2_title": "You regularly experience aching, pressure, or discomfort", "card_2_body": "that interferes with walking, relaxing, or everyday activities.", "card_3_title": "You're looking for a conservative, non-surgical way to manage discomfort at home", "card_3_body": "before considering more invasive treatment.", "card_4_title": "You want adjustable support rather than a fixed toe spacer", "card_4_body": "so you can gradually control the amount of correction and pressure based on your comfort.", "callout_heading": "A more comfortable tomorrow can start today.", "callout_body": "Support your feet. Keep doing what you love." },
+    "hero": { "product_name": "Altaeron™ Adjustable Bunion Corrector", "headline": "Gentle, adjustable support for better big-toe alignment.", "explanation": "Gently guides the big toe toward a straighter position while helping ease pressure and crowding around the bunion.", "benefit_1": "Dial-Controlled Support", "benefit_1_note": "Adjust the level of support to your comfort.", "benefit_2": "Adjustable Adult Fit", "benefit_2_note": "Designed for left or right foot.", "benefit_3": "30-Day Easy Returns", "benefit_3_note": "Try it at home with confidence.", "purchase_clarification": "1 corrector · Use on either foot", "review_content_html": "<p>Easy to adjust, <strong>comfortable to wear</strong>, and it gives my big toe the <strong>support I was looking for.</strong></p>" },
+    "right_fit": { "eyebrow": "FIND YOUR RIGHT FIT", "heading_html": "Is Altaeron™ <strong>Right for You?</strong>", "subheading": "The Adjustable Bunion Corrector may be a good fit if:", "card_1_title": "You have a mild to moderate bunion", "card_1_body": "Your big toe has started drifting toward the neighboring toes.", "card_2_title": "Bunion discomfort is affecting your everyday comfort", "card_2_body": "Pressure, rubbing or aching bothers you when walking, standing or relaxing.", "card_3_title": "You want a conservative, non-surgical approach", "card_3_body": "To help manage everyday bunion discomfort at home.", "card_4_title": "You prefer adjustable support over a fixed toe spacer", "card_4_body": "So you can choose the level of support that feels right for your foot.", "callout_heading": "Adjust the support to your foot instead of settling for one fixed level of pressure.", "callout_body": "" },
     "reviews_eyebrow": "Customer reviews",
     "faq_eyebrow": "FAQ",
     "bunion": {
-      "eyebrow": "WHAT IT DOES FOR YOUR BUNION",
+      "eyebrow": "What It Does for Your Bunion",
       "heading": "Support your big toe in a more natural position.",
       "subheading": "As the big toe shifts inward, pressure and crowding can build. Altaeron supports a straighter position while worn.",
-      "reassurance": "Gentle support should feel controlled — never painful.",
-      "progression_1_title": "Bunion position",
-      "progression_1_caption": "Big toe shifted inward",
-      "progression_2_title": "Product support",
-      "progression_2_caption": "Guides the toe outward",
-      "progression_3_title": "Supported position",
-      "progression_3_caption": "Big toe sits more naturally",
+      "reassurance": "Support should feel controlled and comfortable — never forced.",
+      "progression_1_title": "Bunion Position",
+      "progression_1_caption": "Big toe drifts toward the neighboring toes.",
+      "progression_2_title": "Guided Positioning",
+      "progression_2_caption": "Altaeron gently guides the big toe away from crowding.",
+      "progression_3_title": "Supported Position",
+      "progression_3_caption": "The toe sits in a straighter, more open position while worn.",
       "benefit_1_title": "Better Toe Alignment",
-      "benefit_1_body": "Supports a straighter position while worn.",
-      "benefit_2_title": "Less Crowding & Pressure",
-      "benefit_2_body": "Creates more space around the bunion area."
+      "benefit_1_body": "Helps guide the big toe toward a straighter position while worn.",
+      "benefit_2_title": "Helps Ease Bunion Pressure",
+      "benefit_2_body": "Helps reduce crowding and pressure around the bunion area."
     },
     "adjustable": {
       "eyebrow": "ADJUSTABLE SUPPORT",
-      "heading": "Every bunion feels different. Your support should too.",
-      "subheading": "Unlike fixed spacers, Altaeron lets you choose the level of support that feels right for your foot.",
-      "reassurance": "Your foot sets the pace — not the device.",
-      "benefit_1_title": "You Control the Support",
-      "benefit_1_body": "Adjust to your comfort.",
-      "benefit_2_title": "Start Gentle",
-      "benefit_2_body": "Begin light. Increase gradually.",
-      "benefit_3_title": "No Fixed-Tension Guesswork",
-      "benefit_3_body": "Find the level that suits your foot."
+      "heading": "Every Bunion Feels Different. Your Support Should Too.",
+      "subheading": "Unlike fixed toe spacers, Altaeron lets you gradually adjust the tension until you find the level of support that feels right for your foot.",
+      "reassurance": "More tension isn’t always better — find the setting that feels supportive and comfortable.",
+      "benefit_1_title": "Turn to Adjust",
+      "benefit_1_body": "Fine-tune the tension with the rotary dial.",
+      "benefit_2_title": "Start Light",
+      "benefit_2_body": "Begin with gentle tension and increase gradually.",
+      "benefit_3_title": "Stay in Control",
+      "benefit_3_body": "Adjust or release the tension whenever you need."
     },
     "muscle": {
       "eyebrow": "MUSCLE SUPPORT / ANATOMY",
@@ -1526,25 +1534,30 @@
       "benefit_1_title": "Balanced Position",
       "benefit_1_body": "Supports a more natural alignment.",
       "benefit_2_title": "Repeated Support",
-      "benefit_2_body": "Regular sessions support better positioning."
+      "benefit_2_body": "Regular sessions support better positioning.",
+      "design_bridge": "That support starts with the design itself.",
+      "comfort_heading": "Built for everyday comfort:",
+      "comfort_1": "Structured support helps keep the fit stable.",
+      "comfort_2": "Soft fabric and silicone padding cushion contact areas.",
+      "comfort_3": "Adjustable dial tension lets you control how much support you feel."
     },
     "timeline": {
-      "eyebrow": "WHAT TO EXPECT OVER TIME",
-      "heading": "What consistent support can look like over time.",
-      "subheading": "Altaeron is designed to move from comfortable relief toward regular alignment support as part of your routine.",
-      "reassurance_heading": "Consistency matters more than force.",
-      "reassurance_text": "Start gently. Adjust gradually. Use regularly.",
+      "eyebrow": "",
+      "heading": "What to Expect When You Start",
+      "subheading": "Every foot feels different. Comfort should guide your routine.",
+      "reassurance_heading": "",
+      "reassurance_text": "Once you find a comfortable setting, make Altaeron part of your regular at-home routine.",
       "stage_1_label": "FIRST FEW WEARS",
-      "stage_1_title": "Relieve",
-      "stage_1_body": "Ease pressure, crowding & rubbing while worn.",
-      "stage_2_label": "CONTINUED USE",
-      "stage_2_title": "Reinforce",
-      "stage_2_body": "Encourage more balanced positioning over time."
+      "stage_1_title": "Find Your Setting",
+      "stage_1_body": "Start with lighter tension and get familiar with the feel of adjustable support.",
+      "stage_2_label": "ONCE IT FEELS COMFORTABLE",
+      "stage_2_title": "Fine-Tune the Fit",
+      "stage_2_body": "Adjust the dial until you find the balance of support and comfort that works for you."
     },
     "try_home": {
       "eyebrow": "TRY IT AT HOME",
-      "heading": "Give your feet time to decide.",
-      "body": "Take time to find the support level and routine that feel right for you. If Altaeron isn’t right for your feet, return it within 30 days.",
+      "heading": "Give Your Feet Time to Decide",
+      "body": "Finding the right fit and tension can take a few wears. Try Altaeron at home and see how it feels in your own routine.",
       "handwritten_message": "Support a more comfortable tomorrow",
       "cta_text": "TRY ALTAERON →",
       "cta_reassurance": "Secure checkout · 30-day easy returns",
@@ -1555,20 +1568,24 @@
     "faq": {
       "title": "Still deciding?",
       "subtitle": "Here’s what to know before your first wear.",
-      "question_1": "Is it suitable for men and women?",
-      "answer_1": "Yes. Altaeron is designed as a unisex corrector for adult feet.",
-      "question_2": "Will it fit either foot?",
-      "answer_2": "Yes. One design can be used on the left or right foot.",
-      "question_3": "How much should I adjust it?",
-      "answer_3": "Start gently. Increase support only until you reach a level that feels controlled and comfortable.",
+      "question_1": "Does Altaeron fit both left and right feet?",
+      "answer_1": "Yes. The adjustable design can be used on either the left or right foot. Each corrector is worn on one foot at a time.",
+      "question_2": "Will it fit my foot?",
+      "answer_2": "Altaeron uses adjustable straps designed to accommodate a wide range of adult foot sizes.",
+      "question_3": "How tight should I adjust the dial?",
+      "answer_3": "Start gently and increase the tension until the support feels firm but comfortable. You should never need to force the toe into position.",
       "question_4": "How long should I wear it at first?",
-      "answer_4": "Begin with shorter seated sessions and gradually increase wear time as your foot becomes comfortable.",
-      "question_5": "Can I walk in it?",
-      "answer_5": "Altaeron can be worn for light walking around the home, but is designed primarily for comfortable use while seated, resting, or relaxing.",
-      "question_6": "How quickly should I expect changes?",
-      "answer_6": "Every foot is different. Focus first on comfortable support and consistent use rather than forcing correction.",
-      "question_7": "Can I use it permanently to straighten my toe?",
-      "answer_7": "Altaeron is designed to support alignment, relieve crowding and encourage better positioning through regular use. Individual results can vary depending on your foot and bunion severity."
+      "answer_4": "Start with shorter sessions while sitting or relaxing, then increase gradually as you become comfortable with the fit and tension.",
+      "question_5": "Can I walk while wearing it?",
+      "answer_5": "Altaeron is designed primarily for seated, resting and low-activity use. Light walking around the home may be comfortable once the fit is secure.",
+      "question_6": "Can I wear Altaeron inside shoes?",
+      "answer_6": "Because the structured frame and dial add some bulk, Altaeron may not fit comfortably inside every shoe. It is best suited to at-home use.",
+      "question_7": "What comes with one order?",
+      "answer_7": "Each unit includes one adjustable Altaeron™ Bunion Corrector. It can be used on either the left or right foot, one foot at a time.",
+      "question_8": "What are the product specifications?",
+      "answer_8": "Approx. size: 10 × 8 × 2.5 cm<br>Fit: Adjustable for adult feet<br>Frame: ABS support structure<br>Padding: Soft fabric + silicone contact areas<br>Adjustment: Dial-controlled steel-wire tension system<br>Hinge: Rotating design",
+      "question_9": "Does Altaeron permanently straighten a bunion?",
+      "answer_9": "Altaeron is designed to provide adjustable positioning support while you wear it. It does not permanently change the underlying bone structure of a bunion."
     }
   },
   "altaeron_pdp_dialfit": {

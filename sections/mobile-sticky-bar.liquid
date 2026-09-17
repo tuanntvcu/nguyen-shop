@@ -60,6 +60,22 @@
         {%- for block in section.blocks -%}
           {%- liquid
             assign title = block.settings.text
+            unless request.locale.iso_code == 'en'
+              case block.type
+                when 'home'
+                  assign title = default_home
+                when 'products'
+                  assign title = default_products
+                when 'search'
+                  assign title = default_search
+                when 'cart'
+                  assign title = default_cart
+                when 'link'
+                  if block.settings.url contains '/pages/about'
+                    assign title = 'storefront.navigation.about_us' | t
+                  endif
+              endcase
+            endunless
           -%}
           {%- case block.type -%}
             {%- when 'home' -%}

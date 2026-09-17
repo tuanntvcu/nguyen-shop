@@ -10,6 +10,10 @@
 
   assign form_id = 'ContactForm-' | append: section.id
   assign phone_field_index = 1
+  assign contact_heading = section.settings.heading
+  if request.locale.iso_code != 'en' and template.suffix == 'contact'
+    assign contact_heading = 'storefront.navigation.contact_us' | t
+  endif
 -%}
 
 {% render 'divider',
@@ -52,11 +56,11 @@
       {%- endif -%}
       <div class="contact">
         <div class="contact__wrapper flex justify-center flex-col h-full">
-          {%- if section.settings.heading != blank -%}
+          {%- if contact_heading != blank -%}
             <h2 class="contact__title inline-richtext {{ section.settings.heading_size }} text-center">
               <motion-element data-motion="fade-up" class="inline-flex">
                 {% render 'highlight-text',
-                  text: section.settings.heading,
+                  text: contact_heading,
                   style: section.settings.heading_highlight_style
                 %}
               </motion-element>
@@ -145,8 +149,12 @@
                 {%- if block.settings.field_type == 'phone' -%}
                   {%- liquid
                     assign placeholder = 'templates.contact.form.phone' | t
-                    if block.settings.placeholder != blank
+                    assign phone_heading = block.settings.heading
+                    if block.settings.placeholder != blank and request.locale.iso_code == 'en'
                       assign placeholder = block.settings.placeholder
+                    endif
+                    if request.locale.iso_code != 'en'
+                      assign phone_heading = 'templates.contact.form.phone' | t
                     endif
 
                     if phone_field_index > 1
@@ -157,9 +165,9 @@
                     class="form-field form-field--{{ block.settings.field_type }}{% if block.settings.full_width %} form-field--full{% endif %}"
                     {{ block.shopify_attributes }}
                   >
-                    {%- if block.settings.heading != blank -%}
+                    {%- if phone_heading != blank -%}
                       <label class="form-label" for="ContactForm-{{ block.settings.field_type }}-{{ block.id }}">
-                        {{- block.settings.heading -}}
+                        {{- phone_heading -}}
                         {% if block.settings.required %}
                           <span aria-hidden="true">*</span>
                         {% endif %}

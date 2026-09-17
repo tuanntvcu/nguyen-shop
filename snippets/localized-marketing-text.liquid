@@ -1,0 +1,21 @@
+{%- liquid
+  assign localized_text_key = blank
+  assign normalized_text = text | strip | downcase
+
+  case normalized_text
+    when 'first order: 5% off'
+      assign localized_text_key = 'storefront.announcement.first_order_discount'
+    when '30-day comfort guarantee'
+      assign localized_text_key = 'storefront.announcement.comfort_guarantee'
+    when 'free shipping worldwide'
+      assign localized_text_key = 'storefront.announcement.free_shipping_worldwide'
+    when 'free shipping on orders $39+'
+      assign localized_text_key = 'storefront.announcement.free_shipping_threshold'
+  endcase
+
+  if request.locale.iso_code == 'en' or localized_text_key == blank
+    echo text
+  else
+    echo localized_text_key | t
+  endif
+-%}

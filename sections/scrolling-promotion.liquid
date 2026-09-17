@@ -111,7 +111,7 @@
                     class="promotion__text {{ block.settings.text_size }} {{ block.settings.font_weight }} font-{{ block.settings.font_style }} text-{{ block.settings.text_style }}{% if block.settings.use_custom_color %} promotion__text--custom-color{% endif %}"
                     style="letter-spacing: {{ letter_spacing }}em;"
                   >
-                    {{ block.settings.text }}
+                    {% render 'localized-marketing-text', text: block.settings.text %}
                   </div>
                 </{{ tag }}>
               {%- endif -%}

@@ -58,8 +58,8 @@
       "settings": {
         "show_hero_video": false,
         "eyebrow": "Altaeron™ Adjustable Bunion Corrector",
-        "headline": "Gentle support for better big-toe alignment.",
-        "subheadline": "Helps guide the big toe toward a more natural position while easing pressure and crowding around the bunion.",
+        "headline": "Gentle, adjustable support for better big-toe alignment.",
+        "subheadline": "Gently guides the big toe toward a straighter position while helping ease pressure and crowding around the bunion.",
         "review_avatar": "shopify://shop_images/Screenshot_2026-09-14_165648.png",
         "review_content": "<p>Easy to adjust, <strong>comfortable to wear</strong>, and it gives my big toe the <strong>support I was looking for.</strong></p>",
         "reviewer_name": "Karen M.",
@@ -74,24 +74,24 @@
           "type": "progression",
           "settings": {
             "image": "shopify://shop_images/TaVS1aYI3x3hgQWxvr56bgsEDZqSpARcKveSbQZrgZMwQYCF_LuYneRQpOXn6GSAEGGE4ZVPSVozS34rb_p2mcYEgR8785NUTL-vrCrA3ftkRM-EZpsIHVtFs1EwVMHy8Zgzxrkrx70LzUgOz1LTYMyML9LCZ-iKY-unLd8mHreHmOhXp0XFnOd.jpg",
-            "title": "Bunion position",
-            "caption": "Big toe shifted inward"
+            "title": "Bunion Position",
+            "caption": "Big toe drifts toward the neighboring toes."
           }
         },
         "progression_2": {
           "type": "progression",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_06_43_PM.png",
-            "title": "Product support",
-            "caption": "Guides the toe outward"
+            "title": "Guided Positioning",
+            "caption": "Altaeron gently guides the big toe away from crowding."
           }
         },
         "progression_3": {
           "type": "progression",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_09_38_PM.png",
-            "title": "Supported position",
-            "caption": "Big toe sits more naturally"
+            "title": "Supported Position",
+            "caption": "The toe sits in a straighter, more open position while worn."
           }
         },
         "benefit_1": {
@@ -99,15 +99,15 @@
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_18_51_PM.png",
             "title": "Better Toe Alignment",
-            "body": "Supports a straighter position while worn."
+            "body": "Helps guide the big toe toward a straighter position while worn."
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_24_41_PM.png",
-            "title": "Less Crowding & Pressure",
-            "body": "Creates more space around the bunion area."
+            "title": "Helps Ease Bunion Pressure",
+            "body": "Helps reduce crowding and pressure around the bunion area."
           }
         }
       },
@@ -119,10 +119,10 @@
         "benefit_2"
       ],
       "settings": {
-        "eyebrow": "WHAT IT DOES FOR YOUR BUNION",
+        "eyebrow": "What It Does for Your Bunion",
         "heading": "Support your big toe in a more natural position.",
         "subheading": "As the big toe shifts inward, pressure and crowding can build. Altaeron supports a straighter position while worn.",
-        "reassurance": "Gentle support should feel controlled — never painful."
+        "reassurance": "Support should feel controlled and comfortable — never forced."
       }
     },
     "altaeron_right_fit": {
@@ -132,28 +132,28 @@
           "type": "fit_card",
           "settings": {
             "title": "You have a mild to moderate bunion",
-            "body": "and your big toe is drifting toward the other toes"
+            "body": "Your big toe has started drifting toward the neighboring toes."
           }
         },
         "fit_2": {
           "type": "fit_card",
           "settings": {
-            "title": "You regularly experience aching, pressure, or discomfort",
-            "body": "that interferes with walking, relaxing, or everyday activities."
+            "title": "Bunion discomfort is affecting your everyday comfort",
+            "body": "Pressure, rubbing or aching bothers you when walking, standing or relaxing."
           }
         },
         "fit_3": {
           "type": "fit_card",
           "settings": {
-            "title": "You're looking for a conservative, non-surgical way to manage discomfort at home",
-            "body": "before considering more invasive treatment."
+            "title": "You want a conservative, non-surgical approach",
+            "body": "To help manage everyday bunion discomfort at home."
           }
         },
         "fit_4": {
           "type": "fit_card",
           "settings": {
-            "title": "You want adjustable support rather than a fixed toe spacer",
-            "body": "so you can gradually control the amount of correction and pressure based on your comfort."
+            "title": "You prefer adjustable support over a fixed toe spacer",
+            "body": "So you can choose the level of support that feels right for your foot."
           }
         }
       },
@@ -168,8 +168,8 @@
         "heading": "Is Altaeron™ <strong>Right for You?</strong>",
         "subheading": "The Adjustable Bunion Corrector may be a good fit if:",
         "show_callout": true,
-        "callout_heading": "A more comfortable tomorrow can start today.",
-        "callout_body": "Support your feet. Keep doing what you love."
+        "callout_heading": "Adjust the support to your foot instead of settling for one fixed level of pressure.",
+        "callout_body": ""
       }
     },
     "altaeron_adjustable_support": {
@@ -179,24 +179,24 @@
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_41_34_PM.png",
-            "title": "You Control the Support",
-            "body": "Adjust to your comfort."
+            "title": "Turn to Adjust",
+            "body": "Fine-tune the tension with the rotary dial."
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_47_44_PM.png",
-            "title": "Start Gentle",
-            "body": "Begin light. Increase gradually."
+            "title": "Start Light",
+            "body": "Begin with gentle tension and increase gradually."
           }
         },
         "benefit_3": {
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_48_44_PM.png",
-            "title": "No Fixed-Tension Guesswork",
-            "body": "Find the level that suits your foot."
+            "title": "Stay in Control",
+            "body": "Adjust or release the tension whenever you need."
           }
         }
       },
@@ -207,10 +207,10 @@
       ],
       "settings": {
         "eyebrow": "ADJUSTABLE SUPPORT",
-        "heading": "Every bunion feels different. Your support should too.",
-        "subheading": "Unlike fixed spacers, Altaeron lets you choose the level of support that feels right for your foot.",
+        "heading": "Every Bunion Feels Different. Your Support Should Too.",
+        "subheading": "Unlike fixed toe spacers, Altaeron lets you gradually adjust the tension until you find the level of support that feels right for your foot.",
         "hero_image": "shopify://shop_images/4a15bd95-dedd-4c76-8c25-03f7c4aa70dd.png",
-        "reassurance": "Your foot sets the pace — not the device."
+        "reassurance": "More tension isn’t always better — find the setting that feels supportive and comfortable."
       }
     },
     "altaeron_muscle_support": {
@@ -252,17 +252,17 @@
           "type": "stage",
           "settings": {
             "label": "FIRST FEW WEARS",
-            "title": "Relieve",
-            "body": "Ease pressure, crowding & rubbing while worn.",
+            "title": "Find Your Setting",
+            "body": "Start with lighter tension and get familiar with the feel of adjustable support.",
             "video": "shopify://files/videos/0912.mp4"
           }
         },
         "stage_3": {
           "type": "stage",
           "settings": {
-            "label": "CONTINUED USE",
-            "title": "Reinforce",
-            "body": "Encourage more balanced positioning over time.",
+            "label": "ONCE IT FEELS COMFORTABLE",
+            "title": "Fine-Tune the Fit",
+            "body": "Adjust the dial until you find the balance of support and comfort that works for you.",
             "video": "shopify://files/videos/0910 (2).mp4"
           }
         }
@@ -272,11 +272,11 @@
         "stage_3"
       ],
       "settings": {
-        "eyebrow": "WHAT TO EXPECT OVER TIME",
-        "heading": "What consistent support can look like over time.",
-        "subheading": "Altaeron is designed to move from comfortable relief toward regular alignment support as part of your routine.",
-        "reassurance_heading": "Consistency matters more than force.",
-        "reassurance_text": "Start gently. Adjust gradually. Use regularly."
+        "eyebrow": "",
+        "heading": "What to Expect When You Start",
+        "subheading": "Every foot feels different. Comfort should guide your routine.",
+        "reassurance_heading": "",
+        "reassurance_text": "Once you find a comfortable setting, make Altaeron part of your regular at-home routine."
       }
     },
     "altaeron_try_at_home": {
@@ -296,8 +296,8 @@
       ],
       "settings": {
         "eyebrow": "TRY IT AT HOME",
-        "heading": "Give your feet time to decide.",
-        "body": "Take time to find the support level and routine that feel right for you. If Altaeron isn’t right for your feet, return it within 30 days.",
+        "heading": "Give Your Feet Time to Decide",
+        "body": "Finding the right fit and tension can take a few wears. Try Altaeron at home and see how it feels in your own routine.",
         "hero_image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
         "show_handwritten": true,
         "handwritten_message": "Support a more comfortable tomorrow",

@@ -23,9 +23,9 @@
   assign reel_cta_label = section.settings.cta_label
   assign reel_review_content = section.settings.review_content
   unless request.locale.iso_code == 'en'
-    assign reel_product_name = 'altaeron_pdp_reels_v2.hero.atf_product_name' | t
-    assign reel_benefit_headline = 'altaeron_pdp_reels_v2.hero.atf_headline' | t
-    assign reel_explanation = 'altaeron_pdp_reels_v2.hero.atf_explanation' | t
+    assign reel_product_name = 'altaeron_pdp_reels_v3.hero.product_name' | t
+    assign reel_benefit_headline = 'altaeron_pdp_reels_v3.hero.headline' | t
+    assign reel_explanation = 'altaeron_pdp_reels_v3.hero.explanation' | t
     assign reel_price_label = 'altaeron_pdp_reels_v2.common.from' | t
     assign reel_cta_label = 'altaeron_pdp_reels_v2.buy.atf_cta' | t
     assign reel_review_content = 'altaeron_pdp_reels_v3.hero.review_content_html' | t
@@ -368,9 +368,9 @@
         <p class="apdp-narrative__benefit-headline">{{ reel_benefit_headline }}</p>
         <p class="apdp-narrative__explanation">{{ reel_explanation }}</p>
         <ul class="apdp-narrative__benefits" role="list">
-          <li>{% render 'altaeron-pdp-icon', icon: 'sliders' %}<span><b>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_1' | t: default: 'Adjustable Support' }}</b><small>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_1_note' | t: default: 'Set the level that feels right for your foot.' }}</small></span></li>
-          <li>{% render 'altaeron-pdp-icon', icon: 'left-right' %}<span><b>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_2' | t: default: 'Unisex · Either Foot' }}</b><small>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_2_note' | t: default: 'Designed for men and women, left or right foot.' }}</small></span></li>
-          <li>{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_3' | t: default: '30-Day Easy Returns' }}</b><small>{{ 'altaeron_pdp_reels_v2.hero.atf_benefit_3_note' | t: default: 'Try it at home with less risk.' }}</small></span></li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'sliders' %}<span><b>{{ 'altaeron_pdp_reels_v3.hero.benefit_1' | t }}</b><small>{{ 'altaeron_pdp_reels_v3.hero.benefit_1_note' | t }}</small></span></li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'left-right' %}<span><b>{{ 'altaeron_pdp_reels_v3.hero.benefit_2' | t }}</b><small>{{ 'altaeron_pdp_reels_v3.hero.benefit_2_note' | t }}</small></span></li>
+          <li>{% render 'altaeron-pdp-icon', icon: 'return' %}<span><b>{{ 'altaeron_pdp_reels_v3.hero.benefit_3' | t }}</b><small>{{ 'altaeron_pdp_reels_v3.hero.benefit_3_note' | t }}</small></span></li>
         </ul>
         <figure class="apdp-hero-review">
           <div class="apdp-tail-avatar">
@@ -409,7 +409,7 @@
             </fieldset>
           {%- endunless -%}
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
-          <p class="apdp-new-customer-offer">{{ 'altaeron_pdp_offer.new_customer_html' | t }}</p>
+          <p class="apdp-new-customer-offer">{{ 'altaeron_pdp_reels_v3.hero.purchase_clarification' | t }}</p>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ reel_cta_label }}">{% if current_variant.available %}{{ reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><span data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}>{% if current_variant.available %} — {{ current_variant.price | money }}{% endif %}</span></span><span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
           <p class="apdp-cta-reassurance">{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>{{ 'altaeron_pdp_reels_v2.buy.reassurance' | t: default: 'Secure checkout · Tracked shipping · 30-day easy returns' }}</span></p>
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp_reels_v2.buy.installments' | t: amount: installment_amount }} <strong>shop<span>Pay</span></strong></div>
@@ -435,7 +435,7 @@
         <div class="apdp-buy__trust apdp-buy__trust--three">
           <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>{{ 'altaeron_pdp_reels_v2.buy.shipping' | t }}</b></a>
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<b>{{ 'altaeron_pdp_reels_v2.buy.returns_30' | t: default: '30-Day Returns' }}</b></a>
-          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<b>Fast shipping</b></a>
+          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'support' %}<b>{{ 'storefront.pdp.fast_shipping' | t }}</b></a>
         </div>
       </aside>
     </div>

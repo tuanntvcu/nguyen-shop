@@ -50,12 +50,12 @@
               {%- endif -%}
             </cart-count>
           </h2>
-          <p class="cart-drawer__intro">You’re one step closer to more comfortable movement.</p>
+          <p class="cart-drawer__intro">{{ 'storefront.cart_drawer.intro' | t }}</p>
           <div
             id="CartDrawerRewards-{{ section.id }}"
             class="cart-drawer__rewards"
             role="list"
-            aria-label="Cart rewards"
+            aria-label="{{ 'storefront.cart_drawer.rewards' | t | escape }}"
             {% if cart == empty %}
               hidden
             {% endif %}
@@ -68,11 +68,11 @@
                   <circle cx="7" cy="17.2" r="1.5"/><circle cx="17.8" cy="17.2" r="1.5"/>
                 </svg>
               </span>
-              <span class="cart-drawer__reward-label">Free shipping</span>
+              <span class="cart-drawer__reward-label">{{ 'storefront.cart_drawer.free_shipping' | t }}</span>
             </div>
             <div class="cart-drawer__reward cart-drawer__reward--discount" role="listitem">
               <span class="cart-drawer__reward-icon cart-drawer__reward-icon--percent" aria-hidden="true">%</span>
-              <span class="cart-drawer__reward-label">5% OFF</span>
+              <span class="cart-drawer__reward-label">{{ 'storefront.cart_drawer.discount' | t: percent: 5 }}</span>
             </div>
           </div>
         </div>
@@ -508,25 +508,29 @@
                 -%}
               </ul>
             </cart-items>
-            <div class="cart-drawer__trust" aria-label="Order benefits">
+            <div class="cart-drawer__trust" aria-label="{{ 'storefront.cart_drawer.order_benefits' | t | escape }}">
               <div class="cart-drawer__trust-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h3l4 4v3h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
-                <strong>Free Shipping</strong><span>On every order</span>
+                <strong>{{ 'storefront.cart_drawer.free_shipping' | t }}</strong><span>{{ 'storefront.cart_drawer.on_every_order' | t }}</span>
               </div>
               <div class="cart-drawer__trust-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 2.8 8.1 7 10 4.2-1.9 7-5.2 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-5"/></svg>
-                <strong>30-Day Guarantee</strong><span>Try it with confidence</span>
+                <strong>{{ 'storefront.cart_drawer.guarantee' | t }}</strong><span>{{ 'storefront.cart_drawer.try_with_confidence' | t }}</span>
               </div>
               <div class="cart-drawer__trust-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 13H2v5h4v-5H4ZM20 13h2v5h-4v-5h2ZM18 19c-1 1.3-3 2-6 2"/></svg>
-                <strong>Dedicated Support</strong><span>Here to help</span>
+                <strong>{{ 'storefront.cart_drawer.dedicated_support' | t }}</strong><span>{{ 'storefront.cart_drawer.here_to_help' | t }}</span>
               </div>
             </div>
             {%- if section.settings.enable_complete_care -%}
+              {%- liquid
+                assign complete_care_heading = 'storefront.cart_drawer.complete_care' | t
+                assign complete_care_description = 'storefront.cart_drawer.complete_care_description' | t
+              -%}
               {%- render 'cart-drawer-complete-care',
                 product: section.settings.complete_care_product,
-                heading: section.settings.complete_care_heading,
-                description: section.settings.complete_care_description,
+                heading: complete_care_heading,
+                description: complete_care_description,
                 section_id: section.id,
                 cart: cart
               -%}
@@ -764,8 +768,8 @@
                 {{ 'general.cart.continue_shopping' | t }}
               </button>
               <div class="cart-drawer__payments">
-                <div class="cart-drawer__payments-title"><span>Secure checkout</span></div>
-                <ul role="list" aria-label="Accepted payment methods">
+                <div class="cart-drawer__payments-title"><span>{{ 'storefront.cart_drawer.secure_checkout' | t }}</span></div>
+                <ul role="list" aria-label="{{ 'storefront.cart_drawer.accepted_payment_methods' | t | escape }}">
                   {%- liquid
                     assign preferred_payment_types = 'visa,mastercard,american_express,apple_pay,google_pay,discover' | split: ','
                     assign rendered_payment_count = 0

@@ -89,7 +89,7 @@
         <p class="alta-custom__subheading">{{ faq_subtitle }}</p>
       </header>
       <div class="apdp-tail-accordion">
-        {%- for faq_index in (1..7) -%}
+        {%- for faq_index in (1..9) -%}
           {%- capture question_key -%}altaeron_pdp_reels_v3.faq.question_{{ faq_index }}{%- endcapture -%}
           {%- capture answer_key -%}altaeron_pdp_reels_v3.faq.answer_{{ faq_index }}{%- endcapture -%}
           <details><summary>{{ question_key | t }}{% render 'icon-accordion-chevron', class: 'apdp-tail-accordion__chevron' %}</summary><p>{{ answer_key | t }}</p></details>

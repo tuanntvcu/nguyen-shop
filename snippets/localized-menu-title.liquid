@@ -1,0 +1,45 @@
+{%- liquid
+  assign localized_title_key = blank
+  assign normalized_url = link.url | downcase
+  assign normalized_title = link.title | handle
+
+  if normalized_url contains '#altaeronconcerns' or normalized_title == 'shop-by-concern'
+    assign localized_title_key = 'storefront.navigation.shop_by_concern'
+  elsif normalized_url contains '/collections/bunion-toe-alignment'
+    assign localized_title_key = 'storefront.navigation.bunion_toe_alignment'
+  elsif normalized_url contains '/collections/heel-plantar-fascia'
+    assign localized_title_key = 'storefront.navigation.heel_plantar_fascia'
+  elsif normalized_url contains '/collections/ankle-support'
+    assign localized_title_key = 'storefront.navigation.ankle_support'
+  elsif normalized_url contains '/collections/recovery-massage'
+    assign localized_title_key = 'storefront.navigation.recovery_massage'
+  elsif normalized_title == 'shop-all' or normalized_title == 'all-products'
+    assign localized_title_key = 'storefront.navigation.shop_all'
+  elsif normalized_title == 'our-story'
+    assign localized_title_key = 'storefront.navigation.our_story'
+  elsif normalized_url contains '#altaeron-values' or normalized_title == 'about-us'
+    assign localized_title_key = 'storefront.navigation.about_us'
+  elsif normalized_url contains '#altaeron-reviews' or normalized_title == 'reviews'
+    assign localized_title_key = 'storefront.navigation.reviews'
+  elsif normalized_url contains '#altaeron-faq' or normalized_title == 'faq'
+    assign localized_title_key = 'storefront.navigation.faq'
+  elsif normalized_url contains '/policies/shipping-policy' or normalized_title == 'shipping'
+    assign localized_title_key = 'storefront.navigation.shipping'
+  elsif normalized_url contains '/policies/refund-policy' or normalized_title == 'returns'
+    assign localized_title_key = 'storefront.navigation.returns'
+  elsif normalized_title == 'contact-us'
+    assign localized_title_key = 'storefront.navigation.contact_us'
+  elsif normalized_url contains '/pages/contact' or normalized_title == 'support'
+    assign localized_title_key = 'storefront.navigation.support'
+  elsif normalized_url contains '/account/orders' or normalized_title == 'track-order'
+    assign localized_title_key = 'storefront.navigation.track_order'
+  elsif normalized_title == 'blog'
+    assign localized_title_key = 'storefront.navigation.blog'
+  endif
+
+  if request.locale.iso_code == 'en' or localized_title_key == blank
+    echo link.title | escape
+  else
+    echo localized_title_key | t | escape
+  endif
+-%}

@@ -45,13 +45,19 @@
                         assign working_hours = block.settings.working_hours
                         assign email = block.settings.email
                         assign phone = block.settings.phone
+                        assign contact_heading = block.settings.heading
+                        unless request.locale.iso_code == 'en'
+                          if contact_heading == 'Customer Care'
+                            assign contact_heading = 'storefront.footer.customer_care' | t
+                          endif
+                        endunless
                         assign content_empty = false
                         if address == blank and working_hours == blank and email == blank and phone == blank
                           assign content_empty = true
                         endif
 
                         assign tag = 'div'
-                        if block.settings.heading != blank
+                        if contact_heading != blank
                           assign tag = 'details'
                         endif
                       %}
@@ -65,10 +71,10 @@
                           {% endif %}
                           class="accordion-details footer-accordion-details"
                         >
-                          {%- if block.settings.heading != blank -%}
+                          {%- if contact_heading != blank -%}
                             <summary class="accordion-details__summary flex items-center justify-between gap-2">
                               <h3 class="footer-block__heading inline-richtext {{ block.settings.heading_size }}">
-                                {{- block.settings.heading -}}
+                                {{- contact_heading -}}
                               </h3>
                               <span class="flex items-center lg:hidden">{%- render 'icon-plus-toggle' -%}</span>
                             </summary>
@@ -144,6 +150,16 @@
                         if block_title == blank
                           assign block_title = linklists[block.settings.menu].title
                         endif
+                        unless request.locale.iso_code == 'en'
+                          case block.settings.menu
+                            when 'footer-shop'
+                              assign block_title = 'storefront.navigation.shop_by_concern' | t
+                            when 'footer-support'
+                              assign block_title = 'storefront.footer.help' | t
+                            when 'footer-company'
+                              assign block_title = 'storefront.footer.company' | t
+                          endcase
+                        endunless
 
                         assign tag = 'div'
                         if block_title != blank
@@ -175,7 +191,7 @@
                                   href="{{ link.url }}"
                                   class="reversed-link"
                                 >
-                                  {{ link.title }}
+                                  {% render 'localized-menu-title', link: link %}
                                 </a>
                               </li>
                             {%- endfor -%}
@@ -186,6 +202,12 @@
                     {%- when 'image_text' -%}
                       {%- liquid
                         assign tag = 'div'
+                        assign image_text_content = block.settings.text
+                        unless request.locale.iso_code == 'en'
+                          if image_text_content contains 'Thoughtfully selected support for everyday foot comfort.'
+                            assign image_text_content = 'storefront.footer.brand_html' | t
+                          endif
+                        endunless
                         if block.settings.heading != blank
                           assign tag = 'details'
                         endif
@@ -224,9 +246,9 @@
                               }}
                             </div>
                           {% endif %}
-                          {%- if block.settings.text != blank -%}
+                          {%- if image_text_content != blank -%}
                             <div class="footer-image-box__text rte">
-                              {{ block.settings.text }}
+                              {{ image_text_content }}
                             </div>
                           {%- endif -%}
                           {%- if block.settings.button_label != blank -%}
@@ -335,7 +357,7 @@
               <ul class="linklist linklist--horizontal list-unstyled">
                 {% for link in linklists[section.settings.footer_bottom_menu].links %}
                   <li>
-                    <a href="{{ link.url }}" class="reversed-link">{{ link.title | escape }}</a>
+                    <a href="{{ link.url }}" class="reversed-link">{% render 'localized-menu-title', link: link %}</a>
                   </li>
                 {% endfor %}
               </ul>

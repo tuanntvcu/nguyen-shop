@@ -21,13 +21,13 @@
 
 <details is="menu-drawer-details" level="top">
   <summary class="menu-drawer__item-link flex items-center justify-between">
-    <span>{{ link.title | escape }}</span>
+    <span>{% render 'localized-menu-title', link: link %}</span>
     {%- render 'icon-caret', size: 'medium' -%}
   </summary>
   <div class="menu-drawer__submenu absolute z-1 flex flex-col w-full h-full" data-parent>
     <button type="button" class="menu-drawer__item-back-link font-navigation flex items-center gap-2 w-full">
       {%- render 'icon-caret', size: 'small' -%}
-      {{ link.title | escape }}
+      {% render 'localized-menu-title', link: link %}
     </button>
     <ul class="flex flex-col h-full v-scrollable" data-parent role="list">
       {%- if collections != blank and block.type == 'product_list' and enable_mega_menu -%}
@@ -48,7 +48,7 @@
           {%- if childlink.links != blank -%}
             <details is="menu-drawer-details">
               <summary class="menu-drawer__item-link flex items-center justify-between">
-                <span>{{ childlink.title | escape }}</span>
+                <span>{% render 'localized-menu-title', link: childlink %}</span>
                 {%- render 'icon-caret', size: 'medium' -%}
               </summary>
               <div class="menu-drawer__submenu absolute z-1 flex flex-col w-full h-full" data-parent>
@@ -57,7 +57,7 @@
                   class="menu-drawer__item-back-link font-navigation flex items-center gap-2 w-full"
                 >
                   {%- render 'icon-caret', size: 'small' -%}
-                  {{ childlink.title | escape }}
+                  {% render 'localized-menu-title', link: childlink %}
                 </button>
                 <ul class="v-scrollable h-full w-full ss">
                   {%- for grandchildlink in childlink.links -%}
@@ -66,7 +66,7 @@
                         href="{{ grandchildlink.url }}"
                         class="menu-drawer__item-link flex items-center justify-between"
                       >
-                        {{- grandchildlink.title | escape -}}
+                        {%- render 'localized-menu-title', link: grandchildlink -%}
                       </a>
                     </li>
                   {%- endfor -%}
@@ -78,7 +78,7 @@
               href="{{ childlink.url }}"
               class="menu-drawer__item-link flex items-center justify-between"
             >
-              {{- childlink.title -}}
+              {%- render 'localized-menu-title', link: childlink -%}
             </a>
           {%- endif -%}
         </li>

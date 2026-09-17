@@ -37,7 +37,7 @@
               {%- for variant in product.variants -%}
                 {%- assign variant_image = variant.featured_image | default: product.featured_image -%}
                 <option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | escape }}{% endif %}" data-image="{{ variant_image | image_url: width: 320 }}"{% if variant.id == selected_variant.id %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>
-                  {{ variant.title | escape }}{% unless variant.available %} — Sold out{% endunless %}
+                  {{ variant.title | escape }}{% unless variant.available %} — {{ 'products.product.sold_out' | t }}{% endunless %}
                 </option>
               {%- endfor -%}
             </select>
@@ -45,7 +45,7 @@
             <input type="hidden" name="id" value="{{ selected_variant.id }}">
           {%- endunless -%}
           <button type="submit" class="btn cart-drawer__care-add"{% unless selected_variant.available %} disabled aria-disabled="true"{% endunless %}>
-            <span>{% if selected_variant.available %}Add to Cart{% else %}Sold out{% endif %}</span>
+            <span>{% if selected_variant.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
             {%- render 'loading-spinner' -%}
           </button>
           <div class="product-form__error-message" role="alert" hidden></div>

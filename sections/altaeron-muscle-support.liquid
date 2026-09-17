@@ -94,7 +94,14 @@
     <header class="alta-muscle__header">
       {%- if eyebrow != blank -%}<p class="alta-muscle__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
       <h2 id="AltaeronMuscleHeading-{{ section.id }}" class="alta-muscle__heading">{{ heading | escape }}</h2>
-      {%- if subheading != blank -%}<p class="alta-muscle__subheading">{{ subheading | escape }}</p>{%- endif -%}
+      {%- if subheading != blank -%}
+        <p class="alta-muscle__subheading">
+          {{ subheading | escape }}
+          {%- if template.suffix == 'altaeron-reels-v3' -%}
+            <br><br>{{ 'altaeron_pdp_reels_v3.muscle.design_bridge' | t }}<br><strong>{{ 'altaeron_pdp_reels_v3.muscle.comfort_heading' | t }}</strong><br>• {{ 'altaeron_pdp_reels_v3.muscle.comfort_1' | t }}<br>• {{ 'altaeron_pdp_reels_v3.muscle.comfort_2' | t }}<br>• {{ 'altaeron_pdp_reels_v3.muscle.comfort_3' | t }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
     </header>
 
     {%- assign anatomy_alt = section.settings.anatomy_image.alt | default: heading -%}

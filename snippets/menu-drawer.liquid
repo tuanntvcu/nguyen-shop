@@ -71,7 +71,7 @@
                 -%}
               {%- else -%}
                 <a href="{{ link.url }}" class="menu-drawer__item-link flex items-center justify-between">
-                  {{- link.title | escape -}}
+                  {%- render 'localized-menu-title', link: link -%}
                 </a>
               {%- endif -%}
             </li>
