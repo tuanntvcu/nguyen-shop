@@ -1194,6 +1194,27 @@
     "try_home": { "eyebrow": "ご自宅でお試しください", "heading": "足に合うか、ゆっくり確かめてください", "body": "自分に合うフィット感とテンションを見つけるまで、数回かかることがあります。ご自宅でAltaeronを試し、普段の生活の中で装着感を確かめてください。", "handwritten_message": "より快適な明日をサポート", "cta_text": "ALTAERONを試す →", "cta_reassurance": "安全な決済 · 30日間の簡単返品", "banner_text": "今日の小さな一歩。\n明日のより大きな快適さへ。", "trust_1_title": "30日間の簡単返品", "trust_1_body": "ご自宅で普段の生活に取り入れてお試しください。" },
     "faq": { "title": "まだ迷っていますか？", "subtitle": "初めて装着する前に知っておきたいこと。", "question_1": "Altaeronは左右どちらの足にも使えますか？", "answer_1": "はい。調節式のため、左足にも右足にも使用できます。矯正器は一度に片足へ装着します。", "question_2": "自分の足に合いますか？", "answer_2": "Altaeronは、幅広い大人の足サイズに対応できる調節式ストラップを採用しています。", "question_3": "ダイヤルはどの程度締めればよいですか？", "answer_3": "弱い設定から始め、しっかり支えられながら快適に感じるところまでテンションを上げてください。親指を無理に動かす必要はありません。", "question_4": "最初はどのくらいの時間装着すればよいですか？", "answer_4": "座っている時やくつろいでいる時に短時間から始め、フィット感とテンションに慣れたら徐々に時間を延ばしてください。", "question_5": "装着したまま歩けますか？", "answer_5": "Altaeronは主に座っている時、休憩中、軽い活動時の使用を想定しています。しっかりフィットすれば、室内での軽い歩行も快適に行える場合があります。", "question_6": "靴の中に装着できますか？", "answer_6": "フレームとダイヤルに厚みがあるため、すべての靴に快適に収まるとは限りません。主にご自宅での使用に適しています。", "question_7": "1回の注文には何が含まれますか？", "answer_7": "1個の調節式Altaeron™外反母趾矯正器が含まれます。左足または右足のどちらか一方に使用できます。", "question_8": "製品仕様を教えてください。", "answer_8": "おおよそのサイズ：10 × 8 × 2.5 cm\nフィット：大人の足向け調節式\nフレーム：ABSサポート構造\nパッド：柔らかな生地 + シリコン接触部\n調節：ダイヤル式スチールワイヤーテンションシステム\nヒンジ：回転式デザイン", "question_9": "Altaeronで外反母趾は永久にまっすぐになりますか？", "answer_9": "Altaeronは装着中に調節可能な位置サポートを提供する製品です。外反母趾の骨格そのものを永久的に変えるものではありません。" }
   },
+  "research_evidence": {
+    "eyebrow": "エビデンスに基づくサポート",
+    "heading": "研究では何が分かっていますか？",
+    "intro": "外反母趾に対する保存的サポートの臨床研究では、装具や足指のアライメント器具が、より良い配列を支え、外反母趾に伴う不快感の軽減に役立つ可能性が示されています。",
+    "study_1": { "title": "足指のアライメント改善", "meta": "システマティックレビュー · 9件の研究", "body": "9件の臨床研究を検討した結果、足指のアライメントに良好な影響が認められ、特にトーセパレーターを備えた設計で最も強い結果が示されました。", "citation": "Kwan et al., BMJ Open (2021)" },
+    "study_2": { "title": "外反母趾角と痛みの軽減", "meta": "RCT · 90名 · 12か月", "body": "オーダーメイドのトーセパレーターを使用した参加者では、外反母趾角が平均3.3°減少した一方、対照群では1.9°増加しました。治療群では痛みも軽減しました。", "citation": "Chadchavalpanichaya et al. (2018)" },
+    "study_3": { "title": "短期的な痛みの軽減", "meta": "RCT · 209名", "body": "ランダム化比較試験では、装具治療により、経過観察と比べて歩行時の痛みが短期的に改善しました。", "citation": "Torkki et al., JAMA (2001)" },
+    "more_research": "その他の研究",
+    "study_4": { "title": "サポート＋運動", "body": "運動と装具によるサポートを組み合わせると、運動のみの場合よりも外反母趾角と痛みが改善しました。", "citation": "Zhu et al. (2026)" },
+    "study_5": { "title": "筋力と機能", "body": "トーセパレーターと足部を対象とした運動を組み合わせることで、痛み、足指の把持力、母趾の筋力と機能が改善しました。", "citation": "Abdalbary (2018)" },
+    "view_study": "研究を見る",
+    "disclaimer": "上記の研究は、外反母趾用装具、トーセパレーター、および複数の方法を組み合わせた保存的プログラムを評価したものです。すべての器具やすべての人に同じ結果が得られることを示すものではありません。",
+    "view_all_sources": "すべての出典を見る",
+    "sources_heading": "研究資料",
+    "view_source": "出典を見る",
+    "source_1": "Hallux valgus orthosis characteristics and effectiveness: a systematic review with meta-analysis — Mei-Ying Kwan, Kit-Lun Yick, Joanne Yip, Chi-Yung Tse; BMJ Open, 2021.",
+    "source_2": "Effectiveness of the custom-mold room temperature vulcanizing silicone toe separator on hallux valgus — Navaporn Chadchavalpanichaya et al.; Prosthetics and Orthotics International, 2018.",
+    "source_3": "Surgery vs orthosis vs watchful waiting for hallux valgus: a randomized controlled trial — M. Torkki et al.; JAMA, 2001.",
+    "source_4": "Effects of exercise combined with external support on hallux valgus angle and pain — Zhitao Zhu et al.; Foot and Ankle Surgery, 2026.",
+    "source_5": "Foot Mobilization and Exercise Program Combined with Toe Separator Improves Outcomes in Women with Moderate Hallux Valgus — Sahar Ahmed Abdalbary; Journal of the American Podiatric Medical Association, 2018."
+  },
   "altaeron_pdp_dialfit": {
     "common": {
       "save": "割引",

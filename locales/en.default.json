@@ -1588,6 +1588,27 @@
       "answer_9": "Altaeron is designed to provide adjustable positioning support while you wear it. It does not permanently change the underlying bone structure of a bunion."
     }
   },
+  "research_evidence": {
+    "eyebrow": "EVIDENCE-BASED SUPPORT",
+    "heading": "What Does the Research Say?",
+    "intro": "Clinical research on conservative bunion supports suggests that orthoses and toe-alignment devices may help support better alignment and reduce bunion-related discomfort.",
+    "study_1": { "title": "Better Toe Alignment", "meta": "Systematic Review · 9 studies", "body": "A review of 9 clinical studies found a positive effect on toe alignment, with toe-separating designs showing the strongest results.", "citation": "Kwan et al., BMJ Open (2021)" },
+    "study_2": { "title": "Reduced Bunion Angle & Pain", "meta": "RCT · 90 participants · 12 months", "body": "Participants using a custom toe separator showed an average 3.3° reduction in hallux valgus angle, while the control group increased by 1.9°. Pain also decreased in the treatment group.", "citation": "Chadchavalpanichaya et al. (2018)" },
+    "study_3": { "title": "Short-Term Pain Relief", "meta": "RCT · 209 participants", "body": "A randomized controlled trial found that orthotic treatment provided short-term improvement in walking pain compared with watchful waiting.", "citation": "Torkki et al., JAMA (2001)" },
+    "more_research": "MORE RESEARCH",
+    "study_4": { "title": "Support + Exercise", "body": "Exercise combined with orthotic support improved hallux valgus angle and pain more than exercise alone.", "citation": "Zhu et al. (2026)" },
+    "study_5": { "title": "Strength & Function", "body": "A toe separator combined with targeted foot exercises improved pain, toe-grip strength and big-toe strength and function.", "citation": "Abdalbary (2018)" },
+    "view_study": "View study",
+    "disclaimer": "Research above evaluated hallux valgus orthoses, toe separators, and combined conservative programs. Results do not establish identical outcomes for every device or every person.",
+    "view_all_sources": "View all sources",
+    "sources_heading": "Research sources",
+    "view_source": "View source",
+    "source_1": "Hallux valgus orthosis characteristics and effectiveness: a systematic review with meta-analysis — Mei-Ying Kwan, Kit-Lun Yick, Joanne Yip and Chi-Yung Tse; BMJ Open, 2021.",
+    "source_2": "Effectiveness of the custom-mold room temperature vulcanizing silicone toe separator on hallux valgus — Navaporn Chadchavalpanichaya et al.; Prosthetics and Orthotics International, 2018.",
+    "source_3": "Surgery vs orthosis vs watchful waiting for hallux valgus: a randomized controlled trial — M. Torkki et al.; JAMA, 2001.",
+    "source_4": "Effects of exercise combined with external support on hallux valgus angle and pain — Zhitao Zhu et al.; Foot and Ankle Surgery, 2026.",
+    "source_5": "Foot Mobilization and Exercise Program Combined with Toe Separator Improves Outcomes in Women with Moderate Hallux Valgus — Sahar Ahmed Abdalbary; Journal of the American Podiatric Medical Association, 2018."
+  },
   "altaeron_pdp_dialfit": {
     "common": { "save": "Save", "save_amount": "Save {{ amount }}" },
     "accessibility": { "product_media": "Altaeron DialFit product media", "open_image": "Open product image {{ index }}", "return_demo": "Return to DialFit demonstration video", "back_demo": "Back to demo", "purchase": "Purchase {{ product }}", "product_in_use": "DialFit product in use", "publications": "Publications", "final_purchase": "Final DialFit purchase call to action", "payment_methods": "Accepted payment methods" },

@@ -172,6 +172,15 @@
         "callout_body": ""
       }
     },
+    "altaeron_research_evidence": {
+      "type": "altaeron-research-evidence",
+      "settings": {
+        "show_section": true,
+        "eyebrow": "EVIDENCE-BASED SUPPORT",
+        "heading": "What Does the Research Say?",
+        "intro": "Clinical research on conservative bunion supports suggests that orthoses and toe-alignment devices may help support better alignment and reduce bunion-related discomfort."
+      }
+    },
     "altaeron_adjustable_support": {
       "type": "altaeron-adjustable-support",
       "blocks": {
@@ -323,6 +332,7 @@
   "order": [
     "altaeron_pdp_reels_v3",
     "altaeron_right_fit",
+    "altaeron_research_evidence",
     "altaeron_bunion_benefits",
     "altaeron_adjustable_support",
     "altaeron_muscle_support",
