@@ -213,16 +213,6 @@
         "reassurance": "Support should feel controlled and comfortable — never forced."
       }
     },
-    "altaeron_research_evidence": {
-      "type": "altaeron-research-evidence",
-      "settings": {
-        "show_section": true,
-        "eyebrow": "EVIDENCE-BASED SUPPORT",
-        "heading": "What Does the Research Say?",
-        "intro": "Clinical research on conservative bunion supports suggests that orthoses and toe-alignment devices may help support better alignment and reduce bunion-related discomfort.",
-        "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"
-      }
-    },
     "altaeron_muscle_support": {
       "type": "altaeron-muscle-support",
       "blocks": {
@@ -289,6 +279,16 @@
         "reassurance_text": "Once you find a comfortable setting, make Altaeron part of your regular at-home routine."
       }
     },
+    "altaeron_research_evidence": {
+      "type": "altaeron-research-evidence",
+      "settings": {
+        "show_section": true,
+        "eyebrow": "EVIDENCE-BASED SUPPORT",
+        "heading": "What Does the Research Say?",
+        "intro": "Clinical research on conservative bunion supports suggests that orthoses and toe-alignment devices may help support better alignment and reduce bunion-related discomfort.",
+        "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"
+      }
+    },
     "altaeron_try_at_home": {
       "type": "altaeron-try-at-home",
       "blocks": {
@@ -335,11 +335,11 @@
     "altaeron_right_fit",
     "altaeron_adjustable_support",
     "altaeron_bunion_benefits",
-    "altaeron_research_evidence",
     "altaeron_muscle_support",
     "altaeron_support_timeline",
     "altaeron_try_at_home",
     "altaeron_reviews_faq",
-    "altaeron_story_cta"
+    "altaeron_story_cta",
+    "altaeron_research_evidence"
   ]
 }
