@@ -34,6 +34,7 @@
     #AltaeronResearch-{{ section.id }} .research__primary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     #AltaeronResearch-{{ section.id }} .research__secondary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     #AltaeronResearch-{{ section.id }} .research-card { background: #fff; border: 1px solid var(--research-line); border-radius: 18px; box-shadow: 0 12px 32px rgba(16,42,67,.06); min-width: 0; }
+    #AltaeronResearch-{{ section.id }} .research-card[id] { scroll-margin-top: calc(var(--header-height, 80px) + 24px); }
     #AltaeronResearch-{{ section.id }} .research-card--primary { display: flex; flex-direction: column; min-height: 390px; padding: 24px; }
     #AltaeronResearch-{{ section.id }} .research-card__head { align-items: center; display: grid; gap: 16px; grid-template-columns: 96px minmax(0, 1fr); }
     #AltaeronResearch-{{ section.id }} .research-card__icon { align-items: center; background: var(--research-soft); border-radius: 50%; color: var(--research-accent); display: flex; height: 96px; justify-content: center; width: 96px; }
@@ -142,7 +143,15 @@
           {%- capture image_key -%}study_{{ i }}_image{%- endcapture -%}
           {%- assign study_image = section.settings[image_key] -%}
           {%- assign study_title = key_root | append: '.title' | t -%}
-          <article class="research-card research-card--primary">
+          {%- assign research_anchor = blank -%}
+          {%- if template.suffix == 'altaeron-reels-v3' -%}
+            {%- if i == 1 -%}
+              {%- assign research_anchor = 'bunion-research-alignment' -%}
+            {%- elsif i == 3 -%}
+              {%- assign research_anchor = 'bunion-research-pain' -%}
+            {%- endif -%}
+          {%- endif -%}
+          <article class="research-card research-card--primary"{% if research_anchor != blank %} id="{{ research_anchor }}"{% endif %}>
             <div class="research-card__head">
               <div class="research-card__icon">
                 {%- if study_image != blank -%}
@@ -172,7 +181,11 @@
           {%- capture image_key -%}study_{{ i }}_image{%- endcapture -%}
           {%- assign study_image = section.settings[image_key] -%}
           {%- assign study_title = key_root | append: '.title' | t -%}
-          <article class="research-card research-card--secondary">
+          {%- assign research_anchor = blank -%}
+          {%- if template.suffix == 'altaeron-reels-v3' and i == 4 -%}
+            {%- assign research_anchor = 'bunion-research-exercise' -%}
+          {%- endif -%}
+          <article class="research-card research-card--secondary"{% if research_anchor != blank %} id="{{ research_anchor }}"{% endif %}>
             <div class="research-card__icon">
               {%- if study_image != blank -%}
                 {{ study_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '96, 144, 192, 240', sizes: '(min-width: 750px) 84px, 70px', alt: study_image.alt | default: study_title }}

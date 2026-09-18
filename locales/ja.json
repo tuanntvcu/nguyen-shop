@@ -1183,6 +1183,7 @@
   }
 ,
   "altaeron_pdp_reels_v3": {
+    "evidence_benefits": { "item_1": "外反母趾の痛みや圧迫感の軽減をサポート", "item_2": "足の親指をよりまっすぐな位置で支える", "item_3": "足の運動と併用し、より良い保存的ケアをサポート", "item_4": "足の親指のアライメントに関わる筋肉と組織をサポート" },
     "hero": { "product_name": "Altaeron™ 調節式外反母趾サポーター", "headline": "足の親指をより良い位置へ導く、やさしく調節可能なサポート。", "explanation": "足の親指をよりまっすぐな位置へやさしく導きながら、外反母趾周辺の圧迫感や窮屈さを和らげます。", "benefit_1": "ダイヤル式サポート", "benefit_1_note": "快適さに合わせてサポートの強さを調節できます。", "benefit_2": "大人向け調節式フィット", "benefit_2_note": "左右どちらの足にも使用できます。", "benefit_3": "30日間の簡単返品", "benefit_3_note": "ご自宅で安心してお試しください。", "purchase_clarification": "矯正器1個 · 左右どちらの足にも使用可能", "review_content_html": "<p>調節しやすく、<strong>快適に装着でき</strong>、足の親指に<strong>求めていたサポート</strong>を与えてくれます。</p>" },
     "reviews_eyebrow": "お客様のレビュー",
     "faq_eyebrow": "よくあるご質問",

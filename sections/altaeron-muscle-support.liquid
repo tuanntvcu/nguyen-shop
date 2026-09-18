@@ -25,6 +25,7 @@
   #AltaeronMuscle-{{ section.id }} * { box-sizing: border-box; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__shell { margin-inline: auto; width: min(1360px, calc(100% - 80px)); }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__header { margin-bottom: 24px; max-width: 1080px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__header[id] { scroll-margin-top: calc(var(--header-height, 80px) + 24px); }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__eyebrow { align-items: center; color: var(--alta-muscle-accent); display: flex; font-size: 12px; font-weight: 750; gap: 12px; letter-spacing: .24em; line-height: 1.3; margin: 0 0 10px; text-transform: uppercase; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__heading { color: var(--alta-muscle-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(30px, 3vw, 46px); font-weight: 750; letter-spacing: -.035em; line-height: 1.08; margin: 0; }
@@ -91,7 +92,7 @@
 
 <section id="AltaeronMuscle-{{ section.id }}" class="alta-muscle-support" aria-labelledby="AltaeronMuscleHeading-{{ section.id }}">
   <div class="alta-muscle__shell">
-    <header class="alta-muscle__header">
+    <header class="alta-muscle__header"{% if template.suffix == 'altaeron-reels-v3' %} id="bunion-muscle-support"{% endif %}>
       {%- if eyebrow != blank -%}<p class="alta-muscle__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
       <h2 id="AltaeronMuscleHeading-{{ section.id }}" class="alta-muscle__heading">{{ heading | escape }}</h2>
       {%- if subheading != blank -%}

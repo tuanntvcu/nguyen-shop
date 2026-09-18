@@ -17,15 +17,11 @@
   assign review_rating = review_data.average_rating | default: 0 | plus: 0
   assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
   assign reel_product_name = section.settings.eyebrow
-  assign reel_benefit_headline = section.settings.headline
-  assign reel_explanation = section.settings.subheadline
   assign reel_price_label = section.settings.price_label
   assign reel_cta_label = section.settings.cta_label
   assign reel_review_content = section.settings.review_content
   unless request.locale.iso_code == 'en'
     assign reel_product_name = 'altaeron_pdp_reels_v3.hero.product_name' | t
-    assign reel_benefit_headline = 'altaeron_pdp_reels_v3.hero.headline' | t
-    assign reel_explanation = 'altaeron_pdp_reels_v3.hero.explanation' | t
     assign reel_price_label = 'altaeron_pdp_reels_v2.common.from' | t
     assign reel_cta_label = 'altaeron_pdp_reels_v2.buy.atf_cta' | t
     assign reel_review_content = 'altaeron_pdp_reels_v3.hero.review_content_html' | t
@@ -114,8 +110,15 @@
   #AltaeronPdp-{{ section.id }} .apdp-narrative .apdp-rating .apdp-stars{font-size:15px}
   #AltaeronPdp-{{ section.id }} .apdp-narrative .apdp-rating strong{color:var(--altaeron-body,#344054);font-size:12px;font-weight:600}
   #AltaeronPdp-{{ section.id }} .apdp-narrative h1{color:var(--altaeron-navy,#102A43);font-family:var(--alta-font-family,var(--font-heading-family));font-size:clamp(30px,2.35vw,42px);font-weight:750;letter-spacing:-.035em;line-height:1.08;margin:0 0 12px}
-  #AltaeronPdp-{{ section.id }} .apdp-narrative__benefit-headline{color:var(--altaeron-navy,#102A43);font-size:18px;font-weight:700;line-height:1.35;margin:0 0 8px}
-  #AltaeronPdp-{{ section.id }} .apdp-narrative__explanation{color:var(--altaeron-body,#344054);font-size:14px;line-height:1.55;margin:0}
+  html{scroll-behavior:smooth}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links{display:grid;gap:4px;list-style:none;margin:0;padding:0}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links a{align-items:center;border-radius:7px;color:var(--altaeron-navy,#102A43);display:grid;font-size:13px;font-weight:650;gap:9px;grid-template-columns:20px minmax(0,1fr) 16px;line-height:1.32;min-height:42px;padding:5px 7px;text-decoration:none;transition:background-color .18s ease,color .18s ease}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-check{align-items:center;background:var(--altaeron-soft-teal,#EAF5F2);border-radius:50%;color:var(--altaeron-primary,#006B5E);display:flex;height:20px;justify-content:center;width:20px}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-check svg{height:12px;stroke-width:2.2;width:12px}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-arrow{color:var(--altaeron-primary,#006B5E);height:14px;justify-self:end;opacity:.7;transition:transform .18s ease;width:14px}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links a:hover{background:var(--altaeron-off-white,#F8FAF9);color:var(--altaeron-primary,#006B5E)}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links a:hover .apdp-narrative__evidence-arrow{transform:translateX(2px)}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links a:focus-visible{background:var(--altaeron-off-white,#F8FAF9);outline:2px solid var(--altaeron-primary,#006B5E);outline-offset:2px}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;margin:18px 0 0;padding:0}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{align-items:center;background:var(--altaeron-off-white,#F8FAF9);border:1px solid var(--altaeron-border,#E4E7EC);border-radius:10px;color:var(--altaeron-navy,#102A43);display:flex;flex-direction:column;gap:7px;min-width:0;padding:12px 7px;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li>svg{color:var(--altaeron-primary,#006B5E);flex:0 0 22px;height:22px;stroke-width:1.8;width:22px}
@@ -224,8 +227,7 @@
     #AltaeronPdp-{{ section.id }} .apdp-buy{order:4}
     #AltaeronPdp-{{ section.id }} .apdp-narrative{min-height:0;overflow:visible;padding:20px 15px 12px}
     #AltaeronPdp-{{ section.id }} .apdp-narrative h1{font-size:30px;max-width:none}
-    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefit-headline{font-size:17px}
-    #AltaeronPdp-{{ section.id }} .apdp-narrative__explanation{font-size:14px}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links a{font-size:13px;min-height:44px}
     #AltaeronPdp-{{ section.id }} .apdp-narrative .apdp-rating{max-width:none}
     #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{margin-top:16px}
     #AltaeronPdp-{{ section.id }} .apdp-hero-review{grid-template-columns:50px minmax(0,1fr);padding:14px}
@@ -270,6 +272,7 @@
   #AltaeronPdp-{{ section.id }} :where(.apdp-gallery-story h2 strong,.apdp-gallery-story__result strong){color:var(--altaeron-primary,#006B5E)}
   #AltaeronPdp-{{ section.id }} .apdp-gallery-story__consequence{text-decoration-color:var(--altaeron-primary,#006B5E)}
   #AltaeronPdp-{{ section.id }} .apdp-gallery-story__result{background:var(--altaeron-soft-teal,#EAF5F2);color:var(--altaeron-body,#344054)}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links *{transition:none!important}}
   {% render 'altaeron-reels-responsive-main', section_id: section.id, template_class: 'altaeron-reels-v3' %}
 </style>
 
@@ -366,8 +369,19 @@
           </a>
         {%- endif -%}
         <h1 id="AltaeronTitle-{{ section.id }}"><span class="apdp-title-lines">{{ reel_product_name }}</span></h1>
-        <p class="apdp-narrative__benefit-headline">{{ reel_benefit_headline }}</p>
-        <p class="apdp-narrative__explanation">{{ reel_explanation }}</p>
+        <ul class="apdp-narrative__evidence-links" role="list">
+          {%- assign evidence_anchors = 'bunion-research-pain,bunion-research-alignment,bunion-research-exercise,bunion-muscle-support' | split: ',' -%}
+          {%- for i in (1..4) -%}
+            {%- capture evidence_key -%}altaeron_pdp_reels_v3.evidence_benefits.item_{{ i }}{%- endcapture -%}
+            <li>
+              <a href="#{{ evidence_anchors[forloop.index0] }}">
+                <span class="apdp-narrative__evidence-check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="m3.5 8.2 2.8 2.8 6.2-6.2"/></svg></span>
+                <span>{{ evidence_key | t }}</span>
+                <svg class="apdp-narrative__evidence-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
         <ul class="apdp-narrative__benefits" role="list">
           <li>{% render 'altaeron-pdp-icon', icon: 'sliders' %}<span><b>{{ 'altaeron_pdp_reels_v3.hero.benefit_1' | t }}</b><small>{{ 'altaeron_pdp_reels_v3.hero.benefit_1_note' | t }}</small></span></li>
           <li>{% render 'altaeron-pdp-icon', icon: 'left-right' %}<span><b>{{ 'altaeron_pdp_reels_v3.hero.benefit_2' | t }}</b><small>{{ 'altaeron_pdp_reels_v3.hero.benefit_2_note' | t }}</small></span></li>
