@@ -114,47 +114,6 @@
         "callout_body": ""
       }
     },
-    "altaeron_adjustable_support": {
-      "type": "altaeron-adjustable-support",
-      "blocks": {
-        "benefit_1": {
-          "type": "benefit",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_41_34_PM.png",
-            "title": "Turn to Adjust",
-            "body": "Fine-tune the tension with the rotary dial."
-          }
-        },
-        "benefit_2": {
-          "type": "benefit",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_47_44_PM.png",
-            "title": "Start Light",
-            "body": "Begin with gentle tension and increase gradually."
-          }
-        },
-        "benefit_3": {
-          "type": "benefit",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_48_44_PM.png",
-            "title": "Stay in Control",
-            "body": "Adjust or release the tension whenever you need."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3"
-      ],
-      "settings": {
-        "eyebrow": "ADJUSTABLE SUPPORT",
-        "heading": "Every Bunion Feels Different. Your Support Should Too.",
-        "subheading": "Unlike fixed toe spacers, Altaeron lets you gradually adjust the tension until you find the level of support that feels right for your foot.",
-        "hero_image": "shopify://shop_images/4a15bd95-dedd-4c76-8c25-03f7c4aa70dd.png",
-        "reassurance": "More tension isn’t always better — find the setting that feels supportive and comfortable."
-      }
-    },
     "altaeron_bunion_benefits": {
       "type": "altaeron-bunion-benefits",
       "blocks": {
@@ -211,6 +170,47 @@
         "heading": "Support your big toe in a more natural position.",
         "subheading": "As the big toe shifts inward, pressure and crowding can build. Altaeron supports a straighter position while worn.",
         "reassurance": "Support should feel controlled and comfortable — never forced."
+      }
+    },
+    "altaeron_adjustable_support": {
+      "type": "altaeron-adjustable-support",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_41_34_PM.png",
+            "title": "Turn to Adjust",
+            "body": "Fine-tune the tension with the rotary dial."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_47_44_PM.png",
+            "title": "Start Light",
+            "body": "Begin with gentle tension and increase gradually."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_48_44_PM.png",
+            "title": "Stay in Control",
+            "body": "Adjust or release the tension whenever you need."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3"
+      ],
+      "settings": {
+        "eyebrow": "ADJUSTABLE SUPPORT",
+        "heading": "Every Bunion Feels Different. Your Support Should Too.",
+        "subheading": "Unlike fixed toe spacers, Altaeron lets you gradually adjust the tension until you find the level of support that feels right for your foot.",
+        "hero_image": "shopify://shop_images/4a15bd95-dedd-4c76-8c25-03f7c4aa70dd.png",
+        "reassurance": "More tension isn’t always better — find the setting that feels supportive and comfortable."
       }
     },
     "altaeron_muscle_support": {
@@ -279,16 +279,6 @@
         "reassurance_text": "Once you find a comfortable setting, make Altaeron part of your regular at-home routine."
       }
     },
-    "altaeron_research_evidence": {
-      "type": "altaeron-research-evidence",
-      "settings": {
-        "show_section": true,
-        "eyebrow": "EVIDENCE-BASED SUPPORT",
-        "heading": "What Does the Research Say?",
-        "intro": "Clinical research on conservative bunion supports suggests that orthoses and toe-alignment devices may help support better alignment and reduce bunion-related discomfort.",
-        "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"
-      }
-    },
     "altaeron_try_at_home": {
       "type": "altaeron-try-at-home",
       "blocks": {
@@ -328,15 +318,25 @@
         "product_image": "shopify://shop_images/e037c921-ec53-489f-9884-5dd8b2e75e7b.png",
         "cta_label": "ADD TO CART"
       }
+    },
+    "altaeron_research_evidence": {
+      "type": "altaeron-research-evidence",
+      "settings": {
+        "show_section": true,
+        "eyebrow": "EVIDENCE-BASED SUPPORT",
+        "heading": "What Does the Research Say?",
+        "intro": "Clinical research on conservative bunion supports suggests that orthoses and toe-alignment devices may help support better alignment and reduce bunion-related discomfort.",
+        "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"
+      }
     }
   },
   "order": [
     "altaeron_pdp_reels_v3",
     "altaeron_right_fit",
-    "altaeron_adjustable_support",
     "altaeron_bunion_benefits",
-    "altaeron_muscle_support",
+    "altaeron_adjustable_support",
     "altaeron_support_timeline",
+    "altaeron_muscle_support",
     "altaeron_try_at_home",
     "altaeron_reviews_faq",
     "altaeron_story_cta",
