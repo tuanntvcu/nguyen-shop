@@ -216,8 +216,8 @@
     #AltaeronPdp-{{ section.id }} .apdp-payment-terms{display:none}
   }
   @media(max-width:390px){
-    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits small{display:none}
-    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{min-height:68px;padding:10px 5px}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{gap:12px;margin-top:0}
+    #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{grid-template-columns:20px minmax(0,1fr);min-height:0;padding:0}
   }
   #AltaeronPdp-{{ section.id }} .apdp-day__benefits article{background:var(--altaeron-off-white,#F8FAF9);border-color:var(--altaeron-border,#E4E7EC)}
   #AltaeronPdp-{{ section.id }} :where(.apdp-gallery-story__copy,.apdp-gallery-story__consequence){color:var(--altaeron-body,#344054)}

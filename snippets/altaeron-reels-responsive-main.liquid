@@ -130,5 +130,7 @@
   @media (min-width: 768px) {
     {{ reel_root }} :where(.apdp-gallery__stage, .apdp-gallery__viewer) { aspect-ratio: 1 / 1; }
     {{ reel_root }} :where(.apdp-gallery__hero > img, .apdp-gallery__item img) { height: 100%; object-fit: cover; object-position: center; width: 100%; }
+    {{ reel_root }} .apdp-narrative__benefits { grid-template-columns: 1fr; }
+    {{ reel_root }} .apdp-narrative__benefits li { grid-template-columns: 20px minmax(0, 1fr); min-height: 0; padding: 0; }
   }
 {%- endif -%}
