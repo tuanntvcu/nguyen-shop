@@ -62,7 +62,7 @@
         "subheadline": "Gently guides the big toe toward a straighter position while helping ease pressure and crowding around the bunion.",
         "review_avatar": "shopify://shop_images/Screenshot_2026-09-14_165648.png",
         "review_content": "<p>My right bunion has been bugging me forever especially after work or if i wear the wrong shoes. first time i put this thing on i turned it way too much lol had to take it off and start over 😅 now i just use it when im sitting on the couch at night, maybe <strong>20-30 mins</strong>. feels weird at first but i actually like the little stretch now. <strong>keeps my big toe from feeling so jammed up against the other one</strong></p>",
-        "reviewer_name": "Karen M.",
+        "reviewer_name": "Linda",
         "price_label": "From",
         "cta_label": "ADD TO CART"
       }
@@ -125,6 +125,40 @@
         "reassurance": "Support should feel controlled and comfortable — never forced."
       }
     },
+    "altaeron_support_timeline": {
+      "type": "altaeron-support-timeline",
+      "blocks": {
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "label": "FIRST FEW WEARS",
+            "title": "Find Your Setting",
+            "body": "Start with lighter tension and get familiar with the feel of adjustable support.",
+            "video": "shopify://files/videos/0912.mp4"
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "label": "ONCE IT FEELS COMFORTABLE",
+            "title": "Fine-Tune the Fit",
+            "body": "Adjust the dial until you find the balance of support and comfort that works for you.",
+            "video": "shopify://files/videos/0910 (2).mp4"
+          }
+        }
+      },
+      "block_order": [
+        "stage_1",
+        "stage_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "What to Expect When You Start",
+        "subheading": "Every foot feels different. Comfort should guide your routine.",
+        "reassurance_heading": "",
+        "reassurance_text": "Once you find a comfortable setting, make Altaeron part of your regular at-home routine."
+      }
+    },
     "altaeron_right_fit": {
       "type": "altaeron-right-fit",
       "blocks": {
@@ -172,6 +206,35 @@
         "callout_body": ""
       }
     },
+    "altaeron_try_at_home": {
+      "type": "altaeron-try-at-home",
+      "blocks": {
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "image": "shopify://shop_images/Website_Badges_-_Easy_Returns_Badge_480x480_0d6e0732-f362-4352-9d69-53cb92ec7300.webp",
+            "title": "30-Day Easy Returns",
+            "body": "Try it as part of your normal at-home routine."
+          }
+        }
+      },
+      "block_order": [
+        "trust_1"
+      ],
+      "settings": {
+        "eyebrow": "TRY IT AT HOME",
+        "heading": "Give Your Feet Time to Decide",
+        "body": "Finding the right fit and tension can take a few wears. Try Altaeron at home and see how it feels in your own routine.",
+        "hero_image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
+        "show_handwritten": true,
+        "handwritten_message": "Support a more comfortable tomorrow",
+        "cta_text": "TRY ALTAERON →",
+        "cta_link": "",
+        "cta_reassurance": "Secure checkout · 30-day easy returns",
+        "show_banner": true,
+        "banner_text": "A small step for today.\nGreater comfort for tomorrow."
+      }
+    },
     "altaeron_adjustable_support": {
       "type": "altaeron-adjustable-support",
       "blocks": {
@@ -213,40 +276,6 @@
         "reassurance": "More tension isn’t always better — find the setting that feels supportive and comfortable."
       }
     },
-    "altaeron_support_timeline": {
-      "type": "altaeron-support-timeline",
-      "blocks": {
-        "stage_1": {
-          "type": "stage",
-          "settings": {
-            "label": "FIRST FEW WEARS",
-            "title": "Find Your Setting",
-            "body": "Start with lighter tension and get familiar with the feel of adjustable support.",
-            "video": "shopify://files/videos/0912.mp4"
-          }
-        },
-        "stage_3": {
-          "type": "stage",
-          "settings": {
-            "label": "ONCE IT FEELS COMFORTABLE",
-            "title": "Fine-Tune the Fit",
-            "body": "Adjust the dial until you find the balance of support and comfort that works for you.",
-            "video": "shopify://files/videos/0910 (2).mp4"
-          }
-        }
-      },
-      "block_order": [
-        "stage_1",
-        "stage_3"
-      ],
-      "settings": {
-        "eyebrow": "",
-        "heading": "What to Expect When You Start",
-        "subheading": "Every foot feels different. Comfort should guide your routine.",
-        "reassurance_heading": "",
-        "reassurance_text": "Once you find a comfortable setting, make Altaeron part of your regular at-home routine."
-      }
-    },
     "altaeron_muscle_support": {
       "type": "altaeron-muscle-support",
       "blocks": {
@@ -277,35 +306,6 @@
         "subheading": "Supporting the big toe in a more natural position can encourage more balanced muscle engagement over time.",
         "anatomy_image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_36_PM.png",
         "reassurance": "Better positioning. More balanced support."
-      }
-    },
-    "altaeron_try_at_home": {
-      "type": "altaeron-try-at-home",
-      "blocks": {
-        "trust_1": {
-          "type": "trust",
-          "settings": {
-            "image": "shopify://shop_images/Website_Badges_-_Easy_Returns_Badge_480x480_0d6e0732-f362-4352-9d69-53cb92ec7300.webp",
-            "title": "30-Day Easy Returns",
-            "body": "Try it as part of your normal at-home routine."
-          }
-        }
-      },
-      "block_order": [
-        "trust_1"
-      ],
-      "settings": {
-        "eyebrow": "TRY IT AT HOME",
-        "heading": "Give Your Feet Time to Decide",
-        "body": "Finding the right fit and tension can take a few wears. Try Altaeron at home and see how it feels in your own routine.",
-        "hero_image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
-        "show_handwritten": true,
-        "handwritten_message": "Support a more comfortable tomorrow",
-        "cta_text": "TRY ALTAERON →",
-        "cta_link": "",
-        "cta_reassurance": "Secure checkout · 30-day easy returns",
-        "show_banner": true,
-        "banner_text": "A small step for today.\nGreater comfort for tomorrow."
       }
     },
     "altaeron_reviews_faq": {
