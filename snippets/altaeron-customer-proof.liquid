@@ -1,0 +1,48 @@
+<section class="altaeron-customer-proof" aria-labelledby="{{ heading_id }}">
+  <div class="altaeron-customer-proof__shell">
+    <header class="altaeron-customer-proof__header">
+      {%- if eyebrow != blank -%}<p class="altaeron-customer-proof__eyebrow">{{ eyebrow }}</p>{%- endif -%}
+      <h2 id="{{ heading_id }}" class="altaeron-customer-proof__heading">{{ title }}</h2>
+    </header>
+
+    <div class="altaeron-customer-proof__grid">
+      {%- for index in (1..2) -%}
+        {%- liquid
+          if index == 1
+            assign avatar = avatar_1
+            assign avatar_url = avatar_url_1
+            assign reviewer_name = reviewer_name_1
+            assign review_content = review_content_1
+          else
+            assign avatar = avatar_2
+            assign avatar_url = avatar_url_2
+            assign reviewer_name = reviewer_name_2
+            assign review_content = review_content_2
+          endif
+        -%}
+        <article class="altaeron-customer-proof__review">
+          <div class="altaeron-customer-proof__reviewer">
+            <div class="altaeron-customer-proof__avatar">
+              {%- if avatar != blank -%}
+                {{ avatar | image_url: width: 160 | image_tag: loading: 'lazy', widths: '104, 160', sizes: '52px', alt: reviewer_name }}
+              {%- elsif avatar_url != blank -%}
+                <img src="{{ avatar_url | escape }}" width="104" height="104" loading="lazy" alt="{{ reviewer_name | escape }}">
+              {%- else -%}
+                <span class="altaeron-customer-proof__initial" aria-hidden="true">{{ reviewer_name | slice: 0 }}</span>
+              {%- endif -%}
+            </div>
+            <div><strong class="altaeron-customer-proof__name">{{ reviewer_name }}</strong>{% render 'altaeron-pdp-stars', rating: 5 %}</div>
+          </div>
+          <blockquote class="altaeron-customer-proof__quote">{{ review_content }}</blockquote>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if review_count > 0 and review_rating > 0 -%}
+      <a class="altaeron-customer-proof__summary" href="{{ reviews_link | default: '#judgeme_product_reviews' | escape }}" aria-label="{{ review_rating_display }} out of 5 from {{ review_count }} reviews">
+        {% render 'altaeron-pdp-stars', rating: review_rating %}
+        <span><strong>{{ review_rating_display }}</strong> from {{ review_count }} reviews</span>
+      </a>
+    {%- endif -%}
+  </div>
+</section>

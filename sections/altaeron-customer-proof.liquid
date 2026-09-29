@@ -1,0 +1,50 @@
+{{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}
+{{ 'altaeron-customer-proof.css' | asset_url | stylesheet_tag }}
+
+{%- assign proof_heading_id = 'AltaeronCustomerProof-' | append: section.id -%}
+{%- liquid
+  assign review_data = product.metafields.judgeme.review_widget_data.value
+  assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
+  assign review_rating = review_data.average_rating | default: 0 | plus: 0
+  assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
+-%}
+{% render 'altaeron-customer-proof',
+  heading_id: proof_heading_id,
+  eyebrow: section.settings.eyebrow,
+  title: section.settings.title,
+  avatar_1: section.settings.avatar_1,
+  avatar_url_1: section.settings.avatar_url_1,
+  reviewer_name_1: section.settings.reviewer_name_1,
+  review_content_1: section.settings.review_content_1,
+  avatar_2: section.settings.avatar_2,
+  avatar_url_2: section.settings.avatar_url_2,
+  reviewer_name_2: section.settings.reviewer_name_2,
+  review_content_2: section.settings.review_content_2,
+  review_count: review_count,
+  review_rating: review_rating,
+  review_rating_display: review_rating_display,
+  reviews_link: '#judgeme_product_reviews'
+%}
+
+{% schema %}
+{
+  "name": "Altaeron Customer Proof",
+  "tag": "section",
+  "class": "section-altaeron-customer-proof",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer proof" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "WHAT CUSTOMERS ARE SAYING" },
+    { "type": "header", "content": "Review 1 — Linda" },
+    { "type": "image_picker", "id": "avatar_1", "label": "Avatar" },
+    { "type": "text", "id": "avatar_url_1", "label": "Avatar URL fallback", "default": "https://review-images.judgeme.com/altaeron/1789753655__orisllcal12293__original.png?quality=80&width=160" },
+    { "type": "text", "id": "reviewer_name_1", "label": "Customer name", "default": "Linda" },
+    { "type": "richtext", "id": "review_content_1", "label": "Full review", "default": "<p>my right bunion has been bugging me forever especially after work or if i wear the wrong shoes. first time i put this thing on i turned it way too much lol had to take it off and start over 😅 now i just use it when im sitting on the couch at night, maybe 20-30 mins. feels weird at first but i actually like the little stretch now. keeps my big toe from feeling so jammed up against the other one</p>" },
+    { "type": "header", "content": "Review 2 — debbie" },
+    { "type": "image_picker", "id": "avatar_2", "label": "Avatar" },
+    { "type": "text", "id": "avatar_url_2", "label": "Avatar URL fallback", "default": "https://review-images.judgeme.com/altaeron/1789792345__a1f6c4391f1d34e6998ceec28c924062fnjpg_96__original.png?quality=80&width=160" },
+    { "type": "text", "id": "reviewer_name_2", "label": "Customer name", "default": "debbie" },
+    { "type": "richtext", "id": "review_content_2", "label": "Full review", "default": "<p>I really like this brace. i dont expect it to actually fix my bunion, but it does a really good job keeping my foot supported and more stable. ive been wearing it around 30 mins a day, mostly after being on my feet, and it helps with the tension and discomfort. for me its more of a comfortable support/immobilizing brace than a “corrector” and im totally fine with that. feels well made and comfortable to wear ❤️‍🔥</p>" }
+  ],
+  "presets": [{ "name": "Altaeron Customer Proof" }]
+}
+{% endschema %}
