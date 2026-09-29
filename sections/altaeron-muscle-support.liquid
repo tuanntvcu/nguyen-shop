@@ -30,6 +30,11 @@
   #AltaeronMuscle-{{ section.id }} .alta-muscle__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__heading { color: var(--alta-muscle-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(30px, 3vw, 46px); font-weight: 750; letter-spacing: -.035em; line-height: 1.08; margin: 0; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__subheading { color: var(--alta-muscle-body); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; margin: 10px 0 0; max-width: 1000px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__comfort { background: var(--alta-muscle-soft); border: 1px solid rgba(0,107,94,.12); border-radius: 15px; margin-bottom: 36px; padding: 24px 28px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__comfort h2 { color: var(--alta-muscle-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(25px,2.4vw,34px); margin: 0 0 16px; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__comfort ul { display: grid; gap: 11px 24px; grid-template-columns: repeat(2,minmax(0,1fr)); list-style: none; margin: 0; padding: 0; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__comfort li { align-items: flex-start; display: flex; font-size: 15px; gap: 9px; line-height: 1.45; }
+  #AltaeronMuscle-{{ section.id }} .alta-muscle__comfort li::before { color: var(--alta-muscle-accent); content: '✓'; font-weight: 800; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy { min-height: 560px; position: relative; }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { background: #f3f5f4; border: 1px solid var(--alta-muscle-line); border-radius: 18px; height: 560px; margin-inline: auto; overflow: hidden; width: min(100%, 960px); }
   #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media :is(img, svg),
@@ -67,6 +72,8 @@
     #AltaeronMuscle-{{ section.id }} .alta-muscle__anatomy-media { height: auto; width: 100%; }
   }
   @media (max-width: 749px) {
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__comfort { margin-bottom: 24px; padding: 20px 17px; }
+    #AltaeronMuscle-{{ section.id }} .alta-muscle__comfort ul { grid-template-columns: 1fr; }
     #AltaeronMuscle-{{ section.id }} { padding: 12px 0 24px; }
     #AltaeronMuscle-{{ section.id }} .alta-muscle__shell { width: calc(100% - 30px); }
     #AltaeronMuscle-{{ section.id }} .alta-muscle__header { margin-bottom: 18px; }
@@ -92,17 +99,19 @@
 
 <section id="AltaeronMuscle-{{ section.id }}" class="alta-muscle-support" aria-labelledby="AltaeronMuscleHeading-{{ section.id }}">
   <div class="alta-muscle__shell">
+    <div class="alta-muscle__comfort">
+      <h2>{{ 'altaeron_pdp_reels_v3.muscle.comfort_heading' | t }}</h2>
+      <ul>
+        <li>{{ 'altaeron_pdp_reels_v3.muscle.comfort_1' | t }}</li>
+        <li>{{ 'altaeron_pdp_reels_v3.muscle.comfort_2' | t }}</li>
+        <li>{{ 'altaeron_pdp_reels_v3.muscle.comfort_3' | t }}</li>
+        <li>{{ 'altaeron_pdp_reels_v3.muscle.comfort_4' | t }}</li>
+      </ul>
+    </div>
     <header class="alta-muscle__header"{% if template.suffix == 'altaeron-reels-v3' %} id="bunion-muscle-support"{% endif %}>
       {%- if eyebrow != blank -%}<p class="alta-muscle__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
       <h2 id="AltaeronMuscleHeading-{{ section.id }}" class="alta-muscle__heading">{{ heading | escape }}</h2>
-      {%- if subheading != blank -%}
-        <p class="alta-muscle__subheading">
-          {{ subheading | escape }}
-          {%- if template.suffix == 'altaeron-reels-v3' -%}
-            <br><br>{{ 'altaeron_pdp_reels_v3.muscle.design_bridge' | t }}<br><strong>{{ 'altaeron_pdp_reels_v3.muscle.comfort_heading' | t }}</strong><br>• {{ 'altaeron_pdp_reels_v3.muscle.comfort_1' | t }}<br>• {{ 'altaeron_pdp_reels_v3.muscle.comfort_2' | t }}<br>• {{ 'altaeron_pdp_reels_v3.muscle.comfort_3' | t }}
-          {%- endif -%}
-        </p>
-      {%- endif -%}
+      {%- if subheading != blank -%}<p class="alta-muscle__subheading">{{ subheading | escape }}</p>{%- endif -%}
     </header>
 
     {%- assign anatomy_alt = section.settings.anatomy_image.alt | default: heading -%}
