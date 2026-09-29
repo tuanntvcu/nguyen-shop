@@ -67,53 +67,6 @@
         "cta_label": "ADD TO CART"
       }
     },
-    "altaeron_right_fit": {
-      "type": "altaeron-right-fit",
-      "blocks": {
-        "fit_1": {
-          "type": "fit_card",
-          "settings": {
-            "title": "You have a mild to moderate bunion",
-            "body": "Your big toe has started drifting toward the neighboring toes."
-          }
-        },
-        "fit_2": {
-          "type": "fit_card",
-          "settings": {
-            "title": "Bunion discomfort is affecting your everyday comfort",
-            "body": "Pressure, rubbing or aching bothers you when walking, standing or relaxing."
-          }
-        },
-        "fit_3": {
-          "type": "fit_card",
-          "settings": {
-            "title": "You want a conservative, non-surgical approach",
-            "body": "To help manage everyday bunion discomfort at home."
-          }
-        },
-        "fit_4": {
-          "type": "fit_card",
-          "settings": {
-            "title": "You prefer adjustable support over a fixed toe spacer",
-            "body": "So you can choose the level of support that feels right for your foot."
-          }
-        }
-      },
-      "block_order": [
-        "fit_1",
-        "fit_2",
-        "fit_3",
-        "fit_4"
-      ],
-      "settings": {
-        "eyebrow": "FIND YOUR RIGHT FIT",
-        "heading": "Is Altaeron™ <strong>Right for You?</strong>",
-        "subheading": "The Adjustable Bunion Corrector may be a good fit if:",
-        "show_callout": true,
-        "callout_heading": "Adjust the support to your foot instead of settling for one fixed level of pressure.",
-        "callout_body": ""
-      }
-    },
     "altaeron_bunion_benefits": {
       "type": "altaeron-bunion-benefits",
       "blocks": {
@@ -170,6 +123,53 @@
         "heading": "Support your big toe in a more natural position.",
         "subheading": "As the big toe shifts inward, pressure and crowding can build. Altaeron supports a straighter position while worn.",
         "reassurance": "Support should feel controlled and comfortable — never forced."
+      }
+    },
+    "altaeron_right_fit": {
+      "type": "altaeron-right-fit",
+      "blocks": {
+        "fit_1": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You have a mild to moderate bunion",
+            "body": "Your big toe has started drifting toward the neighboring toes."
+          }
+        },
+        "fit_2": {
+          "type": "fit_card",
+          "settings": {
+            "title": "Bunion discomfort is affecting your everyday comfort",
+            "body": "Pressure, rubbing or aching bothers you when walking, standing or relaxing."
+          }
+        },
+        "fit_3": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You want a conservative, non-surgical approach",
+            "body": "To help manage everyday bunion discomfort at home."
+          }
+        },
+        "fit_4": {
+          "type": "fit_card",
+          "settings": {
+            "title": "You prefer adjustable support over a fixed toe spacer",
+            "body": "So you can choose the level of support that feels right for your foot."
+          }
+        }
+      },
+      "block_order": [
+        "fit_1",
+        "fit_2",
+        "fit_3",
+        "fit_4"
+      ],
+      "settings": {
+        "eyebrow": "FIND YOUR RIGHT FIT",
+        "heading": "Is Altaeron™ <strong>Right for You?</strong>",
+        "subheading": "The Adjustable Bunion Corrector may be a good fit if:",
+        "show_callout": true,
+        "callout_heading": "Adjust the support to your foot instead of settling for one fixed level of pressure.",
+        "callout_body": ""
       }
     },
     "altaeron_adjustable_support": {
@@ -332,12 +332,12 @@
   },
   "order": [
     "altaeron_pdp_reels_v3",
-    "altaeron_right_fit",
     "altaeron_bunion_benefits",
-    "altaeron_adjustable_support",
     "altaeron_support_timeline",
-    "altaeron_muscle_support",
+    "altaeron_right_fit",
     "altaeron_try_at_home",
+    "altaeron_adjustable_support",
+    "altaeron_muscle_support",
     "altaeron_reviews_faq",
     "altaeron_story_cta",
     "altaeron_research_evidence"
