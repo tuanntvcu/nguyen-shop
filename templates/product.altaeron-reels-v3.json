@@ -125,85 +125,6 @@
         "reassurance": "You control the stretch from the first turn of the dial."
       }
     },
-    "altaeron_support_timeline": {
-      "type": "altaeron-support-timeline",
-      "blocks": {
-        "stage_1": {
-          "type": "stage",
-          "settings": {
-            "label": "START LIGHT",
-            "title": "Begin with Low Tension",
-            "body": "The first few sessions may feel unfamiliar. Give your foot time to adjust.",
-            "video": "shopify://files/videos/0912.mp4"
-          }
-        },
-        "stage_3": {
-          "type": "stage",
-          "settings": {
-            "label": "FIND YOUR STRETCH",
-            "title": "Firm, Never Painful",
-            "body": "Tighten only until the outward pull feels firm and comfortable.",
-            "video": "shopify://files/videos/0910 (2).mp4"
-          }
-        }
-      },
-      "block_order": [
-        "stage_1",
-        "stage_3"
-      ],
-      "settings": {
-        "eyebrow": "What to Expect When You Start",
-        "heading": "You Should Feel a Stretch — Not a Fight",
-        "subheading": "The first few sessions may feel unfamiliar. Start with light tension, let your foot adjust, then gradually increase until you feel a firm, comfortable outward stretch.",
-        "reassurance_heading": "BUILD THE ROUTINE",
-        "reassurance_text": "Work toward 20–30 minute sessions while relaxing at home."
-      }
-    },
-    "altaeron_customer_proof_RtL9nR": {
-      "type": "altaeron-customer-proof",
-      "name": "Altaeron Customer Proof",
-      "settings": {
-        "eyebrow": "Customer proof",
-        "title": "WHAT CUSTOMERS ARE SAYING",
-        "avatar_1": "shopify://shop_images/760341870_122093094465430024_1430747234869843375_n.jpg",
-        "avatar_url_1": "https://review-images.judgeme.com/altaeron/1789753655__orisllcal12293__original.png?quality=80&width=160",
-        "reviewer_name_1": "Linda",
-        "review_content_1": "<p>my right bunion has been bugging me forever especially after work or if i wear the wrong shoes. first time i put this thing on i turned it way too much lol had to take it off and start over 😅 now i just use it when im sitting on the couch at night, maybe 20-30 mins. feels weird at first but i actually like the little stretch now. keeps my big toe from feeling so jammed up against the other one</p>",
-        "avatar_2": "shopify://shop_images/558312976_10111481540078518_146096806356904784_n.jpg",
-        "avatar_url_2": "https://review-images.judgeme.com/altaeron/1789792345__a1f6c4391f1d34e6998ceec28c924062fnjpg_96__original.png?quality=80&width=160",
-        "reviewer_name_2": "debbie",
-        "review_content_2": "<p>Ive been wearing it around 30 mins a day, mostly after being on my feet, and it helps with the tension and discomfort. for me its more of a comfortable support/immobilizing brace than a “corrector” and im totally fine with that. feels well made and comfortable to wear ❤️‍🔥</p>"
-      }
-    },
-    "altaeron_try_at_home": {
-      "type": "altaeron-try-at-home",
-      "blocks": {
-        "trust_1": {
-          "type": "trust",
-          "settings": {
-            "image": "shopify://shop_images/Website_Badges_-_Easy_Returns_Badge_480x480_0d6e0732-f362-4352-9d69-53cb92ec7300.webp",
-            "title": "30-Day Easy Returns",
-            "body": "Try it as part of your normal at-home routine."
-          }
-        }
-      },
-      "block_order": [
-        "trust_1"
-      ],
-      "settings": {
-        "eyebrow": "TRY IT AT HOME",
-        "heading": "Find the Tension That Feels Right for You",
-        "body": "Start light, adjust gradually, and use Altaeron as part of your normal at-home routine. You stay in control of the stretch from the first turn of the dial.",
-        "hero_image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
-        "show_handwritten": true,
-        "handwritten_message": "Your foot. Your tension. Your routine.",
-        "cta_text": "TRY ALTAERON →",
-        "cta_link": "",
-        "cta_reassurance": "Secure checkout · 30-day easy returns",
-        "show_banner": true,
-        "banner_text": "Your foot. Your tension. Your routine."
-      }
-    },
     "altaeron_right_fit": {
       "type": "altaeron-right-fit",
       "blocks": {
@@ -257,6 +178,85 @@
         "show_callout": false,
         "callout_heading": "",
         "callout_body": ""
+      }
+    },
+    "altaeron_customer_proof_RtL9nR": {
+      "type": "altaeron-customer-proof",
+      "name": "Altaeron Customer Proof",
+      "settings": {
+        "eyebrow": "Customer proof",
+        "title": "WHAT CUSTOMERS ARE SAYING",
+        "avatar_1": "shopify://shop_images/760341870_122093094465430024_1430747234869843375_n.jpg",
+        "avatar_url_1": "https://review-images.judgeme.com/altaeron/1789753655__orisllcal12293__original.png?quality=80&width=160",
+        "reviewer_name_1": "Linda",
+        "review_content_1": "<p>my right bunion has been bugging me forever especially after work or if i wear the wrong shoes. first time i put this thing on i turned it way too much lol had to take it off and start over 😅 now i just use it when im sitting on the couch at night, maybe 20-30 mins. feels weird at first but i actually like the little stretch now. keeps my big toe from feeling so jammed up against the other one</p>",
+        "avatar_2": "shopify://shop_images/558312976_10111481540078518_146096806356904784_n.jpg",
+        "avatar_url_2": "https://review-images.judgeme.com/altaeron/1789792345__a1f6c4391f1d34e6998ceec28c924062fnjpg_96__original.png?quality=80&width=160",
+        "reviewer_name_2": "debbie",
+        "review_content_2": "<p>Ive been wearing it around 30 mins a day, mostly after being on my feet, and it helps with the tension and discomfort. for me its more of a comfortable support/immobilizing brace than a “corrector” and im totally fine with that. feels well made and comfortable to wear ❤️‍🔥</p>"
+      }
+    },
+    "altaeron_try_at_home": {
+      "type": "altaeron-try-at-home",
+      "blocks": {
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "image": "shopify://shop_images/Website_Badges_-_Easy_Returns_Badge_480x480_0d6e0732-f362-4352-9d69-53cb92ec7300.webp",
+            "title": "30-Day Easy Returns",
+            "body": "Try it as part of your normal at-home routine."
+          }
+        }
+      },
+      "block_order": [
+        "trust_1"
+      ],
+      "settings": {
+        "eyebrow": "TRY IT AT HOME",
+        "heading": "Find the Tension That Feels Right for You",
+        "body": "Start light, adjust gradually, and use Altaeron as part of your normal at-home routine. You stay in control of the stretch from the first turn of the dial.",
+        "hero_image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
+        "show_handwritten": true,
+        "handwritten_message": "Your foot. Your tension. Your routine.",
+        "cta_text": "TRY ALTAERON →",
+        "cta_link": "",
+        "cta_reassurance": "Secure checkout · 30-day easy returns",
+        "show_banner": true,
+        "banner_text": "Your foot. Your tension. Your routine."
+      }
+    },
+    "altaeron_support_timeline": {
+      "type": "altaeron-support-timeline",
+      "blocks": {
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "label": "START LIGHT",
+            "title": "Begin with Low Tension",
+            "body": "The first few sessions may feel unfamiliar. Give your foot time to adjust.",
+            "video": "shopify://files/videos/0912.mp4"
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "label": "FIND YOUR STRETCH",
+            "title": "Firm, Never Painful",
+            "body": "Tighten only until the outward pull feels firm and comfortable.",
+            "video": "shopify://files/videos/0910 (2).mp4"
+          }
+        }
+      },
+      "block_order": [
+        "stage_1",
+        "stage_3"
+      ],
+      "settings": {
+        "eyebrow": "What to Expect When You Start",
+        "heading": "You Should Feel a Stretch — Not a Fight",
+        "subheading": "The first few sessions may feel unfamiliar. Start with light tension, let your foot adjust, then gradually increase until you feel a firm, comfortable outward stretch.",
+        "reassurance_heading": "BUILD THE ROUTINE",
+        "reassurance_text": "Work toward 20–30 minute sessions while relaxing at home."
       }
     },
     "altaeron_adjustable_support": {
@@ -336,13 +336,6 @@
       "type": "altaeron-reels-v3-reviews-faq",
       "settings": {}
     },
-    "altaeron_story_cta": {
-      "type": "altaeron-reels-v3-final",
-      "settings": {
-        "product_image": "shopify://shop_images/e037c921-ec53-489f-9884-5dd8b2e75e7b.png",
-        "cta_label": "ADD TO CART"
-      }
-    },
     "altaeron_research_evidence": {
       "type": "altaeron-research-evidence",
       "settings": {
@@ -352,17 +345,24 @@
         "intro": "Research on conservative bunion supports, orthoses, and toe-positioning approaches has reported improvements in measures such as pain, pressure, or toe alignment in certain study populations.",
         "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"
       }
+    },
+    "altaeron_story_cta": {
+      "type": "altaeron-reels-v3-final",
+      "settings": {
+        "product_image": "shopify://shop_images/e037c921-ec53-489f-9884-5dd8b2e75e7b.png",
+        "cta_label": "ADD TO CART"
+      }
     }
   },
   "order": [
     "altaeron_pdp_reels_v3",
     "altaeron_bunion_benefits",
     "altaeron_right_fit",
+    "altaeron_customer_proof_RtL9nR",
     "altaeron_try_at_home",
     "altaeron_support_timeline",
     "altaeron_adjustable_support",
     "altaeron_muscle_support",
-    "altaeron_customer_proof_RtL9nR",
     "altaeron_reviews_faq",
     "altaeron_research_evidence",
     "altaeron_story_cta"
