@@ -61,7 +61,7 @@
         "headline": "Gentle, adjustable support for better big-toe alignment.",
         "subheadline": "Gently guides the big toe toward a straighter position while helping ease pressure and crowding around the bunion.",
         "review_avatar": "shopify://shop_images/Screenshot_2026-09-14_165648.png",
-        "review_content": "<p>Easy to adjust, <strong>comfortable to wear</strong>, and it gives my big toe the <strong>support I was looking for.</strong></p>",
+        "review_content": "<p>My right bunion has been bugging me forever especially after work or if i wear the wrong shoes. first time i put this thing on i turned it way too much lol had to take it off and start over 😅 now i just use it when im sitting on the couch at night, maybe <strong>20-30 mins</strong>. feels weird at first but i actually like the little stretch now. <strong>keeps my big toe from feeling so jammed up against the other one</strong></p>",
         "reviewer_name": "Karen M.",
         "price_label": "From",
         "cta_label": "ADD TO CART"
@@ -213,38 +213,6 @@
         "reassurance": "More tension isn’t always better — find the setting that feels supportive and comfortable."
       }
     },
-    "altaeron_muscle_support": {
-      "type": "altaeron-muscle-support",
-      "blocks": {
-        "benefit_1": {
-          "type": "support_card",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_02_10_PM.png",
-            "title": "Balanced Position",
-            "body": "Supports a more natural alignment."
-          }
-        },
-        "benefit_2": {
-          "type": "support_card",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_40_PM.png",
-            "title": "Repeated Support",
-            "body": "Regular sessions support better positioning."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2"
-      ],
-      "settings": {
-        "eyebrow": "MUSCLE SUPPORT / ANATOMY",
-        "heading": "Better alignment supports more balanced toe function.",
-        "subheading": "Supporting the big toe in a more natural position can encourage more balanced muscle engagement over time.",
-        "anatomy_image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_36_PM.png",
-        "reassurance": "Better positioning. More balanced support."
-      }
-    },
     "altaeron_support_timeline": {
       "type": "altaeron-support-timeline",
       "blocks": {
@@ -277,6 +245,38 @@
         "subheading": "Every foot feels different. Comfort should guide your routine.",
         "reassurance_heading": "",
         "reassurance_text": "Once you find a comfortable setting, make Altaeron part of your regular at-home routine."
+      }
+    },
+    "altaeron_muscle_support": {
+      "type": "altaeron-muscle-support",
+      "blocks": {
+        "benefit_1": {
+          "type": "support_card",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_02_10_PM.png",
+            "title": "Balanced Position",
+            "body": "Supports a more natural alignment."
+          }
+        },
+        "benefit_2": {
+          "type": "support_card",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_40_PM.png",
+            "title": "Repeated Support",
+            "body": "Regular sessions support better positioning."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2"
+      ],
+      "settings": {
+        "eyebrow": "MUSCLE SUPPORT / ANATOMY",
+        "heading": "Better alignment supports more balanced toe function.",
+        "subheading": "Supporting the big toe in a more natural position can encourage more balanced muscle engagement over time.",
+        "anatomy_image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_36_PM.png",
+        "reassurance": "Better positioning. More balanced support."
       }
     },
     "altaeron_try_at_home": {
