@@ -159,6 +159,22 @@
         "reassurance_text": "Once you find a comfortable setting, make Altaeron part of your regular at-home routine."
       }
     },
+    "altaeron_customer_proof_RtL9nR": {
+      "type": "altaeron-customer-proof",
+      "name": "Altaeron Customer Proof",
+      "settings": {
+        "eyebrow": "Customer proof",
+        "title": "WHAT CUSTOMERS ARE SAYING",
+        "avatar_1": "shopify://shop_images/760341870_122093094465430024_1430747234869843375_n.jpg",
+        "avatar_url_1": "https://review-images.judgeme.com/altaeron/1789753655__orisllcal12293__original.png?quality=80&width=160",
+        "reviewer_name_1": "Linda",
+        "review_content_1": "<p>my right bunion has been bugging me forever especially after work or if i wear the wrong shoes. first time i put this thing on i turned it way too much lol had to take it off and start over 😅 now i just use it when im sitting on the couch at night, maybe 20-30 mins. feels weird at first but i actually like the little stretch now. keeps my big toe from feeling so jammed up against the other one</p>",
+        "avatar_2": "shopify://shop_images/558312976_10111481540078518_146096806356904784_n.jpg",
+        "avatar_url_2": "https://review-images.judgeme.com/altaeron/1789792345__a1f6c4391f1d34e6998ceec28c924062fnjpg_96__original.png?quality=80&width=160",
+        "reviewer_name_2": "debbie",
+        "review_content_2": "<p>Ive been wearing it around 30 mins a day, mostly after being on my feet, and it helps with the tension and discomfort. for me its more of a comfortable support/immobilizing brace than a “corrector” and im totally fine with that. feels well made and comfortable to wear ❤️‍🔥</p>"
+      }
+    },
     "altaeron_try_at_home": {
       "type": "altaeron-try-at-home",
       "blocks": {
@@ -334,6 +350,7 @@
     "altaeron_pdp_reels_v3",
     "altaeron_bunion_benefits",
     "altaeron_support_timeline",
+    "altaeron_customer_proof_RtL9nR",
     "altaeron_try_at_home",
     "altaeron_right_fit",
     "altaeron_adjustable_support",
