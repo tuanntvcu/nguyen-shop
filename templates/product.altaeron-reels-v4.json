@@ -1,0 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * Altaeron Reels V4 conversion-focused product template.
+ * Cloned from the V3 product experience without modifying V3.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "altaeron_pdp_reels_v4": {
+      "type": "altaeron-pdp-reels-v4",
+      "settings": {
+        "show_hero_video": false,
+        "product_name": "Altaeron™ Adjustable Bunion Corrector",
+        "headline": "Take Pressure Off Your Bunion. Guide Your Big Toe Back Toward Alignment.",
+        "subheadline": "Structured support applies controlled outward tension while worn.",
+        "mechanism_video": "shopify://files/videos/0909 (3).mp4",
+        "detail_image_1": "shopify://shop_images/4a15bd95-dedd-4c76-8c25-03f7c4aa70dd.png",
+        "detail_image_2": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_02_10_PM.png",
+        "how_to_video": "shopify://files/videos/0822-copy.mp4",
+        "anatomy_image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_36_PM.png",
+        "price_label": "From",
+        "cta_label": "ADD TO CART"
+      }
+    }
+  },
+  "order": ["altaeron_pdp_reels_v4"]
+}
