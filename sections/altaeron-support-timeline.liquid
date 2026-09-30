@@ -89,7 +89,7 @@
     <header class="alta-timeline__header">
       {%- if eyebrow != blank -%}<p class="alta-timeline__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
       <h2 id="AltaeronTimelineHeading-{{ section.id }}" class="alta-timeline__heading">{{ heading | escape }}</h2>
-      {%- if subheading != blank -%}<p class="alta-timeline__subheading">{{ subheading | escape }}</p>{%- endif -%}
+      {%- if subheading != blank -%}<p class="alta-timeline__subheading">{{ subheading | escape | newline_to_br }}</p>{%- endif -%}
     </header>
 
     {%- if section.blocks.size > 0 -%}
@@ -119,7 +119,7 @@
             <div class="alta-timeline-card__copy">
               <p class="alta-timeline-card__label">{{ stage_label | escape }}</p>
               <h3>{{ stage_title | escape }}</h3>
-              <p class="alta-timeline-card__body">{{ stage_body | escape }}</p>
+              <p class="alta-timeline-card__body">{{ stage_body | escape | newline_to_br }}</p>
             </div>
             <div class="alta-timeline-card__media">
               {%- if block.settings.video != blank -%}
@@ -139,7 +139,7 @@
       <div class="alta-timeline__reassurance">
         <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor"><rect x="4.5" y="7.5" width="23" height="20" rx="2"/><path d="M10 4v7M22 4v7M4.5 13h23M9 18h3M15 18h3M21 18h3M9 23h3M15 23h3M21 23h3"/></svg>
         {%- if reassurance_heading != blank -%}<strong>{{ reassurance_heading | escape }}</strong>{%- endif -%}
-        {%- if reassurance_text != blank -%}<span>{{ reassurance_text | escape }}</span>{%- endif -%}
+        {%- if reassurance_text != blank -%}<span>{{ reassurance_text | escape | newline_to_br }}</span>{%- endif -%}
       </div>
     {%- endif -%}
   </div>
@@ -176,7 +176,7 @@
   "presets": [{
     "name": "Altaeron: Timeline",
     "blocks": [
-      { "type": "stage", "settings": { "label": "FIRST FEW WEARS", "title": "Relieve", "body": "Ease pressure, crowding & rubbing while worn." } },
+      { "type": "stage", "settings": { "label": "FIRST SESSION", "title": "Feel the Outward Pull", "body": "Feel the big toe being guided away from the second toe." } },
       { "type": "stage", "settings": { "label": "WEEKS 1–2", "title": "Realign", "body": "Support a straighter big-toe position with regular sessions." } },
       { "type": "stage", "settings": { "label": "CONTINUED USE", "title": "Reinforce", "body": "Encourage more balanced positioning over time." } }
     ]

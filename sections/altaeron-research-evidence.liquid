@@ -3,10 +3,20 @@
   assign research_heading = section.settings.heading
   assign research_intro = section.settings.intro
   unless request.locale.iso_code == 'en'
-    assign research_eyebrow = 'research_evidence.eyebrow' | t
-    assign research_heading = 'research_evidence.heading' | t
-    assign research_intro = 'research_evidence.intro' | t
+    if template.suffix == 'altaeron-reels-v3'
+      assign research_eyebrow = 'altaeron_pdp_reels_v3.research.eyebrow' | t
+      assign research_heading = 'altaeron_pdp_reels_v3.research.heading' | t
+      assign research_intro = 'altaeron_pdp_reels_v3.research.intro' | t
+    else
+      assign research_eyebrow = 'research_evidence.eyebrow' | t
+      assign research_heading = 'research_evidence.heading' | t
+      assign research_intro = 'research_evidence.intro' | t
+    endif
   endunless
+  assign research_key_root = 'research_evidence'
+  if template.suffix == 'altaeron-reels-v3'
+    assign research_key_root = 'altaeron_pdp_reels_v3.research'
+  endif
 -%}
 
 {%- if section.settings.show_section -%}
@@ -139,7 +149,7 @@
         {%- assign primary_urls = 'https://bmjopen.bmj.com/content/11/8/e047273,https://pubmed.ncbi.nlm.nih.gov/28318407/,https://pubmed.ncbi.nlm.nih.gov/11368700/' | split: ',' -%}
         {%- for i in (1..3) -%}
           {%- assign zero_index = i | minus: 1 -%}
-          {%- capture key_root -%}research_evidence.study_{{ i }}{%- endcapture -%}
+          {%- capture key_root -%}{{ research_key_root }}.study_{{ i }}{%- endcapture -%}
           {%- capture image_key -%}study_{{ i }}_image{%- endcapture -%}
           {%- assign study_image = section.settings[image_key] -%}
           {%- assign study_title = key_root | append: '.title' | t -%}
@@ -177,7 +187,7 @@
         {%- assign secondary_urls = 'https://pubmed.ncbi.nlm.nih.gov/40973592/,https://pubmed.ncbi.nlm.nih.gov/29683337/' | split: ',' -%}
         {%- for i in (4..5) -%}
           {%- assign zero_index = i | minus: 4 -%}
-          {%- capture key_root -%}research_evidence.study_{{ i }}{%- endcapture -%}
+          {%- capture key_root -%}{{ research_key_root }}.study_{{ i }}{%- endcapture -%}
           {%- capture image_key -%}study_{{ i }}_image{%- endcapture -%}
           {%- assign study_image = section.settings[image_key] -%}
           {%- assign study_title = key_root | append: '.title' | t -%}
@@ -199,7 +209,7 @@
         {%- endfor -%}
       </div>
 
-      <p class="research__disclaimer">{{ 'research_evidence.disclaimer' | t }}</p>
+      <p class="research__disclaimer">{%- if template.suffix == 'altaeron-reels-v3' -%}{{ 'altaeron_pdp_reels_v3.research.takeaway' | t | newline_to_br }}{%- else -%}{{ 'research_evidence.disclaimer' | t }}{%- endif -%}</p>
       <details class="research-sources">
         <summary>{{ 'research_evidence.view_all_sources' | t }} <span aria-hidden="true">→</span></summary>
         <div class="research-sources__panel">

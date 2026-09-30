@@ -7,11 +7,17 @@
   assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
   assign review_rating = review_data.average_rating | default: 0 | plus: 0
   assign review_rating_display = review_rating | times: 10 | floor | divided_by: 10.0
+  assign proof_eyebrow = section.settings.eyebrow
+  assign proof_title = section.settings.title
+  if template.suffix == 'altaeron-reels-v3' and request.locale.iso_code != 'en'
+    assign proof_eyebrow = 'altaeron_pdp_reels_v3.customer_proof.eyebrow' | t
+    assign proof_title = 'altaeron_pdp_reels_v3.customer_proof.title' | t
+  endif
 -%}
 {% render 'altaeron-customer-proof',
   heading_id: proof_heading_id,
-  eyebrow: section.settings.eyebrow,
-  title: section.settings.title,
+  eyebrow: proof_eyebrow,
+  title: proof_title,
   avatar_1: section.settings.avatar_1,
   avatar_url_1: section.settings.avatar_url_1,
   reviewer_name_1: section.settings.reviewer_name_1,
@@ -33,7 +39,7 @@
   "class": "section-altaeron-customer-proof",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer proof" },
-    { "type": "text", "id": "title", "label": "Heading", "default": "WHAT CUSTOMERS ARE SAYING" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Real People. Real At-Home Routines." },
     { "type": "header", "content": "Review 1 — Linda" },
     { "type": "image_picker", "id": "avatar_1", "label": "Avatar" },
     { "type": "text", "id": "avatar_url_1", "label": "Avatar URL fallback", "default": "https://review-images.judgeme.com/altaeron/1789753655__orisllcal12293__original.png?quality=80&width=160" },

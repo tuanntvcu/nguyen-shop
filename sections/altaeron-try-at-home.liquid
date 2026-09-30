@@ -113,7 +113,7 @@
       <div class="alta-try__content">
         {%- if eyebrow != blank -%}<p class="alta-try__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
         <h2 id="AltaeronTryHomeHeading-{{ section.id }}" class="alta-try__heading">{{ heading | escape }}</h2>
-        {%- if body != blank -%}<p class="alta-try__body">{{ body | escape }}</p>{%- endif -%}
+        {%- if body != blank -%}<p class="alta-try__body">{{ body | escape | newline_to_br }}</p>{%- endif -%}
         {%- if section.settings.show_handwritten and handwritten_message != blank -%}
           <p class="alta-try__note">{{ handwritten_message | escape | newline_to_br }}</p>
         {%- endif -%}
@@ -197,7 +197,7 @@
     { "type": "checkbox", "id": "show_handwritten", "label": "Show supporting message", "default": true },
     { "type": "textarea", "id": "handwritten_message", "label": "Supporting message", "default": "Support\na more comfortable\ntomorrow" },
     { "type": "header", "content": "Call to action" },
-    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "TRY ALTAERON →" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "START YOUR CORRECTION →" },
     { "type": "url", "id": "cta_link", "label": "CTA link" },
     { "type": "text", "id": "cta_reassurance", "label": "CTA reassurance", "default": "Secure checkout · 30-day easy returns" },
     { "type": "header", "content": "Bottom banner" },

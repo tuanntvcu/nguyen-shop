@@ -83,7 +83,7 @@
     <header class="alta-custom__header">
       {%- if eyebrow != blank -%}<p class="alta-custom__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
       <h2 id="AltaeronAdjustableHeading-{{ section.id }}" class="alta-custom__heading">{{ heading | escape }}</h2>
-      {%- if subheading != blank -%}<p class="alta-custom__subheading">{{ subheading | escape }}</p>{%- endif -%}
+      {%- if subheading != blank -%}<p class="alta-custom__subheading">{{ subheading | escape | newline_to_br }}</p>{%- endif -%}
     </header>
 
     {%- assign hero_alt = section.settings.hero_image.alt | default: heading -%}

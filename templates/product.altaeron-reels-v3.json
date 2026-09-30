@@ -58,13 +58,13 @@
       "settings": {
         "show_hero_video": false,
         "eyebrow": "Altaeron™ Adjustable Bunion Corrector",
-        "headline": "Relieve Bunion Pressure. Reposition Your Big Toe While You Rest.",
-        "subheadline": "Adjustable outward tension guides your big toe away from the crowded position where rubbing and pressure build — with a level of stretch you control.",
+        "headline": "Relieve Bunion Pressure. Realign Your Big Toe.",
+        "subheadline": "Altaeron uses adjustable corrective tension to guide your big toe away from inward drift and back toward a straighter, more natural position — relieving pressure while progressively restoring healthier alignment.",
         "review_avatar": "shopify://shop_images/Screenshot_2026-09-14_165648.png",
         "review_content": "<p><em>Feels </em><em><strong>comfy </strong></em><em>and </em><em><strong>well made</strong></em><em> 👍</em></p>",
         "reviewer_name": "Megan",
         "price_label": "From",
-        "cta_label": "TRY ALTAERON —"
+        "cta_label": "START YOUR CORRECTION"
       }
     },
     "altaeron_bunion_benefits": {
@@ -74,40 +74,40 @@
           "type": "progression",
           "settings": {
             "image": "shopify://shop_images/TaVS1aYI3x3hgQWxvr56bgsEDZqSpARcKveSbQZrgZMwQYCF_LuYneRQpOXn6GSAEGGE4ZVPSVozS34rb_p2mcYEgR8785NUTL-vrCrA3ftkRM-EZpsIHVtFs1EwVMHy8Zgzxrkrx70LzUgOz1LTYMyML9LCZ-iKY-unLd8mHreHmOhXp0XFnOd.jpg",
-            "title": "Big Toe Presses Inward",
-            "caption": "The big toe moves toward the neighboring toes, increasing crowding around the bunion area."
+            "title": "Big Toe Drifts Inward",
+            "caption": "The big toe presses toward the second toe, increasing crowding and pressure around the bunion."
           }
         },
         "progression_2": {
           "type": "progression",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_06_43_PM.png",
-            "title": "Dial In the Stretch",
-            "caption": "Turn the dial to gradually guide the big toe outward."
+            "title": "Dial In Corrective Tension",
+            "caption": "Turn the dial gradually to apply a controlled outward pull."
           }
         },
         "progression_3": {
           "type": "progression",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_09_38_PM.png",
-            "title": "Create More Space",
-            "caption": "The big toe sits in a straighter, more open position while the corrector is worn."
+            "title": "Guide the Toe Back Outward",
+            "caption": "The big toe moves away from the second toe and toward a straighter anatomical position."
           }
         },
         "benefit_1": {
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_18_51_PM.png",
-            "title": "You Control the Tension",
-            "body": "Start light, increase gradually, and stop where the stretch feels firm but comfortable."
+            "title": "Progress at Your Pace",
+            "body": "Start gently and increase the correction as your foot adapts."
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_24_41_PM.png",
-            "title": "Made for Your At-Home Routine",
-            "body": "Use it while sitting, working at a desk, or relaxing — without turning your routine upside down."
+            "title": "Make Correction Repeatable",
+            "body": "Use Altaeron while sitting or relaxing so better positioning can become part of your normal routine."
           }
         }
       },
@@ -120,9 +120,9 @@
       ],
       "settings": {
         "eyebrow": "HOW IT WORKS",
-        "heading": "Controlled Tension That Pulls Your Big Toe Outward",
-        "subheading": "Altaeron anchors around your foot while the adjustable dial creates controlled outward tension on the big toe. Turn the dial until you feel a firm, comfortable stretch — then release or readjust whenever you want.",
-        "reassurance": "You control the stretch from the first turn of the dial."
+        "heading": "The Problem Isn't Just the Bump. It's the Drift.",
+        "subheading": "As a bunion develops, the big toe moves inward toward the second toe.\n\nThat inward drift crowds the forefoot, changes natural toe alignment and concentrates pressure around the bunion joint.\n\nAltaeron works in the opposite direction.\n\nIts structured frame anchors around your foot while the adjustable dial applies controlled outward tension to guide the big toe back toward better alignment.",
+        "reassurance": "The toe drifts inward. Altaeron works outward."
       }
     },
     "altaeron_right_fit": {
@@ -132,35 +132,35 @@
           "type": "fit_card",
           "settings": {
             "title": "Your big toe pushes toward the second toe",
-            "body": "You notice inward pressure or crowding between the toes."
+            "body": "You can see or feel the toes becoming increasingly crowded."
           }
         },
         "fit_2": {
           "type": "fit_card",
           "settings": {
-            "title": "The bunion area feels rubbed, pressured, or crowded",
-            "body": "You want support that responds to how your foot feels."
+            "title": "The bunion feels pressured after a long day",
+            "body": "Standing, walking or tighter shoes make the joint more noticeable."
           }
         },
         "fit_3": {
           "type": "fit_card",
           "settings": {
-            "title": "Long days or tighter shoes make it more noticeable",
-            "body": "The area feels more crowded after hours on your feet."
+            "title": "Your toes feel jammed together",
+            "body": "You want to restore space instead of simply cushioning the contact point."
           }
         },
         "fit_4": {
           "type": "fit_card",
           "settings": {
-            "title": "You want more control than a fixed toe spacer provides",
-            "body": "You prefer to adjust the tension in small steps."
+            "title": "Basic toe spacers feel too passive",
+            "body": "You want to control how strongly the big toe is guided outward."
           }
         },
         "fit_5": {
           "type": "fit_card",
           "settings": {
-            "title": "You prefer a conservative, non-surgical approach to managing bunion discomfort at home.&nbsp;",
-            "body": "You want a conservative option that fits a seated or relaxing routine."
+            "title": "You want to work on the alignment itself",
+            "body": "You prefer a progressive, non-surgical approach you can use at home."
           }
         }
       },
@@ -173,8 +173,8 @@
       ],
       "settings": {
         "eyebrow": "IS ALTAERON RIGHT FOR YOU?",
-        "heading": "If Your Big Toe Feels Crowded, This Is the Use Case",
-        "subheading": "Altaeron is designed for adults who want adjustable, conservative support for a big toe that presses inward toward the neighboring toes.",
+        "heading": "If Your Big Toe Is Drifting Inward, This Is What Altaeron Was Built For.",
+        "subheading": "",
         "show_callout": false,
         "callout_heading": "",
         "callout_body": ""
@@ -185,7 +185,7 @@
       "name": "Altaeron Customer Proof",
       "settings": {
         "eyebrow": "Customer proof",
-        "title": "WHAT CUSTOMERS ARE SAYING",
+        "title": "Real People. Real At-Home Routines.",
         "avatar_1": "shopify://shop_images/760341870_122093094465430024_1430747234869843375_n.jpg",
         "avatar_url_1": "https://review-images.judgeme.com/altaeron/1789753655__orisllcal12293__original.png?quality=80&width=160",
         "reviewer_name_1": "Linda",
@@ -213,16 +213,16 @@
       ],
       "settings": {
         "eyebrow": "TRY IT AT HOME",
-        "heading": "Find the Tension That Feels Right for You",
-        "body": "Start light, adjust gradually, and use Altaeron as part of your normal at-home routine. You stay in control of the stretch from the first turn of the dial.",
+        "heading": "Don't Just Cushion the Bunion. Work on the Position Creating It.",
+        "body": "Bunion pads protect the bump.\n\nAltaeron goes a step further by guiding the big toe itself.\n\nSecure the brace. Dial in a comfortable outward pull. Let the big toe spend time away from the crowded position.",
         "hero_image": "shopify://shop_images/ChatGPT_Image_Aug_11_2026_02_20_04_PM.png",
         "show_handwritten": true,
-        "handwritten_message": "Your foot. Your tension. Your routine.",
-        "cta_text": "TRY ALTAERON →",
+        "handwritten_message": "The toe drifts inward. Altaeron works outward.",
+        "cta_text": "START YOUR CORRECTION →",
         "cta_link": "",
-        "cta_reassurance": "Secure checkout · 30-day easy returns",
+        "cta_reassurance": "30-Day Easy Returns · Free & Tracked Shipping",
         "show_banner": true,
-        "banner_text": "Your foot. Your tension. Your routine."
+        "banner_text": "The toe drifts inward. Altaeron works outward."
       }
     },
     "altaeron_support_timeline": {
@@ -231,18 +231,18 @@
         "stage_1": {
           "type": "stage",
           "settings": {
-            "label": "START LIGHT",
-            "title": "Begin with Low Tension",
-            "body": "The first few sessions may feel unfamiliar. Give your foot time to adjust.",
+            "label": "FIRST SESSION",
+            "title": "Feel the Outward Pull",
+            "body": "You should immediately feel the big toe being guided away from the second toe.\n\nMore separation. Less crowding. A clear, controlled stretch.\n\nStart light — correction should feel firm, never painful.",
             "video": "shopify://files/videos/0912.mp4"
           }
         },
         "stage_3": {
           "type": "stage",
           "settings": {
-            "label": "FIND YOUR STRETCH",
-            "title": "Firm, Never Painful",
-            "body": "Tighten only until the outward pull feels firm and comfortable.",
+            "label": "DAYS TO WEEKS",
+            "title": "Less Pressure. Easier Positioning.",
+            "body": "As your foot adapts, the straighter position begins to feel more natural.\n\nYou may notice less toe-to-toe pressure, less rubbing around the bunion, less squeezing inside shoes and easier tolerance of stronger corrective tension.",
             "video": "shopify://files/videos/0910 (2).mp4"
           }
         }
@@ -252,11 +252,11 @@
         "stage_3"
       ],
       "settings": {
-        "eyebrow": "What to Expect When You Start",
-        "heading": "You Should Feel a Stretch — Not a Fight",
-        "subheading": "The first few sessions may feel unfamiliar. Start with light tension, let your foot adjust, then gradually increase until you feel a firm, comfortable outward stretch.",
-        "reassurance_heading": "BUILD THE ROUTINE",
-        "reassurance_text": "Work toward 20–30 minute sessions while relaxing at home."
+        "eyebrow": "WHAT TO EXPECT WHEN YOU START",
+        "heading": "Feel the Correction First. Let Progress Build From There.",
+        "subheading": "You shouldn't need weeks to know whether Altaeron is doing anything.\n\nThe positioning effect begins as soon as the dial is properly adjusted.",
+        "reassurance_heading": "OVER TIME",
+        "reassurance_text": "Progressively Reinforce Better Alignment\n\nRealignment is cumulative. Repeated corrective positioning gives the muscles and soft tissues around the big toe time to adapt toward a healthier anatomical position.\n\nCorrect. Adapt. Repeat."
       }
     },
     "altaeron_adjustable_support": {
@@ -266,24 +266,24 @@
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_41_34_PM.png",
-            "title": "Turn to Adjust",
-            "body": "Fine-tune the tension with the rotary dial."
+            "title": "Start Light",
+            "body": "Begin with gentle tension while your foot becomes familiar with the position."
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_47_44_PM.png",
-            "title": "Start Light",
-            "body": "Begin with gentle tension and increase gradually."
+            "title": "Dial It In",
+            "body": "Increase until you clearly feel the big toe moving outward. Fine-tune or release the tension whenever you need."
           }
         },
         "benefit_3": {
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_48_44_PM.png",
-            "title": "Stay in Control",
-            "body": "Adjust or release the tension whenever you need."
+            "title": "Progress Gradually",
+            "body": "Add correction as the stretch becomes easier to tolerate."
           }
         }
       },
@@ -294,10 +294,10 @@
       ],
       "settings": {
         "eyebrow": "ADJUSTABLE SUPPORT",
-        "heading": "One Setting Doesn’t Fit Every Foot",
-        "subheading": "Your comfort level can change from day to day. The dial lets you increase or reduce tension in small steps instead of forcing your toe into one fixed position.",
+        "heading": "A Fixed Spacer Stays the Same. Your Foot Doesn't.",
+        "subheading": "Your foot can tolerate more correction as it adapts.\n\nThat's why Altaeron doesn't lock you into one fixed amount of separation.",
         "hero_image": "shopify://shop_images/4a15bd95-dedd-4c76-8c25-03f7c4aa70dd.png",
-        "reassurance": "More control than fixed support. No guessing which tension level you are stuck with."
+        "reassurance": "Your correction progresses with your foot."
       }
     },
     "altaeron_muscle_support": {
@@ -307,16 +307,16 @@
           "type": "support_card",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_02_10_PM.png",
-            "title": "Balanced Position",
-            "body": "Supports a more natural alignment."
+            "title": "Restore Alignment",
+            "body": "Altaeron guides the big toe back toward its natural anatomical position."
           }
         },
         "benefit_2": {
           "type": "support_card",
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_40_PM.png",
-            "title": "Repeated Support",
-            "body": "Regular sessions support better positioning."
+            "title": "Strengthen What Holds It",
+            "body": "Targeted foot exercises help strengthen the muscles responsible for toe control and arch stability."
           }
         }
       },
@@ -326,10 +326,10 @@
       ],
       "settings": {
         "eyebrow": "SUPPORT + MOVEMENT",
-        "heading": "Support the Position. Train the Muscles That Help Control It.",
-        "subheading": "Big-toe position is influenced by more than the joint alone. Muscles around the foot also contribute to toe control and movement. Altaeron can be paired with simple foot exercises as part of a conservative at-home routine.",
+        "heading": "Align the Toe. Strengthen the Foot.",
+        "subheading": "Better alignment doesn't stop at the brace.\n\nThe muscles around the big toe and arch also help control how the forefoot moves and stabilizes.\n\nYour big toe contributes to balance, forefoot stability, push-off, pressure distribution and arch function. Better alignment gives the forefoot a more natural foundation to work from.",
         "anatomy_image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_36_PM.png",
-        "reassurance": "The brace supports the position while worn. Exercise works the foot when the brace comes off."
+        "reassurance": "Choose footwear with enough room for the toes to spread instead of being pushed inward again.\n\nAltaeron positions. Exercise strengthens. Better footwear protects the progress."
       }
     },
     "altaeron_reviews_faq": {
@@ -341,8 +341,8 @@
       "settings": {
         "show_section": true,
         "eyebrow": "RESEARCH",
-        "heading": "Research Behind Conservative Bunion Support",
-        "intro": "Research on conservative bunion supports, orthoses, and toe-positioning approaches has reported improvements in measures such as pain, pressure, or toe alignment in certain study populations.",
+        "heading": "Conservative Bunion Correction Can Change More Than Pain.",
+        "intro": "Clinical research on hallux-valgus orthoses, toe separators and combined exercise programs has reported improvements in pain, alignment, strength and function.",
         "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"
       }
     },
@@ -350,7 +350,7 @@
       "type": "altaeron-reels-v3-final",
       "settings": {
         "product_image": "shopify://shop_images/e037c921-ec53-489f-9884-5dd8b2e75e7b.png",
-        "cta_label": "ADD TO CART"
+        "cta_label": "ADD TO CART —"
       }
     }
   },

@@ -24,7 +24,7 @@
     assign reel_headline = 'altaeron_pdp_reels_v3.hero.headline' | t
     assign reel_subheadline = 'altaeron_pdp_reels_v3.hero.explanation' | t
     assign reel_price_label = 'altaeron_pdp_reels_v2.common.from' | t
-    assign reel_cta_label = 'altaeron_pdp_reels_v2.buy.atf_cta' | t
+    assign reel_cta_label = 'altaeron_pdp_reels_v3.hero.cta_label' | t
     assign reel_review_content = 'altaeron_pdp_reels_v3.hero.review_content_html' | t
   endunless
   assign reel_cta_label = reel_cta_label | remove: '→' | strip
@@ -324,7 +324,7 @@
         {%- endif -%}
         <p class="apdp-narrative__product">{{ reel_product_name }}</p>
         <h1 id="AltaeronTitle-{{ section.id }}"><span class="apdp-title-lines">{{ reel_headline }}</span></h1>
-        <p class="apdp-narrative__subheadline">{{ reel_subheadline }}</p>
+        <p class="apdp-narrative__subheadline">{{ reel_subheadline | newline_to_br }}</p>
         <ul class="apdp-narrative__benefits" role="list">
           {%- for i in (1..4) -%}
             {%- capture benefit_key -%}altaeron_pdp_reels_v3.hero.benefit_{{ i }}{%- endcapture -%}
@@ -370,7 +370,7 @@
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
           <p class="apdp-new-customer-offer">{{ 'altaeron_pdp_reels_v3.hero.purchase_clarification' | t }}</p>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ reel_cta_label }}">{% if current_variant.available %}{{ reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><span data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}>{% if current_variant.available %} — {{ current_variant.price | money }}{% endif %}</span></span><span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
-          <p class="apdp-cta-reassurance">{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>{{ 'altaeron_pdp_reels_v2.buy.reassurance' | t: default: 'Secure checkout · Tracked shipping · 30-day easy returns' }}</span></p>
+          <p class="apdp-cta-reassurance">{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>{{ 'altaeron_pdp_reels_v3.hero.trust_row' | t }}</span></p>
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp_reels_v2.buy.installments' | t: amount: installment_amount }} <strong>shop<span>Pay</span></strong></div>
           {%- if shop.enabled_payment_types.size > 0 -%}
             {%- liquid
@@ -445,14 +445,14 @@
     { "type": "header", "content": "Reels hero" },
     { "type": "checkbox", "id": "show_hero_video", "label": "Show metafield video first in gallery", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Product name", "default": "Altaeron™ Adjustable Bunion Corrector" },
-    { "type": "textarea", "id": "headline", "label": "Core benefit", "default": "Relieve Bunion Pressure. Reposition Your Big Toe While You Rest." },
-    { "type": "textarea", "id": "subheadline", "label": "Explanation", "default": "Adjustable outward tension guides your big toe away from the crowded position where rubbing and pressure build — with a level of stretch you control." },
+    { "type": "textarea", "id": "headline", "label": "Core benefit", "default": "Relieve Bunion Pressure. Realign Your Big Toe." },
+    { "type": "textarea", "id": "subheadline", "label": "Explanation", "default": "Altaeron uses adjustable corrective tension to guide your big toe away from inward drift and back toward a straighter, more natural position — relieving pressure while progressively restoring healthier alignment." },
     { "type": "header", "content": "Above-the-fold review" },
     { "type": "image_picker", "id": "review_avatar", "label": "Reviewer image" },
     { "type": "richtext", "id": "review_content", "label": "Review content", "default": "<p>I started with gentle tension and adjusted it until it felt comfortable. Simple to use and surprisingly supportive</p>" },
     { "type": "text", "id": "reviewer_name", "label": "Reviewer name", "default": "Karen M." },
     { "type": "text", "id": "price_label", "label": "Price label", "default": "From" },
-    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "ADD TO CART" }
+    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "START YOUR CORRECTION" }
   ],
   "blocks": [
     {

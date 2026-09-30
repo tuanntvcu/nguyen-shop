@@ -82,7 +82,7 @@
   <section class="apdp-final-cta alta-pdp-flow-section" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.final_cta' | t | escape }}"><div class="apdp-shell apdp-final-cta__inner">
     <div class="apdp-final-cta__product apdp-tail-media">{%- if product_image != blank -%}{{ product_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}</div>
     <div class="apdp-final-cta__content">
-      <h2>{{ 'altaeron_pdp_reels_v3.final_cta.title' | t }}</h2><p>{{ 'altaeron_pdp_reels_v3.final_cta.subtitle' | t }}</p>
+      <h2>{{ 'altaeron_pdp_reels_v3.final_cta.title' | t }}</h2><p>{{ 'altaeron_pdp_reels_v3.final_cta.subtitle' | t | newline_to_br }}</p>
       <div class="apdp-final-benefits"><span>{% render 'altaeron-pdp-icon', icon: 'shield' %}<b>{{ 'altaeron_pdp_reels_v2.buy.guarantee' | t }}</b></span><span>{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>{{ 'altaeron_pdp_reels_v2.buy.shipping' | t }}</b></span><span>{% render 'altaeron-pdp-icon', icon: 'support' %}<b>{{ 'altaeron_pdp_reels_v2.buy.support' | t }}</b></span></div>
       <div class="apdp-final-payments">
         <span class="visually-hidden">{{ 'altaeron_pdp_reels_v2.accessibility.payment_methods' | t }}</span>
@@ -114,7 +114,7 @@
   "enabled_on": { "templates": ["product"] },
   "settings": [
     { "type": "image_picker", "id": "product_image", "label": "CTA product image" },
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "TRY ALTAERON —" }
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "ADD TO CART —" }
   ],
   "presets": [{ "name": "Altaeron: Story & CTA" }]
 }
