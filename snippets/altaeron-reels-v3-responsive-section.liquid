@@ -80,6 +80,7 @@
       {{ root }} .alta-custom__heading { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
       {{ root }} .alta-custom__subheading { font-size: 16px; line-height: 1.6; max-width: 700px; }
       {{ root }} .alta-bunion__step-copy { height: auto; min-height: 0; }
+      {{ root }} .alta-bunion__step-media { aspect-ratio: 4 / 3; }
       {{ root }} :is(.alta-bunion__step-media, .alta-custom-card__media) :is(img, svg) { height: 100%; object-fit: cover; object-position: center; width: 100%; }
       {{ root }} .alta-custom__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     {%- when 'adjustable' -%}
@@ -180,7 +181,7 @@
       {{ root }} .alta-muscle__reassurance { grid-column: 1 / -1; margin-top: 0; }
     {%- when 'timeline' -%}
       {{ root }} .alta-timeline__stages { grid-template-columns: repeat(2, minmax(0, 440px)); justify-content: center; }
-      {{ root }} .alta-timeline-card__media { aspect-ratio: 1 / 1; }
+      {{ root }} .alta-timeline-card__media { aspect-ratio: 9 / 16; }
     {%- when 'try_home' -%}
       {{ root }} .alta-try__hero { grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); }
       {{ root }} .alta-try__content { padding: clamp(34px, 4vw, 48px); }
