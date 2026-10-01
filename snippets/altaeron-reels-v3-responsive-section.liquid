@@ -9,6 +9,66 @@
   {%- when 'final' -%}{%- assign root = 'body.altaeron-reels-v3 #AltaeronV3Final-' | append: section_id -%}
 {%- endcase -%}
 
+{%- if section_kind == 'try_home' -%}
+  {{ root }} .alta-try__hero {
+    border-color: rgba(0, 40, 60, .08);
+    border-radius: 14px;
+    box-shadow: none;
+  }
+  {{ root }} .alta-try__content { padding: 30px 21px 24px; }
+  {{ root }} .alta-try__eyebrow {
+    font-size: 10.5px;
+    font-weight: 600;
+    gap: 11px;
+    letter-spacing: .22em;
+    line-height: 1.3;
+    margin-bottom: 11px;
+  }
+  {{ root }} .alta-try__eyebrow::before {
+    flex-basis: 28px;
+    height: 1px;
+  }
+  {{ root }} .alta-try__heading {
+    font-size: 29px;
+    font-weight: 650;
+    letter-spacing: -.018em;
+    line-height: 1.09;
+    max-width: 320px;
+  }
+  {{ root }} .alta-try__body {
+    color: rgba(16, 42, 67, .83);
+    font-size: 15.5px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-top: 15px;
+    max-width: 560px;
+  }
+  {{ root }} .alta-try__body br { display: none; }
+  {{ root }} .alta-try__body br + br {
+    content: '';
+    display: block;
+    margin-top: 15px;
+  }
+  {{ root }} .alta-try__note {
+    border-left: 1px solid rgba(0, 107, 94, .38);
+    color: rgba(0, 107, 94, .88);
+    font-size: 18px;
+    font-weight: 450;
+    letter-spacing: -.01em;
+    line-height: 1.45;
+    margin-top: 24px;
+    max-width: 520px;
+    padding: 0 0 0 15px;
+  }
+  {{ root }} .alta-try__hero-media { border: 0; }
+  {{ root }} .alta-try__hero-media :is(img, svg) {
+    border: 0;
+    box-shadow: none;
+    display: block;
+    width: 100%;
+  }
+{%- endif -%}
+
 @media (min-width: 768px) {
   {{ root }} :where(img, video) { display: block; max-width: 100%; }
 
@@ -59,8 +119,9 @@
       {{ root }} { padding-block: 44px; }
       {{ root }} .alta-try__shell { max-width: 1180px; width: calc(100% - 48px); }
       {{ root }} .alta-try__hero { grid-template-columns: 1fr; }
-      {{ root }} .alta-try__content { padding: 34px; }
-      {{ root }} .alta-try__heading { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; }
+      {{ root }} .alta-try__content { margin-inline: auto; max-width: 600px; padding: 38px 34px 34px; width: 100%; }
+      {{ root }} .alta-try__eyebrow { font-size: 11px; }
+      {{ root }} .alta-try__heading { font-size: clamp(32px, 3vw, 38px); line-height: 1.1; max-width: 520px; }
       {{ root }} .alta-try__body { font-size: 16px; line-height: 1.6; }
       {{ root }} .alta-try__hero-media { aspect-ratio: 16 / 9; height: auto; min-height: 0; }
       {{ root }} .alta-try__hero-media :is(img, svg) { object-fit: cover; }
@@ -122,6 +183,7 @@
       {{ root }} .alta-timeline-card__media { aspect-ratio: 4 / 3; }
     {%- when 'try_home' -%}
       {{ root }} .alta-try__hero { grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); }
+      {{ root }} .alta-try__content { padding: clamp(34px, 4vw, 48px); }
       {{ root }} .alta-try__hero-media { aspect-ratio: auto; height: clamp(340px, 38vw, 410px); }
     {%- when 'reviews_faq' -%}
       {{ root }} .alta-v3-tail__section:not(.alta-v3-tail__section--reviews) .alta-v3-tail__shell { gap: 48px; grid-template-columns: minmax(280px, 43fr) minmax(0, 57fr); }

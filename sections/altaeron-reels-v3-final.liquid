@@ -49,11 +49,19 @@
     #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust{margin-top:40px;padding-top:26px}
     #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust-item{font-size:13px}
   }
-  @media(min-width:1024px){
-    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__inner{max-width:800px;padding:56px 40px 60px}
-    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__media{margin-bottom:30px;max-width:400px;width:58%}
-    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__copy{max-width:380px}
-    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefits{max-width:420px}
+  @media(min-width:900px){
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__inner{align-items:start;column-gap:clamp(64px,5vw,72px);display:grid;grid-template-columns:minmax(0,47fr) minmax(0,53fr);max-width:none;padding:64px 0 68px;text-align:left;width:min(1160px,calc(100% - 80px))}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__media{margin:0;max-width:none;width:100%}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__content{min-width:0;padding-top:52px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__title{font-size:clamp(36px,3vw,40px);line-height:1.1;margin:0;max-width:430px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__copy{font-size:17px;line-height:1.6;margin:20px 0 0;max-width:430px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefits{margin:32px 0 0;max-width:420px;width:100%}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefit{justify-content:flex-start;min-height:48px;padding:8px 0;text-align:left}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta{margin:32px 0 0;width:320px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust{margin:40px 0 0;max-width:520px}
+  }
+  @media(min-width:1200px){
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__inner{column-gap:72px}
   }
   @media(prefers-reduced-motion:reduce){#AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta{transition:none}}
 </style>
@@ -63,7 +71,7 @@
     <div class="altaeron-relief-closing__inner">
       <div class="altaeron-relief-closing__media apdp-tail-media">
         {%- if product_image != blank -%}
-          {{ product_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 768px) 330px, 48vw', alt: product.title }}
+          {{ product_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '320, 500, 700', sizes: '(min-width: 1200px) 520px, (min-width: 900px) 44vw, (min-width: 768px) 380px, 48vw', alt: product.title }}
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag }}
         {%- endif -%}

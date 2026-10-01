@@ -20,7 +20,7 @@ const scopedStyle = finalSection
   .match(/<style>([\s\S]*?)<\/style>/)[1]
   .replaceAll('{{ section.id }}', 'Test');
 
-for (const width of [360, 375, 390, 430, 768, 1440]) {
+for (const width of [360, 375, 390, 430, 768, 1024, 1280, 1440]) {
   const responsivePage = await browser.newPage({ viewport: { width, height: 1000 } });
   await responsivePage.setContent(`<!doctype html><html><head><style>*{box-sizing:border-box}body{margin:0}${scopedStyle}</style></head><body>
     <div id="AltaeronV3Final-Test" class="altaeron-pdp">
@@ -46,7 +46,9 @@ for (const width of [360, 375, 390, 430, 768, 1440]) {
     return {
       viewport: document.documentElement.clientWidth,
       scrollWidth: document.documentElement.scrollWidth,
+      inner: box('.altaeron-relief-closing__inner'),
       media: box('.altaeron-relief-closing__media'),
+      content: box('.altaeron-relief-closing__content'),
       title: box('.altaeron-relief-closing__title'),
       copy: box('.altaeron-relief-closing__copy'),
       benefits: box('.altaeron-relief-closing__benefits'),
@@ -59,7 +61,20 @@ for (const width of [360, 375, 390, 430, 768, 1440]) {
     };
   });
   assert.equal(layout.scrollWidth, layout.viewport, `${width}px layout must not overflow horizontally`);
-  assert.ok(layout.media.bottom <= layout.title.top);
+  if (width < 900) {
+    assert.ok(layout.media.bottom <= layout.title.top, `${width}px layout must remain stacked`);
+  } else {
+    assert.ok(layout.media.right <= layout.content.left, `${width}px image must sit left of content`);
+    assert.ok(layout.content.top >= layout.media.top, `${width}px content must align from the top of the image`);
+    assert.ok(layout.title.top - layout.media.top >= 40, `${width}px content needs intentional top offset`);
+    assert.ok(layout.content.left - layout.media.right >= 64, `${width}px column gap must be at least 64px`);
+    assert.ok(layout.content.left - layout.media.right <= 84, `${width}px column gap must not exceed 84px`);
+    assert.ok(layout.inner.width <= 1160.5, `${width}px container must remain controlled`);
+    assert.ok(Math.abs(layout.title.left - layout.content.left) < 1);
+    assert.ok(Math.abs(layout.benefits.left - layout.content.left) < 1);
+    assert.ok(Math.abs(layout.cta.left - layout.content.left) < 1);
+    if (width === 1440) assert.ok(layout.media.width >= 500 && layout.media.width <= 540);
+  }
   assert.ok(layout.title.bottom <= layout.copy.top);
   assert.ok(layout.copy.bottom <= layout.benefits.top);
   assert.ok(layout.benefits.bottom <= layout.cta.top);
