@@ -11,32 +11,49 @@
 {{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}
 
 <style>
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing{background:#003d29;color:#fff;margin-top:28px}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__inner{margin-inline:auto;max-width:620px;padding:0 24px 38px;text-align:center}
+  #AltaeronV3Final-{{ section.id }}{
+    --alta-relief-ink:var(--altaeron-navy,#102A43);
+    --alta-relief-body:var(--altaeron-body,#344054);
+    --alta-relief-accent:var(--altaeron-primary,#006B5E);
+    --alta-relief-accent-hover:var(--altaeron-primary-hover,#00594F);
+    --alta-relief-soft:var(--altaeron-off-white,#F8FAF9);
+    --alta-relief-line:var(--altaeron-border,#E4E7EC)
+  }
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing{background:var(--alta-relief-soft);border-block:1px solid var(--alta-relief-line);color:var(--alta-relief-body);margin-top:28px}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__inner{margin-inline:auto;max-width:620px;padding:32px 24px 38px;text-align:center}
   #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__media{margin:0 auto 18px;max-width:420px;width:70%}
   #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__media :where(img,svg){display:block;height:auto;max-width:100%;width:100%}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__title{color:#fff;font-family:var(--alta-font-family,var(--font-heading-family));font-size:clamp(28px,8vw,29px);font-weight:600;letter-spacing:-.015em;line-height:1.1;margin:0 auto;max-width:340px}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__title{color:var(--alta-relief-ink);font-family:var(--alta-font-family,var(--font-heading-family));font-size:clamp(28px,8vw,29px);font-weight:750;letter-spacing:-.035em;line-height:1.08;margin:0 auto;max-width:340px}
   #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__title span{display:block}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__copy{color:rgba(255,255,255,.82);font-size:15px;font-weight:400;line-height:1.55;margin:16px auto 0;max-width:330px}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__copy{color:var(--alta-relief-body);font-size:15px;font-weight:400;line-height:1.55;margin:16px auto 0;max-width:330px}
   #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__copy span{display:block}
   #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefits{list-style:none;margin:26px auto 0;max-width:320px;padding:0}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefit{align-items:center;display:flex;font-size:15px;font-weight:500;justify-content:center;line-height:1.3;min-height:46px;padding:8px 6px}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefit:not(:last-child){border-bottom:1px solid rgba(255,255,255,.12)}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta{align-items:center;background:#fff;border:1px solid #fff;border-radius:7px;color:#062417;cursor:pointer;display:flex;font-family:inherit;font-size:14px;font-weight:600;justify-content:center;letter-spacing:.035em;line-height:1.2;margin:29px auto 0;max-width:320px;min-height:50px;padding:12px 18px;text-transform:uppercase;transition:background-color .18s ease,color .18s ease;width:100%}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta:hover{background:transparent;color:#fff}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta:disabled{cursor:not-allowed;opacity:.55}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust{border-top:1px solid rgba(255,255,255,.1);display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr));margin:36px auto 0;max-width:580px;padding-top:24px}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust-item{align-items:center;display:flex;flex-direction:column;font-size:12px;font-weight:600;gap:8px;line-height:1.35;min-width:0;padding-inline:2px}
-  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust-item svg{flex:0 0 24px;height:24px;width:24px}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefit{align-items:center;color:var(--alta-relief-ink);display:flex;font-size:15px;font-weight:650;justify-content:center;line-height:1.35;min-height:46px;padding:8px 6px}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefit:not(:last-child){border-bottom:1px solid var(--alta-relief-line)}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta{align-items:center;appearance:none;background:var(--alta-relief-accent);border:1px solid var(--alta-relief-accent);border-radius:7px;color:#fff;cursor:pointer;display:flex;font-family:inherit;font-size:14px;font-weight:750;justify-content:center;letter-spacing:.035em;line-height:1.2;margin:29px auto 0;max-width:320px;min-height:52px;padding:12px 18px;text-transform:uppercase;transition:background-color .18s ease,border-color .18s ease,transform .18s ease;width:100%}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta:hover{background:var(--alta-relief-accent-hover);border-color:var(--alta-relief-accent-hover);color:#fff}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta:active{transform:translateY(1px)}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta:focus-visible{outline:3px solid rgba(0,107,94,.3);outline-offset:3px}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta:disabled{cursor:not-allowed;opacity:.55;transform:none}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust{border-top:1px solid var(--alta-relief-line);display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr));margin:36px auto 0;max-width:580px;padding-top:24px}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust-item{align-items:center;color:var(--alta-relief-ink);display:flex;flex-direction:column;font-size:12px;font-weight:650;gap:8px;line-height:1.35;min-width:0;padding-inline:2px}
+  #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust-item svg{color:var(--alta-relief-accent);flex:0 0 24px;height:24px;stroke-width:1.8;width:24px}
   @media(min-width:768px){
-    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__inner{max-width:760px;padding:0 32px 42px}
-    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__media{margin-bottom:20px;max-width:330px}
-    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__title{font-size:clamp(32px,3vw,36px);max-width:420px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__inner{max-width:760px;padding:48px 32px 52px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__media{margin-bottom:26px;max-width:380px;width:62%}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__title{font-size:clamp(32px,3vw,36px);max-width:440px}
     #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__copy{font-size:16px}
-    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefits{max-width:400px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefits{margin-top:30px;max-width:400px}
     #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefit{font-size:16px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta{margin-top:32px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust{margin-top:40px;padding-top:26px}
     #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__trust-item{font-size:13px}
+  }
+  @media(min-width:1024px){
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__inner{max-width:800px;padding:56px 40px 60px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__media{margin-bottom:30px;max-width:400px;width:58%}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__copy{max-width:380px}
+    #AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__benefits{max-width:420px}
   }
   @media(prefers-reduced-motion:reduce){#AltaeronV3Final-{{ section.id }} .altaeron-relief-closing__cta{transition:none}}
 </style>
