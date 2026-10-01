@@ -1756,9 +1756,14 @@
       "answer_20": "Tamaño aprox.: 3,94 × 3,15 × 0,98 in (10 × 8 × 2,5 cm)\nAjuste: Regulable para pies adultos\nEstructura: Soporte de ABS\nAcolchado: Tejido suave + zonas de contacto de silicona\nAjuste de tensión: Sistema de cable de acero controlado por dial\nArticulación: Diseño giratorio"
     },
     "final_cta": {
-      "title": "EL ALIVIO ES SOLO EL PRINCIPIO.",
-      "subtitle": "No te limites a acolchar el juanete.\n\nTrabaja sobre la posición que lo crea.\n\nEndereza el dedo.\nRecupera el espacio.\nAlivia la presión.\n\nEmpieza tu corrección hoy.",
-      "cta_label": "AÑADIR AL CARRITO —"
+      "title_line_1": "EL ALIVIO ES SOLO",
+      "title_line_2": "EL PRINCIPIO.",
+      "body_line_1": "No te limites a amortiguar el juanete.",
+      "body_line_2": "Apoya la posición del dedo que está detrás de la presión.",
+      "benefit_1": "Guía el dedo hacia afuera",
+      "benefit_2": "Crea más espacio",
+      "benefit_3": "Alivia la presión del juanete",
+      "cta_label": "EMPIEZA TU CORRECCIÓN"
     },
     "customer_proof": {
       "eyebrow": "Experiencias de clientes",

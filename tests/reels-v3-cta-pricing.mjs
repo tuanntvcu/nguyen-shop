@@ -11,10 +11,66 @@ const template = JSON.parse((await fs.readFile('templates/product.altaeron-reels
 assert.match(section, /data-apdp-submit-label[\s\S]*data-apdp-cta-price/);
 assert.match(stylesheet, /\.altaeron-pdp--reels-v3 bundle-deals-widget \[data-tier-index="1"\] \.bd-tier__compare\{display:none!important\}/);
 assert.equal(template.sections.altaeron_pdp_reels_v3.settings.cta_label, 'START YOUR CORRECTION');
-assert.equal(template.sections.altaeron_story_cta.settings.cta_label, 'ADD TO CART —');
-assert.match(finalSection, /data-apdp-final-submit[\s\S]*data-apdp-final-button-price/);
+assert.equal(template.sections.altaeron_story_cta.settings.cta_label, 'START YOUR CORRECTION');
+assert.match(finalSection, /class="altaeron-relief-closing__cta" data-apdp-final-submit/);
+assert.doesNotMatch(finalSection, /data-apdp-final-button-price|apdp-final-payments/);
 
 const browser = await chromium.launch({ headless: true });
+const scopedStyle = finalSection
+  .match(/<style>([\s\S]*?)<\/style>/)[1]
+  .replaceAll('{{ section.id }}', 'Test');
+
+for (const width of [360, 375, 390, 430, 768, 1440]) {
+  const responsivePage = await browser.newPage({ viewport: { width, height: 1000 } });
+  await responsivePage.setContent(`<!doctype html><html><head><style>*{box-sizing:border-box}body{margin:0}${scopedStyle}</style></head><body>
+    <div id="AltaeronV3Final-Test" class="altaeron-pdp">
+      <section class="apdp-final-cta altaeron-relief-closing">
+        <div class="altaeron-relief-closing__inner">
+          <div class="altaeron-relief-closing__media"><svg viewBox="0 0 700 420" aria-hidden="true"></svg></div>
+          <div class="altaeron-relief-closing__content">
+            <h2 class="altaeron-relief-closing__title"><span>RELIEF IS ONLY</span><span>THE BEGINNING.</span></h2>
+            <p class="altaeron-relief-closing__copy"><span>Don't just cushion the bunion.</span><span>Support the toe position behind the pressure.</span></p>
+            <ul class="altaeron-relief-closing__benefits"><li class="altaeron-relief-closing__benefit">Guide the toe outward</li><li class="altaeron-relief-closing__benefit">Create more space</li><li class="altaeron-relief-closing__benefit">Ease bunion pressure</li></ul>
+            <button class="altaeron-relief-closing__cta">START YOUR CORRECTION</button>
+            <div class="altaeron-relief-closing__trust"><div class="altaeron-relief-closing__trust-item"><svg></svg><span>30-Day Comfort Guarantee</span></div><div class="altaeron-relief-closing__trust-item"><svg></svg><span>Free Shipping</span></div><div class="altaeron-relief-closing__trust-item"><svg></svg><span>Real Support</span></div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body></html>`);
+  const layout = await responsivePage.evaluate(() => {
+    const box = (selector) => {
+      const rect = document.querySelector(selector).getBoundingClientRect();
+      return { top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right, width: rect.width };
+    };
+    return {
+      viewport: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      media: box('.altaeron-relief-closing__media'),
+      title: box('.altaeron-relief-closing__title'),
+      copy: box('.altaeron-relief-closing__copy'),
+      benefits: box('.altaeron-relief-closing__benefits'),
+      cta: box('.altaeron-relief-closing__cta'),
+      trust: box('.altaeron-relief-closing__trust'),
+      trustItems: [...document.querySelectorAll('.altaeron-relief-closing__trust-item')].map((item) => {
+        const rect = item.getBoundingClientRect();
+        return { left: rect.left, right: rect.right };
+      }),
+    };
+  });
+  assert.equal(layout.scrollWidth, layout.viewport, `${width}px layout must not overflow horizontally`);
+  assert.ok(layout.media.bottom <= layout.title.top);
+  assert.ok(layout.title.bottom <= layout.copy.top);
+  assert.ok(layout.copy.bottom <= layout.benefits.top);
+  assert.ok(layout.benefits.bottom <= layout.cta.top);
+  assert.ok(layout.cta.bottom <= layout.trust.top);
+  assert.ok(layout.cta.width <= 320.5);
+  assert.equal(layout.trustItems.length, 3);
+  assert.ok(layout.trustItems[0].right <= layout.trustItems[1].left);
+  assert.ok(layout.trustItems[1].right <= layout.trustItems[2].left);
+  await responsivePage.close();
+}
+
 const page = await browser.newPage();
 
 await page.setContent(`<!doctype html><html><body>

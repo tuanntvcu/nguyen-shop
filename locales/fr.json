@@ -1756,9 +1756,14 @@
       "answer_20": "Dimensions approximatives : 3,94 × 3,15 × 0,98 in (10 × 8 × 2,5 cm)\nAjustement : Réglable pour les pieds adultes\nStructure : Support en ABS\nRembourrage : Tissu doux + zones de contact en silicone\nRéglage : Système de tension par câble d’acier contrôlé par molette\nArticulation : Conception rotative"
     },
     "final_cta": {
-      "title": "LE SOULAGEMENT N’EST QUE LE DÉBUT.",
-      "subtitle": "Ne vous contentez pas de protéger l’hallux valgus.\n\nAgissez sur la position qui le crée.\n\nRedressez l’orteil.\nRétablissez l’espace.\nSoulagez la pression.\n\nCommencez votre correction dès aujourd’hui.",
-      "cta_label": "AJOUTER AU PANIER —"
+      "title_line_1": "LE SOULAGEMENT N’EST QUE",
+      "title_line_2": "LE DÉBUT.",
+      "body_line_1": "Ne vous contentez pas d’amortir l’hallux valgus.",
+      "body_line_2": "Soutenez la position de l’orteil à l’origine de la pression.",
+      "benefit_1": "Guidez l’orteil vers l’extérieur",
+      "benefit_2": "Créez plus d’espace",
+      "benefit_3": "Soulagez la pression de l’hallux valgus",
+      "cta_label": "COMMENCEZ VOTRE CORRECTION"
     },
     "customer_proof": {
       "eyebrow": "Témoignages clients",

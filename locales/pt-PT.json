@@ -1756,9 +1756,14 @@
       "answer_20": "Tamanho aproximado: 3,94 × 3,15 × 0,98 in (10 × 8 × 2,5 cm)\nAjuste: Regulável para pés adultos\nEstrutura: Suporte em ABS\nAcolchoamento: Tecido macio + áreas de contacto em silicone\nAjuste da tensão: Sistema de cabo de aço controlado por seletor\nArticulação: Design rotativo"
     },
     "final_cta": {
-      "title": "O ALÍVIO É APENAS O COMEÇO.",
-      "subtitle": "Não se limite a acolchoar o joanete.\n\nTrabalhe na posição que o provoca.\n\nEndireite o dedo.\nRestaure o espaço.\nAlivie a pressão.\n\nComece a sua correção hoje.",
-      "cta_label": "ADICIONAR AO CARRINHO —"
+      "title_line_1": "O ALÍVIO É APENAS",
+      "title_line_2": "O COMEÇO.",
+      "body_line_1": "Não se limite a acolchoar o joanete.",
+      "body_line_2": "Apoie a posição do dedo por detrás da pressão.",
+      "benefit_1": "Guie o dedo para fora",
+      "benefit_2": "Crie mais espaço",
+      "benefit_3": "Alivie a pressão do joanete",
+      "cta_label": "COMECE A SUA CORREÇÃO"
     },
     "customer_proof": {
       "eyebrow": "Experiências de clientes",

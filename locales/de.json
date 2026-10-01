@@ -1756,9 +1756,14 @@
       "answer_20": "Ungefähre Größe: 3,94 × 3,15 × 0,98 in (10 × 8 × 2,5 cm)\nPassform: Verstellbar für Füße Erwachsener\nRahmen: ABS-Stützstruktur\nPolsterung: Weiches Gewebe + Silikon-Kontaktflächen\nEinstellung: Drehknopfgesteuertes Stahlseil-Spannsystem\nGelenk: Drehbares Design"
     },
     "final_cta": {
-      "title": "LINDERUNG IST ERST DER ANFANG.",
-      "subtitle": "Den Ballen nicht nur polstern.\n\nArbeiten Sie an der Position, die ihn verursacht.\n\nDen Zeh aufrichten.\nPlatz wiederherstellen.\nDruck lindern.\n\nStarten Sie Ihre Korrektur noch heute.",
-      "cta_label": "IN DEN WARENKORB —"
+      "title_line_1": "LINDERUNG IST ERST",
+      "title_line_2": "DER ANFANG.",
+      "body_line_1": "Den Ballen nicht nur polstern.",
+      "body_line_2": "Unterstützen Sie die Zehenposition hinter dem Druck.",
+      "benefit_1": "Den Zeh nach außen führen",
+      "benefit_2": "Mehr Platz schaffen",
+      "benefit_3": "Ballenzehdruck lindern",
+      "cta_label": "KORREKTUR STARTEN"
     },
     "customer_proof": {
       "eyebrow": "Kundenerfahrungen",

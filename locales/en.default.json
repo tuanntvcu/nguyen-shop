@@ -1755,9 +1755,14 @@
       "answer_20": "Approx. size: 3.94 × 3.15 × 0.98 in (10 × 8 × 2.5 cm)\nFit: Adjustable for adult feet\nFrame: ABS support structure\nPadding: Soft fabric + silicone contact areas\nAdjustment: Dial-controlled steel-wire tension system\nHinge: Rotating design"
     },
     "final_cta": {
-      "title": "RELIEF IS ONLY THE BEGINNING.",
-      "subtitle": "Don't just cushion the bunion.\n\nWork on the position creating it.\n\nStraighten the toe.\nRestore the space.\nRelieve the pressure.\n\nStart Your Correction Today.",
-      "cta_label": "ADD TO CART —"
+      "title_line_1": "RELIEF IS ONLY",
+      "title_line_2": "THE BEGINNING.",
+      "body_line_1": "Don't just cushion the bunion.",
+      "body_line_2": "Support the toe position behind the pressure.",
+      "benefit_1": "Guide the toe outward",
+      "benefit_2": "Create more space",
+      "benefit_3": "Ease bunion pressure",
+      "cta_label": "START YOUR CORRECTION"
     },
     "customer_proof": {
       "eyebrow": "Customer proof",
