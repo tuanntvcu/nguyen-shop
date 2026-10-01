@@ -80,6 +80,18 @@
     #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance span { font-size: 12px; }
   }
   {%- if template.suffix == 'altaeron-reels-v3' -%}
+    /* Reel V3: lightweight editorial treatment for the OVER TIME block only. */
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance--editorial { align-items: start; background: var(--altaeron-off-white, #f8faf9); border: 1px solid var(--alta-timeline-line); border-radius: 13px; display: grid; gap: 0 12px; grid-template-columns: 20px minmax(0, 1fr); justify-content: stretch; margin: 16px auto 0; min-height: 0; padding: 24px 22px 25px; text-align: left; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance--editorial > strong { color: var(--alta-timeline-accent); font-size: 11.5px; font-weight: 700; grid-column: 1 / -1; letter-spacing: .05em; line-height: 1.2; margin: 0; text-transform: uppercase; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance--editorial > svg { align-self: start; color: var(--alta-timeline-accent); grid-column: 1; grid-row: 3 / 5; height: 19px; margin-top: 21px; opacity: .75; stroke-width: 1.65; width: 19px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance-copy { display: contents; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance-copy p { margin-bottom: 0; max-width: 700px; text-align: left; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance-subtitle { color: var(--alta-timeline-body); font-size: 15px; font-weight: 450; grid-column: 1 / -1; line-height: 1.4; margin-top: 5px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance-body { color: var(--alta-timeline-body); font-size: 15px; font-weight: 400; grid-column: 2; grid-row: 3; line-height: 1.58; margin-top: 20px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance-closing { color: var(--alta-timeline-ink); font-size: 15px; font-weight: 600; grid-column: 2; grid-row: 4; line-height: 1.35; margin-top: 16px; }
+    @media (min-width: 900px) {
+      #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance--editorial { max-width: 904px; padding-inline: 28px; width: 100%; }
+    }
     {% render 'altaeron-reels-v3-responsive-section', section_kind: 'timeline', section_id: section.id %}
   {%- endif -%}
 </style>
@@ -136,10 +148,30 @@
     {%- endif -%}
 
     {%- if reassurance_heading != blank or reassurance_text != blank -%}
-      <div class="alta-timeline__reassurance">
+      <div class="alta-timeline__reassurance{% if template.suffix == 'altaeron-reels-v3' %} alta-timeline__reassurance--editorial{% endif %}">
         <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor"><rect x="4.5" y="7.5" width="23" height="20" rx="2"/><path d="M10 4v7M22 4v7M4.5 13h23M9 18h3M15 18h3M21 18h3M9 23h3M15 23h3M21 23h3"/></svg>
         {%- if reassurance_heading != blank -%}<strong>{{ reassurance_heading | escape }}</strong>{%- endif -%}
-        {%- if reassurance_text != blank -%}<span>{{ reassurance_text | escape | newline_to_br }}</span>{%- endif -%}
+        {%- if reassurance_text != blank -%}
+          {%- if template.suffix == 'altaeron-reels-v3' -%}
+            {%- assign reassurance_parts = reassurance_text | newline_to_br | split: '<br />' -%}
+            {%- assign reassurance_part_index = 0 -%}
+            <div class="alta-timeline__reassurance-copy">
+              {%- for reassurance_part in reassurance_parts -%}
+                {%- assign reassurance_part = reassurance_part | strip -%}
+                {%- if reassurance_part != blank -%}
+                  {%- case reassurance_part_index -%}
+                    {%- when 0 -%}<p class="alta-timeline__reassurance-subtitle">{{ reassurance_part | escape }}</p>
+                    {%- when 1 -%}<p class="alta-timeline__reassurance-body">{{ reassurance_part | escape }}</p>
+                    {%- else -%}<p class="alta-timeline__reassurance-closing">{{ reassurance_part | escape }}</p>
+                  {%- endcase -%}
+                  {%- assign reassurance_part_index = reassurance_part_index | plus: 1 -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <span>{{ reassurance_text | escape | newline_to_br }}</span>
+          {%- endif -%}
+        {%- endif -%}
       </div>
     {%- endif -%}
   </div>

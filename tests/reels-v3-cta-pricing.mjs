@@ -56,7 +56,7 @@ for (const width of [360, 375, 390, 430, 768, 1024, 1280, 1440]) {
       trust: box('.altaeron-relief-closing__trust'),
       trustItems: [...document.querySelectorAll('.altaeron-relief-closing__trust-item')].map((item) => {
         const rect = item.getBoundingClientRect();
-        return { left: rect.left, right: rect.right };
+        return { left: rect.left, right: rect.right, textAlign: getComputedStyle(item).textAlign };
       }),
     };
   });
@@ -83,6 +83,7 @@ for (const width of [360, 375, 390, 430, 768, 1024, 1280, 1440]) {
   assert.equal(layout.trustItems.length, 3);
   assert.ok(layout.trustItems[0].right <= layout.trustItems[1].left);
   assert.ok(layout.trustItems[1].right <= layout.trustItems[2].left);
+  assert.ok(layout.trustItems.every((item) => item.textAlign === 'center'), `${width}px trust labels must remain centered under their icons`);
   await responsivePage.close();
 }
 
