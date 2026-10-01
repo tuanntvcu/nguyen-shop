@@ -53,6 +53,8 @@ for (const width of [360, 375, 390, 430, 768, 1024, 1280, 1440]) {
     const icon = document.querySelector('.alta-timeline__reassurance--editorial svg');
     const body = document.querySelector('.alta-timeline__reassurance-body');
     const closing = document.querySelector('.alta-timeline__reassurance-closing');
+    const label = document.querySelector('.alta-timeline__reassurance--editorial > strong');
+    const subtitle = document.querySelector('.alta-timeline__reassurance-subtitle');
     const cardStyle = getComputedStyle(card);
     return {
       viewport: document.documentElement.clientWidth,
@@ -68,8 +70,10 @@ for (const width of [360, 375, 390, 430, 768, 1024, 1280, 1440]) {
         border: cardStyle.borderTopWidth,
         shadow: cardStyle.boxShadow,
         textAlign: cardStyle.textAlign,
-        iconWidth: getComputedStyle(icon).width,
-        iconOpacity: getComputedStyle(icon).opacity,
+        iconDisplay: getComputedStyle(icon).display,
+        labelFontSize: getComputedStyle(label).fontSize,
+        labelLetterSpacing: getComputedStyle(label).letterSpacing,
+        subtitleFontSize: getComputedStyle(subtitle).fontSize,
         bodyFontSize: getComputedStyle(body).fontSize,
         bodyLineHeight: getComputedStyle(body).lineHeight,
         closingWeight: getComputedStyle(closing).fontWeight,
@@ -79,17 +83,19 @@ for (const width of [360, 375, 390, 430, 768, 1024, 1280, 1440]) {
 
   assert.equal(layout.scrollWidth, layout.viewport, `${width}px layout must not overflow`);
   assert.equal(layout.styles.background, 'rgb(248, 250, 249)');
-  assert.equal(layout.styles.border, '1px');
+  assert.equal(layout.styles.border, '0px');
   assert.equal(layout.styles.shadow, 'none');
   assert.equal(layout.styles.textAlign, 'left');
-  assert.equal(layout.styles.iconWidth, '19px');
-  assert.equal(layout.styles.iconOpacity, '0.75');
-  assert.equal(layout.styles.bodyFontSize, '15px');
-  assert.equal(layout.styles.bodyLineHeight, '23.7px');
+  assert.equal(layout.styles.iconDisplay, 'none');
+  assert.equal(layout.styles.labelFontSize, '11px');
+  assert.equal(layout.styles.labelLetterSpacing, '0.66px');
+  assert.equal(layout.styles.subtitleFontSize, '16px');
+  assert.equal(layout.styles.bodyFontSize, '16px');
+  assert.equal(layout.styles.bodyLineHeight, '25.28px');
   assert.equal(layout.styles.closingWeight, '600');
   assert.ok(Math.abs(layout.card.top - layout.stages.bottom - 16) < 1, `${width}px progression gap must remain compact`);
   assert.ok(Math.abs(layout.label.left - layout.subtitle.left) < 1, `${width}px header copy must align left`);
-  assert.ok(layout.body.left > layout.subtitle.left, `${width}px icon must use only a narrow supporting column`);
+  assert.ok(Math.abs(layout.body.left - layout.subtitle.left) < 1, `${width}px body copy must share the left text axis`);
   assert.ok(Math.abs(layout.body.left - layout.closing.left) < 1, `${width}px closing line must align with body copy`);
   if (width === 375) assert.ok(layout.card.height < 360, '375px block must remain compact');
   if (width >= 900) {
