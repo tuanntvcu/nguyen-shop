@@ -7,6 +7,46 @@
     return new Intl.NumberFormat(document.documentElement.lang || 'en-US', { style: 'currency', currency }).format(Number(cents || 0) / 100);
   }
 
+  function addBusinessDays(date, businessDays) {
+    const result = new Date(date);
+    result.setHours(12, 0, 0, 0);
+    let daysAdded = 0;
+
+    while (daysAdded < businessDays) {
+      result.setDate(result.getDate() + 1);
+      const dayOfWeek = result.getDay();
+      if (dayOfWeek !== 0 && dayOfWeek !== 6) daysAdded += 1;
+    }
+
+    return result;
+  }
+
+  function initDeliveryEstimate(root) {
+    const estimate = root.querySelector('[data-apdp-delivery-estimate]');
+    const range = estimate?.querySelector('[data-apdp-delivery-range]');
+    if (!estimate || !range) return;
+
+    const minBusinessDays = 3;
+    const maxBusinessDays = 4;
+    const locale = estimate.dataset.locale || document.documentElement.lang || 'en';
+    const today = new Date();
+    const earliestDelivery = addBusinessDays(today, minBusinessDays);
+    const latestDelivery = addBusinessDays(today, maxBusinessDays);
+    const crossesYears = earliestDelivery.getFullYear() !== latestDelivery.getFullYear();
+    const formatter = new Intl.DateTimeFormat(locale, {
+      month: 'short',
+      day: 'numeric',
+      ...(crossesYears ? { year: 'numeric' } : {}),
+    });
+    const formattedRange = typeof formatter.formatRange === 'function'
+      ? formatter.formatRange(earliestDelivery, latestDelivery)
+      : `${formatter.format(earliestDelivery)}–${formatter.format(latestDelivery)}`;
+
+    range.textContent = locale.toLowerCase().startsWith('en')
+      ? formattedRange.replace(/\s*[–-]\s*/u, '–')
+      : formattedRange;
+  }
+
   const promotion = {
     enabled: true,
     timeZone: 'America/Los_Angeles',
@@ -1002,6 +1042,7 @@
     if (!root || root.dataset.apdpReady === 'true') return;
     root.dataset.apdpReady = 'true';
     initPromotion(root);
+    initDeliveryEstimate(root);
     initHeroExperience(root);
     initSocialProof(root);
     const activateMedia = initGallery(root);

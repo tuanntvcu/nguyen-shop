@@ -85,6 +85,9 @@
   #AltaeronPdp-{{ section.id }} .apdp-hero-review blockquote p{margin:0}
   #AltaeronPdp-{{ section.id }} .apdp-hero-review blockquote strong{color:var(--altaeron-primary,#006B5E)}
   #AltaeronPdp-{{ section.id }} .apdp-hero-review figcaption{font-size:12px;margin-top:9px}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-estimate{align-items:center;color:var(--altaeron-navy,#102A43);display:flex;font-size:12px;font-weight:450;gap:6px;justify-content:center;line-height:1.4;margin:10px 0 8px;min-height:17px;text-align:center}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-estimate svg{color:var(--altaeron-primary,#006B5E);flex:0 0 15px;height:15px;stroke-width:1.8;width:15px}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-estimate strong{font-weight:650}
   #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance{align-items:center;color:var(--altaeron-body,#344054);display:flex;font-size:10px;gap:6px;justify-content:center;line-height:1.4;margin:9px 0 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance svg{color:var(--altaeron-primary,#006B5E);flex:0 0 14px;height:14px;width:14px}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options{border:0;margin:11px 0 0;text-align:center}
@@ -370,6 +373,7 @@
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
           <p class="apdp-new-customer-offer">{{ 'altaeron_pdp_reels_v3.hero.purchase_clarification' | t }}</p>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ reel_cta_label }}">{% if current_variant.available %}{{ reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><span data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}>{% if current_variant.available %} — {{ current_variant.price | money }}{% endif %}</span></span><span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
+          <p class="apdp-delivery-estimate" data-apdp-delivery-estimate data-locale="{{ request.locale.iso_code | escape }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span>{{ 'altaeron_pdp_reels_v3.hero.estimated_delivery' | t }}: <strong data-apdp-delivery-range></strong></span></p>
           <p class="apdp-cta-reassurance">{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>{{ 'altaeron_pdp_reels_v3.hero.trust_row' | t }}</span></p>
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp_reels_v2.buy.installments' | t: amount: installment_amount }} <strong>shop<span>Pay</span></strong></div>
           {%- if shop.enabled_payment_types.size > 0 -%}
@@ -452,7 +456,7 @@
     { "type": "richtext", "id": "review_content", "label": "Review content", "default": "<p>I started with gentle tension and adjusted it until it felt comfortable. Simple to use and surprisingly supportive</p>" },
     { "type": "text", "id": "reviewer_name", "label": "Reviewer name", "default": "Karen M." },
     { "type": "text", "id": "price_label", "label": "Price label", "default": "From" },
-    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "START YOUR CORRECTION" }
+    { "type": "text", "id": "cta_label", "label": "Add to cart label", "default": "ADD TO CART" }
   ],
   "blocks": [
     {

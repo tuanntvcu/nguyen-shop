@@ -451,7 +451,7 @@
   line-height: 1.25;
 }
 .cart-drawer__care {
-  display: grid;
+  display: none;
   grid-template-columns: 8.8rem minmax(0, 1fr);
   gap: 1.2rem;
   padding: 1.2rem;
