@@ -26,17 +26,20 @@
     const range = estimate?.querySelector('[data-apdp-delivery-range]');
     if (!estimate || !range) return;
 
-    const minBusinessDays = 3;
-    const maxBusinessDays = 4;
+    const handlingBusinessDays = 1;
+    const minTransitBusinessDays = 3;
+    const maxTransitBusinessDays = 4;
     const locale = estimate.dataset.locale || document.documentElement.lang || 'en';
-    const today = new Date();
-    const earliestDelivery = addBusinessDays(today, minBusinessDays);
-    const latestDelivery = addBusinessDays(today, maxBusinessDays);
-    const crossesYears = earliestDelivery.getFullYear() !== latestDelivery.getFullYear();
+    const orderDate = new Date();
+    const processingCompleteDate = addBusinessDays(orderDate, handlingBusinessDays);
+    const earliestDelivery = addBusinessDays(processingCompleteDate, minTransitBusinessDays);
+    const latestDelivery = addBusinessDays(processingCompleteDate, maxTransitBusinessDays);
+    const includeYear = orderDate.getFullYear() !== latestDelivery.getFullYear()
+      || earliestDelivery.getFullYear() !== latestDelivery.getFullYear();
     const formatter = new Intl.DateTimeFormat(locale, {
       month: 'short',
       day: 'numeric',
-      ...(crossesYears ? { year: 'numeric' } : {}),
+      ...(includeYear ? { year: 'numeric' } : {}),
     });
     const formattedRange = typeof formatter.formatRange === 'function'
       ? formatter.formatRange(earliestDelivery, latestDelivery)

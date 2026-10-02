@@ -9,22 +9,32 @@ const addBusinessDaysSource = script.match(/function addBusinessDays\([\s\S]*?\n
 
 assert.ok(addBusinessDaysSource, 'addBusinessDays must remain a reusable function');
 const addBusinessDays = new Function(`${addBusinessDaysSource}; return addBusinessDays;`)();
-const formatEnglishRange = (start, end) => new Intl.DateTimeFormat('en-US', {
+const formatEnglishRange = (orderDate, start, end) => new Intl.DateTimeFormat('en-US', {
   month: 'short',
   day: 'numeric',
-  ...(start.getFullYear() !== end.getFullYear() ? { year: 'numeric' } : {}),
+  ...(orderDate.getFullYear() !== end.getFullYear() || start.getFullYear() !== end.getFullYear()
+    ? { year: 'numeric' }
+    : {}),
 }).formatRange(start, end).replace(/\s*[–-]\s*/u, '–');
 const deliveryRange = (dateString) => {
   const orderDate = new Date(`${dateString}T12:00:00`);
-  return formatEnglishRange(addBusinessDays(orderDate, 3), addBusinessDays(orderDate, 4));
+  const handlingBusinessDays = 1;
+  const minTransitBusinessDays = 3;
+  const maxTransitBusinessDays = 4;
+  const processingCompleteDate = addBusinessDays(orderDate, handlingBusinessDays);
+  return formatEnglishRange(
+    orderDate,
+    addBusinessDays(processingCompleteDate, minTransitBusinessDays),
+    addBusinessDays(processingCompleteDate, maxTransitBusinessDays),
+  );
 };
 
-assert.equal(deliveryRange('2026-10-02'), 'Oct 7–8', 'Friday must roll over the weekend');
-assert.equal(deliveryRange('2026-10-03'), 'Oct 7–8', 'Saturday must start counting on Monday');
-assert.equal(deliveryRange('2026-10-04'), 'Oct 7–8', 'Sunday must start counting on Monday');
-assert.equal(deliveryRange('2026-10-05'), 'Oct 8–9', 'Monday must count from Tuesday');
-assert.equal(deliveryRange('2026-10-27'), 'Oct 30–Nov 2', 'month-end range must remain natural');
-assert.equal(deliveryRange('2026-12-28'), 'Dec 31, 2026–Jan 1, 2027', 'cross-year range must include years');
+assert.equal(deliveryRange('2026-10-02'), 'Oct 8–9', 'Friday must include handling before transit');
+assert.equal(deliveryRange('2026-10-05'), 'Oct 9–12', 'Monday must include handling before transit');
+assert.equal(deliveryRange('2026-10-03'), 'Oct 8–9', 'Saturday must start handling on Monday');
+assert.equal(deliveryRange('2026-10-04'), 'Oct 8–9', 'Sunday must start handling on Monday');
+assert.equal(deliveryRange('2026-10-27'), 'Nov 2–3', 'month-end range must remain natural');
+assert.equal(deliveryRange('2026-12-28'), 'Jan 1–4, 2027', 'cross-year calculation must remain natural');
 
 const deliveryStyles = section
   .match(/<style>([\s\S]*?)<\/style>/)[1]
