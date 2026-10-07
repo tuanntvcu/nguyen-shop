@@ -63,6 +63,9 @@ next[17]=parts[17].replace(`<div class="apdp-final-badge" aria-hidden="true"><di
 next[16]=parts[16].replace('<h2>AirRelief Customer Reviews</h2>',`{% render 'altaeron-pdp-section-heading', number: '9', title: 'AirRelief Customer Reviews' %}`).replace('class="apdp-shell apdp-review-summary"','class="apdp-tail apdp-shell apdp-dialfit-full alta-pdp-flow-section apdp-dialfit-section apdp-review-summary"');
 const order=[0,1,2,3,4,5,7,12,14,15,17,16];
 let result=original.slice(0,original.indexOf(parts[0]))+order.map(i=>next[i]).join('\n\n')+original.slice(original.indexOf(parts.at(-1))+parts.at(-1).length);
+// Keep the mobile sticky purchase bar's explicit label and dynamic sale price pair.
+result=result.replace('<span>Altaeron™ AirRelief <b data-apdp-sticky-price>{{ current_variant.price | money }}</b></span>','<span>Altaeron™ AirRelief<small><b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if current_compare <= current_variant.price %} hidden{% endif %}>{{ current_compare | money }}</s></small></span>');
+result=result.replace('<span data-apdp-sticky-text>{{ cta_label | escape }}</span>','<span data-apdp-sticky-text data-available-text="Add to cart">{% if current_variant.available %}Add to cart{% else %}{{ \'products.product.sold_out\' | t | escape }}{% endif %}</span>');
 // Schema adds media overrides without changing existing settings or temporary media selections.
 const schemaMatch=result.match(/\{% schema %\}\s*([\s\S]*?)\s*\{% endschema %\}/);
 const schema=JSON.parse(schemaMatch[1]);
@@ -96,3 +99,4 @@ css+=`\n/* Product-specific supporting content uses existing DialFit components.
 `;
 await fs.writeFile('assets/altaeron-pdp-massager.css',css.replace(/[ \t]+$/gm,''));
 console.log('Refined 18 sections to 12 containers: 8 numbered chapters, guarantee, final CTA and conditional chapter-9 reviews.');
+await import('./refine-airrelief-copy.mjs');
