@@ -626,7 +626,7 @@
         if (available) ctaPrice.textContent = ` — ${money(price, format)}`;
       }
       if (finalButtonPrice) finalButtonPrice.hidden = !available;
-      if (stickyText) stickyText.textContent = label;
+      if (stickyText) stickyText.textContent = available ? (stickyText.dataset.availableText || label) : label;
       updateRelatedPrices(price, compare);
       if (mediaId) activateMedia(mediaId);
       if (pushUrl) {
