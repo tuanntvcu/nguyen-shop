@@ -1409,7 +1409,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "Labor Day Sale",
+      "eyebrow": "Fall Comfort Sale",
       "title": "Get More Relief. Pay Less.",
       "offer": "Extra 15% Off",
       "automatically_applied": "",
@@ -1420,9 +1420,9 @@
       "hours": "Hours",
       "minutes": "Minutes",
       "seconds": "Seconds",
-      "cta": "Get My Labor Day Deal",
-      "announcement_desktop": "🇺🇸 Labor Day Sale — Extra 15% Off",
-      "announcement_mobile": "Labor Day Sale — Extra 15% Off"
+      "cta": "Get My Fall Comfort Deal",
+      "announcement_desktop": "🍂 Fall Comfort Sale — Extra 15% Off",
+      "announcement_mobile": "Fall Comfort Sale — Extra 15% Off"
     },
     "common": {
       "save": "Save",

@@ -2,6 +2,9 @@
    These exceptions handle AirRelief's existing content shape; no separate type/color scale. */
 .altaeron-pdp--massager .apdp-massager-comparison-scroll{overflow-x:auto;margin-top:24px}
 .altaeron-pdp--massager .apdp-massager-compare{min-width:630px}
+.altaeron-pdp--massager .apdp-sticky__product .apdp-sticky__prices{align-items:baseline;display:flex;flex-wrap:wrap;gap:2px 6px;overflow:visible;white-space:normal}
+.altaeron-pdp--massager .apdp-sticky__prices :where(b,s){flex:none;white-space:nowrap}
+.altaeron-pdp--massager .apdp-sticky__prices s{color:var(--altaeron-muted,#667085);font-size:12px;text-decoration:line-through}
 .altaeron-pdp--massager .apdp-hero__grid:not(:has(.apdp-gallery)){grid-template-columns:1fr 1fr}
 .altaeron-pdp--massager .apdp-hero__grid:not(:has(.apdp-gallery)) .apdp-narrative{grid-column:1}
 .altaeron-pdp--massager .apdp-hero__grid:not(:has(.apdp-gallery)) .apdp-buy{grid-column:2}

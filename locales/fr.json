@@ -1410,7 +1410,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "Promotion de la fête du Travail",
+      "eyebrow": "Promotion confort d’automne",
       "title": "Plus de soulagement. Payez moins.",
       "offer": "15 % de réduction supplémentaire",
       "automatically_applied": "",
@@ -1421,9 +1421,9 @@
       "hours": "Heures",
       "minutes": "Minutes",
       "seconds": "Secondes",
-      "cta": "Profiter de l’offre de la fête du Travail",
-      "announcement_desktop": "🇺🇸 Promotion de la fête du Travail — 15 % de réduction supplémentaire",
-      "announcement_mobile": "Fête du Travail — 15 % de réduction supplémentaire"
+      "cta": "Profiter de l’offre confort d’automne",
+      "announcement_desktop": "🍂 Promotion confort d’automne — 15 % de réduction supplémentaire",
+      "announcement_mobile": "Confort d’automne — 15 % de réduction supplémentaire"
     },
     "common": {
       "save": "Économisez",

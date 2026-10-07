@@ -1410,7 +1410,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "Oferta del Día del Trabajo",
+      "eyebrow": "Oferta de confort de otoño",
       "title": "Más alivio. Paga menos.",
       "offer": "15 % de descuento adicional",
       "automatically_applied": "",
@@ -1421,9 +1421,9 @@
       "hours": "Horas",
       "minutes": "Minutos",
       "seconds": "Segundos",
-      "cta": "Conseguir mi oferta del Día del Trabajo",
-      "announcement_desktop": "🇺🇸 Oferta del Día del Trabajo — 15 % de descuento adicional",
-      "announcement_mobile": "Oferta del Día del Trabajo — 15 % de descuento adicional"
+      "cta": "Conseguir mi oferta de confort de otoño",
+      "announcement_desktop": "🍂 Oferta de confort de otoño — 15 % de descuento adicional",
+      "announcement_mobile": "Oferta de confort de otoño — 15 % de descuento adicional"
     },
     "common": {
       "save": "Ahorra",

@@ -1410,7 +1410,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "Labor-Day-Angebot",
+      "eyebrow": "Herbst-Komfort-Angebot",
       "title": "Mehr Entlastung. Weniger bezahlen.",
       "offer": "Zusätzlich 15 % Rabatt",
       "automatically_applied": "",
@@ -1421,9 +1421,9 @@
       "hours": "Stunden",
       "minutes": "Minuten",
       "seconds": "Sekunden",
-      "cta": "Labor-Day-Angebot sichern",
-      "announcement_desktop": "🇺🇸 Labor-Day-Angebot — Zusätzlich 15 % Rabatt",
-      "announcement_mobile": "Labor-Day-Angebot — Zusätzlich 15 % Rabatt"
+      "cta": "Herbst-Komfort-Angebot sichern",
+      "announcement_desktop": "🍂 Herbst-Komfort-Angebot — Zusätzlich 15 % Rabatt",
+      "announcement_mobile": "Herbst-Komfort-Angebot — Zusätzlich 15 % Rabatt"
     },
     "common": {
       "save": "Sparen",

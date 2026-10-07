@@ -701,7 +701,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "Oferta de Labor Day",
+      "eyebrow": "Oferta de conforto de outono",
       "title": "Mais alívio. Menos gasto.",
       "offer": "15% de desconto extra",
       "automatically_applied": "",
@@ -712,9 +712,9 @@
       "hours": "Horas",
       "minutes": "Minutos",
       "seconds": "Segundos",
-      "cta": "Quero minha oferta de Labor Day",
-      "announcement_desktop": "🇺🇸 Oferta de Labor Day — 15% de desconto extra",
-      "announcement_mobile": "Oferta de Labor Day — 15% de desconto extra"
+      "cta": "Quero minha oferta de conforto de outono",
+      "announcement_desktop": "🍂 Oferta de conforto de outono — 15% de desconto extra",
+      "announcement_mobile": "Oferta de conforto de outono — 15% de desconto extra"
     },
     "common": {
       "save": "Economize",
