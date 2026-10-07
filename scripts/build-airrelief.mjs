@@ -1,2 +1,2 @@
-// Rebuild the current AirRelief design from the read-only audit; preserve its copy and schema.
-import './refine-airrelief-design.mjs';
+// Rebuild from the saved live architecture audit; retain product data and purchase behavior.
+import './refine-airrelief-architecture.mjs';

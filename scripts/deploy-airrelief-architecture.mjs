@@ -1,0 +1,15 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {gql,files} from './airrelief-store.mjs';
+const dir='tmp/airrelief-audit/architecture';
+const before=JSON.parse(await fs.readFile(`${dir}/files-before.json`,'utf8'));
+const names=['sections/altaeron-pdp-massager.liquid','assets/altaeron-pdp-massager.css'];
+const protectedNames=before.filter(f=>!names.includes(f.filename)).map(f=>f.filename);
+const unchanged=async()=>{const current=await files(protectedNames);for(const f of current)assert.equal(f.checksumMd5,before.find(o=>o.filename===f.filename).checksumMd5,`Protected file: ${f.filename}`);return current.map(({filename,checksumMd5})=>({filename,checksumMd5}));};
+await unchanged();
+const result=await gql(`mutation($files:[OnlineStoreThemeFilesUpsertFileInput!]!){themeFilesUpsert(themeId:"gid://shopify/OnlineStoreTheme/140538314813",files:$files){upsertedThemeFiles{filename}userErrors{field message}}}`,{files:await Promise.all(names.map(async filename=>({filename,body:{type:'TEXT',value:await fs.readFile(filename,'utf8')}})))});
+await fs.writeFile(`${dir}/protected-files-after.json`,JSON.stringify(await unchanged(),null,2));
+const state=await gql(`{product(id:"gid://shopify/Product/8052528480317"){id title handle descriptionHtml vendor productType templateSuffix seo{title description} variants(first:20){nodes{id title price compareAtPrice availableForSale}}media(first:30){nodes{id alt}}metafields(first:100){nodes{namespace key type value}}} dialfit:product(id:"gid://shopify/Product/7996620341309"){id title handle templateSuffix}}`);
+assert.deepEqual(state,JSON.parse(await fs.readFile(`${dir}/product-before.json`,'utf8')));
+await fs.writeFile(`${dir}/product-after.json`,JSON.stringify(state,null,2));
+console.log(JSON.stringify({result,protectedFilesUnchanged:true,productFieldsUnchanged:true}));
