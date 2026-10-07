@@ -22,3 +22,6 @@ database.sqlite
 # Ignore shopify files created during app dev
 .shopify/*
 .shopify.lock
+
+# Local AirRelief store backups, browser captures and audit output
+/tmp/airrelief-audit/

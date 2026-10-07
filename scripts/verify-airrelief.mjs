@@ -1,0 +1,30 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {gql,files,dir,id} from './airrelief-store.mjs';
+import {chromium} from '../tmp/pw/node_modules/playwright/index.mjs';
+const original=JSON.parse(await fs.readFile(`${dir}/files-before.json`,'utf8'));
+const live=await files(original.map(f=>f.filename));
+for(const f of live)assert.equal(f.checksumMd5,original.find(o=>o.filename===f.filename).checksumMd5);
+const state=await gql(`{product(id:"${id}"){id title handle templateSuffix onlineStoreUrl seo{title description} variants(first:10){nodes{price compareAtPrice}}}dialfit:product(id:"gid://shopify/Product/7996620341309"){title handle templateSuffix}}`);
+assert.equal(state.product.templateSuffix,'altaeron-massager');assert.equal(state.dialfit.templateSuffix,'altaeron-dialfit');
+const qa=JSON.parse(await fs.readFile(`${dir}/qa.json`,'utf8'));
+for(const row of qa.filter(r=>r.width)){
+ assert.equal(row.status,200);assert.equal(row.overflow,false);assert.equal(row.stale,false);assert.equal(row.conflicting,false);assert.equal(row.faqCount,13);assert.equal(row.bundleCount,0);assert.equal(row.countdownTicks,true);assert.equal(row.faqOpens,true);assert.equal(row.brokenImages.length,0);assert.equal(row.errors.length,0);
+ const schema=row.schema.map(s=>JSON.parse(s)).find(s=>s['@type']==='Product');assert.equal(schema.name,state.product.title);assert.equal(schema.offers.price,'49.95');assert.equal(schema.offers.priceCurrency,'USD');assert.match(schema.offers.availability,/InStock/);assert.equal(schema.aggregateRating,undefined);
+}
+assert.equal(qa[0].cart.items[0].quantity,1);assert.equal(qa[0].finalCart[0].quantity,1);
+const browser=await chromium.launch({headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}});
+await page.goto(state.product.onlineStoreUrl,{waitUntil:'domcontentloaded'});await page.waitForTimeout(1500);
+await page.locator('[id^=AltaeronMedicalReview-]').screenshot({path:`${dir}/medical-desktop.png`});
+await page.locator('[id^=AirReliefFinal-]').screenshot({path:`${dir}/final-desktop.png`});
+await page.evaluate(()=>scrollTo(0,0));await page.waitForTimeout(400);
+await page.screenshot({path:`${dir}/hero-desktop.png`});
+const runtime=await page.evaluate(()=>({discountCode:window.ScaloraTheme?.settings?.checkoutDiscountCode,discountScript:!!document.querySelector('script[src*="checkout-discount"]'),mediaCount:document.querySelectorAll('.altaeron-pdp--massager .apdp-gallery img').length}));
+const intercepted=[];await page.route('**/discount/**',async route=>{intercepted.push(route.request().url());await route.abort();});
+await page.locator('[data-apdp-submit]').click();await page.waitForTimeout(1800);
+assert.equal(await page.locator('cart-drawer').evaluate(el=>el.open),true);
+await page.locator('cart-drawer [name=checkout]').evaluate(el=>el.click());await page.waitForTimeout(700);
+assert.ok(runtime.discountCode);assert.equal(runtime.discountScript,true);assert.ok(intercepted.some(u=>u.includes(`/discount/${runtime.discountCode}`)));
+await browser.close();
+const result={state,originalThemeFilesUnchanged:true,qaAssertionsPassed:true,runtime,checkoutDiscountRoute:intercepted};
+await fs.writeFile(`${dir}/verification.json`,JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
