@@ -2,9 +2,22 @@
    These exceptions handle AirRelief's existing content shape; no separate type/color scale. */
 .altaeron-pdp--massager .apdp-massager-comparison-scroll{overflow-x:auto;margin-top:24px}
 .altaeron-pdp--massager .apdp-massager-compare{min-width:630px}
-.altaeron-pdp--massager .apdp-massager-neutral-portrait{align-items:center;display:flex;justify-content:center}
-.altaeron-pdp--massager .apdp-massager-neutral-portrait>svg{height:54px;width:54px;color:var(--altaeron-primary,#006B5E)}
-.altaeron-pdp--massager .apdp-final-badge svg{height:54px;width:54px;fill:none;stroke:currentColor;stroke-width:1.5}
 .altaeron-pdp--massager .apdp-hero__grid:not(:has(.apdp-gallery)){grid-template-columns:1fr 1fr}
 .altaeron-pdp--massager .apdp-hero__grid:not(:has(.apdp-gallery)) .apdp-narrative{grid-column:1}
 .altaeron-pdp--massager .apdp-hero__grid:not(:has(.apdp-gallery)) .apdp-buy{grid-column:2}
+
+/* Product-specific supporting content uses existing DialFit components. */
+.altaeron-pdp--massager .apdp-massager-comparison-media{border-radius:16px;margin:24px auto 0;max-width:720px}
+.altaeron-pdp--massager .apdp-massager-support{margin-top:24px}
+.altaeron-pdp--massager .apdp-massager-support__body{padding:0 0 24px}
+.altaeron-pdp--massager .apdp-massager-support__body .apdp-dialfit-steps{margin-top:24px}
+.altaeron-pdp--massager .apdp-dialfit-proof{margin-top:34px}
+.altaeron-pdp--massager .apdp-massager-methods>span{font-size:14px;letter-spacing:.04em}
+.altaeron-pdp--massager .apdp-massager-guarantee-badge .apdp-dialfit-seal{border-color:currentColor;color:var(--altaeron-primary,#006B5E)}
+.altaeron-pdp--massager .apdp-massager-guarantee-badge .apdp-dialfit-seal span{border-color:currentColor}
+.altaeron-pdp--massager .apdp-dialfit-guarantee:has(.apdp-massager-guarantee-badge){grid-template-columns:108px minmax(0,1fr) auto}
+.altaeron-pdp--massager .apdp-dialfit-benefits.apdp-massager-practical{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:34px}
+@media(max-width:767px){
+ .altaeron-pdp--massager .apdp-dialfit-guarantee:has(.apdp-massager-guarantee-badge){grid-template-columns:108px minmax(0,1fr)}
+ .altaeron-pdp--massager .apdp-dialfit-benefits.apdp-massager-practical{grid-template-columns:1fr}
+}
