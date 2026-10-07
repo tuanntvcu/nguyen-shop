@@ -1,6 +1,15 @@
 {%- liquid
  assign current_variant = product.selected_or_first_available_variant
  assign current_compare = current_variant.compare_at_price | default: 0
+ assign sticky_image = blank
+ for media in product.media
+   assign media_id_string = media.id | append: ''
+   if media_id_string == section.settings.excluded_media_id
+     continue
+   endif
+   assign sticky_image = media.preview_image
+   break
+ endfor
  assign product_form_id = 'product-form-' | append: section.id
  assign massager_headline = section.settings.headline
  if massager_headline == blank or massager_headline == 'Heavy, Swollen Feet? Give Them 15 Minutes.'
@@ -406,7 +415,7 @@
 </div><div class="apdp-final-cta__buy"><p><strong data-apdp-final-price>{{ current_variant.price | money }}</strong><s data-apdp-final-compare{% if current_compare <= current_variant.price %} hidden{% endif %}>{{ current_compare | money }}</s></p><button type="button" class="apdp-final-button" data-apdp-final-submit{% unless current_variant.available %} disabled{% endunless %}>{{ 'altaeron_pdp_massager.give_my_feet_15_minutes' | t | escape_once }}<span data-apdp-final-button-price> — {{ current_variant.price | money }}</span></button><p class="apdp-final-fine">{{ 'altaeron_pdp_massager.free_tracked_shipping_30_day_comfort_guarantee' | t | escape_once }}</p></div><div class="apdp-final-badge"><div class="apdp-dialfit-seal" role="img" aria-label="{{ 'altaeron_pdp_massager.30_day_comfort_guarantee' | t | escape_once }}"><strong>{{ 'altaeron_pdp_massager.30_day' | t | escape_once }}</strong><span>{{ 'altaeron_pdp_massager.comfort' | t | escape_once }}</span>{{ 'altaeron_pdp_massager.guarantee' | t | escape_once }}</div></div></div></section>
 
 <section id="AltaeronVerified-{{ section.id }}" class="apdp-tail apdp-shell apdp-dialfit-full alta-pdp-flow-section apdp-dialfit-section apdp-review-summary"{% if review_count == 0 %} hidden{% endif %}>{% assign massager_title = 'altaeron_pdp_massager.airrelief_customer_reviews' | t %}{% render 'altaeron-pdp-section-heading', number: '9', title: massager_title %}<div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-id="{{ product.id }}" data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-widget="review" data-auto-install="false" data-entry-point="review_widget.js" data-entry-key="review-widget/main.js"></div>{% if product.metafields.judgeme.review_widget_data %}<script>window.jdgm=window.jdgm||{};window.jdgm.data=window.jdgm.data||{};window.jdgm.data.reviewWidget=window.jdgm.data.reviewWidget||{};window.jdgm.data.reviewWidget[{{ product.id | json }}]={{ product.metafields.judgeme.review_widget_data }};</script>{% endif %}</section>
-<div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product"><span>Altaeron™ AirRelief <small class="apdp-sticky__prices"><b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if current_compare <= current_variant.price %} hidden{% endif %}>{{ current_compare | money }}</s></small></span></div><button class="apdp-button apdp-button--primary" type="button" data-apdp-sticky-submit{% unless current_variant.available %} disabled{% endunless %}><span data-apdp-sticky-text data-available-text="{{ 'altaeron_pdp_massager.add_to_cart' | t | escape_once }}">{% if current_variant.available %}{{ 'altaeron_pdp_massager.add_to_cart' | t | escape_once }}{% else %}{{ 'products.product.sold_out' | t | escape_once }}{% endif %}</span></button></div><script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script><script type="application/ld+json">{{ product | structured_data }}</script></div>
+<div class="apdp-sticky" data-apdp-sticky hidden><div class="apdp-sticky__product">{%- if sticky_image != blank -%}{{ sticky_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '46px', alt: sticky_image.alt | default: product.title }}{%- endif -%}<span>Altaeron™ AirRelief <small class="apdp-sticky__prices"><b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if current_compare <= current_variant.price %} hidden{% endif %}>{{ current_compare | money }}</s></small></span></div><button class="apdp-button apdp-button--primary" type="button" data-apdp-sticky-submit{% unless current_variant.available %} disabled{% endunless %}><span data-apdp-sticky-text data-available-text="{{ 'altaeron_pdp_massager.add_to_cart' | t | escape_once }}">{% if current_variant.available %}{{ 'altaeron_pdp_massager.add_to_cart' | t | escape_once }}{% else %}{{ 'products.product.sold_out' | t | escape_once }}{% endif %}</span></button></div><script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script><script type="application/ld+json">{{ product | structured_data }}</script></div>
 {% schema %}
 {
   "name": "Altaeron AirRelief PDP",
