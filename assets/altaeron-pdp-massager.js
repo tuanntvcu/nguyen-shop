@@ -1047,6 +1047,7 @@
     initPromotion(root);
     initDeliveryEstimate(root);
     initHeroExperience(root);
+    initSocialProof(root);
 
     const activateMedia = initGallery(root);
     initQuantity(root);
