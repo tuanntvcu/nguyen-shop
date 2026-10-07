@@ -1,0 +1,21 @@
+import fs from 'node:fs/promises';
+import {chromium} from '../tmp/pw/node_modules/playwright/index.mjs';
+const dir='tmp/airrelief-audit/design';
+const browser=await chromium.launch({headless:true});
+const selectors={page:'.altaeron-pdp',container:'.apdp-dialfit-full',narrow:'.apdp-dialfit-copy',section:'.apdp-education',h1:'.apdp-narrative h1',h2:'.alta-pdp-section-heading__title',badge:'.alta-pdp-section-heading__number',accent:'.apdp-dialfit-story h2 strong',body:'.apdp-dialfit-story__copy>p',eyebrow:'.apdp-eyebrow',card:'.apdp-dialfit-card',cardTitle:'.apdp-dialfit-benefits h3',cardBody:'.apdp-dialfit-benefits p',image:'.apdp-dialfit-story__media',grid:'.apdp-dialfit-benefits',button:'[data-apdp-submit]',campaign:'.apdp-promotion',compare:'.apdp-dialfit-compare',compareCell:'.apdp-dialfit-compare [role=cell]',faq:'.apdp-tail-accordion summary',medical:'.apdp-expert__panel',medicalQuote:'.apdp-expert blockquote p',guarantee:'.apdp-dialfit-guarantee',final:'.apdp-final-cta',finalGrid:'.apdp-final-cta__inner',finalButton:'.apdp-final-button',story:'.apdp-dialfit-story',storyGrid:'.apdp-dialfit-story__layout',storyHeading:'.apdp-dialfit-story h2',mechanism:'.apdp-dialfit-mechanism__layout',steps:'.apdp-dialfit-steps'};
+const shots={atf:'.apdp-hero',story:'.apdp-dialfit-story',mechanism:'.apdp-dialfit-mechanism',benefits:'section:has(.apdp-dialfit-benefits)',comparison:'section:has(.apdp-dialfit-compare)',medical:'.apdp-expert',faq:'.apdp-tail-faq',final:'.apdp-final-cta'};
+const result=[];
+for(const width of [375,768,1024,1440]){
+ const page=await browser.newPage({viewport:{width,height:950},reducedMotion:'reduce'});
+ await page.goto('https://altaeron.com/products/dialfit-knee-brace',{waitUntil:'domcontentloaded'});await page.locator('.altaeron-pdp').waitFor();await page.waitForTimeout(1500);
+ const styles=await page.evaluate(selectors=>Object.fromEntries(Object.entries(selectors).map(([k,s])=>{const e=document.querySelector(s);if(!e)return[k,null];const c=getComputedStyle(e);return[k,Object.fromEntries(['fontFamily','fontSize','fontWeight','lineHeight','letterSpacing','color','backgroundColor','paddingTop','paddingRight','paddingBottom','paddingLeft','marginTop','marginBottom','borderRadius','borderColor','gap','gridTemplateColumns','maxWidth','width','height','aspectRatio','objectFit','textTransform'].map(p=>[p,c[p]]))];})),selectors);
+ const root=page.locator('.altaeron-pdp');const sections=await root.evaluate(e=>[...e.children].filter(c=>c.tagName==='SECTION').map(c=>({class:c.className,heading:c.querySelector('h1,h2')?.textContent.trim()})));
+ result.push({width,styles,sections});
+ if(width===375)for(const[k,s]of Object.entries(shots)){const l=page.locator(s).first();await l.scrollIntoViewIfNeeded();await page.waitForTimeout(200);await l.screenshot({path:`${dir}/dialfit-before-${width}-${k}.png`});}
+ await page.close();
+}
+const page=await browser.newPage({viewport:{width:375,height:950}});await page.goto('https://altaeron.com/products/airrelief-foot-ankle-massager',{waitUntil:'domcontentloaded'});await page.locator('.altaeron-pdp--massager').waitFor();await page.waitForTimeout(1000);
+const before=await page.locator('.altaeron-pdp--massager').evaluate(root=>{const copy=root.cloneNode(true);copy.querySelectorAll('script,style,[aria-hidden="true"]').forEach(e=>e.remove());return {text:copy.textContent.replace(/\s+/g,' ').trim(),sections:[...root.children].filter(c=>c.tagName==='SECTION').map(c=>({heading:c.querySelector('h1,h2')?.textContent.trim(),text:c.textContent.replace(/\s+/g,' ').trim()})),media:[...root.querySelectorAll('img,video')].map(e=>({tag:e.tagName,src:e.currentSrc||e.src})),faqs:[...root.querySelectorAll('details')].map(d=>d.innerText)};});
+await fs.writeFile(`${dir}/airrelief-content-before.json`,JSON.stringify(before,null,2));
+await page.locator('.alta-pdp-flow-section').first().screenshot({path:`${dir}/airrelief-before-375-story.png`});
+await browser.close();await fs.writeFile(`${dir}/style-map.json`,JSON.stringify(result,null,2));console.log(JSON.stringify(result.map(r=>({width:r.width,story:r.styles.story,storyHeading:r.styles.storyHeading,body:r.styles.body,badge:r.styles.badge,container:r.styles.container})),null,2));

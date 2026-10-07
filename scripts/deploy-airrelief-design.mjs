@@ -1,0 +1,14 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {gql,files} from './airrelief-store.mjs';
+const dir='tmp/airrelief-audit/design';const before=JSON.parse(await fs.readFile(`${dir}/files-before.json`,'utf8'));
+const names=['assets/altaeron-pdp-massager.css','sections/altaeron-pdp-massager.liquid'];
+const current=await files(before.map(f=>f.filename));for(const f of current.filter(f=>!names.includes(f.filename)))assert.equal(f.checksumMd5,before.find(o=>o.filename===f.filename).checksumMd5,`Protected live file changed during design audit: ${f.filename}`);
+await fs.writeFile(`${dir}/files-before-latest-refinement.json`,JSON.stringify(current,null,2));
+const result=await gql(`mutation($files:[OnlineStoreThemeFilesUpsertFileInput!]!){themeFilesUpsert(themeId:"gid://shopify/OnlineStoreTheme/140538314813",files:$files){upsertedThemeFiles{filename}userErrors{field message}}}`,{files:await Promise.all(names.map(async filename=>({filename,body:{type:'TEXT',value:await fs.readFile(filename,'utf8')}})))});
+console.log(JSON.stringify(result));
+const protectedFiles=await files(before.filter(f=>!names.includes(f.filename)).map(f=>f.filename));for(const f of protectedFiles)assert.equal(f.checksumMd5,before.find(o=>o.filename===f.filename).checksumMd5);
+await fs.writeFile(`${dir}/protected-files-after.json`,JSON.stringify(protectedFiles.map(({filename,checksumMd5})=>({filename,checksumMd5})),null,2));
+const state=await gql(`{product(id:"gid://shopify/Product/8052528480317"){id title handle descriptionHtml vendor productType templateSuffix seo{title description} variants(first:20){nodes{id title price compareAtPrice availableForSale}}media(first:30){nodes{id alt}}metafields(first:100){nodes{namespace key type value}}}}`);
+assert.deepEqual(state,JSON.parse(await fs.readFile(`${dir}/product-before.json`,'utf8')));await fs.writeFile(`${dir}/product-after.json`,JSON.stringify(state,null,2));
+console.log('Protected DialFit/shared/theme settings files and all Shopify product fields unchanged.');
