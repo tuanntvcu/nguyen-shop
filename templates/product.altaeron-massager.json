@@ -11,7 +11,20 @@
   "sections": {
     "altaeron_massager": {
       "type": "altaeron-pdp-massager",
-      "settings": {}
+      "settings": {
+        "hero_image": "shopify://shop_images/Sffb0cfbe4e034587a75d23a75d53999bd.webp",
+        "story_image": "shopify://shop_images/ChatGPT_Image_Sep_4_2026_08_36_36_AM.png",
+        "mechanism_image": "shopify://shop_images/Sd2bbebcaa2c7488b9c55ee8293582bd9Z.webp",
+        "comparison_image_1": "shopify://shop_images/images.jpg",
+        "comparison_image_2": "shopify://shop_images/S24a68c0256f5443d96f43a3f304fbaccH.webp",
+        "proof_video": "shopify://files/videos/0911.mp4",
+        "proof_image_1": "shopify://shop_images/ChatGPT_Image_Sep_11_2026_05_40_26_PM.png",
+        "proof_image_2": "shopify://shop_images/ChatGPT_Image_Sep_11_2026_05_4.png",
+        "proof_image_3": "shopify://shop_images/ChatGPT_Image_Sep_11_2026_05_52_43_PM.png",
+        "proof_image_4": "shopify://shop_images/ChatGPT_Image_Sep_11_2026_06_0.png",
+        "final_cta_image": "shopify://shop_images/ChatGPT_Image_Sep_4_2026_12_23_52_AM.png",
+        "preview_hero_video": true
+      }
     }
   },
   "order": [

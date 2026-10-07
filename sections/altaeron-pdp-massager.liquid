@@ -14,6 +14,9 @@
    endfor
  endif
  assign hero_video = section.settings.hero_video
+ if hero_video == blank and section.settings.preview_hero_video
+   assign hero_video = product.metafields.altaeron.massager_preview_hero_video.value
+ endif
  if hero_video != blank
    assign hero_poster = hero_video.preview_image | image_url: width: 1200
  endif
@@ -491,6 +494,12 @@
       "id": "medical_body",
       "label": "Medical review body",
       "default": "Combining rhythmic compression, warmth and vibration can provide a practical way to relax tired feet and ankles after prolonged standing, walking or physical activity. Adjustable intensity is particularly useful because comfort and pressure tolerance can vary significantly from person to person."
+    },
+    {
+      "type": "checkbox",
+      "id": "preview_hero_video",
+      "label": "Use temporary hero video when no video selected",
+      "default": false
     },
     {
       "type": "header",
