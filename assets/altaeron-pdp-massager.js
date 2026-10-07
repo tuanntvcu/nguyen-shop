@@ -211,7 +211,8 @@
     const items = [...root.querySelectorAll('[data-apdp-media]')];
     const thumbsList = root.querySelector('.apdp-gallery__thumbs');
     const stage = root.querySelector('.apdp-gallery__stage');
-    const stageImage = stage?.querySelector('img');
+    const gallery = root.querySelector('[data-apdp-gallery]');
+    const heroVideo = stage?.querySelector('video');
     if (!thumbs.length || !items.length) return () => {};
 
     if (thumbsList) {
@@ -265,15 +266,13 @@
       }, true);
     }
 
-    const activate = (id, focus = false, syncStage = true) => {
+    const activate = (id, focus = false, showViewer = true) => {
       const activeItem = items.find((item) => String(item.dataset.apdpMedia) === String(id));
-      const activeThumb = thumbs.find((thumb) => String(thumb.dataset.apdpThumb) === String(id));
       if (!activeItem) return;
 
-      if (syncStage && stageImage && activeThumb?.dataset.apdpPreviewSrc) {
-        stageImage.src = activeThumb.dataset.apdpPreviewSrc;
-        stageImage.removeAttribute('srcset');
-        stageImage.alt = activeThumb.dataset.apdpPreviewAlt || '';
+      if (showViewer) {
+        gallery?.classList.add('is-viewer-active');
+        heroVideo?.pause();
       }
 
       thumbs.forEach((thumb) => {
@@ -294,8 +293,17 @@
         if (!active) item.querySelectorAll('video').forEach((video) => video.pause());
       });
       const activeVideo = activeItem.querySelector('video[autoplay]');
-      if (activeVideo && !document.hidden) activeVideo.play().catch(() => {});
+      if (showViewer && activeVideo && !document.hidden) activeVideo.play().catch(() => {});
     };
+
+    root.querySelector('[data-apdp-return-demo]')?.addEventListener('click', () => {
+      gallery?.classList.remove('is-viewer-active');
+      items.forEach((item) => item.querySelectorAll('video').forEach((video) => video.pause()));
+      if (heroVideo && !document.hidden && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heroVideo.play().catch(() => {});
+      }
+      thumbs.find((thumb) => thumb.classList.contains('is-active'))?.focus({ preventScroll: true });
+    });
 
     thumbs.forEach((thumb, index) => {
       thumb.addEventListener('click', () => activate(thumb.dataset.apdpThumb));
@@ -353,6 +361,15 @@
       <button type="button" class="apdp-zoom-viewer__nav apdp-zoom-viewer__nav--next" data-apdp-zoom-next aria-label="Next image">&#8250;</button>
       <div class="apdp-zoom-viewer__counter" data-apdp-zoom-counter aria-live="polite"></div>
     `;
+
+    const localizedLabels = trigger.closest(SELECTOR)?.dataset;
+    [
+      ['[data-apdp-zoom-close]', localizedLabels?.zoomCloseLabel],
+      ['[data-apdp-zoom-prev]', localizedLabels?.zoomPreviousLabel],
+      ['[data-apdp-zoom-next]', localizedLabels?.zoomNextLabel],
+    ].forEach(([selector, label]) => {
+      if (label) viewer.querySelector(selector).setAttribute('aria-label', label);
+    });
 
     const image = viewer.querySelector('[data-apdp-zoom-image]');
     const canvas = viewer.querySelector('[data-apdp-zoom-canvas]');
@@ -907,7 +924,7 @@
         return;
       }
       video.controls = false;
-      if (videoIsVisible && !document.hidden) video.play().catch(() => {});
+      if (videoIsVisible && !document.hidden && !video.closest('.is-viewer-active')) video.play().catch(() => {});
       else video.pause();
     };
 

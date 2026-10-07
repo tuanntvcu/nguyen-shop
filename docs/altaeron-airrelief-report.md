@@ -4,6 +4,10 @@ Live page: https://altaeron.com/products/airrelief-foot-ankle-massager
 
 Product ID: 8052528480317. Updated on October 7, 2026 (Asia/Saigon).
 
+Localization update (October 7, 2026): the local theme now provides 197 AirRelief translation keys in English, German, Spanish, French, Japanese and Portuguese (Portugal and Brazil). The `altaeron_pdp_massager` namespace covers the hero, nine chapter headings, comparison, instructions, 13 FAQs, specifications, guarantee, purchase labels, savings and gallery accessibility labels. Shipped headline, subheadline, CTA and medical-body defaults use locale translations; merchant-edited values continue to use section settings and Shopify's translations for those settings. Existing shared translations are unchanged. Product titles, variant names, reviews and text embedded in images remain managed by their existing data sources.
+
+Localization validation: local Liquid rendering and browser interaction checks cover all seven locale files, English copy parity, translation-key completeness, HTML/amount-placeholder preservation, merchant overrides, image-viewer labels and available/unavailable variant transitions. Shopify Theme Check reports no offenses for the changed section/locales; unrelated repository and audit-file offenses remain. This localization update has not been uploaded to the live theme.
+
 Architecture refinement: the current page now follows DialFit's eight numbered chapters: (1) Story, (2) Mechanism, (3) Benefits, (4) Use cases, (5) Comparison, (6) How to use, (7) Medical Review, (8) FAQ. The guarantee and final purchase retain their unnumbered source components. Customer reviews follow the final purchase as chapter 9, hidden while there are no legitimate reviews. The former 18 section containers are reduced to 12; only chapters 1–8 are currently visible as numbered sections.
 
 Controls/customization is folded into mechanism copy, four configuration chips and a support accordion in chapter 6. Battery and adjustable fit use supporting cards within chapter 6; the 15-minute progression uses a support accordion, with the existing proof video/images immediately below it. Audience copy is merged into chapter 4's secondary support layer. The twelve-row specifications and box contents are in a support accordion within chapter 8. All thirteen FAQ topics/answers, product specifications, campaign, discount and quantity-one behavior are retained.
@@ -70,7 +74,7 @@ Shopify fields changed: title, handle, vendor/type, branded description, SEO tit
 
 Media: the existing supplier image prints “5 Levels Heating,” conflicting with the requested configuration. Its media ID is excluded from this PDP through an editable setting; the file is retained in Shopify. Hero, story, mechanism and final CTA media settings are ready. New product media is picked up dynamically, except the excluded image. Empty media areas collapse. No supplier images were downloaded or hard-coded. The existing image may still appear in other store components that use product media directly.
 
-Localization: new product copy uses English source text without translation-key lookups; shared campaign, offer and system strings retain existing translations. No unrelated locale files changed. German, Spanish, French, Japanese and Portuguese translations of the new AirRelief copy remain to be added/reviewed; the new copy currently remains English on localized pages.
+Initial localization state (superseded locally by the October 7 localization update above): AirRelief product copy was English-only; shared campaign, offer and system strings already used existing translations.
 
 Validation:
 
