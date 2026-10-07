@@ -3,7 +3,16 @@
  assign current_compare = current_variant.compare_at_price | default: 0
  assign product_form_id = 'product-form-' | append: section.id
  assign cta_label = section.settings.cta_label
- assign hero_image = section.settings.hero_image | default: product.featured_image
+ assign hero_image = section.settings.hero_image
+ if hero_image == blank
+   for candidate in product.media
+     assign candidate_id = candidate.id | append: ''
+     if candidate_id != section.settings.excluded_media_id
+       assign hero_image = candidate.preview_image
+       break
+     endif
+   endfor
+ endif
  assign hero_video = section.settings.hero_video
  if hero_video != blank
    assign hero_poster = hero_video.preview_image | image_url: width: 1200
@@ -335,6 +344,8 @@
 #AltaeronPdp-{{ section.id }} .airrelief-portrait{background:#EAF5F2;border-radius:12px;min-height:180px;display:grid;place-items:center;color:#006B5E}
 #AltaeronPdp-{{ section.id }} .airrelief-portrait svg{height:64px;width:64px}
 #AltaeronPdp-{{ section.id }} .apdp-hero__grid:not(:has(.apdp-gallery)){grid-template-columns:1fr 1fr}
+#AltaeronPdp-{{ section.id }} .apdp-hero__grid:not(:has(.apdp-gallery)) .apdp-narrative{grid-column:1;grid-row:1}
+#AltaeronPdp-{{ section.id }} .apdp-hero__grid:not(:has(.apdp-gallery)) .apdp-buy{grid-column:2;grid-row:1}
 #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{margin-bottom:18px}
 #AltaeronPdp-{{ section.id }} .airrelief-variant{width:100%;padding:12px;margin-bottom:16px}
 @media(max-width:767px){#AltaeronPdp-{{ section.id }} .airrelief-four,#AltaeronPdp-{{ section.id }} .airrelief-two{grid-template-columns:1fr}#AltaeronPdp-{{ section.id }} .airrelief-expert{grid-template-columns:1fr}#AltaeronPdp-{{ section.id }} .airrelief-expert blockquote{grid-column:1}#AltaeronPdp-{{ section.id }} .airrelief-portrait{min-height:90px}#AltaeronPdp-{{ section.id }} .apdp-hero__grid:not(:has(.apdp-gallery)){grid-template-columns:1fr}}
@@ -342,7 +353,7 @@
 <div id="AltaeronPdp-{{ section.id }}" class="altaeron-pdp altaeron-pdp--cro-hero altaeron-pdp--massager" data-section="{{ section.id }}" data-product-id="{{ product.id }}" data-product-url="{{ product.url }}" data-money-format="{{ shop.money_format | escape }}" data-save-label="Save" data-save-template="Save [amount]" data-add-to-cart-label="{{ cta_label | escape }}" data-sold-out-label="{{ 'products.product.sold_out' | t | escape }}">
 <section class="apdp-hero"><div class="apdp-shell apdp-hero__grid">{% if hero_image != blank or hero_video != blank %}      <div class="apdp-gallery" data-apdp-gallery>
         <div class="apdp-gallery__thumbs" role="tablist" aria-label="Product media">
-          {%- for media in product.media -%}
+          {%- for media in product.media -%}{%- assign media_id_string = media.id | append: '' -%}{%- if media_id_string == section.settings.excluded_media_id -%}{%- continue -%}{%- endif -%}
             <button type="button" class="apdp-gallery__thumb{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tab" aria-selected="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" aria-controls="AltaeronMedia-{{ section.id }}-{{ media.id }}" data-apdp-thumb="{{ media.id }}" data-apdp-preview-src="{{ media.preview_image | image_url: width: 1600 }}" data-apdp-preview-alt="{{ media.alt | default: product.title | escape }}">
               {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '58px', alt: media.alt | default: product.title }}
               {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}<span class="apdp-gallery__play" aria-hidden="true">▶</span>{%- endif -%}
@@ -360,7 +371,7 @@
           {%- endif -%}
         </div>
         <div class="apdp-gallery__viewer" aria-live="polite">
-          {%- for media in product.media -%}
+          {%- for media in product.media -%}{%- assign media_id_string = media.id | append: '' -%}{%- if media_id_string == section.settings.excluded_media_id -%}{%- continue -%}{%- endif -%}
             <div id="AltaeronMedia-{{ section.id }}-{{ media.id }}" class="apdp-gallery__item{% if media.id == product.featured_media.id %} is-active{% endif %}" role="tabpanel" data-apdp-media="{{ media.id }}"{% if media.media_type == 'image' %} data-apdp-zoom-src="{{ media.preview_image | image_url: width: 2400 }}" data-apdp-zoom-width="{{ media.preview_image.width }}" data-apdp-zoom-height="{{ media.preview_image.height }}"{% endif %}{% unless media.id == product.featured_media.id %} hidden{% endunless %}>
               {% render 'altaeron-pdp-media', media: media, product: product, loading: 'lazy', fetchpriority: 'auto', sizes: '(min-width: 1024px) 560px, 100vw' %}
               {%- if media.media_type == 'image' -%}<button type="button" class="apdp-gallery__zoom" data-apdp-zoom aria-haspopup="dialog" aria-label="Open product image"><span aria-hidden="true">{% render 'icon-zoom' %}</span></button>{%- endif -%}
@@ -403,6 +414,12 @@
       "id": "cta_label",
       "label": "Purchase label",
       "default": "GET MY AIRRELIEF"
+    },
+    {
+      "type": "text",
+      "id": "excluded_media_id",
+      "label": "Media ID hidden due to conflicting specifications",
+      "default": "28186264698941"
     },
     {
       "type": "checkbox",
