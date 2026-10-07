@@ -1,0 +1,1069 @@
+(() => {
+  const SELECTOR = '.altaeron-pdp--massager';
+
+  function money(cents, format) {
+    if (window.Shopify?.formatMoney) return window.Shopify.formatMoney(cents, format);
+    const currency = window.Shopify?.currency?.active || 'USD';
+    return new Intl.NumberFormat(document.documentElement.lang || 'en-US', { style: 'currency', currency }).format(Number(cents || 0) / 100);
+  }
+
+  function addBusinessDays(date, businessDays) {
+    const result = new Date(date);
+    result.setHours(12, 0, 0, 0);
+    let daysAdded = 0;
+
+    while (daysAdded < businessDays) {
+      result.setDate(result.getDate() + 1);
+      const dayOfWeek = result.getDay();
+      if (dayOfWeek !== 0 && dayOfWeek !== 6) daysAdded += 1;
+    }
+
+    return result;
+  }
+
+  function initDeliveryEstimate(root) {
+    const estimate = root.querySelector('[data-apdp-delivery-estimate]');
+    const range = estimate?.querySelector('[data-apdp-delivery-range]');
+    if (!estimate || !range) return;
+
+    const handlingBusinessDays = 1;
+    const minTransitBusinessDays = 3;
+    const maxTransitBusinessDays = 4;
+    const locale = estimate.dataset.locale || document.documentElement.lang || 'en';
+    const orderDate = new Date();
+    const processingCompleteDate = addBusinessDays(orderDate, handlingBusinessDays);
+    const earliestDelivery = addBusinessDays(processingCompleteDate, minTransitBusinessDays);
+    const latestDelivery = addBusinessDays(processingCompleteDate, maxTransitBusinessDays);
+    const includeYear = orderDate.getFullYear() !== latestDelivery.getFullYear()
+      || earliestDelivery.getFullYear() !== latestDelivery.getFullYear();
+    const formatter = new Intl.DateTimeFormat(locale, {
+      month: 'short',
+      day: 'numeric',
+      ...(includeYear ? { year: 'numeric' } : {}),
+    });
+    const formattedRange = typeof formatter.formatRange === 'function'
+      ? formatter.formatRange(earliestDelivery, latestDelivery)
+      : `${formatter.format(earliestDelivery)}–${formatter.format(latestDelivery)}`;
+
+    range.textContent = locale.toLowerCase().startsWith('en')
+      ? formattedRange.replace(/\s*[–-]\s*/u, '–')
+      : formattedRange;
+  }
+
+  const promotion = {
+    enabled: true,
+    timeZone: 'America/Los_Angeles',
+  };
+
+  const promotionDateFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: promotion.timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hourCycle: 'h23',
+  });
+
+  function promotionDateParts(timestamp) {
+    return Object.fromEntries(
+      promotionDateFormatter.formatToParts(new Date(timestamp))
+        .filter(({ type }) => type !== 'literal')
+        .map(({ type, value }) => [type, Number(value)]),
+    );
+  }
+
+  function promotionTimeZoneOffset(timestamp) {
+    const parts = promotionDateParts(timestamp);
+    const timestampWithoutMilliseconds = Math.floor(timestamp / 1000) * 1000;
+    return Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second)
+      - timestampWithoutMilliseconds;
+  }
+
+  function nextPromotionMidnight(timestamp) {
+    const parts = promotionDateParts(timestamp);
+    const midnightAsUtc = Date.UTC(parts.year, parts.month - 1, parts.day + 1);
+    let deadline = midnightAsUtc;
+
+    // Resolve the IANA time-zone offset twice so this remains correct across PST/PDT changes.
+    for (let pass = 0; pass < 2; pass += 1) {
+      deadline = midnightAsUtc - promotionTimeZoneOffset(deadline);
+    }
+    return deadline;
+  }
+
+  function initPromotion(root) {
+    const card = root.querySelector('[data-apdp-promotion-card]');
+    if (!card || !promotion.enabled) return;
+
+    const countdown = card.querySelector('[data-apdp-promotion-countdown]');
+    const units = {
+      days: card.querySelector('[data-apdp-promotion-days]'),
+      hours: card.querySelector('[data-apdp-promotion-hours]'),
+      minutes: card.querySelector('[data-apdp-promotion-minutes]'),
+      seconds: card.querySelector('[data-apdp-promotion-seconds]'),
+    };
+    const submitLabel = root.querySelector('[data-apdp-submit-label]');
+    const stickyPromotion = root.querySelector('[data-apdp-promotion-sticky]');
+    const announcement = document.querySelector('.announcement-bar');
+    const translations = {
+      cta: card.dataset.apdpPromotionCta,
+      announcementDesktop: card.dataset.apdpPromotionAnnouncementDesktop,
+      announcementMobile: card.dataset.apdpPromotionAnnouncementMobile,
+      timerLabel: card.dataset.apdpPromotionTimerLabel,
+    };
+
+    const update = () => {
+      const now = Date.now();
+      const deadline = nextPromotionMidnight(now);
+      const remaining = deadline - now;
+      const totalSeconds = Math.max(0, Math.floor(remaining / 1000));
+      const values = {
+        days: Math.floor(totalSeconds / 86400),
+        hours: Math.floor((totalSeconds % 86400) / 3600),
+        minutes: Math.floor((totalSeconds % 3600) / 60),
+        seconds: totalSeconds % 60,
+      };
+      Object.entries(values).forEach(([key, value]) => {
+        if (units[key]) units[key].textContent = String(value).padStart(2, '0');
+      });
+      const timerLabel = translations.timerLabel
+        ?.replace('[days]', values.days)
+        .replace('[hours]', values.hours)
+        .replace('[minutes]', values.minutes)
+        .replace('[seconds]', values.seconds);
+      if (timerLabel) countdown?.setAttribute('aria-label', timerLabel);
+    };
+
+    card.hidden = false;
+    if (stickyPromotion) stickyPromotion.hidden = false;
+    if (submitLabel && translations.cta && !root.classList.contains('altaeron-pdp--massager')) {
+      submitLabel.textContent = translations.cta;
+      submitLabel.dataset.availableText = translations.cta;
+    }
+    if (announcement && card.dataset.apdpPromotionSyncAnnouncement !== 'false') {
+      announcement.classList.add('announcement-bar--labor-day');
+      const announcementPromotion = document.createElement('div');
+      announcementPromotion.dataset.apdpPromoAnnouncement = '';
+      announcementPromotion.className = 'apdp-promo-announcement';
+      const desktopCopy = document.createElement('span');
+      desktopCopy.className = 'apdp-promo-announcement__desktop';
+      desktopCopy.textContent = translations.announcementDesktop;
+      const mobileCopy = document.createElement('span');
+      mobileCopy.className = 'apdp-promo-announcement__mobile';
+      mobileCopy.textContent = translations.announcementMobile;
+      announcementPromotion.append(desktopCopy, mobileCopy);
+      announcement.append(announcementPromotion);
+    }
+    update();
+    window.setInterval(update, 1000);
+  }
+
+  function initSocialProof(root) {
+    const message = root.querySelector('[data-apdp-social-proof]');
+    const count = message?.querySelector('[data-apdp-social-proof-count]');
+    if (!message || !count) return;
+
+    const offsetMatch = message.dataset.storeUtcOffset?.match(/^([+-])(\d{2}):?(\d{2})$/);
+    const offsetMinutes = offsetMatch
+      ? (offsetMatch[1] === '-' ? -1 : 1) * (Number(offsetMatch[2]) * 60 + Number(offsetMatch[3]))
+      : null;
+
+    const storeDate = () => {
+      if (offsetMinutes === null) return message.dataset.storeDate;
+      return new Date(Date.now() + offsetMinutes * 60_000).toISOString().slice(0, 10);
+    };
+
+    const dailyCount = (date) => {
+      let hash = 2166136261;
+      for (let index = 0; index < date.length; index += 1) {
+        hash ^= date.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      hash ^= hash >>> 16;
+      hash = Math.imul(hash, 2246822507);
+      hash ^= hash >>> 13;
+      return 20 + ((hash >>> 0) % 11);
+    };
+
+    const update = () => {
+      if (!message.isConnected) return;
+      const date = storeDate();
+      if (!date) return;
+      count.textContent = String(dailyCount(date));
+      message.hidden = false;
+
+      const shiftedNow = new Date(Date.now() + (offsetMinutes || 0) * 60_000);
+      const nextStoreMidnight = Date.UTC(
+        shiftedNow.getUTCFullYear(),
+        shiftedNow.getUTCMonth(),
+        shiftedNow.getUTCDate() + 1,
+      );
+      window.setTimeout(update, Math.max(1_000, nextStoreMidnight - shiftedNow.getTime() + 100));
+    };
+
+    update();
+  }
+
+  function initGallery(root) {
+    const thumbs = [...root.querySelectorAll('[data-apdp-thumb]')];
+    const items = [...root.querySelectorAll('[data-apdp-media]')];
+    const thumbsList = root.querySelector('.apdp-gallery__thumbs');
+    const stage = root.querySelector('.apdp-gallery__stage');
+    const stageImage = stage?.querySelector('img');
+    if (!thumbs.length || !items.length) return () => {};
+
+    if (thumbsList) {
+      let pointerId = null;
+      let startPosition = 0;
+      let startScrollPosition = 0;
+      let horizontal = false;
+      let dragged = false;
+      let suppressClick = false;
+      const dragThreshold = 8;
+
+      thumbsList.addEventListener('dragstart', (event) => event.preventDefault());
+
+      thumbsList.addEventListener('pointerdown', (event) => {
+        if (event.pointerType !== 'mouse' || event.button !== 0) return;
+        pointerId = event.pointerId;
+        horizontal = getComputedStyle(thumbsList).flexDirection === 'row';
+        startPosition = horizontal ? event.clientX : event.clientY;
+        startScrollPosition = horizontal ? thumbsList.scrollLeft : thumbsList.scrollTop;
+        dragged = false;
+      });
+
+      thumbsList.addEventListener('pointermove', (event) => {
+        if (event.pointerId !== pointerId) return;
+        const position = horizontal ? event.clientX : event.clientY;
+        const distance = position - startPosition;
+        if (!dragged && Math.abs(distance) < dragThreshold) return;
+        if (!dragged && !thumbsList.hasPointerCapture(pointerId)) thumbsList.setPointerCapture(pointerId);
+        dragged = true;
+        suppressClick = true;
+        thumbsList.classList.add('is-dragging');
+        if (horizontal) thumbsList.scrollLeft = startScrollPosition - distance;
+        else thumbsList.scrollTop = startScrollPosition - distance;
+        event.preventDefault();
+      });
+
+      const stopDragging = (event) => {
+        if (event.pointerId !== pointerId) return;
+        if (thumbsList.hasPointerCapture(pointerId)) thumbsList.releasePointerCapture(pointerId);
+        pointerId = null;
+        thumbsList.classList.remove('is-dragging');
+        if (dragged) window.setTimeout(() => { suppressClick = false; }, 0);
+      };
+
+      thumbsList.addEventListener('pointerup', stopDragging);
+      thumbsList.addEventListener('pointercancel', stopDragging);
+      thumbsList.addEventListener('click', (event) => {
+        if (!suppressClick) return;
+        event.preventDefault();
+        event.stopPropagation();
+      }, true);
+    }
+
+    const activate = (id, focus = false, syncStage = true) => {
+      const activeItem = items.find((item) => String(item.dataset.apdpMedia) === String(id));
+      const activeThumb = thumbs.find((thumb) => String(thumb.dataset.apdpThumb) === String(id));
+      if (!activeItem) return;
+
+      if (syncStage && stageImage && activeThumb?.dataset.apdpPreviewSrc) {
+        stageImage.src = activeThumb.dataset.apdpPreviewSrc;
+        stageImage.removeAttribute('srcset');
+        stageImage.alt = activeThumb.dataset.apdpPreviewAlt || '';
+      }
+
+      thumbs.forEach((thumb) => {
+        const active = String(thumb.dataset.apdpThumb) === String(id);
+        thumb.classList.toggle('is-active', active);
+        thumb.setAttribute('aria-selected', String(active));
+        thumb.tabIndex = active ? 0 : -1;
+        if (active && focus) {
+          thumb.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+          thumb.focus({ preventScroll: true });
+        }
+      });
+      items.forEach((item) => {
+        const active = item === activeItem;
+        item.hidden = !active;
+        item.setAttribute('aria-hidden', String(!active));
+        item.classList.toggle('is-active', active);
+        if (!active) item.querySelectorAll('video').forEach((video) => video.pause());
+      });
+      const activeVideo = activeItem.querySelector('video[autoplay]');
+      if (activeVideo && !document.hidden) activeVideo.play().catch(() => {});
+    };
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => activate(thumb.dataset.apdpThumb));
+      thumb.addEventListener('keydown', (event) => {
+        if (!['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        let next = index;
+        if (['ArrowDown', 'ArrowRight'].includes(event.key)) next = (index + 1) % thumbs.length;
+        if (['ArrowUp', 'ArrowLeft'].includes(event.key)) next = (index - 1 + thumbs.length) % thumbs.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = thumbs.length - 1;
+        activate(thumbs[next].dataset.apdpThumb, true);
+      });
+    });
+
+    const initiallyActive = thumbs.find((thumb) => thumb.classList.contains('is-active')) || thumbs[0];
+    activate(initiallyActive.dataset.apdpThumb, false, false);
+
+    return activate;
+  }
+
+  function handleZoomClick(event) {
+    const button = event.target.closest?.('[data-apdp-zoom]');
+    const root = button?.closest(SELECTOR);
+    if (!button || !root) return;
+    event.preventDefault();
+    event.stopPropagation();
+
+    const zoomItems = [...root.querySelectorAll('[data-apdp-media][data-apdp-zoom-src]')];
+    const activeItem = button.closest('[data-apdp-media]');
+    const index = Math.max(0, zoomItems.indexOf(activeItem));
+    openZoomViewer(zoomItems.map((item) => ({
+      src: item.dataset.apdpZoomSrc,
+      alt: item.querySelector('img')?.alt || '',
+    })), index, button);
+  }
+
+  function openZoomViewer(images, initialIndex, trigger) {
+    if (!images.length) return;
+    document.querySelector('[data-apdp-zoom-viewer]')?.remove();
+
+    const viewer = document.createElement('div');
+    viewer.className = 'apdp-zoom-viewer';
+    viewer.dataset.apdpZoomViewer = '';
+    viewer.tabIndex = -1;
+    viewer.setAttribute('role', 'dialog');
+    viewer.setAttribute('aria-modal', 'true');
+    viewer.setAttribute('aria-label', trigger.getAttribute('aria-label') || 'Product image viewer');
+    viewer.innerHTML = `
+      <button type="button" class="apdp-zoom-viewer__close" data-apdp-zoom-close aria-label="Close image viewer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      <button type="button" class="apdp-zoom-viewer__nav apdp-zoom-viewer__nav--prev" data-apdp-zoom-prev aria-label="Previous image">&#8249;</button>
+      <div class="apdp-zoom-viewer__canvas" data-apdp-zoom-canvas>
+        <img class="apdp-zoom-viewer__image" data-apdp-zoom-image alt="">
+      </div>
+      <button type="button" class="apdp-zoom-viewer__nav apdp-zoom-viewer__nav--next" data-apdp-zoom-next aria-label="Next image">&#8250;</button>
+      <div class="apdp-zoom-viewer__counter" data-apdp-zoom-counter aria-live="polite"></div>
+    `;
+
+    const image = viewer.querySelector('[data-apdp-zoom-image]');
+    const canvas = viewer.querySelector('[data-apdp-zoom-canvas]');
+    const counter = viewer.querySelector('[data-apdp-zoom-counter]');
+    const previous = viewer.querySelector('[data-apdp-zoom-prev]');
+    const next = viewer.querySelector('[data-apdp-zoom-next]');
+    const oldOverflow = document.body.style.overflow;
+    let index = initialIndex;
+    let dragState = null;
+    let suppressCanvasClick = false;
+
+    const setZoomed = (zoomed) => {
+      image.classList.toggle('is-zoomed', zoomed);
+      canvas.classList.toggle('is-zoomed', zoomed);
+      if (zoomed) {
+        requestAnimationFrame(() => {
+          canvas.scrollLeft = Math.max(0, (canvas.scrollWidth - canvas.clientWidth) / 2);
+          canvas.scrollTop = Math.max(0, (canvas.scrollHeight - canvas.clientHeight) / 2);
+        });
+      } else {
+        canvas.scrollTo(0, 0);
+      }
+    };
+
+    const show = (nextIndex) => {
+      index = (nextIndex + images.length) % images.length;
+      image.style.transform = '';
+      setZoomed(false);
+      image.src = images[index].src;
+      image.alt = images[index].alt;
+      counter.textContent = `${index + 1} / ${images.length}`;
+    };
+    const close = () => {
+      document.removeEventListener('keydown', onKeydown);
+      document.body.style.overflow = oldOverflow;
+      viewer.remove();
+      if (trigger.isConnected) trigger.focus({ preventScroll: true });
+    };
+    const onKeydown = (event) => {
+      if (event.key === 'Escape') close();
+      if (event.key === 'ArrowLeft' && images.length > 1) show(index - 1);
+      if (event.key === 'ArrowRight' && images.length > 1) show(index + 1);
+      if (event.key === 'Tab') {
+        const controls = [...viewer.querySelectorAll('button:not([hidden])')];
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    if (images.length === 1) {
+      previous.hidden = true;
+      next.hidden = true;
+    }
+    viewer.querySelector('[data-apdp-zoom-close]').addEventListener('click', close);
+    previous.addEventListener('click', () => show(index - 1));
+    next.addEventListener('click', () => show(index + 1));
+    canvas.addEventListener('pointerdown', (event) => {
+      if (!event.isPrimary || event.button > 0) return;
+      dragState = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        scrollLeft: canvas.scrollLeft,
+        scrollTop: canvas.scrollTop,
+        zoomed: image.classList.contains('is-zoomed'),
+        moved: false,
+      };
+      canvas.setPointerCapture(event.pointerId);
+      canvas.classList.add('is-dragging');
+    });
+    canvas.addEventListener('pointermove', (event) => {
+      if (!dragState || event.pointerId !== dragState.pointerId) return;
+      const deltaX = event.clientX - dragState.startX;
+      const deltaY = event.clientY - dragState.startY;
+      if (!dragState.moved && Math.hypot(deltaX, deltaY) < 5) return;
+      dragState.moved = true;
+      event.preventDefault();
+      if (dragState.zoomed) {
+        canvas.scrollLeft = dragState.scrollLeft - deltaX;
+        canvas.scrollTop = dragState.scrollTop - deltaY;
+      } else if (images.length > 1) {
+        image.style.transform = `translate3d(${deltaX}px,0,0)`;
+      }
+    });
+    const finishDrag = (event) => {
+      if (!dragState || event.pointerId !== dragState.pointerId) return;
+      const deltaX = event.clientX - dragState.startX;
+      const wasMoved = dragState.moved;
+      const wasZoomed = dragState.zoomed;
+      if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+      canvas.classList.remove('is-dragging');
+      dragState = null;
+      image.style.transform = '';
+      if (wasMoved) {
+        suppressCanvasClick = true;
+        window.setTimeout(() => { suppressCanvasClick = false; }, 0);
+      }
+      if (!wasZoomed && wasMoved && Math.abs(deltaX) >= Math.min(100, canvas.clientWidth * 0.16)) {
+        show(index + (deltaX < 0 ? 1 : -1));
+      }
+    };
+    canvas.addEventListener('pointerup', finishDrag);
+    canvas.addEventListener('pointercancel', finishDrag);
+    canvas.addEventListener('click', () => {
+      if (suppressCanvasClick) {
+        suppressCanvasClick = false;
+        return;
+      }
+      setZoomed(!image.classList.contains('is-zoomed'));
+    });
+    viewer.addEventListener('click', (event) => { if (event.target === viewer) close(); });
+    document.addEventListener('keydown', onKeydown);
+    document.body.appendChild(viewer);
+    document.body.style.overflow = 'hidden';
+    show(index);
+    viewer.focus({ preventScroll: true });
+  }
+
+  function initQuantity(root) {
+    const input = root.querySelector('[data-apdp-quantity]');
+    if (!input) return;
+    root.querySelector('[data-apdp-quantity-minus]')?.addEventListener('click', () => {
+      input.value = Math.max(Number(input.min || 1), Number(input.value || 1) - 1);
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    root.querySelector('[data-apdp-quantity-plus]')?.addEventListener('click', () => {
+      input.value = Number(input.value || 1) + 1;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  }
+
+  function initVariants(root, activateMedia) {
+    const externalFinal = root.classList.contains('altaeron-pdp--reels-v3')
+      ? document.querySelector('[data-apdp-v3-final]')
+      : null;
+    const form = root.querySelector('.apdp-form');
+    const idInput = root.querySelector('[data-apdp-variant-id]');
+    const select = root.querySelector('[data-apdp-variant-select]');
+    const radios = [...root.querySelectorAll('[data-apdp-variant-option]')];
+    const currentPrice = root.querySelector('[data-apdp-current-price]');
+    const comparePrice = root.querySelector('[data-apdp-compare-price]');
+    const savings = root.querySelector('[data-apdp-savings]');
+    const submit = root.querySelector('[data-apdp-submit]');
+    const submitText = root.querySelector('[data-apdp-submit-text]');
+    const submitLabel = root.querySelector('[data-apdp-submit-label]');
+    const ctaPrice = root.querySelector('[data-apdp-cta-price]');
+    const stickySubmit = root.querySelector('[data-apdp-sticky-submit]');
+    const finalSubmit = root.querySelector('[data-apdp-final-submit]') || externalFinal?.querySelector('[data-apdp-final-submit]');
+    const trySubmit = root.classList.contains('altaeron-pdp--reels-v3')
+      ? document.querySelector('[data-apdp-try-submit]')
+      : null;
+    const stickyText = root.querySelector('[data-apdp-sticky-text]');
+    const stickyPrice = root.querySelector('[data-apdp-sticky-price]');
+    const stickyCompare = root.querySelector('[data-apdp-sticky-compare]');
+    const stickySavings = root.querySelector('[data-apdp-sticky-savings]');
+    const stickyBundleTitle = root.querySelector('[data-apdp-sticky-bundle-title]');
+    const installmentTerms = [...root.querySelectorAll('[data-apdp-installments]'), ...(externalFinal ? externalFinal.querySelectorAll('[data-apdp-installments]') : [])];
+    const finalPrice = root.querySelector('[data-apdp-final-price]') || externalFinal?.querySelector('[data-apdp-final-price]');
+    const finalButtonPrice = root.querySelector('[data-apdp-final-button-price]') || externalFinal?.querySelector('[data-apdp-final-button-price]');
+    const finalCompare = root.querySelector('[data-apdp-final-compare]') || externalFinal?.querySelector('[data-apdp-final-compare]');
+    const finalSavings = root.querySelector('[data-apdp-final-savings]') || externalFinal?.querySelector('[data-apdp-final-savings]');
+    const variantsNode = root.querySelector('[data-apdp-product-json]');
+    const variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
+    const format = root.dataset.moneyFormat;
+    const bundleWidget = root.querySelector('bundle-deals-widget, [data-apdp-bundle-widget]');
+    const savingsText = (amount) => (root.dataset.saveTemplate || `${root.dataset.saveLabel} [amount]`)
+      .replaceAll('[amount]', money(amount, format));
+    const fillTemplate = (template, replacements) => Object.entries(replacements)
+      .reduce((result, [key, value]) => result.replaceAll(`[${key}]`, value), template || '');
+
+    const updateInstallments = (price) => {
+      const installment = money(Math.round(price / 4), format);
+      installmentTerms.forEach((element) => {
+        const textNode = [...element.childNodes].find((node) => node.nodeType === Node.TEXT_NODE && /\d/.test(node.textContent));
+        if (!textNode) return;
+        textNode.textContent = textNode.textContent.replace(/(?:[$€£¥₹₩₫]\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|CAD|AUD|VND|₫))/i, installment);
+      });
+    };
+
+    const updateRelatedPrices = (price, compare) => {
+      const hasSavings = compare > price;
+      const saved = Math.max(compare - price, 0);
+      if (finalPrice) finalPrice.textContent = money(price, format);
+      if (finalButtonPrice) {
+        const priceSeparator = finalButtonPrice.hasAttribute('data-apdp-no-separator') ? ' ' : ' — ';
+        finalButtonPrice.textContent = `${priceSeparator}${money(price, format)}`;
+      }
+      if (finalCompare) {
+        finalCompare.hidden = !hasSavings;
+        if (hasSavings) finalCompare.textContent = money(compare, format);
+      }
+      if (finalSavings) {
+        finalSavings.hidden = !hasSavings;
+        if (hasSavings) finalSavings.textContent = savingsText(saved);
+      }
+      updateInstallments(price);
+    };
+
+    const chosenControl = () => {
+      const explicitControl = select?.selectedOptions?.[0] || radios.find((radio) => radio.checked);
+      if (explicitControl) return explicitControl;
+
+      const variant = variants.find((item) => String(item.id) === String(idInput?.value)) || variants[0];
+      if (!variant) return null;
+      return {
+        value: variant.id,
+        dataset: {
+          price: variant.price,
+          compare: variant.compare_at_price || 0,
+          available: String(variant.available),
+          mediaId: variant.featured_media?.id || '',
+        },
+      };
+    };
+    const update = (pushUrl = true) => {
+      const control = chosenControl();
+      if (!control) return;
+      const id = control.value;
+      const price = Number(control.dataset.price || 0);
+      const compare = Number(control.dataset.compare || 0);
+      const available = control.dataset.available === 'true';
+      const mediaId = control.dataset.mediaId;
+      const variant = variants.find((item) => String(item.id) === String(id));
+
+      if (idInput) idInput.value = id;
+      if (currentPrice) currentPrice.textContent = money(price, format);
+      if (stickyPrice) stickyPrice.textContent = money(price, format);
+      if (stickyCompare) {
+        stickyCompare.hidden = compare <= price;
+        if (compare > price) stickyCompare.textContent = money(compare, format);
+      }
+      if (comparePrice) {
+        if (comparePrice.dataset.staticPrice) {
+          comparePrice.hidden = false;
+          comparePrice.textContent = comparePrice.dataset.staticPrice;
+        } else {
+          comparePrice.hidden = compare <= price;
+          if (compare > price) comparePrice.textContent = money(compare, format);
+        }
+      }
+      if (savings) {
+        if (savings.dataset.staticSavings) {
+          savings.hidden = false;
+          savings.textContent = savings.dataset.staticSavings;
+        } else {
+          savings.hidden = compare <= price;
+          if (compare > price) savings.textContent = savingsText(compare - price);
+        }
+      }
+      if (stickySavings) {
+        stickySavings.hidden = compare <= price;
+        if (compare > price) stickySavings.textContent = savingsText(compare - price);
+      }
+      [submit, stickySubmit, finalSubmit, trySubmit].forEach((button) => {
+        if (!button) return;
+        button.disabled = !available;
+        if (available) button.removeAttribute('aria-disabled');
+        else button.setAttribute('aria-disabled', 'true');
+      });
+      const label = available ? (submitLabel?.dataset.availableText || root.dataset.addToCartLabel) : root.dataset.soldOutLabel;
+      if (submitLabel) submitLabel.textContent = label;
+      if (ctaPrice) {
+        ctaPrice.hidden = !available;
+        if (available) ctaPrice.textContent = ` — ${money(price, format)}`;
+      }
+      if (finalButtonPrice) finalButtonPrice.hidden = !available;
+      if (stickyText) stickyText.textContent = label;
+      updateRelatedPrices(price, compare);
+      if (mediaId) activateMedia(mediaId);
+      if (pushUrl) {
+        const url = new URL(root.dataset.productUrl, window.location.origin);
+        url.searchParams.set('variant', id);
+        window.history.replaceState({ ...window.history.state, variant: id }, '', url);
+      }
+      form?.dispatchEvent(new CustomEvent('altaeron:variant-change', { bubbles: true, detail: { variant } }));
+    };
+
+    const parseDisplayedMoney = (value) => {
+      const numeric = String(value || '').replace(/[^\d.,]/g, '');
+      const decimalIndex = Math.max(numeric.lastIndexOf('.'), numeric.lastIndexOf(','));
+      if (decimalIndex >= 0 && numeric.length - decimalIndex - 1 === 2) {
+        const whole = numeric.slice(0, decimalIndex).replace(/[^\d]/g, '');
+        const decimal = numeric.slice(decimalIndex + 1).replace(/[^\d]/g, '');
+        return (Number(whole || 0) * 100) + Number(decimal || 0);
+      }
+      return Number(numeric.replace(/[^\d]/g, '') || 0) * 100;
+    };
+
+    const selectedBundle = () => {
+      if (!bundleWidget) return null;
+      const widgetRoot = bundleWidget.shadowRoot || bundleWidget;
+      const checkedInputs = [...widgetRoot.querySelectorAll('input[type="radio"]:checked, [role="radio"][aria-checked="true"]')];
+      const moneyPattern = /(?:[$€£¥₹₩]\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|CAD|AUD|VND|₫))/gi;
+      const bundleTitle = (option) => {
+        const explicitTitle = option.querySelector('.bd-tier__name')?.textContent.replace(/\s+/g, ' ').trim();
+        if (explicitTitle) return explicitTitle;
+        const ignoredPattern = /^(?:recommended|best value|save\b|from\b|for\b)/i;
+        const titlePattern = /\b(?:bundle|pack|correctors?|items?|pieces?|left|right)\b/i;
+        const preferredTitlePattern = /(?:\b\d+\b.*\b(?:bundle|pack|correctors?|items?|pieces?|left|right)\b|\b(?:bundle|pack|correctors?|items?|pieces?)\b)/i;
+        const containsMoney = (text) => {
+          moneyPattern.lastIndex = 0;
+          return moneyPattern.test(text);
+        };
+        const elementTexts = [...option.querySelectorAll('h1,h2,h3,h4,h5,h6,strong,b,[class*="title"],[class*="name"]')]
+          .map((element) => element.textContent.replace(/\s+/g, ' ').trim())
+          .filter((text) => text && text.length <= 70 && !containsMoney(text) && !ignoredPattern.test(text));
+        const lineTexts = String(option.innerText || option.textContent || '')
+          .split(/\r?\n/)
+          .map((text) => text.replace(/\s+/g, ' ').trim())
+          .filter((text) => text && text.length <= 70 && !containsMoney(text) && !ignoredPattern.test(text));
+        moneyPattern.lastIndex = 0;
+        const texts = [...new Set([...elementTexts, ...lineTexts])];
+        return texts.find((text) => preferredTitlePattern.test(text)) || texts.find((text) => titlePattern.test(text)) || '';
+      };
+
+      for (const input of checkedInputs) {
+        const candidates = [...(input.labels || [])];
+        let ancestor = input.parentElement;
+        while (ancestor && ancestor !== widgetRoot) {
+          candidates.push(ancestor);
+          ancestor = ancestor.parentElement;
+        }
+
+        for (const option of candidates) {
+          const optionInputs = option.querySelectorAll('input[type="radio"]').length;
+          const totalPrice = option.querySelector('.bd-tier__price');
+          const comparePrice = option.querySelector('.bd-tier__compare');
+          if (optionInputs <= 1 && totalPrice) {
+            const quantityMatch = option.textContent.match(/\b(\d+)\s*(?:correctors?|items?|pieces?|packs?)\b/i);
+            const tierQuantity = Number(option.dataset.tierIndex) + 1;
+            const quantity = Number(input.dataset.quantity || quantityMatch?.[1] || tierQuantity || 1);
+            return {
+              price: parseDisplayedMoney(totalPrice.textContent),
+              compare: parseDisplayedMoney(comparePrice?.textContent),
+              quantity,
+              title: bundleTitle(option),
+            };
+          }
+        }
+      }
+      return null;
+    };
+
+    // Bundle option names, descriptions and badges belong to the app.
+    // Only normalize the price fields used by the PDP pricing display.
+    const syncBundleTierPrices = (widgetRoot, baseCompare, basePrice) => {
+      if (root.dataset.bundleMode === 'fixed') return;
+      const setText = (element, value) => {
+        if (element && value && element.textContent !== value) element.textContent = value;
+      };
+      const firstTierPrice = parseDisplayedMoney(widgetRoot.querySelector('[data-tier-index="0"] .bd-tier__price')?.textContent);
+      [...widgetRoot.querySelectorAll('[data-tier-index]')].forEach((tier, index) => {
+        const quantity = Number(tier.dataset.tierIndex) + 1 || index + 1;
+        const priceElement = tier.querySelector('.bd-tier__price');
+        const tierPrice = parseDisplayedMoney(priceElement?.textContent);
+        setText(priceElement, money(tierPrice, format));
+        if (quantity === 1) return;
+
+        const originalTotal = root.classList.contains('altaeron-pdp--reels-v3') && quantity === 2 && firstTierPrice
+          ? firstTierPrice * 2
+          : (baseCompare > basePrice ? baseCompare : basePrice) * quantity;
+        setText(tier.querySelector('.bd-tier__compare'), originalTotal > 0 ? money(originalTotal, format) : '');
+      });
+    };
+
+    const syncBundlePricing = () => {
+      const control = chosenControl();
+      if (!control) return;
+
+      const basePrice = Number(control.dataset.price || 0);
+      const baseCompare = Number(control.dataset.compare || 0);
+      if (bundleWidget) syncBundleTierPrices(bundleWidget.shadowRoot || bundleWidget, baseCompare, basePrice);
+
+      const bundle = selectedBundle();
+      if (!bundle?.price) return;
+      const bundleCompare = baseCompare > basePrice
+        ? baseCompare * bundle.quantity
+        : (bundle.compare || basePrice * bundle.quantity);
+      const bundleSavings = Math.max(bundleCompare - bundle.price, 0);
+
+      if (stickyBundleTitle) {
+        stickyBundleTitle.hidden = !bundle.title;
+        stickyBundleTitle.textContent = bundle.title || '';
+      }
+
+      if (currentPrice) currentPrice.textContent = money(bundle.price, format);
+      if (stickyPrice) stickyPrice.textContent = money(bundle.price, format);
+      [comparePrice, stickyCompare].forEach((element) => {
+        if (!element) return;
+        element.hidden = bundleSavings <= 0;
+        if (bundleSavings > 0) element.textContent = money(bundleCompare, format);
+      });
+      [savings, stickySavings].forEach((element) => {
+        if (!element) return;
+        element.hidden = bundleSavings <= 0;
+        if (bundleSavings > 0) element.textContent = savingsText(bundleSavings);
+      });
+      if (ctaPrice) ctaPrice.textContent = ` — ${money(bundle.price, format)}`;
+      if (root.dataset.bundleCtaOne || root.dataset.bundleCtaMany) {
+        const ctaText = bundle.quantity === 1
+          ? fillTemplate(root.dataset.bundleCtaOne, { price: money(bundle.price, format) })
+          : fillTemplate(root.dataset.bundleCtaMany, { count: String(bundle.quantity), price: money(bundle.price, format) });
+        const ctaTextWithoutPrice = ctaText.replace(/\s*[—-]\s*[^—-]+$/, '').trim();
+        if (submitLabel) submitLabel.textContent = ctaTextWithoutPrice;
+        if (stickyText) stickyText.textContent = ctaText;
+      }
+      updateRelatedPrices(bundle.price, bundleCompare);
+    };
+
+    let bundleFrame;
+    const scheduleBundlePricing = () => {
+      window.cancelAnimationFrame(bundleFrame);
+      bundleFrame = window.requestAnimationFrame(syncBundlePricing);
+    };
+
+    select?.addEventListener('change', () => { update(); scheduleBundlePricing(); });
+    radios.forEach((radio) => radio.addEventListener('change', () => { update(); scheduleBundlePricing(); }));
+    if (bundleWidget) {
+      const observedRoots = new WeakSet();
+      const observeBundleRoot = (observedRoot) => {
+        if (!observedRoot || observedRoots.has(observedRoot)) return;
+        observedRoots.add(observedRoot);
+        ['change', 'input', 'click'].forEach((eventName) => observedRoot.addEventListener(eventName, scheduleBundlePricing, true));
+        new MutationObserver(scheduleBundlePricing).observe(observedRoot, {
+          attributes: true,
+          attributeFilter: ['checked', 'class', 'aria-checked'],
+          childList: true,
+          subtree: true,
+        });
+      };
+
+      observeBundleRoot(bundleWidget);
+      observeBundleRoot(bundleWidget.shadowRoot);
+      if (bundleWidget.localName.includes('-')) {
+        window.customElements?.whenDefined(bundleWidget.localName).then(() => {
+          observeBundleRoot(bundleWidget.shadowRoot);
+          scheduleBundlePricing();
+        });
+      }
+    }
+    update(false);
+    scheduleBundlePricing();
+  }
+
+  function initSticky(root) {
+    const externalFinal = root.classList.contains('altaeron-pdp--reels-v3')
+      ? document.querySelector('[data-apdp-v3-final]')
+      : null;
+    const sticky = root.querySelector('[data-apdp-sticky]');
+    const purchaseButton = root.querySelector('[data-apdp-submit]');
+    const primaryPurchase = root.querySelector('[data-apdp-primary-purchase]');
+    const stickyButton = root.querySelector('[data-apdp-sticky-submit]');
+    const finalButton = root.querySelector('[data-apdp-final-submit]') || externalFinal?.querySelector('[data-apdp-final-submit]');
+    const tryButton = root.classList.contains('altaeron-pdp--reels-v3')
+      ? document.querySelector('[data-apdp-try-submit]')
+      : null;
+    const form = root.querySelector('.apdp-form');
+    const finalCta = root.querySelector('.apdp-final-cta, .apdp-massager-bottom') || externalFinal?.querySelector('.apdp-final-cta');
+    if (!sticky || !purchaseButton || !stickyButton || !form) return;
+
+    const mobile = window.matchMedia('(max-width: 749px)');
+    let purchaseIsPast = false;
+    let finalCtaIsVisible = false;
+    const updateVisibility = () => { sticky.hidden = !mobile.matches || !purchaseIsPast || finalCtaIsVisible; };
+    const observer = new IntersectionObserver(([entry]) => {
+      purchaseIsPast = !entry.isIntersecting && (!primaryPurchase || entry.boundingClientRect.bottom <= 0);
+      updateVisibility();
+    }, { threshold: 0 });
+    observer.observe(primaryPurchase || purchaseButton);
+    if (finalCta) {
+      const finalCtaObserver = new IntersectionObserver(([entry]) => {
+        finalCtaIsVisible = entry.isIntersecting;
+        updateVisibility();
+      }, { threshold: 0 });
+      finalCtaObserver.observe(finalCta);
+    }
+    mobile.addEventListener?.('change', updateVisibility);
+    stickyButton.addEventListener('click', () => {
+      if (!stickyButton.disabled) form.requestSubmit();
+    });
+    finalButton?.addEventListener('click', () => {
+      if (!finalButton.disabled) form.requestSubmit(purchaseButton);
+    });
+    tryButton?.addEventListener('click', () => {
+      if (!tryButton.disabled) form.requestSubmit(purchaseButton);
+    });
+  }
+
+  function initLazyVideos(root) {
+    const media = [...root.querySelectorAll('[data-apdp-lazy-video]')];
+    if (!media.length) return;
+
+    const hydrate = (element) => {
+      if (element.dataset.apdpVideoLoaded === 'true') return;
+      element.dataset.apdpVideoLoaded = 'true';
+
+      if (element.tagName === 'IFRAME') {
+        if (element.dataset.src) {
+          element.src = element.dataset.src;
+          element.removeAttribute('data-src');
+        }
+        return;
+      }
+
+      element.querySelectorAll('source[data-src]').forEach((source) => {
+        source.src = source.dataset.src;
+        source.removeAttribute('data-src');
+      });
+      element.load();
+      if (element.autoplay) element.play().catch(() => {});
+    };
+
+    const startObserving = () => {
+      if (!('IntersectionObserver' in window)) {
+        media.forEach(hydrate);
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          hydrate(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '300px 0px' });
+      media.forEach((element) => observer.observe(element));
+    };
+
+    if (document.readyState === 'complete') startObserving();
+    else window.addEventListener('load', startObserving, { once: true });
+  }
+
+  function initHeroExperience(root) {
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const video = root.querySelector('[data-apdp-hero-video]');
+    const bundleCta = root.querySelector('[data-apdp-bundle-cta]');
+    let videoIsVisible = true;
+
+    const syncVideo = () => {
+      if (!video) return;
+      video.muted = true;
+      video.defaultMuted = true;
+      if (motionPreference.matches) {
+        video.pause();
+        video.controls = true;
+        return;
+      }
+      video.controls = false;
+      if (videoIsVisible && !document.hidden) video.play().catch(() => {});
+      else video.pause();
+    };
+
+    if (video && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        videoIsVisible = entry.isIntersecting;
+        syncVideo();
+      }, { threshold: 0.08 });
+      observer.observe(video);
+    }
+    if (video) {
+      document.addEventListener('visibilitychange', syncVideo);
+      motionPreference.addEventListener?.('change', syncVideo);
+      syncVideo();
+    }
+
+    bundleCta?.addEventListener('click', (event) => {
+      const targetId = bundleCta.getAttribute('href')?.slice(1);
+      const target = targetId ? document.getElementById(targetId) : null;
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: motionPreference.matches ? 'auto' : 'smooth', block: 'start' });
+      target.focus({ preventScroll: true });
+    });
+  }
+
+  function initMedicalReviewLink(root) {
+    const link = root.querySelector('[data-apdp-medical-review-link]');
+    if (!link) return;
+    const target = root.querySelector(link.hash);
+    if (!target) return;
+
+    link.addEventListener('click', (event) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      window.history.pushState(null, '', link.hash);
+      target.focus({ preventScroll: true });
+    });
+  }
+
+  function initStepTimelines(root) {
+    root.querySelectorAll('[data-apdp-step-timeline]').forEach((timeline) => {
+      if (timeline.dataset.timelineReady === 'true') return;
+      timeline.dataset.timelineReady = 'true';
+
+      const steps = [...timeline.querySelectorAll('[data-apdp-step]')];
+      if (!steps.length) return;
+      const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let timers = [];
+      let isVisible = false;
+
+      const clearTimers = () => {
+        timers.forEach(window.clearTimeout);
+        timers = [];
+      };
+      const setStepState = (step, state) => {
+        step.dataset.stepState = state;
+        if (state === 'current') step.setAttribute('aria-current', 'step');
+        else step.removeAttribute('aria-current');
+      };
+      const finish = () => {
+        clearTimers();
+        timeline.classList.add('is-animation-ready');
+        steps.forEach((step) => setStepState(step, 'complete'));
+      };
+      const play = () => {
+        if (!isVisible || motionPreference.matches) return;
+        clearTimers();
+        timeline.classList.add('is-animation-ready');
+        steps.forEach((step) => setStepState(step, 'upcoming'));
+
+        steps.forEach((step, index) => {
+          timers.push(window.setTimeout(() => {
+            if (index > 0) setStepState(steps[index - 1], 'complete');
+            setStepState(step, 'current');
+          }, index * 650));
+        });
+        timers.push(window.setTimeout(() => {
+          setStepState(steps[steps.length - 1], 'complete');
+          timers.push(window.setTimeout(play, 1200));
+        }, steps.length * 650));
+      };
+
+      if (!('IntersectionObserver' in window)) {
+        finish();
+        return;
+      }
+
+      const observer = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !motionPreference.matches) play();
+        else clearTimers();
+      }, { threshold: 0.35 });
+      observer.observe(timeline);
+
+      if (motionPreference.matches) finish();
+
+      motionPreference.addEventListener?.('change', (event) => {
+        if (event.matches) finish();
+        else if (isVisible) play();
+      });
+    });
+  }
+
+  function initReviewSliders(root) {
+    root.querySelectorAll('[data-apdp-review-slider]').forEach((slider) => {
+      const group = slider.closest('[data-apdp-review-slider-group]');
+      const previous = group?.querySelector('[data-apdp-review-prev]');
+      const next = group?.querySelector('[data-apdp-review-next]');
+      if (!previous || !next) return;
+
+      const card = () => slider.querySelector('.apdp-tail-review');
+      const step = () => {
+        const item = card();
+        if (!item) return slider.clientWidth;
+        const styles = window.getComputedStyle(slider.querySelector('.apdp-tail-review-grid'));
+        return item.getBoundingClientRect().width + Number.parseFloat(styles.columnGap || styles.gap || 0);
+      };
+      const update = () => {
+        const maximum = Math.max(0, slider.scrollWidth - slider.clientWidth);
+        previous.disabled = slider.scrollLeft <= 2;
+        next.disabled = slider.scrollLeft >= maximum - 2;
+      };
+      previous.addEventListener('click', () => slider.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => slider.scrollBy({ left: step(), behavior: 'smooth' }));
+      slider.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    });
+  }
+
+  function init(root) {
+    if (!root || root.dataset.apdpReady === 'true') return;
+    root.dataset.apdpReady = 'true';
+    initPromotion(root);
+    initDeliveryEstimate(root);
+    initHeroExperience(root);
+
+    const activateMedia = initGallery(root);
+    initQuantity(root);
+    initVariants(root, activateMedia);
+    initSticky(root);
+    initMedicalReviewLink(root);
+    initLazyVideos(root);
+    initReviewSliders(root);
+    initStepTimelines(root);
+  }
+
+  const initAll = (scope = document) => scope.querySelectorAll(SELECTOR).forEach(init);
+  if (!window.__altaeronPdpZoomBound) {
+    window.__altaeronPdpZoomBound = true;
+    document.addEventListener('click', handleZoomClick);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initAll());
+  else initAll();
+  document.addEventListener('shopify:section:load', (event) => initAll(event.target));
+})();
