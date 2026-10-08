@@ -12,18 +12,27 @@
     "altaeron_massager": {
       "type": "altaeron-pdp-massager",
       "settings": {
+        "headline": "Heavy, Swollen Feet? Give Them 15 Minutes.",
+        "subheadline": "Air compression, warming heat and vibration surround tired feet and ankles to ease aching pressure, loosen tightness and help that heavy, puffy feeling melt away.",
+        "cta_label": "GET MY AIRRELIEF",
+        "excluded_media_id": "28186264698941",
+        "dynamic_checkout": false,
         "hero_image": "shopify://shop_images/Sffb0cfbe4e034587a75d23a75d53999bd.webp",
-        "story_image": "shopify://shop_images/ChatGPT_Image_Sep_4_2026_08_36_36_AM.png",
-        "mechanism_image": "shopify://shop_images/Sd2bbebcaa2c7488b9c55ee8293582bd9Z.webp",
-        "comparison_image_1": "shopify://shop_images/images.jpg",
-        "comparison_image_2": "shopify://shop_images/S24a68c0256f5443d96f43a3f304fbaccH.webp",
-        "proof_video": "shopify://files/videos/0911.mp4",
-        "proof_image_1": "shopify://shop_images/ChatGPT_Image_Sep_11_2026_05_40_26_PM.png",
-        "proof_image_2": "shopify://shop_images/ChatGPT_Image_Sep_11_2026_05_4.png",
-        "proof_image_3": "shopify://shop_images/ChatGPT_Image_Sep_11_2026_05_52_43_PM.png",
-        "proof_image_4": "shopify://shop_images/ChatGPT_Image_Sep_11_2026_06_0.png",
+        "story_image": "shopify://shop_images/SoothetheFoot_Ankle.png",
+        "mechanism_image": "shopify://shop_images/AirReliefAnkleMassager_ThreeTherapies.png",
         "final_cta_image": "shopify://shop_images/ChatGPT_Image_Sep_4_2026_12_23_52_AM.png",
-        "preview_hero_video": true
+        "reviewer_verified": false,
+        "reviewer_name": "",
+        "reviewer_credentials": "",
+        "medical_body": "Combining rhythmic compression, warmth and vibration can provide a practical way to relax tired feet and ankles after prolonged standing, walking or physical activity. Adjustable intensity is particularly useful because comfort and pressure tolerance can vary significantly from person to person.",
+        "preview_hero_video": true,
+        "comparison_image_1": "shopify://shop_images/Reliefin3SimpleSteps_1.png",
+        "comparison_image_2": "shopify://shop_images/S24a68c0256f5443d96f43a3f304fbaccH.webp",
+        "proof_video": "shopify://files/videos/1008(2).mp4",
+        "proof_image_1": "shopify://shop_images/CozyLivingwithSmartAnkleSupport.png",
+        "proof_image_2": "shopify://shop_images/RelaxingPost-WalkAnkleTherapy.png",
+        "proof_image_3": "shopify://shop_images/RelaxedPost-WorkoutWellnessMoment.png",
+        "proof_image_4": "shopify://shop_images/CozyBedroomRecoveryMoment.png"
       }
     }
   },
