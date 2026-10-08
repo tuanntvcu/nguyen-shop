@@ -28,8 +28,40 @@
             "alignment": "center",
             "block_custom_class": ""
           }
-        },
-        "text_DmBBtg": {
+        }
+      },
+      "block_order": [
+        "image_J68fdX"
+      ],
+      "custom_css": [
+        "[data-block-type=\"image\"] {max-width: 81.2rem; margin: 0 auto -9%;}",
+        ".rich-text__heading {max-width: 74rem; margin: 0 auto;}",
+        ".custom__block--text {max-width: 81.2rem; margin: 0 auto;}",
+        "@media (max-width: 767px) {[data-block-type=\"image\"] {margin-bottom: -14%; } .rich-text__heading {max-width: 33rem; }}"
+      ],
+      "settings": {
+        "container": "full",
+        "color_scheme": "",
+        "enable_sticky_column": false,
+        "heading": "",
+        "heading_size": "h1",
+        "heading_highlight_style": "none",
+        "subheading": "",
+        "description": "",
+        "column_gap": "none",
+        "row_gap": "extra-large",
+        "swipe_on_mobile": false,
+        "columns_mobile": "1",
+        "padding_top": 20,
+        "padding_bottom": 22,
+        "show_section_divider": false,
+        "divider_width": "fixed"
+      }
+    },
+    "custom_content_g3Ug8k": {
+      "type": "custom-content",
+      "blocks": {
+        "text_YD7cdg": {
           "type": "text",
           "settings": {
             "heading": "ALTAERON",
@@ -49,8 +81,7 @@
         }
       },
       "block_order": [
-        "image_J68fdX",
-        "text_DmBBtg"
+        "text_YD7cdg"
       ],
       "custom_css": [
         "[data-block-type=\"image\"] {max-width: 81.2rem; margin: 0 auto -9%;}",
@@ -68,11 +99,11 @@
         "subheading": "",
         "description": "",
         "column_gap": "none",
-        "row_gap": "none",
+        "row_gap": "extra-large",
         "swipe_on_mobile": false,
         "columns_mobile": "1",
-        "padding_top": 16,
-        "padding_bottom": 0,
+        "padding_top": 100,
+        "padding_bottom": 22,
         "show_section_divider": false,
         "divider_width": "fixed"
       }
@@ -80,6 +111,7 @@
   },
   "order": [
     "main",
-    "custom_content_wN3EKJ"
+    "custom_content_wN3EKJ",
+    "custom_content_g3Ug8k"
   ]
 }
