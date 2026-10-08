@@ -23,6 +23,7 @@
         "image_J68fdX": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/1a7d4dee-bed0-4f1c-b6ad-c6f5713a22f1.png",
             "width": "100%",
             "alignment": "center",
             "block_custom_class": ""
@@ -58,7 +59,7 @@
         "@media (max-width: 767px) {[data-block-type=\"image\"] {margin-bottom: -14%; } .rich-text__heading {max-width: 33rem; }}"
       ],
       "settings": {
-        "container": "fixed",
+        "container": "full",
         "color_scheme": "",
         "enable_sticky_column": false,
         "heading": "",
