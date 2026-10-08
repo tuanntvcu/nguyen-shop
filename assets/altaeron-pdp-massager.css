@@ -2,6 +2,7 @@
    These exceptions handle AirRelief's existing content shape; no separate type/color scale. */
 .altaeron-pdp--massager .apdp-massager-comparison-scroll{overflow-x:auto;margin-top:24px}
 .altaeron-pdp--massager .apdp-massager-compare{min-width:630px}
+.altaeron-pdp--massager .apdp-sticky__product>span{font-size:11px;line-height:1.3;text-overflow:ellipsis;white-space:nowrap}
 .altaeron-pdp--massager .apdp-sticky__product .apdp-sticky__prices{align-items:baseline;display:flex;flex-wrap:wrap;gap:2px 6px;overflow:visible;white-space:normal}
 .altaeron-pdp--massager .apdp-sticky__prices :where(b,s){flex:none;white-space:nowrap}
 .altaeron-pdp--massager .apdp-sticky__prices s{color:var(--altaeron-muted,#667085);font-size:12px;text-decoration:line-through}
@@ -10,7 +11,7 @@
 .altaeron-pdp--massager .apdp-hero__grid:not(:has(.apdp-gallery)) .apdp-buy{grid-column:2}
 
 /* Product-specific supporting content uses existing DialFit components. */
-.altaeron-pdp--massager .apdp-massager-comparison-media{border-radius:16px;margin:24px auto 0;max-width:720px}
+.altaeron-pdp--massager .apdp-massager-comparison-media{display:none;border-radius:16px;margin:24px auto 0;max-width:720px}
 .altaeron-pdp--massager .apdp-massager-support{margin-top:24px}
 .altaeron-pdp--massager .apdp-massager-support__body{padding:0 0 24px}
 .altaeron-pdp--massager .apdp-massager-support__body .apdp-dialfit-steps{margin-top:24px}

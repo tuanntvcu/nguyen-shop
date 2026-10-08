@@ -37,7 +37,7 @@
      endif
    endfor
  endif
- assign hero_video = section.settings.hero_video
+ assign hero_video = section.settings.hero_video | default: product.metafields.altaeron.pdp_hero_video.value
  if hero_video == blank and section.settings.preview_hero_video
    assign hero_video = product.metafields.altaeron.massager_preview_hero_video.value
  endif
@@ -47,6 +47,12 @@
  assign review_data = product.metafields.judgeme.review_widget_data.value
  assign review_count = review_data.number_of_reviews | default: 0 | plus: 0
  assign review_rating = review_data.average_rating | default: 0 | plus: 0
+ assign atf_review_body = section.settings.review_body | strip
+ assign atf_reviewer_name = section.settings.review_name | strip
+ assign atf_review_title = section.settings.review_title | strip
+ assign atf_review_close = section.settings.review_close | strip
+ assign atf_review_rating = section.settings.review_rating
+ assign atf_reviewer_initial = atf_reviewer_name | slice: 0 | upcase
 -%}
 {{ 'altaeron-pdp.css' | asset_url | stylesheet_tag }}
 {{ 'altaeron-pdp-massager.css' | asset_url | stylesheet_tag }}
@@ -70,6 +76,12 @@
   #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating{gap:9px;font-size:15px;margin:12px 0 14px}
   #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating .apdp-stars{font-size:21px}
   #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating strong{font-size:15px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review{align-items:start;background:#f7faf7;border:1px solid #dfe7e1;border-radius:10px;display:grid;gap:13px;grid-template-columns:56px minmax(0,1fr);margin:16px 0 0;padding:16px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review .apdp-tail-avatar{height:56px;width:56px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review .apdp-stars{font-size:20px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review blockquote{color:#29483d;font-size:14px;line-height:1.55;margin:5px 0 0}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review blockquote strong{color:#075c3b;display:block;margin-bottom:3px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-review figcaption{font-size:12px;margin-top:9px}
   #AltaeronPdp-{{ section.id }} .apdp-payment-icons{border-top:0;padding:10px 0 0}
   #AltaeronPdp-{{ section.id }} .apdp-social-proof{margin-top:8px}
   #AltaeronPdp-{{ section.id }} .apdp-promotion__offer strong,
@@ -110,6 +122,7 @@
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-mechanism__copy .apdp-dialfit-highlight{margin:22px 0 0}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-support-states{display:grid;gap:8px;grid-template-columns:1fr 1fr;margin:20px 0 0}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-support-states div{background:#f4f7f3;border-radius:8px;padding:10px 11px}
+  #AltaeronPdp-{{ section.id }} .apdp-dialfit-support-states>div:nth-child(3){grid-column:1 / -1}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-support-states strong{color:#075c3b;display:block;font-size:11px;letter-spacing:.045em;line-height:1.25;margin-bottom:3px}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-support-states span{color:#52655d;display:block;font-size:11px;line-height:1.4}
   #AltaeronPdp-{{ section.id }} .apdp-dialfit-mechanism__secondary{color:#29483d;font-size:13px!important;font-weight:650;margin:9px 0 0!important}
@@ -219,6 +232,8 @@
     #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating{font-size:14px;gap:8px;margin:12px 0 14px}
     #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating .apdp-stars{font-size:20px}
     #AltaeronPdp-{{ section.id }} .apdp-narrative>.apdp-rating strong{font-size:14px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-review{grid-template-columns:50px minmax(0,1fr);padding:14px}
+    #AltaeronPdp-{{ section.id }} .apdp-dialfit-review .apdp-tail-avatar{height:50px;width:50px}
     #AltaeronPdp-{{ section.id }} .apdp-buy{order:4}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-story{padding:34px 0}
     #AltaeronPdp-{{ section.id }} .apdp-dialfit-story__layout,#AltaeronPdp-{{ section.id }} .apdp-dialfit-mechanism__layout{display:flex;flex-direction:column;gap:24px}
@@ -328,7 +343,16 @@
       </div>
 
 {% endif %}
-<div class="apdp-narrative"><p class="apdp-eyebrow">{{ product.title | escape }}</p>{% if review_count > 0 %}<a class="apdp-rating" href="#AltaeronVerified-{{ section.id }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ review_rating }} / 5 · {{ review_count }} {{ 'altaeron_pdp_massager.reviews' | t | escape_once }}</strong></a>{% endif %}<h1>{{ massager_headline | escape_once }}</h1><p class="apdp-narrative__subhead">{{ massager_subheadline | escape_once }}</p><ul class="apdp-narrative__benefits" role="list"><li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_massager.3_way_relief_compression_heat_vibration' | t | escape_once }}</span></li><li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_massager.helps_ease_swelling_stiffness_end_of_day_aching' | t | escape_once }}</span></li><li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_massager.5_intensity_levels_from_gentle_comfort_to_deeper_compression' | t | escape_once }}</span></li><li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_massager.cordless_15_minute_relief_while_you_sit_work_or_unwind' | t | escape_once }}</span></li></ul></div>
+<div class="apdp-narrative"><p class="apdp-eyebrow">{{ product.title | escape }}</p>{% if review_count > 0 %}<a class="apdp-rating" href="#AltaeronVerified-{{ section.id }}">{% render 'altaeron-pdp-stars', rating: review_rating %}<strong>{{ review_rating }} / 5 · {{ review_count }} {{ 'altaeron_pdp_massager.reviews' | t | escape_once }}</strong></a>{% endif %}<h1>{{ massager_headline | escape_once }}</h1><p class="apdp-narrative__subhead">{{ massager_subheadline | escape_once }}</p><ul class="apdp-narrative__benefits" role="list"><li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_massager.3_way_relief_compression_heat_vibration' | t | escape_once }}</span></li><li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_massager.helps_ease_swelling_stiffness_end_of_day_aching' | t | escape_once }}</span></li><li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_massager.5_intensity_levels_from_gentle_comfort_to_deeper_compression' | t | escape_once }}</span></li><li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ 'altaeron_pdp_massager.cordless_15_minute_relief_while_you_sit_work_or_unwind' | t | escape_once }}</span></li></ul>
+        {%- if section.settings.show_atf_review and atf_review_body != blank and atf_reviewer_name != blank -%}
+        <figure class="apdp-dialfit-review">
+          <div class="apdp-tail-avatar">
+            {%- if section.settings.review_avatar != blank -%}{{ section.settings.review_avatar | image_url: width: 160 | image_tag: loading: 'eager', widths: '80, 120, 160', sizes: '56px', alt: section.settings.review_avatar.alt | default: atf_reviewer_name }}{%- else -%}<span class="apdp-tail-avatar__initial" aria-hidden="true">{{ atf_reviewer_initial | escape }}</span>{%- endif -%}
+          </div>
+          <div>{% render 'altaeron-pdp-stars', rating: atf_review_rating %}<blockquote>{% if atf_review_title != blank %}<strong>{{ atf_review_title | escape }}</strong>{% endif %}{{ atf_review_body | escape | newline_to_br }}{% if atf_review_close != blank %}<strong>{{ atf_review_close | escape }}</strong>{% endif %}</blockquote><figcaption><strong>{{ atf_reviewer_name | escape }}</strong>{% if section.settings.review_verified %} &middot; {{ 'altaeron_pdp_dialfit.buy.verified_customer' | t }}{% endif %}</figcaption></div>
+        </figure>
+        {%- endif -%}
+      </div>
 <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" data-apdp-primary-purchase>{% render 'altaeron-labor-day-promotion', section: section, sync_announcement: false %}<h2 class="apdp-buy__title">{{ product.title | escape }}</h2><div class="apdp-buy__price-line"><div><div class="apdp-price" aria-live="polite"><span class="apdp-price__current" data-apdp-current-price>{{ current_variant.price | money }}</span><s class="apdp-price__compare" data-apdp-compare-price{% if current_compare <= current_variant.price %} hidden{% endif %}>{{ current_compare | money }}</s></div></div><span class="apdp-price__save" data-apdp-savings hidden></span></div>
 {% form 'product', product, id: product_form_id, class: 'apdp-form main-product-form', is: 'product-form', data-product-id: product.id %}<input type="hidden" name="id" value="{{ current_variant.id }}" data-apdp-variant-id><input type="hidden" name="quantity" value="1">
 {% unless product.has_only_default_variant %}<label for="AirReliefVariant-{{ section.id }}">{{ 'altaeron_pdp_massager.choose_your_option' | t | escape_once }}</label><select id="AirReliefVariant-{{ section.id }}" class="airrelief-variant" data-apdp-variant-select>{% for variant in product.variants %}<option value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price | default: 0 }}" data-available="{{ variant.available }}" data-media-id="{{ variant.featured_media.id }}"{% if variant.id == current_variant.id %} selected{% endif %}>{{ variant.title | escape }}</option>{% endfor %}</select>{% endunless %}
@@ -376,8 +400,8 @@
       <div class="apdp-expert__panel">
         <div class="apdp-expert__portrait">{%- if expert_image != blank -%}{{ expert_image | image_url: width: 1024 | image_tag: loading: 'lazy', widths: '320, 480, 720, 1024', sizes: '(min-width: 768px) 18vw, 35vw', alt: expert_alt }}{%- else -%}<img src="{{ 'altaeron-expert-portrait.png' | asset_url }}" width="1024" height="1536" loading="lazy" alt="{{ expert_fallback_alt | escape }}">{%- endif -%}</div>
         <div class="apdp-expert__profile"><small>{{ 'altaeron_pdp.expert.reviewed_by' | t }}</small><h2>{{ 'altaeron_pdp.expert.name' | t }}</h2><p>{{ 'altaeron_pdp.expert.role' | t }}</p><strong>{{ 'altaeron_pdp.expert.experience' | t }}</strong><span class="apdp-expert__signature">{{ 'altaeron_pdp.expert.signature' | t }}</span></div>
-        <blockquote><span aria-hidden="true">“</span><p>{{ 'altaeron_pdp.expert.quote' | t }} <b aria-hidden="true">”</b></p></blockquote>
-        <div class="apdp-expert__criteria"><strong>{{ 'altaeron_pdp.expert.criteria_heading' | t }}</strong><ul><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_1' | t }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_2' | t }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp.expert.criterion_3' | t }}</li></ul><p>{{ 'altaeron_pdp.expert.criteria_footer' | t }}</p></div>
+        <blockquote><span aria-hidden="true">“</span><p>{{ 'altaeron_pdp_massager.expert.quote' | t | escape }} <b aria-hidden="true">”</b></p></blockquote>
+        <div class="apdp-expert__criteria"><strong>{{ 'altaeron_pdp.expert.criteria_heading' | t }}</strong><ul><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp_massager.expert.criterion_1' | t | escape }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp_massager.expert.criterion_2' | t | escape }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp_massager.expert.criterion_3' | t | escape }}</li><li>{% render 'altaeron-pdp-icon', icon: 'check' %} {{ 'altaeron_pdp_massager.expert.criterion_4' | t | escape }}</li></ul><p>{{ 'altaeron_pdp_massager.expert.criteria_footer' | t | escape }}</p></div>
         <div class="apdp-expert__press" aria-label="{{ 'altaeron_pdp_dialfit.accessibility.publications' | t | escape }}"><span>WebMD</span><span>healthline</span><span>Verywell<span>health</span></span><span>yahoo!<b>life</b></span><span>CNN</span></div>
       </div>
     </div>
@@ -441,6 +465,57 @@
       "id": "cta_label",
       "label": "Purchase label",
       "default": "GET MY AIRRELIEF"
+    },
+    {
+      "type": "header",
+      "content": "Above-the-fold review"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_atf_review",
+      "label": "Show above-the-fold review",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "review_avatar",
+      "label": "Reviewer avatar"
+    },
+    {
+      "type": "text",
+      "id": "review_name",
+      "label": "Reviewer name"
+    },
+    {
+      "type": "range",
+      "id": "review_rating",
+      "label": "Review rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "review_title",
+      "label": "Review title"
+    },
+    {
+      "type": "textarea",
+      "id": "review_body",
+      "label": "Review content",
+      "info": "Enter the review content and reviewer name to display the card."
+    },
+    {
+      "type": "text",
+      "id": "review_close",
+      "label": "Review closing line"
+    },
+    {
+      "type": "checkbox",
+      "id": "review_verified",
+      "label": "Show verified customer label",
+      "default": false
     },
     {
       "type": "text",

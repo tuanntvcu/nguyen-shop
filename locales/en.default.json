@@ -2308,6 +2308,14 @@
     "save_amount": "Save [amount]",
     "close_image_viewer": "Close image viewer",
     "previous_image": "Previous image",
-    "next_image": "Next image"
+    "next_image": "Next image",
+    "expert": {
+      "quote": "For common complaints such as plantar fasciitis discomfort, heel pain, swollen ankles and post-activity soreness, I look for relief that addresses tension, stiffness and heaviness together. Air compression, heat and vibration can complement each other by encouraging circulation, relaxing tight tissue and helping tired feet recover.",
+      "criterion_1": "Compression to ease swelling and heavy feet",
+      "criterion_2": "Heat to relax stiff arches, heels & ankles",
+      "criterion_3": "Vibration to soothe plantar and muscle tension",
+      "criterion_4": "Adjustable pressure for targeted daily relief",
+      "criteria_footer": "AirRelief delivers all four in a simple 15-minute session."
+    }
   }
 }
