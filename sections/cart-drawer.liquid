@@ -708,14 +708,14 @@
           </div>
           <div class="drawer__footer-body">
             {%- liquid
-              assign cart_drawer_discount_percentage = settings.cart_drawer_discount_percentage | default: 5 | plus: 0
+              assign cart_drawer_discount_percentage = settings.cart_drawer_discount_percentage | default: 10 | plus: 0
               assign has_shopify_discount = false
               if cart.cart_level_discount_applications.size > 0
                 assign has_shopify_discount = true
                 assign cart_drawer_total = cart.total_price | times: 0.9 | round
               else
                 assign cart_drawer_discount_amount = cart.items_subtotal_price | times: cart_drawer_discount_percentage | divided_by: 100
-                assign cart_drawer_total = cart.items_subtotal_price | minus: cart_drawer_discount_amount | times: 0.9 | round
+                assign cart_drawer_total = cart.items_subtotal_price | minus: cart_drawer_discount_amount
               endif
             -%}
             <div class="grid gap-4">

@@ -1391,7 +1391,7 @@
         "step": 1,
         "unit": "%",
         "label": "Cart drawer discount",
-        "default": 5,
+        "default": 10,
         "info": "Percentage displayed above the estimated total in the cart drawer."
       },
       {
