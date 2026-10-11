@@ -1840,7 +1840,7 @@ class ProductBundleVariantSelector extends HTMLElement {
     // Change price
     const regularPriceElement = this.querySelector('.f-price__regular');
     regularPriceElement.querySelector('.f-price-item--regular').innerHTML = `${ScaloraTheme.Currency.formatMoney(
-      price,
+      Math.round(price * 0.9),
       ScaloraTheme.settings.moneyFormat
     )}`;
 
@@ -1850,7 +1850,7 @@ class ProductBundleVariantSelector extends HTMLElement {
       ScaloraTheme.settings.moneyFormat
     )}</s>`;
     salePriceElement.querySelector('.f-price-item--sale').innerHTML = `${ScaloraTheme.Currency.formatMoney(
-      price,
+      Math.round(price * 0.9),
       ScaloraTheme.settings.moneyFormat
     )}`;
   }

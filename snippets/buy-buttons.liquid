@@ -162,9 +162,9 @@
                       {%- if current_qty_for_volume_pricing < volume_pricing_array.last.minimum_quantity -%}
                         {%- liquid
                           if settings.currency_code_enabled
-                            assign variant_price = product.selected_or_first_available_variant.price | money_with_currency
+                            assign variant_price = product.selected_or_first_available_variant.price | times: 0.9 | round | money_with_currency
                           else
-                            assign variant_price = product.selected_or_first_available_variant.price | money
+                            assign variant_price = product.selected_or_first_available_variant.price | times: 0.9 | round | money
                           endif
                         -%}
                         <span class="price-per-item--current price__regular whitespace-nowrap">
@@ -175,9 +175,9 @@
                           {%- if current_qty_for_volume_pricing >= price_break.minimum_quantity -%}
                             {%- liquid
                               if settings.currency_code_enabled
-                                assign price_break_price = price_break.price | money_with_currency
+                                assign price_break_price = price_break.price | times: 0.9 | round | money_with_currency
                               else
-                                assign price_break_price = price_break.price | money
+                                assign price_break_price = price_break.price | times: 0.9 | round | money
                               endif
                             -%}
                             <span class="price-per-item--current price__regular whitespace-nowrap">
@@ -191,9 +191,9 @@
                       <span class="price-per-item--current price__regular whitespace-nowrap">
                         {%- liquid
                           if settings.currency_code_enabled
-                            assign variant_price = product.selected_or_first_available_variant.price | money_with_currency
+                            assign variant_price = product.selected_or_first_available_variant.price | times: 0.9 | round | money_with_currency
                           else
-                            assign variant_price = product.selected_or_first_available_variant.price | money
+                            assign variant_price = product.selected_or_first_available_variant.price | times: 0.9 | round | money
                           endif
                         -%}
                         {{- 'products.product.volume_pricing.price_at_each_html' | t: price: variant_price -}}
@@ -244,9 +244,9 @@
                     <span>{{ product.selected_or_first_available_variant.quantity_rule.min }}+</span>
                     {%- liquid
                       if settings.currency_code_enabled
-                        assign price = product.selected_or_first_available_variant.price | money_with_currency
+                        assign price = product.selected_or_first_available_variant.price | times: 0.9 | round | money_with_currency
                       else
-                        assign price = product.selected_or_first_available_variant.price | money
+                        assign price = product.selected_or_first_available_variant.price | times: 0.9 | round | money
                       endif
                     -%}
                     <span data-text="{{ 'products.product.volume_pricing.price_at_each' | t: price: price }}">
@@ -256,9 +256,9 @@
                   {%- for price_break in product.selected_or_first_available_variant.quantity_price_breaks -%}
                     {%- liquid
                       if settings.currency_code_enabled
-                        assign price_break_price = price_break.price | money_with_currency
+                        assign price_break_price = price_break.price | times: 0.9 | round | money_with_currency
                       else
-                        assign price_break_price = price_break.price | money
+                        assign price_break_price = price_break.price | times: 0.9 | round | money
                       endif
                     -%}
                     <li class="blocks-radius-md{% if forloop.index >= 3 %} show-more-item hidden{% endif %}">

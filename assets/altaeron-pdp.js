@@ -542,10 +542,10 @@
     const updateRelatedPrices = (price, compare) => {
       const hasSavings = compare > price;
       const saved = Math.max(compare - price, 0);
-      if (finalPrice) finalPrice.textContent = money(price, format);
+      if (finalPrice) finalPrice.textContent = money(Math.round(price * 0.9), format);
       if (finalButtonPrice) {
         const priceSeparator = finalButtonPrice.hasAttribute('data-apdp-no-separator') ? ' ' : ' — ';
-        finalButtonPrice.textContent = `${priceSeparator}${money(price, format)}`;
+        finalButtonPrice.textContent = `${priceSeparator}${money(Math.round(price * 0.9), format)}`;
       }
       if (finalCompare) {
         finalCompare.hidden = !hasSavings;
@@ -585,8 +585,8 @@
       const variant = variants.find((item) => String(item.id) === String(id));
 
       if (idInput) idInput.value = id;
-      if (currentPrice) currentPrice.textContent = money(price, format);
-      if (stickyPrice) stickyPrice.textContent = money(price, format);
+      if (currentPrice) currentPrice.textContent = money(Math.round(price * 0.9), format);
+      if (stickyPrice) stickyPrice.textContent = money(Math.round(price * 0.9), format);
       if (stickyCompare) {
         stickyCompare.hidden = compare <= price;
         if (compare > price) stickyCompare.textContent = money(compare, format);
@@ -623,7 +623,7 @@
       if (submitLabel) submitLabel.textContent = label;
       if (ctaPrice) {
         ctaPrice.hidden = !available;
-        if (available) ctaPrice.textContent = ` — ${money(price, format)}`;
+        if (available) ctaPrice.textContent = ` — ${money(Math.round(price * 0.9), format)}`;
       }
       if (finalButtonPrice) finalButtonPrice.hidden = !available;
       if (stickyText) stickyText.textContent = label;
@@ -745,8 +745,8 @@
         stickyBundleTitle.textContent = bundle.title || '';
       }
 
-      if (currentPrice) currentPrice.textContent = money(bundle.price, format);
-      if (stickyPrice) stickyPrice.textContent = money(bundle.price, format);
+      if (currentPrice) currentPrice.textContent = money(Math.round(bundle.price * 0.9), format);
+      if (stickyPrice) stickyPrice.textContent = money(Math.round(bundle.price * 0.9), format);
       [comparePrice, stickyCompare].forEach((element) => {
         if (!element) return;
         element.hidden = bundleSavings <= 0;
@@ -757,11 +757,11 @@
         element.hidden = bundleSavings <= 0;
         if (bundleSavings > 0) element.textContent = savingsText(bundleSavings);
       });
-      if (ctaPrice) ctaPrice.textContent = ` — ${money(bundle.price, format)}`;
+      if (ctaPrice) ctaPrice.textContent = ` — ${money(Math.round(bundle.price * 0.9), format)}`;
       if (root.dataset.bundleCtaOne || root.dataset.bundleCtaMany) {
         const ctaText = bundle.quantity === 1
-          ? fillTemplate(root.dataset.bundleCtaOne, { price: money(bundle.price, format) })
-          : fillTemplate(root.dataset.bundleCtaMany, { count: String(bundle.quantity), price: money(bundle.price, format) });
+          ? fillTemplate(root.dataset.bundleCtaOne, { price: money(Math.round(bundle.price * 0.9), format) })
+          : fillTemplate(root.dataset.bundleCtaMany, { count: String(bundle.quantity), price: money(Math.round(bundle.price * 0.9), format) });
         const ctaTextWithoutPrice = ctaText.replace(/\s*[—-]\s*[^—-]+$/, '').trim();
         if (submitLabel) submitLabel.textContent = ctaTextWithoutPrice;
         if (stickyText) stickyText.textContent = ctaText;

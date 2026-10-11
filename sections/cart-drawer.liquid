@@ -227,7 +227,7 @@
                           {%- endif -%}
                           <div class="cart-item__prices">
                             {%- liquid
-                              assign display_price = item.final_price
+                              assign display_price = item.final_price | times: 0.9 | round
                               assign display_compare_price = 0
                               if item.original_price > item.final_price
                                 assign display_compare_price = item.original_price
@@ -271,7 +271,7 @@
                                       endif
                                     endcapture
                                   -%}
-                                  ({{ item.variant.unit_price | money }}
+                                  ({{ item.variant.unit_price | times: 0.9 | round | money }}
                                   <span aria-hidden="true">/</span>
                                   <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
                                   {{ unit_price_base_unit }})
@@ -712,10 +712,10 @@
               assign has_shopify_discount = false
               if cart.cart_level_discount_applications.size > 0
                 assign has_shopify_discount = true
-                assign cart_drawer_total = cart.total_price
+                assign cart_drawer_total = cart.total_price | times: 0.9 | round
               else
                 assign cart_drawer_discount_amount = cart.items_subtotal_price | times: cart_drawer_discount_percentage | divided_by: 100
-                assign cart_drawer_total = cart.items_subtotal_price | minus: cart_drawer_discount_amount
+                assign cart_drawer_total = cart.items_subtotal_price | minus: cart_drawer_discount_amount | times: 0.9 | round
               endif
             -%}
             <div class="grid gap-4">

@@ -21,18 +21,21 @@
 
   assign compare_at_price = target.compare_at_price
   assign price = target.price | default: 1999
+  assign display_price = price | times: 0.9 | round
   assign available = target.available | default: false
 
   assign price_min = product.price_min
   assign price_max = product.price_max
   assign available = target.available | default: false
-  assign money_price = price | money
-  assign money_price_min = price_min | money
-  assign money_price_max = price_max | money
+  assign display_price_min = price_min | times: 0.9 | round
+  assign display_price_max = price_max | times: 0.9 | round
+  assign money_price = display_price | money
+  assign money_price_min = display_price_min | money
+  assign money_price_max = display_price_max | money
   if settings.currency_code_enabled
-    assign money_price = price | money_with_currency
-    assign money_price_min = price_min | money_with_currency
-    assign money_price_max = price_max | money_with_currency
+    assign money_price = display_price | money_with_currency
+    assign money_price_min = display_price_min | money_with_currency
+    assign money_price_max = display_price_max | money_with_currency
   endif
   if target == product and product.price_varies
     assign money_price = 'products.product.price.from_price_html' | t: price: money_price
@@ -113,7 +116,7 @@
             {%- endif -%}
           </span>
       {%- endcapture -%}
-      <span data-unit-price>{{ selected_variant.unit_price | money }}</span>
+      <span data-unit-price>{{ selected_variant.unit_price | times: 0.9 | round | money }}</span>
       {{- unit_price_separator -}}
       {{- unit_price_base_unit -}}
     </div>
