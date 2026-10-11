@@ -17,7 +17,7 @@
         "announcement_bar_kLmPnx": {
           "type": "announcement_bar",
           "settings": {
-            "text": "First order: 5% off",
+            "text": "New customer: 10% off",
             "link": "",
             "icon": "discount"
           }
