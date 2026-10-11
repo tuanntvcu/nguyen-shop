@@ -72,7 +72,7 @@
             </div>
             <div class="cart-drawer__reward cart-drawer__reward--discount" role="listitem">
               <span class="cart-drawer__reward-icon cart-drawer__reward-icon--percent" aria-hidden="true">%</span>
-              <span class="cart-drawer__reward-label">{{ 'storefront.cart_drawer.discount' | t: percent: 5 }}</span>
+              <span class="cart-drawer__reward-label">{{ 'storefront.cart_drawer.discount' | t: percent: 10 }}</span>
             </div>
           </div>
         </div>
@@ -710,12 +710,9 @@
             {%- liquid
               assign cart_drawer_discount_percentage = settings.cart_drawer_discount_percentage | default: 10 | plus: 0
               assign has_shopify_discount = false
+              assign cart_drawer_total = cart.total_price
               if cart.cart_level_discount_applications.size > 0
                 assign has_shopify_discount = true
-                assign cart_drawer_total = cart.total_price | times: 0.9 | round
-              else
-                assign cart_drawer_discount_amount = cart.items_subtotal_price | times: cart_drawer_discount_percentage | divided_by: 100
-                assign cart_drawer_total = cart.items_subtotal_price | minus: cart_drawer_discount_amount
               endif
             -%}
             <div class="grid gap-4">
