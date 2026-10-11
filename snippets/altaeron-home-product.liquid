@@ -41,7 +41,7 @@
         </div>
       {%- endif -%}
       <div class="ah-product__footer">
-        <span class="ah-product__price">{{ product.price | money }}{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}</span>
+        <span class="ah-product__price">{{ product.price | times: 0.9 | round | money }}{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}</span>
         {%- if product.available -%}
           {%- form 'product', product, is: 'product-form', class: 'ah-quick-add', data-quick-add: '' -%}
             <input type="hidden" name="id" value="{{ selected_variant.id }}">

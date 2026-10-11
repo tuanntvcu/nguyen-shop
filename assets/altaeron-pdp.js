@@ -692,7 +692,7 @@
             const tierQuantity = Number(option.dataset.tierIndex) + 1;
             const quantity = Number(input.dataset.quantity || quantityMatch?.[1] || tierQuantity || 1);
             return {
-              price: parseDisplayedMoney(totalPrice.textContent),
+              price: Number(totalPrice.dataset.altaeronOriginalPrice || parseDisplayedMoney(totalPrice.textContent)),
               compare: parseDisplayedMoney(comparePrice?.textContent),
               quantity,
               title: bundleTitle(option),
@@ -710,12 +710,19 @@
       const setText = (element, value) => {
         if (element && value && element.textContent !== value) element.textContent = value;
       };
-      const firstTierPrice = parseDisplayedMoney(widgetRoot.querySelector('[data-tier-index="0"] .bd-tier__price')?.textContent);
+      const firstTierElement = widgetRoot.querySelector('[data-tier-index="0"] .bd-tier__price');
+      if (firstTierElement && !firstTierElement.dataset.altaeronOriginalPrice) {
+        firstTierElement.dataset.altaeronOriginalPrice = String(parseDisplayedMoney(firstTierElement.textContent));
+      }
+      const firstTierPrice = Number(firstTierElement?.dataset.altaeronOriginalPrice || 0);
       [...widgetRoot.querySelectorAll('[data-tier-index]')].forEach((tier, index) => {
         const quantity = Number(tier.dataset.tierIndex) + 1 || index + 1;
         const priceElement = tier.querySelector('.bd-tier__price');
-        const tierPrice = parseDisplayedMoney(priceElement?.textContent);
-        setText(priceElement, money(tierPrice, format));
+        if (priceElement && !priceElement.dataset.altaeronOriginalPrice) {
+          priceElement.dataset.altaeronOriginalPrice = String(parseDisplayedMoney(priceElement.textContent));
+        }
+        const tierPrice = Number(priceElement?.dataset.altaeronOriginalPrice || 0);
+        setText(priceElement, money(Math.round(tierPrice * 0.9), format));
         if (quantity === 1) return;
 
         const originalTotal = root.classList.contains('altaeron-pdp--reels-v3') && quantity === 2 && firstTierPrice
