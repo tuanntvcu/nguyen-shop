@@ -3,7 +3,7 @@
   assign normalized_text = text | strip | downcase
 
   case normalized_text
-    when 'first order: 5% off'
+    when 'first order: 10% off'
       assign localized_text_key = 'storefront.announcement.first_order_discount'
     when '30-day comfort guarantee'
       assign localized_text_key = 'storefront.announcement.comfort_guarantee'

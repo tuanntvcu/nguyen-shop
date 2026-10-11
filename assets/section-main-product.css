@@ -598,3 +598,16 @@
     color: Window;
   }
 }
+
+.apdp-new-customer-offer {
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 10px 0 8px;
+  text-align: center;
+}
+
+.apdp-new-customer-offer strong {
+  color: inherit;
+  font-weight: 700;
+}

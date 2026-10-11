@@ -10,7 +10,7 @@
 {
   "storefront": {
     "announcement": {
-      "first_order_discount": "Primeira encomenda: 5% de desconto",
+      "first_order_discount": "Primeira encomenda: 10% de desconto",
       "comfort_guarantee": "GARANTIA DE CONFORTO DE 30 DIAS",
       "free_shipping_worldwide": "PORTES GRÁTIS PARA TODO O MUNDO",
       "free_shipping_threshold": "PORTES GRÁTIS EM ENCOMENDAS DE 39 $ OU MAIS"
@@ -1406,7 +1406,7 @@
     }
   },
   "altaeron_pdp_offer": {
-    "new_customer_html": "Novo cliente? <strong>Poupe 5%</strong> — aplicado automaticamente"
+    "new_customer_html": "Novo cliente? <strong>Poupe 10%</strong> — aplicado automaticamente"
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {

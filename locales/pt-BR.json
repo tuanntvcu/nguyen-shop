@@ -9,7 +9,7 @@
  */
 {
   "storefront": {
-    "announcement": { "first_order_discount": "Primeiro pedido: 5% de desconto", "comfort_guarantee": "GARANTIA DE CONFORTO DE 30 DIAS", "free_shipping_worldwide": "FRETE GRÁTIS PARA TODO O MUNDO", "free_shipping_threshold": "FRETE GRÁTIS EM PEDIDOS DE US$ 39 OU MAIS" },
+    "announcement": { "first_order_discount": "Primeiro pedido: 10% de desconto", "comfort_guarantee": "GARANTIA DE CONFORTO DE 30 DIAS", "free_shipping_worldwide": "FRETE GRÁTIS PARA TODO O MUNDO", "free_shipping_threshold": "FRETE GRÁTIS EM PEDIDOS DE US$ 39 OU MAIS" },
     "cart_drawer": { "intro": "Você está a um passo de se movimentar com mais conforto.", "rewards": "Benefícios do carrinho", "free_shipping": "Frete grátis", "discount": "{{ percent }}% DE DESCONTO", "order_benefits": "Benefícios do pedido", "on_every_order": "Em todos os pedidos", "guarantee": "Garantia de 30 dias", "try_with_confidence": "Experimente com confiança", "dedicated_support": "Suporte personalizado", "here_to_help": "Estamos aqui para ajudar", "secure_checkout": "Pagamento seguro", "accepted_payment_methods": "Formas de pagamento aceitas", "complete_care": "COMPLETE SEU CUIDADO", "complete_care_description": "Suporte ajustável para o joelho em caminhadas, dias ativos e longas horas em pé." },
     "home": { "review_placeholder": "As avaliações dos clientes aparecerão aqui quando forem adicionadas.", "sample_customer": "Cliente de exemplo", "preview_content": "Conteúdo de pré-visualização" },
     "pdp": { "fast_shipping": "Envio rápido" },
@@ -697,7 +697,7 @@
     "product": {"rating":"{{ rating }} de 5 estrelas em {{ count }} avaliações","add_to_cart":"Adicionar {{ product }} ao carrinho","choose_options":"Escolher opções para {{ product }}","view":"Ver {{ product }}","best_seller":"Mais vendido"}
   },
   "altaeron_pdp_offer": {
-    "new_customer_html": "Cliente novo? <strong>Economize 5%</strong> — aplicado automaticamente"
+    "new_customer_html": "Cliente novo? <strong>Economize 10%</strong> — aplicado automaticamente"
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
