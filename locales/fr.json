@@ -37,7 +37,8 @@
       "preview_content": "Contenu d’aperçu"
     },
     "pdp": {
-      "fast_shipping": "Cliniquement prouvé"
+      "fast_shipping": "Expédition rapide",
+      "clinically_proven": "Cliniquement prouvé"
     },
     "footer": {
       "brand_html": "<h2>ALTAERON</h2><p>Des solutions soigneusement sélectionnées pour le confort quotidien de vos pieds.</p>",

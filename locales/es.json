@@ -37,7 +37,8 @@
       "preview_content": "Contenido de vista previa"
     },
     "pdp": {
-      "fast_shipping": "Clínicamente probado"
+      "fast_shipping": "Envío rápido",
+      "clinically_proven": "Clínicamente probado"
     },
     "footer": {
       "brand_html": "<h2>ALTAERON</h2><p>Soportes cuidadosamente seleccionados para la comodidad diaria de tus pies.</p>",

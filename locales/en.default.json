@@ -37,7 +37,8 @@
       "preview_content": "Preview content"
     },
     "pdp": {
-      "fast_shipping": "Clinically Proven"
+      "fast_shipping": "Fast shipping",
+      "clinically_proven": "Clinically Proven"
     },
     "footer": {
       "brand_html": "<h2>ALTAERON</h2><p>Thoughtfully selected support for everyday foot comfort.</p>",

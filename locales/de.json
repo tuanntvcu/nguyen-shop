@@ -37,7 +37,8 @@
       "preview_content": "Vorschauinhalt"
     },
     "pdp": {
-      "fast_shipping": "Klinisch bewiesen"
+      "fast_shipping": "Schneller Versand",
+      "clinically_proven": "Klinisch bewiesen"
     },
     "footer": {
       "brand_html": "<h2>ALTAERON</h2><p>Sorgfältig ausgewählte Unterstützung für täglichen Fußkomfort.</p>",
