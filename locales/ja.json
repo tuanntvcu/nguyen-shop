@@ -1067,7 +1067,7 @@
     }
   },
   "altaeron_pdp_offer": {
-    "new_customer_html": "新規のお客様：コードWELCOMEで10%割引"
+    "new_customer_html": "初回のご注文ですか？10%割引 — チェックアウト時に自動適用"
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {

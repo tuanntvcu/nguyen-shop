@@ -697,7 +697,7 @@
     "product": {"rating":"{{ rating }} de 5 estrelas em {{ count }} avaliações","add_to_cart":"Adicionar {{ product }} ao carrinho","choose_options":"Escolher opções para {{ product }}","view":"Ver {{ product }}","best_seller":"Mais vendido"}
   },
   "altaeron_pdp_offer": {
-    "new_customer_html": "Novos clientes: economize 10% com o código WELCOME"
+    "new_customer_html": "Primeiro pedido? Economize 10% — aplicado automaticamente no checkout"
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
