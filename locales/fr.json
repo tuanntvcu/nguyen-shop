@@ -1490,8 +1490,10 @@
       "paragraph_3": "Sans traitement, la situation peut s’aggraver. Vos orteils peuvent se chevaucher et des orteils en marteau ou des excroissances osseuses peuvent apparaître.",
       "paragraph_4_html": "L’hallux valgus est un <span class=\"apdp-gallery-story__alert\">trouble évolutif</span> qui ne disparaît pas de lui-même.",
       "paragraph_5_html": "Au fil du temps, il peut entraîner des problèmes plus graves, comme <span class=\"apdp-gallery-story__consequence\">une chirurgie invasive, des problèmes aux hanches, aux genoux et au bas du dos, voire une perte de mobilité.</span>",
-      "paragraph_6": "Grâce aux bienfaits d’une thérapie d’alignement avancée éprouvée cliniquement et à un mécanisme d’articulation breveté, le Bunion Fix Alateron cible efficacement l’inconfort lié à l’hallux valgus et aide votre pied à retrouver son bien-être avec seulement 30 minutes d’utilisation quotidienne.",
-      "result_html": "91 % des utilisateurs ont signalé une <strong>réduction de la douleur au pied</strong> dès la première semaine"
+      "paragraph_6": "",
+      "result_html": "91 % des utilisateurs ont signalé une <strong>réduction de la douleur au pied</strong> dès la première semaine",
+      "paragraph_6_a": "Grâce à une thérapie d’alignement cliniquement éprouvée et à un mécanisme de charnière breveté, l’Altaeron™ Adjustable Bunion Corrector cible la gêne dans la zone touchée du pied.",
+      "paragraph_6_b": "Seulement 30 minutes d’utilisation quotidienne contribuent au bien-être de vos pieds."
     },
     "buy": {
       "choose_option": "Choisissez une option",
@@ -1715,14 +1717,33 @@
     },
     "try_home": {
       "eyebrow": "ESSAYEZ-LE CHEZ VOUS",
-      "heading": "Ne vous contentez pas de protéger l’hallux valgus. Agissez sur la position qui le crée.",
-      "body": "Les protections amortissent la bosse.\n\nAltaeron va plus loin en guidant le gros orteil lui-même.\n\nFixez l’attelle. Réglez une traction confortable vers l’extérieur. Laissez le gros orteil passer du temps hors de sa position comprimée.",
-      "handwritten_message": "87 % des utilisateurs ont rapporté des <b>améliorations visibles</b> dès le premier mois.",
+      "heading": "Vous n’êtes plus qu’à un pas de vous LIBÉRER de l’inconfort lié à l’hallux valgus, des orteils gonflés et des douleurs aux pieds...",
+      "body": "Si vous lisez ceci, il est probable que vous souffriez d’un inconfort persistant lié à l’hallux valgus.\n\nConséquence : la douleur et l’inconfort affectent vos activités quotidiennes.\n\nSans traitement, la situation peut s’aggraver. Vos orteils peuvent se chevaucher et des orteils en marteau ou des excroissances osseuses peuvent apparaître.\n\nL’hallux valgus est un trouble évolutif qui ne disparaît pas de lui-même.\n\nAu fil du temps, il peut entraîner des problèmes plus graves, comme une chirurgie invasive, des problèmes aux hanches, aux genoux et au bas du dos, voire une perte de mobilité.\n\nGrâce à une thérapie d’alignement cliniquement éprouvée et à un mécanisme de charnière breveté, l’Altaeron™ Adjustable Bunion Corrector cible la gêne dans la zone touchée du pied.\n\nSeulement 30 minutes d’utilisation quotidienne contribuent au bien-être de vos pieds.",
+      "handwritten_message": "91 % des utilisateurs ont signalé une réduction de la douleur au pied dès la première semaine",
       "cta_text": "COMMENCEZ VOTRE CORRECTION →",
       "cta_reassurance": "Retours faciles sous 30 jours · Livraison gratuite avec suivi",
-      "banner_text": "87 % des utilisateurs ont rapporté des <b>améliorations visibles</b> dès le premier mois.",
+      "banner_text": "91 % des utilisateurs ont signalé une réduction de la douleur au pied dès la première semaine",
       "trust_1_title": "Retours faciles sous 30 jours",
-      "trust_1_body": "Essayez-le dans le cadre de votre routine habituelle à la maison."
+      "trust_1_body": "Essayez-le dans le cadre de votre routine habituelle à la maison.",
+      "title_before": "Vous n’êtes plus qu’à un pas de ",
+      "title_emphasis": "vous LIBÉRER de l’inconfort lié à l’hallux valgus",
+      "title_after": ", des orteils gonflés et des douleurs aux pieds...",
+      "body_1_before": "Si vous lisez ceci, il est probable que vous souffriez d’un ",
+      "body_1_emphasis": "inconfort persistant lié à l’hallux valgus.",
+      "body_1_after": "",
+      "body_2": "Conséquence : la douleur et l’inconfort affectent vos activités quotidiennes.",
+      "body_3": "Sans traitement, la situation peut s’aggraver. Vos orteils peuvent se chevaucher et des orteils en marteau ou des excroissances osseuses peuvent apparaître.",
+      "body_4_before": "L’hallux valgus est un ",
+      "body_4_emphasis": "trouble évolutif",
+      "body_4_after": " qui ne disparaît pas de lui-même.",
+      "body_5_before": "Au fil du temps, il peut entraîner des problèmes plus graves, comme ",
+      "body_5_emphasis": "une chirurgie invasive, des problèmes aux hanches, aux genoux et au bas du dos, voire une perte de mobilité.",
+      "body_5_after": "",
+      "body_6": "Grâce à une thérapie d’alignement cliniquement éprouvée et à un mécanisme de charnière breveté, l’Altaeron™ Adjustable Bunion Corrector cible la gêne dans la zone touchée du pied.",
+      "body_7": "Seulement 30 minutes d’utilisation quotidienne contribuent au bien-être de vos pieds.",
+      "close_before": "91 % des utilisateurs ont signalé une ",
+      "close_emphasis": "réduction de la douleur au pied",
+      "close_after": " dès la première semaine"
     },
     "faq": {
       "title": "Vous hésitez encore ?",
@@ -1937,11 +1958,11 @@
       "footer": "Pour un ajustement plus fiable, comparez les deux mesures de circonférence avec le tableau avant de sélectionner votre taille."
     },
     "story": {
-      "title": "Vous êtes à un tour de",
-      "title_emphasis": "Un mouvement plus confiant et soutenu.",
-      "paragraph_1": "La marche, les escaliers, les séances d'entraînement et les longues heures debout peuvent exercer un stress répété sur vos genoux.",
-      "paragraph_2": "Le DialFit vous offre un soutien réglable lorsque vous en avez besoin, aidant votre genou à se sentir plus en sécurité lors des mouvements quotidiens sans verrouiller votre jambe dans une attelle rigide encombrante.",
-      "highlight": "Serrez-le lorsque vous souhaitez plus de soutien. Facilitez-le lorsque vous ne le faites pas."
+        "title": "Vous êtes à un tour de",
+        "title_emphasis": "Un mouvement plus confiant et soutenu.",
+        "paragraph_1": "La marche, les escaliers, les séances d'entraînement et les longues heures debout peuvent exercer un stress répété sur vos genoux.",
+        "paragraph_2": "Le DialFit vous offre un soutien réglable lorsque vous en avez besoin, aidant votre genou à se sentir plus en sécurité lors des mouvements quotidiens sans verrouiller votre jambe dans une attelle rigide encombrante.",
+        "highlight": "Serrez-le lorsque vous souhaitez plus de soutien. Facilitez-le lorsque vous ne le faites pas."
     },
     "mechanism": {
       "title": "La différence réside dans le cadran.",

@@ -1490,8 +1490,10 @@
       "paragraph_3": "Ohne Behandlung kann es schlimmer werden. Die Zehen können sich überkreuzen und Hammerzehen oder Knochensporne können entstehen.",
       "paragraph_4_html": "Hallux valgus ist eine <span class=\"apdp-gallery-story__alert\">fortschreitende Erkrankung</span>, die nicht von selbst verschwindet.",
       "paragraph_5_html": "Mit der Zeit kann dies zu ernsteren Problemen führen, darunter <span class=\"apdp-gallery-story__consequence\">invasive Operationen, Beschwerden an Hüfte, Knien und unterem Rücken sowie sogar eingeschränkte Beweglichkeit.</span>",
-      "paragraph_6": "Durch eine klinisch erprobte, fortschrittliche Ausrichtungstherapie und einen patentierten Gelenkmechanismus lindert der Alateron Bunion Fix Beschwerden im betroffenen Fußbereich und unterstützt die Fußgesundheit bei nur 30 Minuten täglicher Anwendung.",
-      "result_html": "91 % der Anwender berichteten bereits in der ersten Woche über <strong>weniger Fußschmerzen</strong>"
+      "paragraph_6": "",
+      "result_html": "91 % der Anwender berichteten bereits in der ersten Woche über <strong>weniger Fußschmerzen</strong>",
+      "paragraph_6_a": "Mit klinisch erprobter Ausrichtungstherapie und patentiertem Scharniermechanismus wirkt der Altaeron™ Adjustable Bunion Corrector gezielt gegen Beschwerden im betroffenen Fußbereich.",
+      "paragraph_6_b": "Schon 30 Minuten tägliche Anwendung unterstützen die Fußgesundheit."
     },
     "buy": {
       "choose_option": "Option auswählen",
@@ -1715,14 +1717,33 @@
     },
     "try_home": {
       "eyebrow": "ZU HAUSE AUSPROBIEREN",
-      "heading": "Den Ballen nicht nur polstern. An seiner Ursache arbeiten.",
-      "body": "Ballenpolster schützen die Erhebung.\n\nAltaeron geht weiter und führt den großen Zeh selbst.\n\nSchiene befestigen. Angenehmen Zug nach außen einstellen. Den großen Zeh Zeit außerhalb der eingeengten Position verbringen lassen.",
-      "handwritten_message": "87 % der Anwender berichteten bereits im ersten Monat von <b>sichtbaren Verbesserungen</b>.",
+      "heading": "Sie sind nur noch einen Schritt davon entfernt, Hallux-valgus-Beschwerden, geschwollene Zehen und Fußschmerzen LOSZUWERDEN...",
+      "body": "Wenn Sie das lesen, leiden Sie wahrscheinlich unter anhaltenden Hallux-valgus-Beschwerden.\n\nDie Folge: Schmerzen und Beschwerden beeinträchtigen Ihren Alltag.\n\nOhne Behandlung kann es schlimmer werden. Die Zehen können sich überkreuzen und Hammerzehen oder Knochensporne können entstehen.\n\nHallux valgus ist eine fortschreitende Erkrankung, die nicht von selbst verschwindet.\n\nMit der Zeit kann dies zu ernsteren Problemen führen, darunter invasive Operationen, Beschwerden an Hüfte, Knien und unterem Rücken sowie sogar eingeschränkte Beweglichkeit.\n\nMit klinisch erprobter Ausrichtungstherapie und patentiertem Scharniermechanismus wirkt der Altaeron™ Adjustable Bunion Corrector gezielt gegen Beschwerden im betroffenen Fußbereich.\n\nSchon 30 Minuten tägliche Anwendung unterstützen die Fußgesundheit.",
+      "handwritten_message": "91 % der Anwender berichteten bereits in der ersten Woche über weniger Fußschmerzen",
       "cta_text": "KORREKTUR STARTEN →",
       "cta_reassurance": "30 Tage einfache Rückgabe · Kostenloser Versand mit Sendungsverfolgung",
-      "banner_text": "87 % der Anwender berichteten bereits im ersten Monat von <b>sichtbaren Verbesserungen</b>.",
+      "banner_text": "91 % der Anwender berichteten bereits in der ersten Woche über weniger Fußschmerzen",
       "trust_1_title": "30 Tage einfache Rückgabe",
-      "trust_1_body": "Probieren Sie es als Teil Ihrer normalen Routine zu Hause aus."
+      "trust_1_body": "Probieren Sie es als Teil Ihrer normalen Routine zu Hause aus.",
+      "title_before": "Sie sind nur noch einen Schritt davon entfernt, ",
+      "title_emphasis": "Hallux-valgus-Beschwerden, geschwollene Zehen und Fußschmerzen LOSZUWERDEN",
+      "title_after": "...",
+      "body_1_before": "Wenn Sie das lesen, leiden Sie wahrscheinlich unter anhaltenden ",
+      "body_1_emphasis": "Hallux-valgus-Beschwerden.",
+      "body_1_after": "",
+      "body_2": "Die Folge: Schmerzen und Beschwerden beeinträchtigen Ihren Alltag.",
+      "body_3": "Ohne Behandlung kann es schlimmer werden. Die Zehen können sich überkreuzen und Hammerzehen oder Knochensporne können entstehen.",
+      "body_4_before": "Hallux valgus ist eine ",
+      "body_4_emphasis": "fortschreitende Erkrankung",
+      "body_4_after": ", die nicht von selbst verschwindet.",
+      "body_5_before": "Mit der Zeit kann dies zu ernsteren Problemen führen, darunter ",
+      "body_5_emphasis": "invasive Operationen, Beschwerden an Hüfte, Knien und unterem Rücken sowie sogar eingeschränkte Beweglichkeit.",
+      "body_5_after": "",
+      "body_6": "Mit klinisch erprobter Ausrichtungstherapie und patentiertem Scharniermechanismus wirkt der Altaeron™ Adjustable Bunion Corrector gezielt gegen Beschwerden im betroffenen Fußbereich.",
+      "body_7": "Schon 30 Minuten tägliche Anwendung unterstützen die Fußgesundheit.",
+      "close_before": "91 % der Anwender berichteten bereits in der ersten Woche über ",
+      "close_emphasis": "weniger Fußschmerzen",
+      "close_after": ""
     },
     "faq": {
       "title": "Noch unentschlossen?",
@@ -1937,11 +1958,11 @@
       "footer": "Um eine optimale Passform zu gewährleisten, vergleichen Sie beide Umfangsmaße mit der Tabelle, bevor Sie Ihre Größe auswählen."
     },
     "story": {
-      "title": "Sie sind nur eine Umdrehung entfernt",
-      "title_emphasis": "Selbstbewusstere, unterstützte Bewegung.",
-      "paragraph_1": "Gehen, Treppensteigen, Training und langes Stehen auf den Beinen können Ihre Knie immer wieder belasten.",
-      "paragraph_2": "DialFit bietet Ihnen bei Bedarf anpassbare Unterstützung – so fühlt sich Ihr Knie bei alltäglichen Bewegungen sicherer an, ohne dass Ihr Bein in einer sperrigen, starren Orthese eingeklemmt wird.",
-      "highlight": "Ziehen Sie es fester an, wenn Sie mehr Unterstützung wünschen. Erleichtern Sie es, wenn Sie es nicht tun."
+        "title": "Sie sind nur eine Umdrehung entfernt",
+        "title_emphasis": "Selbstbewusstere, unterstützte Bewegung.",
+        "paragraph_1": "Gehen, Treppensteigen, Training und langes Stehen auf den Beinen können Ihre Knie immer wieder belasten.",
+        "paragraph_2": "DialFit bietet Ihnen bei Bedarf anpassbare Unterstützung – so fühlt sich Ihr Knie bei alltäglichen Bewegungen sicherer an, ohne dass Ihr Bein in einer sperrigen, starren Orthese eingeklemmt wird.",
+        "highlight": "Ziehen Sie es fester an, wenn Sie mehr Unterstützung wünschen. Erleichtern Sie es, wenn Sie es nicht tun."
     },
     "mechanism": {
       "title": "Der Unterschied liegt im Zifferblatt.",

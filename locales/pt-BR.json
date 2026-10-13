@@ -780,8 +780,10 @@
       "paragraph_3": "Sem tratamento, a situação pode piorar. Os dedos podem se cruzar e podem surgir dedos em martelo e esporões ósseos.",
       "paragraph_4_html": "Os joanetes são uma <span class=\"apdp-gallery-story__alert\">condição progressiva</span> e não desaparecem sozinhos.",
       "paragraph_5_html": "Com o tempo, podem causar problemas mais sérios, como <span class=\"apdp-gallery-story__consequence\">cirurgia invasiva, problemas nos quadris, joelhos e lombar, e até imobilidade.</span>",
-      "paragraph_6": "Com uma terapia avançada de alinhamento clinicamente comprovada e um mecanismo de articulação patenteado, o Bunion Fix da Alateron atua no desconforto do joanete e ajuda a recuperar o bem-estar do pé com apenas 30 minutos de uso diário.",
-      "result_html": "91% dos usuários relataram <strong>redução da dor nos pés</strong> já na primeira semana"
+      "paragraph_6": "",
+      "result_html": "91% dos usuários relataram <strong>redução da dor nos pés</strong> já na primeira semana",
+      "paragraph_6_a": "Com terapia de alinhamento clinicamente comprovada e um mecanismo de dobradiça patenteado, o Altaeron™ Adjustable Bunion Corrector atua no desconforto na área afetada do pé.",
+      "paragraph_6_b": "Com apenas 30 minutos de uso diário, ajuda a cuidar da saúde dos pés."
     },
     "buy": {
       "choose_option": "Escolha uma opção",
@@ -1005,14 +1007,33 @@
     },
     "try_home": {
       "eyebrow": "EXPERIMENTE EM CASA",
-      "heading": "Não apenas acolchoe o joanete. Trabalhe na posição que o provoca.",
-      "body": "Protetores de joanete protegem a saliência.\n\nAltaeron vai além ao guiar o próprio dedão.\n\nPrenda o corretor. Ajuste uma tração confortável para fora. Deixe o dedão passar algum tempo longe da posição apertada.",
-      "handwritten_message": "87% dos usuários relataram <b>melhoras visíveis</b> já no primeiro mês.",
+      "heading": "Você está a apenas um passo de se LIVRAR do desconforto dos joanetes, dos dedos inchados e das dores nos pés...",
+      "body": "Se você está lendo isto, provavelmente sofre de desconforto persistente causado por joanetes.\n\nO resultado? A dor e o desconforto afetam suas atividades diárias.\n\nSem tratamento, a situação pode piorar. Os dedos podem se cruzar e podem surgir dedos em martelo e esporões ósseos.\n\nOs joanetes são uma condição progressiva e não desaparecem sozinhos.\n\nCom o tempo, podem causar problemas mais sérios, como cirurgia invasiva, problemas nos quadris, joelhos e lombar, e até imobilidade.\n\nCom terapia de alinhamento clinicamente comprovada e um mecanismo de dobradiça patenteado, o Altaeron™ Adjustable Bunion Corrector atua no desconforto na área afetada do pé.\n\nCom apenas 30 minutos de uso diário, ajuda a cuidar da saúde dos pés.",
+      "handwritten_message": "91% dos usuários relataram redução da dor nos pés já na primeira semana",
       "cta_text": "COMECE SUA CORREÇÃO →",
       "cta_reassurance": "Devolução fácil em 30 dias · Frete grátis com rastreamento",
-      "banner_text": "87% dos usuários relataram <b>melhoras visíveis</b> já no primeiro mês.",
+      "banner_text": "91% dos usuários relataram redução da dor nos pés já na primeira semana",
       "trust_1_title": "Devoluções fáceis em até 30 dias",
-      "trust_1_body": "Experimente-o como parte da sua rotina normal em casa."
+      "trust_1_body": "Experimente-o como parte da sua rotina normal em casa.",
+      "title_before": "Você está a apenas um passo de ",
+      "title_emphasis": "se LIVRAR do desconforto dos joanetes",
+      "title_after": ", dos dedos inchados e das dores nos pés...",
+      "body_1_before": "Se você está lendo isto, provavelmente sofre de ",
+      "body_1_emphasis": "desconforto persistente causado por joanetes.",
+      "body_1_after": "",
+      "body_2": "O resultado? A dor e o desconforto afetam suas atividades diárias.",
+      "body_3": "Sem tratamento, a situação pode piorar. Os dedos podem se cruzar e podem surgir dedos em martelo e esporões ósseos.",
+      "body_4_before": "Os joanetes são uma ",
+      "body_4_emphasis": "condição progressiva",
+      "body_4_after": " e não desaparecem sozinhos.",
+      "body_5_before": "Com o tempo, podem causar problemas mais sérios, como ",
+      "body_5_emphasis": "cirurgia invasiva, problemas nos quadris, joelhos e lombar, e até imobilidade.",
+      "body_5_after": "",
+      "body_6": "Com terapia de alinhamento clinicamente comprovada e um mecanismo de dobradiça patenteado, o Altaeron™ Adjustable Bunion Corrector atua no desconforto na área afetada do pé.",
+      "body_7": "Com apenas 30 minutos de uso diário, ajuda a cuidar da saúde dos pés.",
+      "close_before": "91% dos usuários relataram ",
+      "close_emphasis": "redução da dor nos pés",
+      "close_after": " já na primeira semana"
     },
     "faq": {
       "title": "Ainda está decidindo?",
@@ -1204,11 +1225,11 @@
       "footer": "Para um ajuste mais confiável, compare ambas as medidas de circunferência com a tabela antes de selecionar seu tamanho."
     },
     "story": {
-      "title": "Você está a um passo de distância",
-      "title_emphasis": "Movimento mais confiante e apoiado.",
-      "paragraph_1": "Caminhadas, escadas, exercícios e longas horas em pé podem causar estresse repetido nos joelhos.",
-      "paragraph_2": "DialFit oferece suporte ajustável quando você precisa - ajudando seu joelho a se sentir mais seguro durante os movimentos diários, sem travar a perna dentro de uma cinta rígida volumosa.",
-      "highlight": "Aperte quando quiser mais suporte. Facilite quando não o fizer."
+        "title": "Você está a um passo de distância",
+        "title_emphasis": "Movimento mais confiante e apoiado.",
+        "paragraph_1": "Caminhadas, escadas, exercícios e longas horas em pé podem causar estresse repetido nos joelhos.",
+        "paragraph_2": "DialFit oferece suporte ajustável quando você precisa - ajudando seu joelho a se sentir mais seguro durante os movimentos diários, sem travar a perna dentro de uma cinta rígida volumosa.",
+        "highlight": "Aperte quando quiser mais suporte. Facilite quando não o fizer."
     },
     "mechanism": {
       "title": "A diferença está no mostrador.",

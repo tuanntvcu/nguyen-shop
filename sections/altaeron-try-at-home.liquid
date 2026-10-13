@@ -1,19 +1,18 @@
 {%- liquid
   assign eyebrow = section.settings.eyebrow
-  assign heading = section.settings.heading
-  assign body = section.settings.body
-  assign handwritten_message = section.settings.handwritten_message
+  assign title_before = 'altaeron_pdp_reels_v3.try_home.title_before' | t
+  assign title_emphasis = 'altaeron_pdp_reels_v3.try_home.title_emphasis' | t
+  assign title_after = 'altaeron_pdp_reels_v3.try_home.title_after' | t
+  assign close_before = 'altaeron_pdp_reels_v3.try_home.close_before' | t
+  assign close_emphasis = 'altaeron_pdp_reels_v3.try_home.close_emphasis' | t
+  assign close_after = 'altaeron_pdp_reels_v3.try_home.close_after' | t
+  assign heading = title_before | append: title_emphasis | append: title_after
   assign cta_text = section.settings.cta_text
   assign cta_reassurance = section.settings.cta_reassurance
-  assign banner_text = section.settings.banner_text
   unless request.locale.iso_code == 'en'
     assign eyebrow = 'altaeron_pdp_reels_v3.try_home.eyebrow' | t
-    assign heading = 'altaeron_pdp_reels_v3.try_home.heading' | t
-    assign body = 'altaeron_pdp_reels_v3.try_home.body' | t
-    assign handwritten_message = 'altaeron_pdp_reels_v3.try_home.handwritten_message' | t
     assign cta_text = 'altaeron_pdp_reels_v3.try_home.cta_text' | t
     assign cta_reassurance = 'altaeron_pdp_reels_v3.try_home.cta_reassurance' | t
-    assign banner_text = 'altaeron_pdp_reels_v3.try_home.banner_text' | t
   endunless
   assign hero_alt = section.settings.hero_image.alt | default: heading
   assign cta_link = section.settings.cta_link
@@ -38,8 +37,13 @@
   #AltaeronTryHome-{{ section.id }} .alta-try__eyebrow { align-items: center; color: var(--alta-try-accent); display: flex; font-size: 12px; font-weight: 750; gap: 12px; letter-spacing: .24em; line-height: 1.3; margin: 0 0 12px; text-transform: uppercase; }
   #AltaeronTryHome-{{ section.id }} .alta-try__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
   #AltaeronTryHome-{{ section.id }} .alta-try__heading { color: var(--alta-try-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(32px, 3.2vw, 48px); font-weight: 750; letter-spacing: -.038em; line-height: 1.06; margin: 0; max-width: 560px; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__heading strong { color: #1674b8; }
   #AltaeronTryHome-{{ section.id }} .alta-try__body { color: var(--alta-try-body); font-size: clamp(16px, 1.4vw, 19px); line-height: 1.55; margin: 14px 0 0; max-width: 610px; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__body p { margin: 0 0 14px; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__body p:last-child { margin-bottom: 0; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__body strong { color: #ff4d54; font-weight: 700; }
   #AltaeronTryHome-{{ section.id }} .alta-try__note { border-left: 2px solid rgba(0,107,94,.35); color: var(--alta-try-accent); font-family: var(--font-heading-family, inherit); font-size: clamp(19px, 2vw, 27px); font-style: italic; font-weight: 500; letter-spacing: -.015em; line-height: 1.25; margin: 28px 0 0; padding: 2px 0 2px 18px; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__note strong { color: #1674b8; }
   #AltaeronTryHome-{{ section.id }} .alta-try__hero-media { background: #edf1ef; min-height: 520px; overflow: hidden; }
   #AltaeronTryHome-{{ section.id }} .alta-try__hero-media :is(img, svg),
   #AltaeronTryHome-{{ section.id }} .alta-try-trust__icon :is(img, svg) { display: block; height: 100%; object-fit: cover; width: 100%; }
@@ -112,10 +116,18 @@
     <div class="alta-try__hero">
       <div class="alta-try__content">
         {%- if eyebrow != blank -%}<p class="alta-try__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
-        <h2 id="AltaeronTryHomeHeading-{{ section.id }}" class="alta-try__heading">{{ heading | escape }}</h2>
-        {%- if body != blank -%}<p class="alta-try__body">{{ body | escape | newline_to_br }}</p>{%- endif -%}
-        {%- if section.settings.show_handwritten and handwritten_message != blank -%}
-          <p class="alta-try__note">{{ handwritten_message | escape | newline_to_br }}</p>
+        <h2 id="AltaeronTryHomeHeading-{{ section.id }}" class="alta-try__heading">{{ title_before | escape }}<strong>{{ title_emphasis | escape }}</strong>{{ title_after | escape }}</h2>
+        <div class="alta-try__body">
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_1_before' | t | escape }}<strong>{{ 'altaeron_pdp_reels_v3.try_home.body_1_emphasis' | t | escape }}</strong>{{ 'altaeron_pdp_reels_v3.try_home.body_1_after' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_2' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_3' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_4_before' | t | escape }}<strong>{{ 'altaeron_pdp_reels_v3.try_home.body_4_emphasis' | t | escape }}</strong>{{ 'altaeron_pdp_reels_v3.try_home.body_4_after' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_5_before' | t | escape }}<strong>{{ 'altaeron_pdp_reels_v3.try_home.body_5_emphasis' | t | escape }}</strong>{{ 'altaeron_pdp_reels_v3.try_home.body_5_after' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_6' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_7' | t | escape }}</p>
+        </div>
+        {%- if section.settings.show_handwritten and close_before != blank -%}
+          <p class="alta-try__note">{{ close_before | escape }}<strong>{{ close_emphasis | escape }}</strong>{{ close_after | escape }}</p>
         {%- endif -%}
       </div>
       <div class="alta-try__hero-media">
@@ -175,7 +187,7 @@
     {%- if section.settings.show_banner -%}
       <div class="alta-try__banner">
         <div class="alta-try__banner-copy">
-          <p>{{ banner_text | escape }}</p>
+          <p>{{ close_before | escape }}<strong>{{ close_emphasis | escape }}</strong>{{ close_after | escape }}</p>
         </div>
       </div>
     {%- endif -%}
@@ -190,19 +202,19 @@
   "enabled_on": { "templates": ["product"] },
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "TRY IT AT HOME" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Give your feet time to decide." },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "Take time to find the support level and routine that feel right for you. If Altaeron isn’t right for your feet, return it within 30 days." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You Are Just One Foot Away From Being FREE of Bunion Discomfort, Swollen Toes, or Foot Aches..." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "If you’re reading this, chances are you are suffering from persistent bunion discomfort.\n\nThe pain and discomfort can affect your daily activities.\n\nIf left untreated, bunions can worsen. Your toes may cross over, and hammer toes or bone spurs may develop.\n\nBunions are a progressive disorder and may not go away on their own.\n\nOver time, this can lead to more serious issues, including invasive surgery, problems in your hips, knees and lower back, and even immobility.\n\nHarnessing clinically proven advanced alignment therapy and a patented hinge-joint mechanism, the Altaeron™ Adjustable Bunion Corrector addresses bunion discomfort around the affected area of your foot.\n\nIt supports foot health with as little as 30 minutes of daily use." },
     { "type": "image_picker", "id": "hero_image", "label": "Hero lifestyle image" },
     { "type": "header", "content": "Supporting message" },
     { "type": "checkbox", "id": "show_handwritten", "label": "Show supporting message", "default": true },
-    { "type": "textarea", "id": "handwritten_message", "label": "Supporting message", "default": "Support\na more comfortable\ntomorrow" },
+    { "type": "textarea", "id": "handwritten_message", "label": "Supporting message", "default": "91% of users reported reduced foot pain from the first week." },
     { "type": "header", "content": "Call to action" },
     { "type": "text", "id": "cta_text", "label": "CTA text", "default": "START YOUR CORRECTION →" },
     { "type": "url", "id": "cta_link", "label": "CTA link" },
     { "type": "text", "id": "cta_reassurance", "label": "CTA reassurance", "default": "Secure checkout · 30-day easy returns" },
     { "type": "header", "content": "Bottom banner" },
     { "type": "checkbox", "id": "show_banner", "label": "Show bottom banner", "default": true },
-    { "type": "textarea", "id": "banner_text", "label": "Banner text", "default": "A small step for today.\nGreater comfort for tomorrow." }
+    { "type": "textarea", "id": "banner_text", "label": "Banner text", "default": "91% of users reported reduced foot pain from the first week." }
   ],
   "blocks": [
     {

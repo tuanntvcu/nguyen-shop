@@ -1490,8 +1490,10 @@
       "paragraph_3": "Si no se trata, puede empeorar. Los dedos pueden cruzarse y pueden aparecer dedos en martillo y espolones óseos.",
       "paragraph_4_html": "Los juanetes son un <span class=\"apdp-gallery-story__alert\">trastorno progresivo</span> y no desaparecen por sí solos.",
       "paragraph_5_html": "Con el tiempo, pueden provocar problemas más graves, como <span class=\"apdp-gallery-story__consequence\">cirugía invasiva, problemas en las caderas, las rodillas y la zona lumbar, e incluso inmovilidad.</span>",
-      "paragraph_6": "Gracias a una terapia avanzada de alineación clínicamente probada y a un mecanismo de articulación patentado, Bunion Fix de Alateron trata eficazmente las molestias del juanete en la zona afectada y ayuda a recuperar el bienestar del pie con tan solo 30 minutos de uso diario.",
-      "result_html": "El 91 % de los usuarios indicó una <strong>reducción del dolor de pies</strong> desde la primera semana"
+      "paragraph_6": "",
+      "result_html": "El 91 % de los usuarios indicó una <strong>reducción del dolor de pies</strong> desde la primera semana",
+      "paragraph_6_a": "Con terapia de alineación clínicamente probada y un mecanismo articulado patentado, el Altaeron™ Adjustable Bunion Corrector actúa sobre las molestias en la zona afectada del pie.",
+      "paragraph_6_b": "Con solo 30 minutos de uso diario, ayuda a cuidar la salud de tus pies."
     },
     "buy": {
       "choose_option": "Elige una opción",
@@ -1715,14 +1717,33 @@
     },
     "try_home": {
       "eyebrow": "PRUÉBALO EN CASA",
-      "heading": "No te limites a acolchar el juanete. Trabaja sobre la posición que lo crea.",
-      "body": "Las almohadillas protegen el bulto.\n\nAltaeron va más allá al guiar el propio dedo gordo.\n\nAsegura el corrector. Ajusta una tracción cómoda hacia fuera. Deja que el dedo gordo pase tiempo lejos de la posición comprimida.",
-      "handwritten_message": "El 87 % de los usuarios reportó <b>mejoras visibles</b> desde el primer mes.",
+      "heading": "Estás a un solo paso de LIBERARTE de las molestias de los juanetes, los dedos hinchados y el dolor de pies...",
+      "body": "Si estás leyendo esto, probablemente sufres molestias persistentes por los juanetes.\n\n¿El resultado? El dolor y las molestias afectan a tus actividades diarias.\n\nSi no se trata, puede empeorar. Los dedos pueden cruzarse y pueden aparecer dedos en martillo y espolones óseos.\n\nLos juanetes son un trastorno progresivo y no desaparecen por sí solos.\n\nCon el tiempo, pueden provocar problemas más graves, como cirugía invasiva, problemas en las caderas, las rodillas y la zona lumbar, e incluso inmovilidad.\n\nCon terapia de alineación clínicamente probada y un mecanismo articulado patentado, el Altaeron™ Adjustable Bunion Corrector actúa sobre las molestias en la zona afectada del pie.\n\nCon solo 30 minutos de uso diario, ayuda a cuidar la salud de tus pies.",
+      "handwritten_message": "El 91 % de los usuarios indicó una reducción del dolor de pies desde la primera semana",
       "cta_text": "EMPIEZA TU CORRECCIÓN →",
       "cta_reassurance": "Devoluciones fáciles durante 30 días · Envío gratis con seguimiento",
-      "banner_text": "El 87 % de los usuarios reportó <b>mejoras visibles</b> desde el primer mes.",
+      "banner_text": "El 91 % de los usuarios indicó una reducción del dolor de pies desde la primera semana",
       "trust_1_title": "Devoluciones fáciles durante 30 días",
-      "trust_1_body": "Pruébalo como parte de tu rutina habitual en casa."
+      "trust_1_body": "Pruébalo como parte de tu rutina habitual en casa.",
+      "title_before": "Estás a un solo paso de ",
+      "title_emphasis": "LIBERARTE de las molestias de los juanetes",
+      "title_after": ", los dedos hinchados y el dolor de pies...",
+      "body_1_before": "Si estás leyendo esto, probablemente sufres ",
+      "body_1_emphasis": "molestias persistentes por los juanetes.",
+      "body_1_after": "",
+      "body_2": "¿El resultado? El dolor y las molestias afectan a tus actividades diarias.",
+      "body_3": "Si no se trata, puede empeorar. Los dedos pueden cruzarse y pueden aparecer dedos en martillo y espolones óseos.",
+      "body_4_before": "Los juanetes son un ",
+      "body_4_emphasis": "trastorno progresivo",
+      "body_4_after": " y no desaparecen por sí solos.",
+      "body_5_before": "Con el tiempo, pueden provocar problemas más graves, como ",
+      "body_5_emphasis": "cirugía invasiva, problemas en las caderas, las rodillas y la zona lumbar, e incluso inmovilidad.",
+      "body_5_after": "",
+      "body_6": "Con terapia de alineación clínicamente probada y un mecanismo articulado patentado, el Altaeron™ Adjustable Bunion Corrector actúa sobre las molestias en la zona afectada del pie.",
+      "body_7": "Con solo 30 minutos de uso diario, ayuda a cuidar la salud de tus pies.",
+      "close_before": "El 91 % de los usuarios indicó una ",
+      "close_emphasis": "reducción del dolor de pies",
+      "close_after": " desde la primera semana"
     },
     "faq": {
       "title": "¿Aún lo estás pensando?",
@@ -1937,11 +1958,11 @@
       "footer": "Para obtener el ajuste más confiable, compare ambas medidas de circunferencia con la tabla antes de seleccionar su talla."
     },
     "story": {
-      "title": "Estás a una vuelta de",
-      "title_emphasis": "Movimiento más seguro y apoyado.",
-      "paragraph_1": "Caminar, subir escaleras, hacer ejercicio y pasar largas horas de pie pueden generar tensión repetida en las rodillas.",
-      "paragraph_2": "DialFit le brinda sujeción ajustable cuando la necesita, ayudando a que la rodilla se sienta más segura durante el movimiento diario sin inmovilizar la pierna dentro de una ortesis rígida y voluminosa.",
-      "highlight": "Apriétalo cuando quieras más soporte. Facilítelo cuando no lo haga."
+        "title": "Estás a una vuelta de",
+        "title_emphasis": "Movimiento más seguro y apoyado.",
+        "paragraph_1": "Caminar, subir escaleras, hacer ejercicio y pasar largas horas de pie pueden generar tensión repetida en las rodillas.",
+        "paragraph_2": "DialFit le brinda sujeción ajustable cuando la necesita, ayudando a que la rodilla se sienta más segura durante el movimiento diario sin inmovilizar la pierna dentro de una ortesis rígida y voluminosa.",
+        "highlight": "Apriétalo cuando quieras más soporte. Facilítelo cuando no lo haga."
     },
     "mechanism": {
       "title": "La diferencia está en el dial.",

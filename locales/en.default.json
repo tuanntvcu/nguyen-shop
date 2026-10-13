@@ -1489,8 +1489,10 @@
       "paragraph_3": "If left untreated, it can get worse. Your toes cross over, you may develop hammer toes and bone spurs.",
       "paragraph_4_html": "Bunions are a <span class=\"apdp-gallery-story__alert\">progressive disorder</span> and they will not go away on their own.",
       "paragraph_5_html": "Over time, this can lead to more serious issues like <span class=\"apdp-gallery-story__consequence\">invasive surgery, problems in your hips, knees and lower back, and even immobility.</span>",
-      "paragraph_6": "Harnessing the benefits of clinically proven advanced alignment therapy and a patented hinge joint mechanism, the Alateron Bunion Fix effectively addresses bunion discomfort in the affected area of your foot and rejuvenates your foot's health with as little as 30 minutes of daily use.",
-      "result_html": "91% of users reported <strong>reduced foot pain</strong> from the first week"
+      "paragraph_6": "",
+      "result_html": "91% of users reported <strong>reduced foot pain</strong> from the first week",
+      "paragraph_6_a": "Harnessing clinically proven advanced alignment therapy and a patented hinge-joint mechanism, the Altaeron™ Adjustable Bunion Corrector addresses bunion discomfort around the affected area of your foot.",
+      "paragraph_6_b": "It supports foot health with as little as 30 minutes of daily use."
     },
     "buy": {
       "choose_option": "Choose an option",
@@ -1714,14 +1716,33 @@
     },
     "try_home": {
       "eyebrow": "TRY IT AT HOME",
-      "heading": "Don't Just Cushion the Bunion. Work on the Position Creating It.",
-      "body": "Bunion pads protect the bump.\n\nAltaeron goes a step further by guiding the big toe itself.\n\nSecure the brace. Dial in a comfortable outward pull. Let the big toe spend time away from the crowded position.",
-      "handwritten_message": "87% of users reported <b>visible improvements</b> from the first month",
+      "heading": "You Are Just One Foot Away From Being FREE of Bunion Discomfort, Swollen Toes, or Foot Aches...",
+      "body": "If you’re reading this, chances are you are suffering from persistent bunion discomfort.\n\nThe result? The pain and discomfort impacts your daily activities.\n\nIf left untreated, it can get worse. Your toes cross over, you may develop hammer toes and bone spurs.\n\nBunions are a progressive disorder and they will not go away on their own.\n\nOver time, this can lead to more serious issues like invasive surgery, problems in your hips, knees and lower back, and even immobility.\n\nHarnessing clinically proven advanced alignment therapy and a patented hinge-joint mechanism, the Altaeron™ Adjustable Bunion Corrector addresses bunion discomfort around the affected area of your foot.\n\nIt supports foot health with as little as 30 minutes of daily use.",
+      "handwritten_message": "91% of users reported reduced foot pain from the first week",
       "cta_text": "START YOUR CORRECTION →",
       "cta_reassurance": "30-Day Easy Returns · Free & Tracked Shipping",
-      "banner_text": "87% of users reported <b>visible improvements</b> from the first month",
+      "banner_text": "91% of users reported reduced foot pain from the first week",
       "trust_1_title": "30-Day Easy Returns",
-      "trust_1_body": "Try it as part of your normal at-home routine."
+      "trust_1_body": "Try it as part of your normal at-home routine.",
+      "title_before": "You Are Just One Foot Away From ",
+      "title_emphasis": "Being FREE of Bunion Discomfort",
+      "title_after": ", Swollen Toes, or Foot Aches...",
+      "body_1_before": "If you’re reading this, chances are you are suffering from persistent ",
+      "body_1_emphasis": "bunion discomfort.",
+      "body_1_after": "",
+      "body_2": "The result? The pain and discomfort impacts your daily activities.",
+      "body_3": "If left untreated, it can get worse. Your toes cross over, you may develop hammer toes and bone spurs.",
+      "body_4_before": "Bunions are a ",
+      "body_4_emphasis": "progressive disorder",
+      "body_4_after": " and they will not go away on their own.",
+      "body_5_before": "Over time, this can lead to more serious issues like ",
+      "body_5_emphasis": "invasive surgery, problems in your hips, knees and lower back, and even immobility.",
+      "body_5_after": "",
+      "body_6": "Harnessing clinically proven advanced alignment therapy and a patented hinge-joint mechanism, the Altaeron™ Adjustable Bunion Corrector addresses bunion discomfort around the affected area of your foot.",
+      "body_7": "It supports foot health with as little as 30 minutes of daily use.",
+      "close_before": "91% of users reported ",
+      "close_emphasis": "reduced foot pain",
+      "close_after": " from the first week"
     },
     "faq": {
       "title": "Still deciding?",
@@ -1936,11 +1957,11 @@
       "footer": "For the most reliable fit, compare both circumference measurements with the chart before selecting your size."
     },
     "story": {
-      "title": "You’re One Turn Away From",
-      "title_emphasis": "More Confident, Supported Movement.",
-      "paragraph_1": "Walking, stairs, workouts and long hours on your feet can put repeated stress through your knees.",
-      "paragraph_2": "DialFit gives you adjustable support when you need it — helping your knee feel more secure through everyday movement without locking your leg inside a bulky rigid brace.",
-      "highlight": "Tighten it when you want more support. Ease it when you don't."
+        "title": "You’re One Turn Away From",
+        "title_emphasis": "More Confident, Supported Movement.",
+        "paragraph_1": "Walking, stairs, workouts and long hours on your feet can put repeated stress through your knees.",
+        "paragraph_2": "DialFit gives you adjustable support when you need it — helping your knee feel more secure through everyday movement without locking your leg inside a bulky rigid brace.",
+        "highlight": "Tighten it when you want more support. Ease it when you don't."
     },
     "mechanism": {
       "title": "The Difference Is in the Dial.",
