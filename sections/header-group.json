@@ -14,14 +14,6 @@
     "announcement_bar_P4MRmx": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement_bar_kLmPnx": {
-          "type": "announcement_bar",
-          "settings": {
-            "text": "ENJOY 10% OFF YOUR FIRST ORDER",
-            "link": "",
-            "icon": "discount"
-          }
-        },
         "announcement_bar_yELyjf": {
           "type": "announcement_bar",
           "settings": {
@@ -40,7 +32,6 @@
         }
       },
       "block_order": [
-        "announcement_bar_kLmPnx",
         "announcement_bar_yELyjf",
         "announcement_bar_tracking"
       ],
