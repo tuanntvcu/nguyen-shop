@@ -71,6 +71,7 @@
 }
 
 .altaeron-reels-v3-reasons__point strong {
+  color: var(--altaeron-primary, #006b5e);
   font-weight: 750;
 }
 
