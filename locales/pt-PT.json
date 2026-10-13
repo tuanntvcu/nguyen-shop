@@ -37,7 +37,7 @@
       "preview_content": "Conteúdo de pré-visualização"
     },
     "pdp": {
-      "fast_shipping": "Envio rápido"
+      "fast_shipping": "Clinicamente comprovado"
     },
     "footer": {
       "brand_html": "<h2>ALTAERON</h2><p>Suportes cuidadosamente selecionados para o conforto diário dos seus pés.</p>",
@@ -1605,14 +1605,14 @@
       "product_name": "Altaeron™ Corretor Ajustável para Joanetes",
       "headline": "Reduza a saliência do joanete. Endireite o seu dedo grande.",
       "headline_html": "<strong>Reduza</strong> a <strong>saliência do joanete</strong>. <strong>Endireite</strong> o seu <strong>dedo grande</strong>.",
-      "explanation": "Altaeron utiliza tensão ajustável para puxar o seu dedo grande em direção a uma posição mais direita — tornando o joanete menos saliente enquanto alivia a dor, a pressão e a compressão entre os dedos. Controla o alongamento; algumas pessoas sentem uma diferença logo na primeira sessão.",
-      "benefit_1": "Reduz visivelmente a aparência da saliência do joanete",
-      "benefit_1_note": "Ajuste o nível de apoio ao seu conforto.",
-      "benefit_2": "Puxa o dedo grande em direção a uma posição mais direita",
-      "benefit_2_note": "Concebido para o pé esquerdo ou direito.",
-      "benefit_3": "Alivia a dor do joanete, a pressão, o atrito e a compressão entre os dedos",
-      "benefit_3_note": "Experimente em casa com confiança.",
-      "benefit_4": "Adequado a todos os tamanhos de pé — use em qualquer um dos pés",
+      "explanation": "Joanetes dolorosos? Alivie o desconforto, previna o seu crescimento e reduza o joanete sem cirurgia.",
+      "benefit_1": "Evite a cirurgia e alivie rapidamente a dor",
+      "benefit_1_note": "Experimente em casa com confiança.",
+      "benefit_2": "Reduz visivelmente a aparência da saliência do joanete",
+      "benefit_2_note": "Ajuste o nível de apoio ao seu conforto.",
+      "benefit_3": "Adequado a todos os tamanhos de pé — use em qualquer um dos pés",
+      "benefit_3_note": "Concebido para o pé esquerdo ou direito.",
+      "benefit_4": "Eficácia comprovada em mais de 10.000 clientes",
       "purchase_clarification": "1 corretor · Utilize em qualquer um dos pés",
       "review_content_html": "<p>O meu podologista disse-me que precisava de uma cirurgia para corrigir os joanetes dolorosos. Em vez disso, encomendei o <strong>corretor ajustável de joanetes</strong> da <strong>Altaeron™</strong> e, após um mês de utilização, a dor dos joanetes diminuiu significativamente e o meu dedo começou a voltar à sua posição natural! Fez uma grande diferença.</p>",
       "cta_label": "COMECE A SUA CORREÇÃO",
@@ -1641,8 +1641,8 @@
     "bunion": {
       "eyebrow": "COMO FUNCIONA",
       "heading": "O problema não é apenas a saliência. É o desvio.",
-      "subheading": "À medida que o joanete se desenvolve, o dedo grande desloca-se para dentro, em direção ao segundo dedo.\n\nEsse desvio comprime o antepé, altera o alinhamento natural dos dedos e concentra pressão em redor da articulação do joanete.\n\nAltaeron atua na direção oposta.\n\nA sua estrutura firme fixa-se ao pé, enquanto o botão ajustável aplica tensão controlada para fora e guia o dedo grande de volta a um alinhamento melhor.",
-      "reassurance": "O dedo desvia-se para dentro. Altaeron atua para fora.",
+      "subheading": "O Corretor Ajustável de Joanetes Altaeron™ oferece apoio avançado ao alinhamento. O seu mecanismo ajustável foi concebido para <strong class=\"alta-custom__emphasis\">apoiar o realinhamento</strong> do dedo grande e aliviar gradualmente a inflamação.\n\nAjuda a libertar a tensão muscular, guiando suavemente o dedo grande de volta à sua posição natural e promovendo um alinhamento mais confortável da articulação ao longo do tempo.\n\nIsto ajuda a aliviar a tensão acumulada, endireitar o dedo grande, reduzir o desconforto do joanete e promover um melhor alinhamento do pé, para voltar a caminhar com mais conforto e confiança.\n\nAlgumas pessoas poderão precisar de uma ou duas sessões para se habituarem, pois a <strong class=\"alta-custom__emphasis\">sensação poderá ser mais percetível do que com outros métodos</strong>.\n\nEsta é uma forma não invasiva de apoiar o posicionamento natural do dedo e do pé, ajudando com o desconforto associado a calçado inadequado ou a fatores genéticos.\n\nQuer tenha pés mais pequenos ou maiores, o Corretor Ajustável de Joanetes Altaeron™ foi concebido para se ajustar e proporcionar conforto a vários tamanhos de pé.",
+      "reassurance": "87% dos utilizadores relataram <b>melhorias visíveis</b> logo no primeiro mês.",
       "progression_1_title": "O dedo grande desvia-se para dentro",
       "progression_1_caption": "O dedo grande pressiona o segundo dedo, aumentando a compressão e a pressão em redor do joanete.",
       "progression_2_title": "Ajuste a tensão corretiva",
@@ -1706,10 +1706,10 @@
       "eyebrow": "EXPERIMENTE EM CASA",
       "heading": "Não se limite a acolchoar o joanete. Trabalhe na posição que o provoca.",
       "body": "As almofadas para joanetes protegem a saliência.\n\nAltaeron vai mais longe ao guiar o próprio dedo grande.\n\nPrenda o corretor. Ajuste uma tração confortável para fora. Deixe o dedo grande passar algum tempo longe da posição comprimida.",
-      "handwritten_message": "O dedo desvia-se para dentro. Altaeron atua para fora.",
+      "handwritten_message": "87% dos utilizadores relataram <b>melhorias visíveis</b> logo no primeiro mês.",
       "cta_text": "COMECE A SUA CORREÇÃO →",
       "cta_reassurance": "Devoluções fáceis durante 30 dias · Envio grátis com seguimento",
-      "banner_text": "O dedo desvia-se para dentro. Altaeron atua para fora.",
+      "banner_text": "87% dos utilizadores relataram <b>melhorias visíveis</b> logo no primeiro mês.",
       "trust_1_title": "Devoluções fáceis durante 30 dias",
       "trust_1_body": "Experimente-o como parte da sua rotina habitual em casa."
     },

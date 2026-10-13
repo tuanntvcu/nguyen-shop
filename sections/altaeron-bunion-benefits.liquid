@@ -31,6 +31,7 @@
   #AltaeronBunion-{{ section.id }} .alta-custom__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
   #AltaeronBunion-{{ section.id }} .alta-custom__heading { color: var(--alta-custom-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(30px, 3vw, 46px); font-weight: 750; letter-spacing: -.035em; line-height: 1.08; margin: 0; }
   #AltaeronBunion-{{ section.id }} .alta-custom__subheading { color: var(--alta-custom-body); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; margin: 10px 0 0; max-width: 1050px; }
+  #AltaeronBunion-{{ section.id }} .alta-custom__subheading strong { color: #9b2525; font-weight: 750; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__progression { background: #f7f9f9; border: 1px solid var(--alta-custom-line); border-radius: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: hidden; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__step { background: #fff; min-width: 0; position: relative; text-align: center; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__step + .alta-bunion__step { border-left: 1px solid rgba(228, 231, 236, .75); }
@@ -97,7 +98,7 @@
     <header class="alta-custom__header">
       {%- if eyebrow != blank -%}<p class="alta-custom__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
       <h2 id="AltaeronBunionHeading-{{ section.id }}" class="alta-custom__heading">{{ heading | escape }}</h2>
-      {%- if subheading != blank -%}<p class="alta-custom__subheading">{{ subheading | escape | newline_to_br }}</p>{%- endif -%}
+      {%- if subheading != blank -%}<p class="alta-custom__subheading">{{ subheading | newline_to_br }}</p>{%- endif -%}
     </header>
 
     {%- if progression_blocks.size > 0 -%}

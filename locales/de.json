@@ -37,7 +37,7 @@
       "preview_content": "Vorschauinhalt"
     },
     "pdp": {
-      "fast_shipping": "Schneller Versand"
+      "fast_shipping": "Klinisch bewiesen"
     },
     "footer": {
       "brand_html": "<h2>ALTAERON</h2><p>Sorgfältig ausgewählte Unterstützung für täglichen Fußkomfort.</p>",
@@ -1605,14 +1605,14 @@
       "product_name": "Altaeron™ Verstellbarer Ballenzehkorrektor",
       "headline": "Verkleinern Sie den Ballenzeh optisch. Begradigen Sie Ihren großen Zeh.",
       "headline_html": "<strong>Verkleinern Sie</strong> den <strong>Ballenzeh optisch</strong>. <strong>Begradigen Sie</strong> Ihren <strong>großen Zeh</strong>.",
-      "explanation": "Altaeron zieht Ihren großen Zeh mit verstellbarer Spannung in eine geradere Position — so wirkt der Ballenzeh weniger ausgeprägt, während Schmerzen, Druck und Enge gelindert werden. Sie bestimmen die Dehnung; manche Menschen spüren schon bei der ersten Anwendung einen Unterschied.",
-      "benefit_1": "Lässt den Ballenzeh sichtbar weniger ausgeprägt wirken",
-      "benefit_1_note": "Passen Sie die Stärke an Ihren Komfort an.",
-      "benefit_2": "Zieht den großen Zeh in eine geradere Position",
-      "benefit_2_note": "Für den linken oder rechten Fuß geeignet.",
-      "benefit_3": "Lindert Ballenzehschmerzen, Druck, Reibung und Enge",
-      "benefit_3_note": "Probieren Sie es zu Hause unbesorgt aus.",
-      "benefit_4": "Passt allen Fußgrößen – an beiden Füßen verwendbar",
+      "explanation": "Schmerzhafter Ballenzeh? Lindern Sie Beschwerden, verhindern Sie ein weiteres Wachstum und verkleinern Sie den Ballenzeh ohne Operation.",
+      "benefit_1": "Operation vermeiden und Schmerzen schnell lindern",
+      "benefit_1_note": "Probieren Sie es zu Hause unbesorgt aus.",
+      "benefit_2": "Lässt den Ballenzeh sichtbar weniger ausgeprägt wirken",
+      "benefit_2_note": "Passen Sie die Stärke an Ihren Komfort an.",
+      "benefit_3": "Passt allen Fußgrößen – an beiden Füßen verwendbar",
+      "benefit_3_note": "Für den linken oder rechten Fuß geeignet.",
+      "benefit_4": "Bei über 10.000 Kunden bewährt",
       "purchase_clarification": "1 Korrektor · Für beide Füße geeignet",
       "review_content_html": "<p>Mein Podologe sagte mir, dass ich wegen meiner schmerzhaften Ballenzehen operiert werden müsse. Stattdessen bestellte ich den <strong>verstellbaren Hallux-Valgus-Korrektor</strong> von <strong>Altaeron™</strong>. Nach einem Monat Anwendung haben meine Ballenzehschmerzen deutlich nachgelassen, und mein Zeh beginnt, sich wieder in seine natürliche Position zu bewegen! Das hat einen großen Unterschied gemacht.</p>",
       "cta_label": "KORREKTUR STARTEN",
@@ -1641,8 +1641,8 @@
     "bunion": {
       "eyebrow": "SO FUNKTIONIERT ES",
       "heading": "Das Problem ist nicht nur der Ballen. Es ist die Fehlstellung.",
-      "subheading": "Wenn sich ein Ballenzeh entwickelt, wandert der große Zeh nach innen zum zweiten Zeh.\n\nDiese Fehlstellung verengt den Vorfuß, verändert die natürliche Zehenausrichtung und bündelt Druck am Ballengelenk.\n\nAltaeron wirkt in die Gegenrichtung.\n\nDer stabile Rahmen sitzt fest am Fuß, während der verstellbare Drehknopf kontrollierten Zug nach außen erzeugt und den großen Zeh zurück in eine bessere Ausrichtung führt.",
-      "reassurance": "Der Zeh weicht nach innen ab. Altaeron wirkt nach außen.",
+      "subheading": "Der verstellbare Ballenzehkorrektor Altaeron™ bietet fortschrittliche Unterstützung für die Zehenausrichtung. Sein verstellbarer Mechanismus wurde entwickelt, um die <strong class=\"alta-custom__emphasis\">Neuausrichtung</strong> des großen Zehs zu unterstützen und Entzündungen allmählich zu lindern.\n\nEr hilft, Muskelspannungen zu lösen, indem er den großen Zeh sanft in seine natürliche Position führt und so mit der Zeit eine angenehmere Ausrichtung des Zehengelenks unterstützt.\n\nDas kann helfen, angestaute Spannung zu lösen, den großen Zeh zu begradigen, Beschwerden durch den Ballenzeh zu lindern und eine bessere Fußausrichtung zu unterstützen, damit Sie sich wieder angenehmer und sicherer auf den Beinen fühlen.\n\nManche Anwender benötigen möglicherweise ein oder zwei Sitzungen, um sich daran zu gewöhnen, da sich das <strong class=\"alta-custom__emphasis\">Gefühl deutlicher bemerkbar machen kann als bei anderen Methoden</strong>.\n\nDies ist eine nicht-invasive Möglichkeit, die natürliche Position von Zeh und Fuß zu unterstützen und Beschwerden durch schlecht sitzendes Schuhwerk oder genetische Faktoren anzugehen.\n\nOb Sie kleinere oder größere Füße haben: Der verstellbare Ballenzehkorrektor Altaeron™ ist anpassbar und bietet verschiedenen Fußgrößen einen bequemen Sitz.",
+      "reassurance": "87 % der Anwender berichteten bereits im ersten Monat von <b>sichtbaren Verbesserungen</b>.",
       "progression_1_title": "Der große Zeh weicht nach innen ab",
       "progression_1_caption": "Der große Zeh drückt zum zweiten Zeh und verstärkt Enge und Druck am Ballen.",
       "progression_2_title": "Korrekturspannung einstellen",
@@ -1706,10 +1706,10 @@
       "eyebrow": "ZU HAUSE AUSPROBIEREN",
       "heading": "Den Ballen nicht nur polstern. An seiner Ursache arbeiten.",
       "body": "Ballenpolster schützen die Erhebung.\n\nAltaeron geht weiter und führt den großen Zeh selbst.\n\nSchiene befestigen. Angenehmen Zug nach außen einstellen. Den großen Zeh Zeit außerhalb der eingeengten Position verbringen lassen.",
-      "handwritten_message": "Der Zeh weicht nach innen ab. Altaeron wirkt nach außen.",
+      "handwritten_message": "87 % der Anwender berichteten bereits im ersten Monat von <b>sichtbaren Verbesserungen</b>.",
       "cta_text": "KORREKTUR STARTEN →",
       "cta_reassurance": "30 Tage einfache Rückgabe · Kostenloser Versand mit Sendungsverfolgung",
-      "banner_text": "Der Zeh weicht nach innen ab. Altaeron wirkt nach außen.",
+      "banner_text": "87 % der Anwender berichteten bereits im ersten Monat von <b>sichtbaren Verbesserungen</b>.",
       "trust_1_title": "30 Tage einfache Rückgabe",
       "trust_1_body": "Probieren Sie es als Teil Ihrer normalen Routine zu Hause aus."
     },

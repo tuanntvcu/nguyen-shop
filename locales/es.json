@@ -37,7 +37,7 @@
       "preview_content": "Contenido de vista previa"
     },
     "pdp": {
-      "fast_shipping": "Envío rápido"
+      "fast_shipping": "Clínicamente probado"
     },
     "footer": {
       "brand_html": "<h2>ALTAERON</h2><p>Soportes cuidadosamente seleccionados para la comodidad diaria de tus pies.</p>",
@@ -1605,14 +1605,14 @@
       "product_name": "Altaeron™ Corrector Ajustable para Juanetes",
       "headline": "Reduce la prominencia del juanete. Endereza tu dedo gordo.",
       "headline_html": "<strong>Reduce</strong> la <strong>prominencia del juanete</strong>. <strong>Endereza</strong> tu <strong>dedo gordo</strong>.",
-      "explanation": "Altaeron utiliza tensión ajustable para llevar tu dedo gordo hacia una posición más recta — haciendo que el juanete se vea menos prominente mientras alivia el dolor, la presión y la compresión entre los dedos. Tú controlas el estiramiento; algunas personas notan una diferencia desde la primera sesión.",
-      "benefit_1": "Reduce visiblemente la prominencia del juanete",
-      "benefit_1_note": "Ajusta el nivel de soporte a tu comodidad.",
-      "benefit_2": "Lleva el dedo gordo hacia una posición más recta",
-      "benefit_2_note": "Diseñado para el pie izquierdo o derecho.",
-      "benefit_3": "Alivia el dolor del juanete, la presión, el roce y la compresión entre los dedos",
-      "benefit_3_note": "Pruébalo en casa con confianza.",
-      "benefit_4": "Apto para todos los tamaños de pie — úsalo en cualquiera de los dos pies",
+      "explanation": "¿Juanetes dolorosos? Alivia las molestias, evita que sigan creciendo y reduce el juanete sin cirugía.",
+      "benefit_1": "Evita la cirugía y alivia el dolor rápidamente",
+      "benefit_1_note": "Pruébalo en casa con confianza.",
+      "benefit_2": "Reduce visiblemente la prominencia del juanete",
+      "benefit_2_note": "Ajusta el nivel de soporte a tu comodidad.",
+      "benefit_3": "Apto para todos los tamaños de pie — úsalo en cualquiera de los dos pies",
+      "benefit_3_note": "Diseñado para el pie izquierdo o derecho.",
+      "benefit_4": "Eficacia demostrada en más de 10.000 clientes",
       "purchase_clarification": "1 corrector · Úsalo en cualquiera de los dos pies",
       "review_content_html": "<p>Mi podólogo me dijo que necesitaba una operación para corregir mis juanetes dolorosos. En su lugar, pedí el <strong>corrector ajustable para juanetes</strong> de <strong>Altaeron™</strong> y, después de usarlo durante un mes, el dolor de los juanetes ha disminuido considerablemente y mi dedo ha empezado a volver a su posición natural. ¡Ha marcado una gran diferencia!</p>",
       "cta_label": "EMPIEZA TU CORRECCIÓN",
@@ -1641,8 +1641,8 @@
     "bunion": {
       "eyebrow": "CÓMO FUNCIONA",
       "heading": "El problema no es solo el bulto. Es la desviación.",
-      "subheading": "Cuando se forma un juanete, el dedo gordo se desplaza hacia dentro, en dirección al segundo dedo.\n\nEsa desviación comprime el antepié, altera la alineación natural de los dedos y concentra la presión alrededor de la articulación del juanete.\n\nAltaeron actúa en la dirección contraria.\n\nSu estructura se fija alrededor del pie y el dial ajustable aplica una tensión controlada hacia fuera para devolver el dedo gordo a una mejor alineación.",
-      "reassurance": "El dedo se desvía hacia dentro. Altaeron actúa hacia fuera.",
+      "subheading": "El corrector ajustable para juanetes Altaeron™ ofrece un soporte avanzado para la alineación. Está diseñado para <strong class=\"alta-custom__emphasis\">favorecer la realineación</strong> del dedo gordo y aliviar gradualmente la inflamación mediante su mecanismo ajustable.\n\nAyuda a liberar la tensión muscular guiando suavemente el dedo gordo hacia su posición natural y favoreciendo una alineación más cómoda de la articulación con el tiempo.\n\nEsto ayuda a aliviar la tensión acumulada, enderezar el dedo gordo, reducir las molestias del juanete y favorecer una mejor alineación del pie, para que vuelvas a caminar con más comodidad y confianza.\n\nAlgunas personas pueden necesitar una o dos sesiones para acostumbrarse, ya que la <strong class=\"alta-custom__emphasis\">sensación puede ser más perceptible que con otros métodos</strong>.\n\nEs una forma no invasiva de favorecer la posición natural del dedo y del pie, y ayudar con las molestias asociadas al calzado inadecuado o a factores genéticos.\n\nTanto si tienes los pies pequeños como grandes, el corrector ajustable para juanetes Altaeron™ está diseñado para adaptarse y ofrecer un ajuste cómodo a distintos tamaños de pie.",
+      "reassurance": "El 87 % de los usuarios reportó <b>mejoras visibles</b> desde el primer mes.",
       "progression_1_title": "El dedo gordo se desvía hacia dentro",
       "progression_1_caption": "El dedo gordo presiona hacia el segundo dedo, aumentando la compresión y la presión alrededor del juanete.",
       "progression_2_title": "Ajusta la tensión correctiva",
@@ -1706,10 +1706,10 @@
       "eyebrow": "PRUÉBALO EN CASA",
       "heading": "No te limites a acolchar el juanete. Trabaja sobre la posición que lo crea.",
       "body": "Las almohadillas protegen el bulto.\n\nAltaeron va más allá al guiar el propio dedo gordo.\n\nAsegura el corrector. Ajusta una tracción cómoda hacia fuera. Deja que el dedo gordo pase tiempo lejos de la posición comprimida.",
-      "handwritten_message": "El dedo se desvía hacia dentro. Altaeron actúa hacia fuera.",
+      "handwritten_message": "El 87 % de los usuarios reportó <b>mejoras visibles</b> desde el primer mes.",
       "cta_text": "EMPIEZA TU CORRECCIÓN →",
       "cta_reassurance": "Devoluciones fáciles durante 30 días · Envío gratis con seguimiento",
-      "banner_text": "El dedo se desvía hacia dentro. Altaeron actúa hacia fuera.",
+      "banner_text": "El 87 % de los usuarios reportó <b>mejoras visibles</b> desde el primer mes.",
       "trust_1_title": "Devoluciones fáciles durante 30 días",
       "trust_1_body": "Pruébalo como parte de tu rutina habitual en casa."
     },

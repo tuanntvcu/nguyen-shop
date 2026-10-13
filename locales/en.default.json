@@ -37,7 +37,7 @@
       "preview_content": "Preview content"
     },
     "pdp": {
-      "fast_shipping": "Fast shipping"
+      "fast_shipping": "Clinically Proven"
     },
     "footer": {
       "brand_html": "<h2>ALTAERON</h2><p>Thoughtfully selected support for everyday foot comfort.</p>",
@@ -1604,14 +1604,14 @@
       "product_name": "Altaeron™ Adjustable Bunion Corrector",
       "headline": "Reduce the Bunion Bump. Straighten Your Big Toe.",
       "headline_html": "<strong>Reduce</strong> the <strong>Bunion Bump</strong>. <strong>Straighten</strong> Your <strong>Big Toe</strong>.",
-      "explanation": "Altaeron uses adjustable tension to pull your big toe toward a straighter position — making the bunion look less prominent while relieving pain, pressure and crowding. You control the stretch, with some people feeling a difference from the very first session.",
-      "benefit_1": "Visibly reduces the appearance of the bunion bump",
-      "benefit_1_note": "Adjust the level of support to your comfort.",
-      "benefit_2": "Pulls the big toe toward a straighter position",
-      "benefit_2_note": "Designed for left or right foot.",
-      "benefit_3": "Relieves bunion pain, pressure, rubbing and crowding",
-      "benefit_3_note": "Try it at home with confidence.",
-      "benefit_4": "Fits All Foot Sizes - Use on Either Foot",
+      "explanation": "Painful Bunions? Alleviate discomfort, prevent further growth, and shrink the bunion without surgery.",
+      "benefit_1": "Avoid Surgery & Relieve Pain Fast",
+      "benefit_1_note": "Try it at home with confidence.",
+      "benefit_2": "Visibly reduces the appearance of the bunion bump",
+      "benefit_2_note": "Adjust the level of support to your comfort.",
+      "benefit_3": "Fits All Foot Sizes - Use on Either Foot",
+      "benefit_3_note": "Designed for left or right foot.",
+      "benefit_4": "Proven Effective with 10,000+ Customers",
       "purchase_clarification": "1 corrector · Use on either foot",
       "review_content_html": "<p><em>Feels </em><em><strong>comfy </strong></em><em>and </em><em><strong>well made</strong></em><em> 👍</em></p>",
       "cta_label": "ADD TO CART",
@@ -1640,8 +1640,8 @@
     "bunion": {
       "eyebrow": "HOW IT WORKS",
       "heading": "The Problem Isn't Just the Bump. It's the Drift.",
-      "subheading": "As a bunion develops, the big toe moves inward toward the second toe.\n\nThat inward drift crowds the forefoot, changes natural toe alignment and concentrates pressure around the bunion joint.\n\nAltaeron works in the opposite direction.\n\nIts structured frame anchors around your foot while the adjustable dial applies controlled outward tension to guide the big toe back toward better alignment.",
-      "reassurance": "The toe drifts inward. Altaeron works outward.",
+      "subheading": "The Altaeron™ Adjustable Bunion Corrector provides advanced alignment support. It's designed to <strong class=\"alta-custom__emphasis\">support the realignment</strong> of the big toe and gradually alleviate inflammation with its adjustable alignment mechanism.\n\nIt helps release muscular tension by gently guiding your big toe back toward its natural position, supporting more comfortable toe joint alignment over time.\n\nThis helps relieve built-up tension, straighten the big toe, reduce bunion discomfort, and support better foot alignment so you can get back on your feet feeling more comfortable and confident again.\n\nSome users may require a session or two to get used to it, as the <strong class=\"alta-custom__emphasis\">sensation may feel more noticeable compared to other methods</strong>.\n\nThis is a non-invasive way to support the natural positioning of the toe and foot, helping address discomfort associated with ill-fitting footwear or genetic factors.\n\nWhether you have smaller or larger feet, the Altaeron™ Adjustable Bunion Corrector is designed with adjustability in mind to provide a comfortable fit for a range of foot sizes.",
+      "reassurance": "87% of users reported <b>visible improvements</b> from the first month",
       "progression_1_title": "Big Toe Drifts Inward",
       "progression_1_caption": "The big toe presses toward the second toe, increasing crowding and pressure around the bunion.",
       "progression_2_title": "Dial In Corrective Tension",
@@ -1705,10 +1705,10 @@
       "eyebrow": "TRY IT AT HOME",
       "heading": "Don't Just Cushion the Bunion. Work on the Position Creating It.",
       "body": "Bunion pads protect the bump.\n\nAltaeron goes a step further by guiding the big toe itself.\n\nSecure the brace. Dial in a comfortable outward pull. Let the big toe spend time away from the crowded position.",
-      "handwritten_message": "The toe drifts inward. Altaeron works outward.",
+      "handwritten_message": "87% of users reported <b>visible improvements</b> from the first month",
       "cta_text": "START YOUR CORRECTION →",
       "cta_reassurance": "30-Day Easy Returns · Free & Tracked Shipping",
-      "banner_text": "The toe drifts inward. Altaeron works outward.",
+      "banner_text": "87% of users reported <b>visible improvements</b> from the first month",
       "trust_1_title": "30-Day Easy Returns",
       "trust_1_body": "Try it as part of your normal at-home routine."
     },
