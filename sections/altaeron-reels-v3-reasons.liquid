@@ -54,7 +54,7 @@
                 {{ block.settings.content }}
               {% else %}
                 {%- capture point_key -%}altaeron_pdp_reasons.point_{{ forloop.index }}{%- endcapture -%}
-                {%- assign localized_point = point_key | t -%}
+                {%- assign localized_point = point_key | t | replace: '&lt;', '<' | replace: '&gt;', '>' -%}
                 {% if localized_point contains 'Translation missing:' %}
                   {{ block.settings.content }}
                 {% else %}
