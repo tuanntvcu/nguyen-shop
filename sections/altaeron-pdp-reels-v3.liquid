@@ -30,6 +30,7 @@
   assign reel_cta_label = reel_cta_label | remove: '→' | strip
   assign product_form_id = 'product-form-' | append: section.id
   assign compare_price = current_variant.compare_at_price
+  
   assign savings = 0
   if compare_price > current_variant.price
     assign savings = compare_price | minus: current_variant.price
