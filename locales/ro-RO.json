@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "Reducerea WELCOME a fost aplicat\u0103 cu succes!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Intra in magazin folosind parola:",

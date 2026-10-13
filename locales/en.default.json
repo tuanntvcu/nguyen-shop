@@ -29,7 +29,8 @@
       "secure_checkout": "Secure checkout",
       "accepted_payment_methods": "Accepted payment methods",
       "complete_care": "COMPLETE YOUR CARE",
-      "complete_care_description": "Adjustable knee support for walking, active days and long hours on your feet."
+      "complete_care_description": "Adjustable knee support for walking, active days and long hours on your feet.",
+      "welcome_discount_applied": "WELCOME discount applied successfully!"
     },
     "home": {
       "review_placeholder": "Customer review content will appear here once added.",

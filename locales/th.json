@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "\u0e43\u0e0a\u0e49\u0e2a\u0e48\u0e27\u0e19\u0e25\u0e14 WELCOME \u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08\u0e41\u0e25\u0e49\u0e27!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "เข้าสู่ร้านค้าโดยใช้รหัสผ่าน:",

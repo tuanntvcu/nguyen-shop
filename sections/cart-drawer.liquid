@@ -710,7 +710,7 @@
             {%- liquid
               assign cart_drawer_discount_percentage = settings.cart_drawer_discount_percentage | default: 10 | plus: 0
               assign has_shopify_discount = false
-              assign cart_drawer_total = cart.total_price
+              assign cart_drawer_total = cart.original_total_price | times: 0.9
               if cart.cart_level_discount_applications.size > 0
                 assign has_shopify_discount = true
               endif
@@ -745,9 +745,14 @@
                     {{- 'customer.order.total' | t -}}
                   </span>
                   <span class="totals__subtotal-value h4 font-body-bolder">
-                    {{- cart_drawer_total | money_with_currency -}}
+                    {{- cart_drawer_total | money -}}
+                    <span class="cart-drawer__total-original">(<s>{{ cart.original_total_price | money }}</s>)</span>
                   </span>
                 </div>
+                <p class="cart-drawer__welcome-discount" role="status">
+                  <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="m4.8 8.1 2.1 2.1 4.3-4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>{{ 'storefront.cart_drawer.welcome_discount_applied' | t }}</span>
+                </p>
               </div>
               <form
                 action="{{ routes.cart_url }}"

@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "\u0421\u043a\u0438\u0434\u043a\u0430 WELCOME \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u043f\u0440\u0438\u043c\u0435\u043d\u0435\u043d\u0430!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Войдите в магазин, используя пароль:",

@@ -29,7 +29,8 @@
       "secure_checkout": "Sicherer Checkout",
       "accepted_payment_methods": "Akzeptierte Zahlungsmethoden",
       "complete_care": "ERGÄNZEN SIE IHRE PFLEGE",
-      "complete_care_description": "Verstellbare Knieunterstützung für Spaziergänge, aktive Tage und lange Stunden auf den Beinen."
+      "complete_care_description": "Verstellbare Knieunterstützung für Spaziergänge, aktive Tage und lange Stunden auf den Beinen.",
+      "welcome_discount_applied": "WELCOME-Rabatt erfolgreich angewendet!"
     },
     "home": {
       "review_placeholder": "Kundenbewertungen werden hier angezeigt, sobald sie hinzugefügt wurden.",

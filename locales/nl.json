@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "WELCOME-korting succesvol toegepast!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Ga naar de winkel met wachtwoord:",

@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "Rabat WELCOME zosta\u0142 pomy\u015blnie zastosowany!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Wejdź do sklepu używając hasła:",

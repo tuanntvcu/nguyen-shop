@@ -29,7 +29,8 @@
       "secure_checkout": "Paiement sécurisé",
       "accepted_payment_methods": "Moyens de paiement acceptés",
       "complete_care": "COMPLÉTEZ VOTRE ROUTINE",
-      "complete_care_description": "Maintien réglable du genou pour la marche, les journées actives et les longues heures debout."
+      "complete_care_description": "Maintien réglable du genou pour la marche, les journées actives et les longues heures debout.",
+      "welcome_discount_applied": "La r\u00e9duction WELCOME a bien \u00e9t\u00e9 appliqu\u00e9e !"
     },
     "home": {
       "review_placeholder": "Les avis clients apparaîtront ici dès qu’ils auront été ajoutés.",

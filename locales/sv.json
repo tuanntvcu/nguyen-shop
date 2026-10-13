@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "WELCOME-rabatten har till\u00e4mpats!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Gå in i butik med lösenord:",

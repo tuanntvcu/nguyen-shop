@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "Z\u013eava WELCOME bola \u00faspe\u0161ne uplatnen\u00e1!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Vstúpte do obchodu pomocou hesla:",

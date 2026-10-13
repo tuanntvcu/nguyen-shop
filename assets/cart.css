@@ -581,10 +581,35 @@
   color: var(--cart-primary);
   letter-spacing: 0.04em;
 }
+.cart-drawer__welcome-discount {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.6rem 0 0;
+  color: #00a86b;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+.cart-drawer__welcome-discount svg {
+  flex: 0 0 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
 .cart-drawer__footer .totals__subtotal,
 .cart-drawer__footer .totals__subtotal-value {
   color: var(--cart-ink);
   font-size: 2rem;
+}
+.cart-drawer__total-original {
+  color: var(--altaeron-muted, #667085);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-inline-start: 0.6rem;
+  white-space: nowrap;
+}
+body.cart-template main-cart .cart__footer--cart-note,
+body.cart-template main-cart .cart__footer--shipping-rate {
+  display: none;
 }
 .cart-drawer__footer .tax-note {
   color: var(--cart-muted);

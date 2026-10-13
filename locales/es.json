@@ -29,7 +29,8 @@
       "secure_checkout": "Pago seguro",
       "accepted_payment_methods": "Métodos de pago aceptados",
       "complete_care": "COMPLETA TU CUIDADO",
-      "complete_care_description": "Soporte ajustable para la rodilla al caminar, en días activos y durante largas horas de pie."
+      "complete_care_description": "Soporte ajustable para la rodilla al caminar, en días activos y durante largas horas de pie.",
+      "welcome_discount_applied": "\u00a1Descuento WELCOME aplicado correctamente!"
     },
     "home": {
       "review_placeholder": "Las reseñas de clientes aparecerán aquí cuando se añadan.",

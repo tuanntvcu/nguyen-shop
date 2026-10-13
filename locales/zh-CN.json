@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "WELCOME \u4f18\u60e0\u5df2\u6210\u529f\u5e94\u7528\uff01"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "使用密码进入商店：",

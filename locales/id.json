@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "Diskon WELCOME berhasil diterapkan!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Masuk ke toko menggunakan kata sandi:",

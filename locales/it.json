@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "Sconto WELCOME applicato con successo!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Accedi al negozio utilizzando la password:",

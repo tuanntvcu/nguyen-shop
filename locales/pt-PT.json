@@ -29,7 +29,8 @@
       "secure_checkout": "Pagamento seguro",
       "accepted_payment_methods": "Métodos de pagamento aceites",
       "complete_care": "COMPLETE OS SEUS CUIDADOS",
-      "complete_care_description": "Suporte ajustável para o joelho em caminhadas, dias ativos e longas horas de pé."
+      "complete_care_description": "Suporte ajustável para o joelho em caminhadas, dias ativos e longas horas de pé.",
+      "welcome_discount_applied": "Desconto WELCOME aplicado com sucesso!"
     },
     "home": {
       "review_placeholder": "As avaliações dos clientes aparecerão aqui depois de serem adicionadas.",

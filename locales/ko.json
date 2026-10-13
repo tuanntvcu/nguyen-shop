@@ -1,4 +1,9 @@
 {
+  "storefront": {
+    "cart_drawer": {
+      "welcome_discount_applied": "WELCOME \ud560\uc778\uc774 \uc131\uacf5\uc801\uc73c\ub85c \uc801\uc6a9\ub418\uc5c8\uc2b5\ub2c8\ub2e4!"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "비밀번호를 사용하여 매장에 입장하세요:",
