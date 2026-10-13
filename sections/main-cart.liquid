@@ -254,16 +254,16 @@
                                       <span class="price__regular">
                                         {%- liquid 
                                           if settings.currency_code_enabled
-                                            assign display_final_price = item.final_price | times: 0.9 | round
+                                            assign display_final_price = item.final_price
                                             echo display_final_price | money_with_currency
                                           else
-                                            assign display_final_price = item.final_price | times: 0.9 | round
+                                            assign display_final_price = item.final_price
                                             echo display_final_price | money
                                           endif  
                                         -%}
                                       </span>
                                     {%- else -%}
-                                    {{- item.original_price | times: 0.9 | round | money -}}
+                                    {{- item.original_price | money -}}
                                     {%- endif -%}
           
                                     {%- if item.variant.available and item.unit_price_measurement -%}
@@ -279,7 +279,7 @@
                                             endif
                                           endcapture
                                         -%}
-                                        ({{ item.variant.unit_price | times: 0.9 | round | money }}
+                                        ({{ item.variant.unit_price | money }}
                                         <span aria-hidden="true">/</span>
                                         <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
                                         {{ unit_price_base_unit }})
@@ -476,16 +476,16 @@
                               <span class="price__regular">
                                 {%- liquid 
                                   if settings.currency_code_enabled
-                                    assign display_final_price = item.final_price | times: 0.9 | round
+                                    assign display_final_price = item.final_price
                                     echo display_final_price | money_with_currency
                                   else
-                                    assign display_final_price = item.final_price | times: 0.9 | round
+                                    assign display_final_price = item.final_price
                                     echo display_final_price | money
                                   endif  
                                 -%}
                               </span>
                             {%- else -%}
-                              {{- item.original_price | times: 0.9 | round | money -}}
+                              {{- item.original_price | money -}}
                             {%- endif -%}
   
                             {%- if item.variant.available and item.unit_price_measurement -%}
@@ -501,7 +501,7 @@
                                     endif
                                   endcapture
                                 -%}
-                                ({{ item.variant.unit_price | times: 0.9 | round | money }}
+                                ({{ item.variant.unit_price | money }}
                                 <span aria-hidden="true">/</span>
                                 <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
                                 {{ unit_price_base_unit }})
@@ -636,10 +636,10 @@
                         <span class="font-body-bolder">
                           {%- liquid
                             if settings.currency_code_enabled
-                              assign display_line_price = item.final_line_price | times: 0.9 | round
+                              assign display_line_price = item.final_line_price
                               echo display_line_price | money_with_currency
                             else
-                              assign display_line_price = item.final_line_price | times: 0.9 | round
+                              assign display_line_price = item.final_line_price
                               echo display_line_price | money
                             endif
                           -%}
@@ -702,7 +702,7 @@
                           {{- 'sections.cart.estimated_total' | t -}}
                         </span>
                         <span class="totals__subtotal-value h4 font-body-bolder">
-                          {{- cart.total_price | times: 0.9 | round | money_with_currency -}}
+                          {{- cart.total_price | money_with_currency -}}
                         </span>
                       </div>
                       <div class="tax-note">

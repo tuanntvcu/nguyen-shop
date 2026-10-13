@@ -21,14 +21,14 @@
 
   assign compare_at_price = target.compare_at_price
   assign price = target.price | default: 1999
-  assign display_price = price | times: 0.9 | round
+  assign display_price = price
   assign available = target.available | default: false
 
   assign price_min = product.price_min
   assign price_max = product.price_max
   assign available = target.available | default: false
-  assign display_price_min = price_min | times: 0.9 | round
-  assign display_price_max = price_max | times: 0.9 | round
+  assign display_price_min = price_min
+  assign display_price_max = price_max
   assign money_price = display_price | money
   assign money_price_min = display_price_min | money
   assign money_price_max = display_price_max | money
@@ -116,7 +116,7 @@
             {%- endif -%}
           </span>
       {%- endcapture -%}
-      <span data-unit-price>{{ selected_variant.unit_price | times: 0.9 | round | money }}</span>
+      <span data-unit-price>{{ selected_variant.unit_price | money }}</span>
       {{- unit_price_separator -}}
       {{- unit_price_base_unit -}}
     </div>

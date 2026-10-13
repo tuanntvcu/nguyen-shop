@@ -16,9 +16,9 @@
       {%- if cart_qty < volume_pricing_array.last.minimum_quantity -%}
         {%- liquid
           if settings.currency_code_enabled
-            assign variant_price = variant.price | times: 0.9 | round | money_with_currency
+            assign variant_price = variant.price | money_with_currency
           else
-            assign variant_price = variant.price | times: 0.9 | round | money
+            assign variant_price = variant.price | money
           endif
         -%}
         <span class="price-per-item--current price__regular whitespace-nowrap">
@@ -29,9 +29,9 @@
           {%- if cart_qty >= price_break.minimum_quantity -%}
             {%- liquid
               if settings.currency_code_enabled
-                assign price_break_price = price_break.price | times: 0.9 | round | money_with_currency
+                assign price_break_price = price_break.price | money_with_currency
               else
-                assign price_break_price = price_break.price | times: 0.9 | round | money
+                assign price_break_price = price_break.price | money
               endif
             -%}
             <span class="price-per-item--current price__regular whitespace-nowrap">
@@ -45,9 +45,9 @@
       <span class="price-per-item--current price__regular whitespace-nowrap">
         {%- liquid
           if settings.currency_code_enabled
-            assign variant_price = variant.price | times: 0.9 | round | money_with_currency
+            assign variant_price = variant.price | money_with_currency
           else
-            assign variant_price = variant.price | times: 0.9 | round | money
+            assign variant_price = variant.price | money
           endif
         -%}
         {{- 'sections.quick_order_list.each_html' | t: money: variant_price -}}
@@ -158,9 +158,9 @@
               <span>{{ variant.quantity_rule.min }}+</span>
               {%- liquid 
                 if settings.currency_code_enabled
-                  assign price = variant.price | times: 0.9 | round | money_with_currency
+                  assign price = variant.price | money_with_currency
                 else
-                  assign price = variant.price | times: 0.9 | round | money
+                  assign price = variant.price | money
                 endif
               -%}
               <span> {{ 'sections.quick_order_list.each_html' | t: money: price }}</span>
@@ -173,9 +173,9 @@
                 </span>
                 {%- liquid 
                   if settings.currency_code_enabled
-                    assign price_break_price = price_break.price | times: 0.9 | round | money_with_currency
+                    assign price_break_price = price_break.price | money_with_currency
                   else
-                    assign price_break_price = price_break.price | times: 0.9 | round | money
+                    assign price_break_price = price_break.price | money
                   endif
                 -%}
                 <span>{{ 'sections.quick_order_list.each_html' | t: money: price_break_price }}</span>
