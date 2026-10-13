@@ -400,7 +400,7 @@
         <div class="apdp-buy__trust apdp-buy__trust--three">
           <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<b>{{ 'altaeron_pdp_reels_v2.buy.shipping' | t }}</b></a>
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<b>{{ 'altaeron_pdp_reels_v2.buy.returns_30' | t: default: '30-Day Returns' }}</b></a>
-          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'medical-cross' %}<b>{{ 'storefront.pdp.clinically_proven' | t }}</b></a>
+          <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'medical-cross' %}<b>{{ 'storefront.pdp.clinically_proven' | t: default: 'Clinically Proven' | escape }}</b></a>
         </div>
       </aside>
     </div>
