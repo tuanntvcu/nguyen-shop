@@ -1641,7 +1641,11 @@
     "bunion": {
       "eyebrow": "HOW IT WORKS",
       "heading": "The Problem Isn't Just the Bump. It's the Drift.",
-      "subheading": "The Altaeron™ Adjustable Bunion Corrector administers advanced alignment therapy. It's designed to <strong class=\"alta-custom__emphasis\">support the realignment</strong> of the big toe and gradually alleviate inflammation by using an adjustable hinge joint mechanism.\n\nIt helps release muscular tension by simply pulling your big toe back to its natural position, resulting in pain-free natural realignment of your toe joint over time.\n\nThis releases years of built up tension, straightens and shrinks the bunion, reduces pain, and prevents further growth to get you back on your feet to stand tall and confident again.\n\nSome users may require a session or two to get used to it, as the <strong class=\"alta-custom__emphasis\">sensation may feel more robust compared to other methods</strong>.\n\nThis is a natural and non-invasive way of restoring the natural position of the toe, foot, and reversing the damage caused by ill-fitting footwear or genetics.\n\nWhether it's a small child's foot or an adult size 13, the Altaeron™ Adjustable Bunion Corrector is crafted to fit all foot sizes comfortably.",
+      "subheading": "",
+      "subheading_2": "It helps release muscular tension by simply pulling your big toe back to its natural position, resulting in pain-free natural realignment of your toe joint over time.",
+      "subheading_3": "This releases years of built up tension, straightens and shrinks the bunion, reduces pain, and prevents further growth to get you back on your feet to stand tall and confident again.",
+      "subheading_5": "This is a natural and non-invasive way of restoring the natural position of the toe, foot, and reversing the damage caused by ill-fitting footwear or genetics.",
+      "subheading_6": "Whether it's a small child's foot or an adult size 13, the Altaeron™ Adjustable Bunion Corrector is crafted to fit all foot sizes comfortably.",
       "reassurance": "87% of users reported <b>visible improvements</b> from the first month",
       "progression_1_title": "Big Toe Drifts Inward",
       "progression_1_caption": "The big toe presses toward the second toe, increasing crowding and pressure around the bunion.",
@@ -1652,7 +1656,13 @@
       "benefit_1_title": "Progress at Your Pace",
       "benefit_1_body": "Start gently and increase the correction as your foot adapts.",
       "benefit_2_title": "Make Correction Repeatable",
-      "benefit_2_body": "Use Altaeron while sitting or relaxing so better positioning can become part of your normal routine."
+      "benefit_2_body": "Use Altaeron while sitting or relaxing so better positioning can become part of your normal routine.",
+      "subheading_1_before": "Altaeron™ administers advanced alignment therapy. Its adjustable hinge joint mechanism is designed to ",
+      "subheading_1_emphasis": "support the realignment",
+      "subheading_1_after": " of the big toe and gradually alleviate inflammation.",
+      "subheading_4_before": "Some users may require a session or two to get used to it, as the ",
+      "subheading_4_emphasis": "sensation may feel more robust compared to other methods",
+      "subheading_4_after": "."
     },
     "adjustable": {
       "eyebrow": "ADJUSTABLE SUPPORT",

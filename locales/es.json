@@ -1642,7 +1642,11 @@
     "bunion": {
       "eyebrow": "CÓMO FUNCIONA",
       "heading": "El problema no es solo el bulto. Es la desviación.",
-      "subheading": "El corrector ajustable para juanetes Altaeron™ administra una terapia avanzada de alineación. Está diseñado para <strong class=\"alta-custom__emphasis\">favorecer la realineación</strong> del dedo gordo y aliviar gradualmente la inflamación mediante un mecanismo ajustable con bisagra.\n\nAyuda a liberar la tensión muscular al llevar simplemente el dedo gordo de vuelta a su posición natural, logrando con el tiempo una realineación natural e indolora de la articulación.\n\nEsto libera años de tensión acumulada, endereza y reduce el juanete, disminuye el dolor y evita que siga creciendo, para que vuelvas a caminar erguido y con confianza.\n\nAlgunas personas pueden necesitar una o dos sesiones para acostumbrarse, ya que la <strong class=\"alta-custom__emphasis\">sensación puede ser más intensa que con otros métodos</strong>.\n\nEs una forma natural y no invasiva de recuperar la posición natural del dedo y del pie, y revertir los daños causados por calzado inadecuado o por factores genéticos.\n\nTanto si se trata del pie pequeño de un niño como de una talla 47 de adulto, el corrector ajustable para juanetes Altaeron™ está fabricado para adaptarse cómodamente a todos los tamaños de pie.",
+      "subheading": "",
+      "subheading_2": "Ayuda a liberar la tensión muscular al llevar el dedo gordo de vuelta a su posición natural, logrando con el tiempo una realineación natural e indolora de la articulación.",
+      "subheading_3": "Esto libera años de tensión acumulada, endereza y reduce el juanete, disminuye el dolor y evita que siga creciendo, para que vuelvas a caminar erguido y con confianza.",
+      "subheading_5": "Es una forma natural y no invasiva de recuperar la posición natural del dedo y del pie, y revertir daños causados por calzado inadecuado o factores genéticos.",
+      "subheading_6": "Desde el pie pequeño de un niño hasta una talla 47 de adulto, el corrector ajustable Altaeron™ está fabricado para adaptarse cómodamente a distintos tamaños.",
       "reassurance": "El 87 % de los usuarios reportó <b>mejoras visibles</b> desde el primer mes.",
       "progression_1_title": "El dedo gordo se desvía hacia dentro",
       "progression_1_caption": "El dedo gordo presiona hacia el segundo dedo, aumentando la compresión y la presión alrededor del juanete.",
@@ -1653,7 +1657,13 @@
       "benefit_1_title": "Progresa a tu ritmo",
       "benefit_1_body": "Empieza con suavidad y aumenta la corrección a medida que el pie se adapta.",
       "benefit_2_title": "Convierte la corrección en un hábito",
-      "benefit_2_body": "Usa Altaeron mientras estás sentado o descansando para integrar una mejor posición en tu rutina."
+      "benefit_2_body": "Usa Altaeron mientras estás sentado o descansando para integrar una mejor posición en tu rutina.",
+      "subheading_1_before": "El corrector Altaeron™ ofrece terapia avanzada de alineación. Su mecanismo articulado ajustable está diseñado para ",
+      "subheading_1_emphasis": "favorecer la realineación",
+      "subheading_1_after": " del dedo gordo y aliviar gradualmente la inflamación.",
+      "subheading_4_before": "Algunas personas pueden necesitar una o dos sesiones para acostumbrarse, ya que la ",
+      "subheading_4_emphasis": "sensación puede ser más intensa que con otros métodos",
+      "subheading_4_after": "."
     },
     "adjustable": {
       "eyebrow": "CORRECCIÓN AJUSTABLE",

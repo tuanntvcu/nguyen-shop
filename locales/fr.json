@@ -1642,7 +1642,11 @@
     "bunion": {
       "eyebrow": "COMMENT ÇA MARCHE",
       "heading": "Le problème n’est pas seulement la bosse. C’est la déviation.",
-      "subheading": "Le correcteur réglable d’hallux valgus Altaeron™ administre une thérapie avancée d’alignement. Il est conçu pour <strong class=\"alta-custom__emphasis\">accompagner le réalignement</strong> du gros orteil et réduire progressivement l’inflammation grâce à un mécanisme réglable à charnière.\n\nIl aide à relâcher les tensions musculaires en ramenant simplement le gros orteil vers sa position naturelle, pour un réalignement naturel et sans douleur de l’articulation au fil du temps.\n\nCela libère des années de tensions accumulées, redresse et réduit l’oignon, diminue la douleur et empêche sa progression, afin de vous aider à retrouver une démarche assurée.\n\nIl peut falloir une ou deux séances à certaines personnes pour s’y habituer, car la <strong class=\"alta-custom__emphasis\">sensation peut être plus intense qu’avec d’autres méthodes</strong>.\n\nCette méthode naturelle et non invasive aide à rétablir la position naturelle de l’orteil et du pied, et à inverser les dommages causés par des chaussures mal ajustées ou par la génétique.\n\nQu’il s’agisse d’un petit pied d’enfant ou d’une pointure adulte 47, le correcteur réglable d’hallux valgus Altaeron™ est conçu pour s’adapter confortablement à toutes les pointures.",
+      "subheading": "",
+      "subheading_2": "Il aide à relâcher les tensions musculaires en ramenant le gros orteil vers sa position naturelle, pour un réalignement naturel et sans douleur de l’articulation au fil du temps.",
+      "subheading_3": "Cela libère des années de tensions accumulées, redresse et réduit l’oignon, diminue la douleur et empêche sa progression, afin de vous aider à retrouver une démarche assurée.",
+      "subheading_5": "Cette méthode naturelle et non invasive aide à rétablir la position naturelle de l’orteil et du pied, et à inverser les dommages dus à des chaussures mal ajustées ou à la génétique.",
+      "subheading_6": "Du petit pied d’un enfant à une pointure adulte 47, le correcteur Altaeron™ est conçu pour s’adapter confortablement à différentes pointures.",
       "reassurance": "87 % des utilisateurs ont rapporté des <b>améliorations visibles</b> dès le premier mois.",
       "progression_1_title": "Le gros orteil dévie vers l’intérieur",
       "progression_1_caption": "Le gros orteil pousse vers le deuxième orteil, augmentant la compression et la pression autour de l’hallux valgus.",
@@ -1653,7 +1657,13 @@
       "benefit_1_title": "Progressez à votre rythme",
       "benefit_1_body": "Commencez doucement et augmentez la correction à mesure que votre pied s’adapte.",
       "benefit_2_title": "Faites de la correction une habitude",
-      "benefit_2_body": "Utilisez Altaeron assis ou au repos pour intégrer un meilleur positionnement à votre routine."
+      "benefit_2_body": "Utilisez Altaeron assis ou au repos pour intégrer un meilleur positionnement à votre routine.",
+      "subheading_1_before": "Le correcteur Altaeron™ administre une thérapie avancée d’alignement. Sa charnière réglable est conçue pour ",
+      "subheading_1_emphasis": "accompagner le réalignement",
+      "subheading_1_after": " du gros orteil et réduire progressivement l’inflammation.",
+      "subheading_4_before": "Il peut falloir une ou deux séances à certaines personnes pour s’y habituer, car la ",
+      "subheading_4_emphasis": "sensation peut être plus intense qu’avec d’autres méthodes",
+      "subheading_4_after": "."
     },
     "adjustable": {
       "eyebrow": "CORRECTION RÉGLABLE",

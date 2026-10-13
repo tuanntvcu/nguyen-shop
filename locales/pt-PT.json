@@ -1642,7 +1642,11 @@
     "bunion": {
       "eyebrow": "COMO FUNCIONA",
       "heading": "O problema não é apenas a saliência. É o desvio.",
-      "subheading": "O Corretor Ajustável de Joanetes Altaeron™ proporciona uma terapia avançada de alinhamento. Foi concebido para <strong class=\"alta-custom__emphasis\">apoiar o realinhamento</strong> do dedo grande e aliviar gradualmente a inflamação através de um mecanismo articulado ajustável.\n\nAjuda a libertar a tensão muscular, puxando simplesmente o dedo grande de volta à sua posição natural e promovendo, ao longo do tempo, um realinhamento natural e sem dor da articulação.\n\nIsto liberta anos de tensão acumulada, endireita e reduz o joanete, diminui a dor e impede o seu crescimento, para voltar a caminhar com postura e confiança.\n\nAlgumas pessoas poderão precisar de uma ou duas sessões para se habituarem, pois a <strong class=\"alta-custom__emphasis\">sensação poderá ser mais intensa do que com outros métodos</strong>.\n\nEsta é uma forma natural e não invasiva de restaurar a posição natural do dedo e do pé e reverter os danos causados por calçado inadequado ou pela genética.\n\nQuer se trate do pé pequeno de uma criança ou de um tamanho adulto 47, o Corretor Ajustável de Joanetes Altaeron™ foi concebido para se adaptar confortavelmente a todos os tamanhos de pé.",
+      "subheading": "",
+      "subheading_2": "Ajuda a libertar a tensão muscular, puxando o dedo grande de volta à posição natural e promovendo, ao longo do tempo, um realinhamento natural e sem dor da articulação.",
+      "subheading_3": "Isto liberta anos de tensão acumulada, endireita e reduz o joanete, diminui a dor e impede o seu crescimento, para voltar a caminhar com postura e confiança.",
+      "subheading_5": "Esta é uma forma natural e não invasiva de restaurar a posição do dedo e do pé e reverter danos causados por calçado inadequado ou pela genética.",
+      "subheading_6": "Do pé pequeno de uma criança ao tamanho adulto 47, o corretor Altaeron™ foi concebido para se ajustar confortavelmente a vários tamanhos de pé.",
       "reassurance": "87% dos utilizadores relataram <b>melhorias visíveis</b> logo no primeiro mês.",
       "progression_1_title": "O dedo grande desvia-se para dentro",
       "progression_1_caption": "O dedo grande pressiona o segundo dedo, aumentando a compressão e a pressão em redor do joanete.",
@@ -1653,7 +1657,13 @@
       "benefit_1_title": "Progrida no seu ritmo",
       "benefit_1_body": "Comece suavemente e aumente a correção conforme o pé se adapta.",
       "benefit_2_title": "Transforme a correção em rotina",
-      "benefit_2_body": "Utilize Altaeron sentado ou a descansar para integrar um melhor posicionamento na sua rotina."
+      "benefit_2_body": "Utilize Altaeron sentado ou a descansar para integrar um melhor posicionamento na sua rotina.",
+      "subheading_1_before": "O corretor Altaeron™ proporciona terapia avançada de alinhamento. A articulação ajustável foi concebida para ",
+      "subheading_1_emphasis": "apoiar o realinhamento",
+      "subheading_1_after": " do dedo grande e aliviar gradualmente a inflamação.",
+      "subheading_4_before": "Algumas pessoas poderão precisar de uma ou duas sessões para se habituarem, pois a ",
+      "subheading_4_emphasis": "sensação poderá ser mais intensa do que com outros métodos",
+      "subheading_4_after": "."
     },
     "adjustable": {
       "eyebrow": "CORREÇÃO AJUSTÁVEL",

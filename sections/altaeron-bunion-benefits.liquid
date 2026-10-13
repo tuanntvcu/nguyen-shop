@@ -5,10 +5,21 @@
   assign heading = section.settings.heading
   assign subheading = section.settings.subheading
   assign reassurance = section.settings.reassurance
+  assign translated_subheading = true
+  for paragraph_index in (1..6)
+    assign paragraph_key = 'altaeron_pdp_reels_v3.bunion.subheading_' | append: paragraph_index
+    if paragraph_index == 1 or paragraph_index == 4
+      assign paragraph_key = paragraph_key | append: '_before'
+    endif
+    assign paragraph_copy = paragraph_key | t
+    if paragraph_copy contains 'Translation missing:'
+      assign translated_subheading = false
+      break
+    endif
+  endfor
   unless request.locale.iso_code == 'en'
     assign eyebrow = 'altaeron_pdp_reels_v3.bunion.eyebrow' | t
     assign heading = 'altaeron_pdp_reels_v3.bunion.heading' | t
-    assign subheading = 'altaeron_pdp_reels_v3.bunion.subheading' | t
     assign reassurance = 'altaeron_pdp_reels_v3.bunion.reassurance' | t
   endunless
 -%}
@@ -31,6 +42,8 @@
   #AltaeronBunion-{{ section.id }} .alta-custom__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
   #AltaeronBunion-{{ section.id }} .alta-custom__heading { color: var(--alta-custom-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(30px, 3vw, 46px); font-weight: 750; letter-spacing: -.035em; line-height: 1.08; margin: 0; }
   #AltaeronBunion-{{ section.id }} .alta-custom__subheading { color: var(--alta-custom-body); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; margin: 10px 0 0; max-width: 1050px; }
+  #AltaeronBunion-{{ section.id }} .alta-custom__subheading p { margin: 0 0 .85em; }
+  #AltaeronBunion-{{ section.id }} .alta-custom__subheading p:last-child { margin-bottom: 0; }
   #AltaeronBunion-{{ section.id }} .alta-custom__subheading strong { color: #9b2525; font-weight: 750; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__progression { background: #f7f9f9; border: 1px solid var(--alta-custom-line); border-radius: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: hidden; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__step { background: #fff; min-width: 0; position: relative; text-align: center; }
@@ -98,7 +111,25 @@
     <header class="alta-custom__header">
       {%- if eyebrow != blank -%}<p class="alta-custom__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
       <h2 id="AltaeronBunionHeading-{{ section.id }}" class="alta-custom__heading">{{ heading | escape }}</h2>
-      {%- if subheading != blank -%}<p class="alta-custom__subheading">{{ subheading | newline_to_br }}</p>{%- endif -%}
+      {%- if translated_subheading or subheading != blank -%}
+        <div class="alta-custom__subheading">
+          {%- if translated_subheading -%}
+            {%- for paragraph_index in (1..6) -%}
+              {%- capture paragraph_key -%}altaeron_pdp_reels_v3.bunion.subheading_{{ paragraph_index }}{%- endcapture -%}
+              {%- if paragraph_index == 1 or paragraph_index == 4 -%}
+                {%- assign before_key = paragraph_key | append: '_before' -%}
+                {%- assign emphasis_key = paragraph_key | append: '_emphasis' -%}
+                {%- assign after_key = paragraph_key | append: '_after' -%}
+                <p>{{ before_key | t }}<strong>{{ emphasis_key | t }}</strong>{{ after_key | t }}</p>
+              {%- else -%}
+                <p>{{ paragraph_key | t }}</p>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {{ subheading | newline_to_br }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </header>
 
     {%- if progression_blocks.size > 0 -%}

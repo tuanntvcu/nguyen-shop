@@ -1642,7 +1642,11 @@
     "bunion": {
       "eyebrow": "SO FUNKTIONIERT ES",
       "heading": "Das Problem ist nicht nur der Ballen. Es ist die Fehlstellung.",
-      "subheading": "Der verstellbare Ballenzehkorrektor Altaeron™ bietet eine fortschrittliche Ausrichtungstherapie. Er wurde entwickelt, um die <strong class=\"alta-custom__emphasis\">Neuausrichtung</strong> des großen Zehs zu unterstützen und Entzündungen mithilfe eines verstellbaren Scharniermechanismus allmählich zu lindern.\n\nEr hilft, Muskelspannungen zu lösen, indem er den großen Zeh einfach in seine natürliche Position zurückzieht und so mit der Zeit eine schmerzfreie, natürliche Neuausrichtung des Zehengelenks ermöglicht.\n\nSo werden jahrelange Spannungen gelöst, der Ballenzeh begradigt und verkleinert, Schmerzen gelindert und weiteres Wachstum verhindert, damit Sie wieder aufrecht und selbstbewusst auftreten können.\n\nManche Anwender benötigen möglicherweise ein oder zwei Sitzungen, um sich daran zu gewöhnen, da sich das <strong class=\"alta-custom__emphasis\">Gefühl im Vergleich zu anderen Methoden intensiver anfühlen kann</strong>.\n\nDies ist eine natürliche, nicht-invasive Möglichkeit, die natürliche Position von Zeh und Fuß wiederherzustellen und Schäden durch schlecht sitzendes Schuhwerk oder genetische Faktoren rückgängig zu machen.\n\nOb kleiner Kinderfuß oder Schuhgröße 47: Der verstellbare Ballenzehkorrektor Altaeron™ ist so gefertigt, dass er bequem an Füße jeder Größe passt.",
+      "subheading": "",
+      "subheading_2": "Er hilft, Muskelspannungen zu lösen, indem er den großen Zeh in seine natürliche Position zurückzieht und so mit der Zeit eine schmerzfreie, natürliche Neuausrichtung des Zehengelenks ermöglicht.",
+      "subheading_3": "So werden jahrelange Spannungen gelöst, der Ballenzeh begradigt und verkleinert, Schmerzen gelindert und weiteres Wachstum verhindert, damit Sie wieder aufrecht und selbstbewusst auftreten können.",
+      "subheading_5": "Dies ist eine natürliche, nicht-invasive Möglichkeit, die natürliche Position von Zeh und Fuß wiederherzustellen und Schäden durch schlecht sitzendes Schuhwerk oder genetische Faktoren rückgängig zu machen.",
+      "subheading_6": "Ob kleiner Kinderfuß oder Schuhgröße 47: Der verstellbare Ballenzehkorrektor Altaeron™ ist für einen bequemen Sitz an Füßen jeder Größe gefertigt.",
       "reassurance": "87 % der Anwender berichteten bereits im ersten Monat von <b>sichtbaren Verbesserungen</b>.",
       "progression_1_title": "Der große Zeh weicht nach innen ab",
       "progression_1_caption": "Der große Zeh drückt zum zweiten Zeh und verstärkt Enge und Druck am Ballen.",
@@ -1653,7 +1657,13 @@
       "benefit_1_title": "Im eigenen Tempo steigern",
       "benefit_1_body": "Beginnen Sie sanft und steigern Sie die Korrektur, wenn sich Ihr Fuß angepasst hat.",
       "benefit_2_title": "Korrektur zur Routine machen",
-      "benefit_2_body": "Tragen Sie Altaeron im Sitzen oder beim Entspannen, damit eine bessere Position Teil Ihrer normalen Routine wird."
+      "benefit_2_body": "Tragen Sie Altaeron im Sitzen oder beim Entspannen, damit eine bessere Position Teil Ihrer normalen Routine wird.",
+      "subheading_1_before": "Der Ballenzehkorrektor Altaeron™ bietet fortschrittliche Ausrichtungstherapie. Sein Mechanismus unterstützt die ",
+      "subheading_1_emphasis": "Neuausrichtung",
+      "subheading_1_after": " des großen Zehs und lindert Entzündungen allmählich.",
+      "subheading_4_before": "Manche Anwender benötigen ein oder zwei Sitzungen, um sich daran zu gewöhnen, da sich das ",
+      "subheading_4_emphasis": "Gefühl intensiver anfühlen kann als bei anderen Methoden",
+      "subheading_4_after": "."
     },
     "adjustable": {
       "eyebrow": "VERSTELLBARE KORREKTUR",
