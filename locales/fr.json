@@ -2351,5 +2351,17 @@
       "criterion_4": "Une pression réglable pour un soulagement ciblé au quotidien",
       "criteria_footer": "AirRelief réunit ces quatre atouts dans une simple séance de 15 minutes."
     }
-  }
+  },
+  "altaeron_pdp_reasons":  {
+                                   "eyebrow":  "AVANTAGES",
+                                   "heading":  "8 raisons de l’adopter",
+                                   "point_1":  "\u003cp\u003e\u003cstrong\u003eSoulage l’inconfort\u003c/strong\u003e pendant la marche, l’exercice, la station debout et le sommeil\u003c/p\u003e",
+                                   "point_2":  "\u003cp\u003e\u003cstrong\u003eAide\u003c/strong\u003e à prévenir la progression de l’oignon\u003c/p\u003e",
+                                   "point_3":  "\u003cp\u003e\u003cstrong\u003eUne option non chirurgicale\u003c/strong\u003e pour soulager l’inconfort\u003c/p\u003e",
+                                   "point_4":  "\u003cp\u003eUn réalignement articulaire ferme qui \u003cstrong\u003eagit réellement\u003c/strong\u003e pour \u003cstrong\u003eaméliorer votre état\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_5":  "\u003cp\u003e\u003cstrong\u003eIntensité\u003c/strong\u003e d’étirement réglable\u003c/p\u003e",
+                                   "point_6":  "\u003cp\u003eConçu et recommandé par des \u003cstrong\u003eprofessionnels de santé\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_7":  "\u003cp\u003e\u003cstrong\u003eFacile à utiliser\u003c/strong\u003e et à transporter\u003c/p\u003e",
+                                   "point_8":  "\u003cp\u003e\u003cstrong\u003eRetours faciles sous 30 jours\u003c/strong\u003e — essayez sans risque\u003c/p\u003e"
+                               }
 }

@@ -2009,5 +2009,17 @@
       "criterion_4": "日々の気になる部分のケアに合わせて調節できる圧力",
       "criteria_footer": "AirReliefは、この4つを手軽な15分間のセッションで提供します。"
     }
-  }
+  },
+  "altaeron_pdp_reasons":  {
+                                   "eyebrow":  "特長",
+                                   "heading":  "きっと気に入る8つの理由",
+                                   "point_1":  "\u003cp\u003e歩行、運動、立ち仕事、睡眠時の\u003cstrong\u003e不快感を軽減\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_2":  "\u003cp\u003e外反母趾のさらなる進行を\u003cstrong\u003e防ぎます\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_3":  "\u003cp\u003e\u003cstrong\u003e手術をしない\u003c/strong\u003eケアの選択肢\u003c/p\u003e",
+                                   "point_4":  "\u003cp\u003eしっかりと関節を整え、状態の\u003cstrong\u003e改善をサポート\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_5":  "\u003cp\u003e\u003cstrong\u003e調整可能\u003c/strong\u003eなストレッチ強度\u003c/p\u003e",
+                                   "point_6":  "\u003cp\u003e\u003cstrong\u003e医療専門家\u003c/strong\u003eが設計し、推奨\u003c/p\u003e",
+                                   "point_7":  "\u003cp\u003e\u003cstrong\u003e使いやすく\u003c/strong\u003e、持ち運びにも便利\u003c/p\u003e",
+                                   "point_8":  "\u003cp\u003e\u003cstrong\u003e30日間返品可能\u003c/strong\u003e — リスクなくお試しいただけます\u003c/p\u003e"
+                               }
 }

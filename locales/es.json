@@ -2351,5 +2351,17 @@
       "criterion_4": "Presión ajustable para un alivio diario localizado",
       "criteria_footer": "AirRelief ofrece los cuatro en una sencilla sesión de 15 minutos."
     }
-  }
+  },
+  "altaeron_pdp_reasons":  {
+                                   "eyebrow":  "VENTAJAS",
+                                   "heading":  "8 razones por las que te encantará",
+                                   "point_1":  "\u003cp\u003e\u003cstrong\u003eAlivia las molestias\u003c/strong\u003e al caminar, hacer ejercicio, estar de pie y dormir\u003c/p\u003e",
+                                   "point_2":  "\u003cp\u003e\u003cstrong\u003eAyuda\u003c/strong\u003e a prevenir que el juanete siga creciendo\u003c/p\u003e",
+                                   "point_3":  "\u003cp\u003e\u003cstrong\u003eUna opción no quirúrgica\u003c/strong\u003e para aliviar las molestias\u003c/p\u003e",
+                                   "point_4":  "\u003cp\u003eRealineación firme de la articulación que \u003cstrong\u003erealmente funciona\u003c/strong\u003e para \u003cstrong\u003emejorar tu estado\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_5":  "\u003cp\u003e\u003cstrong\u003eIntensidad\u003c/strong\u003e de estiramiento ajustable\u003c/p\u003e",
+                                   "point_6":  "\u003cp\u003eDiseñado y recomendado por \u003cstrong\u003eprofesionales médicos\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_7":  "\u003cp\u003e\u003cstrong\u003eFácil de usar\u003c/strong\u003e y portátil\u003c/p\u003e",
+                                   "point_8":  "\u003cp\u003e\u003cstrong\u003eDevoluciones fáciles durante 30 días\u003c/strong\u003e — pruébalo sin riesgo\u003c/p\u003e"
+                               }
 }

@@ -2351,5 +2351,17 @@
       "criterion_4": "Einstellbarer Druck für gezielte tägliche Linderung",
       "criteria_footer": "AirRelief vereint alle vier in einer einfachen 15-minütigen Sitzung."
     }
-  }
+  },
+  "altaeron_pdp_reasons":  {
+                                   "eyebrow":  "VORTEILE",
+                                   "heading":  "8 Gründe, warum Sie es lieben werden",
+                                   "point_1":  "\u003cp\u003e\u003cstrong\u003eLindert Beschwerden\u003c/strong\u003e beim Gehen, Trainieren, Stehen und Schlafen\u003c/p\u003e",
+                                   "point_2":  "\u003cp\u003e\u003cstrong\u003eHilft\u003c/strong\u003e, weiteres Wachstum des Ballenzehs zu verhindern\u003c/p\u003e",
+                                   "point_3":  "\u003cp\u003e\u003cstrong\u003eNicht-operative Möglichkeit\u003c/strong\u003e zur Linderung\u003c/p\u003e",
+                                   "point_4":  "\u003cp\u003eStabile Gelenkausrichtung, die \u003cstrong\u003ewirklich wirkt\u003c/strong\u003e und Ihren Zustand \u003cstrong\u003everbessern kann\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_5":  "\u003cp\u003e\u003cstrong\u003eEinstellbare\u003c/strong\u003e Dehnungsintensität\u003c/p\u003e",
+                                   "point_6":  "\u003cp\u003eVon \u003cstrong\u003emedizinischem Fachpersonal\u003c/strong\u003e entwickelt und empfohlen\u003c/p\u003e",
+                                   "point_7":  "\u003cp\u003e\u003cstrong\u003eEinfach zu verwenden\u003c/strong\u003e und tragbar\u003c/p\u003e",
+                                   "point_8":  "\u003cp\u003e\u003cstrong\u003e30 Tage einfache Rückgabe\u003c/strong\u003e — risikofrei ausprobieren\u003c/p\u003e"
+                               }
 }

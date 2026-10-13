@@ -1,0 +1,101 @@
+.altaeron-reels-v3-reasons {
+  --reasons-accent: var(--altaeron-primary, #006b5e);
+  --reasons-body: var(--altaeron-body, #344054);
+  --reasons-border: var(--altaeron-border, #e4e7ec);
+  --reasons-ink: var(--altaeron-navy, #102a43);
+  background: #f7faf8;
+  border-top: 1px solid var(--reasons-border);
+  color: var(--reasons-body);
+  padding: 54px 0;
+}
+
+.altaeron-reels-v3-reasons__shell {
+  margin-inline: auto;
+  width: min(1240px, calc(100% - 80px));
+}
+
+.altaeron-reels-v3-reasons__eyebrow {
+  align-items: center;
+  color: var(--reasons-accent);
+  display: flex;
+  font-size: 11px;
+  font-weight: 800;
+  gap: 10px;
+  letter-spacing: .2em;
+  margin: 0 0 9px;
+  text-transform: uppercase;
+}
+
+.altaeron-reels-v3-reasons__eyebrow::before {
+  background: currentColor;
+  content: "";
+  flex: 0 0 32px;
+  height: 2px;
+}
+
+.altaeron-reels-v3-reasons__heading {
+  color: var(--reasons-ink);
+  font-family: var(--alta-font-family, var(--font-heading-family));
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 750;
+  letter-spacing: -.035em;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.altaeron-reels-v3-reasons__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 26px;
+}
+
+.altaeron-reels-v3-reasons__point {
+  border-bottom: 4px solid var(--reasons-accent);
+  min-width: 0;
+  padding: 18px 20px;
+}
+
+.altaeron-reels-v3-reasons__point:nth-child(odd) {
+  border-right: 1px solid var(--reasons-border);
+}
+
+.altaeron-reels-v3-reasons__point:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.altaeron-reels-v3-reasons__point p {
+  color: var(--reasons-ink);
+  font-size: 16px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.altaeron-reels-v3-reasons__point strong {
+  font-weight: 750;
+}
+
+@media (max-width: 749px) {
+  .altaeron-reels-v3-reasons {
+    padding: 32px 0;
+  }
+
+  .altaeron-reels-v3-reasons__shell {
+    width: calc(100% - 30px);
+  }
+
+  .altaeron-reels-v3-reasons__heading {
+    font-size: 29px;
+  }
+
+  .altaeron-reels-v3-reasons__grid {
+    margin-top: 20px;
+  }
+
+  .altaeron-reels-v3-reasons__point {
+    padding: 15px 12px;
+  }
+
+  .altaeron-reels-v3-reasons__point p {
+    font-size: 14px;
+  }
+}

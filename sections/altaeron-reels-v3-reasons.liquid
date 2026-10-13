@@ -1,0 +1,72 @@
+{{ 'altaeron-reels-v3-reasons.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign reasons_eyebrow = section.settings.eyebrow
+  assign reasons_heading = section.settings.heading
+  if request.locale.iso_code != 'en'
+    assign localized_eyebrow = 'altaeron_pdp_reasons.eyebrow' | t
+    assign localized_heading = 'altaeron_pdp_reasons.heading' | t
+    unless localized_heading contains 'Translation missing:'
+      assign reasons_eyebrow = localized_eyebrow
+      assign reasons_heading = localized_heading
+    endunless
+  endif
+-%}
+
+<section
+  id="AltaeronReasons-{{ section.id }}"
+  class="altaeron-reels-v3-reasons"
+  aria-labelledby="AltaeronReasonsHeading-{{ section.id }}"
+>
+  <div class="altaeron-reels-v3-reasons__shell">
+    {% if reasons_eyebrow != blank %}
+      <p class="altaeron-reels-v3-reasons__eyebrow">{{ reasons_eyebrow | escape }}</p>
+    {% endif %}
+    <h2 id="AltaeronReasonsHeading-{{ section.id }}" class="altaeron-reels-v3-reasons__heading">
+      {{ reasons_heading | escape }}
+    </h2>
+    {% if section.blocks.size > 0 %}
+      <div class="altaeron-reels-v3-reasons__grid">
+        {% for block in section.blocks %}
+          <article class="altaeron-reels-v3-reasons__point" {{ block.shopify_attributes }}>
+            {% if request.locale.iso_code == 'en' %}
+              {{ block.settings.content }}
+            {% else %}
+              {%- capture point_key -%}altaeron_pdp_reasons.point_{{ forloop.index }}{%- endcapture -%}
+              {%- assign localized_point = point_key | t -%}
+              {% if localized_point contains 'Translation missing:' %}
+                {{ block.settings.content }}
+              {% else %}
+                {{ localized_point }}
+              {% endif %}
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron: 8 reasons",
+  "tag": "section",
+  "class": "section-altaeron-reels-v3-reasons",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BENEFITS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "8 Reasons Why You Will Love It" }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Benefit point",
+      "limit": 8,
+      "settings": [
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p><strong>Benefit</strong> description.</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Altaeron: 8 reasons" }]
+}
+{% endschema %}

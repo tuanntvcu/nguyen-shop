@@ -636,5 +636,17 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Gửi tiếp (tùy chọn)"
     }
+  },
+  "altaeron_pdp_reasons": {
+    "eyebrow": "LỢI ÍCH",
+    "heading": "8 lý do bạn sẽ yêu thích sản phẩm",
+    "point_1": "<p><strong>Giảm khó chịu</strong> khi đi bộ, tập thể dục, đứng lâu và ngủ</p>",
+    "point_2": "<p><strong>Giúp ngăn</strong> tình trạng bunion phát triển thêm</p>",
+    "point_3": "<p><strong>Lựa chọn không cần phẫu thuật</strong> để giảm khó chịu</p>",
+    "point_4": "<p>Căn chỉnh khớp chắc chắn, <strong>thực sự hiệu quả</strong> để <strong>cải thiện tình trạng</strong> của bạn</p>",
+    "point_5": "<p><strong>Điều chỉnh được</strong> cường độ kéo giãn</p>",
+    "point_6": "<p>Được thiết kế và khuyên dùng bởi <strong>chuyên gia y tế</strong></p>",
+    "point_7": "<p><strong>Dễ sử dụng</strong> và thuận tiện mang theo</p>",
+    "point_8": "<p><strong>Đổi trả dễ dàng trong 30 ngày</strong> — dùng thử không lo rủi ro</p>"
   }
 }

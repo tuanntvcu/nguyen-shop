@@ -1607,5 +1607,17 @@
       "criterion_4": "Pressão ajustável para alívio diário direcionado",
       "criteria_footer": "O AirRelief oferece os quatro em uma simples sessão de 15 minutos."
     }
-  }
+  },
+  "altaeron_pdp_reasons":  {
+                                   "eyebrow":  "BENEFÍCIOS",
+                                   "heading":  "8 motivos para você adorar",
+                                   "point_1":  "\u003cp\u003e\u003cstrong\u003eAlívio do desconforto\u003c/strong\u003e ao caminhar, fazer exercícios, ficar em pé e dormir\u003c/p\u003e",
+                                   "point_2":  "\u003cp\u003e\u003cstrong\u003eAjuda\u003c/strong\u003e a prevenir o aumento do joanete\u003c/p\u003e",
+                                   "point_3":  "\u003cp\u003e\u003cstrong\u003eUma opção não cirúrgica\u003c/strong\u003e para aliviar o desconforto\u003c/p\u003e",
+                                   "point_4":  "\u003cp\u003eRealinhamento firme da articulação que \u003cstrong\u003erealmente funciona\u003c/strong\u003e para \u003cstrong\u003emelhorar sua condição\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_5":  "\u003cp\u003e\u003cstrong\u003eIntensidade\u003c/strong\u003e de alongamento ajustável\u003c/p\u003e",
+                                   "point_6":  "\u003cp\u003eDesenvolvido e recomendado por \u003cstrong\u003eprofissionais de saúde\u003c/strong\u003e\u003c/p\u003e",
+                                   "point_7":  "\u003cp\u003e\u003cstrong\u003eFácil de usar\u003c/strong\u003e e portátil\u003c/p\u003e",
+                                   "point_8":  "\u003cp\u003e\u003cstrong\u003eDevolução fácil em até 30 dias\u003c/strong\u003e — experimente sem riscos\u003c/p\u003e"
+                               }
 }

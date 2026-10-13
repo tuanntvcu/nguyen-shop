@@ -196,6 +196,33 @@
         "review_content_2": "<p>Ive been wearing it around 30 mins a day, mostly after being on my feet, and it helps with the tension and discomfort. for me its more of a comfortable support/immobilizing brace than a “corrector” and im totally fine with that. feels well made and comfortable to wear ❤️‍🔥</p>"
       }
     },
+    "altaeron_reasons_8": {
+      "type": "altaeron-reels-v3-reasons",
+      "blocks": {
+        "reason_1": { "type": "point", "settings": { "content": "<p><strong>Relief from discomfort</strong> while walking, exercising, standing &amp; sleeping</p>" } },
+        "reason_2": { "type": "point", "settings": { "content": "<p><strong>Prevents</strong> Further Bunion Growth</p>" } },
+        "reason_3": { "type": "point", "settings": { "content": "<p><strong>Non-Surgical Option</strong> for Relief</p>" } },
+        "reason_4": { "type": "point", "settings": { "content": "<p>Firm Joint Realignment That <strong>Actually Works</strong> to <strong>Improve Your Condition</strong></p>" } },
+        "reason_5": { "type": "point", "settings": { "content": "<p><strong>Adjustable</strong> Stretch Intensity</p>" } },
+        "reason_6": { "type": "point", "settings": { "content": "<p>Designed &amp; Recommended by <strong>Medical Professionals</strong></p>" } },
+        "reason_7": { "type": "point", "settings": { "content": "<p><strong>Easy to Use</strong> &amp; Portable</p>" } },
+        "reason_8": { "type": "point", "settings": { "content": "<p><strong>30-Day Easy Returns</strong> — Try It Risk-Free</p>" } }
+      },
+      "block_order": [
+        "reason_1",
+        "reason_2",
+        "reason_3",
+        "reason_4",
+        "reason_5",
+        "reason_6",
+        "reason_7",
+        "reason_8"
+      ],
+      "settings": {
+        "eyebrow": "BENEFITS",
+        "heading": "8 Reasons Why You Will Love It"
+      }
+    },
     "altaeron_try_at_home": {
       "type": "altaeron-try-at-home",
       "blocks": {
@@ -358,6 +385,7 @@
     "altaeron_pdp_reels_v3",
     "altaeron_bunion_benefits",
     "altaeron_right_fit",
+    "altaeron_reasons_8",
     "altaeron_customer_proof_RtL9nR",
     "altaeron_try_at_home",
     "altaeron_support_timeline",
