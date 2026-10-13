@@ -3,100 +3,175 @@
   --reasons-body: var(--altaeron-body, #344054);
   --reasons-border: var(--altaeron-border, #e4e7ec);
   --reasons-ink: var(--altaeron-navy, #102a43);
-  background: #f7faf8;
+  background: linear-gradient(180deg, #f2f8f5 0%, #f8fbf9 100%);
   border-top: 1px solid var(--reasons-border);
   color: var(--reasons-body);
-  padding: 54px 0;
+  padding: 32px 0;
 }
 
 .altaeron-reels-v3-reasons__shell {
   margin-inline: auto;
-  width: min(1240px, calc(100% - 80px));
+  width: calc(100% - 30px);
 }
 
 .altaeron-reels-v3-reasons__eyebrow {
   align-items: center;
   color: var(--reasons-accent);
   display: flex;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
-  gap: 10px;
+  gap: 9px;
   letter-spacing: .2em;
-  margin: 0 0 9px;
+  margin: 0 0 8px;
   text-transform: uppercase;
 }
 
 .altaeron-reels-v3-reasons__eyebrow::before {
   background: currentColor;
   content: "";
-  flex: 0 0 32px;
+  flex: 0 0 28px;
   height: 2px;
 }
 
 .altaeron-reels-v3-reasons__heading {
   color: var(--reasons-ink);
   font-family: var(--alta-font-family, var(--font-heading-family));
-  font-size: clamp(30px, 3vw, 44px);
+  font-size: clamp(26px, 7vw, 32px);
   font-weight: 750;
   letter-spacing: -.035em;
-  line-height: 1.08;
+  line-height: 1.1;
   margin: 0;
 }
 
 .altaeron-reels-v3-reasons__grid {
   display: grid;
+  gap: 9px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 26px;
+  margin-top: 18px;
 }
 
 .altaeron-reels-v3-reasons__point {
-  border-bottom: 4px solid var(--reasons-accent);
+  align-items: flex-start;
+  background: rgba(255, 255, 255, .9);
+  border: 1px solid rgba(228, 231, 236, .72);
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(16, 42, 67, .035);
+  display: flex;
+  gap: 8px;
   min-width: 0;
-  padding: 18px 20px;
+  padding: 10px 8px;
 }
 
-.altaeron-reels-v3-reasons__point:nth-child(odd) {
-  border-right: 1px solid var(--reasons-border);
+.altaeron-reels-v3-reasons__icon {
+  align-items: center;
+  background: #eaf5f2;
+  border-radius: 50%;
+  color: var(--reasons-accent);
+  display: flex;
+  flex: 0 0 34px;
+  height: 34px;
+  justify-content: center;
+  width: 34px;
 }
 
-.altaeron-reels-v3-reasons__point:nth-last-child(-n + 2) {
-  border-bottom: 0;
+.altaeron-reels-v3-reasons__icon svg {
+  display: block;
+  height: 23px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+  width: 23px;
+}
+
+.altaeron-reels-v3-reasons__copy {
+  min-width: 0;
+  padding-top: 1px;
 }
 
 .altaeron-reels-v3-reasons__point p {
-  color: var(--reasons-ink);
-  font-size: 16px;
-  line-height: 1.45;
+  color: var(--reasons-body);
+  font-size: 11px;
+  line-height: 1.3;
   margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.altaeron-reels-v3-reasons__point p strong:first-child {
+  color: var(--reasons-ink);
+  display: block;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.2;
+  margin-bottom: 2px;
 }
 
 .altaeron-reels-v3-reasons__point strong {
-  color: var(--altaeron-primary, #006b5e);
+  color: var(--reasons-accent);
   font-weight: 750;
 }
 
-@media (max-width: 749px) {
+@media (min-width: 750px) {
   .altaeron-reels-v3-reasons {
-    padding: 32px 0;
+    padding: 54px 0;
   }
 
   .altaeron-reels-v3-reasons__shell {
-    width: calc(100% - 30px);
+    width: min(1600px, calc(100% - 64px));
+  }
+
+  .altaeron-reels-v3-reasons__eyebrow {
+    font-size: 11px;
+    gap: 10px;
+    margin-bottom: 9px;
+  }
+
+  .altaeron-reels-v3-reasons__eyebrow::before {
+    flex-basis: 32px;
   }
 
   .altaeron-reels-v3-reasons__heading {
-    font-size: 29px;
+    font-size: clamp(30px, 3vw, 44px);
   }
 
   .altaeron-reels-v3-reasons__grid {
-    margin-top: 20px;
+    gap: 14px;
+    margin-top: 26px;
   }
 
   .altaeron-reels-v3-reasons__point {
-    padding: 15px 12px;
+    align-items: center;
+    border-radius: 16px;
+    gap: 16px;
+    min-height: 152px;
+    padding: 20px;
+  }
+
+  .altaeron-reels-v3-reasons__icon {
+    flex-basis: 82px;
+    height: 82px;
+    width: 82px;
+  }
+
+  .altaeron-reels-v3-reasons__icon svg {
+    height: 54px;
+    width: 54px;
   }
 
   .altaeron-reels-v3-reasons__point p {
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .altaeron-reels-v3-reasons__point p strong:first-child {
+    font-size: 18px;
+    line-height: 1.25;
+    margin-bottom: 5px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .altaeron-reels-v3-reasons__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
