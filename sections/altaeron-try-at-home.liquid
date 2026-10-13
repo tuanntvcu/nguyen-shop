@@ -187,7 +187,7 @@
     {%- if section.settings.show_banner -%}
       <div class="alta-try__banner">
         <div class="alta-try__banner-copy">
-          <p>{{ close_before | escape }}<strong>{{ close_emphasis | escape }}</strong>{{ close_after | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.banner_text' | t | escape }}</p>
         </div>
       </div>
     {%- endif -%}
@@ -207,7 +207,7 @@
     { "type": "image_picker", "id": "hero_image", "label": "Hero lifestyle image" },
     { "type": "header", "content": "Supporting message" },
     { "type": "checkbox", "id": "show_handwritten", "label": "Show supporting message", "default": true },
-    { "type": "textarea", "id": "handwritten_message", "label": "Supporting message", "default": "10,000+ Happy Customers" },
+    { "type": "textarea", "id": "handwritten_message", "label": "Supporting message", "default": "91% of users reported reduced foot pain from the first week." },
     { "type": "header", "content": "Call to action" },
     { "type": "text", "id": "cta_text", "label": "CTA text", "default": "START YOUR CORRECTION →" },
     { "type": "url", "id": "cta_link", "label": "CTA link" },
