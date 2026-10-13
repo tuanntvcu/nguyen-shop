@@ -70,10 +70,6 @@
               </span>
               <span class="cart-drawer__reward-label">{{ 'storefront.cart_drawer.free_shipping' | t }}</span>
             </div>
-            <div class="cart-drawer__reward cart-drawer__reward--discount" role="listitem">
-              <span class="cart-drawer__reward-icon cart-drawer__reward-icon--percent" aria-hidden="true">%</span>
-              <span class="cart-drawer__reward-label">{{ 'storefront.cart_drawer.discount' | t: percent: 10 }}</span>
-            </div>
           </div>
         </div>
         <div
@@ -707,53 +703,16 @@
             {%- endif -%}
           </div>
           <div class="drawer__footer-body">
-            {%- liquid
-              assign cart_drawer_discount_percentage = settings.cart_drawer_discount_percentage | default: 10 | plus: 0
-              assign has_shopify_discount = false
-              assign cart_drawer_base_total = cart.items_subtotal_price
-              assign cart_drawer_total = cart_drawer_base_total | times: 0.9
-              if cart.cart_level_discount_applications.size > 0
-                assign has_shopify_discount = true
-              endif
-            -%}
             <div class="grid gap-4">
               <div class="grid gap-2">
-                {%- if has_shopify_discount -%}
-                  <div class="cart-drawer__discounts" role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                    {%- for discount in cart.cart_level_discount_applications -%}
-                      <div class="cart-drawer__discount-summary flex justify-between items-center" role="listitem">
-                        <span>{{ 'customer.order.discount' | t }}</span>
-                        <span class="cart-drawer__discount-value font-body-bold">
-                          {%- if discount.value_type == 'percentage' -%}
-                            {{ discount.value | round: 2 }}%
-                          {%- else -%}
-                            -{{ discount.total_allocated_amount | money }}
-                          {%- endif -%}
-                        </span>
-                      </div>
-                    {%- endfor -%}
-                  </div>
-                {%- else -%}
-                  <div class="cart-drawer__discount-summary flex justify-between items-center">
-                    <span>{{ 'customer.order.discount' | t }}</span>
-                    <span class="cart-drawer__discount-value font-body-bold">
-                      {{ cart_drawer_discount_percentage }}%
-                    </span>
-                  </div>
-                {%- endif -%}
                 <div class="totals flex justify-between items-center">
                   <span class="totals__subtotal h4">
                     {{- 'customer.order.total' | t -}}
                   </span>
                   <span class="totals__subtotal-value h4 font-body-bolder">
-                    {{- cart_drawer_total | money -}}
-                    <span class="cart-drawer__total-original">(<s>{{ cart_drawer_base_total | money }}</s>)</span>
+                    {{- cart.total_price | money -}}
                   </span>
                 </div>
-                <p class="cart-drawer__welcome-discount" role="status">
-                  <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="m4.8 8.1 2.1 2.1 4.3-4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  <span>{{ 'storefront.cart_drawer.welcome_discount_applied' | t }}</span>
-                </p>
               </div>
               <form
                 action="{{ routes.cart_url }}"

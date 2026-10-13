@@ -13,9 +13,11 @@
       assign localized_text_key = 'storefront.announcement.free_shipping_threshold'
   endcase
 
-  if request.locale.iso_code == 'en' or localized_text_key == blank
-    echo text
-  else
-    echo localized_text_key | t
+  unless request.page_type == 'product' and normalized_text contains 'welcome'
+    if request.locale.iso_code == 'en' or localized_text_key == blank
+      echo text
+    else
+      echo localized_text_key | t
+    endif
   endif
 -%}
