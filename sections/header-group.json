@@ -25,7 +25,7 @@
         "announcement_bar_tracking": {
           "type": "announcement_bar",
           "settings": {
-            "text": "free shipping worldwide",
+            "text": "free shipping",
             "link": "/account/orders",
             "icon": "shipping"
           }
