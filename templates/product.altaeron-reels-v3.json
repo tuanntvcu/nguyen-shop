@@ -93,30 +93,12 @@
             "title": "Guide the Toe Back Outward",
             "caption": "The big toe moves away from the second toe and toward a straighter anatomical position."
           }
-        },
-        "benefit_1": {
-          "type": "benefit",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_18_51_PM.png",
-            "title": "Progress at Your Pace",
-            "body": "Start gently and increase the correction as your foot adapts."
-          }
-        },
-        "benefit_2": {
-          "type": "benefit",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_24_41_PM.png",
-            "title": "Make Correction Repeatable",
-            "body": "Use Altaeron while sitting or relaxing so better positioning can become part of your normal routine."
-          }
         }
       },
       "block_order": [
         "progression_1",
         "progression_2",
-        "progression_3",
-        "benefit_1",
-        "benefit_2"
+        "progression_3"
       ],
       "settings": {
         "eyebrow": "HOW IT WORKS",
