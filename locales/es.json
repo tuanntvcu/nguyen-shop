@@ -2363,5 +2363,25 @@
                                    "point_6":  "\u003cp\u003eDiseñado y recomendado por \u003cstrong\u003eprofesionales médicos\u003c/strong\u003e\u003c/p\u003e",
                                    "point_7":  "\u003cp\u003e\u003cstrong\u003eFácil de usar\u003c/strong\u003e y portátil\u003c/p\u003e",
                                    "point_8":  "\u003cp\u003e\u003cstrong\u003eDevoluciones fáciles durante 30 días\u003c/strong\u003e — pruébalo sin riesgo\u003c/p\u003e"
-                               }
+                               },
+  "altaeron_comparison": {
+      "heading": "¿Por qué elegirnos?",
+      "claim_before": "No te dejes engañar por",
+      "claim_accent": "imitaciones baratas",
+      "intro": "Así se compara [product] con otras opciones:",
+      "other_label": "Otras marcas",
+      "feature_1": "Garantía de devolución de 30 días",
+      "feature_2": "Alivia las molestias",
+      "feature_3": "Ayuda a prevenir el avance del juanete",
+      "feature_4": "Mejora la alineación con el tiempo",
+      "feature_5": "Cómodo para caminar",
+      "feature_6": "Resistente y duradero"
+    },
+    "altaeron_results": {
+      "heading_html": "Resultados <strong>reales</strong>, personas reales",
+      "intro_html": "<p>Enviamos el Corrector de Juanetes Ajustable Altaeron™ a más de 37 clínicas de podología de EE. UU. Un total de 432 pacientes con juanetes lo probaron. Estos son los resultados.</p>",
+      "result_1_html": "<p>de los usuarios notaron menos dolor desde la segunda sesión</p>",
+      "result_2_html": "<p>de los usuarios eliminaron el dolor tras 14 días de uso constante (30 min/día)</p>",
+      "result_3_html": "<p>de los usuarios observaron mejoras visibles en la alineación tras 30 días de uso constante (30 min/día)</p>"
+    }
 }

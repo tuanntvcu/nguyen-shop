@@ -2350,5 +2350,25 @@
       "criterion_4": "Adjustable pressure for targeted daily relief",
       "criteria_footer": "AirRelief delivers all four in a simple 15-minute session."
     }
-  }
+  },
+  "altaeron_comparison": {
+      "heading": "Why Choose Us?",
+      "claim_before": "Don't fall for",
+      "claim_accent": "cheap knock-offs",
+      "intro": "How [product] compares to others:",
+      "other_label": "Other brands",
+      "feature_1": "30-Day Money Back Guarantee",
+      "feature_2": "Alleviate Discomfort",
+      "feature_3": "Help Prevent Bunion Growth",
+      "feature_4": "Improve Alignment Over Time",
+      "feature_5": "Comfortable to Wear While Walking",
+      "feature_6": "Durable & Long Lasting"
+    },
+    "altaeron_results": {
+      "heading_html": "Real <strong>Results</strong>, Real People",
+      "intro_html": "<p>We conducted a consumer test where we sent the Altaeron™ Adjustable Bunion Corrector to over 37 podiatrist offices across the US. A total of 432 patients with bunions tested it. Here are the results.</p>",
+      "result_1_html": "<p>of users reported reduced bunion pain from the 2nd session</p>",
+      "result_2_html": "<p>of users completely eliminated their bunion pain after just 14 days of consistent use (30min/day)</p>",
+      "result_3_html": "<p>of users saw visible improvements in toe alignment after just 30 days of consistent use (30min/day)</p>"
+    }
 }

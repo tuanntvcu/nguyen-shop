@@ -2363,5 +2363,25 @@
                                    "point_6":  "\u003cp\u003eConçu et recommandé par des \u003cstrong\u003eprofessionnels de santé\u003c/strong\u003e\u003c/p\u003e",
                                    "point_7":  "\u003cp\u003e\u003cstrong\u003eFacile à utiliser\u003c/strong\u003e et à transporter\u003c/p\u003e",
                                    "point_8":  "\u003cp\u003e\u003cstrong\u003eRetours faciles sous 30 jours\u003c/strong\u003e — essayez sans risque\u003c/p\u003e"
-                               }
+                               },
+  "altaeron_comparison": {
+      "heading": "Pourquoi nous choisir ?",
+      "claim_before": "Ne vous laissez pas tromper par les",
+      "claim_accent": "contrefaçons bon marché",
+      "intro": "Découvrez comment [product] se compare aux autres :",
+      "other_label": "Autres marques",
+      "feature_1": "Garantie satisfait ou remboursé de 30 jours",
+      "feature_2": "Soulage l’inconfort",
+      "feature_3": "Aide à prévenir l’aggravation de l’oignon",
+      "feature_4": "Améliore l’alignement au fil du temps",
+      "feature_5": "Confortable pour marcher",
+      "feature_6": "Durable et résistant"
+    },
+    "altaeron_results": {
+      "heading_html": "De vrais <strong>résultats</strong>, de vraies personnes",
+      "intro_html": "<p>Nous avons envoyé le correcteur d’oignon réglable Altaeron™ à plus de 37 cabinets de podologie aux États-Unis. Au total, 432 patients l’ont testé. Voici les résultats.</p>",
+      "result_1_html": "<p>des utilisateurs ont constaté une diminution de la douleur dès la deuxième séance</p>",
+      "result_2_html": "<p>des utilisateurs ont déclaré que leur douleur avait disparu après 14 jours d’utilisation régulière (30 min/jour)</p>",
+      "result_3_html": "<p>des utilisateurs ont observé une amélioration visible de l’alignement après 30 jours d’utilisation régulière (30 min/jour)</p>"
+    }
 }

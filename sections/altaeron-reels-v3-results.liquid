@@ -1,21 +1,24 @@
 {%- liquid
   assign heading_id = 'AltaeronResultsHeading-' | append: section.id
+  assign results_heading = 'altaeron_results.heading_html' | t
+  assign results_intro = 'altaeron_results.intro_html' | t
 -%}
 
 <section id="AltaeronResults-{{ section.id }}" class="ar3-results" aria-labelledby="{{ heading_id }}" style="--ar3-results-duration: {{ section.settings.animation_duration }}s;">
   <div class="ar3-results__inner">
     <div class="ar3-results__intro">
       {%- if section.settings.heading != blank -%}
-        <div id="{{ heading_id }}" class="ar3-results__heading rte" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+        <div id="{{ heading_id }}" class="ar3-results__heading rte" role="heading" aria-level="2">{{ results_heading }}</div>
       {%- endif -%}
       {%- if section.settings.intro != blank -%}
-        <div class="ar3-results__copy rte">{{ section.settings.intro }}</div>
+        <div class="ar3-results__copy rte">{{ results_intro }}</div>
       {%- endif -%}
     </div>
     <div class="ar3-results__list" role="list">
       {%- for block in section.blocks -%}
         {%- assign percentage = block.settings.percentage | at_most: 100 -%}
         {%- assign arc_length = percentage | times: 2.8274 -%}
+        {%- assign result_text_key = 'altaeron_results.result_' | append: forloop.index | append: '_html' -%}
         <article class="ar3-results__item" role="listitem" {{ block.shopify_attributes }}>
           <div class="ar3-results__ring" style="--ar3-results-arc: {{ arc_length }};" role="img" aria-label="{{ percentage }}%">
             <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
@@ -24,7 +27,7 @@
             </svg>
             <span>{{ percentage }}%</span>
           </div>
-          {%- if block.settings.text != blank -%}<div class="ar3-results__text rte">{{ block.settings.text }}</div>{%- endif -%}
+          {%- if block.settings.text != blank -%}<div class="ar3-results__text rte">{% if forloop.index <= 3 %}{{ result_text_key | t }}{% else %}{{ block.settings.text }}{% endif %}</div>{%- endif -%}
         </article>
       {%- endfor -%}
     </div>

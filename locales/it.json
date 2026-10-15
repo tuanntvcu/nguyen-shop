@@ -636,5 +636,25 @@
       "send_on": "AAAA-MM-GG",
       "send_on_label": "Invia (facoltativo)"
     }
-  }
+  },
+  "altaeron_comparison": {
+      "heading": "Perché scegliere noi?",
+      "claim_before": "Non farti ingannare dalle",
+      "claim_accent": "imitazioni economiche",
+      "intro": "Ecco come [product] si confronta con gli altri:",
+      "other_label": "Altri marchi",
+      "feature_1": "Garanzia soddisfatti o rimborsati di 30 giorni",
+      "feature_2": "Allevia il fastidio",
+      "feature_3": "Aiuta a prevenire il peggioramento dell’alluce valgo",
+      "feature_4": "Migliora l’allineamento nel tempo",
+      "feature_5": "Comodo mentre cammini",
+      "feature_6": "Resistente e durevole"
+    },
+    "altaeron_results": {
+      "heading_html": "Risultati <strong>reali</strong>, persone reali",
+      "intro_html": "<p>Abbiamo inviato il correttore regolabile Altaeron™ a oltre 37 studi di podologia negli Stati Uniti. In totale, 432 pazienti con alluce valgo lo hanno provato. Ecco i risultati.</p>",
+      "result_1_html": "<p>degli utenti ha riferito meno dolore dalla seconda sessione</p>",
+      "result_2_html": "<p>degli utenti ha eliminato il dolore dopo 14 giorni di uso costante (30 min al giorno)</p>",
+      "result_3_html": "<p>degli utenti ha notato miglioramenti visibili dopo 30 giorni di uso costante (30 min al giorno)</p>"
+    }
 }

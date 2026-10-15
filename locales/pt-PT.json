@@ -2363,5 +2363,25 @@
                                    "point_6":  "\u003cp\u003eConcebido e recomendado por \u003cstrong\u003eprofissionais de saúde\u003c/strong\u003e\u003c/p\u003e",
                                    "point_7":  "\u003cp\u003e\u003cstrong\u003eFácil de usar\u003c/strong\u003e e portátil\u003c/p\u003e",
                                    "point_8":  "\u003cp\u003e\u003cstrong\u003eDevolução fácil durante 30 dias\u003c/strong\u003e — experimente sem riscos\u003c/p\u003e"
-                               }
+                               },
+  "altaeron_comparison": {
+      "heading": "Porquê escolher a Altaeron?",
+      "claim_before": "Não se deixe enganar por",
+      "claim_accent": "imitações baratas",
+      "intro": "Veja como [product] se compara com outras opções:",
+      "other_label": "Outras marcas",
+      "feature_1": "Garantia de reembolso de 30 dias",
+      "feature_2": "Ajuda a aliviar o desconforto",
+      "feature_3": "Ajuda a prevenir a progressão do joanete",
+      "feature_4": "Ajuda a melhorar o alinhamento",
+      "feature_5": "Confortável para caminhar",
+      "feature_6": "Resistente e duradouro"
+    },
+    "altaeron_results": {
+      "heading_html": "<strong>Resultados</strong> reais, pessoas reais",
+      "intro_html": "<p>Enviámos o corretor ajustável de joanete Altaeron™ para mais de 37 clínicas de podologia nos EUA. Ao todo, 432 pacientes testaram o produto. Veja os resultados.</p>",
+      "result_1_html": "<p>dos utilizadores referiram menos dor a partir da segunda sessão</p>",
+      "result_2_html": "<p>dos utilizadores disseram que a dor desapareceu após 14 dias de utilização (30 min/dia)</p>",
+      "result_3_html": "<p>dos utilizadores observaram melhorias visíveis após 30 dias de utilização (30 min/dia)</p>"
+    }
 }

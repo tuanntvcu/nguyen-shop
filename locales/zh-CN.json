@@ -636,5 +636,25 @@
       "send_on": "年-月-日",
       "send_on_label": "发送（可选）"
     }
-  }
+  },
+  "altaeron_comparison": {
+      "heading": "为什么选择我们？",
+      "claim_before": "谨防",
+      "claim_accent": "廉价仿品",
+      "intro": "看看[product]与其他产品的对比：",
+      "other_label": "其他品牌",
+      "feature_1": "30天退款保证",
+      "feature_2": "帮助缓解不适",
+      "feature_3": "帮助预防拇外翻加重",
+      "feature_4": "改善脚趾排列",
+      "feature_5": "行走时佩戴舒适",
+      "feature_6": "经久耐用"
+    },
+    "altaeron_results": {
+      "heading_html": "真实用户的<strong>真实效果</strong>",
+      "intro_html": "<p>我们将Altaeron™可调节拇外翻矫正器送至美国37家以上的足病诊所，共有432名患者参与试用。以下是测试结果。</p>",
+      "result_1_html": "<p>的用户从第二次使用起就感到疼痛减轻</p>",
+      "result_2_html": "<p>的用户表示，坚持使用14天后（每天30分钟），疼痛消失</p>",
+      "result_3_html": "<p>的用户表示，坚持使用30天后（每天30分钟），脚趾排列明显改善</p>"
+    }
 }

@@ -648,5 +648,25 @@
     "point_6": "<p>Được thiết kế và khuyên dùng bởi <strong>chuyên gia y tế</strong></p>",
     "point_7": "<p><strong>Dễ sử dụng</strong> và thuận tiện mang theo</p>",
     "point_8": "<p><strong>Đổi trả dễ dàng trong 30 ngày</strong> — dùng thử không lo rủi ro</p>"
-  }
+  },
+  "altaeron_comparison": {
+      "heading": "Vì sao chọn Altaeron?",
+      "claim_before": "Đừng để bị đánh lừa bởi",
+      "claim_accent": "hàng nhái giá rẻ",
+      "intro": "So sánh [product] với các sản phẩm khác:",
+      "other_label": "Thương hiệu khác",
+      "feature_1": "Đảm bảo hoàn tiền trong 30 ngày",
+      "feature_2": "Giúp giảm khó chịu",
+      "feature_3": "Hỗ trợ ngăn bunion tiến triển",
+      "feature_4": "Hỗ trợ cải thiện vị trí ngón chân",
+      "feature_5": "Thoải mái khi đi bộ",
+      "feature_6": "Bền bỉ, sử dụng lâu dài"
+    },
+    "altaeron_results": {
+      "heading_html": "<strong>Kết quả</strong> thực tế từ người dùng",
+      "intro_html": "<p>Chúng tôi gửi dụng cụ chỉnh bunion Altaeron™ đến hơn 37 phòng khám chuyên khoa chân tại Hoa Kỳ. Tổng cộng 432 bệnh nhân bị bunion đã dùng thử sản phẩm. Đây là kết quả.</p>",
+      "result_1_html": "<p>người dùng cho biết cơn đau giảm từ lần sử dụng thứ hai</p>",
+      "result_2_html": "<p>người dùng cho biết cơn đau hết sau 14 ngày sử dụng đều đặn (30 phút/ngày)</p>",
+      "result_3_html": "<p>người dùng nhận thấy vị trí ngón chân cải thiện rõ sau 30 ngày sử dụng đều đặn (30 phút/ngày)</p>"
+    }
 }

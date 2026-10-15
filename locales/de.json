@@ -2363,5 +2363,25 @@
                                    "point_6":  "\u003cp\u003eVon \u003cstrong\u003emedizinischem Fachpersonal\u003c/strong\u003e entwickelt und empfohlen\u003c/p\u003e",
                                    "point_7":  "\u003cp\u003e\u003cstrong\u003eEinfach zu verwenden\u003c/strong\u003e und tragbar\u003c/p\u003e",
                                    "point_8":  "\u003cp\u003e\u003cstrong\u003e30 Tage einfache Rückgabe\u003c/strong\u003e — risikofrei ausprobieren\u003c/p\u003e"
-                               }
+                               },
+  "altaeron_comparison": {
+      "heading": "Warum Altaeron?",
+      "claim_before": "Lass dich nicht täuschen von",
+      "claim_accent": "billigen Imitaten",
+      "intro": "So schneidet [product] im Vergleich ab:",
+      "other_label": "Andere Marken",
+      "feature_1": "30-Tage-Geld-zurück-Garantie",
+      "feature_2": "Lindert Beschwerden",
+      "feature_3": "Kann das Fortschreiten des Ballenzehs verlangsamen",
+      "feature_4": "Unterstützt die Ausrichtung im Laufe der Zeit",
+      "feature_5": "Bequem beim Gehen",
+      "feature_6": "Langlebig und robust"
+    },
+    "altaeron_results": {
+      "heading_html": "Echte <strong>Ergebnisse</strong>, echte Menschen",
+      "intro_html": "<p>Wir haben den Altaeron™ Adjustable Bunion Corrector an über 37 podiatrische Praxen in den USA geschickt. Insgesamt haben 432 Patienten mit Ballenzehen das Produkt getestet. Hier sind die Ergebnisse.</p>",
+      "result_1_html": "<p>Nutzer berichteten ab der zweiten Anwendung von weniger Schmerzen am Ballenzeh</p>",
+      "result_2_html": "<p>Nutzer gaben an, ihre Schmerzen nach 14 Tagen konsequenter Anwendung (30 Min./Tag) vollständig beseitigt zu haben</p>",
+      "result_3_html": "<p>Nutzer bemerkten nach 30 Tagen konsequenter Anwendung (30 Min./Tag) sichtbare Verbesserungen der Zehenstellung</p>"
+    }
 }

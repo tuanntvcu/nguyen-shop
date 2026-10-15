@@ -636,5 +636,25 @@
       "send_on": "年-月-日",
       "send_on_label": "發送（可選）"
     }
-  }
+  },
+  "altaeron_comparison": {
+      "heading": "為什麼選擇我們？",
+      "claim_before": "小心",
+      "claim_accent": "廉價仿冒品",
+      "intro": "看看[product]與其他產品的比較：",
+      "other_label": "其他品牌",
+      "feature_1": "30 天退款保證",
+      "feature_2": "幫助緩解不適",
+      "feature_3": "幫助預防拇趾外翻惡化",
+      "feature_4": "改善腳趾排列",
+      "feature_5": "步行時配戴舒適",
+      "feature_6": "耐用持久"
+    },
+    "altaeron_results": {
+      "heading_html": "真實使用者的<strong>實際成果</strong>",
+      "intro_html": "<p>我們將 Altaeron™ 可調式拇趾外翻矯正器送至美國 37 間以上足部專科診所，共有 432 位患者參與試用。以下是測試結果。</p>",
+      "result_1_html": "<p>的使用者從第二次使用起就感到疼痛減輕</p>",
+      "result_2_html": "<p>的使用者表示，持續使用 14 天後（每天 30 分鐘），疼痛消失</p>",
+      "result_3_html": "<p>的使用者表示，持續使用 30 天後（每天 30 分鐘），腳趾排列明顯改善</p>"
+    }
 }

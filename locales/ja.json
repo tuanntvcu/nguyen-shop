@@ -2021,5 +2021,25 @@
                                    "point_6":  "\u003cp\u003e\u003cstrong\u003e医療専門家\u003c/strong\u003eが設計し、推奨\u003c/p\u003e",
                                    "point_7":  "\u003cp\u003e\u003cstrong\u003e使いやすく\u003c/strong\u003e、持ち運びにも便利\u003c/p\u003e",
                                    "point_8":  "\u003cp\u003e\u003cstrong\u003e30日間返品可能\u003c/strong\u003e — リスクなくお試しいただけます\u003c/p\u003e"
-                               }
+                               },
+  "altaeron_comparison": {
+      "heading": "選ばれる理由",
+      "claim_before": "安価な模倣品に",
+      "claim_accent": "ご注意ください",
+      "intro": "[product]と他製品を比較しました：",
+      "other_label": "他社製品",
+      "feature_1": "30日間返金保証",
+      "feature_2": "不快感をやわらげる",
+      "feature_3": "外反母趾の進行予防をサポート",
+      "feature_4": "時間をかけて足指の位置を整える",
+      "feature_5": "歩行中も快適",
+      "feature_6": "丈夫で長持ち"
+    },
+    "altaeron_results": {
+      "heading_html": "本当の<strong>結果</strong>を、実際のユーザーから",
+      "intro_html": "<p>米国の37か所以上の足病医療機関にAltaeron™調整式外反母趾矯正器を送り、432名の患者が試用しました。その結果をご紹介します。</p>",
+      "result_1_html": "<p>のユーザーが2回目の使用から痛みの軽減を実感</p>",
+      "result_2_html": "<p>のユーザーが14日間継続使用後（1日30分）、痛みが完全になくなったと回答</p>",
+      "result_3_html": "<p>のユーザーが30日間継続使用後（1日30分）、足指の位置に目に見える変化を実感</p>"
+    }
 }

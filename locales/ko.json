@@ -636,5 +636,25 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "보내기(선택사항)"
     }
-  }
+  },
+  "altaeron_comparison": {
+      "heading": "왜 Altaeron일까요?",
+      "claim_before": "저렴한 모조품에",
+      "claim_accent": "속지 마세요",
+      "intro": "[product]과 다른 제품을 비교해 보세요:",
+      "other_label": "다른 브랜드",
+      "feature_1": "30일 환불 보장",
+      "feature_2": "불편함 완화에 도움",
+      "feature_3": "무지외반증 악화 예방에 도움",
+      "feature_4": "시간이 지나며 발가락 정렬 개선 지원",
+      "feature_5": "걸을 때도 편안하게",
+      "feature_6": "튼튼하고 오래 사용 가능"
+    },
+    "altaeron_results": {
+      "heading_html": "실제 사용자의 <strong>실제 결과</strong>",
+      "intro_html": "<p>미국 내 37곳 이상의 족부 전문 진료소에서 총 432명의 무지외반증 환자가 Altaeron™ 조절식 교정기를 사용했습니다. 결과를 확인해 보세요.</p>",
+      "result_1_html": "<p>의 사용자가 두 번째 사용부터 통증 감소를 경험했습니다</p>",
+      "result_2_html": "<p>의 사용자가 14일간 꾸준히 사용한 후(하루 30분) 통증이 사라졌다고 답했습니다</p>",
+      "result_3_html": "<p>의 사용자가 30일간 꾸준히 사용한 후(하루 30분) 눈에 띄는 개선을 확인했습니다</p>"
+    }
 }
