@@ -61,7 +61,7 @@
         "headline": "<strong>Reduce</strong> the <strong>Bunion Bump</strong>. <strong>Straighten</strong> Your <strong>Big Toe</strong>.",
         "subheadline": "Painful Bunions? Alleviate discomfort, prevent further growth, and shrink the bunion without surgery.",
         "review_avatar": "shopify://shop_images/710756253_1607197857410793_5226155300253549255_n.jpg",
-        "review_content": "<p>I was told by my podiatrist that I needed surgery to fix my painful bunions. Instead I ordered the <strong>Adjustable Bunion Corrector</strong> from <strong>Altaeron™</strong> and after using it for a month my bunion pain has reduced significantly and my toe has started moving back to its natural position! It has made a big difference.</p>",
+        "review_content": "<p>I ordered the <strong>Adjustable Bunion Corrector</strong> from <strong>Altaeron™</strong> and after using it for a month my bunion pain has reduced significantly and my toe has started moving back to its natural position! It has made a big difference.</p>",
         "reviewer_name": "Megan",
         "price_label": "From",
         "cta_label": "ADD TO CART"
@@ -105,42 +105,6 @@
         "heading": "The Problem Isn't Just the Bump. It's the Drift.",
         "subheading": "The Altaeron™ Adjustable Bunion Corrector administers advanced alignment therapy. It's designed to <strong class=\"alta-custom__emphasis\">support the realignment</strong> of the big toe and gradually alleviate inflammation by using an adjustable hinge joint mechanism.\n\nIt helps release muscular tension by simply pulling your big toe back to its natural position, resulting in pain-free natural realignment of your toe joint over time.\n\nThis releases years of built up tension, straightens and shrinks the bunion, reduces pain, and prevents further growth to get you back on your feet to stand tall and confident again.\n\nSome users may require a session or two to get used to it, as the <strong class=\"alta-custom__emphasis\">sensation may feel more robust compared to other methods</strong>.\n\nThis is a natural and non-invasive way of restoring the natural position of the toe, foot, and reversing the damage caused by ill-fitting footwear or genetics.\n\nWhether it's a small child's foot or an adult size 13, the Altaeron™ Adjustable Bunion Corrector is crafted to fit all foot sizes comfortably.",
         "reassurance": "87% of users reported visible improvements from the first month"
-      }
-    },
-    "altaeron_results": {
-      "type": "altaeron-reels-v3-results",
-      "blocks": {
-        "result_1": {
-          "type": "result",
-          "settings": {
-            "percentage": 91,
-            "text": "<p>of users reported reduced bunion pain from the 2nd session</p>"
-          }
-        },
-        "result_2": {
-          "type": "result",
-          "settings": {
-            "percentage": 90,
-            "text": "<p>of users completely eliminated their bunion pain after just 14 days of consistent use (30min/day)</p>"
-          }
-        },
-        "result_3": {
-          "type": "result",
-          "settings": {
-            "percentage": 88,
-            "text": "<p>of users saw visible improvements in toe alignment after just 30 days of consistent use (30min/day)</p>"
-          }
-        }
-      },
-      "block_order": [
-        "result_1",
-        "result_2",
-        "result_3"
-      ],
-      "settings": {
-        "heading": "<p>Real <strong>Results</strong>, Real People</p>",
-        "intro": "<p>We conducted a consumer test where we sent the Altaeron™ Adjustable Bunion Corrector to over 37 podiatrist offices across the US. A total of 432 patients with bunions tested it. Here are the results.</p>",
-        "animation_duration": 3
       }
     },
     "altaeron_right_fit": {
@@ -322,6 +286,42 @@
         "yes_label": "Included",
         "no_label": "Not included",
         "color_scheme": "scheme-1"
+      }
+    },
+    "altaeron_results": {
+      "type": "altaeron-reels-v3-results",
+      "blocks": {
+        "result_1": {
+          "type": "result",
+          "settings": {
+            "percentage": 91,
+            "text": "<p>of users reported reduced bunion pain from the 2nd session</p>"
+          }
+        },
+        "result_2": {
+          "type": "result",
+          "settings": {
+            "percentage": 90,
+            "text": "<p>of users completely eliminated their bunion pain after just 14 days of consistent use (30min/day)</p>"
+          }
+        },
+        "result_3": {
+          "type": "result",
+          "settings": {
+            "percentage": 88,
+            "text": "<p>of users saw visible improvements in toe alignment after just 30 days of consistent use (30min/day)</p>"
+          }
+        }
+      },
+      "block_order": [
+        "result_1",
+        "result_2",
+        "result_3"
+      ],
+      "settings": {
+        "heading": "<p>Real <strong>Results</strong>, Real People</p>",
+        "intro": "<p>We conducted a consumer test where we sent the Altaeron™ Adjustable Bunion Corrector to over 37 podiatrist offices across the US. A total of 432 patients with bunions tested it. Here are the results.</p>",
+        "animation_duration": 3
       }
     },
     "altaeron_customer_proof_RtL9nR": {
