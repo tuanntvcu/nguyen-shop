@@ -1,0 +1,89 @@
+{%- liquid
+  assign comparison_logo = settings.logo
+  assign comparison_product = product.title | default: section.settings.product_name
+-%}
+
+<section class="alta-compare color-{{ section.settings.color_scheme }}" id="AltaCompare-{{ section.id }}">
+  <div class="alta-compare__inner">
+    <header class="alta-compare__header">
+      <h2>{{ section.settings.heading | escape }}</h2>
+      <p class="alta-compare__claim">{{ section.settings.claim_before | escape }} <strong>{{ section.settings.claim_accent | escape }}</strong></p>
+      <p class="alta-compare__intro">{{ section.settings.intro | escape | replace: '[product]', comparison_product }}</p>
+    </header>
+    <div class="alta-compare__wrap">
+      <div class="alta-compare__table" role="table" aria-label="{{ section.settings.heading | escape }}">
+        <div class="alta-compare__head" role="row">
+          <div class="alta-compare__feature" role="columnheader"></div>
+          <div class="alta-compare__brand" role="columnheader" aria-label="{{ comparison_product | escape }}">
+            {%- if comparison_logo != blank -%}{{ comparison_logo | image_url: width: 180 | image_tag: loading: 'lazy', alt: shop.name, class: 'alta-compare__logo' }}{%- else -%}<span class="alta-compare__brand-name">{{ shop.name | escape }}</span>{%- endif -%}
+          </div>
+          <div class="alta-compare__other" role="columnheader">{{ section.settings.other_label | escape }}</div>
+        </div>
+        <div class="alta-compare__rows" role="rowgroup">
+          {%- for block in section.blocks -%}
+            <div class="alta-compare__row" role="row" {{ block.shopify_attributes }}>
+              <div class="alta-compare__feature" role="cell">{{ block.settings.feature | escape }}</div>
+              <div class="alta-compare__yes" role="cell" aria-label="{{ section.settings.yes_label | escape }}"><span aria-hidden="true">✓</span></div>
+              <div class="alta-compare__no" role="cell" aria-label="{{ section.settings.no_label | escape }}"><span aria-hidden="true">×</span></div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #AltaCompare-{{ section.id }}{--ac-green:var(--altaeron-primary,#006b5e);--ac-ink:var(--altaeron-navy,#102a43);--ac-muted:#667085;background:rgb(var(--color-background));color:var(--ac-ink);padding:clamp(36px,5vw,72px) 20px;font-family:var(--font-body-family);}
+  #AltaCompare-{{ section.id }} .alta-compare__inner{margin:auto;max-width:1120px}
+  #AltaCompare-{{ section.id }} .alta-compare__header{margin:0 auto 30px;max-width:740px;text-align:center}
+  #AltaCompare-{{ section.id }} .alta-compare__header h2{color:var(--ac-ink);font-family:var(--alta-font-family,var(--font-heading-family));font-size:clamp(27px,3vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.1;margin:0 0 24px}
+  #AltaCompare-{{ section.id }} .alta-compare__claim{font-size:clamp(18px,2vw,25px);font-weight:700;line-height:1.3;margin:0 0 18px}
+  #AltaCompare-{{ section.id }} .alta-compare__claim strong{color:var(--ac-green)}
+  #AltaCompare-{{ section.id }} .alta-compare__intro{color:var(--ac-muted);font-size:16px;margin:0}
+  #AltaCompare-{{ section.id }} .alta-compare__wrap{padding-top:0}
+  #AltaCompare-{{ section.id }} .alta-compare__table{position:relative}
+  #AltaCompare-{{ section.id }} .alta-compare__head,#AltaCompare-{{ section.id }} .alta-compare__row{display:grid;grid-template-columns:minmax(0,1fr) 92px 120px;align-items:center}
+  #AltaCompare-{{ section.id }} .alta-compare__head{height:54px;position:relative;z-index:2}
+  #AltaCompare-{{ section.id }} .alta-compare__head>.alta-compare__feature{grid-column:1}
+  #AltaCompare-{{ section.id }} .alta-compare__head>.alta-compare__brand{grid-column:2}
+  #AltaCompare-{{ section.id }} .alta-compare__head>.alta-compare__other{grid-column:3}
+  #AltaCompare-{{ section.id }} .alta-compare__brand,#AltaCompare-{{ section.id }} .alta-compare__other{align-self:stretch;display:flex;align-items:center;justify-content:center;text-align:center}
+  #AltaCompare-{{ section.id }} .alta-compare__brand{background:transparent;border-radius:0;box-shadow:none;color:var(--ac-green);padding:4px}
+  #AltaCompare-{{ section.id }} .alta-compare__logo{display:block;height:auto;max-height:42px;max-width:82px;width:auto}
+  #AltaCompare-{{ section.id }} .alta-compare__brand-name{font-size:12px;font-weight:700;line-height:1.2}
+  #AltaCompare-{{ section.id }} .alta-compare__other{font-size:14px;font-weight:700;line-height:1.2;padding:4px}
+  #AltaCompare-{{ section.id }} .alta-compare__rows{border-radius:12px;box-shadow:0 2px 12px #0003;isolation:isolate;overflow:visible;position:relative}
+  #AltaCompare-{{ section.id }} .alta-compare__rows:before{background:#fff;border-radius:15px;box-shadow:0 0 12px #0003;content:"";inset:0 120px 0 auto;position:absolute;width:92px;z-index:0}
+  #AltaCompare-{{ section.id }} .alta-compare__row{min-height:56px}
+  #AltaCompare-{{ section.id }} .alta-compare__row:nth-child(odd){background:#f5f6f5}
+  #AltaCompare-{{ section.id }} .alta-compare__row:nth-child(even){background:#fff}
+  #AltaCompare-{{ section.id }} .alta-compare__feature{font-size:16px;line-height:1.4;padding:14px 22px}
+  #AltaCompare-{{ section.id }} .alta-compare__row>.alta-compare__feature,#AltaCompare-{{ section.id }} .alta-compare__row>.alta-compare__no{position:relative;z-index:1}
+  #AltaCompare-{{ section.id }} .alta-compare__yes,#AltaCompare-{{ section.id }} .alta-compare__no{display:flex;justify-content:center}
+  #AltaCompare-{{ section.id }} .alta-compare__yes{background:transparent;position:relative;z-index:1}
+  #AltaCompare-{{ section.id }} .alta-compare__yes span,#AltaCompare-{{ section.id }} .alta-compare__no span{align-items:center;border-radius:50%;color:#fff;display:flex;font-size:21px;font-weight:700;height:30px;justify-content:center;line-height:1;position:relative;width:30px;z-index:1}
+  #AltaCompare-{{ section.id }} .alta-compare__yes span{background:var(--ac-green)}
+  #AltaCompare-{{ section.id }} .alta-compare__no span{background:#c9362c}
+  @media(max-width:600px){#AltaCompare-{{ section.id }}{padding:32px 16px 40px}#AltaCompare-{{ section.id }} .alta-compare__header{margin-bottom:5px}#AltaCompare-{{ section.id }} .alta-compare__header h2{margin-bottom:22px}#AltaCompare-{{ section.id }} .alta-compare__claim{font-size:19px;margin-bottom:12px}#AltaCompare-{{ section.id }} .alta-compare__intro{font-size:15px;line-height:1.5}#AltaCompare-{{ section.id }} .alta-compare__wrap{padding-top:0}#AltaCompare-{{ section.id }} .alta-compare__head,#AltaCompare-{{ section.id }} .alta-compare__row{grid-template-columns:minmax(0,1fr) 58px 68px}#AltaCompare-{{ section.id }} .alta-compare__head{height:58px}#AltaCompare-{{ section.id }} .alta-compare__logo{max-width:48px;max-height:34px}#AltaCompare-{{ section.id }} .alta-compare__other{font-size:12px}#AltaCompare-{{ section.id }} .alta-compare__rows:before{inset:0 68px 0 auto;width:58px}#AltaCompare-{{ section.id }} .alta-compare__row{min-height:55px}#AltaCompare-{{ section.id }} .alta-compare__feature{font-size:14px;padding:10px 12px}#AltaCompare-{{ section.id }} .alta-compare__yes span,#AltaCompare-{{ section.id }} .alta-compare__no span{height:29px;width:29px}}
+</style>
+
+{% schema %}
+{
+  "name": "Product comparison",
+  "tag": "section",
+  "class": "section-altaeron-comparison",
+  "settings": [
+    {"type":"text","id":"heading","label":"Heading","default":"Why Choose Us?"},
+    {"type":"text","id":"claim_before","label":"Claim","default":"Don't fall for"},
+    {"type":"text","id":"claim_accent","label":"Claim accent","default":"cheap knock-offs"},
+    {"type":"text","id":"intro","label":"Intro","default":"How [product] compares to others:"},
+    {"type":"text","id":"other_label","label":"Other products label","default":"Other brands"},
+    {"type":"text","id":"yes_label","label":"Included label","default":"Included"},
+    {"type":"text","id":"no_label","label":"Not included label","default":"Not included"},
+    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
+  ],
+  "blocks": [{"type":"feature","name":"Comparison feature","settings":[{"type":"text","id":"feature","label":"Feature","default":"30-Day Money Back Guarantee"}]}],
+  "presets": [{"name":"Product comparison","blocks":[{"type":"feature","settings":{"feature":"30-Day Money Back Guarantee"}},{"type":"feature","settings":{"feature":"Alleviate Discomfort"}},{"type":"feature","settings":{"feature":"Help Prevent Bunion Growth"}},{"type":"feature","settings":{"feature":"Improve Alignment Over Time"}},{"type":"feature","settings":{"feature":"Comfortable to Wear While Walking"}},{"type":"feature","settings":{"feature":"Durable & Long Lasting"}}]}]
+}
+{% endschema %}

@@ -107,6 +107,64 @@
         "reassurance": "87% of users reported visible improvements from the first month"
       }
     },
+    "altaeron_comparison": {
+      "type": "altaeron-product-comparison",
+      "blocks": {
+        "guarantee": {"type":"feature","settings":{"feature":"30-Day Money Back Guarantee"}},
+        "comfort": {"type":"feature","settings":{"feature":"Alleviate Discomfort"}},
+        "growth": {"type":"feature","settings":{"feature":"Help Prevent Bunion Growth"}},
+        "alignment": {"type":"feature","settings":{"feature":"Improve Alignment Over Time"}},
+        "walking": {"type":"feature","settings":{"feature":"Comfortable to Wear While Walking"}},
+        "durable": {"type":"feature","settings":{"feature":"Durable & Long Lasting"}}
+      },
+      "block_order": ["guarantee","comfort","growth","alignment","walking","durable"],
+      "settings": {
+        "heading": "Why Choose Us?",
+        "claim_before": "Don't fall for",
+        "claim_accent": "cheap knock-offs",
+        "intro": "How [product] compares to others:",
+        "other_label": "Other brands",
+        "yes_label": "Included",
+        "no_label": "Not included",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "altaeron_results": {
+      "type": "altaeron-reels-v3-results",
+      "blocks": {
+        "result_1": {
+          "type": "result",
+          "settings": {
+            "percentage": 91,
+            "text": "<p>of users reported reduced bunion pain from the 2nd session</p>"
+          }
+        },
+        "result_2": {
+          "type": "result",
+          "settings": {
+            "percentage": 90,
+            "text": "<p>of users completely eliminated their bunion pain after just 14 days of consistent use (30min/day)</p>"
+          }
+        },
+        "result_3": {
+          "type": "result",
+          "settings": {
+            "percentage": 88,
+            "text": "<p>of users saw visible improvements in toe alignment after just 30 days of consistent use (30min/day)</p>"
+          }
+        }
+      },
+      "block_order": [
+        "result_1",
+        "result_2",
+        "result_3"
+      ],
+      "settings": {
+        "heading": "<p>Real <strong>Results</strong>, Real People</p>",
+        "intro": "<p>We conducted a consumer test where we sent the Altaeron™ Adjustable Bunion Corrector to over 37 podiatrist offices across the US. A total of 432 patients with bunions tested it. Here are the results.</p>",
+        "animation_duration": 3
+      }
+    },
     "altaeron_right_fit": {
       "type": "altaeron-right-fit",
       "blocks": {
@@ -408,6 +466,7 @@
   "order": [
     "altaeron_pdp_reels_v3",
     "altaeron_bunion_benefits",
+    "altaeron_comparison",
     "altaeron_right_fit",
     "altaeron_reasons_8",
     "altaeron_customer_proof_RtL9nR",

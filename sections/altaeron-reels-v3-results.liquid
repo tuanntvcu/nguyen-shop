@@ -1,0 +1,114 @@
+{%- liquid
+  assign heading_id = 'AltaeronResultsHeading-' | append: section.id
+-%}
+
+<section id="AltaeronResults-{{ section.id }}" class="ar3-results" aria-labelledby="{{ heading_id }}" style="--ar3-results-duration: {{ section.settings.animation_duration }}s;">
+  <div class="ar3-results__inner">
+    <div class="ar3-results__intro">
+      {%- if section.settings.heading != blank -%}
+        <div id="{{ heading_id }}" class="ar3-results__heading rte" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <div class="ar3-results__copy rte">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </div>
+    <div class="ar3-results__list" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign percentage = block.settings.percentage | at_most: 100 -%}
+        {%- assign arc_length = percentage | times: 2.8274 -%}
+        <article class="ar3-results__item" role="listitem" {{ block.shopify_attributes }}>
+          <div class="ar3-results__ring" style="--ar3-results-arc: {{ arc_length }};" role="img" aria-label="{{ percentage }}%">
+            <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+              <circle class="ar3-results__track" cx="50" cy="50" r="45"></circle>
+              <circle class="ar3-results__progress" cx="50" cy="50" r="45"></circle>
+            </svg>
+            <span>{{ percentage }}%</span>
+          </div>
+          {%- if block.settings.text != blank -%}<div class="ar3-results__text rte">{{ block.settings.text }}</div>{%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  #AltaeronResults-{{ section.id }} { --ar3-results-accent: var(--apdp-green, #064d2d); color: var(--apdp-ink, #183b2d); padding: clamp(28px, 5vw, 64px) 0; }
+  #AltaeronResults-{{ section.id }} .ar3-results__inner { align-items: center; display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin: 0 auto; max-width: 1240px; padding: 0 clamp(18px, 4vw, 48px); }
+  #AltaeronResults-{{ section.id }} .ar3-results__intro { text-align: center; }
+  #AltaeronResults-{{ section.id }} .ar3-results__heading { color: var(--apdp-ink, #183b2d); font-family: var(--font-heading-family); font-size: clamp(28px, 3vw, 42px); font-weight: 750; letter-spacing: -.025em; line-height: 1.15; margin: 0 0 18px; }
+  #AltaeronResults-{{ section.id }} .ar3-results__heading p { margin: 0; }
+  #AltaeronResults-{{ section.id }} .ar3-results__heading strong { color: var(--ar3-results-accent); }
+  #AltaeronResults-{{ section.id }} .ar3-results__copy { font-size: 16px; line-height: 1.65; margin: 0 auto; max-width: 560px; }
+  #AltaeronResults-{{ section.id }} .ar3-results__copy p { margin: 0; }
+  #AltaeronResults-{{ section.id }} .ar3-results__list { min-width: 0; }
+  #AltaeronResults-{{ section.id }} .ar3-results__item { align-items: center; border-bottom: 1px solid var(--apdp-line, #e0e5e1); display: grid; gap: 20px; grid-template-columns: 84px minmax(0, 1fr); padding: 14px 0; }
+  #AltaeronResults-{{ section.id }} .ar3-results__item:first-child { padding-top: 0; }
+  #AltaeronResults-{{ section.id }} .ar3-results__ring { align-items: center; aspect-ratio: 1; color: var(--ar3-results-accent); display: flex; font-size: 18px; font-weight: 750; justify-content: center; position: relative; }
+  #AltaeronResults-{{ section.id }} .ar3-results__ring svg { height: 100%; inset: 0; overflow: visible; position: absolute; transform: rotate(-90deg); width: 100%; }
+  #AltaeronResults-{{ section.id }} .ar3-results__ring circle { fill: none; stroke-width: 7; }
+  #AltaeronResults-{{ section.id }} .ar3-results__track { stroke: #e8edf0; }
+  #AltaeronResults-{{ section.id }} .ar3-results__progress { stroke: var(--ar3-results-accent); stroke-dasharray: 0 282.74; stroke-linecap: butt; animation: ar3-results-fill-{{ section.id }} var(--ar3-results-duration) ease-out forwards; animation-play-state: paused; }
+  #AltaeronResults-{{ section.id }}.is-visible .ar3-results__progress { animation-play-state: running; }
+  @keyframes ar3-results-fill-{{ section.id }} { to { stroke-dasharray: var(--ar3-results-arc) 282.74; } }
+  #AltaeronResults-{{ section.id }} .ar3-results__text { font-size: 16px; line-height: 1.6; }
+  #AltaeronResults-{{ section.id }} .ar3-results__text p { margin: 0; }
+  @media (max-width: 767px) {
+    #AltaeronResults-{{ section.id }} { padding: 22px 0; }
+    #AltaeronResults-{{ section.id }} .ar3-results__inner { display: block; padding: 0 15px; }
+    #AltaeronResults-{{ section.id }} .ar3-results__intro { margin-bottom: 24px; text-align: left; }
+    #AltaeronResults-{{ section.id }} .ar3-results__heading { font-size: 24px; line-height: 1.25; margin-bottom: 22px; text-align: center; }
+    #AltaeronResults-{{ section.id }} .ar3-results__copy { font-size: 15px; line-height: 1.62; }
+    #AltaeronResults-{{ section.id }} .ar3-results__item { gap: 20px; grid-template-columns: 70px minmax(0, 1fr); padding: 13px 0; }
+    #AltaeronResults-{{ section.id }} .ar3-results__ring { font-size: 16px; }
+    #AltaeronResults-{{ section.id }} .ar3-results__text { font-size: 15px; line-height: 1.6; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #AltaeronResults-{{ section.id }} .ar3-results__progress { animation-duration: .01ms; }
+  }
+</style>
+
+<script>
+  (() => {
+    const section = document.getElementById('AltaeronResults-{{ section.id }}');
+    if (!section || section.dataset.observed) return;
+    section.dataset.observed = 'true';
+    if (!('IntersectionObserver' in window)) {
+      section.classList.add('is-visible');
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        section.classList.add('is-visible');
+        observer.disconnect();
+      }
+    }, { rootMargin: '0px 0px 160px 0px', threshold: 0.05 });
+    observer.observe(section);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Reel V3 results",
+  "tag": "section",
+  "class": "section-ar3-results",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Real <strong>Results</strong>, Real People</p>" },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>We conducted a consumer test where we sent the Altaeron™ Adjustable Bunion Corrector to over 37 podiatrist offices across the US. A total of 432 patients with bunions tested it. Here are the results.</p>" },
+    { "type": "range", "id": "animation_duration", "min": 1, "max": 10, "step": 1, "unit": "s", "label": "Ring animation duration", "default": 3 }
+  ],
+  "blocks": [
+    { "type": "result", "name": "Result", "settings": [
+      { "type": "range", "id": "percentage", "min": 1, "max": 100, "step": 1, "unit": "%", "label": "Percentage", "default": 91 },
+      { "type": "richtext", "id": "text", "label": "Result text", "default": "<p>of users reported reduced bunion pain from the 2nd session</p>" }
+    ] }
+  ],
+  "presets": [
+    { "name": "Reel V3 results", "blocks": [
+      { "type": "result", "settings": { "percentage": 91, "text": "<p>of users reported reduced bunion pain from the 2nd session</p>" } },
+      { "type": "result", "settings": { "percentage": 90, "text": "<p>of users completely eliminated their bunion pain after just 14 days of consistent use (30min/day)</p>" } },
+      { "type": "result", "settings": { "percentage": 88, "text": "<p>of users saw visible improvements in toe alignment after just 30 days of consistent use (30min/day)</p>" } }
+    ] }
+  ]
+}
+{% endschema %}
