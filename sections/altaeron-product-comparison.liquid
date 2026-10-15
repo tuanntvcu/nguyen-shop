@@ -7,7 +7,7 @@
   <div class="alta-compare__inner">
     <header class="alta-compare__header">
       <h2>{{ 'altaeron_comparison.heading' | t | escape }}</h2>
-      <p class="alta-compare__claim">{{ 'altaeron_comparison.claim_before' | t | escape }} <strong>{{ 'altaeron_comparison.claim_accent' | t | escape }}</strong></p>
+      <p class="alta-compare__claim">{{ section.settings.claim_before | escape }} <strong>{{ section.settings.claim_accent | escape }}</strong></p>
       <p class="alta-compare__intro">{{ 'altaeron_comparison.intro' | t | replace: '[product]', comparison_product | escape }}</p>
     </header>
     <div class="alta-compare__wrap">
