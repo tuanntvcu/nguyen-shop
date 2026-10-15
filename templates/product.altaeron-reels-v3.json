@@ -231,6 +231,7 @@
     },
     "altaeron_customer_proof_RtL9nR": {
       "type": "altaeron-customer-proof",
+      "disabled": true,
       "name": "Altaeron Customer Proof",
       "settings": {
         "eyebrow": "Customer proof",
