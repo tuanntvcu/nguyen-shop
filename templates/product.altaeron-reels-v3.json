@@ -107,28 +107,6 @@
         "reassurance": "87% of users reported visible improvements from the first month"
       }
     },
-    "altaeron_comparison": {
-      "type": "altaeron-product-comparison",
-      "blocks": {
-        "guarantee": {"type":"feature","settings":{"feature":"30-Day Money Back Guarantee"}},
-        "comfort": {"type":"feature","settings":{"feature":"Alleviate Discomfort"}},
-        "growth": {"type":"feature","settings":{"feature":"Help Prevent Bunion Growth"}},
-        "alignment": {"type":"feature","settings":{"feature":"Improve Alignment Over Time"}},
-        "walking": {"type":"feature","settings":{"feature":"Comfortable to Wear While Walking"}},
-        "durable": {"type":"feature","settings":{"feature":"Durable & Long Lasting"}}
-      },
-      "block_order": ["guarantee","comfort","growth","alignment","walking","durable"],
-      "settings": {
-        "heading": "Why Choose Us?",
-        "claim_before": "Don't fall for",
-        "claim_accent": "cheap knock-offs",
-        "intro": "How [product] compares to others:",
-        "other_label": "Other brands",
-        "yes_label": "Included",
-        "no_label": "Not included",
-        "color_scheme": "scheme-1"
-      }
-    },
     "altaeron_results": {
       "type": "altaeron-reels-v3-results",
       "blocks": {
@@ -285,6 +263,65 @@
       "settings": {
         "eyebrow": "BENEFITS",
         "heading": "8 Reasons Why You Will Love It"
+      }
+    },
+    "altaeron_comparison": {
+      "type": "altaeron-product-comparison",
+      "blocks": {
+        "guarantee": {
+          "type": "feature",
+          "settings": {
+            "feature": "30-Day Money Back Guarantee"
+          }
+        },
+        "comfort": {
+          "type": "feature",
+          "settings": {
+            "feature": "Alleviate Discomfort"
+          }
+        },
+        "growth": {
+          "type": "feature",
+          "settings": {
+            "feature": "Help Prevent Bunion Growth"
+          }
+        },
+        "alignment": {
+          "type": "feature",
+          "settings": {
+            "feature": "Improve Alignment Over Time"
+          }
+        },
+        "walking": {
+          "type": "feature",
+          "settings": {
+            "feature": "Comfortable to Wear While Walking"
+          }
+        },
+        "durable": {
+          "type": "feature",
+          "settings": {
+            "feature": "Durable & Long Lasting"
+          }
+        }
+      },
+      "block_order": [
+        "guarantee",
+        "comfort",
+        "growth",
+        "alignment",
+        "walking",
+        "durable"
+      ],
+      "settings": {
+        "heading": "Why Choose Us?",
+        "claim_before": "Don't fall for",
+        "claim_accent": "cheap knock-offs",
+        "intro": "How [product] compares to others:",
+        "other_label": "Other brands",
+        "yes_label": "Included",
+        "no_label": "Not included",
+        "color_scheme": "scheme-1"
       }
     },
     "altaeron_customer_proof_RtL9nR": {
@@ -466,10 +503,10 @@
   "order": [
     "altaeron_pdp_reels_v3",
     "altaeron_bunion_benefits",
-    "altaeron_comparison",
-    "altaeron_results",
     "altaeron_right_fit",
     "altaeron_reasons_8",
+    "altaeron_comparison",
+    "altaeron_results",
     "altaeron_customer_proof_RtL9nR",
     "altaeron_try_at_home",
     "altaeron_support_timeline",
