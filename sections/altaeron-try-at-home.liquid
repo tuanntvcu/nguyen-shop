@@ -59,6 +59,8 @@
   #AltaeronTryHome-{{ section.id }} .alta-try__cta:disabled { cursor: not-allowed; opacity: .55; transform: none; }
   #AltaeronTryHome-{{ section.id }} .alta-try__checkout-note { align-items: center; color: #667085; display: flex; font-size: 12px; gap: 7px; justify-content: center; line-height: 1.4; margin: 10px 0 0; }
   #AltaeronTryHome-{{ section.id }} .alta-try__checkout-note svg { flex: 0 0 14px; height: 14px; width: 14px; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__customers-note { align-items: center; color: var(--alta-try-accent); display: flex; font-size: 12px; font-weight: 750; gap: 7px; justify-content: center; line-height: 1.4; margin: 6px 0 0; }
+  #AltaeronTryHome-{{ section.id }} .alta-try__customers-note svg { flex: 0 0 15px; height: 15px; width: 15px; }
   #AltaeronTryHome-{{ section.id }} .alta-try__banner { background: linear-gradient(90deg, #edf8f7, #f4f8f5); border: 1px solid rgba(0,107,94,.08); border-radius: 15px; margin-top: 24px; overflow: hidden; }
   #AltaeronTryHome-{{ section.id }} .alta-try__banner-copy { align-items: center; display: flex; justify-content: center; padding: 24px 38px; text-align: center; }
   #AltaeronTryHome-{{ section.id }} .alta-try__banner-copy p { color: var(--alta-try-ink); font-family: var(--alta-font-family, var(--font-heading-family)); font-size: clamp(21px, 2.3vw, 31px); font-weight: 700; letter-spacing: -.025em; line-height: 1.22; margin: 0; white-space: pre-line; }
@@ -118,13 +120,11 @@
         {%- if eyebrow != blank -%}<p class="alta-try__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
         <h2 id="AltaeronTryHomeHeading-{{ section.id }}" class="alta-try__heading">{{ title_before | escape }}<strong>{{ title_emphasis | escape }}</strong>{{ title_after | escape }}</h2>
         <div class="alta-try__body">
-          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_1_before' | t | escape }}<strong>{{ 'altaeron_pdp_reels_v3.try_home.body_1_emphasis' | t | escape }}</strong>{{ 'altaeron_pdp_reels_v3.try_home.body_1_after' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_1' | t | escape }}</p>
           <p>{{ 'altaeron_pdp_reels_v3.try_home.body_2' | t | escape }}</p>
           <p>{{ 'altaeron_pdp_reels_v3.try_home.body_3' | t | escape }}</p>
-          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_4_before' | t | escape }}<strong>{{ 'altaeron_pdp_reels_v3.try_home.body_4_emphasis' | t | escape }}</strong>{{ 'altaeron_pdp_reels_v3.try_home.body_4_after' | t | escape }}</p>
+          <p><strong>{{ 'altaeron_pdp_reels_v3.try_home.body_4' | t | escape }}</strong></p>
           <p>{{ 'altaeron_pdp_reels_v3.try_home.body_5_before' | t | escape }}<strong>{{ 'altaeron_pdp_reels_v3.try_home.body_5_emphasis' | t | escape }}</strong>{{ 'altaeron_pdp_reels_v3.try_home.body_5_after' | t | escape }}</p>
-          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_6' | t | escape }}</p>
-          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_7' | t | escape }}</p>
         </div>
         {%- if section.settings.show_handwritten and close_before != blank -%}
           <p class="alta-try__note">{{ close_before | escape }}<strong>{{ close_emphasis | escape }}</strong>{{ close_after | escape }}</p>
@@ -182,6 +182,7 @@
       {%- if cta_reassurance != blank -%}
         <p class="alta-try__checkout-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>{{ cta_reassurance | escape }}</span></p>
       {%- endif -%}
+      <p class="alta-try__customers-note">{% render 'altaeron-pdp-icon', icon: 'people' %}<strong>{{ 'altaeron_pdp_reels_v3.try_home.banner_text' | t | escape }}</strong></p>
     </div>
 
     {%- if section.settings.show_banner -%}

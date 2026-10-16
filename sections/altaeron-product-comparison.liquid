@@ -23,7 +23,7 @@
           {%- for block in section.blocks -%}
             {%- assign feature_key = 'altaeron_comparison.feature_' | append: forloop.index -%}
             <div class="alta-compare__row" role="row" {{ block.shopify_attributes }}>
-              <div class="alta-compare__feature" role="cell">{% if forloop.index <= 6 %}{{ feature_key | t | escape_once }}{% else %}{{ block.settings.feature | escape_once }}{% endif %}</div>
+              <div class="alta-compare__feature" role="cell">{% if forloop.index <= 7 %}{{ feature_key | t | escape_once }}{% else %}{{ block.settings.feature | escape_once }}{% endif %}</div>
               <div class="alta-compare__yes" role="cell" aria-label="{{ section.settings.yes_label | escape }}"><span aria-hidden="true">✓</span></div>
               <div class="alta-compare__no" role="cell" aria-label="{{ section.settings.no_label | escape }}"><span aria-hidden="true">×</span></div>
             </div>
@@ -85,6 +85,6 @@
     {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
   ],
   "blocks": [{"type":"feature","name":"Comparison feature","settings":[{"type":"text","id":"feature","label":"Feature","default":"30-Day Money Back Guarantee"}]}],
-  "presets": [{"name":"Product comparison","blocks":[{"type":"feature","settings":{"feature":"30-Day Money Back Guarantee"}},{"type":"feature","settings":{"feature":"Alleviate Discomfort"}},{"type":"feature","settings":{"feature":"Help Prevent Bunion Growth"}},{"type":"feature","settings":{"feature":"Improve Alignment Over Time"}},{"type":"feature","settings":{"feature":"Comfortable to Wear While Walking"}},{"type":"feature","settings":{"feature":"Durable & Long Lasting"}}]}]
+  "presets": [{"name":"Product comparison","blocks":[{"type":"feature","settings":{"feature":"30-Day Money-Back Guarantee"}},{"type":"feature","settings":{"feature":"Helps Alleviate Discomfort"}},{"type":"feature","settings":{"feature":"Designed to Help Address Bunion Progression"}},{"type":"feature","settings":{"feature":"Supports Better Toe Alignment Over Time"}},{"type":"feature","settings":{"feature":"Adjustable Correction Tension"}},{"type":"feature","settings":{"feature":"Designed for Comfortable At-Home Use"}},{"type":"feature","settings":{"feature":"Durable, Structured Design"}}]}]
 }
 {% endschema %}

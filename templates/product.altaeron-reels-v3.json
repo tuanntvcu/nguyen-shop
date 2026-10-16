@@ -59,7 +59,7 @@
         "show_hero_video": false,
         "eyebrow": "Altaeron™ Adjustable Bunion Corrector",
         "headline": "<strong>Reduce</strong> the <strong>Bunion Bump</strong>. <strong>Straighten</strong> Your <strong>Big Toe</strong>.",
-        "subheadline": "Painful Bunions? Alleviate discomfort, prevent further growth, and shrink the bunion without surgery.",
+        "subheadline": "<strong>Painful bunions? Take action before the problem gets worse.</strong> Help relieve bunion discomfort, improve big toe alignment, and reduce the appearance of the bunion bump — without surgery.",
         "review_avatar": "shopify://shop_images/710756253_1607197857410793_5226155300253549255_n.jpg",
         "review_content": "<p>I was told by my podiatrist that I needed surgery to fix my painful bunions. Instead I ordered the <strong>Adjustable Bunion Corrector</strong> from <strong>Altaeron™</strong> and after using it for a month my bunion pain has reduced significantly and my toe has started moving back to its natural position! It has made a big difference.</p>",
         "reviewer_name": "Megan",
@@ -102,9 +102,9 @@
       ],
       "settings": {
         "eyebrow": "HOW IT WORKS",
-        "heading": "The Problem Isn't Just the Bump. It's the Drift.",
+        "heading": "",
         "subheading": "The Altaeron™ Adjustable Bunion Corrector administers advanced alignment therapy. It's designed to <strong class=\"alta-custom__emphasis\">support the realignment</strong> of the big toe and gradually alleviate inflammation by using an adjustable hinge joint mechanism.\n\nIt helps release muscular tension by simply pulling your big toe back to its natural position, resulting in pain-free natural realignment of your toe joint over time.\n\nThis releases years of built up tension, straightens and shrinks the bunion, reduces pain, and prevents further growth to get you back on your feet to stand tall and confident again.\n\nSome users may require a session or two to get used to it, as the <strong class=\"alta-custom__emphasis\">sensation may feel more robust compared to other methods</strong>.\n\nThis is a natural and non-invasive way of restoring the natural position of the toe, foot, and reversing the damage caused by ill-fitting footwear or genetics.\n\nWhether it's a small child's foot or an adult size 13, the Altaeron™ Adjustable Bunion Corrector is crafted to fit all foot sizes comfortably.",
-        "reassurance": "87% of users reported visible improvements from the first month"
+        "reassurance": "<strong class=\"alta-custom__reassurance-title\">Visible Progress Can Start Within the First Month</strong><br><strong>87% of users reported visible improvements within the first month.</strong><br>A reason to start addressing toe alignment instead of waiting for crowding and discomfort to become a bigger part of everyday life."
       }
     },
     "altaeron_results": {
@@ -139,7 +139,7 @@
       ],
       "settings": {
         "heading": "<p>Real <strong>Results</strong>, Real People</p>",
-        "intro": "<p>We conducted a consumer test where we sent the Altaeron™ Adjustable Bunion Corrector to over 37 podiatrist offices across the US. A total of 432 patients with bunions tested it. Here are the results.</p>",
+        "intro": "<p>We conducted a consumer test involving <strong>432 patients with bunions across 37 podiatrist offices in the United States</strong>. Here are the reported results.</p>",
         "animation_duration": 3
       }
     },
@@ -149,29 +149,29 @@
         "fit_1": {
           "type": "fit_card",
           "settings": {
-            "title": "Your big toe pushes toward the second toe",
-            "body": "You can see or feel the toes becoming increasingly crowded."
+            "title": "Your Big Toe Is Moving Toward the Next Toe",
+            "body": "You can see the change in its position, or notice the toes becoming more crowded."
           }
         },
         "fit_2": {
           "type": "fit_card",
           "settings": {
-            "title": "The bunion feels pressured after a long day",
-            "body": "Standing, walking or tighter shoes make the joint more noticeable."
+            "title": "The Bunion Becomes More Noticeable After a Long Day",
+            "body": "Standing, walking, or wearing tighter shoes can make pressure around the joint harder to ignore."
           }
         },
         "fit_3": {
           "type": "fit_card",
           "settings": {
-            "title": "Your toes feel jammed together",
-            "body": "You want to restore space instead of simply cushioning the contact point."
+            "title": "Your Toes Feel Crowded or Jammed Together",
+            "body": "You want more space between your toes — not just something that cushions the area where they rub."
           }
         },
         "fit_4": {
           "type": "fit_card",
           "settings": {
-            "title": "Basic toe spacers feel too passive",
-            "body": "You want to control how strongly the big toe is guided outward."
+            "title": "You Want More Control Than a Basic Toe Spacer Offers",
+            "body": "You want to adjust the level of correction instead of relying on one fixed amount of separation."
           }
         },
         "fit_5": {
@@ -262,7 +262,7 @@
       ],
       "settings": {
         "eyebrow": "BENEFITS",
-        "heading": "8 Reasons Why You Will Love It"
+        "heading": "8 Reasons Why You'll Love Altaeron™"
       }
     },
     "altaeron_comparison": {
@@ -271,37 +271,43 @@
         "guarantee": {
           "type": "feature",
           "settings": {
-            "feature": "30-Day Money Back Guarantee"
+            "feature": "30-Day Money-Back Guarantee"
           }
         },
         "comfort": {
           "type": "feature",
           "settings": {
-            "feature": "Alleviate Discomfort"
+            "feature": "Helps Alleviate Discomfort"
           }
         },
         "growth": {
           "type": "feature",
           "settings": {
-            "feature": "Help Prevent Bunion Growth"
+            "feature": "Designed to Help Address Bunion Progression"
           }
         },
         "alignment": {
           "type": "feature",
           "settings": {
-            "feature": "Improve Alignment Over Time"
+            "feature": "Supports Better Toe Alignment Over Time"
           }
         },
         "walking": {
           "type": "feature",
           "settings": {
-            "feature": "Comfortable to Wear While Walking"
+            "feature": "Adjustable Correction Tension"
           }
         },
         "durable": {
           "type": "feature",
           "settings": {
-            "feature": "Durable & Long Lasting"
+            "feature": "Designed for Comfortable At-Home Use"
+          }
+        },
+        "durable_design": {
+          "type": "feature",
+          "settings": {
+            "feature": "Durable, Structured Design"
           }
         }
       },
@@ -311,7 +317,8 @@
         "growth",
         "alignment",
         "walking",
-        "durable"
+        "durable",
+        "durable_design"
       ],
       "settings": {
         "heading": "Why Choose Us?",
@@ -359,14 +366,14 @@
       "settings": {
         "eyebrow": "TRY IT AT HOME",
         "heading": "You Are Just One Foot Away From Being FREE of Bunion Discomfort, Swollen Toes, or Foot Aches...",
-        "body": "If you’re reading this, chances are you are suffering from persistent bunion discomfort.\n\nThe pain and discomfort can affect your daily activities.\n\nIf left untreated, bunions can worsen. Your toes may cross over, and hammer toes or bone spurs may develop.\n\nBunions are a progressive disorder and may not go away on their own.\n\nOver time, this can lead to more serious issues, including invasive surgery, problems in your hips, knees and lower back, and even immobility.\n\nHarnessing clinically proven advanced alignment therapy and a patented hinge-joint mechanism, the Altaeron™ Adjustable Bunion Corrector addresses bunion discomfort around the affected area of your foot.\n\nIt supports foot health with as little as 30 minutes of daily use.",
+        "body": "Bunions can affect more than the way your foot looks. The pressure can follow you through work, errands, exercise, and the moments when you finally sit down to rest.\n\nAnd when you begin noticing your big toe shifting further toward the next toe, it is natural to wonder whether the change will become more difficult to manage.\n\nBunions can progress over time. In some cases, increasing deformity can contribute to overlapping toes, corns, calluses, and additional foot discomfort. More advanced cases may require professional treatment, including surgery.\n\nYou don\u0027t have to ignore the changes you\u0027re noticing.\n\nThe Altaeron™ Adjustable Bunion Corrector combines a structured hinge-joint design with adjustable tension to provide a targeted, non-surgical approach to bunion care. Use it for around 30 minutes a day, gradually adjusting the tension to your comfort level as part of your at-home routine.",
         "hero_image": "shopify://shop_images/Bunion_Braces_in_a_Cozy_Living_Room.png",
         "show_handwritten": true,
-        "handwritten_message": "91% of users reported reduced foot pain from the first week.",
+        "handwritten_message": "91% of users reported reduced foot pain from the first week. Start taking a more active role in your foot care — without making surgery your first step.",
         "cta_text": "START YOUR CORRECTION →",
         "cta_link": "",
         "cta_reassurance": "30-Day Easy Returns · Free & Tracked Shipping",
-        "show_banner": true,
+        "show_banner": false,
         "banner_text": "10,000+ Happy Customers"
       }
     },
@@ -397,7 +404,7 @@
         "stage_3"
       ],
       "settings": {
-        "eyebrow": "WHAT TO EXPECT WHEN YOU START",
+        "eyebrow": "Your Correction Journey",
         "heading": "Feel the Correction First. Let Progress Build From There.",
         "subheading": "You shouldn't need weeks to know whether Altaeron is doing anything.\n\nThe positioning effect begins as soon as the dial is properly adjusted.",
         "reassurance_heading": "OVER TIME",
@@ -486,7 +493,7 @@
       "type": "altaeron-research-evidence",
       "settings": {
         "show_section": true,
-        "eyebrow": "RESEARCH",
+        "eyebrow": "The Research Behind Conservative Bunion Care",
         "heading": "Conservative Bunion Correction Can Change More Than Pain.",
         "intro": "Clinical research on hallux-valgus orthoses, toe separators and combined exercise programs has reported improvements in pain, alignment, strength and function.",
         "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"

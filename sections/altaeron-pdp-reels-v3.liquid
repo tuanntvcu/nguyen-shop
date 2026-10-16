@@ -68,6 +68,7 @@
   #AltaeronPdp-{{ section.id }} .apdp-narrative h1 strong{color:var(--altaeron-primary,#006B5E);font-weight:inherit}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__product{color:var(--altaeron-primary,#006B5E);font-size:12px;font-weight:750;letter-spacing:.12em;line-height:1.35;margin:0 0 10px;text-transform:uppercase}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__subheadline{color:var(--altaeron-body,#344054);font-size:15px;line-height:1.55;margin:0 0 16px}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__subheadline strong{color:var(--altaeron-primary,#006B5E);font-weight:750}
   html{scroll-behavior:smooth}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links{display:grid;gap:4px;list-style:none;margin:0;padding:0}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__evidence-links a{align-items:center;border-radius:7px;color:var(--altaeron-navy,#102A43);display:grid;font-size:13px;font-weight:650;gap:9px;grid-template-columns:20px minmax(0,1fr) 16px;line-height:1.32;min-height:42px;padding:5px 7px;text-decoration:none;transition:background-color .18s ease,color .18s ease}
@@ -80,6 +81,7 @@
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits{display:grid;gap:9px;list-style:none;margin:0;padding:0}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li{align-items:flex-start;color:var(--altaeron-navy,#102A43);display:grid;font-size:13px;font-weight:650;gap:9px;grid-template-columns:20px minmax(0,1fr);line-height:1.4;min-width:0}
   #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li>svg{color:var(--altaeron-primary,#006B5E);height:19px;stroke-width:2.2;width:19px}
+  #AltaeronPdp-{{ section.id }} .apdp-narrative__benefits li strong{color:var(--altaeron-primary,#006B5E);font-weight:750}
   #AltaeronPdp-{{ section.id }} .apdp-hero-review{align-items:start;background:var(--altaeron-off-white,#F8FAF9);border:1px solid var(--altaeron-border,#E4E7EC);border-radius:10px;display:grid;gap:13px;grid-template-columns:56px minmax(0,1fr);margin:16px 0 0;padding:16px}
   #AltaeronPdp-{{ section.id }} .apdp-hero-review .apdp-tail-avatar{height:56px;width:56px}
   #AltaeronPdp-{{ section.id }} .apdp-hero-review .apdp-stars{font-size:20px}
@@ -90,7 +92,7 @@
   #AltaeronPdp-{{ section.id }} .apdp-delivery-estimate{align-items:center;color:var(--altaeron-navy,#102A43);display:flex;font-size:12px;font-weight:450;gap:6px;justify-content:center;line-height:1.4;margin:10px 0 8px;min-height:17px;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-estimate svg{color:var(--altaeron-primary,#006B5E);flex:0 0 15px;height:15px;stroke-width:1.8;width:15px}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-estimate strong{font-weight:650}
-  #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance{align-items:center;color:var(--altaeron-body,#344054);display:flex;font-size:10px;gap:6px;justify-content:center;line-height:1.4;margin:9px 0 0;text-align:center}
+  #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance{display:none}
   #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance svg{color:var(--altaeron-primary,#006B5E);flex:0 0 14px;height:14px;width:14px}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options{border:0;margin:11px 0 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options summary{color:var(--altaeron-body,#344054);cursor:pointer;font-size:10px;list-style:none;text-decoration:underline;text-underline-offset:3px}
@@ -333,7 +335,8 @@
         <ul class="apdp-narrative__benefits" role="list">
           {%- for i in (1..4) -%}
             {%- capture benefit_key -%}altaeron_pdp_reels_v3.hero.benefit_{{ i }}{%- endcapture -%}
-            <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ benefit_key | t }}</span></li>
+            {%- assign benefit_text = benefit_key | t | replace: '&lt;', '<' | replace: '&gt;', '>' -%}
+            <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ benefit_text }}</span></li>
           {%- endfor -%}
         </ul>
         <figure class="apdp-hero-review">
