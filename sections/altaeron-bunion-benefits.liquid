@@ -20,7 +20,7 @@
   unless request.locale.iso_code == 'en'
     assign eyebrow = 'altaeron_pdp_reels_v3.bunion.eyebrow' | t
     assign heading = 'altaeron_pdp_reels_v3.bunion.heading' | t
-    assign reassurance = 'altaeron_pdp_reels_v3.bunion.reassurance' | t
+    assign reassurance = 'altaeron_pdp_reels_v3.bunion.reassurance' | t | replace: '&lt;', '<' | replace: '&gt;', '>'
   endunless
 -%}
 

@@ -25,7 +25,7 @@
     assign reel_subheadline = 'altaeron_pdp_reels_v3.hero.explanation' | t
     assign reel_price_label = 'altaeron_pdp_reels_v2.common.from' | t
     assign reel_cta_label = 'altaeron_pdp_reels_v3.hero.cta_label' | t
-    assign reel_review_content = 'altaeron_pdp_reels_v3.hero.review_content_html' | t
+    assign reel_review_content = 'altaeron_pdp_reels_v3.hero.review_content_html' | t | replace: '&lt;', '<' | replace: '&gt;', '>'
   endunless
   assign reel_cta_label = reel_cta_label | remove: '→' | strip
   assign product_form_id = 'product-form-' | append: section.id
