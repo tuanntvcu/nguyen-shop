@@ -1806,7 +1806,9 @@
     "feature_4": "Ajuda a melhorar o alinhamento dos dedos ao longo do tempo",
     "feature_5": "Tensão de correção ajustável",
     "feature_6": "Desenvolvido para uso confortável em casa",
-    "feature_7": "Design estruturado e durável"
+    "feature_7": "Design estruturado e durável",
+    "yes_label": "Incluído",
+    "no_label": "Não incluído"
   },
   "altaeron_results": {
     "heading_html": "<strong>Resultados</strong> reais, pessoas reais",

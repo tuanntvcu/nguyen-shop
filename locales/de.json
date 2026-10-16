@@ -2378,7 +2378,9 @@
     "feature_4": "Unterstützt langfristig eine bessere Zehenstellung",
     "feature_5": "Einstellbare Korrekturspannung",
     "feature_6": "Für angenehme Anwendung zu Hause entwickelt",
-    "feature_7": "Robustes, strukturiertes Design"
+    "feature_7": "Robustes, strukturiertes Design",
+    "yes_label": "Enthalten",
+    "no_label": "Nicht enthalten"
   },
   "altaeron_results": {
     "heading_html": "Echte <strong>Ergebnisse</strong>, echte Menschen",

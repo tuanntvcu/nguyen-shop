@@ -1,13 +1,24 @@
 {%- liquid
   assign comparison_logo = settings.logo
   assign comparison_product = product.title | default: section.settings.product_name
+  assign comparison_claim_before = section.settings.claim_before
+  assign comparison_claim_accent = section.settings.claim_accent
+  assign comparison_yes_label = section.settings.yes_label
+  assign comparison_no_label = section.settings.no_label
+  unless request.locale.iso_code == 'en'
+    assign comparison_product = 'altaeron_pdp_reels_v3.hero.product_name' | t
+    assign comparison_claim_before = 'altaeron_comparison.claim_before' | t
+    assign comparison_claim_accent = 'altaeron_comparison.claim_accent' | t
+    assign comparison_yes_label = 'altaeron_comparison.yes_label' | t
+    assign comparison_no_label = 'altaeron_comparison.no_label' | t
+  endunless
 -%}
 
 <section class="alta-compare color-{{ section.settings.color_scheme }}" id="AltaCompare-{{ section.id }}">
   <div class="alta-compare__inner">
     <header class="alta-compare__header">
       <h2>{{ 'altaeron_comparison.heading' | t | escape_once }}</h2>
-      <p class="alta-compare__claim">{{ section.settings.claim_before | escape_once }} <strong>{{ section.settings.claim_accent | escape_once }}</strong></p>
+      <p class="alta-compare__claim">{{ comparison_claim_before | escape_once }} <strong>{{ comparison_claim_accent | escape_once }}</strong></p>
       <p class="alta-compare__intro">{{ 'altaeron_comparison.intro' | t | replace: '[product]', comparison_product | escape_once }}</p>
     </header>
     <div class="alta-compare__wrap">
@@ -24,8 +35,8 @@
             {%- assign feature_key = 'altaeron_comparison.feature_' | append: forloop.index -%}
             <div class="alta-compare__row" role="row" {{ block.shopify_attributes }}>
               <div class="alta-compare__feature" role="cell">{% if forloop.index <= 7 %}{{ feature_key | t | escape_once }}{% else %}{{ block.settings.feature | escape_once }}{% endif %}</div>
-              <div class="alta-compare__yes" role="cell" aria-label="{{ section.settings.yes_label | escape }}"><span aria-hidden="true">✓</span></div>
-              <div class="alta-compare__no" role="cell" aria-label="{{ section.settings.no_label | escape }}"><span aria-hidden="true">×</span></div>
+              <div class="alta-compare__yes" role="cell" aria-label="{{ comparison_yes_label | escape }}"><span aria-hidden="true">✓</span></div>
+              <div class="alta-compare__no" role="cell" aria-label="{{ comparison_no_label | escape }}"><span aria-hidden="true">×</span></div>
             </div>
           {%- endfor -%}
         </div>

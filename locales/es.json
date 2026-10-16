@@ -2378,7 +2378,9 @@
     "feature_4": "Favorece una mejor alineación de los dedos con el tiempo",
     "feature_5": "Tensión de corrección ajustable",
     "feature_6": "Diseñado para un uso cómodo en casa",
-    "feature_7": "Diseño estructurado y duradero"
+    "feature_7": "Diseño estructurado y duradero",
+    "yes_label": "Incluido",
+    "no_label": "No incluido"
   },
   "altaeron_results": {
     "heading_html": "Resultados <strong>reales</strong>, personas reales",

@@ -21,8 +21,8 @@
   assign reel_review_content = section.settings.review_content
   unless request.locale.iso_code == 'en'
     assign reel_product_name = 'altaeron_pdp_reels_v3.hero.product_name' | t
-    assign reel_headline = 'altaeron_pdp_reels_v3.hero.headline_html' | t
-    assign reel_subheadline = 'altaeron_pdp_reels_v3.hero.explanation' | t
+    assign reel_headline = 'altaeron_pdp_reels_v3.hero.headline_html' | t | replace: '&lt;', '<' | replace: '&gt;', '>'
+    assign reel_subheadline = 'altaeron_pdp_reels_v3.hero.explanation' | t | replace: '&lt;', '<' | replace: '&gt;', '>'
     assign reel_price_label = 'altaeron_pdp_reels_v2.common.from' | t
     assign reel_cta_label = 'altaeron_pdp_reels_v3.hero.cta_label' | t
     assign reel_review_content = 'altaeron_pdp_reels_v3.hero.review_content_html' | t | replace: '&lt;', '<' | replace: '&gt;', '>'

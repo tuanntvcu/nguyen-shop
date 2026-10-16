@@ -2378,7 +2378,9 @@
     "feature_4": "Favorise un meilleur alignement des orteils au fil du temps",
     "feature_5": "Tension de correction réglable",
     "feature_6": "Conçu pour une utilisation confortable à domicile",
-    "feature_7": "Conception structurée et durable"
+    "feature_7": "Conception structurée et durable",
+    "yes_label": "Inclus",
+    "no_label": "Non inclus"
   },
   "altaeron_results": {
     "heading_html": "De vrais <strong>résultats</strong>, de vraies personnes",

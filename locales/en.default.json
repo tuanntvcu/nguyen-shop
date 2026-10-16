@@ -2357,7 +2357,9 @@
     "feature_4": "Supports Better Toe Alignment Over Time",
     "feature_5": "Adjustable Correction Tension",
     "feature_6": "Designed for Comfortable At-Home Use",
-    "feature_7": "Durable, Structured Design"
+    "feature_7": "Durable, Structured Design",
+    "yes_label": "Included",
+    "no_label": "Not included"
   },
   "altaeron_results": {
     "heading_html": "Real <strong>Results</strong>, Real People",

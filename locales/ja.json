@@ -2036,7 +2036,9 @@
     "feature_4": "時間をかけた足指の位置改善をサポート",
     "feature_5": "矯正テンションを調節可能",
     "feature_6": "自宅で快適に使えるよう設計",
-    "feature_7": "耐久性に配慮した構造設計"
+    "feature_7": "耐久性に配慮した構造設計",
+    "yes_label": "含まれる",
+    "no_label": "含まれない"
   },
   "altaeron_results": {
     "heading_html": "本当の<strong>結果</strong>を、実際のユーザーから",
