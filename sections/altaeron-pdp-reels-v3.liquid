@@ -339,20 +339,6 @@
             <li>{% render 'altaeron-pdp-icon', icon: 'check' %}<span>{{ benefit_text }}</span></li>
           {%- endfor -%}
         </ul>
-        <figure class="apdp-hero-review">
-          <div class="apdp-tail-avatar">
-            {%- if section.settings.review_avatar != blank -%}
-              {{ section.settings.review_avatar | image_url: width: 160 | image_tag: loading: 'eager', widths: '80, 120, 160', sizes: '56px', alt: section.settings.review_avatar.alt | default: section.settings.reviewer_name }}
-            {%- else -%}
-              <span class="apdp-tail-avatar__initial" aria-hidden="true">{{ section.settings.reviewer_name | slice: 0 }}</span>
-            {%- endif -%}
-          </div>
-          <div>
-            {% render 'altaeron-pdp-stars', rating: 5 %}
-            <blockquote>{{ reel_review_content }}</blockquote>
-            <figcaption><strong>{{ section.settings.reviewer_name }}</strong> &middot; {{ 'altaeron_pdp.reviews.verified_buyer' | t }}</figcaption>
-          </div>
-        </figure>
       </div>
 
       <aside id="AltaeronBuy-{{ section.id }}" class="apdp-buy" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.purchase' | t: product: product.title | escape }}" data-apdp-primary-purchase>
@@ -405,6 +391,20 @@
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'altaeron-pdp-icon', icon: 'return' %}<b>{{ 'altaeron_pdp_reels_v2.buy.returns_30' | t: default: '30-Day Returns' }}</b></a>
           <a href="/pages/contact">{% render 'altaeron-pdp-icon', icon: 'medical-cross' %}<b>{{ 'storefront.pdp.clinically_proven' | t: default: 'Clinically Proven' | escape }}</b></a>
         </div>
+        <figure class="apdp-hero-review">
+          <div class="apdp-tail-avatar">
+            {%- if section.settings.review_avatar != blank -%}
+              {{ section.settings.review_avatar | image_url: width: 160 | image_tag: loading: 'eager', widths: '80, 120, 160', sizes: '56px', alt: section.settings.review_avatar.alt | default: section.settings.reviewer_name }}
+            {%- else -%}
+              <span class="apdp-tail-avatar__initial" aria-hidden="true">{{ section.settings.reviewer_name | slice: 0 }}</span>
+            {%- endif -%}
+          </div>
+          <div>
+            {% render 'altaeron-pdp-stars', rating: 5 %}
+            <blockquote>{{ reel_review_content }}</blockquote>
+            <figcaption><strong>{{ section.settings.reviewer_name }}</strong> &middot; {{ 'altaeron_pdp.reviews.verified_buyer' | t }}</figcaption>
+          </div>
+        </figure>
       </aside>
     </div>
   </section>
