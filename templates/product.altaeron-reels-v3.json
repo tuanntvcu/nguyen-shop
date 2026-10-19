@@ -497,6 +497,7 @@
     },
     "altaeron_research_evidence": {
       "type": "altaeron-research-evidence",
+      "disabled": true,
       "settings": {
         "show_section": true,
         "eyebrow": "The Research Behind Conservative Bunion Care",
