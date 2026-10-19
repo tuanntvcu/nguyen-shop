@@ -6,6 +6,13 @@
   assign subheading = section.settings.subheading
   assign reassurance = section.settings.reassurance
   assign how_it_works_video = section.settings.how_it_works_video
+  assign mobile_gallery_images = ''
+  for image_index in (1..5)
+    assign image_setting_id = 'mobile_gallery_image_' | append: image_index
+    if section.settings[image_setting_id] != blank
+      assign mobile_gallery_images = mobile_gallery_images | append: '1'
+    endif
+  endfor
   assign translated_subheading = true
   for paragraph_index in (1..6)
     assign paragraph_key = 'altaeron_pdp_reels_v3.bunion.subheading_' | append: paragraph_index
@@ -49,7 +56,7 @@
   #AltaeronBunion-{{ section.id }} .alta-bunion__progression { background: #f7f9f9; border: 1px solid var(--alta-custom-line); border-radius: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: hidden; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__step { background: #fff; min-width: 0; position: relative; text-align: center; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__step + .alta-bunion__step { border-left: 1px solid rgba(228, 231, 236, .75); }
-  #AltaeronBunion-{{ section.id }} .alta-bunion__step:not(:last-child)::after { align-items: center; background: rgba(255,255,255,.94); border: 1px solid rgba(0,107,94,.18); border-radius: 50%; color: var(--alta-custom-accent); content: '→'; display: flex; font-size: 25px; font-weight: 500; height: 42px; justify-content: center; position: absolute; right: -21px; top: calc(50% - 42px); width: 42px; z-index: 2; }
+  #AltaeronBunion-{{ section.id }} .alta-bunion__step:not(:last-child)::after { align-items: center; background: rgba(255,255,255,.94); border: 1px solid rgba(0,107,94,.18); border-radius: 50%; color: var(--alta-custom-accent); content: '\2192'; display: flex; font-size: 25px; font-weight: 500; height: 42px; justify-content: center; position: absolute; right: -21px; top: calc(50% - 42px); width: 42px; z-index: 2; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__step-media { aspect-ratio: 4 / 3; background: #eef2f3; overflow: hidden; }
   #AltaeronBunion-{{ section.id }} :is(.alta-bunion__step-media, .alta-custom-card__media) :is(img, svg) { display: block; height: 100%; object-fit: cover; width: 100%; }
   #AltaeronBunion-{{ section.id }} .alta-bunion__step-copy { background: rgba(255,255,255,.92); min-height: 94px; padding: 16px 12px 18px; }
@@ -66,6 +73,7 @@
   #AltaeronBunion-{{ section.id }} .alta-custom__reassurance strong { color: var(--altaeron-primary,#006B5E); font-weight: 750; }
   #AltaeronBunion-{{ section.id }} .alta-custom__reassurance-title { font-size: 18px; }
   #AltaeronBunion-{{ section.id }} .alta-custom__reassurance svg { flex: 0 0 29px; height: 29px; stroke-width: 1.8; width: 29px; }
+  #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery { display: none; }
   #AltaeronBunion-{{ section.id }} .alta-custom__how-layout { display: grid; gap: 24px; }
   #AltaeronBunion-{{ section.id }} .alta-custom__copy { display: contents; }
   #AltaeronBunion-{{ section.id }} .alta-custom__header,
@@ -119,6 +127,13 @@
     #AltaeronBunion-{{ section.id }} .alta-custom-card p { font-size: 13px; }
     #AltaeronBunion-{{ section.id }} .alta-custom__reassurance { font-size: 14px; gap: 10px; margin-top: 14px; min-height: 58px; padding: 12px 14px; }
     #AltaeronBunion-{{ section.id }} .alta-custom__reassurance svg { flex-basis: 24px; height: 24px; width: 24px; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery { display: block; margin: 0 0 14px; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery-track { overflow: hidden; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery-slide { aspect-ratio: 1.22 / 1; background: #f1f3f3; border-radius: 12px; overflow: hidden; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery-slide img { display: block; height: 100%; object-fit: cover; width: 100%; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery .swiper-pagination { display: flex; gap: 6px; justify-content: center; margin-top: 9px; position: static; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery .swiper-pagination-bullet { background: #c8cece; height: 5px; margin: 0 !important; opacity: 1; width: 5px; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery .swiper-pagination-bullet-active { background: #152c2b; }
   }
   {%- if template.suffix == 'altaeron-reels-v3' -%}
     {% render 'altaeron-reels-v3-responsive-section', section_kind: 'bunion', section_id: section.id %}
@@ -224,6 +239,51 @@
       </div>
     {%- endif -%}
 
+    {%- if mobile_gallery_images != blank -%}
+      <div class="alta-bunion__mobile-gallery" data-mobile-gallery>
+        <div class="alta-bunion__mobile-gallery-track swiper" data-gallery-track>
+          <div class="swiper-wrapper">
+          {%- for image_index in (1..5) -%}
+            {%- assign image_setting_id = 'mobile_gallery_image_' | append: image_index -%}
+            {%- assign gallery_image = section.settings[image_setting_id] -%}
+            {%- if gallery_image != blank -%}
+              <div class="alta-bunion__mobile-gallery-slide swiper-slide" data-gallery-slide>
+                {{ gallery_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360, 540, 750, 1000, 1200', sizes: '(max-width: 749px) 88vw', alt: gallery_image.alt }}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+          </div>
+        </div>
+        {%- if mobile_gallery_images.size > 1 -%}
+          <div class="swiper-pagination" aria-label="Gallery slides"></div>
+        {%- endif -%}
+      </div>
+      <script>
+        (() => {
+          const initializeGallery = () => {
+            const slider = document.querySelector('#AltaeronBunion-{{ section.id }} [data-gallery-track]');
+            if (!slider || slider.dataset.initialized || !window.ScaloraTheme?.Carousel) return;
+            slider.dataset.initialized = 'true';
+            const options = {
+              slidesPerView: 1.12,
+              spaceBetween: 10,
+              watchOverflow: true,
+              breakpoints: { 750: { enabled: false } },
+            };
+            const pagination = slider.parentElement.querySelector('.swiper-pagination');
+            if (pagination) options.pagination = { el: pagination, clickable: true };
+            const carousel = new window.ScaloraTheme.Carousel(slider, options);
+            carousel.init();
+          };
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeGallery, { once: true });
+          } else {
+            initializeGallery();
+          }
+        })();
+      </script>
+    {%- endif -%}
+
     {%- if reassurance != blank -%}
       <p class="alta-custom__reassurance">
         <span>{{ reassurance }}</span>
@@ -243,7 +303,13 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WHAT IT DOES FOR YOUR BUNION" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Support your big toe in a more natural position." },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "As a bunion develops, the big toe moves inward toward the second toe. Altaeron works in the opposite direction with controlled outward tension." },
-    { "type": "textarea", "id": "reassurance", "label": "Reassurance", "default": "Gentle support should feel controlled — never painful." }
+    { "type": "textarea", "id": "reassurance", "label": "Reassurance", "default": "Gentle support should feel controlled — never painful." },
+    { "type": "header", "content": "Mobile image slider" },
+    { "type": "image_picker", "id": "mobile_gallery_image_1", "label": "Image 1" },
+    { "type": "image_picker", "id": "mobile_gallery_image_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "mobile_gallery_image_3", "label": "Image 3" },
+    { "type": "image_picker", "id": "mobile_gallery_image_4", "label": "Image 4" },
+    { "type": "image_picker", "id": "mobile_gallery_image_5", "label": "Image 5" }
   ],
   "blocks": [
     {
