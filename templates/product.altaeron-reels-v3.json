@@ -445,6 +445,7 @@
         "benefit_2",
         "benefit_3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "ADJUSTABLE SUPPORT",
         "heading": "A Fixed Spacer Stays the Same. Your Foot Doesn't.",
