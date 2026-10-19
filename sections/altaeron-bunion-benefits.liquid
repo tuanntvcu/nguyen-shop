@@ -129,8 +129,8 @@
     #AltaeronBunion-{{ section.id }} .alta-custom__reassurance svg { flex-basis: 24px; height: 24px; width: 24px; }
     #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery { display: block; margin: 0 0 14px; }
     #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery-track { overflow: hidden; }
-    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery-slide { aspect-ratio: 1.22 / 1; background: #f1f3f3; border-radius: 12px; overflow: hidden; }
-    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery-slide img { display: block; height: 100%; object-fit: cover; width: 100%; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery-slide { aspect-ratio: 1.22 / 1; background: #fff; border-radius: 12px; overflow: hidden; }
+    #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery-slide img { display: block; height: 100%; object-fit: contain; width: 100%; }
     #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery .swiper-pagination { display: flex; gap: 6px; justify-content: center; margin-top: 9px; position: static; }
     #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery .swiper-pagination-bullet { background: #c8cece; height: 5px; margin: 0 !important; opacity: 1; width: 5px; }
     #AltaeronBunion-{{ section.id }} .alta-bunion__mobile-gallery .swiper-pagination-bullet-active { background: #152c2b; }
@@ -239,19 +239,25 @@
       </div>
     {%- endif -%}
 
+    {%- if reassurance != blank -%}
+      <p class="alta-custom__reassurance">
+        <span>{{ reassurance }}</span>
+      </p>
+    {%- endif -%}
+
     {%- if mobile_gallery_images != blank -%}
       <div class="alta-bunion__mobile-gallery" data-mobile-gallery>
         <div class="alta-bunion__mobile-gallery-track swiper" data-gallery-track>
           <div class="swiper-wrapper">
-          {%- for image_index in (1..5) -%}
-            {%- assign image_setting_id = 'mobile_gallery_image_' | append: image_index -%}
-            {%- assign gallery_image = section.settings[image_setting_id] -%}
-            {%- if gallery_image != blank -%}
-              <div class="alta-bunion__mobile-gallery-slide swiper-slide" data-gallery-slide>
-                {{ gallery_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360, 540, 750, 1000, 1200', sizes: '(max-width: 749px) 88vw', alt: gallery_image.alt }}
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
+            {%- for image_index in (1..5) -%}
+              {%- assign image_setting_id = 'mobile_gallery_image_' | append: image_index -%}
+              {%- assign gallery_image = section.settings[image_setting_id] -%}
+              {%- if gallery_image != blank -%}
+                <div class="alta-bunion__mobile-gallery-slide swiper-slide" data-gallery-slide>
+                  {{ gallery_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360, 540, 750, 1000, 1200', sizes: '(max-width: 749px) 88vw', alt: gallery_image.alt }}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
           </div>
         </div>
         {%- if mobile_gallery_images.size > 1 -%}
@@ -282,12 +288,6 @@
           }
         })();
       </script>
-    {%- endif -%}
-
-    {%- if reassurance != blank -%}
-      <p class="alta-custom__reassurance">
-        <span>{{ reassurance }}</span>
-      </p>
     {%- endif -%}
   </div>
 </section>
