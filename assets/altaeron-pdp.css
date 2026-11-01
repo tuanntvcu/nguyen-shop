@@ -945,3 +945,7 @@ bundle-deals-widget input[type="radio"]{
 .altaeron-pdp .apdp-final-cta__buy>p s{color:#D0D5DD}
 .altaeron-pdp .apdp-sticky{border-color:var(--altaeron-border,#E4E7EC)}
 .altaeron-pdp :where(select,input,textarea):focus-visible{border-color:var(--altaeron-primary,#006B5E);outline:2px solid rgba(0,107,94,.22);outline-offset:1px}
+
+@media (max-width:749px){
+  body:has(.altaeron-pdp--reels-v3 .apdp-sticky:not([hidden])) .Avada-Faqs_Button.bottom{bottom:100px!important}
+}
