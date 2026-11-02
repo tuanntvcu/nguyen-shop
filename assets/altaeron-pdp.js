@@ -732,33 +732,41 @@
       });
     };
 
-    const syncReelsV3PopularBadge = (widgetRoot) => {
+    const syncReelsV3FirstTierLabel = (widgetRoot) => {
       if (!root.classList.contains('altaeron-pdp--reels-v3')) return;
 
       const firstTier = widgetRoot.querySelector('[data-tier-index="0"]');
-      const secondTier = widgetRoot.querySelector('[data-tier-index="1"]');
-      if (!firstTier || !secondTier) return;
+      const nameRow = firstTier?.querySelector('.bd-tier__name-row');
+      if (!firstTier || !nameRow || nameRow.querySelector('.bd-tier__label')) return;
 
-      const hasPopularBadge = (tier) => [...tier.querySelectorAll('*')].some((element) =>
-        /^most\s+popular$/i.test(element.textContent.replace(/\s+/g, ' ').trim())
-      );
-      if (hasPopularBadge(firstTier)) return;
+      const catalogElement = document.getElementById('bundle-deals-catalog');
+      if (!catalogElement) return;
 
-      const sourceBadge = [...secondTier.querySelectorAll('*')]
-        .filter((element) => /^most\s+popular$/i.test(element.textContent.replace(/\s+/g, ' ').trim()))
-        .sort((a, b) => a.children.length - b.children.length)[0];
-      const firstTierName = firstTier.querySelector('.bd-tier__name');
-      if (!sourceBadge || !firstTierName) return;
+      let deals;
+      try {
+        deals = JSON.parse(catalogElement.textContent || '[]');
+      } catch (_) {
+        return;
+      }
 
-      const badge = sourceBadge.cloneNode(true);
-      badge.dataset.altaeronPopularBadgeCopy = 'true';
-      const sourceContainer = sourceBadge.parentElement;
-      const matchingContainer = sourceContainer && sourceContainer !== secondTier
-        ? [...firstTier.querySelectorAll(sourceContainer.localName)]
-          .find((element) => element.className === sourceContainer.className)
-        : null;
-      if (matchingContainer) matchingContainer.append(badge);
-      else firstTierName.insertAdjacentElement('afterend', badge);
+      const tierInput = firstTier.querySelector('input[type="radio"]');
+      const dealId = tierInput?.name.match(/^bd-tier-(.+)$/)?.[1];
+      const deal = deals.find((item) => item.id === dealId);
+      const tier = deal?.blocks?.[Number(firstTier.dataset.tierIndex)];
+      if (!tier?.label?.trim()) return;
+
+      // The bundle app only renders label chips on discounted tiers. Reel V3's
+      // first tier has its own catalog label, but no discount, so render that
+      // label using the app's native chip class.
+      const locale = window.Shopify?.locale || document.documentElement.lang;
+      const translatedLabel = deal.translations?.[locale]?.blocks?.[tier.id]?.label;
+      const label = document.createElement('span');
+      label.className = 'bd-tier__label';
+      label.dataset.altaeronTierLabel = '0';
+      label.textContent = (translatedLabel || tier.label)
+        .replace('{{saved_total}}', money(0, format))
+        .replace('{{saved_percent}}', '0%');
+      nameRow.append(label);
     };
 
     const syncBundlePricing = () => {
@@ -770,7 +778,7 @@
       if (bundleWidget) {
         const widgetRoot = bundleWidget.shadowRoot || bundleWidget;
         syncBundleTierPrices(widgetRoot, baseCompare, basePrice);
-        syncReelsV3PopularBadge(widgetRoot);
+        syncReelsV3FirstTierLabel(widgetRoot);
       }
 
       const bundle = selectedBundle();
