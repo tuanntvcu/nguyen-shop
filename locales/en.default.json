@@ -18,7 +18,7 @@
     "cart_drawer": {
       "intro": "You’re one step closer to more comfortable movement.",
       "rewards": "Cart rewards",
-      "free_shipping": "Free shipping",
+      "free_shipping": "Free Shipping with Tracking",
       "discount": "{{ percent }}% OFF",
       "order_benefits": "Order benefits",
       "on_every_order": "On every order",

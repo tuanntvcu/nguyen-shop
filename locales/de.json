@@ -18,7 +18,7 @@
     "cart_drawer": {
       "intro": "Sie sind angenehmerer Bewegung einen Schritt näher.",
       "rewards": "Warenkorbvorteile",
-      "free_shipping": "Kostenloser Versand",
+      "free_shipping": "Kostenloser Versand mit Sendungsverfolgung",
       "discount": "{{ percent }} % RABATT",
       "order_benefits": "Bestellvorteile",
       "on_every_order": "Bei jeder Bestellung",

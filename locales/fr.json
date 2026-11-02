@@ -18,7 +18,7 @@
     "cart_drawer": {
       "intro": "Vous êtes sur le point de retrouver plus de confort dans vos mouvements.",
       "rewards": "Avantages du panier",
-      "free_shipping": "Livraison gratuite",
+      "free_shipping": "Livraison gratuite avec suivi",
       "discount": "{{ percent }} % DE RÉDUCTION",
       "order_benefits": "Avantages de la commande",
       "on_every_order": "Sur chaque commande",

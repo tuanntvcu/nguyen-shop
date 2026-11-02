@@ -18,7 +18,7 @@
     "cart_drawer": {
       "intro": "Está a um passo de se movimentar com mais conforto.",
       "rewards": "Vantagens do carrinho",
-      "free_shipping": "Portes grátis",
+      "free_shipping": "Portes grátis com seguimento",
       "discount": "{{ percent }}% DE DESCONTO",
       "order_benefits": "Vantagens da encomenda",
       "on_every_order": "Em todas as encomendas",

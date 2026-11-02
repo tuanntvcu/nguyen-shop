@@ -255,6 +255,7 @@
   width: 100%;
   height: 4.2rem;
   margin-block-start: 0.2rem;
+  display: none;
 }
 .cart-drawer__rewards[hidden] {
   display: none;
