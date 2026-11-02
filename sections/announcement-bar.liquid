@@ -134,16 +134,17 @@
     }
     #shopify-section-{{ section.id }} .announcement-bar__marquee-track {
       display: flex;
-      width: max-content;
-      min-width: 100%;
+      width: 200%;
       animation: altaeron-announcement-marquee 24s linear infinite;
       will-change: transform;
     }
     #shopify-section-{{ section.id }} .announcement-bar__marquee-group {
       display: flex;
-      flex-shrink: 0;
+      flex: 0 0 50%;
+      width: 50%;
+      min-width: 0;
+      box-sizing: border-box;
       gap: clamp(40px, 7vw, 110px);
-      min-width: 100%;
       padding-right: clamp(40px, 7vw, 110px);
       align-items: center;
       justify-content: space-around;

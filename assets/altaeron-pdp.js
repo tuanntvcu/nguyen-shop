@@ -732,13 +732,46 @@
       });
     };
 
+    const syncReelsV3PopularBadge = (widgetRoot) => {
+      if (!root.classList.contains('altaeron-pdp--reels-v3')) return;
+
+      const firstTier = widgetRoot.querySelector('[data-tier-index="0"]');
+      const secondTier = widgetRoot.querySelector('[data-tier-index="1"]');
+      if (!firstTier || !secondTier) return;
+
+      const hasPopularBadge = (tier) => [...tier.querySelectorAll('*')].some((element) =>
+        /^most\s+popular$/i.test(element.textContent.replace(/\s+/g, ' ').trim())
+      );
+      if (hasPopularBadge(firstTier)) return;
+
+      const sourceBadge = [...secondTier.querySelectorAll('*')]
+        .filter((element) => /^most\s+popular$/i.test(element.textContent.replace(/\s+/g, ' ').trim()))
+        .sort((a, b) => a.children.length - b.children.length)[0];
+      const firstTierName = firstTier.querySelector('.bd-tier__name');
+      if (!sourceBadge || !firstTierName) return;
+
+      const badge = sourceBadge.cloneNode(true);
+      badge.dataset.altaeronPopularBadgeCopy = 'true';
+      const sourceContainer = sourceBadge.parentElement;
+      const matchingContainer = sourceContainer && sourceContainer !== secondTier
+        ? [...firstTier.querySelectorAll(sourceContainer.localName)]
+          .find((element) => element.className === sourceContainer.className)
+        : null;
+      if (matchingContainer) matchingContainer.append(badge);
+      else firstTierName.insertAdjacentElement('afterend', badge);
+    };
+
     const syncBundlePricing = () => {
       const control = chosenControl();
       if (!control) return;
 
       const basePrice = Number(control.dataset.price || 0);
       const baseCompare = Number(control.dataset.compare || 0);
-      if (bundleWidget) syncBundleTierPrices(bundleWidget.shadowRoot || bundleWidget, baseCompare, basePrice);
+      if (bundleWidget) {
+        const widgetRoot = bundleWidget.shadowRoot || bundleWidget;
+        syncBundleTierPrices(widgetRoot, baseCompare, basePrice);
+        syncReelsV3PopularBadge(widgetRoot);
+      }
 
       const bundle = selectedBundle();
       if (!bundle?.price) return;
