@@ -144,8 +144,6 @@
       width: 50%;
       min-width: 0;
       box-sizing: border-box;
-      gap: clamp(40px, 7vw, 110px);
-      padding-right: clamp(40px, 7vw, 110px);
       align-items: center;
       justify-content: space-around;
     }
@@ -184,9 +182,7 @@
     @media (max-width: 767px) {
       #shopify-section-{{ section.id }} .announcement-bar__marquee-track { animation-duration: 18s; }
       #shopify-section-{{ section.id }} .announcement-bar__marquee-group {
-        gap: 19px;
-        justify-content: flex-start;
-        padding-right: 19px;
+        justify-content: space-around;
       }
       #shopify-section-{{ section.id }} .announcement-bar__promise { gap: 7px; padding: 7px 0; font-size: 11px; }
       #shopify-section-{{ section.id }} .announcement-bar__promise-icon { width: 19px; height: 19px; flex-basis: 19px; }
