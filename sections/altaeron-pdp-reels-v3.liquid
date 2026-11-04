@@ -386,6 +386,7 @@
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
           <p class="apdp-new-customer-offer">{{ 'altaeron_pdp_reels_v3.hero.purchase_clarification' | t }}</p>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ reel_cta_label }}">{% if current_variant.available %}{{ reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><span data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}>{% if current_variant.available %} — {{ current_variant.price | money }}{% endif %}</span></span><span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
+          {%- if localization.country.iso_code == 'US' -%}
           <fieldset class="apdp-delivery-options" aria-label="{{ 'altaeron_pdp_reels_v3.delivery_options.title' | t | escape }}">
             <legend class="apdp-delivery-options__heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-5 9 5v10l-9 5-9-5z"/><path d="m3 7 9 5 9-5M12 22V12M7.5 4.5l9 5"/></svg>{{ 'altaeron_pdp_reels_v3.delivery_options.title' | t }}</legend>
             <label class="apdp-delivery-option apdp-delivery-option--ship">
@@ -399,6 +400,7 @@
               <span class="apdp-delivery-option__copy"><span class="apdp-delivery-option__title-row"><strong>{{ 'altaeron_pdp_reels_v3.delivery_options.pickup_title' | t }}</strong><svg class="apdp-delivery-option__map-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M13 6.7c0 3.5-5 8-5 8S3 10.2 3 6.7a5 5 0 1 1 10 0Z"/><circle cx="8" cy="6.5" r="1.6"/></svg></span><small>{{ 'altaeron_pdp_reels_v3.delivery_options.pickup_address' | t }}</small></span>
             </label>
           </fieldset>
+          {%- endif -%}
           <p class="apdp-delivery-estimate" data-apdp-delivery-estimate data-locale="{{ request.locale.iso_code | escape }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span>{{ 'altaeron_pdp_reels_v3.hero.estimated_delivery' | t }}: <strong data-apdp-delivery-range></strong></span></p>
           <p class="apdp-cta-reassurance">{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>{{ 'altaeron_pdp_reels_v3.hero.trust_row' | t }}</span></p>
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp_reels_v2.buy.installments' | t: amount: installment_amount }} <strong>shop<span>Pay</span></strong></div>
