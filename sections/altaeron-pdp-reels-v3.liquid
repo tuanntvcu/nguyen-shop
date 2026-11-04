@@ -99,9 +99,9 @@
   #AltaeronPdp-{{ section.id }} .apdp-delivery-options__heading svg{color:var(--altaeron-primary,#006B5E);flex:0 0 18px;height:18px;width:18px}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-option{align-items:center;background:#fff;border:1px solid var(--altaeron-border,#E4E7EC);border-radius:8px;color:var(--altaeron-navy,#102A43);cursor:pointer;display:grid;gap:9px;grid-template-columns:18px 24px minmax(0,1fr);margin-top:6px;min-height:0;padding:9px 10px;transition:border-color .18s ease,background-color .18s ease,box-shadow .18s ease}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-option:has(input:checked){background:var(--altaeron-soft-teal,#EAF5F2);border:1px solid var(--altaeron-primary,#006B5E)}
-  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio{appearance:none;border:2px solid #b8c0c5;border-radius:50%;height:17px;margin:0;position:relative;width:17px}
-  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio:checked{border-color:var(--altaeron-primary,#006B5E)}
-  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio:checked:after{background:var(--altaeron-primary,#006B5E);border-radius:50%;content:'';inset:2px;position:absolute}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio{appearance:none;background:#fff;border:2px solid #aab9b2;border-radius:50%;box-shadow:none!important;height:18px;margin:0;position:relative;width:18px}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio:checked{--b:#fff;--bc:var(--altaeron-primary,#006B5E);background:#fff!important;border-color:var(--altaeron-primary,#006B5E)}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio:checked:after{background:var(--altaeron-primary,#006B5E);border:0;border-radius:50%;content:'';height:9px;inset:50% auto auto 50%;position:absolute;transform:translate(-50%,-50%);width:9px}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-option__icon{color:var(--altaeron-primary,#006B5E);height:23px;width:23px}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-option--pickup .apdp-delivery-option__icon{color:var(--altaeron-body,#344054)}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-option__copy{display:grid;gap:2px;min-width:0}
@@ -112,6 +112,8 @@
   #AltaeronPdp-{{ section.id }} .apdp-delivery-option__title-row{align-items:center;display:flex;flex-wrap:wrap;gap:7px;min-width:0}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-option__map-icon{color:var(--altaeron-body,#344054);height:14px;width:14px}
   #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio:focus-visible{outline:2px solid var(--altaeron-primary,#006B5E);outline-offset:2px}
+  #AltaeronPdp-{{ section.id }}:has(.apdp-delivery-option input[value="store-pickup"]:checked) .apdp-delivery-estimate{display:none}
+  #AltaeronPdp-{{ section.id }}:has(.apdp-delivery-option input[value="ship-worldwide"]:checked) .apdp-delivery-estimate{display:flex}
   @media(max-width:480px){#AltaeronPdp-{{ section.id }} .apdp-delivery-option{gap:8px;grid-template-columns:18px 22px minmax(0,1fr);padding:8px 9px}#AltaeronPdp-{{ section.id }} .apdp-delivery-option__icon{height:21px;width:21px}#AltaeronPdp-{{ section.id }} .apdp-delivery-option__badge{font-size:10px;padding:4px 7px}#AltaeronPdp-{{ section.id }} .apdp-delivery-option__copy strong{font-size:14px}}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options{border:0;margin:11px 0 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options summary{color:var(--altaeron-body,#344054);cursor:pointer;font-size:12px;list-style:none;text-decoration:underline;text-underline-offset:3px}
