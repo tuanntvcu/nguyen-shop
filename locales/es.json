@@ -1605,6 +1605,14 @@
       "item_3": "Complementa los ejercicios del pie para un mejor cuidado conservador",
       "item_4": "Favorece los músculos y las estructuras implicados en la alineación del dedo gordo"
     },
+    "delivery_options": {
+      "title": "Opciones de entrega",
+      "ship_title": "Env?o a todo el mundo",
+      "ship_description": "Env?o gratis con seguimiento",
+      "recommended": "Recomendado",
+      "pickup_title": "Recogida en tienda",
+      "pickup_address": "550 N Detroit St, Warsaw, IN 46582, EE. UU."
+    },
     "hero": {
       "product_name": "Altaeron™ Corrector Ajustable para Juanetes",
       "headline": "Endereza tu dedo gordo. Reduce la prominencia del juanete.",

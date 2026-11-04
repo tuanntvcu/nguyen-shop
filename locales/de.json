@@ -1605,6 +1605,14 @@
       "item_3": "Ergänzt Fußübungen für eine bessere konservative Versorgung",
       "item_4": "Unterstützt die an der Ausrichtung des großen Zehs beteiligten Muskeln und Strukturen"
     },
+    "delivery_options": {
+      "title": "Lieferoptionen",
+      "ship_title": "Weltweiter Versand",
+      "ship_description": "Kostenloser Versand mit Sendungsverfolgung",
+      "recommended": "Empfohlen",
+      "pickup_title": "Abholung im Gesch?ft",
+      "pickup_address": "550 N Detroit St, Warsaw, IN 46582, USA"
+    },
     "hero": {
       "product_name": "Altaeron™ Verstellbarer Ballenzehkorrektor",
       "headline": "Begradigen Sie Ihren großen Zeh. Verkleinern Sie den Ballenzeh optisch.",

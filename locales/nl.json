@@ -636,5 +636,15 @@
       "send_on": "JJJJ-MM-DD",
       "send_on_label": "Doorsturen (optioneel)"
     }
+  },
+  "altaeron_pdp_reels_v3": {
+    "delivery_options": {
+      "title": "Bezorgopties",
+      "ship_title": "Wereldwijde verzending",
+      "ship_description": "Gratis verzending met tracking",
+      "recommended": "Aanbevolen",
+      "pickup_title": "Ophalen in de winkel",
+      "pickup_address": "550 N Detroit St, Warsaw, IN 46582, VS"
+    }
   }
 }

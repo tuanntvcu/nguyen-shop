@@ -669,5 +669,15 @@
       "result_1_html": "<p>người dùng cho biết cơn đau giảm từ lần sử dụng thứ hai</p>",
       "result_2_html": "<p>người dùng cho biết cơn đau hết sau 14 ngày sử dụng đều đặn (30 phút/ngày)</p>",
       "result_3_html": "<p>người dùng nhận thấy vị trí ngón chân cải thiện rõ sau 30 ngày sử dụng đều đặn (30 phút/ngày)</p>"
+    },
+  "altaeron_pdp_reels_v3": {
+    "delivery_options": {
+      "title": "T?y ch?n giao h?ng",
+      "ship_title": "Giao h?ng to?n c?u",
+      "ship_description": "Mi?n ph? v?n chuy?n c? theo d?i",
+      "recommended": "???c ?? xu?t",
+      "pickup_title": "Nh?n t?i c?a h?ng",
+      "pickup_address": "550 N Detroit St, Warsaw, IN 46582, Hoa K?"
     }
+  }
 }

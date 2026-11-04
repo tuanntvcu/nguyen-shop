@@ -657,5 +657,15 @@
       "result_1_html": "<p>degli utenti ha riferito meno dolore dalla seconda sessione</p>",
       "result_2_html": "<p>degli utenti ha eliminato il dolore dopo 14 giorni di uso costante (30 min al giorno)</p>",
       "result_3_html": "<p>degli utenti ha notato miglioramenti visibili dopo 30 giorni di uso costante (30 min al giorno)</p>"
+    },
+  "altaeron_pdp_reels_v3": {
+    "delivery_options": {
+      "title": "Opzioni di consegna",
+      "ship_title": "Spedizione in tutto il mondo",
+      "ship_description": "Spedizione gratuita e tracciata",
+      "recommended": "Consigliato",
+      "pickup_title": "Ritiro in negozio",
+      "pickup_address": "550 N Detroit St, Warsaw, IN 46582, USA"
     }
+  }
 }

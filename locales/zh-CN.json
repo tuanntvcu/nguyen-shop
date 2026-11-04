@@ -657,5 +657,15 @@
       "result_1_html": "<p>的用户从第二次使用起就感到疼痛减轻</p>",
       "result_2_html": "<p>的用户表示，坚持使用14天后（每天30分钟），疼痛消失</p>",
       "result_3_html": "<p>的用户表示，坚持使用30天后（每天30分钟），脚趾排列明显改善</p>"
+    },
+  "altaeron_pdp_reels_v3": {
+    "delivery_options": {
+      "title": "????",
+      "ship_title": "????",
+      "ship_description": "?????????",
+      "recommended": "??",
+      "pickup_title": "????",
+      "pickup_address": "550 N Detroit St, Warsaw, IN 46582, USA"
     }
+  }
 }

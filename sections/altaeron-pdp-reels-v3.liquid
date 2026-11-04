@@ -94,6 +94,23 @@
   #AltaeronPdp-{{ section.id }} .apdp-delivery-estimate strong{font-weight:650}
   #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance{display:none}
   #AltaeronPdp-{{ section.id }} .apdp-cta-reassurance svg{color:var(--altaeron-primary,#006B5E);flex:0 0 14px;height:14px;width:14px}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-options{border:0;margin:14px 0 0;padding:0}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-options__heading{align-items:center;color:var(--altaeron-navy,#102A43);display:flex;font-size:15px;font-weight:750;gap:9px;letter-spacing:-.015em;line-height:1.3;margin:0 0 10px;padding:0}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-options__heading svg{color:var(--altaeron-primary,#006B5E);flex:0 0 22px;height:22px;width:22px}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option{align-items:center;background:#fff;border:1px solid var(--altaeron-border,#E4E7EC);border-radius:10px;color:var(--altaeron-navy,#102A43);cursor:pointer;display:grid;gap:12px;grid-template-columns:18px 32px minmax(0,1fr) auto;margin-top:8px;min-height:74px;padding:12px 14px;transition:border-color .18s ease,background-color .18s ease,box-shadow .18s ease}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option:has(input:checked){background:var(--altaeron-soft-teal,#EAF5F2);border:2px solid var(--altaeron-primary,#006B5E);box-shadow:0 0 0 1px rgba(0,107,94,.04)}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio{appearance:none;border:2px solid #b8c0c5;border-radius:50%;height:17px;margin:0;position:relative;width:17px}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio:checked{border-color:var(--altaeron-primary,#006B5E)}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__radio:checked:after{background:var(--altaeron-primary,#006B5E);border-radius:50%;content:'';inset:4px;position:absolute}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__icon{color:var(--altaeron-primary,#006B5E);height:30px;width:30px}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option--pickup .apdp-delivery-option__icon{color:var(--altaeron-body,#344054)}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__copy{display:grid;gap:3px;min-width:0}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__copy strong{font-size:14px;font-weight:750;line-height:1.3}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__copy small{color:var(--altaeron-body,#344054);font-size:12px;line-height:1.4}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__badge{align-items:center;background:rgba(0,107,94,.12);border-radius:999px;color:var(--altaeron-primary,#006B5E);display:flex;font-size:11px;font-weight:700;gap:5px;line-height:1.2;padding:8px 10px;white-space:nowrap}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option__badge svg{height:14px;width:14px}
+  #AltaeronPdp-{{ section.id }} .apdp-delivery-option:focus-within{outline:2px solid var(--altaeron-primary,#006B5E);outline-offset:2px}
+  @media(max-width:480px){#AltaeronPdp-{{ section.id }} .apdp-delivery-option{gap:9px;grid-template-columns:17px 26px minmax(0,1fr);padding:11px 10px}#AltaeronPdp-{{ section.id }} .apdp-delivery-option__icon{height:26px;width:26px}#AltaeronPdp-{{ section.id }} .apdp-delivery-option__badge{font-size:10px;grid-column:3;margin-top:2px;padding:6px 9px;width:max-content}#AltaeronPdp-{{ section.id }} .apdp-delivery-option__copy strong{font-size:13px}}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options{border:0;margin:11px 0 0;text-align:center}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options summary{color:var(--altaeron-body,#344054);cursor:pointer;font-size:10px;list-style:none;text-decoration:underline;text-underline-offset:3px}
   #AltaeronPdp-{{ section.id }} .apdp-payment-options summary::-webkit-details-marker{display:none}
@@ -364,6 +381,20 @@
           <bundle-deals-widget id="AltaeronBundles-{{ section.id }}" tabindex="-1" product-id="{{ product.id }}"></bundle-deals-widget>
           <p class="apdp-new-customer-offer">{{ 'altaeron_pdp_reels_v3.hero.purchase_clarification' | t }}</p>
           <button type="submit" name="add" class="apdp-button apdp-button--primary product-form__submit" data-apdp-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-submit-text><span data-apdp-submit-label data-available-text="{{ reel_cta_label }}">{% if current_variant.available %}{{ reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><span data-apdp-cta-price{% unless current_variant.available %} hidden{% endunless %}>{% if current_variant.available %} — {{ current_variant.price | money }}{% endif %}</span></span><span class="loading__spinner hidden">{% render 'loading-spinner' %}</span></button>
+          <fieldset class="apdp-delivery-options" aria-label="{{ 'altaeron_pdp_reels_v3.delivery_options.title' | t | escape }}">
+            <legend class="apdp-delivery-options__heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-5 9 5v10l-9 5-9-5z"/><path d="m3 7 9 5 9-5M12 22V12M7.5 4.5l9 5"/></svg>{{ 'altaeron_pdp_reels_v3.delivery_options.title' | t }}</legend>
+            <label class="apdp-delivery-option">
+              <input class="apdp-delivery-option__radio" type="radio" name="delivery-option-{{ section.id }}" value="ship-worldwide" checked>
+              <svg class="apdp-delivery-option__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M3 16h26M16 3c4 4 6 8 6 13s-2 9-6 13c-4-4-6-8-6-13s2-9 6-13Z"/></svg>
+              <span class="apdp-delivery-option__copy"><strong>{{ 'altaeron_pdp_reels_v3.delivery_options.ship_title' | t }}</strong><small>{{ 'altaeron_pdp_reels_v3.delivery_options.ship_description' | t }}</small></span>
+              <span class="apdp-delivery-option__badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg>{{ 'altaeron_pdp_reels_v3.delivery_options.recommended' | t }}</span>
+            </label>
+            <label class="apdp-delivery-option apdp-delivery-option--pickup">
+              <input class="apdp-delivery-option__radio" type="radio" name="delivery-option-{{ section.id }}" value="store-pickup">
+              <svg class="apdp-delivery-option__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13 6 5h20l2 8M5 13v14h22V13M3 13a4 4 0 0 0 8 0 4 4 0 0 0 8 0 4 4 0 0 0 8 0M12 27v-8h8v8"/></svg>
+              <span class="apdp-delivery-option__copy"><strong>{{ 'altaeron_pdp_reels_v3.delivery_options.pickup_title' | t }}</strong><small><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" style="height:14px;vertical-align:-2px;width:14px"><path d="M13 6.7c0 3.5-5 8-5 8S3 10.2 3 6.7a5 5 0 1 1 10 0Z"/><circle cx="8" cy="6.5" r="1.6"/></svg> {{ 'altaeron_pdp_reels_v3.delivery_options.pickup_address' | t }}</small></span>
+            </label>
+          </fieldset>
           <p class="apdp-delivery-estimate" data-apdp-delivery-estimate data-locale="{{ request.locale.iso_code | escape }}">{% render 'altaeron-pdp-icon', icon: 'truck' %}<span>{{ 'altaeron_pdp_reels_v3.hero.estimated_delivery' | t }}: <strong data-apdp-delivery-range></strong></span></p>
           <p class="apdp-cta-reassurance">{% render 'altaeron-pdp-icon', icon: 'lock' %}<span>{{ 'altaeron_pdp_reels_v3.hero.trust_row' | t }}</span></p>
           <div class="apdp-payment-terms" data-apdp-installments>{{ 'altaeron_pdp_reels_v2.buy.installments' | t: amount: installment_amount }} <strong>shop<span>Pay</span></strong></div>
