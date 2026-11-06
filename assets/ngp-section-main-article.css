@@ -90,6 +90,23 @@
 .ngp-article__wrapper {
   padding: 3.2rem 1.5rem 0;
 }
+.ngp-article__content {
+  margin-inline: auto;
+  max-width: 880px;
+  width: 100%;
+}
+.ngp-article__content :where(img, video, iframe, figure) {
+  max-width: 100%;
+}
+.ngp-article__content img {
+  display: block;
+  height: auto;
+  margin-inline: auto;
+}
+.ngp-article__main-info > .ngp-hero {
+  margin-inline: auto;
+  max-width: 1280px;
+}
 .ngp-article__wrapper > * + * {
   margin-top: 4rem;
 }

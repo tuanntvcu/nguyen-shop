@@ -115,7 +115,7 @@
             {% endif %}
           {% endif %}
         >
-          <div class="ngp-featured-collection__items ngp-products-list ngp-f-grid ngp-f-grid-{{ ngp_columns_mobile }}-cols ngp-md:ngp-f-grid-{{ ngp_columns_tablet }}-cols ngp-lg:ngp-f-grid-{{ ngp_columns_desktop }}-cols ngp-f-grid--gap-{{ section.settings.column_gap }} ngp-f-grid--row-gap-{{ section.settings.row_gap }}{% if ngp_enable_slider %} swiper-wrapper{% endif %}{% if ngp_enable_swipe_mobile %} ngp-swipe-mobile__inner{% endif %}">
+          <div class="ngp-featured-collection__items ngp-products-list ngp-f-grid ngp-f-grid-{{ ngp_columns_mobile }}-cols ngp-md:f-grid-{{ ngp_columns_tablet }}-cols ngp-lg:f-grid-{{ ngp_columns_desktop }}-cols ngp-f-grid--gap-{{ section.settings.column_gap }} ngp-f-grid--row-gap-{{ section.settings.row_gap }}{% if ngp_enable_slider %} swiper-wrapper{% endif %}{% if ngp_enable_swipe_mobile %} ngp-swipe-mobile__inner{% endif %}">
             {%- for ngp_product in ngp_collection.products limit: ngp_products_to_display -%}
               <div class="{{ ngp_item_css_class }}">
                 {%- if ngp_is_metro -%}

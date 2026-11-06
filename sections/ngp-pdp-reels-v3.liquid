@@ -140,7 +140,7 @@
     #AltaeronPdp-{{ section.id }} .ngp-apdp-hero__grid{gap:24px;margin-inline:auto;width:min(1320px,calc(100% - 48px))}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery{align-self:start;display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;min-width:0}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__stage,
-    #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__viewer{aspect-ratio:9/16;background:#eef2ef;border-radius:16px;grid-column:1;grid-row:1;height:auto;justify-self:center;max-height:720px;width:min(100%,405px)}
+    #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__viewer{aspect-ratio:1/1;background:#eef2ef;border-radius:16px;grid-column:1;grid-row:1;height:auto;justify-self:center;max-height:720px;width:min(100%,405px)}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__stage{opacity:1;transition:opacity .2s ease,visibility .2s ease;visibility:visible}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__viewer{opacity:0;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;visibility:hidden;z-index:3}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery.is-viewer-active .ngp-apdp-gallery__stage{opacity:0;pointer-events:none;visibility:hidden}
@@ -155,13 +155,13 @@
   @media(min-width:1100px){
     #AltaeronPdp-{{ section.id }} .ngp-apdp-hero__grid{align-items:start;gap:clamp(22px,2.2vw,34px);grid-template-columns:minmax(330px,32fr) minmax(260px,27fr) minmax(360px,41fr);min-height:0;row-gap:0;width:min(1320px,calc(100% - 64px))}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery{align-self:start;display:grid;gap:12px;grid-column:1;grid-row:1;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;min-width:0}
-    #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__stage{aspect-ratio:9/16;grid-column:1;grid-row:1;height:auto;max-height:900px;opacity:1;transition:opacity .2s ease,visibility .2s ease;visibility:visible}
+    #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__stage{aspect-ratio:1/1;grid-column:1;grid-row:1;height:auto;max-height:900px;opacity:1;transition:opacity .2s ease,visibility .2s ease;visibility:visible}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__stage:before{background:var(--ngp-apdp-hero-poster) center/cover no-repeat;content:"";filter:blur(18px);inset:-26px;opacity:.44;position:absolute;transform:scale(1.08)}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__stage:after{background:rgba(4,27,20,.12);content:"";inset:0;pointer-events:none;position:absolute}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__hero>video{background:transparent;object-fit:contain;position:relative;z-index:1}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-narrative{align-self:start;grid-column:2;grid-row:1}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-buy{grid-column:3;grid-row:1;min-height:0}
-    #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__viewer{aspect-ratio:9/16;grid-column:1;grid-row:1;height:auto;max-height:900px;opacity:0;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;visibility:hidden}
+    #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery__viewer{aspect-ratio:1/1;grid-column:1;grid-row:1;height:auto;max-height:900px;opacity:0;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;visibility:hidden}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery.is-viewer-active .ngp-apdp-gallery__stage{opacity:0;pointer-events:none;visibility:hidden}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery.is-viewer-active .ngp-apdp-gallery__viewer{opacity:1;pointer-events:auto;visibility:visible}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-gallery.is-viewer-active .ngp-apdp-gallery__return{display:flex}

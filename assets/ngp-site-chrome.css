@@ -10,6 +10,7 @@
 .ngp-site-header-wrapper .header__menu-item { color: #102a43; font-size: 12px; letter-spacing: 0.02em; text-transform: uppercase; }
 .ngp-site-header-wrapper .header__icons { gap: 2px; }
 @media (min-width: 990px) {
+  .ngp-site-header-wrapper .desktop-localization-wrapper { display: none !important; }
   .ngp-site-header-wrapper .header.header--middle-left {
     grid-template-areas: "heading navigation icons";
     grid-template-columns: minmax(0, 1fr) fit-content(70%) minmax(0, 1fr);
@@ -158,5 +159,6 @@ body.ngp-mobile-menu-open { overflow: hidden; }
 }
 
 @media (min-width: 990px) {
+  .ngp-site-header-wrapper .ngp-mobile-menu-trigger { display: none !important; }
   .ngp-mobile-menu { display: none !important; }
 }
