@@ -1,0 +1,78 @@
+{%- liquid
+  assign ngp_swatch_trigger = settings.color_swatch_trigger | downcase
+  assign ngp_swatch_file_extension = 'png'
+  assign ngp_swatch_count = 0
+-%}
+{%- for ngp_option in product.options_with_values -%}
+  {%- liquid
+    assign ngp_option_name = ngp_option.name | downcase
+    assign ngp_is_color = false
+
+    if ngp_swatch_trigger contains ngp_option_name
+      assign ngp_is_color = true
+    elsif ngp_swatch_trigger contains 'color' and ngp_option_name contains 'colour'
+      assign ngp_is_color = true
+    endif
+
+    # Skip if it's not a color ngp_option
+    unless ngp_is_color
+      continue
+    endunless
+
+    assign ngp_option_index = forloop.index0
+    assign ngp_value = ''
+    assign ngp_max_swatch_count = settings.pcard_maximum_swatches_to_show
+  -%}
+  <div class="ngp-product-card__swatches ngp-flex ngp-flex-wrap ngp-items-center ngp-gap-2">
+    <ul class="ngp-swatches ngp-swatches--product-card ngp-flex ngp-flex-wrap ngp-items-center{% if settings.pcard_swatches_type == 'variant_image' %} ngp-swatches--variant-image{% endif %}">
+      {%- for ngp_variant in product.variants -%}
+        {%- liquid
+          assign ngp_value = ngp_variant.options[ngp_option_index]
+        -%}
+        {%- unless ngp_values contains ngp_value -%}
+          {%- liquid
+            assign ngp_values = ngp_values | join: ',' | append: ',' | append: ngp_value | split: ','
+            assign ngp_swatch_count = ngp_swatch_count | plus: 1
+            assign ngp_swatch_title = product.title | append: ' - ' | append: ngp_value
+            assign ngp_swatch_url = ngp_variant.url
+
+            assign ngp_swatch = blank
+            if ngp_value.swatch != blank
+              assign ngp_swatch = ngp_value.swatch
+            endif
+
+            if settings.pcard_swatches_type == 'variant_image' and ngp_variant.image
+              assign ngp_swatch = ngp_variant
+            endif
+
+            assign ngp_swatches = ngp_swatch
+            if settings.pcard_swatches_type == 'color_swatch'
+              assign ngp_swatches = ''
+            endif
+          -%}
+          {%- if ngp_swatch_count <= ngp_max_swatch_count -%}
+            <li data-tooltip>
+              {%- render 'ngp-swatch',
+                href: ngp_swatch_url,
+                title: ngp_swatch_title,
+                ngp_value: ngp_value,
+                file_extension: ngp_swatch_file_extension,
+                ngp_swatch: ngp_swatches,
+                tooltip: ngp_value
+              -%}
+            </li>
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    </ul>
+    {%- if ngp_swatch_count > ngp_max_swatch_count -%}
+      <a
+        href="{{ product.url }}"
+        class="ngp-reversed-link"
+        aria-controls="{{ quick_view_modal_id }}"
+        aria-expanded="false"
+        >+{{ ngp_swatch_count | minus: ngp_max_swatch_count -}}
+      </a>
+    {%- endif -%}
+  </div>
+{%- endfor -%}

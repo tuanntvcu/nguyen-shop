@@ -1,0 +1,441 @@
+<script src="{{ 'ngp-altaeron-home.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign ngp_popular_collection = section.settings.popular_collection
+  assign ngp_hero_product = section.settings.hero_product
+  if ngp_hero_product == blank and ngp_popular_collection != blank
+    assign ngp_hero_product = ngp_popular_collection.products.first
+  endif
+  assign ngp_hero_desktop_image = section.settings.hero_image
+  if ngp_hero_desktop_image == blank and ngp_hero_product != blank
+    assign ngp_hero_desktop_image = ngp_hero_product.metafields.custom.homepage_card_image.value | default: ngp_hero_product.featured_image
+  endif
+  assign ngp_hero_mobile_image = section.settings.hero_mobile_image | default: ngp_hero_desktop_image
+  assign ngp_demo_video = shop.metafields.custom.homepage_demo_video.value
+  assign ngp_hero_heading = section.settings.hero_heading
+  assign ngp_hero_text = section.settings.hero_text
+  assign ngp_hero_image_alt = section.settings.hero_image_alt
+  assign ngp_primary_label = section.settings.primary_label
+  assign ngp_secondary_label = section.settings.secondary_label
+  assign ngp_concern_section_heading = section.settings.concern_heading
+  assign ngp_explore_label = section.settings.explore_label
+  assign ngp_popular_heading = section.settings.popular_heading
+  assign ngp_view_all_label = section.settings.view_all_label
+  assign ngp_quiz_heading = section.settings.quiz_heading
+  assign ngp_quiz_text = section.settings.quiz_text
+  assign ngp_quiz_question_one = section.settings.quiz_question_one
+  assign ngp_quiz_question_two = section.settings.quiz_question_two
+  assign ngp_quiz_question_three = section.settings.quiz_question_three
+  assign ngp_quiz_result_prefix = section.settings.quiz_result_prefix
+  assign ngp_quiz_result_label = section.settings.quiz_result_label
+  assign ngp_demo_heading = section.settings.demo_heading
+  assign ngp_demo_text = section.settings.demo_text
+  assign ngp_values_heading = section.settings.values_heading
+  assign ngp_reviews_heading = section.settings.reviews_heading
+  assign ngp_guides_heading = section.settings.guides_heading
+  assign ngp_faq_heading = section.settings.faq_heading
+  assign ngp_newsletter_heading = section.settings.newsletter_heading
+  assign ngp_newsletter_text = section.settings.newsletter_text
+  assign ngp_newsletter_placeholder = section.settings.newsletter_placeholder
+  assign ngp_newsletter_button = section.settings.newsletter_button
+  assign ngp_newsletter_privacy = section.settings.newsletter_privacy
+  unless request.locale.iso_code == 'en'
+    assign ngp_hero_heading = 'altaeron_home.content.hero_heading' | t
+    assign ngp_hero_text = 'altaeron_home.content.hero_text_html' | t
+    assign ngp_hero_image_alt = 'altaeron_home.content.hero_image_alt' | t
+    assign ngp_primary_label = 'altaeron_home.content.primary_label' | t
+    assign ngp_secondary_label = 'altaeron_home.content.secondary_label' | t
+    assign ngp_concern_section_heading = 'altaeron_home.content.concern_heading' | t
+    assign ngp_explore_label = 'altaeron_home.content.explore_label' | t
+    assign ngp_popular_heading = 'altaeron_home.content.popular_heading' | t
+    assign ngp_view_all_label = 'altaeron_home.content.view_all_label' | t
+    assign ngp_quiz_heading = 'altaeron_home.content.quiz_heading' | t
+    assign ngp_quiz_text = 'altaeron_home.content.quiz_text' | t
+    assign ngp_quiz_question_one = 'altaeron_home.content.quiz_question_one' | t
+    assign ngp_quiz_question_two = 'altaeron_home.content.quiz_question_two' | t
+    assign ngp_quiz_question_three = 'altaeron_home.content.quiz_question_three' | t
+    assign ngp_quiz_result_prefix = 'altaeron_home.content.quiz_result_prefix' | t
+    assign ngp_quiz_result_label = 'altaeron_home.content.quiz_result_label' | t
+    assign ngp_demo_heading = 'altaeron_home.content.demo_heading' | t
+    assign ngp_demo_text = 'altaeron_home.content.demo_text' | t
+    assign ngp_values_heading = 'altaeron_home.content.values_heading' | t
+    assign ngp_reviews_heading = 'altaeron_home.content.reviews_heading' | t
+    assign ngp_guides_heading = 'altaeron_home.content.guides_heading' | t
+    assign ngp_faq_heading = 'altaeron_home.content.faq_heading' | t
+    assign ngp_newsletter_heading = 'altaeron_home.content.newsletter_heading' | t
+    assign ngp_newsletter_text = 'altaeron_home.content.newsletter_text' | t
+    assign ngp_newsletter_placeholder = 'altaeron_home.content.newsletter_placeholder' | t
+    assign ngp_newsletter_button = 'altaeron_home.content.newsletter_button' | t
+    assign ngp_newsletter_privacy = 'altaeron_home.content.newsletter_privacy' | t
+  endunless
+-%}
+
+<ngp-altaeron-home class="ngp-home" data-section-id="{{ section.id }}" data-slide-label="{{ 'altaeron_home.accessibility.go_to_slide' | t | escape }}" data-demo-title="{{ 'altaeron_home.accessibility.product_demonstration' | t | escape }}">
+  <section class="ngp-ah-hero" aria-labelledby="HeroHeading-{{ section.id }}" style="--ngp-ah-hero-desktop-x:{{ section.settings.hero_desktop_x }}%;--ngp-ah-hero-desktop-y:{{ section.settings.hero_desktop_y }}%;--ngp-ah-hero-mobile-x:{{ section.settings.hero_mobile_x }}%;--ngp-ah-hero-mobile-y:{{ section.settings.hero_mobile_y }}%;--ngp-ah-hero-overlay:{{ section.settings.hero_mobile_overlay }}">
+    <div class="ngp-ah-shell ngp-ah-hero__grid">
+      <div class="ngp-ah-hero__copy">
+        <h1 id="HeroHeading-{{ section.id }}">{{ ngp_hero_heading | escape | newline_to_br }}</h1>
+        <div class="ngp-ah-hero__text rte">{{ ngp_hero_text }}</div>
+        <div class="ngp-ah-actions">
+          <a class="ngp-ah-button" href="#AltaeronConcerns" data-track="hero_primary_cta_click">{{ ngp_primary_label }}</a>
+          <a class="ngp-ah-button ngp-ah-button--secondary" href="#AltaeronQuiz-{{ section.id }}" data-track="hero_secondary_cta_click">{{ ngp_secondary_label }}</a>
+        </div>
+      </div>
+      <div class="ngp-ah-hero__media ngp-ah-media">
+        {%- if ngp_hero_desktop_image != blank -%}
+          <picture>
+            {%- if ngp_hero_mobile_image != blank -%}<source media="(max-width: 749px)" srcset="{{ ngp_hero_mobile_image | image_url: width: 480 }} 480w, {{ ngp_hero_mobile_image | image_url: width: 750 }} 750w" sizes="100vw">{%- endif -%}
+            {{ ngp_hero_desktop_image | image_url: width: 1800 | image_tag: widths: '480, 720, 960, 1200, 1440, 1800', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: ngp_hero_image_alt }}
+          </picture>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="ngp-ah-trust" aria-label="{{ 'altaeron_home.accessibility.store_benefits' | t | escape }}">
+    <div class="ngp-ah-shell ngp-ah-trust__grid">
+      {%- assign ngp_trust_index = 0 -%}
+      {%- for block in section.blocks -%}{%- if block.type == 'trust' and block.settings.text != blank -%}
+        {%- liquid
+          assign ngp_trust_index = ngp_trust_index | plus: 1
+          assign ngp_trust_text = block.settings.text
+          unless request.locale.iso_code == 'en'
+            assign ngp_trust_key = 'altaeron_home.content.trust_' | append: ngp_trust_index
+            assign ngp_trust_text = ngp_trust_key | t
+          endunless
+        -%}
+        <div class="ngp-ah-trust__item" {{ block.shopify_attributes }}>
+          <span class="ngp-ah-icon" aria-hidden="true">{% render 'ngp-icon', ngp_icon_type: block.settings.icon %}</span>
+          <span>{{ ngp_trust_text }}</span>
+        </div>
+      {%- endif -%}{%- endfor -%}
+    </div>
+  </section>
+
+  {%- if ngp_popular_collection != blank and ngp_popular_collection.products_count > 0 -%}
+    <section class="ngp-ah-section ngp-ah-popular" aria-labelledby="PopularHeading-{{ section.id }}">
+      <div class="ngp-ah-shell">
+        <div class="ngp-ah-section-head"><h2 id="PopularHeading-{{ section.id }}">{{ ngp_popular_heading }}</h2><a href="{{ ngp_popular_collection.url }}"><span>{{ ngp_view_all_label }}</span><span aria-hidden="true">→</span></a></div>
+        <div class="ngp-ah-carousel-wrap"><button class="ngp-ah-slider-arrow ngp-ah-slider-arrow--prev" type="button" data-slider-prev aria-label="{{ 'altaeron_home.accessibility.previous_products' | t | escape }}">{% render 'ngp-icon-slider-prev' %}</button><div class="ngp-ah-products ngp-ah-slider" data-slider tabindex="0" aria-label="{{ ngp_popular_heading | escape }}">
+          {%- for product in ngp_popular_collection.products limit: 8 -%}{% render 'ngp-home-product', product: product %}{%- endfor -%}
+        </div><button class="ngp-ah-slider-arrow ngp-ah-slider-arrow--next" type="button" data-slider-next aria-label="{{ 'altaeron_home.accessibility.next_products' | t | escape }}">{% render 'ngp-icon-slider-next' %}</button></div>
+        <div class="ngp-ah-dots" data-slider-dots aria-label="{{ 'altaeron_home.accessibility.product_carousel_pagination' | t | escape }}"></div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <section id="AltaeronConcerns" class="ngp-ah-section ngp-ah-concerns" aria-labelledby="ConcernHeading-{{ section.id }}">
+    <div class="ngp-ah-shell">
+      <h2 id="ConcernHeading-{{ section.id }}">{{ ngp_concern_section_heading }}</h2>
+      <div class="ngp-ah-concern-grid">
+        {%- assign ngp_concern_index = 0 -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'concern' -%}
+          {%- liquid
+            assign ngp_concern_index = ngp_concern_index | plus: 1
+            assign ngp_concern_collection = block.settings.collection
+            assign ngp_concern_product = ngp_concern_collection.products.first
+            assign ngp_concern_image = block.settings.image | default: ngp_concern_product.metafields.custom.homepage_card_image.value | default: ngp_concern_collection.image | default: ngp_concern_product.featured_image
+            assign ngp_concern_title = block.settings.heading | default: ngp_concern_collection.title
+            assign ngp_concern_text = block.settings.text | default: ngp_concern_collection.description | strip_html | truncatewords: 12
+            unless request.locale.iso_code == 'en'
+              assign ngp_concern_title_key = 'altaeron_home.content.concern_' | append: ngp_concern_index | append: '_title'
+              assign ngp_concern_text_key = 'altaeron_home.content.concern_' | append: ngp_concern_index | append: '_text'
+              assign ngp_concern_title = ngp_concern_title_key | t
+              assign ngp_concern_text = ngp_concern_text_key | t
+            endunless
+          -%}
+          {%- if ngp_concern_collection != blank -%}
+            <a class="ngp-ah-concern" href="{{ ngp_concern_collection.url }}" data-track="concern_card_click" data-concern-title="{{ ngp_concern_title | escape }}" {{ block.shopify_attributes }}>
+              <div class="ngp-ah-concern__media ngp-ah-media">{% if ngp_concern_image %}{{ ngp_concern_image | image_url: width: 620 | image_tag: loading: 'lazy', widths: '220, 360, 480, 620', sizes: '(min-width: 990px) 25vw, 48vw', alt: ngp_concern_title }}{% endif %}</div>
+              <div class="ngp-ah-concern__body">
+                <h3>{{ ngp_concern_title }}</h3>
+                {%- if ngp_concern_text != blank -%}<p>{{ ngp_concern_text }}</p>{%- endif -%}
+                <span>{{ ngp_explore_label }} →</span>
+              </div>
+            </a>
+          {%- endif -%}
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section id="AltaeronQuiz-{{ section.id }}" class="ngp-ah-section ngp-ah-quiz-section" aria-labelledby="QuizHeading-{{ section.id }}">
+    <div class="ngp-ah-shell ngp-ah-quiz">
+      <div class="ngp-ah-quiz__intro"><h2 id="QuizHeading-{{ section.id }}">{{ ngp_quiz_heading }}</h2><p>{{ ngp_quiz_text }}</p></div>
+      <div class="ngp-ah-quiz__main" data-quiz>
+        <div class="ngp-ah-progress" aria-label="{{ 'altaeron_home.accessibility.question_progress' | t | escape }}"><span class="ngp-is-active">1</span><i></i><span>2</span><i></i><span>3</span></div>
+        <fieldset class="ngp-ah-quiz__step ngp-is-active" data-quiz-step="1"><legend>{{ ngp_quiz_question_one }}</legend><div class="ngp-ah-quiz__answer-row"><div class="ngp-ah-quiz__choices">
+          {%- assign ngp_concern_index = 0 -%}
+          {%- for block in section.blocks -%}{%- if block.type == 'concern' and block.settings.collection != blank -%}
+            {%- liquid
+              assign ngp_concern_index = ngp_concern_index | plus: 1
+              assign ngp_quiz_choice_title = block.settings.heading | default: block.settings.collection.title
+              assign ngp_quiz_choice_label = block.settings.quiz_label | default: ngp_quiz_choice_title
+              unless request.locale.iso_code == 'en'
+                assign ngp_concern_title_key = 'altaeron_home.content.concern_' | append: ngp_concern_index | append: '_title'
+                assign ngp_concern_label_key = 'altaeron_home.content.concern_' | append: ngp_concern_index | append: '_quiz_label'
+                assign ngp_quiz_choice_title = ngp_concern_title_key | t
+                assign ngp_quiz_choice_label = ngp_concern_label_key | t
+              endunless
+            -%}
+            <button type="button" data-quiz-choice data-title="{{ ngp_quiz_choice_title | escape }}" data-url="{{ block.settings.collection.url }}"><span class="ngp-ah-quiz__choice-icon" aria-hidden="true">{% render 'ngp-icon', ngp_icon_type: block.settings.quiz_icon %}</span><span>{{ ngp_quiz_choice_label }}</span></button>
+          {%- endif -%}{%- endfor -%}
+        </div><div class="ngp-ah-quiz__nav"><button class="ngp-ah-button ngp-ah-quiz__next" type="button" data-quiz-next disabled>{{ 'altaeron_home.quiz.next' | t }} →</button></div></div></fieldset>
+        <fieldset class="ngp-ah-quiz__step" data-quiz-step="2"><legend>{{ ngp_quiz_question_two }}</legend><div class="ngp-ah-quiz__answer-row"><div class="ngp-ah-quiz__choices ngp-ah-quiz__choices--three"><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.daytime' | t }}</span></button><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.nighttime' | t }}</span></button><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.both' | t }}</span></button></div><div class="ngp-ah-quiz__nav"><button class="ngp-ah-quiz__back" type="button" data-quiz-back>← {{ 'altaeron_home.quiz.back' | t }}</button><button class="ngp-ah-button ngp-ah-quiz__next" type="button" data-quiz-next disabled>{{ 'altaeron_home.quiz.next' | t }} →</button></div></div></fieldset>
+        <fieldset class="ngp-ah-quiz__step" data-quiz-step="3"><legend>{{ ngp_quiz_question_three }}</legend><div class="ngp-ah-quiz__answer-row"><div class="ngp-ah-quiz__choices ngp-ah-quiz__choices--three"><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.gentle' | t }}</span></button><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.adjustable' | t }}</span></button><button type="button" data-quiz-choice><span>{{ 'altaeron_home.quiz.firm' | t }}</span></button></div><div class="ngp-ah-quiz__nav"><button class="ngp-ah-quiz__back" type="button" data-quiz-back>← {{ 'altaeron_home.quiz.back' | t }}</button><button class="ngp-ah-button ngp-ah-quiz__next" type="button" data-quiz-next disabled>{{ 'altaeron_home.quiz.results' | t }} →</button></div></div></fieldset>
+        <div class="ngp-ah-quiz__result" data-quiz-result hidden><p>{{ ngp_quiz_result_prefix }} <strong data-quiz-result-title></strong></p><a class="ngp-ah-button" href="{{ routes.all_products_collection_url }}" data-quiz-result-link data-track="quiz_result_clicked">{{ ngp_quiz_result_label }} →</a></div>
+        <p class="ngp-ah-quiz__disclaimer">{{ 'altaeron_home.quiz.disclaimer' | t }}</p>
+      </div>
+    </div>
+  </section>
+
+  {%- assign ngp_demo_count = section.blocks | where: 'type', 'demonstration' | size -%}
+  {%- assign ngp_has_demo_video = false -%}
+  <section class="ngp-ah-section ngp-ah-demo" aria-labelledby="DemoHeading-{{ section.id }}">
+      <div class="ngp-ah-shell"><div class="ngp-ah-centered"><h2 id="DemoHeading-{{ section.id }}">{{ ngp_demo_heading }}</h2><p>{{ ngp_demo_text }}</p></div>
+        <div class="ngp-ah-demo__rail ngp-ah-slider" data-slider tabindex="0">
+          {%- assign ngp_demo_index = 0 -%}
+          {%- for block in section.blocks -%}{%- if block.type == 'demonstration' -%}
+            {%- liquid
+              assign ngp_demo_index = ngp_demo_index | plus: 1
+              assign ngp_demo_product = block.settings.product
+              assign ngp_demo_block_video = block.settings.video | default: ngp_demo_video
+              assign ngp_demo_poster = block.settings.poster | default: block.settings.video.preview_image | default: ngp_demo_product.metafields.custom.homepage_card_image.value | default: ngp_demo_product.featured_image | default: ngp_demo_video.preview_image
+              assign ngp_demo_title = block.settings.heading | default: ngp_demo_product.title | default: 'Product demonstration'
+              unless request.locale.iso_code == 'en'
+                assign ngp_demo_title_key = 'altaeron_home.content.demo_' | append: ngp_demo_index | append: '_title'
+                assign ngp_demo_title = ngp_demo_title_key | t
+              endunless
+              assign ngp_demo_accessibility_label = block.settings.accessibility_label | default: ngp_demo_title
+              assign ngp_demo_video_source = blank
+              if ngp_demo_block_video != blank
+                assign ngp_has_demo_video = true
+                for ngp_source in ngp_demo_block_video.sources
+                  if ngp_source.mime_type contains 'mp4'
+                    assign ngp_demo_video_source = ngp_source.url
+                    break
+                  endif
+                endfor
+              endif
+            -%}
+            <article class="ngp-ah-video-card" {{ block.shopify_attributes }}>
+              <div class="ngp-ah-video-card__media ngp-ah-media">{% if ngp_demo_poster %}{{ ngp_demo_poster | image_url: width: 600 | image_tag: loading: 'lazy', widths: '220, 360, 600', sizes: '(min-width: 990px) 20vw, 34vw', alt: ngp_demo_accessibility_label }}{% else %}{{ 'product-1' | placeholder_svg_tag: 'ngp-ah-placeholder-svg' }}{% endif %}{% if ngp_demo_video_source != blank %}<button class="ngp-ah-play" type="button" aria-label="{{ 'altaeron_home.accessibility.play_named' | t: name: ngp_demo_accessibility_label | escape }}" data-video-open data-video-title="{{ ngp_demo_title | escape }}" data-video-src="{{ ngp_demo_video_source | escape }}"{% if ngp_demo_block_video.preview_image %} data-video-poster="{{ ngp_demo_block_video.preview_image | image_url: width: 960 }}"{% endif %} data-track="demonstration_video_play">▶</button>{% elsif block.settings.video_url != blank %}<a class="ngp-ah-play" href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="{{ 'altaeron_home.accessibility.play_named' | t: name: ngp_demo_accessibility_label | escape }}" data-track="demonstration_video_play">▶</a>{% elsif block.settings.link != blank %}<a class="ngp-ah-video-card__link" href="{{ block.settings.link }}" aria-label="{{ ngp_demo_accessibility_label | escape }}"></a>{% else %}<span class="ngp-ah-play ngp-ah-play--mock" aria-hidden="true">▶</span>{% endif %}</div>
+              <h3>{{ ngp_demo_title }}</h3>
+            </article>
+          {%- endif -%}{%- endfor -%}
+          {%- if ngp_demo_count == 0 -%}
+            {%- for ngp_i in (1..5) -%}
+              {%- assign ngp_mock_demo_key = 'altaeron_home.content.demo_' | append: ngp_i | append: '_title' -%}
+              {%- assign ngp_mock_demo_title = ngp_mock_demo_key | t -%}
+              <article class="ngp-ah-video-card ngp-ah-video-card--mock">
+                <div class="ngp-ah-video-card__media ngp-ah-media">{{ 'product-1' | placeholder_svg_tag: 'ngp-ah-placeholder-svg' }}<span class="ngp-ah-play ngp-ah-play--mock" aria-hidden="true">▶</span></div>
+                <h3>{{ ngp_mock_demo_title }}</h3>
+              </article>
+            {%- endfor -%}
+          {%- endif -%}
+        </div><div class="ngp-ah-dots" data-slider-dots></div>
+        {%- if ngp_has_demo_video -%}<dialog class="ngp-ah-video-modal" data-video-modal aria-labelledby="VideoModalTitle-{{ section.id }}"><div class="ngp-ah-video-modal__inner"><button class="ngp-ah-video-modal__close" type="button" data-video-close aria-label="{{ 'altaeron_home.accessibility.close_video' | t | escape }}">×</button><h3 id="VideoModalTitle-{{ section.id }}" data-video-modal-title>{{ ngp_demo_heading }}</h3><video controls preload="none" playsinline><source type="video/mp4"></video></div></dialog>{%- endif -%}
+      </div>
+  </section>
+
+  <section id="altaeron-values" class="ngp-ah-section ngp-ah-values" aria-labelledby="ValuesHeading-{{ section.id }}"><div class="ngp-ah-shell"><h2 id="ValuesHeading-{{ section.id }}">{{ ngp_values_heading }}</h2><div class="ngp-ah-values__grid">
+    {%- assign ngp_value_index = 0 -%}
+    {%- for block in section.blocks -%}{%- if block.type == 'value' -%}
+      {%- liquid
+        assign ngp_value_index = ngp_value_index | plus: 1
+        assign ngp_value_title = block.settings.heading
+        assign ngp_value_text = block.settings.text
+        unless request.locale.iso_code == 'en'
+          assign ngp_value_title_key = 'altaeron_home.content.value_' | append: ngp_value_index | append: '_title'
+          assign ngp_value_text_key = 'altaeron_home.content.value_' | append: ngp_value_index | append: '_text'
+          assign ngp_value_title = ngp_value_title_key | t
+          assign ngp_value_text = ngp_value_text_key | t
+        endunless
+      -%}
+      <article class="ngp-ah-value" {{ block.shopify_attributes }}><span class="ngp-ah-icon" aria-hidden="true">{% render 'ngp-icon', ngp_icon_type: block.settings.icon %}</span><h3>{{ ngp_value_title }}</h3><p>{{ ngp_value_text }}</p></article>
+    {%- endif -%}{%- endfor -%}
+  </div></div></section>
+
+  {%- liquid
+    assign ngp_aggregate_review_count = 0
+    assign ngp_aggregate_review_points = 0
+    for product in ngp_popular_collection.products
+      assign ngp_aggregate_data = product.metafields.judgeme.review_widget_data.value
+      assign ngp_product_review_count = ngp_aggregate_data.number_of_reviews | default: 0 | plus: 0
+      assign ngp_product_average = ngp_aggregate_data.average_rating | default: 0 | plus: 0
+      assign ngp_product_points = ngp_product_average | times: ngp_product_review_count
+      assign ngp_aggregate_review_count = ngp_aggregate_review_count | plus: ngp_product_review_count
+      assign ngp_aggregate_review_points = ngp_aggregate_review_points | plus: ngp_product_points
+    endfor
+  -%}
+  {%- capture ngp_review_cards -%}
+    {%- assign ngp_review_count = 0 -%}
+    {%- assign ngp_testimonial_index = 0 -%}
+    {%- for block in section.blocks -%}{%- if block.type == 'testimonial' -%}
+      {%- liquid
+        assign ngp_testimonial_index = ngp_testimonial_index | plus: 1
+        assign ngp_testimonial_product = block.settings.product
+        assign ngp_review_data = ngp_testimonial_product.metafields.judgeme.review_widget_data.value
+        assign ngp_review_index = block.settings.review_number | minus: 1
+        assign ngp_review = ngp_review_data.reviews[ngp_review_index]
+        assign ngp_review_body = block.settings.quote | default: ngp_review.body | strip_html
+        assign ngp_reviewer_name = block.settings.customer_name | default: ngp_review.reviewer_name
+        assign ngp_reviewer_persona = block.settings.persona
+        assign ngp_testimonial_media_alt = block.settings.media_alt | default: ngp_reviewer_name
+        unless request.locale.iso_code == 'en'
+          assign ngp_review_body_key = 'altaeron_home.content.testimonial_' | append: ngp_testimonial_index | append: '_quote'
+          assign ngp_reviewer_persona_key = 'altaeron_home.content.testimonial_' | append: ngp_testimonial_index | append: '_persona'
+          assign ngp_testimonial_media_alt_key = 'altaeron_home.content.testimonial_' | append: ngp_testimonial_index | append: '_media_alt'
+          assign ngp_review_body = ngp_review_body_key | t
+          assign ngp_reviewer_persona = ngp_reviewer_persona_key | t
+          assign ngp_testimonial_media_alt = ngp_testimonial_media_alt_key | t
+        endunless
+        assign ngp_review_rating = ngp_review.rating | default: block.settings.rating | plus: 0
+        assign ngp_review_picture = ngp_review.pictures_urls.first.original
+        assign ngp_testimonial_image = block.settings.image | default: ngp_testimonial_product.metafields.custom.homepage_card_image.value | default: ngp_testimonial_product.featured_image
+      -%}
+      {%- if ngp_review_body != blank and ngp_reviewer_name != blank -%}{%- assign ngp_review_count = ngp_review_count | plus: 1 -%}
+        <article class="ngp-ah-review" {{ block.shopify_attributes }}>
+          <div class="ngp-ah-review__media ngp-ah-media{% if block.settings.image == blank and ngp_review_picture == blank and block.settings.video == blank and block.settings.video_url == blank %} ngp-ah-review__media--product{% endif %}">
+            {%- if block.settings.video != blank -%}
+              {{ block.settings.video | video_tag: controls: true, preload: 'none', image_size: '900x', class: 'ngp-ah-review__video' }}
+            {%- elsif block.settings.video_url != blank -%}
+              <a href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="{{ 'altaeron_home.accessibility.play_testimonial' | t: name: ngp_testimonial_media_alt | escape }}" data-track="review_video_play">
+                {%- if block.settings.poster != blank -%}{{ block.settings.poster | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, 44vw', alt: ngp_testimonial_media_alt }}{%- elsif ngp_testimonial_image != blank -%}{{ ngp_testimonial_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, 44vw', alt: ngp_testimonial_media_alt }}{%- endif -%}
+                <span class="ngp-ah-review__play" aria-hidden="true">▶</span>
+              </a>
+            {%- elsif block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, 44vw', alt: ngp_testimonial_media_alt }}
+            {%- elsif ngp_testimonial_image != blank -%}
+              {{ ngp_testimonial_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, 44vw', alt: ngp_testimonial_media_alt }}
+              <span class="ngp-ah-review__context">{{ 'altaeron_home.reviews.reviewed_product' | t }}</span>
+            {%- elsif ngp_review_picture != blank -%}
+              <img src="{{ ngp_review_picture | escape }}" loading="lazy" width="900" height="560" alt="{{ ngp_testimonial_media_alt | escape }}">
+            {%- endif -%}
+          </div>
+          <div class="ngp-ah-review__body">
+            {%- if ngp_review_rating > 0 -%}<span class="ngp-ah-stars" aria-label="{{ 'altaeron_home.reviews.rating' | t: rating: ngp_review_rating | escape }}">★★★★★</span>{%- endif -%}
+            <blockquote>“{{ ngp_review_body | escape }}”</blockquote>
+            <cite>— {{ ngp_reviewer_name | escape }}{% if ngp_reviewer_persona != blank %}, {{ ngp_reviewer_persona | escape }}{% endif %}</cite>
+            {%- if block.settings.verified_label != blank -%}<span class="ngp-ah-review__verified">{{ block.settings.verified_label | escape }}</span>{%- endif -%}
+            <a class="ngp-ah-review__link" href="{% if block.settings.link != blank %}{{ block.settings.link }}{% elsif ngp_testimonial_product != blank %}{{ ngp_testimonial_product.url }}#judgeme_product_reviews{% else %}#altaeron-reviews{% endif %}" data-track="review_click">{{ 'altaeron_home.reviews.read_review' | t }}<span aria-hidden="true"> →</span></a>
+          </div>
+        </article>
+      {%- endif -%}
+    {%- endif -%}{%- endfor -%}
+  {%- endcapture -%}
+  {%- if ngp_review_count == 0 -%}
+    {%- capture ngp_review_cards -%}
+      {%- for ngp_i in (1..3) -%}
+        <article class="ngp-ah-review ngp-ah-review--mock">
+          <div class="ngp-ah-review__media ngp-ah-media">{{ 'lifestyle-1' | placeholder_svg_tag: 'ngp-ah-placeholder-svg' }}</div>
+          <div class="ngp-ah-review__body"><blockquote>“{{ 'storefront.home.review_placeholder' | t }}”</blockquote><cite>— {{ 'storefront.home.sample_customer' | t }}</cite><span class="ngp-ah-review__sample">{{ 'storefront.home.preview_content' | t }}</span></div>
+        </article>
+      {%- endfor -%}
+    {%- endcapture -%}
+  {%- endif -%}
+  <section id="altaeron-reviews" class="ngp-ah-section ngp-ah-reviews" aria-labelledby="ReviewsHeading-{{ section.id }}"><div class="ngp-ah-shell"><div class="ngp-ah-centered"><h2 id="ReviewsHeading-{{ section.id }}">{{ ngp_reviews_heading }}</h2>{% if ngp_aggregate_review_count > 0 %}{% assign ngp_aggregate_average = ngp_aggregate_review_points | divided_by: ngp_aggregate_review_count | round: 1 %}<p class="ngp-ah-review-summary"><span class="ngp-ah-stars" aria-hidden="true">★★★★★</span> {{ 'altaeron_home.reviews.summary' | t: rating: ngp_aggregate_average, count: ngp_aggregate_review_count }}</p>{% endif %}</div><div class="ngp-ah-review-rail ngp-ah-slider" data-slider tabindex="0">{{ ngp_review_cards }}</div><div class="ngp-ah-dots" data-slider-dots></div></div></section>
+
+  {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
+    <section class="ngp-ah-section ngp-ah-guides" aria-labelledby="GuidesHeading-{{ section.id }}"><div class="ngp-ah-shell"><div class="ngp-ah-section-head"><h2 id="GuidesHeading-{{ section.id }}">{{ ngp_guides_heading }}</h2><a href="{{ section.settings.blog.url }}"><span>{{ ngp_view_all_label }}</span><span aria-hidden="true">→</span></a></div><div class="ngp-ah-guide-grid">
+      {%- for article in section.settings.blog.articles limit: 3 -%}
+        {%- liquid
+          assign ngp_article_cover = article.image | default: article.metafields.custom.cover_image.value
+          assign ngp_article_words = article.content | strip_html | split: ' ' | size
+          assign ngp_read_minutes = ngp_article_words | divided_by: 200 | plus: 1
+          assign ngp_article_description = article.excerpt | default: article.content | strip_html | strip
+        -%}
+        <article class="ngp-ah-guide">
+          <a href="{{ article.url }}" data-track="article_click">
+            <div class="ngp-ah-guide__media ngp-ah-media">
+              {% if ngp_article_cover %}{{ ngp_article_cover | image_url: width: 620 | image_tag: loading: 'lazy', widths: '240, 400, 620', sizes: '(min-width: 750px) 33vw, 28vw', alt: article.title }}{% endif %}
+            </div>
+            <div class="ngp-ah-guide__body">
+              <h3>{{ article.title }}</h3>
+              {%- if ngp_article_description != blank -%}<p class="ngp-ah-guide__description">{{ ngp_article_description }}</p>{%- endif -%}
+              <p class="ngp-ah-guide__reading-time">{{ 'altaeron_home.guides.reading_time' | t: minutes: ngp_read_minutes }}</p>
+            </div>
+          </a>
+        </article>
+      {%- endfor -%}
+    </div></div></section>
+  {%- endif -%}
+
+  <section id="altaeron-faq" class="ngp-ah-section ngp-ah-faq" aria-labelledby="FaqHeading-{{ section.id }}"><div class="ngp-ah-shell"><h2 id="FaqHeading-{{ section.id }}">{{ ngp_faq_heading }}</h2><div class="ngp-ah-faq__grid">
+    {%- assign ngp_faq_index = 0 -%}
+    {%- for block in section.blocks -%}{%- if block.type == 'faq' -%}
+      {%- liquid
+        assign ngp_faq_index = ngp_faq_index | plus: 1
+        assign ngp_faq_question = block.settings.question
+        assign ngp_faq_answer = block.settings.answer
+        if ngp_faq_question != blank
+          unless request.locale.iso_code == 'en'
+            assign ngp_faq_question_key = 'altaeron_home.content.faq_' | append: ngp_faq_index | append: '_question'
+            assign ngp_faq_answer_key = 'altaeron_home.content.faq_' | append: ngp_faq_index | append: '_answer_html'
+            assign ngp_faq_question = ngp_faq_question_key | t
+            assign ngp_faq_answer = ngp_faq_answer_key | t
+          endunless
+        endif
+      -%}
+      {%- if ngp_faq_question != blank -%}<details class="ngp-ah-faq__item" {{ block.shopify_attributes }}><summary data-track="faq_open">{{ ngp_faq_question }}{% render 'ngp-icon-accordion-chevron', class: 'ngp-ah-faq__chevron' %}</summary><div class="rte">{{ ngp_faq_answer }}</div></details>{%- endif -%}
+    {%- endif -%}{%- endfor -%}
+  </div></div></section>
+
+  <section class="ngp-ah-newsletter" aria-labelledby="NewsletterHeading-{{ section.id }}"><div class="ngp-ah-shell ngp-ah-newsletter__inner"><div><h2 id="NewsletterHeading-{{ section.id }}">{{ ngp_newsletter_heading }}</h2><p>{{ ngp_newsletter_text }}</p></div>{%- form 'customer', class: 'ngp-ah-newsletter__form' -%}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="NewsletterEmail-{{ section.id }}">{{ 'newsletter.label' | t }}</label><input id="NewsletterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="{{ ngp_newsletter_placeholder }}" required><button type="submit" data-track="newsletter_signup">{{ ngp_newsletter_button }}</button>{%- if form.posted_successfully? -%}<p class="ngp-ah-newsletter__message" role="status">{{ 'newsletter.success' | t }}</p>{%- elsif form.errors -%}<p class="ngp-ah-newsletter__message" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}{%- endform -%}{%- if ngp_newsletter_privacy != blank -%}<p class="ngp-ah-newsletter__privacy">{{ ngp_newsletter_privacy }}</p>{%- endif -%}</div></section>
+</ngp-altaeron-home>
+
+{% schema %}
+{
+  "name": "Altaeron homepage",
+  "tag": "section",
+  "class": "altaeron-home-section",
+  "settings": [
+    {"type":"text","id":"hero_heading","label":"Hero heading","default":"Support Every Step."},
+    {"type":"richtext","id":"hero_text","label":"Hero text","default":"<p>Find the right support for bunions, heel pain, ankle instability and everyday foot discomfort.</p>"},
+    {"type":"product","id":"hero_product","label":"Hero product fallback"},
+    {"type":"image_picker","id":"hero_image","label":"Hero desktop image"},
+    {"type":"image_picker","id":"hero_mobile_image","label":"Hero mobile image","info":"Optional. Uses the desktop image when left blank."},
+    {"type":"text","id":"hero_image_alt","label":"Hero image alt text","default":"Foot support products for everyday comfort"},
+    {"type":"range","id":"hero_desktop_x","label":"Desktop focal point horizontal","min":0,"max":100,"step":1,"unit":"%","default":50},
+    {"type":"range","id":"hero_desktop_y","label":"Desktop focal point vertical","min":0,"max":100,"step":1,"unit":"%","default":50},
+    {"type":"range","id":"hero_mobile_x","label":"Mobile focal point horizontal","min":0,"max":100,"step":1,"unit":"%","default":67},
+    {"type":"range","id":"hero_mobile_y","label":"Mobile focal point vertical","min":0,"max":100,"step":1,"unit":"%","default":50},
+    {"type":"range","id":"hero_mobile_overlay","label":"Mobile copy gradient strength","min":0,"max":100,"step":5,"unit":"%","default":60},
+    {"type":"text","id":"primary_label","label":"Primary button","default":"Shop by Concern"},
+    {"type":"text","id":"secondary_label","label":"Secondary button","default":"Find Your Match"},
+    {"type":"text","id":"concern_heading","label":"Concern heading","default":"Where Does It Hurt?"},
+    {"type":"text","id":"explore_label","label":"Concern link label","default":"Explore"},
+    {"type":"collection","id":"popular_collection","label":"Popular solutions collection"},
+    {"type":"text","id":"popular_heading","label":"Popular heading","default":"Most Popular Solutions"},
+    {"type":"text","id":"view_all_label","label":"View all label","default":"View all"},
+    {"type":"text","id":"quiz_heading","label":"Quiz heading","default":"Find the Right Support"},
+    {"type":"textarea","id":"quiz_text","label":"Quiz text","default":"Answer 3 quick questions and get a personalized collection recommendation."},
+    {"type":"text","id":"quiz_question_one","label":"Quiz question 1","default":"Where do you feel discomfort?"},
+    {"type":"text","id":"quiz_question_two","label":"Quiz question 2","default":"When would you use support most?"},
+    {"type":"text","id":"quiz_question_three","label":"Quiz question 3","default":"What support feel do you prefer?"},
+    {"type":"text","id":"quiz_result_prefix","label":"Quiz result prefix","default":"A useful place to start:"},
+    {"type":"text","id":"quiz_result_label","label":"Quiz result button","default":"View recommendations"},
+    {"type":"text","id":"demo_heading","label":"Demonstrations heading","default":"Real Demonstrations"},
+    {"type":"text","id":"demo_text","label":"Demonstrations text","default":"See how our products work in real life."},
+    {"type":"text","id":"values_heading","label":"Values heading","default":"Why Altaeron?"},
+    {"type":"text","id":"reviews_heading","label":"Reviews heading","default":"Loved by Real Customers"},
+    {"type":"blog","id":"blog","label":"Foot care blog"},
+    {"type":"text","id":"guides_heading","label":"Guides heading","default":"Foot Care Tips & Guides"},
+    {"type":"text","id":"faq_heading","label":"FAQ heading","default":"Frequently Asked Questions"},
+    {"type":"text","id":"newsletter_heading","label":"Newsletter heading","default":"Take Better Steps."},
+    {"type":"text","id":"newsletter_text","label":"Newsletter text","default":"Tips, guides and product updates straight to your inbox."},
+    {"type":"text","id":"newsletter_placeholder","label":"Email placeholder","default":"Your email address"},
+    {"type":"text","id":"newsletter_button","label":"Newsletter button","default":"Subscribe"},
+    {"type":"text","id":"newsletter_privacy","label":"Newsletter privacy note","default":"No spam. Unsubscribe anytime."}
+  ],
+  "blocks": [
+    {"type":"trust","name":"Trust item","limit":4,"settings":[{"type":"select","id":"icon","label":"Icon","options":[{"value":"community","label":"Community"},{"value":"fit","label":"Support"},{"value":"shield","label":"Shield"},{"value":"shipping","label":"Shipping"}],"default":"fit"},{"type":"text","id":"text","label":"Text"}]},
+    {"type":"concern","name":"Concern collection","limit":4,"settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Override image"},{"type":"text","id":"heading","label":"Override heading"},{"type":"textarea","id":"text","label":"Short description"},{"type":"text","id":"quiz_label","label":"Quiz label"},{"type":"select","id":"quiz_icon","label":"Quiz icon","options":[{"value":"fit","label":"Foot support"},{"value":"heart","label":"Comfort"},{"value":"shield","label":"Stability"},{"value":"community","label":"Whole foot"}],"default":"fit"}]},
+    {"type":"demonstration","name":"Product demonstration","limit":8,"settings":[{"type":"product","id":"product","label":"Product"},{"type":"video","id":"video","label":"Shopify-hosted video"},{"type":"image_picker","id":"poster","label":"Poster override"},{"type":"url","id":"video_url","label":"External video URL"},{"type":"url","id":"link","label":"Optional card link"},{"type":"text","id":"heading","label":"Label"},{"type":"text","id":"accessibility_label","label":"Accessibility label"}]},
+    {"type":"value","name":"Brand value","limit":3,"settings":[{"type":"select","id":"icon","label":"Icon","options":[{"value":"fit","label":"Fit"},{"value":"shield","label":"Guidance"},{"value":"heart","label":"Comfort"}],"default":"fit"},{"type":"text","id":"heading","label":"Heading"},{"type":"textarea","id":"text","label":"Text"}]},
+    {"type":"testimonial","name":"Customer testimonial","limit":6,"settings":[{"type":"product","id":"product","label":"Reviewed product"},{"type":"range","id":"review_number","label":"Judge.me review number","min":1,"max":10,"step":1,"default":1},{"type":"video","id":"video","label":"Shopify-hosted video"},{"type":"url","id":"video_url","label":"External video link"},{"type":"image_picker","id":"poster","label":"Video poster"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"text","id":"media_alt","label":"Media alt text","default":"Customer product experience"},{"type":"textarea","id":"quote","label":"Quote override"},{"type":"text","id":"customer_name","label":"Customer name override"},{"type":"text","id":"persona","label":"Persona or use case"},{"type":"range","id":"rating","label":"Rating fallback","min":0,"max":5,"step":1,"default":0},{"type":"text","id":"verified_label","label":"Verified label (only when substantiated)"},{"type":"url","id":"link","label":"Optional link"}]},
+    {"type":"faq","name":"FAQ","limit":10,"settings":[{"type":"text","id":"question","label":"Question"},{"type":"richtext","id":"answer","label":"Answer"}]}
+  ],
+  "presets": [{"name":"Altaeron homepage"}]
+}
+{% endschema %}

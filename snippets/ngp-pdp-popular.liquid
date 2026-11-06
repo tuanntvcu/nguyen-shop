@@ -1,0 +1,28 @@
+{%- liquid
+  assign ngp_popular_collection = collections['best-sellers']
+  assign ngp_popular_heading = 'Most Popular Solutions'
+  assign ngp_view_all_label = 'View all'
+-%}
+
+{{ 'ngp-altaeron-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ngp-altaeron-home.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .ngp-home .ngp-ah-product__title{font-size:16px;line-height:1.3;margin-bottom:10px}
+  .ngp-home .ngp-ah-section-head h2{margin-bottom:0}
+  @media(max-width:749px){.ngp-home .ngp-ah-product__title{font-size:14px}}
+</style>
+
+<ngp-home class="ngp-home" style="display:block" data-section-id="{{ section.id }}" data-slide-label="{{ 'altaeron_home.accessibility.go_to_slide' | t | escape }}">
+  {%- if ngp_popular_collection != blank and ngp_popular_collection.products_count > 0 -%}
+    <section class="ngp-ah-section ngp-ah-popular" aria-labelledby="PopularHeading-{{ section.id }}">
+      <div class="ngp-ah-shell">
+        <div class="ngp-ah-section-head"><h2 id="PopularHeading-{{ section.id }}">{{ ngp_popular_heading }}</h2><a href="{{ ngp_popular_collection.url }}"><span>{{ ngp_view_all_label }}</span><span aria-hidden="true">→</span></a></div>
+        <div class="ngp-ah-carousel-wrap"><button class="ngp-ah-slider-arrow ngp-ah-slider-arrow--prev" type="button" data-slider-prev aria-label="{{ 'altaeron_home.accessibility.previous_products' | t | escape }}">{% render 'ngp-icon-slider-prev' %}</button><div class="ngp-ah-products ngp-ah-slider" data-slider tabindex="0" aria-label="{{ ngp_popular_heading | escape }}">
+          {%- for product in ngp_popular_collection.products limit: 8 -%}{% render 'ngp-home-product', product: product %}{%- endfor -%}
+        </div><button class="ngp-ah-slider-arrow ngp-ah-slider-arrow--next" type="button" data-slider-next aria-label="{{ 'altaeron_home.accessibility.next_products' | t | escape }}">{% render 'ngp-icon-slider-next' %}</button></div>
+        <div class="ngp-ah-dots" data-slider-dots aria-label="{{ 'altaeron_home.accessibility.product_carousel_pagination' | t | escape }}"></div>
+      </div>
+    </section>
+  {%- endif -%}
+</ngp-home>

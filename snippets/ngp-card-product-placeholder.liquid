@@ -1,0 +1,18 @@
+{% liquid
+  if ngp_image_ratio == blank or ngp_image_ratio == 'adapt'
+    assign ngp_image_ratio = '1/1'
+  endif
+
+  assign ngp_current = ngp_current | default: 1
+%}
+<div class="ngp-product-card {{ custom_class }}">
+  <div class="ngp-product-card__wrapper">
+    <div class="ngp-product-card__image-wrapper" style="--aspect-ratio: {{ ngp_image_ratio }};">
+      {{ 'product-' | append: ngp_current | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    <div class="ngp-product-card__info">
+      <h3 class="ngp-product-card__title ngp-text-pcard-title">{{- 'onboarding.product_title' | t -}}</h3>
+      {% render 'ngp-price' %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1063 @@
+.ngp-country-flag {
+  background: var(--ngp-country-flag-sheet) no-repeat top left;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.ngp-country-flag--AD {
+  background-position: 0 0;
+}
+
+.ngp-country-flag--AE {
+  background-position: -21px 0;
+}
+
+.ngp-country-flag--AF {
+  background-position: 0 -21px;
+}
+
+.ngp-country-flag--African_nion {
+  background-position: -21px -21px;
+}
+
+.ngp-country-flag--AG {
+  background-position: -42px 0;
+}
+
+.ngp-country-flag--AI {
+  background-position: -42px -21px;
+}
+
+.ngp-country-flag--AL {
+  background-position: 0 -42px;
+}
+
+.ngp-country-flag--AM {
+  background-position: -21px -42px;
+}
+
+.ngp-country-flag--AMS {
+  background-position: -42px -42px;
+}
+
+.ngp-country-flag--AO {
+  background-position: -63px 0;
+}
+
+.ngp-country-flag--AQ {
+  background-position: -63px -21px;
+}
+
+.ngp-country-flag--AR {
+  background-position: -63px -42px;
+}
+
+.ngp-country-flag--AS {
+  background-position: 0 -63px;
+}
+
+.ngp-country-flag--AT {
+  background-position: -21px -63px;
+}
+
+.ngp-country-flag--AU {
+  background-position: -42px -63px;
+}
+
+.ngp-country-flag--AW {
+  background-position: -63px -63px;
+}
+
+.ngp-country-flag--AX {
+  background-position: -84px 0;
+}
+
+.ngp-country-flag--AZ {
+  background-position: -84px -21px;
+}
+
+.ngp-country-flag--BA {
+  background-position: -84px -42px;
+}
+
+.ngp-country-flag--BB {
+  background-position: -84px -63px;
+}
+
+.ngp-country-flag--BD {
+  background-position: 0 -84px;
+}
+
+.ngp-country-flag--BE {
+  background-position: -21px -84px;
+}
+
+.ngp-country-flag--BF {
+  background-position: -42px -84px;
+}
+
+.ngp-country-flag--BG {
+  background-position: -63px -84px;
+}
+
+.ngp-country-flag--BH {
+  background-position: -84px -84px;
+}
+
+.ngp-country-flag--BI {
+  background-position: -105px 0;
+}
+
+.ngp-country-flag--BJ {
+  background-position: -105px -21px;
+}
+
+.ngp-country-flag--BL {
+  background-position: -105px -42px;
+}
+
+.ngp-country-flag--BM {
+  background-position: -105px -63px;
+}
+
+.ngp-country-flag--BN {
+  background-position: -105px -84px;
+}
+
+.ngp-country-flag--BO {
+  background-position: 0 -105px;
+}
+
+.ngp-country-flag--BQ-BO {
+  background-position: -21px -105px;
+}
+
+.ngp-country-flag--BQ-SA {
+  background-position: -42px -105px;
+}
+
+.ngp-country-flag--BQ-SE {
+  background-position: -63px -105px;
+}
+
+.ngp-country-flag--BR {
+  background-position: -84px -105px;
+}
+
+.ngp-country-flag--BS {
+  background-position: -105px -105px;
+}
+
+.ngp-country-flag--BT {
+  background-position: -126px 0;
+}
+
+.ngp-country-flag--BV {
+  background-position: -126px -21px;
+}
+
+.ngp-country-flag--BW {
+  background-position: -126px -42px;
+}
+
+.ngp-country-flag--BY {
+  background-position: -126px -63px;
+}
+
+.ngp-country-flag--BZ {
+  background-position: -126px -84px;
+}
+
+.ngp-country-flag--CA {
+  background-position: -126px -105px;
+}
+
+.ngp-country-flag--CC {
+  background-position: 0 -126px;
+}
+
+.ngp-country-flag--CD {
+  background-position: -21px -126px;
+}
+
+.ngp-country-flag--CF {
+  background-position: -42px -126px;
+}
+
+.ngp-country-flag--CG {
+  background-position: -63px -126px;
+}
+
+.ngp-country-flag--CH {
+  background-position: -84px -126px;
+}
+
+.ngp-country-flag--CI {
+  background-position: -105px -126px;
+}
+
+.ngp-country-flag--CK {
+  background-position: -126px -126px;
+}
+
+.ngp-country-flag--CL {
+  background-position: -147px 0;
+}
+
+.ngp-country-flag--CM {
+  background-position: -147px -21px;
+}
+
+.ngp-country-flag--CN {
+  background-position: -147px -42px;
+}
+
+.ngp-country-flag--CO {
+  background-position: -147px -63px;
+}
+
+.ngp-country-flag--CR {
+  background-position: -147px -84px;
+}
+
+.ngp-country-flag--CU {
+  background-position: -147px -105px;
+}
+
+.ngp-country-flag--CV {
+  background-position: -147px -126px;
+}
+
+.ngp-country-flag--CW {
+  background-position: 0 -147px;
+}
+
+.ngp-country-flag--CX {
+  background-position: -21px -147px;
+}
+
+.ngp-country-flag--CY {
+  background-position: -42px -147px;
+}
+
+.ngp-country-flag--CZ {
+  background-position: -63px -147px;
+}
+
+.ngp-country-flag--DE {
+  background-position: -84px -147px;
+}
+
+.ngp-country-flag--DJ {
+  background-position: -105px -147px;
+}
+
+.ngp-country-flag--DK {
+  background-position: -126px -147px;
+}
+
+.ngp-country-flag--DM {
+  background-position: -147px -147px;
+}
+
+.ngp-country-flag--DO {
+  background-position: -168px 0;
+}
+
+.ngp-country-flag--DZ {
+  background-position: -168px -21px;
+}
+
+.ngp-country-flag--EC {
+  background-position: -168px -42px;
+}
+
+.ngp-country-flag--EE {
+  background-position: -168px -63px;
+}
+
+.ngp-country-flag--EG {
+  background-position: -168px -84px;
+}
+
+.ngp-country-flag--EH {
+  background-position: -168px -105px;
+}
+
+.ngp-country-flag--ER {
+  background-position: -168px -126px;
+}
+
+.ngp-country-flag--ES {
+  background-position: -168px -147px;
+}
+
+.ngp-country-flag--ET {
+  background-position: 0 -168px;
+}
+
+.ngp-country-flag--EUROPE {
+  background-position: -21px -168px;
+}
+
+.ngp-country-flag--FI {
+  background-position: -42px -168px;
+}
+
+.ngp-country-flag--FJ {
+  background-position: -63px -168px;
+}
+
+.ngp-country-flag--FK {
+  background-position: -84px -168px;
+}
+
+.ngp-country-flag--FM {
+  background-position: -105px -168px;
+}
+
+.ngp-country-flag--FO {
+  background-position: -126px -168px;
+}
+
+.ngp-country-flag--FR {
+  background-position: -147px -168px;
+}
+
+.ngp-country-flag--GA {
+  background-position: -168px -168px;
+}
+
+.ngp-country-flag--GB {
+  background-position: -189px -63px;
+}
+
+.ngp-country-flag--GB-NIR {
+  background-position: -189px -21px;
+}
+
+.ngp-country-flag--GB-SCT {
+  background-position: -189px -42px;
+}
+
+.ngp-country-flag--GB-UKM {
+  background-position: -189px -63px;
+}
+
+.ngp-country-flag--GB-WLS {
+  background-position: -189px -84px;
+}
+
+.ngp-country-flag--GD {
+  background-position: -189px -105px;
+}
+
+.ngp-country-flag--GE {
+  background-position: -189px -126px;
+}
+
+.ngp-country-flag--GF {
+  background-position: -189px -147px;
+}
+
+.ngp-country-flag--GG {
+  background-position: -189px -168px;
+}
+
+.ngp-country-flag--GH {
+  background-position: 0 -189px;
+}
+
+.ngp-country-flag--GI {
+  background-position: -21px -189px;
+}
+
+.ngp-country-flag--GL {
+  background-position: -42px -189px;
+}
+
+.ngp-country-flag--GM {
+  background-position: -63px -189px;
+}
+
+.ngp-country-flag--GN {
+  background-position: -84px -189px;
+}
+
+.ngp-country-flag--GP {
+  background-position: -105px -189px;
+}
+
+.ngp-country-flag--GP {
+  background-position: -126px -189px;
+}
+
+.ngp-country-flag--GQ {
+  background-position: -147px -189px;
+}
+
+.ngp-country-flag--GR {
+  background-position: -168px -189px;
+}
+
+.ngp-country-flag--GS {
+  background-position: -189px -189px;
+}
+
+.ngp-country-flag--GT {
+  background-position: -210px 0;
+}
+
+.ngp-country-flag--GU {
+  background-position: -210px -21px;
+}
+
+.ngp-country-flag--GW {
+  background-position: -210px -42px;
+}
+
+.ngp-country-flag--GY {
+  background-position: -210px -63px;
+}
+
+.ngp-country-flag--HK {
+  background-position: -210px -84px;
+}
+
+.ngp-country-flag--HM {
+  background-position: -210px -105px;
+}
+
+.ngp-country-flag--HN {
+  background-position: -210px -126px;
+}
+
+.ngp-country-flag--HR {
+  background-position: -210px -147px;
+}
+
+.ngp-country-flag--HT {
+  background-position: -210px -168px;
+}
+
+.ngp-country-flag--HU {
+  background-position: -210px -189px;
+}
+
+.ngp-country-flag--ID {
+  background-position: 0 -210px;
+}
+
+.ngp-country-flag--IE {
+  background-position: -21px -210px;
+}
+
+.ngp-country-flag--IL {
+  background-position: -42px -210px;
+}
+
+.ngp-country-flag--IM {
+  background-position: -63px -210px;
+}
+
+.ngp-country-flag--IN {
+  background-position: -84px -210px;
+}
+
+.ngp-country-flag--IO {
+  background-position: -105px -210px;
+}
+
+.ngp-country-flag--IQ {
+  background-position: -126px -210px;
+}
+
+.ngp-country-flag--IR {
+  background-position: -147px -210px;
+}
+
+.ngp-country-flag--IS {
+  background-position: -168px -210px;
+}
+
+.ngp-country-flag--IT {
+  background-position: -189px -210px;
+}
+
+.ngp-country-flag--JE {
+  background-position: -210px -210px;
+}
+
+.ngp-country-flag--JM {
+  background-position: -231px 0;
+}
+
+.ngp-country-flag--JO {
+  background-position: -231px -21px;
+}
+
+.ngp-country-flag--JP {
+  background-position: -231px -42px;
+}
+
+.ngp-country-flag--KG {
+  background-position: -231px -63px;
+}
+
+.ngp-country-flag--KH {
+  background-position: -231px -84px;
+}
+
+.ngp-country-flag--KI {
+  background-position: -231px -105px;
+}
+
+.ngp-country-flag--KM {
+  background-position: -231px -126px;
+}
+
+.ngp-country-flag--KN {
+  background-position: -231px -147px;
+}
+
+.ngp-country-flag--KN-SK {
+  background-position: -231px -168px;
+}
+
+.ngp-country-flag--KP {
+  background-position: -231px -189px;
+}
+
+.ngp-country-flag--KR {
+  background-position: -231px -210px;
+}
+
+.ngp-country-flag--KW {
+  background-position: 0 -231px;
+}
+
+.ngp-country-flag--KY {
+  background-position: -21px -231px;
+}
+
+.ngp-country-flag--KZ {
+  background-position: -42px -231px;
+}
+
+.ngp-country-flag--LA {
+  background-position: -63px -231px;
+}
+
+.ngp-country-flag--LB {
+  background-position: -84px -231px;
+}
+
+.ngp-country-flag--LC {
+  background-position: -105px -231px;
+}
+
+.ngp-country-flag--LI {
+  background-position: -126px -231px;
+}
+
+.ngp-country-flag--LK {
+  background-position: -147px -231px;
+}
+
+.ngp-country-flag--LR {
+  background-position: -168px -231px;
+}
+
+.ngp-country-flag--LS {
+  background-position: -189px -231px;
+}
+
+.ngp-country-flag--LT {
+  background-position: -210px -231px;
+}
+
+.ngp-country-flag--LU {
+  background-position: -231px -231px;
+}
+
+.ngp-country-flag--LV {
+  background-position: -252px 0;
+}
+
+.ngp-country-flag--LY {
+  background-position: -252px -21px;
+}
+
+.ngp-country-flag--MA {
+  background-position: -252px -42px;
+}
+
+.ngp-country-flag--MC {
+  background-position: -252px -63px;
+}
+
+.ngp-country-flag--MD {
+  background-position: -252px -84px;
+}
+
+.ngp-country-flag--ME {
+  background-position: -252px -105px;
+}
+
+.ngp-country-flag--MF {
+  background-position: -252px -126px;
+}
+
+.ngp-country-flag--MG {
+  background-position: -252px -147px;
+}
+
+.ngp-country-flag--MH {
+  background-position: -252px -168px;
+}
+
+.ngp-country-flag--MK {
+  background-position: -252px -189px;
+}
+
+.ngp-country-flag--ML {
+  background-position: -252px -210px;
+}
+
+.ngp-country-flag--MM {
+  background-position: -252px -231px;
+}
+
+.ngp-country-flag--MN {
+  background-position: 0 -252px;
+}
+
+.ngp-country-flag--MO {
+  background-position: -21px -252px;
+}
+
+.ngp-country-flag--MP {
+  background-position: -42px -252px;
+}
+
+.ngp-country-flag--MQ {
+  background-position: -63px -252px;
+}
+
+.ngp-country-flag--MQ-UNF {
+  background-position: -84px -252px;
+}
+
+.ngp-country-flag--MR {
+  background-position: -105px -252px;
+}
+
+.ngp-country-flag--MS {
+  background-position: -126px -252px;
+}
+
+.ngp-country-flag--MT {
+  background-position: -147px -252px;
+}
+
+.ngp-country-flag--MU {
+  background-position: -168px -252px;
+}
+
+.ngp-country-flag--MV {
+  background-position: -189px -252px;
+}
+
+.ngp-country-flag--MW {
+  background-position: -210px -252px;
+}
+
+.ngp-country-flag--MX {
+  background-position: -231px -252px;
+}
+
+.ngp-country-flag--MY {
+  background-position: -252px -252px;
+}
+
+.ngp-country-flag--MZ {
+  background-position: -273px 0;
+}
+
+.ngp-country-flag--NA {
+  background-position: -273px -21px;
+}
+
+.ngp-country-flag--NC {
+  background-position: -273px -42px;
+}
+
+.ngp-country-flag--NE {
+  background-position: -273px -63px;
+}
+
+.ngp-country-flag--NF {
+  background-position: -273px -84px;
+}
+
+.ngp-country-flag--NG {
+  background-position: -273px -105px;
+}
+
+.ngp-country-flag--NI {
+  background-position: -273px -126px;
+}
+
+.ngp-country-flag--NL {
+  background-position: -273px -147px;
+}
+
+.ngp-country-flag--NO {
+  background-position: -273px -168px;
+}
+
+.ngp-country-flag--NP {
+  background-position: -273px -189px;
+}
+
+.ngp-country-flag--NR {
+  background-position: -273px -210px;
+}
+
+.ngp-country-flag--NU {
+  background-position: -273px -231px;
+}
+
+.ngp-country-flag--NZ {
+  background-position: -273px -252px;
+}
+
+.ngp-country-flag--OM {
+  background-position: 0 -273px;
+}
+
+.ngp-country-flag--PA {
+  background-position: -21px -273px;
+}
+
+.ngp-country-flag--PE {
+  background-position: -42px -273px;
+}
+
+.ngp-country-flag--PF {
+  background-position: -63px -273px;
+}
+
+.ngp-country-flag--PG {
+  background-position: -84px -273px;
+}
+
+.ngp-country-flag--PH {
+  background-position: -105px -273px;
+}
+
+.ngp-country-flag--PK {
+  background-position: -126px -273px;
+}
+
+.ngp-country-flag--PL {
+  background-position: -147px -273px;
+}
+
+.ngp-country-flag--PM {
+  background-position: -168px -273px;
+}
+
+.ngp-country-flag--Pf-UNF {
+  background-position: -189px -273px;
+}
+
+.ngp-country-flag--PN {
+  background-position: -210px -273px;
+}
+
+.ngp-country-flag--PR {
+  background-position: -231px -273px;
+}
+
+.ngp-country-flag--PS {
+  background-position: -252px -273px;
+}
+
+.ngp-country-flag--PT {
+  background-position: -273px -273px;
+}
+
+.ngp-country-flag--PW {
+  background-position: -294px 0;
+}
+
+.ngp-country-flag--PY {
+  background-position: -294px -21px;
+}
+
+.ngp-country-flag--QA {
+  background-position: -294px -42px;
+}
+
+.ngp-country-flag--RAINBOW {
+  background-position: -294px -63px;
+}
+
+.ngp-country-flag--RE {
+  background-position: -294px -84px;
+}
+
+.ngp-country-flag--RO {
+  background-position: -294px -105px;
+}
+
+.ngp-country-flag--RS {
+  background-position: -294px -126px;
+}
+
+.ngp-country-flag--RU {
+  background-position: -294px -147px;
+}
+
+.ngp-country-flag--RW {
+  background-position: -294px -168px;
+}
+
+.ngp-country-flag--SA {
+  background-position: -294px -189px;
+}
+
+.ngp-country-flag--SB {
+  background-position: -294px -210px;
+}
+
+.ngp-country-flag--SC {
+  background-position: -294px -231px;
+}
+
+.ngp-country-flag--SD {
+  background-position: -294px -252px;
+}
+
+.ngp-country-flag--SE {
+  background-position: -294px -273px;
+}
+
+.ngp-country-flag--SG {
+  background-position: 0 -294px;
+}
+
+.ngp-country-flag--SH {
+  background-position: -21px -294px;
+}
+
+.ngp-country-flag--SI {
+  background-position: -42px -294px;
+}
+
+.ngp-country-flag--SJ {
+  background-position: -63px -294px;
+}
+
+.ngp-country-flag--SK {
+  background-position: -84px -294px;
+}
+
+.ngp-country-flag--SL {
+  background-position: -105px -294px;
+}
+
+.ngp-country-flag--SM {
+  background-position: -126px -294px;
+}
+
+.ngp-country-flag--SN {
+  background-position: -147px -294px;
+}
+
+.ngp-country-flag--SO {
+  background-position: -168px -294px;
+}
+
+.ngp-country-flag--SR {
+  background-position: -189px -294px;
+}
+
+.ngp-country-flag--SS {
+  background-position: -210px -294px;
+}
+
+.ngp-country-flag--ST {
+  background-position: -231px -294px;
+}
+
+.ngp-country-flag--SV {
+  background-position: -252px -294px;
+}
+
+.ngp-country-flag--SX {
+  background-position: -273px -294px;
+}
+
+.ngp-country-flag--SY {
+  background-position: -294px -294px;
+}
+
+.ngp-country-flag--SZ {
+  background-position: -315px 0;
+}
+
+.ngp-country-flag--TC {
+  background-position: -315px -21px;
+}
+
+.ngp-country-flag--TD {
+  background-position: -315px -42px;
+}
+
+.ngp-country-flag--TF {
+  background-position: -315px -63px;
+}
+
+.ngp-country-flag--TG {
+  background-position: -315px -84px;
+}
+
+.ngp-country-flag--TH {
+  background-position: -315px -105px;
+}
+
+.ngp-country-flag--TJ {
+  background-position: -315px -126px;
+}
+
+.ngp-country-flag--TK {
+  background-position: -315px -147px;
+}
+
+.ngp-country-flag--TL {
+  background-position: -315px -168px;
+}
+
+.ngp-country-flag--TM {
+  background-position: -315px -189px;
+}
+
+.ngp-country-flag--TN {
+  background-position: -315px -210px;
+}
+
+.ngp-country-flag--TO {
+  background-position: -315px -231px;
+}
+
+.ngp-country-flag--TR {
+  background-position: -315px -252px;
+}
+
+.ngp-country-flag--TT {
+  background-position: -315px -273px;
+}
+
+.ngp-country-flag--TV {
+  background-position: -315px -294px;
+}
+
+.ngp-country-flag--TW {
+  background-position: 0 -315px;
+}
+
+.ngp-country-flag--TZ {
+  background-position: -21px -315px;
+}
+
+.ngp-country-flag--UA {
+  background-position: -42px -315px;
+}
+
+.ngp-country-flag--UG {
+  background-position: -63px -315px;
+}
+
+.ngp-country-flag--UM {
+  background-position: -84px -315px;
+}
+
+.ngp-country-flag--Union_f_outh_merican_ations {
+  background-position: -105px -315px;
+}
+
+.ngp-country-flag--US {
+  background-position: -126px -315px;
+}
+
+.ngp-country-flag--UY {
+  background-position: -147px -315px;
+}
+
+.ngp-country-flag--UZ {
+  background-position: -168px -315px;
+}
+
+.ngp-country-flag--VA {
+  background-position: -189px -315px;
+}
+
+.ngp-country-flag--VC {
+  background-position: -210px -315px;
+}
+
+.ngp-country-flag--VE {
+  background-position: -231px -315px;
+}
+
+.ngp-country-flag--VG {
+  background-position: -252px -315px;
+}
+
+.ngp-country-flag--VI {
+  background-position: -273px -315px;
+}
+
+.ngp-country-flag--VN {
+  background-position: -294px -315px;
+}
+
+.ngp-country-flag--VU {
+  background-position: -315px -315px;
+}
+
+.ngp-country-flag--WF {
+  background-position: -336px 0;
+}
+
+.ngp-country-flag--WS {
+  background-position: -336px -21px;
+}
+
+.ngp-country-flag--XK {
+  background-position: -336px -42px;
+}
+
+.ngp-country-flag--YE {
+  background-position: -336px -63px;
+}
+
+.ngp-country-flag--YT-UNF {
+  background-position: -336px -84px;
+}
+
+.ngp-country-flag--ZA {
+  background-position: -336px -105px;
+}
+
+.ngp-country-flag--ZM {
+  background-position: -336px -126px;
+}
+
+.ngp-country-flag--ZW {
+  background-position: -336px -147px;
+}

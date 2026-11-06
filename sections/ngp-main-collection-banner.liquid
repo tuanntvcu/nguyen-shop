@@ -1,0 +1,440 @@
+{{ 'ngp-section-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign ngp_banner = collection.metafields.scaloratheme.collection_banner.value
+  assign ngp_banner_mobile = collection.metafields.scaloratheme.collection_banner_mobile.value
+
+  if section.settings.image != blank
+    assign ngp_banner = section.settings.image
+  endif
+  if section.settings.image_mobile != blank
+    assign ngp_banner_mobile = section.settings.image_mobile
+  endif
+
+  assign ngp_image_ratio = ngp_banner.aspect_ratio
+  assign ngp_image_ratio_mobile = ngp_banner_mobile.aspect_ratio | default: ngp_image_ratio
+
+  assign ngp_image_position = section.settings.image_position
+
+  assign ngp_inner_class = 'ngp-collection-hero__inner ngp-relative ngp-f-grid ngp-f-grid-1-cols ngp-f-grid--gap-none ngp-color-' | append: section.settings.color_scheme
+
+  if ngp_banner != blank
+    case ngp_image_position
+      when 'left'
+        assign ngp_inner_class = ngp_inner_class | append: ' ngp-md:f-grid-2-cols'
+      when 'right'
+        assign ngp_inner_class = ngp_inner_class | append: ' ngp-md:f-grid-2-cols'
+        assign ngp_text_class = ngp_text_class | append: ' ngp-order-first'
+      when 'top'
+
+      when 'bottom'
+        assign ngp_text_class = ngp_text_class | append: ' ngp-order-first'
+      when 'as-bg'
+        assign ngp_text_class = ngp_text_class | append: ' ngp-content-overlay content-overlay--center'
+    endcase
+  endif
+
+  assign ngp_color_scheme_first = settings.color_schemes | first
+  assign ngp_color_inherit = false
+  if section.settings.color_scheme == ngp_color_scheme_first
+    assign ngp_color_inherit = true
+  endif
+
+  assign ngp_loading = 'lazy'
+  assign ngp_fetchpriority = 'low'
+  if section.index < 3
+    assign ngp_loading = 'eager'
+    assign ngp_fetchpriority = 'high'
+  endif
+%}
+
+<div
+  class="ngp-collection-hero ngp-collection-hero--image-{{ section.settings.image_position }} ngp-hero ngp-hero--{{ section.settings.image_height }} ngp-hero--mobile-{{ section.settings.image_height_mobile }}{% if ngp_color_inherit %} ngp-color-inherit{% endif %} ngp-section ngp-section--padding"
+  style="--section-padding-top: {{ section.settings.padding_top }}px;--section-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="ngp-page-width">
+    <div class="{{ ngp_inner_class }}{% unless ngp_color_inherit %} ngp-blocks-radius{% endunless %}">
+      {%- if ngp_banner -%}
+        {% assign ngp_alt_image = ngp_banner.alt | default: collection.title | escape %}
+        {%- capture ngp_sizes -%}min({{ settings.page_width }}, 100vw){%- endcapture -%}
+        <ngp-parallax-element
+          class="ngp-flex ngp-overflow-hidden{% if ngp_color_inherit %} ngp-blocks-radius{% endif %}"
+          {% if section.settings.enable_parallax %}
+            data-parallax="0.3" data-parallax-direction="{{ section.settings.parallax_direction }}"
+          {% endif %}
+        >
+          <ngp-motion-element class="ngp-block ngp-flex-1" data-motion="zoom-out">
+            <picture
+              class="ngp-hero__media ngp-media-wrapper"
+              style="{% if section.settings.image_height == 'adapt' %}--aspect-ratio: {{ ngp_image_ratio }};--aspect-ratio-mobile: {{ ngp_image_ratio_mobile }};{% endif %}{% if section.settings.image_height_mobile == 'adapt' %}--aspect-ratio-mobile: {{ ngp_image_ratio_mobile }};{% endif %}"
+            >
+              {%- if ngp_banner_mobile -%}
+                <source
+                  media="(max-width: 767px)"
+                  srcset="{{ ngp_banner_mobile | image_url: width: '400x' }} 400w, {{ ngp_banner_mobile | image_url: width: '600x' }} 600w, {{ ngp_banner_mobile | image_url: width: '800x' }} 800w, {{ ngp_banner_mobile | image_url: width: '1000x' }} 1000w"
+                  width="{{ ngp_banner_mobile.width }}"
+                  height="{{ ngp_banner_mobile.height }}"
+                >
+              {%- endif -%}
+              {{-
+                ngp_banner
+                | image_url: width: ngp_banner.width
+                | image_tag:
+                  ngp_loading: ngp_loading,
+                  ngp_fetchpriority: ngp_fetchpriority,
+                  ngp_sizes: ngp_sizes,
+                  width: ngp_banner.width,
+                  height: ngp_banner.height,
+                  widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200',
+                  alt: ngp_alt_image,
+                  class: 'collection-hero__image'
+              -}}
+              {% if section.settings.image_overlay_opacity > 0 %}
+                <div
+                  class="ngp-bg-overlay"
+                  style="--color-overlay-alpha: {{ section.settings.image_overlay_opacity }};"
+                ></div>
+              {% endif %}
+            </picture>
+          </ngp-motion-element>
+        </ngp-parallax-element>
+      {%- endif -%}
+
+      <div class="ngp-collection-hero__text ngp-flex ngp-flex-col ngp-justify-center ngp-text-{{ section.settings.text_alignment }}{{ ngp_text_class }}">
+        {%- for ngp_block in section.blocks -%}
+          {%- case ngp_block.type -%}
+            {%- when 'collection_info' -%}
+              <div
+                class="ngp-collection-hero__info ngp-section--padding"
+                {{ ngp_block.shopify_attributes }}
+                style="--section-padding-top: {{ ngp_block.settings.padding_top }}px; --section-padding-bottom: {{ ngp_block.settings.padding_bottom }}px;"
+              >
+                <{{ ngp_block.settings.heading_tag }} class="ngp-collection-hero__title ngp-overflow-hidden {{ ngp_block.settings.heading_size }}">
+                  <span class="ngp-visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+                  <ngp-motion-element data-motion="fade-up" class="ngp-inline-block">
+                    {{- collection.title | escape -}}
+                  </ngp-motion-element>
+                </{{ ngp_block.settings.heading_tag }}>
+                {%- if ngp_block.settings.show_description and collection.description != blank -%}
+                  <div class="ngp-collection-hero__description ngp-text-lg ngp-rte">
+                    <ngp-motion-element
+                      data-motion="fade-up"
+                      data-motion-delay="50"
+                      class="ngp-block"
+                    >
+                      {{- collection.description }}
+                    </ngp-motion-element>
+                  </div>
+                {%- endif -%}
+              </div>
+          {%- endcase -%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.ngp-main-collection-banner.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.ngp-main-collection-banner.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.general.name"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.ngp-main-collection-banner.settings.settings_header.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.all.image.label"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "t:sections.slideshow.settings.image_overlay_opacity.label",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.ngp-main-collection-banner.settings.image_position.label",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:sections.ngp-main-collection-banner.settings.image_position.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.ngp-main-collection-banner.settings.image_position.options__2.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.ngp-main-collection-banner.settings.image_position.options__3.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.ngp-main-collection-banner.settings.image_position.options__4.label"
+        },
+        {
+          "value": "as-bg",
+          "label": "t:sections.ngp-main-collection-banner.settings.image_position.options__5.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.hero.settings.image_height.options__1.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.hero.settings.image_height.options__2.label"
+        },
+        {
+          "value": "extra-medium",
+          "label": "t:sections.hero.settings.image_height.options__3.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.hero.settings.image_height.options__4.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.hero.settings.image_height.options__5.label"
+        },
+        {
+          "value": "extra-small",
+          "label": "t:sections.hero.settings.image_height.options__6.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.hero.settings.image_height.label"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:sections.all.text_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.all.text_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.text_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.all.text_alignment.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "t:sections.all.enable_parallax_effect.label"
+    },
+    {
+      "type": "select",
+      "id": "parallax_direction",
+      "label": "t:sections.all.parallax_direction.label",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "t:sections.all.parallax_direction.options__1.label"
+        },
+        {
+          "value": "horizontal",
+          "label": "t:sections.all.parallax_direction.options__2.label"
+        },
+        {
+          "value": "zoom",
+          "label": "t:sections.all.parallax_direction.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.ngp-main-collection-banner.settings.mobile_settings_header.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "t:sections.all.image_mobile.label"
+    },
+    {
+      "type": "select",
+      "id": "image_height_mobile",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:sections.hero.settings.image_height.options__0.label"
+        },
+        {
+          "value": "adapt",
+          "label": "t:sections.hero.settings.image_height.options__1.label"
+        }
+      ],
+      "default": "auto",
+      "label": "t:sections.hero.settings.image_height.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_info",
+      "name": "t:sections.ngp-main-collection-banner.blocks.collection_info.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "t:sections.all.text_size.heading.label",
+          "default": "hd2",
+          "options": [
+            {
+              "value": "h6",
+              "label": "t:sections.all.text_size.options__h6.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:sections.all.text_size.options__h5.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.all.text_size.options__h4.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:sections.all.text_size.options__h3.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:sections.all.text_size.options__h2.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.text_size.options__h1.label"
+            },
+            {
+              "value": "hd3",
+              "label": "t:sections.all.text_size.options__hd3.label"
+            },
+            {
+              "value": "hd2",
+              "label": "t:sections.all.text_size.options__hd2.label"
+            },
+            {
+              "value": "hd1",
+              "label": "t:sections.all.text_size.options__hd1.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "t:sections.all.heading_tag.label",
+          "default": "h1",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_description",
+          "default": true,
+          "label": "t:sections.ngp-main-collection-banner.blocks.collection_info.settings.show_description.label"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "t:sections.all.padding.padding_top",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "t:sections.all.padding.padding_bottom",
+          "default": 50
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

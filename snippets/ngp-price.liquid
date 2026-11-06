@@ -1,0 +1,144 @@
+{%- liquid
+  assign ngp_selected_variant = product.selected_or_first_available_variant
+  if use_variant
+    assign ngp_target = ngp_selected_variant
+  else
+    assign ngp_target = product
+  endif
+
+  assign ngp_compare_at_price = ngp_target.compare_at_price
+  assign ngp_price = ngp_target.price | default: 1999
+  assign ngp_display_price = ngp_price
+  assign ngp_available = ngp_target.available | default: false
+
+  assign ngp_price_min = product.price_min
+  assign ngp_price_max = product.price_max
+  assign ngp_available = ngp_target.available | default: false
+  assign ngp_display_price_min = ngp_price_min
+  assign ngp_display_price_max = ngp_price_max
+  assign ngp_money_price = ngp_display_price | money
+  assign ngp_money_price_min = ngp_display_price_min | money
+  assign ngp_money_price_max = ngp_display_price_max | money
+  if settings.currency_code_enabled
+    assign ngp_money_price = ngp_display_price | money_with_currency
+    assign ngp_money_price_min = ngp_display_price_min | money_with_currency
+    assign ngp_money_price_max = ngp_display_price_max | money_with_currency
+  endif
+  if ngp_target == product and product.price_varies
+    assign ngp_money_price = 'products.product.price.from_price_html' | t: ngp_price: ngp_money_price
+  endif
+-%}
+<div
+  class="
+    ngp-f-price
+    {%- if alignment %} ngp-f-price--{{ alignment }}{% endif -%}
+    {%- if price_class %} {{ price_class }}{% endif -%}
+    {%- if ngp_available == false %} ngp-f-price--sold-out {% endif -%}
+    {%- if ngp_compare_at_price > ngp_price and product.quantity_price_breaks_configured? != true %} ngp-f-price--on-sale {% endif -%}
+    {%- if ngp_target.price_varies == false and ngp_target.compare_at_price_varies %} ngp-f-price--no-compare{% endif -%}
+    {%- if ngp_compare_at_price > ngp_price and product.quantity_price_breaks_configured? %} ngp-volume-pricing--sale-badge{% endif -%}
+  "
+>
+  {%- comment -%}
+    Explanation of description list:
+      - div.price__regular: Displayed when there are no variants on sale
+      - div.price__sale: Displayed when a variant is a sale
+  {%- endcomment -%}
+  <div class="ngp-f-price__regular{% if price_regular_class %} {{ price_regular_class }}{% endif %}">
+    {%- if product.quantity_price_breaks_configured? -%}
+      {%- unless product.price_varies == false and product.compare_at_price_varies == true %}
+        <span class="ngp-visually-hidden ngp-visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+        <span class="ngp-f-price-item ngp-f-price-item--regular">
+          <s>
+            {% if settings.currency_code_enabled %}
+              {{ ngp_compare_at_price | money_with_currency }}
+            {% else %}
+              {{ ngp_compare_at_price | money }}
+            {% endif %}
+          </s>
+        </span>
+      {%- endunless -%}
+      <span class="ngp-visually-hidden ngp-visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+      <span class="ngp-f-price-item ngp-f-price-item--regular">
+        {{- 'products.product.volume_pricing.price_range' | t: minimum: ngp_money_price_min, maximum: ngp_money_price_max -}}
+      </span>
+    {%- else -%}
+      <span class="ngp-visually-hidden ngp-visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+      <span class="ngp-f-price-item ngp-f-price-item--regular">
+        {{ ngp_money_price }}
+      </span>
+    {%- endif -%}
+  </div>
+  <div class="ngp-f-price__sale{% if price_sale_class %} {{ price_sale_class }}{% endif %}">
+    <span class="ngp-visually-hidden ngp-visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
+    <span class="ngp-f-price-item ngp-f-price-item--sale">
+      {{ ngp_money_price }}
+    </span>
+    {%- unless ngp_target.price_varies == false and ngp_target.compare_at_price_varies %}
+      <span class="ngp-visually-hidden ngp-visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+      <span class="ngp-f-price-item ngp-f-price-item--regular">
+        <s>
+          {% if settings.currency_code_enabled %}
+            {{ ngp_compare_at_price | money_with_currency }}
+          {% else %}
+            {{ ngp_compare_at_price | money }}
+          {% endif %}
+        </s>
+      </span>
+    {%- endunless -%}
+  </div>
+  <div class="ngp-f-price__unit-wrapper{% if ngp_selected_variant.unit_price_measurement == nil %} hidden{% endif %}">
+    <span class="ngp-visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+    <div class="ngp-f-price__unit">
+      {%- capture ngp_unit_price_separator -%}
+        <span aria-hidden="true">/</span><span class="ngp-visually-hidden">{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+      {%- endcapture -%}
+      {%- capture ngp_unit_price_base_unit -%}
+        <span data-unit-price-base-unit>
+            {%- if ngp_selected_variant.unit_price_measurement -%}
+              {%- if ngp_selected_variant.unit_price_measurement.reference_value != 1 -%}
+                {{- ngp_selected_variant.unit_price_measurement.reference_value -}}
+              {%- endif -%}
+              {{ ngp_selected_variant.unit_price_measurement.reference_unit }}
+            {%- endif -%}
+          </span>
+      {%- endcapture -%}
+      <span data-unit-price>{{ ngp_selected_variant.unit_price | money }}</span>
+      {{- ngp_unit_price_separator -}}
+      {{- ngp_unit_price_base_unit -}}
+    </div>
+  </div>
+
+  {% if show_sale_badge or show_soldout_badge %}
+    <div class="ngp-f-price__badges">
+      {% if show_sale_badge %}
+        {% liquid
+          assign ngp_sale_badge = ''
+          assign ngp_amount = 0
+          case sale_badge_type
+            when 'percentage'
+              if ngp_compare_at_price > ngp_price
+                assign ngp_amount = ngp_compare_at_price | minus: ngp_price | times: 100 | divided_by: ngp_compare_at_price | append: '%'
+              endif
+              assign ngp_sale_badge = 'products.product.price.save_price_html' | t: ngp_amount: ngp_amount
+            when 'fixed_amount'
+              if ngp_compare_at_price > ngp_price
+                assign ngp_amount = ngp_compare_at_price | minus: ngp_price | money
+              endif
+              assign ngp_sale_badge = 'products.product.price.save_price_html' | t: ngp_amount: ngp_amount
+            else
+              assign ngp_sale_badge = 'products.product.on_sale' | t
+          endcase
+        %}
+        <div class="ngp-f-price__badge-sale" data-type="{{ sale_badge_type }}">
+          <span class="ngp-f-badge ngp-f-badge--sale">{{ ngp_sale_badge }}</span>
+        </div>
+      {% endif %}
+      {% if show_soldout_badge %}
+        <div class="ngp-f-price__badge-sold-out">
+          <span class="ngp-f-badge ngp-f-badge--soldout">{{ 'products.product.sold_out' | t }}</span>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

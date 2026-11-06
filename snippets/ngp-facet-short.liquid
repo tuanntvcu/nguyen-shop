@@ -1,0 +1,25 @@
+<label for="SortBy" class="ngp-text-nowrap {{ label_class }}">
+  {{- 'products.facets.sort_by_label' | t -}}
+</label>
+<div class="ngp-select ngp-w-auto ngp-facet-short ngp-flex ngp-items-center ngp-gap-2 ngp-flex-grow">
+  {%- assign ngp_sort_by = results.sort_by | default: results.default_sort_by -%}
+  <select
+    name="sort_by"
+    class="ngp-form-control ngp-form-control--select"
+    id="SortBy"
+    aria-describedby="a11y-refresh-page-message"
+    is="ngp-facet-short"
+  >
+    {%- for ngp_option in results.sort_options -%}
+      <option
+        value="{{ ngp_option.value | escape }}"
+        {% if ngp_option.value == ngp_sort_by %}
+          selected="selected"
+        {% endif %}
+      >
+        {{ ngp_option.name | escape }}
+      </option>
+    {%- endfor -%}
+  </select>
+  {% render 'ngp-icon-caret-down', size: icon_size %}
+</div>

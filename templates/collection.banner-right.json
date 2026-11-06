@@ -1,13 +1,13 @@
 {
   "sections": {
     "breadcrumbs_Gxg9wp": {
-      "type": "breadcrumbs",
+      "type": "ngp-breadcrumbs",
       "settings": {
         "text_alignment": "center"
       }
     },
     "banner": {
-      "type": "main-collection-banner",
+      "type": "ngp-main-collection-banner",
       "blocks": {
         "collection_info_zUNyKV": {
           "type": "collection_info",
@@ -23,9 +23,7 @@
       "block_order": [
         "collection_info_zUNyKV"
       ],
-      "custom_css": [
-
-      ],
+      "custom_css": [],
       "settings": {
         "color_scheme": "scheme-2",
         "image_overlay_opacity": 0,
@@ -40,10 +38,8 @@
       }
     },
     "product-grid": {
-      "type": "main-collection-product-grid",
-      "custom_css": [
-
-      ],
+      "type": "ngp-main-collection-product-grid",
+      "custom_css": [],
       "settings": {
         "products_per_page": 15,
         "columns_desktop": 3,

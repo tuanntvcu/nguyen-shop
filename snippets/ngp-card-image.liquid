@@ -1,0 +1,108 @@
+{%- liquid
+  assign ngp_rich_text_size = ngp_rich_text_size | default: 'small'
+  assign ngp_image_ratio_placeholder = ngp_image_ratio_placeholder | default: '1/1'
+  assign ngp_image_ratio = ngp_image_ratio | default: ngp_image_ratio_placeholder
+  if ngp_image_ratio == 'adapt'
+    if image == blank
+      assign ngp_image_ratio = ngp_image_ratio_placeholder
+    else
+      assign ngp_image_ratio = image.aspect_ratio
+    endif
+
+    if image_mobile == blank
+      assign ngp_image_mobile_ratio = ngp_image_ratio
+    else
+      assign ngp_image_mobile_ratio = image_mobile.aspect_ratio
+    endif
+  endif
+
+  assign ngp_content_alignment_mobile = ngp_content_alignment_mobile | default: content_alignment
+  assign ngp_description_size = ngp_description_size | default: 'ngp-text-base'
+
+  assign ngp_card_mobile_color_inherit = false
+  if parent_color_scheme == color_scheme_mobile
+    assign ngp_card_mobile_color_inherit = true
+  endif
+-%}
+{%- if link -%}
+  <a
+    href="{{ link }}"
+    class="ngp-card-media--link ngp-focus-inset"
+    aria-label="{{ heading | default: shop.name }}"
+  >
+{%- endif -%}
+<div class="ngp-card-media ngp-card-media--content-{{ content_position }} ngp-card-media--{{ content_spacing }}{% if show_text_below %} ngp-card-media--mobile-content-below{% if ngp_card_mobile_color_inherit %} ngp-card-media--mobile-color-inherit{% endif %}{% endif %}{% if content_position != 'below' %} ngp-blocks-radius{% endif %} ngp-relative ngp-overflow-hidden ngp-color-{{ color_scheme }}{% if color_scheme_mobile %} ngp-mobile-color-{{ color_scheme_mobile }}{% endif %} ngp-hover-wrapper">
+  <div class="ngp-overflow-hidden ngp-block ngp-w-full ngp-h-full{% if content_position == 'below' %} ngp-blocks-radius{% endif %}">
+    <ngp-motion-element class="ngp-block ngp-h-full" data-motion="zoom-out-sm">
+      <picture
+        class="ngp-card-media__media ngp-media-wrapper{% if image == blank %} ngp-bg-none{% endif %}"
+        style="--aspect-ratio: {{ ngp_image_ratio }};{% if ngp_image_mobile_ratio %}--aspect-ratio-mobile: {{ ngp_image_mobile_ratio }};{% endif %}"
+      >
+        {%- if image != blank -%}
+          {%- if image_mobile -%}
+            <source
+              media="(max-width: 767px)"
+              srcset="{{ image_mobile | image_url: width: '400x' }} 400w, {{ image_mobile | image_url: width: '600x' }} 600w, {{ image_mobile | image_url: width: '800x' }} 800w, {{ image_mobile | image_url: width: '1000x' }} 1000w"
+              width="{{ image_mobile.width }}"
+              height="{{ image_mobile.height }}"
+            >
+          {%- endif -%}
+          {{
+            image
+            | image_url: width: 1100
+            | image_tag:
+              loading: 'lazy',
+              class: 'motion-reduce absolute inset-0 w-full h-full hover-scale-up',
+              widths: '165, 360, 535, 750, 940, 1100',
+              is: 'ngp-image-lazy'
+          }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg hover-scale-up' }}
+        {%- endif -%}
+
+        {% if image_overlay_opacity and image_overlay_opacity > 0 %}
+          <div
+            class="ngp-bg-overlay"
+            style="--color-overlay-alpha: {{ image_overlay_opacity }};"
+          ></div>
+        {% endif %}
+      </picture>
+    </ngp-motion-element>
+  </div>
+  {%- if heading != blank or description != blank or button_label != blank or subheading != blank -%}
+    <div class="ngp-card-media__content ngp-card-media__content--{{ content_alignment }}{% if content_position != 'below' %} ngp-content-overlay ngp-content-overlay--{{ content_position }}{% if content_position_mobile %} ngp-content-overlay--{{ content_position_mobile }}-mobile{% endif %}{% endif %}">
+      <div class="ngp-card-media__content-wrapper ngp-rich-text ngp-rich-text--{{ ngp_rich_text_size }} ngp-text-{{ ngp_content_alignment_mobile }} ngp-md:ngp-text-{{ content_alignment }}">
+        <div class="ngp-card-media__text ngp-rich-text ngp-rich-text--{{ ngp_rich_text_size }}">
+          {%- if subheading != blank -%}
+            <p class="ngp-m-0 ngp-rich-text__subheading ngp-text-subheading">{{ subheading }}</p>
+          {%- endif -%}
+          {%- if heading != blank -%}
+            <div class="ngp-block ngp-card-media__heading ngp-rich-text__heading {{ heading_size }}">
+              <span class="{% if content_position == 'below' %}ngp-reversed-link{% endif %}">
+                {% render 'ngp-highlight-text', text: heading, style: heading_highlight_style %}
+              </span>
+            </div>
+          {%- endif -%}
+          {%- if description != blank -%}
+            <div class="ngp-card-media__description ngp-rich-text__text ngp-rte {{ ngp_description_size }}">{{ description }}</div>
+          {%- endif -%}
+        </div>
+        {%- if button_label != blank -%}
+          <div class="ngp-card-media__button">
+            <button
+              class="ngp-btn {{ button_style }}"
+              {% unless link %}
+                disabled
+              {% endunless %}
+            >
+              {{ button_label }}
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+{%- if link -%}
+  </a>
+{%- endif -%}

@@ -1,0 +1,242 @@
+{%- liquid
+  assign ngp_eyebrow = section.settings.eyebrow
+  assign ngp_title_before = 'altaeron_pdp_reels_v3.try_home.title_before' | t
+  assign ngp_title_emphasis = 'altaeron_pdp_reels_v3.try_home.title_emphasis' | t
+  assign ngp_title_after = 'altaeron_pdp_reels_v3.try_home.title_after' | t
+  assign ngp_close_before = 'altaeron_pdp_reels_v3.try_home.close_before' | t
+  assign ngp_close_emphasis = 'altaeron_pdp_reels_v3.try_home.close_emphasis' | t
+  assign ngp_close_after = 'altaeron_pdp_reels_v3.try_home.close_after' | t
+  assign ngp_heading = ngp_title_before | append: ngp_title_emphasis | append: ngp_title_after
+  assign ngp_cta_text = section.settings.cta_text
+  assign ngp_cta_reassurance = section.settings.cta_reassurance
+  unless request.locale.iso_code == 'en'
+    assign ngp_eyebrow = 'altaeron_pdp_reels_v3.try_home.eyebrow' | t
+    assign ngp_cta_text = 'altaeron_pdp_reels_v3.try_home.cta_text' | t
+    assign ngp_cta_reassurance = 'altaeron_pdp_reels_v3.try_home.cta_reassurance' | t
+  endunless
+  assign ngp_hero_alt = section.settings.hero_image.alt | default: ngp_heading
+  assign ngp_cta_link = section.settings.cta_link
+-%}
+
+<style>
+  #AltaeronTryHome-{{ section.id }} {
+    --ngp-alta-try-ink: var(--ngp-altaeron-navy, #102a43);
+    --ngp-alta-try-body: var(--ngp-altaeron-body, #344054);
+    --ngp-alta-try-accent: var(--ngp-altaeron-primary, #006b5e);
+    --ngp-alta-try-accent-dark: var(--ngp-altaeron-primary-dark, #005449);
+    --ngp-alta-try-soft: var(--ngp-altaeron-soft-teal, #eaf5f2);
+    --ngp-alta-try-line: var(--ngp-altaeron-border, #e4e7ec);
+    background: #fff;
+    color: var(--ngp-alta-try-body);
+    padding: 36px 0 80px;
+  }
+  #AltaeronTryHome-{{ section.id }} * { box-sizing: border-box; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__shell { margin-inline: auto; width: min(1360px, calc(100% - 80px)); }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero { background: #f7f9f7; border: 1px solid var(--ngp-alta-try-line); border-radius: 18px; display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); overflow: hidden; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__content { align-self: center; padding: clamp(34px, 5vw, 72px); }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__eyebrow { align-items: center; color: var(--ngp-alta-try-accent); display: flex; font-size: 12px; font-weight: 750; gap: 12px; letter-spacing: .24em; line-height: 1.3; margin: 0 0 12px; text-transform: uppercase; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__heading { color: var(--ngp-alta-try-ink); font-family: var(--ngp-alta-font-family, var(--font-heading-family)); font-size: clamp(32px, 3.2vw, 48px); font-weight: 750; letter-spacing: -.038em; line-height: 1.06; margin: 0; max-width: 560px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__heading strong { color: var(--ngp-alta-try-accent); }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__body { color: var(--ngp-alta-try-body); font-size: clamp(16px, 1.4vw, 19px); line-height: 1.55; margin: 14px 0 0; max-width: 610px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__body p { margin: 0 0 14px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__body p:last-child { margin-bottom: 0; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__body strong { color: #ff4d54; font-weight: 700; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__note { border-left: 2px solid rgba(0,107,94,.35); color: var(--ngp-alta-try-accent); font-family: var(--font-heading-family, inherit); font-size: clamp(19px, 2vw, 27px); font-style: italic; font-weight: 500; letter-spacing: -.015em; line-height: 1.25; margin: 28px 0 0; padding: 2px 0 2px 18px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__note strong { color: var(--ngp-alta-try-accent); }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero-media { background: #edf1ef; min-height: 520px; overflow: hidden; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero-media :is(img, svg),
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust__icon :is(img, svg) { display: block; height: 100%; object-fit: cover; width: 100%; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__trust { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 20px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust { align-items: center; background: #fff; border: 1px solid var(--ngp-alta-try-line); border-radius: 14px; display: grid; gap: 15px; grid-template-columns: 64px minmax(0, 1fr); min-width: 0; padding: 17px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust__icon { background: var(--ngp-alta-try-soft); border-radius: 12px; height: 64px; overflow: hidden; width: 64px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust h3 { color: var(--ngp-alta-try-ink); font-family: var(--ngp-alta-font-family, var(--font-heading-family)); font-size: 17px; font-weight: 750; letter-spacing: -.015em; line-height: 1.25; margin: 0 0 4px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust p { color: var(--ngp-alta-try-body); font-size: 13px; line-height: 1.45; margin: 0; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__action { margin: 22px auto 0; max-width: 900px; text-align: center; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__cta { align-items: center; background: var(--ngp-alta-try-accent); border: 1px solid var(--ngp-alta-try-accent); border-radius: 12px; color: #fff; cursor: pointer; display: flex; font-family: inherit; font-size: 16px; font-weight: 750; justify-content: center; letter-spacing: .035em; min-height: 58px; padding: 15px 24px; text-decoration: none; transition: background-color .2s ease, border-color .2s ease, transform .2s ease; width: 100%; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__cta:hover { background: var(--ngp-alta-try-accent-dark); border-color: var(--ngp-alta-try-accent-dark); color: #fff; transform: translateY(-1px); }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__cta:focus-visible { outline: 3px solid rgba(0,107,94,.3); outline-offset: 3px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__cta:disabled { cursor: not-allowed; opacity: .55; transform: none; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__checkout-note { align-items: center; color: #667085; display: flex; font-size: 12px; gap: 7px; justify-content: center; line-height: 1.4; margin: 10px 0 0; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__checkout-note svg { flex: 0 0 14px; height: 14px; width: 14px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__customers-note { align-items: center; color: var(--ngp-alta-try-accent); display: flex; font-size: 12px; font-weight: 750; gap: 7px; justify-content: center; line-height: 1.4; margin: 6px 0 0; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__customers-note svg { flex: 0 0 15px; height: 15px; width: 15px; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__banner { background: linear-gradient(90deg, #edf8f7, #f4f8f5); border: 1px solid rgba(0,107,94,.08); border-radius: 15px; margin-top: 24px; overflow: hidden; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__banner-copy { align-items: center; display: flex; justify-content: center; padding: 24px 38px; text-align: center; }
+  #AltaeronTryHome-{{ section.id }} .ngp-alta-try__banner-copy p { color: var(--ngp-alta-try-ink); font-family: var(--ngp-alta-font-family, var(--font-heading-family)); font-size: clamp(21px, 2.3vw, 31px); font-weight: 700; letter-spacing: -.025em; line-height: 1.22; margin: 0; white-space: pre-line; }
+  @media (min-width: 750px) {
+    #AltaeronTryHome-{{ section.id }} { padding: 40px 0 clamp(72px, 6.5vw, 96px); }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero { box-shadow: 0 20px 56px rgba(16,42,67,.07); grid-template-columns: minmax(0, 48fr) minmax(0, 52fr); }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__content { padding: clamp(34px, 4.2vw, 62px); }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero-media { min-height: 480px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__trust { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__trust:has(> :only-child) { grid-template-columns: minmax(280px, 520px); justify-content: center; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust:hover { border-color: rgba(0,107,94,.3); box-shadow: 0 14px 34px rgba(16,42,67,.08); transform: translateY(-2px); }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__action { max-width: 620px; }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__shell { width: min(1240px, calc(100% - 80px)); }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero-media { min-height: 540px; }
+  }
+  @media (max-width: 899px) {
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero { grid-template-columns: 1fr 1fr; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__content { padding: 34px 28px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero-media { min-height: 460px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__trust { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 749px) {
+    #AltaeronTryHome-{{ section.id }} { padding: 12px 0 28px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__shell { width: calc(100% - 30px); }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero { border-radius: 13px; grid-template-columns: 1fr; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__content { padding: 28px 20px 24px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__eyebrow { font-size: 10px; gap: 9px; letter-spacing: .2em; margin-bottom: 9px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__eyebrow::before { flex-basis: 28px; height: 2px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__heading { font-size: 31px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__body { font-size: 15px; line-height: 1.5; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__note { font-size: 19px; margin-top: 20px; padding-left: 13px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__hero-media { aspect-ratio: 4 / 3; min-height: 0; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__trust { gap: 10px; grid-template-columns: 1fr; margin-top: 14px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust { border-radius: 12px; gap: 12px; grid-template-columns: 54px minmax(0, 1fr); padding: 13px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust__icon { border-radius: 10px; height: 54px; width: 54px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust h3 { font-size: 15px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try-trust p { font-size: 12px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__action { margin-top: 16px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__cta { border-radius: 10px; font-size: 15px; min-height: 54px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__banner { border-radius: 12px; margin-top: 18px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__banner-copy { padding: 18px 16px; }
+    #AltaeronTryHome-{{ section.id }} .ngp-alta-try__banner-copy p { font-size: 17px; }
+  }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'ngp-reels-v3-responsive-section', section_kind: 'try_home', section_id: section.id %}
+  {%- endif -%}
+</style>
+
+<section id="AltaeronTryHome-{{ section.id }}" class="ngp-try-at-home" aria-labelledby="AltaeronTryHomeHeading-{{ section.id }}">
+  <div class="ngp-alta-try__shell">
+    <div class="ngp-alta-try__hero">
+      <div class="ngp-alta-try__content">
+        {%- if ngp_eyebrow != blank -%}<p class="ngp-alta-try__eyebrow">{{ ngp_eyebrow | escape }}</p>{%- endif -%}
+        <h2 id="AltaeronTryHomeHeading-{{ section.id }}" class="ngp-alta-try__heading">{{ ngp_title_before | escape }}<strong>{{ ngp_title_emphasis | escape }}</strong>{{ ngp_title_after | escape }}</h2>
+        <div class="ngp-alta-try__body">
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_1' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_2' | t | escape }}</p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_3' | t | escape }}</p>
+          <p><strong>{{ 'altaeron_pdp_reels_v3.try_home.body_4' | t | escape }}</strong></p>
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.body_5_before' | t | escape }}<strong>{{ 'altaeron_pdp_reels_v3.try_home.body_5_emphasis' | t | escape }}</strong>{{ 'altaeron_pdp_reels_v3.try_home.body_5_after' | t | escape }}</p>
+        </div>
+        {%- if section.settings.show_handwritten and ngp_close_before != blank -%}
+          <p class="ngp-alta-try__note">{{ ngp_close_before | escape }}<strong>{{ ngp_close_emphasis | escape }}</strong>{{ ngp_close_after | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="ngp-alta-try__hero-media">
+        {%- if section.settings.hero_image != blank -%}
+          {{ section.settings.hero_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '420, 640, 840, 1100, 1400, 1600', sizes: '(min-width: 900px) 52vw, (min-width: 750px) 50vw, calc(100vw - 30px)', alt: ngp_hero_alt }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ngp-alta-try__trust">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign ngp_block_title = block.settings.title
+            assign ngp_block_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture ngp_title_key
+                echo 'altaeron_pdp_reels_v3.try_home.trust_' | append: forloop.index | append: '_title'
+              endcapture
+              capture ngp_body_key
+                echo 'altaeron_pdp_reels_v3.try_home.trust_' | append: forloop.index | append: '_body'
+              endcapture
+              assign ngp_block_title = ngp_title_key | t
+              assign ngp_block_body = ngp_body_key | t
+            endunless
+            assign ngp_icon_alt = block.settings.image.alt | default: ngp_block_title
+          -%}
+          <article class="ngp-alta-try-trust" {{ block.shopify_attributes }}>
+            <div class="ngp-alta-try-trust__icon">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '80, 120, 180, 240', sizes: '64px', alt: ngp_icon_alt }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div><h3>{{ ngp_block_title | escape }}</h3><p>{{ ngp_block_body | escape }}</p></div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="ngp-alta-try__action">
+      {%- if ngp_cta_text != blank -%}
+        {%- if ngp_cta_link != blank -%}
+          <a class="ngp-alta-try__cta" href="{{ ngp_cta_link | escape }}">{{ ngp_cta_text | escape }}</a>
+        {%- else -%}
+          <button type="button" class="ngp-alta-try__cta" data-apdp-try-submit{% unless product.selected_or_first_available_variant.available %} disabled aria-disabled="true"{% endunless %}>{{ ngp_cta_text | escape }}</button>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if ngp_cta_reassurance != blank -%}
+        <p class="ngp-alta-try__checkout-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>{{ ngp_cta_reassurance | escape }}</span></p>
+      {%- endif -%}
+      <p class="ngp-alta-try__customers-note">{% render 'ngp-pdp-icon', icon: 'people' %}<strong>{{ 'altaeron_pdp_reels_v3.try_home.banner_text' | t | escape }}</strong></p>
+    </div>
+
+    {%- if section.settings.show_banner -%}
+      <div class="ngp-alta-try__banner">
+        <div class="ngp-alta-try__banner-copy">
+          <p>{{ 'altaeron_pdp_reels_v3.try_home.banner_text' | t | escape }}</p>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron: Try at Home",
+  "tag": "section",
+  "class": "section-altaeron-custom",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "TRY IT AT HOME" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You Are Just One Foot Away From Being FREE of Bunion Discomfort, Swollen Toes, or Foot Aches..." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "If you’re reading this, chances are you are suffering from persistent bunion discomfort.\n\nThe pain and discomfort can affect your daily activities.\n\nIf left untreated, bunions can worsen. Your toes may cross over, and hammer toes or bone spurs may develop.\n\nBunions are a progressive disorder and may not go away on their own.\n\nOver time, this can lead to more serious issues, including invasive surgery, problems in your hips, knees and lower back, and even immobility.\n\nHarnessing clinically proven advanced alignment therapy and a patented hinge-joint mechanism, the Altaeron™ Adjustable Bunion Corrector addresses bunion discomfort around the affected area of your foot.\n\nIt supports foot health with as little as 30 minutes of daily use." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero lifestyle image" },
+    { "type": "header", "content": "Supporting message" },
+    { "type": "checkbox", "id": "show_handwritten", "label": "Show supporting message", "default": true },
+    { "type": "textarea", "id": "handwritten_message", "label": "Supporting message", "default": "91% of users reported reduced foot pain from the first week." },
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "START YOUR CORRECTION →" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "cta_reassurance", "label": "CTA reassurance", "default": "Secure checkout · 30-day easy returns" },
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "checkbox", "id": "show_banner", "label": "Show bottom banner", "default": true },
+    { "type": "textarea", "id": "banner_text", "label": "Banner text", "default": "10,000+ Happy Customers" }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Icon or image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Trust point" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Short reassurance text." }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [{
+    "name": "Altaeron: Try at Home",
+    "blocks": [
+      { "type": "trust", "settings": { "title": "30-Day Easy Returns", "body": "Try it as part of your normal at-home routine." } },
+      { "type": "trust", "settings": { "title": "Tracked Shipping", "body": "Know where your order is from dispatch to delivery." } },
+      { "type": "trust", "settings": { "title": "Responsive Support", "body": "Get help with fit, use or your order." } }
+    ]
+  }]
+}
+{% endschema %}

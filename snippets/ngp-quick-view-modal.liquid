@@ -1,0 +1,24 @@
+<quick-view-modal
+  id="{{ modal_id }}"
+  class="ngp-quick-view ngp-drawer ngp-drawer--right"
+  data-product-url="{{ product.url }}"
+  hidden
+>
+  {{ 'ngp-section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'ngp-component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {% unless product.has_only_default_variant %}
+    {{ 'ngp-component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+  {% endunless %}
+  <div class="ngp-fixed-overlay" aria-controls="{{ modal_id }}"></div>
+  <div class="ngp-drawer__inner">
+    <button
+      class="ngp-drawer__close-btn"
+      aria-controls="{{ modal_id }}"
+      aria-label="{{ 'accessibility.close' | t }}"
+    >
+      {% render 'ngp-icon-close' %}
+    </button>
+    {%- render 'ngp-loading-spinner' -%}
+    <div class="ngp-drawer__body ngp-v-scrollable ngp-h-full ngp-quick-view__content"></div>
+  </div>
+</quick-view-modal>

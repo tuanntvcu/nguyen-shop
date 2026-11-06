@@ -1,0 +1,319 @@
+{%- liquid
+  unless ngp_enable_color_swatch
+    assign ngp_enable_color_swatch = section.settings.enable_color_swatch
+  endunless
+-%}
+{%- if results.filters != empty -%}
+  <form
+    class="ngp-face-form"
+    method="GET"
+    action="{{ request.path }}"
+    is="ngp-facet-form"
+    data-section-id="{{ section.id }}"
+    data-history
+    update-on-change
+  >
+    <div data-filter data-index="{{ context }}-page" hidden>
+      <input type="hidden" name="page" value="">
+
+      {%- if results.current_type != blank or results.current_vendor != blank -%}
+        <input type="hidden" name="q" value="{{ results.current_vendor | default: results.current_type | escape }}">
+      {%- endif -%}
+
+      {%- if request.page_type == 'search' -%}
+        <input type="hidden" name="q" value="{{ results.terms | escape }}">
+      {%- endif -%}
+
+      {%- if show_sort_by == blank and results.sort_by != blank -%}
+        <input type="hidden" name="sort_by" value="{{ results.sort_by }}">
+      {%- endif -%}
+    </div>
+    {%- for ngp_filter in results.filters -%}
+      {%- assign ngp_filter_id = context | append: '-' | append: ngp_filter.param_name -%}
+      {% liquid
+        if ngp_filter.presentation == 'image'
+          assign ngp_show_more_number = 12
+        else
+          assign ngp_show_more_number = 14
+        endif
+
+        assign ngp_downcase_label = ngp_filter.label | downcase
+
+        assign ngp_expand = false
+        if section.settings.expand_filter_groups != blank
+          assign ngp_expand_filter_groups = section.settings.expand_filter_groups | downcase
+          if ngp_expand_filter_groups contains ngp_downcase_label
+            assign ngp_expand = true
+          endif
+        endif
+      %}
+      {%- case ngp_filter.type -%}
+        {%- when 'list', 'boolean' -%}
+          {%- liquid
+            assign ngp_is_color = false
+
+            if settings.color_swatch_trigger != blank and ngp_enable_color_swatch
+              assign ngp_swatch_trigger = settings.color_swatch_trigger | downcase
+              if ngp_swatch_trigger contains ngp_downcase_label
+                assign ngp_is_color = true
+              elsif ngp_swatch_trigger contains 'color' and ngp_downcase_label contains 'colour'
+                assign ngp_is_color = true
+              endif
+            endif
+
+            assign ngp_sorted_values = ngp_filter.values
+            # Keep the selected values grouped together when operator is AND
+            if ngp_filter.operator == 'AND'
+              assign ngp_active_filter_values = ngp_filter.values | where: 'active', true
+              assign ngp_inactive_filter_values = ngp_filter.values | where: 'active', false
+              assign ngp_sorted_values = ngp_active_filter_values | concat: ngp_inactive_filter_values
+            endif
+          -%}
+          <details
+            class="ngp-accordion-details ngp-facet-accordion-details"
+            is="ngp-accordion-details"
+            data-filter
+            data-index="{{ ngp_filter_id }}"
+            {% if ngp_expand %}
+              open
+            {% endif %}
+          >
+            <summary class="ngp-accordion-details__summary ngp-flex ngp-items-center ngp-justify-between">
+              <span class="ngp-h4">
+                {{- ngp_filter.label | escape -}}
+                {%- if ngp_filter.operator == 'AND' -%}
+                  <small class="ngp-accordion-details__helptext ngp-block ngp-text-subtext ngp-text-sm ngp-overflow-hidden">
+                    {{- 'products.facets.filter_and_operator_subtitle' | t -}}
+                  </small>
+                {%- endif -%}
+              </span>
+              {%- render 'ngp-icon-plus-toggle' -%}
+            </summary>
+            <div class="ngp-accordion-details__content ngp-parent-display ngp-flex ngp-flex-col ngp-gap-3">
+              {%- if ngp_is_color or ngp_filter.presentation == 'swatch' -%}
+                <ul class="ngp-swatches ngp-flex ngp-flex-wrap ngp-items-center">
+                  {%- for ngp_filter_value in ngp_sorted_values -%}
+                    {%- liquid
+                      assign ngp_filter_value_id = ngp_filter_id | append: '-' | append: forloop.index
+                      assign ngp_is_disabled = false
+                      if ngp_filter_value.count == 0 and ngp_filter_value.active == false
+                        assign ngp_is_disabled = true
+                      endif
+                    -%}
+                    <li
+                      data-tooltip
+                      class="ngp-filter-item{% if forloop.index > ngp_show_more_number %} ngp-show-more-item hidden{% endif %}"
+                    >
+                      {%- capture ngp_filter_label -%}{{ ngp_filter_value.label }} ({{ ngp_filter_value.count }}){%- endcapture -%}
+                      {%- liquid
+                        if ngp_filter.presentation == 'swatch'
+                          render 'ngp-swatch', allow_multiple: true, value: ngp_filter_value.value, name: ngp_filter_value.param_name, id: ngp_filter_value_id, selected: ngp_filter_value.active, disabled: ngp_is_disabled, swatch: ngp_filter_value.swatch, tooltip: ngp_filter_label
+                        else
+                          render 'ngp-swatch', allow_multiple: true, value: ngp_filter_value.value, name: ngp_filter_value.param_name, id: ngp_filter_value_id, selected: ngp_filter_value.active, disabled: ngp_is_disabled, file_extension: 'png', tooltip: ngp_filter_label
+                        endif
+                      -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- elsif ngp_filter.presentation == 'image' -%}
+                <ul class="ngp-swatches ngp-flex ngp-items-center">
+                  {%- for ngp_filter_value in ngp_sorted_values -%}
+                    {%- liquid
+                      assign ngp_filter_value_id = ngp_filter_id | append: '-' | append: forloop.index
+                      assign ngp_is_disabled = false
+                      if ngp_filter_value.count == 0 and ngp_filter_value.active == false
+                        assign ngp_is_disabled = true
+                      endif
+
+                      assign ngp_swatch_image = blank
+                      assign ngp_swatch_fallback = ngp_filter_value.value | split: ' ' | last | handle
+                      assign ngp_swatch_focal_point = null
+                      if ngp_filter_value.image
+                        assign ngp_swatch_image = ngp_filter_value.image | image_url: width: 144
+                        assign ngp_swatch_focal_point = ngp_filter_value.image.presentation.focal_point
+                      endif
+                    -%}
+                    <li
+                      data-tooltip
+                      class="ngp-filter-item{% if forloop.index > ngp_show_more_number %} ngp-show-more-item hidden{% endif %}"
+                    >
+                      <input
+                        class="ngp-visually-hidden"
+                        name="{{ ngp_filter_value.param_name }}"
+                        value="{{ ngp_filter_value.value | escape }}"
+                        type="checkbox"
+                        id="{{ ngp_filter_value_id }}"
+                        {% if ngp_is_disabled %}
+                          disabled
+                        {% endif -%}
+                        {% if ngp_filter_value.active %}
+                          checked
+                        {% endif %}
+                      >
+                      <label
+                        class="ngp-swatch-color ngp-swatch-image ngp-block ngp-relative{% if class != blank %} {{ class }}{% endif %}"
+                        for="{{ ngp_filter_value_id | escape }}"
+                        style="--swatch-background: {{ ngp_swatch_fallback }};{% if ngp_swatch_image != blank %} background-image: url({{ ngp_swatch_image }});{% endif %}{% if ngp_swatch_focal_point %} --swatch-focal-point: {{ ngp_swatch_focal_point }}{% endif %}"
+                      >
+                        <span class="ngp-tooltip">{{ ngp_filter_value.label | escape }} ({{ ngp_filter_value.count }})</span>
+                      </label>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- else -%}
+                <ul class="ngp-grid ngp-gap-3">
+                  {%- for ngp_filter_value in ngp_sorted_values -%}
+                    {%- liquid
+                      assign ngp_filter_value_id = ngp_filter_id | append: '-' | append: forloop.index
+                      assign ngp_is_disabled = false
+                      if ngp_filter_value.count == 0 and ngp_filter_value.active == false
+                        assign ngp_is_disabled = true
+                      endif
+                    -%}
+                    <li class="ngp-flex ngp-items-center ngp-gap-3{% if forloop.index > ngp_show_more_number %} ngp-show-more-item hidden{% endif %}">
+                      <input
+                        name="{{ ngp_filter_value.param_name }}"
+                        value="{{ ngp_filter_value.value | escape }}"
+                        class="ngp-checkbox"
+                        id="{{ ngp_filter_value_id | escape }}"
+                        type="checkbox"
+                        {% if ngp_filter_value.active %}
+                          checked
+                        {% endif -%}
+                        {% if ngp_is_disabled %}
+                          disabled
+                        {% endif %}
+                      >
+                      <label for="{{ ngp_filter_value_id }}" class="ngp-flex ngp-items-center ngp-gap-1">
+                        {{- ngp_filter_value.label | escape -}}
+                        <span class="ngp-text-sm{% unless ngp_filter_value.active %} ngp-text-subtext{% endunless %}"
+                          >({{ ngp_filter_value.count }})</span
+                        >
+                      </label>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              {%- if ngp_filter.values.size > ngp_show_more_number -%}
+                <ngp-show-more-button>
+                  <button
+                    class="ngp-button-show-more ngp-btn--link"
+                    id="Show-More-{{ forloop.index }}-{{ section.id }}"
+                    type="button"
+                  >
+                    <span class="ngp-label-show-more ngp-label-text"
+                      ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t -}}
+                    </span>
+                    <span class="ngp-label-show-less ngp-label-text hidden"
+                      ><span aria-hidden="true">- </span>{{ 'products.facets.show_less' | t -}}
+                    </span>
+                  </button>
+                </ngp-show-more-button>
+              {%- endif %}
+            </div>
+          </details>
+        {%- when 'price_range' -%}
+          {%- liquid
+            assign ngp_min_value = ngp_filter.min_value.value | default: 0.0 | divided_by: 100.0
+            assign ngp_max_value = ngp_filter.max_value.value | default: ngp_filter.range_max | divided_by: 100.0
+            assign ngp_range_max = ngp_filter.range_max | divided_by: 100.0 | ceil
+            assign ngp_step_value = ngp_max_value | minus: ngp_min_value | divided_by: 100.0 | ceil | at_most: 1
+            assign ngp_lower_progress_limit = ngp_min_value | divided_by: ngp_range_max | times: 100.0
+            assign ngp_higher_progress_limit = ngp_max_value | divided_by: ngp_range_max | times: 100.0
+          -%}
+          <details
+            is="ngp-accordion-details"
+            class="ngp-accordion-details ngp-facet-accordion-details"
+            data-filter
+            data-index="{{ ngp_filter_id }}"
+            {% if ngp_expand %}
+              open
+            {% endif %}
+          >
+            <summary class="ngp-accordion-details__summary ngp-flex ngp-items-center ngp-justify-between">
+              <span class="ngp-h4">{{- ngp_filter.label | escape -}}</span>
+              {%- render 'ngp-icon-plus-toggle' -%}
+            </summary>
+            <div class="ngp-accordion-details__content ngp-accordion-details__content--price">
+              <ngp-price-range class="ngp-grid ngp-gap-6">
+                <label class="ngp-visually-hidden" for="FacetFormRangeFromPrice-{{ context }}">
+                  {{- 'products.facets.from' | t -}}
+                </label>
+                <label class="ngp-visually-hidden" for="FacetFormRangeToPrice-{{ context }}">
+                  {{- 'products.facets.to' | t -}}
+                </label>
+                <div
+                  class="ngp-facet-range-wrapper ngp-relative"
+                  style="--range-min: {{ ngp_lower_progress_limit }}%; --range-max: {{ ngp_higher_progress_limit }}%;"
+                >
+                  <input
+                    class="ngp-facet-range ngp-facet-range__min ngp-w-full ngp-pointer-events-none"
+                    type="range"
+                    min="0"
+                    max="{{ ngp_range_max | ceil }}"
+                    step="{{ ngp_step_value }}"
+                    value="{{ ngp_min_value | ceil }}"
+                    id="FacetFormRangeFromPrice-{{ context }}"
+                  >
+                  <input
+                    class="ngp-facet-range ngp-facet-range__max ngp-w-full ngp-pointer-events-none ngp-absolute"
+                    type="range"
+                    min="0"
+                    max="{{ ngp_range_max | ceil }}"
+                    step="{{ ngp_step_value }}"
+                    value="{{ ngp_max_value | ceil }}"
+                    id="FacetFormRangeToPrice-{{ context }}"
+                  >
+                </div>
+                <div class="ngp-facet-input-wrapper ngp-flex ngp-items-center ngp-gap-5">
+                  <div class="ngp-flex ngp-items-center ngp-flex-grow ngp-relative">
+                    <label class="ngp-visually-hidden" for="FacetFormInputFromPrice-{{ context }}">
+                      {{- 'products.facets.from' | t -}}
+                    </label>
+                    <span class="ngp-facet-range__symbol">{{ cart.currency.symbol }}</span>
+                    <input
+                      class="ngp-form-control ngp-facet-range__input"
+                      type="number"
+                      inputmode="numeric"
+                      name="{{ ngp_filter.min_value.param_name }}"
+                      id="FacetFormInputFromPrice-{{ context }}"
+                      autocomplete="off"
+                      placeholder="0"
+                      min="0"
+                      max="{{ ngp_max_value | ceil }}"
+                      step="{{ ngp_step_value }}"
+                      {% if ngp_filter.min_value.value %}
+                        value="{{ ngp_min_value | ceil }}"
+                      {% endif %}
+                    >
+                  </div>
+                  <span>{{ 'products.facets.to' | t }}</span>
+                  <div class="ngp-flex ngp-items-center ngp-flex-grow ngp-relative">
+                    <label class="ngp-visually-hidden" for="FacetFormInputToPrice-{{ context }}">
+                      {{- 'products.facets.to' | t -}}
+                    </label>
+                    <span class="ngp-facet-range__symbol">{{ cart.currency.symbol }}</span>
+                    <input
+                      class="ngp-form-control ngp-facet-range__input"
+                      type="number"
+                      inputmode="numeric"
+                      name="{{ ngp_filter.max_value.param_name }}"
+                      id="FacetFormInputToPrice-{{ context }}"
+                      autocomplete="off"
+                      placeholder="{{ ngp_range_max | ceil }}"
+                      min="{{ ngp_min_value | ceil }}"
+                      max="{{ ngp_range_max | ceil }}"
+                      step="{{ ngp_step_value }}"
+                      {% if ngp_filter.max_value.value %}
+                        value="{{ ngp_max_value | ceil }}"
+                      {% endif %}
+                    >
+                  </div>
+                </div>
+              </ngp-price-range>
+            </div>
+          </details>
+      {%- endcase -%}
+    {%- endfor -%}
+  </form>
+{%- endif -%}

@@ -1,0 +1,29 @@
+.ngp-collection-item-slider {
+  gap: 2.4rem;
+}
+.ngp-collection-item-slider + .ngp-collection-item-slider {
+  margin-top: 3.2rem;
+}
+.ngp-collection-item-slider__footer {
+  margin-top: 0.8rem;
+}
+
+@media (min-width: 768px) {
+  .ngp-collection-item-slider {
+    gap: 3.2rem;
+  }
+  .ngp-collection-item-slider + .ngp-collection-item-slider {
+    margin-top: 6rem;
+  }
+  .ngp-collection-item-slider__header .swiper-button-prev,
+  .ngp-collection-item-slider__header .swiper-button-next {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin: 0;
+  }
+  .ngp-collection-item-slider__footer {
+    margin-top: 2.8rem;
+  }
+}

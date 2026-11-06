@@ -1,585 +1,473 @@
 if (!customElements.get('quick-order-list')) {
   customElements.define(
     'quick-order-list',
-    class QuickOrderList extends HTMLFormElement {
-      static DEBOUNCE_TIME = 300;
-      static LOADING_CLASS = 'btn--loading';
-
+    class QuickOrderList extends BulkAdd {
+      cartUpdateUnsubscriber = undefined;
+      hasPendingQuantityUpdate = false;
       constructor() {
         super();
-        this.cartUpdateUnsubscriber = undefined;
-        this.changeEvent = new Event('change', { bubbles: true });
-        this.initializeComponent();
+        this.isListInsideModal = this.closest('bulk-modal');
+
+        this.stickyHeaderElement = document.querySelector('sticky-header');
+        if (this.stickyHeaderElement) {
+          this.stickyHeader = {
+            height: this.stickyHeaderElement.offsetHeight,
+            type: `${this.stickyHeaderElement.getAttribute('data-sticky-type')}`,
+          };
+        }
+
+        this.totalBar = this.getTotalBar();
+        if (this.totalBar) {
+          this.totalBarPosition = window.innerHeight - this.totalBar.offsetHeight;
+
+          this.handleResize = this.handleResize.bind(this);
+          window.addEventListener('resize', this.handleResize);
+        }
+
+        this.querySelector('form').addEventListener('submit', (event) => event.preventDefault());
       }
 
-      /**
-       * Initialize the component with necessary event listeners and data
-       */
-      initializeComponent() {
-        this.addEventListener(
-          'change',
-          ScaloraTheme.utils.debounce(this.handleQuantityChange.bind(this), QuickOrderList.DEBOUNCE_TIME)
-        );
+      connectedCallback() {
+        this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, async (event) => {
+          // skip if cart event was triggered by this section
+          if (event.source === this.id) return;
 
-        this.cartUpdateUnsubscriber = ScaloraTheme.pubsub.subscribe(
-          ScaloraTheme.pubsub.PUB_SUB_EVENTS.cartUpdate,
-          this.handleCartUpdate.bind(this)
-        );
+          this.toggleTableLoading(true);
+          await this.refresh();
+          this.toggleTableLoading(false);
+        });
 
-        this.sectionId = this.getAttribute('data-section-id');
-        this.variantIds = this.querySelectorAll('[data-quantity-variant-id]');
+        this.initEventListeners();
       }
 
-      /**
-       * Clean up event listeners when component is removed
-       */
       disconnectedCallback() {
-        if (this.cartUpdateUnsubscriber) {
-          this.cartUpdateUnsubscriber();
-          this.cartUpdateUnsubscriber = null;
-        }
+        this.cartUpdateUnsubscriber?.();
+        window.removeEventListener('resize', this.handleResize);
       }
 
-      /**
-       * Handle quantity change events
-       * @param {Event} event - Change event
-       */
-      handleQuantityChange(event) {
-        const { target } = event;
-        const inputValue = parseInt(target.value);
-        const index = target.getAttribute('data-index');
-
-        if (inputValue === 0) {
-          this.updateItemQuantity(index, inputValue, document.activeElement.getAttribute('name'), target);
-        } else {
-          this.validateQuantityInput(event);
-        }
+      handleResize() {
+        this.totalBarPosition = window.innerHeight - this.totalBar.offsetHeight;
+        this.stickyHeader.height = this.stickyHeaderElement ? this.stickyHeaderElement.offsetHeight : 0;
       }
 
-      /**
-       * Validate quantity input against min, max, and step constraints
-       * @param {Event} event - Change event
-       */
-      validateQuantityInput(event) {
-        const { target } = event;
-        const inputValue = parseInt(target.value);
-        const index = target.getAttribute('data-index');
-        const minValue = parseInt(target.getAttribute('data-min'));
-        const maxValue = parseInt(target.max);
-        const stepValue = parseInt(target.step);
+      initEventListeners() {
+        this.querySelectorAll('.pagination__item').forEach((link) => {
+          link.addEventListener('click', async (event) => {
+            event.preventDefault();
+            event.stopPropagation();
 
-        const validationRules = [
-          {
-            isInvalid: inputValue < minValue,
-            message: ScaloraTheme.quickOrderListStrings.min_error.replace('[min]', minValue),
-          },
-          {
-            isInvalid: inputValue > maxValue,
-            message: ScaloraTheme.quickOrderListStrings.max_error.replace('[max]', maxValue),
-          },
-          {
-            isInvalid: inputValue % stepValue !== 0,
-            message: ScaloraTheme.quickOrderListStrings.step_error.replace('[step]', stepValue),
-          },
-        ];
+            const url = new URL(event.currentTarget.href);
 
-        const failedValidation = validationRules.find((rule) => rule.isInvalid);
-
-        if (failedValidation) {
-          this.setInputValidity(target, failedValidation.message);
-          return;
-        }
-
-        target.setCustomValidity('');
-        target.reportValidity();
-        this.updateItemQuantity(index, inputValue, document.activeElement.getAttribute('name'), target);
-      }
-
-      /**
-       * Set input validity and show error message
-       * @param {HTMLElement} input - Input element
-       * @param {string} message - Error message
-       */
-      setInputValidity(input, message) {
-        input.setCustomValidity(message);
-        input.reportValidity();
-        input.value = input.defaultValue;
-        input.select();
-        input.dispatchEvent(this.changeEvent);
-      }
-
-      /**
-       * Update single item quantity
-       * @param {string} line - Line item index
-       * @param {number} quantity - New quantity
-       * @param {string} name - Input name
-       * @param {HTMLElement} target - Target element
-       */
-      updateItemQuantity(line, quantity, name, target) {
-        const items = {};
-        items[line] = quantity;
-        this.updateCartItems(items, line, name, target);
-      }
-
-      /**
-       * Update multiple cart items
-       * @param {Object} items - Items to update
-       * @param {string} line - Line item index
-       * @param {string} name - Input name
-       * @param {HTMLElement} target - Target element
-       */
-      updateCartItems(items, line, name, target) {
-        this.toggleLoadingState(line, true);
-        this.showErrorMessage();
-
-        const sectionsToUpdate = [];
-        document.documentElement.dispatchEvent(
-          new CustomEvent('cart:grouped-sections', {
-            bubbles: true,
-            detail: { sections: sectionsToUpdate },
-          })
-        );
-
-        const requestBody = JSON.stringify({
-          updates: items,
-          sections: sectionsToUpdate,
-          sections_url: this.getAttribute('data-product-url'),
+            this.toggleTableLoading(true);
+            await this.refresh(url.searchParams.get('page') || '1');
+            this.scrollTop();
+            this.toggleTableLoading(false);
+          });
         });
 
-        fetch(`${ScaloraTheme.routes.cart_update_url}`, {
-          ...ScaloraTheme.utils.fetchConfig(),
-          body: requestBody,
-        })
-          .then((response) => response.json())
-          .then((data) => this.handleCartUpdateSuccess(data, target, line, name))
-          .catch((error) => this.handleCartUpdateError(error))
-          .finally(() => this.toggleLoadingState(line, false));
+        this.querySelector('.quick-order-list__contents').addEventListener(
+          'keyup',
+          this.handleScrollIntoView.bind(this)
+        );
+
+        this.quickOrderListTable.addEventListener('keydown', this.handleSwitchVariantOnEnter.bind(this));
+
+        this.initVariantEventListeners();
       }
 
-      /**
-       * Handle successful cart update
-       * @param {Object} data - Cart data
-       * @param {HTMLElement} target - Target element
-       * @param {string} line - Line item index
-       * @param {string} name - Input name
-       */
-      handleCartUpdateSuccess(data, target, line, name) {
-        ScaloraTheme.pubsub.publish(ScaloraTheme.pubsub.PUB_SUB_EVENTS.cartUpdate, {
-          source: 'quick-order-list',
-          cart: data,
-          target,
-          line,
-          name,
+      initVariantEventListeners() {
+        this.allInputsArray = Array.from(this.querySelectorAll('input[type="number"]'));
+
+        this.querySelectorAll('quantity-input').forEach((qty) => {
+          const debouncedOnChange = debounce(this.onChange.bind(this), BulkAdd.ASYNC_REQUEST_DELAY, true);
+          qty.addEventListener('change', (event) => {
+            this.hasPendingQuantityUpdate = true;
+            debouncedOnChange(event);
+          });
+        });
+
+        this.querySelectorAll('.quick-order-list-remove-button').forEach((button) => {
+          button.addEventListener('click', (event) => {
+            event.preventDefault();
+            this.toggleLoading(true);
+            this.startQueue(button.dataset.index, 0);
+          });
         });
       }
 
-      /**
-       * Handle cart update errors
-       * @param {Error} error - Error object
-       */
-      handleCartUpdateError(error) {
-        if (error.name === 'AbortError') {
-          console.log('Request cancelled');
+      get currentPage() {
+        return this.querySelector('.pagination-wrapper')?.dataset?.page ?? '1';
+      }
+
+      onChange(event) {
+        const inputValue = parseInt(event.target.value);
+        this.cleanErrorMessageOnType(event);
+        if (inputValue == 0) {
+          event.target.setAttribute('value', inputValue);
+          this.startQueue(event.target.dataset.index, inputValue);
         } else {
-          console.error('Cart update error:', error);
-          this.showErrorMessage(ScaloraTheme.cartStrings.error);
+          this.validateQuantity(event);
         }
       }
 
-      /**
-       * Handle cart update event
-       * @param {CustomEvent} event - Cart update event
-       */
-      handleCartUpdate(event) {
-        if (event.cart.errors) {
-          this.handleCartError(event.cart.errors, event.target);
-          return;
-        }
-
-        const sectionContent = new DOMParser().parseFromString(event.cart.sections[this.sectionId], 'text/html');
-
-        this.updateCartSections(sectionContent, event);
-        this.updateFocus(event);
-        this.dispatchCartUpdateEvent(event.cart);
-      }
-
-      /**
-       * Update cart sections in DOM
-       * @param {Document} sectionContent - Parsed section content
-       * @param {CustomEvent} event - Cart update event
-       */
-      updateCartSections(sectionContent, event) {
-        const cartDrawer = document.querySelector(`#CartDrawer-${this.sectionId}`);
-        const mainQuickOrderList = document.querySelector(`#MainQuickOrderList-${this.sectionId}`);
-
-        if (cartDrawer) {
-          const newDrawerContent = sectionContent.querySelector(`#CartDrawer-${this.sectionId}`);
-          if (newDrawerContent) {
-            cartDrawer.innerHTML = newDrawerContent.innerHTML;
-          }
-        }
-
-        if (mainQuickOrderList) {
-          const newListContent = sectionContent.querySelector(`#MainQuickOrderList-${this.sectionId}`);
-          if (newListContent) {
-            mainQuickOrderList.innerHTML = newListContent.innerHTML;
-          }
-        }
-      }
-
-      /**
-       * Update focus after cart update
-       * @param {CustomEvent} event - Cart update event
-       */
-      updateFocus(event) {
-        const mainQuickOrderList = document.querySelector(`#MainQuickOrderList-${this.sectionId}`);
-        const lineItem = document.getElementById(`VariantItem-${this.sectionId}-${event.line}`);
-
-        if (lineItem && lineItem.querySelector(`[name="${event.name}"]`)) {
-          ScaloraTheme.a11y.trapFocus(mainQuickOrderList, lineItem.querySelector(`[name="${event.name}"]`));
-        } else {
-          ScaloraTheme.a11y.trapFocus(mainQuickOrderList, mainQuickOrderList.querySelector('.variant-item__title'));
-        }
-      }
-
-      /**
-       * Dispatch cart updated event
-       * @param {Object} cart - Cart data
-       */
-      dispatchCartUpdateEvent(cart) {
-        document.dispatchEvent(
-          new CustomEvent('cart:updated', {
-            detail: { cart },
-          })
-        );
-      }
-
-      /**
-       * Handle cart errors
-       * @param {string} errors - Error message
-       * @param {HTMLElement} target - Target element
-       */
-      handleCartError(errors, target) {
-        if (!target) {
-          window.location.href = ScaloraTheme.routes.cart_url;
-          return;
-        }
-
-        this.toggleLoadingState(target.getAttribute('data-index'), false);
-        this.setInputValidity(target, errors);
-      }
-
-      /**
-       * Toggle loading state for elements
-       * @param {string} line - Line item index
-       * @param {boolean} isLoading - Loading state
-       */
-      toggleLoadingState(line, isLoading) {
-        const loaders = document.querySelectorAll(`#Loader-${this.sectionId}-${line}`);
-        const allLoader = document.getElementById(`Loader-${this.sectionId}-all`);
-
-        const updateLoader = (element) => {
-          if (!element) return;
-          element.classList[isLoading ? 'add' : 'remove'](QuickOrderList.LOADING_CLASS);
-          element.hidden = !isLoading;
+      cleanErrorMessageOnType(event) {
+        const handleKeydown = () => {
+          event.target.setCustomValidity(' ');
+          event.target.reportValidity();
+          event.target.removeEventListener('keydown', handleKeydown);
         };
 
-        if (loaders) {
-          loaders.forEach(updateLoader);
-        }
-
-        if (allLoader) {
-          updateLoader(allLoader);
-        }
+        event.target.addEventListener('keydown', handleKeydown);
       }
 
-      /**
-       * Show/hide error message
-       * @param {string|null} message - Error message
-       */
-      showErrorMessage(message = null) {
-        const errorElement = this.querySelector('.quick-order-list__error');
-        if (!errorElement) return;
+      validateInput(target) {
+        const targetValue = parseInt(target.value);
+        const targetMin = parseInt(target.dataset.min);
+        const targetStep = parseInt(target.step);
 
-        if (message) {
-          const messageElement = errorElement.querySelector('.quick-order-list-error__message');
-          if (messageElement) {
-            messageElement.textContent = message;
-          }
-          errorElement.removeAttribute('hidden');
+        if (target.max) {
+          return (
+            targetValue == 0 ||
+            (targetValue >= targetMin && targetValue <= parseInt(target.max) && targetValue % targetStep == 0)
+          );
         } else {
-          errorElement.setAttribute('hidden', '');
-        }
-      }
-    },
-    { extends: 'form' }
-  );
-}
-
-if (!customElements.get('quick-order-list-wrapper')) {
-  customElements.define(
-    'quick-order-list-wrapper',
-    class QuickOrderList extends HTMLElement {
-      constructor() {
-        super();
-        this._sectionId = this.getAttribute('data-section-id');
-        this.bindEvents();
-      }
-
-      bindEvents() {
-        this._handleGroupedSections = (event) => this.getSectionToBundle(event);
-        document.addEventListener('cart:grouped-sections', this._handleGroupedSections);
-      }
-
-      getSectionToBundle(event) {
-        if (event.detail && Array.isArray(event.detail.sections)) {
-          event.detail.sections.push(this._sectionId);
+          return targetValue == 0 || (targetValue >= targetMin && targetValue % targetStep == 0);
         }
       }
 
-      disconnectedCallback() {
-        if (this._handleGroupedSections) {
-          document.removeEventListener('cart:grouped-sections', this._handleGroupedSections);
-          this._handleGroupedSections = null;
+      get quickOrderListTable() {
+        return this.querySelector('.quick-order-list__table');
+      }
+
+      getSectionsToRender() {
+        return [
+          {
+            id: this.id,
+            section: this.dataset.section,
+            selector: `#${this.id}`,
+          },
+          {
+            id: 'cart-icon-bubble',
+            section: 'cart-icon-bubble',
+            selector: '#shopify-section-cart-icon-bubble',
+          },
+          {
+            id: `quick-order-list-live-region-text-${this.dataset.productId}`,
+            section: 'cart-live-region-text',
+            selector: '.shopify-section',
+          },
+          {
+            id: 'CartDrawer',
+            selector: '.drawer__inner',
+            section: 'cart-drawer',
+          },
+        ];
+      }
+
+      toggleTableLoading(enable) {
+        this.quickOrderListTable.classList.toggle('quick-order-list__container--disabled', enable);
+        this.toggleLoading(enable);
+      }
+
+      async refresh(pageNumber = null) {
+        const url = this.dataset.url || window.location.pathname;
+
+        return fetch(`${url}?section_id=${this.dataset.section}&page=${pageNumber || this.currentPage}`)
+          .then((response) => response.text())
+          .then((responseText) => {
+            const html = new DOMParser().parseFromString(responseText, 'text/html');
+            const responseQuickOrderList = html.querySelector(`#${this.id}`);
+
+            if (!responseQuickOrderList) {
+              return;
+            }
+
+            this.innerHTML = responseQuickOrderList.innerHTML;
+            this.initEventListeners();
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+      }
+
+      renderSections(parsedState) {
+        const { items, sections } = parsedState;
+
+        this.getSectionsToRender().forEach(({ id, selector, section }) => {
+          if (!sections?.[section]) return;
+          const sectionElement = document.getElementById(id);
+          if (!sectionElement) return;
+
+          const newSection = new DOMParser().parseFromString(sections[section], 'text/html').querySelector(selector);
+
+          if (section === this.dataset.section) {
+            if (this.queue.length > 0 || this.hasPendingQuantityUpdate) return;
+
+            const focusedElement = document.activeElement;
+            let focusTarget = focusedElement?.dataset?.target;
+            if (focusTarget?.includes('remove')) {
+              focusTarget = focusedElement.closest('quantity-popover')?.querySelector('[data-target*="increment-"]')
+                ?.dataset.target;
+            }
+
+            const total = this.getTotalBar();
+            if (total) {
+              total.innerHTML = newSection.querySelector('.quick-order-list__total').innerHTML;
+            }
+
+            const table = this.quickOrderListTable;
+            const newTable = newSection.querySelector('.quick-order-list__table');
+
+            // only update variants if they are from the active page
+            const shouldUpdateVariants =
+              this.currentPage === (newSection.querySelector('.pagination-wrapper')?.dataset.page ?? '1');
+            if (newTable && shouldUpdateVariants) {
+              table.innerHTML = newTable.innerHTML;
+
+              const newFocusTarget = this.querySelector(`[data-target='${focusTarget}']`);
+              if (newFocusTarget) {
+                newFocusTarget?.focus({ preventScroll: true });
+              }
+
+              this.initVariantEventListeners();
+            }
+          } else if (section === 'cart-drawer') {
+            sectionElement.closest('cart-drawer')?.classList.toggle('is-empty', items.length === 0);
+            sectionElement.querySelector(selector).innerHTML = newSection.innerHTML;
+          } else {
+            sectionElement.innerHTML = newSection.innerHTML;
+          }
+        });
+      }
+
+      getTotalBar() {
+        return this.querySelector('.quick-order-list__total');
+      }
+
+      scrollTop() {
+        const { top } = this.getBoundingClientRect();
+
+        if (this.isListInsideModal) {
+          this.scrollIntoView();
+        } else {
+          window.scrollTo({ top: top + window.scrollY - (this.stickyHeader?.height || 0), behavior: 'instant' });
         }
+      }
+
+      scrollQuickOrderListTable(target) {
+        const inputTopBorder = target.getBoundingClientRect().top;
+        const inputBottomBorder = target.getBoundingClientRect().bottom;
+
+        if (this.isListInsideModal) {
+          const totalBarCrossesInput = inputBottomBorder > this.totalBar.getBoundingClientRect().top;
+          const tableHeadCrossesInput =
+            inputTopBorder < this.querySelector('.quick-order-list__table thead').getBoundingClientRect().bottom;
+
+          if (totalBarCrossesInput || tableHeadCrossesInput) {
+            this.scrollToCenter(target);
+          }
+        } else {
+          const stickyHeaderBottomBorder = this.stickyHeaderElement?.getBoundingClientRect().bottom;
+          const totalBarCrossesInput = inputBottomBorder > this.totalBarPosition;
+          const inputOutsideOfViewPort =
+            inputBottomBorder < this.querySelector('.variant-item__quantity-wrapper').offsetHeight;
+          const stickyHeaderCrossesInput =
+            this.stickyHeaderElement &&
+            this.stickyHeader.type !== 'on-scroll-up' &&
+            this.stickyHeader.height > inputTopBorder;
+          const stickyHeaderScrollupCrossesInput =
+            this.stickyHeaderElement &&
+            this.stickyHeader.type === 'on-scroll-up' &&
+            this.stickyHeader.height > inputTopBorder &&
+            stickyHeaderBottomBorder > 0;
+
+          if (
+            totalBarCrossesInput ||
+            inputOutsideOfViewPort ||
+            stickyHeaderCrossesInput ||
+            stickyHeaderScrollupCrossesInput
+          ) {
+            this.scrollToCenter(target);
+          }
+        }
+      }
+
+      scrollToCenter(target) {
+        target.scrollIntoView({
+          block: 'center',
+          behavior: 'smooth',
+        });
+      }
+
+      handleScrollIntoView(event) {
+        if ((event.key === 'Tab' || event.key === 'Enter') && this.allInputsArray.length !== 1) {
+          this.scrollQuickOrderListTable(event.target);
+        }
+      }
+
+      handleSwitchVariantOnEnter(event) {
+        if (event.key !== 'Enter' || event.target.tagName !== 'INPUT') return;
+
+        event.preventDefault();
+        event.target.blur();
+
+        if (!this.validateInput(event.target) || this.allInputsArray.length <= 1) return;
+
+        const currentIndex = this.allInputsArray.indexOf(event.target);
+        const offset = event.shiftKey ? -1 : 1;
+        const nextIndex = (currentIndex + offset + this.allInputsArray.length) % this.allInputsArray.length;
+
+        this.allInputsArray[nextIndex]?.select();
+      }
+
+      updateMultipleQty(items, { removeAll = false } = {}) {
+        if (this.queue.length == 0) this.hasPendingQuantityUpdate = false;
+
+        this.toggleLoading(true);
+        const url = this.dataset.url || window.location.pathname;
+        const sections = this.getSectionsToRender().map(({ section }) => section);
+
+        this.updateMessage();
+        this.setErrorMessage();
+
+        return this.updateCart(items, sections, `${url}?page=${this.currentPage}`, {
+          removeProductId: removeAll ? this.dataset.productId : undefined,
+        })
+          .then((parsedState) => {
+            this.renderSections(parsedState);
+            publish(PUB_SUB_EVENTS.cartUpdate, {
+              source: this.id,
+              cartData: parsedState,
+            });
+          })
+          .catch((e) => {
+            if (e.code !== 'INVALID') console.error(e);
+            this.dispatchCartErrorEvent(
+              e.code === 'INVALID' ? e.message : window.cartStrings.error,
+              e.code || 'SERVICE_UNAVAILABLE'
+            );
+            this.setErrorMessage(e.code === 'INVALID' ? e.message : window.cartStrings.error);
+          })
+          .finally(() => {
+            this.queue.length === 0 && this.toggleLoading(false);
+            this.setRequestStarted(false);
+          });
+      }
+
+      setErrorMessage(message = null) {
+        this.errorMessageTemplate =
+          this.errorMessageTemplate ??
+          document.getElementById(`QuickOrderListErrorTemplate-${this.dataset.productId}`).cloneNode(true);
+        const errorElements = document.querySelectorAll('.quick-order-list-error');
+
+        errorElements.forEach((errorElement) => {
+          errorElement.innerHTML = '';
+          if (!message) return;
+          const updatedMessageElement = this.errorMessageTemplate.cloneNode(true);
+          updatedMessageElement.content.querySelector('.quick-order-list-error-message').innerText = message;
+          errorElement.appendChild(updatedMessageElement.content);
+        });
+      }
+
+      updateMessage(quantity = null) {
+        const messages = this.querySelectorAll('.quick-order-list__message-text');
+        const icons = this.querySelectorAll('.quick-order-list__message-icon');
+
+        if (quantity === null || isNaN(quantity)) {
+          messages.forEach((message) => (message.innerHTML = ''));
+          icons.forEach((icon) => icon.classList.add('hidden'));
+          return;
+        }
+
+        const isQuantityNegative = quantity < 0;
+        const absQuantity = Math.abs(quantity);
+
+        const textTemplate = isQuantityNegative
+          ? absQuantity === 1
+            ? window.quickOrderListStrings.itemRemoved
+            : window.quickOrderListStrings.itemsRemoved
+          : quantity === 1
+          ? window.quickOrderListStrings.itemAdded
+          : window.quickOrderListStrings.itemsAdded;
+
+        messages.forEach((msg) => (msg.innerHTML = textTemplate.replace('[quantity]', absQuantity)));
+
+        if (!isQuantityNegative) {
+          icons.forEach((i) => i.classList.remove('hidden'));
+        }
+      }
+
+      updateError(updatedValue, id) {
+        let message = '';
+        if (typeof updatedValue === 'undefined') {
+          message = window.cartStrings.error;
+        } else {
+          message = window.cartStrings.quantityError.replace('[quantity]', updatedValue);
+        }
+        this.updateLiveRegions(id, message);
+      }
+
+      updateLiveRegions(id, message) {
+        const variantItemErrorDesktop = document.getElementById(`Quick-order-list-item-error-desktop-${id}`);
+        if (variantItemErrorDesktop) {
+          variantItemErrorDesktop.querySelector('.variant-item__error-text').innerHTML = message;
+          variantItemErrorDesktop.closest('tr').classList.remove('hidden');
+        }
+        if (variantItemErrorMobile)
+          variantItemErrorMobile.querySelector('.variant-item__error-text').innerHTML = message;
+
+        this.querySelector('#shopping-cart-variant-item-status').setAttribute('aria-hidden', true);
+
+        const cartStatus = document.getElementById('quick-order-list-live-region-text');
+        cartStatus.setAttribute('aria-hidden', false);
+
+        setTimeout(() => {
+          cartStatus.setAttribute('aria-hidden', true);
+        }, 1000);
+      }
+
+      toggleLoading(loading, target = this) {
+        target.querySelector('#shopping-cart-variant-item-status').toggleAttribute('aria-hidden', !loading);
+        target
+          .querySelectorAll('.variant-remove-total .loading__spinner')
+          ?.forEach((spinner) => spinner.classList.toggle('hidden', !loading));
       }
     }
   );
 }
 
-if (!customElements.get('quick-order-list-remove')) {
+if (!customElements.get('quick-order-list-remove-all-button')) {
   customElements.define(
-    'quick-order-list-remove',
-    class QuickOrderListRemove extends HTMLAnchorElement {
+    'quick-order-list-remove-all-button',
+    class QuickOrderListRemoveAllButton extends HTMLElement {
       constructor() {
         super();
-        this.initializeComponent();
-      }
+        this.quickOrderList = this.closest('quick-order-list');
 
-      /**
-       * Initialize the remove button component
-       */
-      initializeComponent() {
-        try {
-          this.bindEvents();
-          this.findParentForm();
-        } catch (error) {
-          console.error('Error initializing QuickOrderListRemove:', error);
-        }
-      }
-
-      /**
-       * Bind necessary event listeners
-       */
-      bindEvents() {
-        this.handleClick = this.handleClick.bind(this);
-        this.addEventListener('click', this.handleClick);
-      }
-
-      /**
-       * Find and store reference to parent quick order list form
-       */
-      findParentForm() {
-        this.quickOrderList = this.closest('form[is="quick-order-list"]');
-
-        if (!this.quickOrderList) {
-          throw new Error('QuickOrderListRemove must be inside a quick-order-list form');
-        }
-      }
-
-      /**
-       * Handle remove button click
-       * @param {Event} event - Click event
-       */
-      handleClick(event) {
-        try {
-          event.preventDefault();
-
-          const itemIndex = this.getAttribute('data-index');
-          if (!itemIndex) {
-            throw new Error('Missing data-index attribute');
-          }
-
-          this.removeItem(itemIndex);
-        } catch (error) {
-          console.error('Error handling remove click:', error);
-        }
-      }
-
-      /**
-       * Remove item from cart
-       * @param {string} itemIndex - Index of item to remove
-       */
-      removeItem(itemIndex) {
-        const REMOVE_QUANTITY = 0;
-        this.quickOrderList.updateItemQuantity(itemIndex, REMOVE_QUANTITY);
-      }
-
-      /**
-       * Clean up when element is removed
-       */
-      disconnectedCallback() {
-        this.removeEventListener('click', this.handleClick);
-        this.quickOrderList = null;
-      }
-    },
-    { extends: 'a' }
-  );
-}
-
-if (!customElements.get('quick-order-list-remove-all')) {
-  customElements.define(
-    'quick-order-list-remove-all',
-    class QuickOrderListRemoveAll extends HTMLElement {
-      static ACTIONS = {
-        CONFIRM: 'confirm',
-        REMOVE: 'remove',
-        CANCEL: 'cancel',
-      };
-
-      static SELECTORS = {
-        CONFIRMATION: '.quick-order-list-total__confirmation',
-        INFO: '.quick-order-list-total__info',
-        VARIANT_QTY: '[data-quantity-variant-id]',
-      };
-
-      constructor() {
-        super();
-        this.handleClick = this.handleClick.bind(this);
-        this.initializeComponent();
-      }
-
-      /**
-       * Initialize the component
-       */
-      initializeComponent() {
-        try {
-          this.bindEvents();
-          this.findParentForm();
-          this.initializeCartItems();
-        } catch (error) {
-          console.error('Error initializing QuickOrderListRemoveAll:', error);
-        }
-      }
-
-      /**
-       * Bind event listeners
-       */
-      bindEvents() {
-        this.addEventListener('click', this.handleClick);
-      }
-
-      /**
-       * Find and store parent quick order list form
-       */
-      findParentForm() {
-        this.quickOrderList = this.closest('form[is="quick-order-list"]');
-
-        if (!this.quickOrderList) {
-          throw new Error('QuickOrderListRemoveAll must be inside a quick-order-list form');
-        }
-      }
-
-      /**
-       * Initialize cart items data
-       */
-      initializeCartItems() {
-        this.items = {};
-        this.hasVariantsInCart = false;
-
-        const variants = this.quickOrderList.querySelectorAll(QuickOrderListRemoveAll.SELECTORS.VARIANT_QTY);
-
-        variants.forEach(this.processVariant.bind(this));
-      }
-
-      /**
-       * Process each variant element
-       * @param {HTMLElement} variant - Variant element
-       */
-      processVariant(variant) {
-        const cartQuantity = parseInt(variant.getAttribute('data-cart-quantity'));
-        const variantId = parseInt(variant.getAttribute('data-quantity-variant-id'));
-
-        if (cartQuantity > 0 && !isNaN(variantId)) {
-          this.hasVariantsInCart = true;
-          this.items[variantId] = 0;
-        }
-      }
-
-      /**
-       * Handle button click events
-       * @param {Event} event - Click event
-       */
-      handleClick(event) {
-        try {
-          event.preventDefault();
-          const action = this.getAttribute('data-action');
-
-          if (!action) {
-            throw new Error('Missing data-action attribute');
-          }
-
-          this.handleAction(action);
-        } catch (error) {
-          console.error('Error handling click:', error);
-        }
-      }
-
-      /**
-       * Handle different button actions
-       * @param {string} action - Action to perform
-       */
-      handleAction(action) {
-        const actionHandlers = {
-          [QuickOrderListRemoveAll.ACTIONS.CONFIRM]: () => {
-            this.updateVisibility(false, true);
-          },
-          [QuickOrderListRemoveAll.ACTIONS.REMOVE]: () => {
-            this.removeAllItems();
-            this.updateVisibility(true, false);
-          },
-          [QuickOrderListRemoveAll.ACTIONS.CANCEL]: () => {
-            this.updateVisibility(true, false);
-          },
+        this.actions = {
+          confirm: 'confirm',
+          remove: 'remove',
+          cancel: 'cancel',
         };
 
-        const handler = actionHandlers[action];
-        if (handler) {
-          handler();
-        }
+        this.addEventListener('click', (event) => {
+          event.preventDefault();
+          if (this.dataset.action === this.actions.confirm) {
+            this.toggleConfirmation(false, true);
+          } else if (this.dataset.action === this.actions.remove) {
+            this.quickOrderList.updateMultipleQty({}, { removeAll: true });
+            this.toggleConfirmation(true, false);
+          } else if (this.dataset.action === this.actions.cancel) {
+            this.toggleConfirmation(true, false);
+          }
+        });
       }
 
-      /**
-       * Remove all items from cart
-       */
-      removeAllItems() {
-        if (Object.keys(this.items).length > 0) {
-          this.quickOrderList.updateCartItems(this.items);
-        }
-      }
-
-      /**
-       * Update visibility of confirmation and info sections
-       * @param {boolean} showConfirmation - Show confirmation section
-       * @param {boolean} showInfo - Show info section
-       */
-      updateVisibility(showConfirmation, showInfo) {
-        const confirmation = this.quickOrderList.querySelector(QuickOrderListRemoveAll.SELECTORS.CONFIRMATION);
-        const info = this.quickOrderList.querySelector(QuickOrderListRemoveAll.SELECTORS.INFO);
-
-        if (confirmation && info) {
-          confirmation.toggleAttribute('hidden', showConfirmation);
-          info.toggleAttribute('hidden', showInfo);
-        }
-      }
-
-      /**
-       * Clean up when element is removed
-       */
-      disconnectedCallback() {
-        this.removeEventListener('click', this.handleClick);
-        this.quickOrderList = null;
-        this.items = null;
+      toggleConfirmation(showConfirmation, showInfo) {
+        this.quickOrderList
+          .querySelector('.quick-order-list-total__confirmation')
+          .classList.toggle('hidden', showConfirmation);
+        this.quickOrderList.querySelector('.quick-order-list-total__info').classList.toggle('hidden', showInfo);
       }
     }
   );

@@ -1,0 +1,112 @@
+{%- liquid
+  assign ngp_review_data = product.metafields.judgeme.review_widget_data.value
+  assign ngp_reviews = ngp_review_data.reviews
+  assign ngp_review_count = ngp_review_data.number_of_reviews | default: 0 | plus: 0
+  assign ngp_review_rating = ngp_review_data.average_rating | default: 0 | plus: 0
+  assign ngp_review_rating_display = ngp_review_rating | times: 10 | floor | divided_by: 10.0
+  assign ngp_reviews_title = 'altaeron_pdp_reels_v2.reviews.full_title' | t
+  assign ngp_reviews_subtitle = 'altaeron_pdp_reels_v2.reviews.full_subtitle' | t: rating: ngp_review_rating_display, count: ngp_review_count
+  assign ngp_reviews_eyebrow = 'altaeron_pdp_reels_v3.reviews_eyebrow' | t
+  assign ngp_faq_eyebrow = 'altaeron_pdp_reels_v3.faq_eyebrow' | t
+  assign ngp_faq_title = 'altaeron_pdp_reels_v3.faq.title' | t
+  assign ngp_faq_subtitle = 'altaeron_pdp_reels_v3.faq.subtitle' | t
+  assign ngp_has_legacy_judgeme_widget = false
+  if product.metafields.judgeme.widget.size > 20
+    assign ngp_has_legacy_judgeme_widget = true
+  endif
+-%}
+
+
+<style>
+  #AltaeronV3Tail-{{ section.id }} {
+    --ngp-alta-custom-accent: #0d7466;
+    --ngp-alta-custom-body: #43566a;
+    --ngp-alta-custom-ink: #102a43;
+    background: #fff;
+  }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__section { padding: 76px 0; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__section + .ngp-alta-v3-tail__section { border-top: 1px solid #e4e7ec; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__section--reviews { background: #f7faf8; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__shell { margin-inline: auto; width: min(1360px, calc(100% - 80px)); }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__header { margin-bottom: 28px; max-width: 1080px; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__eyebrow { align-items: center; color: var(--ngp-alta-custom-accent); display: flex; font-size: 12px; font-weight: 750; gap: 12px; letter-spacing: .24em; line-height: 1.3; margin: 0 0 10px; text-transform: uppercase; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__heading { color: var(--ngp-alta-custom-ink); font-family: var(--ngp-alta-font-family, var(--font-heading-family)); font-size: clamp(30px, 3vw, 46px); font-weight: 750; letter-spacing: -.035em; line-height: 1.08; margin: 0; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__subheading { color: var(--ngp-alta-custom-body); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; margin: 10px 0 0; max-width: 1050px; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-apdp-review-summary { margin-top: 0; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-apdp-judgeme-widget { margin-top: 0; }
+  #AltaeronV3Tail-{{ section.id }} .ngp-apdp-tail-accordion { background: #fff; }
+  @media (min-width: 750px) {
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__section { padding: clamp(64px, 6vw, 88px) 0; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__header { margin-bottom: 32px; max-width: 850px; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__subheading { max-width: 780px; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__section:not(.ngp-alta-v3-tail__section--reviews) .ngp-alta-v3-tail__shell { align-items:start; display:grid; gap:clamp(32px,5vw,72px); grid-template-columns:minmax(240px,.72fr) minmax(400px,1.28fr); }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__section:not(.ngp-alta-v3-tail__section--reviews) .ngp-alta-custom__header { margin:4px 0 0; position:sticky; top:110px; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-apdp-tail-accordion { border:1px solid #e4e7ec; border-radius:16px; overflow:hidden; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-apdp-tail-accordion details { padding-inline:22px; }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__shell { width: min(1240px, calc(100% - 80px)); }
+  }
+
+  @media (max-width: 749px) {
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__section { padding: 25px 0; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-v3-tail__shell { width: calc(100% - 30px); }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__header { margin-bottom: 20px; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__eyebrow { font-size: 10px; gap: 9px; letter-spacing: .2em; margin-bottom: 8px; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__eyebrow::before { flex-basis: 28px; height: 2px; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__heading { font-size: 29px; }
+    #AltaeronV3Tail-{{ section.id }} .ngp-alta-custom__subheading { font-size: 15px; line-height: 1.45; }
+  }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'ngp-reels-v3-responsive-section', section_kind: 'reviews_faq', section_id: section.id %}
+  {%- endif -%}
+</style>
+
+<div id="AltaeronV3Tail-{{ section.id }}" class="ngp-pdp ngp-alta-v3-tail">
+  <section id="AltaeronV3Reviews" class="ngp-alta-v3-tail__section ngp-alta-v3-tail__section--reviews" aria-labelledby="AltaeronV3ReviewsHeading-{{ section.id }}" data-apdp-review-slider-group>
+    <div class="ngp-alta-v3-tail__shell ngp-apdp-review-summary">
+      <header class="ngp-alta-custom__header">
+        <p class="ngp-alta-custom__eyebrow">{{ ngp_reviews_eyebrow }}</p>
+        <h2 id="AltaeronV3ReviewsHeading-{{ section.id }}" class="ngp-alta-custom__heading">{{ ngp_reviews_title }}</h2>
+        <p class="ngp-alta-custom__subheading">{{ ngp_reviews_subtitle }}</p>
+      </header>
+      <div class="ngp-apdp-judgeme-widget">
+        <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ product.title | escape }}" data-id="{{ product.id }}" data-product-id="{{ product.id }}" data-widget="review" data-auto-install="false" data-shop-reviews-count="{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}" data-entry-point="review_widget.js" data-entry-key="review-widget/main.js">{%- if ngp_has_legacy_judgeme_widget -%}<div class="jdgm-legacy-widget-content" style="display:none">{{ product.metafields.judgeme.widget }}</div>{%- endif -%}</div>
+        {%- if product.metafields.judgeme.review_widget_data -%}<script>window.jdgm=window.jdgm||{};window.jdgm.data=window.jdgm.data||{};window.jdgm.data.reviewWidget=window.jdgm.data.reviewWidget||{};window.jdgm.data.reviewWidget[{{ product.id | json }}]={{ product.metafields.judgeme.review_widget_data }};</script>{%- endif -%}
+        <noscript><div class="ngp-apdp-tail-review-viewport"><div class="ngp-apdp-tail-review-grid">{% render 'ngp-pdp-review-cards', ngp_reviews: ngp_reviews, limit: 10 %}</div></div></noscript>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngp-alta-v3-tail__section" aria-labelledby="AltaeronV3FaqHeading-{{ section.id }}">
+    <div class="ngp-alta-v3-tail__shell">
+      <header class="ngp-alta-custom__header">
+        <p class="ngp-alta-custom__eyebrow">{{ ngp_faq_eyebrow }}</p>
+        <h2 id="AltaeronV3FaqHeading-{{ section.id }}" class="ngp-alta-custom__heading">{{ ngp_faq_title }}</h2>
+        <p class="ngp-alta-custom__subheading">{{ ngp_faq_subtitle }}</p>
+      </header>
+      <div class="ngp-apdp-tail-accordion">
+        {%- assign ngp_faq_indices = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20' | split: ',' -%}
+        {%- for ngp_faq_index in ngp_faq_indices -%}
+          {%- capture ngp_question_key -%}altaeron_pdp_reels_v3.faq.question_{{ ngp_faq_index }}{%- endcapture -%}
+          {%- capture ngp_answer_key -%}altaeron_pdp_reels_v3.faq.answer_{{ ngp_faq_index }}{%- endcapture -%}
+          {%- assign ngp_answer_text = ngp_answer_key | t | replace: '&lt;', '<' | replace: '&gt;', '>' -%}
+          <details><summary>{{ ngp_question_key | t }}{% render 'ngp-icon-accordion-chevron', class: 'ngp-apdp-tail-accordion__chevron' %}</summary><p>{{ ngp_answer_text | newline_to_br }}</p></details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Altaeron: Reviews FAQ",
+  "tag": "section",
+  "class": "section-altaeron-custom",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [],
+  "presets": [{ "name": "Altaeron: Reviews FAQ" }]
+}
+{% endschema %}

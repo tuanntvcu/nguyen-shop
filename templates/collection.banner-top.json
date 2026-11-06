@@ -1,13 +1,13 @@
 {
   "sections": {
     "breadcrumbs_Gxg9wp": {
-      "type": "breadcrumbs",
+      "type": "ngp-breadcrumbs",
       "settings": {
         "text_alignment": "center"
       }
     },
     "banner": {
-      "type": "main-collection-banner",
+      "type": "ngp-main-collection-banner",
       "blocks": {
         "collection_info_zUNyKV": {
           "type": "collection_info",
@@ -24,7 +24,7 @@
         "collection_info_zUNyKV"
       ],
       "custom_css": [
-        "@media(max-width: 767px) {.collection-hero__info {padding-top: 3.2rem; }}"
+        "@media(max-width: 767px) {.ngp-collection-hero__info {padding-top: 3.2rem; }}"
       ],
       "settings": {
         "color_scheme": "scheme-1",
@@ -40,10 +40,8 @@
       }
     },
     "product-grid": {
-      "type": "main-collection-product-grid",
-      "custom_css": [
-
-      ],
+      "type": "ngp-main-collection-product-grid",
+      "custom_css": [],
       "settings": {
         "color_scheme": "scheme-9",
         "products_per_page": 16,

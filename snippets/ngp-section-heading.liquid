@@ -1,0 +1,100 @@
+{%- if section_settings.heading != blank
+  or section_settings.subheading != blank
+  or section_settings.description != blank
+-%}
+  {%- liquid
+    if ngp_header_alignment == blank
+      assign ngp_header_alignment = settings.section_header_alignment
+    endif
+
+    if ngp_header_alignment_mobile == blank
+      assign ngp_header_alignment_mobile = settings.section_header_alignment_mobile
+    endif
+
+    if ngp_header_alignment_mobile == 'inherit'
+      assign ngp_header_alignment_mobile = ngp_header_alignment
+    endif
+
+    if ngp_description == blank
+      assign ngp_description = section_settings.description | default: ''
+    endif
+    if ngp_description_size == blank
+      assign ngp_description_size = section_settings.description_size | default: 'ngp-text-base'
+    endif
+
+    if ngp_header_layout == blank
+      assign ngp_header_layout = section_settings.header_layout | default: 'vertical'
+    endif
+
+    assign ngp_header_class = 'ngp-section__header--' | append: ngp_header_layout
+    assign ngp_header_text_alignment = ngp_header_alignment
+    if ngp_header_layout == 'horizontal'
+      assign ngp_header_class = ngp_header_class | append: ' ngp-md:flex ngp-md:flex-col ngp-md:flex-row ngp-md:justify-between ngp-md:items-center ngp-gap-x-4'
+      if ngp_header_alignment == 'right'
+        assign ngp_header_class = ngp_header_class | append: ' ngp-md:flex-row-reverse'
+      elsif ngp_header_alignment == 'center'
+        assign ngp_header_text_alignment = 'left'
+      endif
+    endif
+
+    unless ngp_custom_css_class == blank
+      assign ngp_custom_css_class = ngp_custom_css_class | prepend: ' '
+    endunless
+
+    assign ngp_motion_delay = ngp_motion_delay | default: 50
+  -%}
+  <div class="ngp-section__header {{ ngp_header_class }} ngp-spacing--{{ spacing | default: 'normal' }}{{ ngp_custom_css_class }}">
+    <div class="ngp-section__header--text ngp-text-{{ ngp_header_alignment_mobile }} ngp-md:ngp-text-{{ ngp_header_text_alignment }}">
+      {%- if section_settings.subheading != blank -%}
+        <p class="ngp-section__subheading ngp-text-subheading">
+          <ngp-motion-element class="ngp-block" data-motion="fade-up" data-motion-delay="{{ ngp_motion_delay }}">
+            {{- section_settings.subheading -}}
+          </ngp-motion-element>
+        </p>
+        {%- assign ngp_motion_delay = ngp_motion_delay | plus: 50 -%}
+      {%- endif -%}
+      {%- if section_settings.heading != blank -%}
+        <h2 class="ngp-section__heading{% if section_settings.heading_size %} {{ section_settings.heading_size }}{% endif %}">
+          <ngp-motion-element class="ngp-block" data-motion="fade-up" data-motion-delay="{{ ngp_motion_delay }}">
+            {% render 'ngp-highlight-text',
+              text: section_settings.heading,
+              style: section_settings.heading_highlight_style
+            %}
+          </ngp-motion-element>
+        </h2>
+        {%- assign ngp_motion_delay = ngp_motion_delay | plus: 50 -%}
+      {%- endif -%}
+      {%- if ngp_description != blank -%}
+        <ngp-motion-element
+          class="ngp-section__description ngp-block ngp-rte {{ ngp_description_size }}"
+          data-motion="fade-up"
+          data-motion-delay="{{ ngp_motion_delay }}"
+        >
+          {{- ngp_description -}}
+        </ngp-motion-element>
+        {%- assign ngp_motion_delay = ngp_motion_delay | plus: 50 -%}
+      {%- endif -%}
+    </div>
+    {%- if button_visible and button_label != blank -%}
+      <ngp-motion-element
+        class="ngp-section__header--button ngp-block ngp-text-{{ ngp_header_alignment_mobile }} ngp-md:ngp-text-{{ ngp_header_alignment }}"
+        data-motion="fade-up"
+        data-motion-delay="{{ ngp_motion_delay }}"
+      >
+        <a
+          class="ngp-btn {{ button_style }}"
+          {% if button_link != blank %}
+            href="{{ button_link }}"
+          {% else %}
+            aria-disabled="true"
+            disabled
+          {% endif %}
+        >
+          {% render 'ngp-button-icon', name: button_icon %}
+          {{- button_label -}}
+        </a>
+      </ngp-motion-element>
+      {%- assign ngp_motion_delay = ngp_motion_delay | plus: 50 -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

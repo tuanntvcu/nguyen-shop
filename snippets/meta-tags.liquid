@@ -1,3 +1,9 @@
+{%- doc -%}
+  Renders Open Graph and Twitter metadata for the current page.
+
+  @example
+  {% render 'meta-tags' %}
+{%- enddoc -%}
 {%- liquid
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
@@ -6,12 +12,6 @@
 
   if request.page_type == 'product'
     assign og_type = 'product'
-    if product.metafields.altaeron.share_title.value != blank
-      assign og_title = product.metafields.altaeron.share_title.value
-    endif
-    if product.metafields.altaeron.share_description.value != blank
-      assign og_description = product.metafields.altaeron.share_description.value
-    endif
   elsif request.page_type == 'article'
     assign og_type = 'article'
   elsif request.page_type == 'password'

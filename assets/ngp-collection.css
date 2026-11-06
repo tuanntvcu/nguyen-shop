@@ -1,0 +1,178 @@
+.ngp-collection__content {
+  --facet-width: clamp(300px, 18vw, 330px);
+  gap: 3rem;
+}
+.ngp-collection__content #FacetFiltersContainer {
+  flex: 0 0 var(--facet-width);
+}
+.ngp-collection__toolbar {
+  background: rgb(var(--color-background));
+  padding-block: 1.2rem;
+  margin-block-end: 1.2rem;
+}
+
+#ProductGridWrapper.show-toolbar {
+  margin-block-start: -1.2rem;
+}
+
+.ngp-facet-accordion-details .ngp-accordion-details__summary {
+  padding-block: 2.4rem;
+}
+.ngp-facet-accordion-details .ngp-accordion-details__content {
+  padding-bottom: 2.4rem;
+  margin-block-start: -0.8rem;
+}
+.ngp-facet-accordion-details .ngp-accordion-details__content--price {
+  margin-block-start: 0;
+}
+.ngp-facet-accordion-details:nth-child(2) .ngp-accordion-details__summary {
+  padding-block-start: 0;
+}
+.ngp-facet-accordion-details:last-child {
+  border-bottom: 0;
+}
+
+.ngp-facet-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  height: 0.4rem;
+  vertical-align: top;
+  margin: 0;
+}
+.ngp-facet-range__max {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+.ngp-facet-range-wrapper {
+  --range-min: 0%;
+  --range-max: 100%;
+  background: linear-gradient(to var(--transform-origin-end), rgb(var(--color-border)) var(--range-min), rgb(var(--color-foreground)) var(--range-min), rgb(var(--color-foreground)) var(--range-max), rgb(var(--color-border)) var(--range-max));
+  border-radius: 0.125rem;
+  height: 0.4rem;
+}
+.ngp-facet-range__symbol {
+  position: absolute;
+  inset-inline-start: 1.6rem;
+}
+.ngp-facet-range__input {
+  padding-inline-start: 3rem;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+  text-align: end;
+}
+.ngp-facet-range__input::-webkit-inner-spin-button, .ngp-facet-range__input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.ngp-facet-range::-webkit-slider-thumb {
+  -webkit-margin-before: -6px;
+  -webkit-appearance: none;
+  background-color: rgb(var(--color-foreground));
+  border-radius: 100%;
+  box-shadow: none;
+  cursor: pointer;
+  height: 16px;
+  margin-block-start: -6px;
+  position: relative;
+  width: 16px;
+  z-index: 1;
+}
+.ngp-facet-range::-webkit-slider-runnable-track {
+  background-color: #ccc;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  height: 4px;
+  width: 100%;
+}
+.ngp-facet-range::-moz-range-thumb {
+  background-color: rgb(var(--color-background));
+  border: 2px solid rgb(var(--color-foreground));
+  border-radius: 100%;
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+}
+.ngp-facet-range::-moz-range-progress, .ngp-facet-range::-moz-range-track {
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  height: 4px;
+  width: 100%;
+}
+.ngp-facet-range::-webkit-slider-runnable-track {
+  background: none;
+}
+.ngp-facet-range::-moz-range-progress {
+  background-color: rgb(var(--color-foreground));
+}
+.ngp-facet-range::-moz-range-track {
+  background-color: rgb(var(--border-color));
+}
+.ngp-facet-range::-webkit-slider-thumb {
+  pointer-events: auto;
+}
+.ngp-facet-range::-moz-range-thumb {
+  pointer-events: auto;
+}
+.ngp-facet-range::-moz-range-progress, .ngp-facet-range::-moz-range-track {
+  background: none;
+}
+@media not screen and (pointer: fine) {
+  .ngp-facet-range::-webkit-slider-thumb {
+    height: 20px;
+    margin-block-start: -9px;
+    width: 20px;
+  }
+  .ngp-facet-range::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.ngp-facet-remove {
+  height: auto;
+  font-weight: inherit;
+  padding-inline: 1.6rem;
+  padding-block: 0.3rem;
+}
+.ngp-facet-remove .ngp-swatch-color {
+  --swatch-size: 1.6rem;
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  .ngp-facet-short {
+    --icon-size: 0.7rem;
+  }
+  .ngp-facet-short select {
+    border: 0;
+    background-color: transparent;
+    width: var(--width);
+    padding: 0;
+    line-height: 1.625;
+    border-radius: 0;
+  }
+  .ngp-facet-short select ~ .ngp-icon {
+    inset-inline-end: 0;
+  }
+}
+
+.ngp-facet-drawer-button {
+  height: auto;
+  padding-inline: 1.6rem;
+  padding-block: 0.6rem;
+  line-height: 1.625;
+}
+
+.ngp-facet-short-drawer {
+  padding-block-end: 2.4rem;
+  margin-block-end: 2.4rem;
+  border-bottom: 0.1rem solid rgb(var(--color-border));
+}
+
+.ngp-facets-active {
+  margin-block-start: -0.4rem;
+  margin-block-end: 2.4rem;
+}

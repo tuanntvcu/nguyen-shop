@@ -1,24 +1,7 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "disabled": true,
-      "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
-      }
-    },
     "custom_content_wN3EKJ": {
-      "type": "custom-content",
+      "type": "ngp-custom-content",
       "blocks": {
         "image_J68fdX": {
           "type": "image",
@@ -35,9 +18,9 @@
       ],
       "custom_css": [
         "[data-block-type=\"image\"] {max-width: 81.2rem; margin: 0 auto -9%;}",
-        ".rich-text__heading {max-width: 74rem; margin: 0 auto;}",
-        ".custom__block--text {max-width: 81.2rem; margin: 0 auto;}",
-        "@media (max-width: 767px) {[data-block-type=\"image\"] {margin-bottom: -14%; } .rich-text__heading {max-width: 33rem; }}"
+        ".ngp-rich-text__heading {max-width: 74rem; margin: 0 auto;}",
+        ".ngp-custom__block--text {max-width: 81.2rem; margin: 0 auto;}",
+        "@media (max-width: 767px) {[data-block-type=\"image\"] {margin-bottom: -14%; } .ngp-rich-text__heading {max-width: 33rem; }}"
       ],
       "settings": {
         "container": "full",
@@ -59,7 +42,7 @@
       }
     },
     "custom_content_g3Ug8k": {
-      "type": "custom-content",
+      "type": "ngp-custom-content",
       "blocks": {
         "text_YD7cdg": {
           "type": "text",
@@ -85,9 +68,9 @@
       ],
       "custom_css": [
         "[data-block-type=\"image\"] {max-width: 81.2rem; margin: 0 auto -9%;}",
-        ".rich-text__heading {max-width: 74rem; margin: 0 auto;}",
-        ".custom__block--text {max-width: 81.2rem; margin: 0 auto;}",
-        "@media (max-width: 767px) {[data-block-type=\"image\"] {margin-bottom: -14%; } .rich-text__heading {max-width: 33rem; }}"
+        ".ngp-rich-text__heading {max-width: 74rem; margin: 0 auto;}",
+        ".ngp-custom__block--text {max-width: 81.2rem; margin: 0 auto;}",
+        "@media (max-width: 767px) {[data-block-type=\"image\"] {margin-bottom: -14%; } .ngp-rich-text__heading {max-width: 33rem; }}"
       ],
       "settings": {
         "container": "full",
@@ -110,7 +93,6 @@
     }
   },
   "order": [
-    "main",
     "custom_content_wN3EKJ",
     "custom_content_g3Ug8k"
   ]

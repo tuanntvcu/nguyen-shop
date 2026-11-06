@@ -1,5 +1,559 @@
-
 {
+  "general": {
+    "password_page": {
+      "login_form_heading": "使用密碼進入商店：",
+      "login_password_button": "使用密碼進入",
+      "login_form_password_label": "密碼",
+      "login_form_password_placeholder": "您的密碼",
+      "login_form_error": "密碼錯誤！",
+      "login_form_submit": "輸入",
+      "admin_link_html": "您是商店擁有人嗎？<a href=\"/admin\" class=\"link underlined-link\">請在此登入</a>",
+      "powered_by_shopify_html": "本商店由 {{ shopify }} 提供技術支援"
+    },
+    "social": {
+      "alt_text": {
+        "share_on_facebook": "在臉書上分享",
+        "share_on_twitter": "分享到 X",
+        "share_on_pinterest": "固定在 Pinterest 上"
+      },
+      "links": {
+        "twitter": "X (Twitter)",
+        "facebook": "Facebook",
+        "pinterest": "Pinterest",
+        "instagram": "Instagram",
+        "tumblr": "Tumblr",
+        "snapchat": "Snapchat",
+        "youtube": "YouTube",
+        "vimeo": "Vimeo",
+        "tiktok": "TikTok"
+      }
+    },
+    "continue_shopping": "繼續購物",
+    "pagination": {
+      "label": "分頁",
+      "page": "第 {{ number }} 頁",
+      "next": "下一個",
+      "previous": "上一篇",
+      "show_more": "展示更多"
+    },
+    "search": {
+      "search": "搜尋",
+      "reset": "清除搜尋詞彙"
+    },
+    "cart": {
+      "view": "檢視購物車 ({{ count }})",
+      "item_added": "商品已加入購物車",
+      "view_empty_cart": "檢視購物車"
+    },
+    "share": {
+      "copy_to_clipboard": "複製連結",
+      "share_url": "連結",
+      "success_message": "連結已複製到剪貼簿",
+      "close": "關閉分享",
+      "copy": "複製",
+      "copied": "已複製"
+    },
+    "slider": {
+      "of": "/",
+      "next_slide": "向右滑動",
+      "previous_slide": "向左滑動",
+      "name": "投影播放器"
+    },
+    "breadcrumbs": {
+      "collections": "收藏",
+      "home": "家"
+    }
+  },
+  "newsletter": {
+    "label": "電子郵件",
+    "success": "感謝您訂閱",
+    "button_label": "訂閱"
+  },
+  "accessibility": {
+    "skip_to_text": "跳至內容",
+    "close": "關閉",
+    "unit_price_separator": "每",
+    "vendor": "小販：",
+    "error": "錯誤",
+    "refresh_page": "選擇項目後，整個頁面將重新整理。",
+    "link_messages": {
+      "new_window": "在新視窗中開啟。",
+      "external": "開啟外部網站。"
+    },
+    "loading": "載入中......",
+    "skip_to_product_info": "略過產品資訊",
+    "total_reviews": "評論總次數",
+    "star_reviews_info": "{{ rating_value }} 顆星 (最高 {{ rating_max }} 顆星)",
+    "collapsible_content_title": "可摺疊的內容",
+    "complementary_products": "配套商品",
+    "layout_switcher": "{{ col }} 欄",
+    "play_video": "播放影片",
+    "load_video": "載入影片：{{ description }}",
+    "product_type": "類型：",
+    "breadcrumbs": "麵包屑"
+  },
+  "blogs": {
+    "article": {
+      "blog": "網誌",
+      "read_more_title": "繼續閱讀：{{ title }}",
+      "comments": {
+        "one": "{{ count }} 則評論",
+        "other": "{{ count }} 則評論"
+      },
+      "moderated": "請注意，評論在發布之前需要獲得批准。",
+      "comment_form_title": "發表評論",
+      "name": "姓名",
+      "email": "電子郵件",
+      "message": "評論",
+      "post": "發表評論",
+      "back_to_blog": "返回網誌",
+      "share": "分享此文章",
+      "success": "您已成功留言！感謝您！",
+      "success_moderated": "您已成功留言。由於我們的網誌有人管理，因此過一段時間後才會進行發布。",
+      "previous_post": "上一篇文章",
+      "article_button_label": "了解更多",
+      "tags": "標籤：",
+      "in": "在",
+      "next_post": "下一篇文章",
+      "by": "經過",
+      "related_posts_title": "相關文章"
+    }
+  },
+  "onboarding": {
+    "product_title": "產品標題範例",
+    "collection_title": "集合名稱"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "加入購物車",
+      "description": "說明",
+      "on_sale": "銷售",
+      "product_variants": "產品子類",
+      "quantity": {
+        "label": "數量",
+        "input_label": "{{ product }} 數量",
+        "increase": "{{ product }} 數量增加",
+        "decrease": "{{ product }} 數量減少",
+        "minimum_of": "最少 {{ quantity }} 個",
+        "maximum_of": "最多 {{ quantity }} 個",
+        "multiples_of": "{{ quantity }} 的倍數",
+        "in_cart_html": "購物車中有 <span class=\"quantity-cart\">{{ quantity }}</span> 個",
+        "note": "檢視數量規則",
+        "min_of": "最少 {{ quantity }} 個",
+        "max_of": "最多 {{ quantity }} 個",
+        "in_cart_aria_label": "數量 (購物車中有 {{ quantity }} 個)"
+      },
+      "price": {
+        "from_price_html": "來自{{ price }}",
+        "regular_price": "正常價格",
+        "sale_price": "銷售價格",
+        "unit_price": "單價",
+        "save_price_html": "儲存<span data-sale-value>{{ amount }}</span>"
+      },
+      "share": "分享產品",
+      "sold_out": "售罄",
+      "unavailable": "無法供貨",
+      "vendor": "廠商",
+      "video_exit_message": "{{ title }} 在同一視窗開啟全螢幕影片。",
+      "xr_button": "在您的空間中檢視",
+      "xr_button_label": "在您的空間中檢視，可將商品載入擴增實境視窗",
+      "pickup_availability": {
+        "view_store_info": "檢視商店資訊",
+        "check_other_stores": "查看其他商店的供貨情況",
+        "pick_up_available": "可提供取貨服務",
+        "pick_up_available_at_html": "可提供 <span class=\"color-foreground\">{{ location_name }}</span> 的取貨服務",
+        "pick_up_unavailable_at_html": "目前無法提供 <span class=\"color-foreground\">{{ location_name }}</span> 的取貨服務",
+        "unavailable": "無法載入取貨服務供應情況",
+        "refresh": "重新整理"
+      },
+      "media": {
+        "open_media": "在互動視窗中開啟多媒體檔案 {{ index }}",
+        "play_model": "播放 3D 檢視器",
+        "play_video": "播放影片",
+        "gallery_viewer": "圖庫檢視器",
+        "load_image": "在圖庫檢視畫面載入圖片 {{ index }}",
+        "load_model": "在圖庫檢視畫面載入 3D 模型 {{ index }}",
+        "load_video": "在圖庫檢視畫面播放影片 {{ index }}",
+        "image_available": "現在可在圖庫檢視畫面中查看圖片 {{ index }}"
+      },
+      "nested_label": "適用於 {{ parent_title }} 的 {{ title }}",
+      "view_full_details": "查看完整資訊",
+      "shipping_policy_html": "結帳時計算<a href=\"{{ link }}\">運費</a>。",
+      "choose_options": "選擇選項",
+      "choose_product_options": "選擇 {{ product_name }} 的選項",
+      "value_unavailable": "{{ option_value }} (無法供貨)",
+      "variant_sold_out_or_unavailable": "子類已售罄或無法供貨",
+      "inventory_in_stock": "有庫存",
+      "inventory_in_stock_show_count": "有 {{ quantity }} 件庫存",
+      "inventory_low_stock": "庫存不足",
+      "inventory_low_stock_show_count": "庫存不足：剩餘 {{ quantity }} 件",
+      "inventory_out_of_stock": "無庫存",
+      "inventory_out_of_stock_continue_selling": "有庫存",
+      "sku": "存貨單位 (SKU)",
+      "volume_pricing": {
+        "title": "批發價",
+        "note": "提供批發價",
+        "minimum": "{{ quantity }}+",
+        "price_range": "{{ minimum }} - {{ maximum }}",
+        "price_at_each_html": "{{ price }}/每項"
+      },
+      "taxes_included": "已包含稅額。",
+      "duties_included": "已包含關稅。",
+      "duties_and_taxes_included": "已包含關稅和稅額。",
+      "view_product_list": "查看產品列表",
+      "share_label": "分享",
+      "quick_view": "快速瀏覽"
+    },
+    "modal": {
+      "label": "媒體庫"
+    },
+    "facets": {
+      "apply": "申請",
+      "clear": "清除",
+      "clear_all": "移除所有",
+      "from": "從",
+      "filter_and_sort": "篩選與排序",
+      "filter_by_label": "篩選條件：",
+      "filter_button": "篩選",
+      "filters_selected": {
+        "one": "已選{{ count }}",
+        "other": "已選{{ count }}"
+      },
+      "max_price": "最高價格為 {{ price }}",
+      "product_count": {
+        "one": "{{ product_count }} 個產品（共 {{ count }} 個）",
+        "other": "{{ product_count }} 個產品（共 {{ count }} 個）"
+      },
+      "product_count_simple": {
+        "one": "{{ count }} 產品",
+        "other": "{{ count }} 個產品"
+      },
+      "reset": "重設",
+      "sort_button": "排序",
+      "sort_by_label": "排序方式：",
+      "to": "到",
+      "clear_filter": "移除篩選條件",
+      "filter_selected_accessibility": "{{ type }} (已選取 {{ count }} 個篩選條件)",
+      "show_more": "展示更多",
+      "show_less": "顯示較少",
+      "filter_and_operator_subtitle": "匹配所有"
+    }
+  },
+  "templates": {
+    "search": {
+      "no_results": "找不到與「{{ terms }}」相符的結果。請檢查拼字或使用其他字詞。",
+      "results_with_count": {
+        "one": "{{ count }} 項結果",
+        "other": "{{ count }} 項結果"
+      },
+      "title": "搜尋結果",
+      "page": "頁面",
+      "products": "產品",
+      "search_for": "搜尋「{{ terms }}」",
+      "results_with_count_and_term": {
+        "one": "找到「{{ terms }}」，共 {{ count }} 筆",
+        "other": "找到「{{ terms }}」，共 {{ count }} 筆"
+      },
+      "results_pages_with_count": {
+        "one": "{{ count }} 個頁面",
+        "other": "{{ count }} 個頁面"
+      },
+      "results_suggestions_with_count": {
+        "one": "{{ count }} 項建議",
+        "other": "{{ count }} 項建議"
+      },
+      "results_products_with_count": {
+        "one": "{{ count }} 項商品",
+        "other": "{{ count }} 項商品"
+      },
+      "suggestions": "建議",
+      "pages": "頁面"
+    },
+    "cart": {
+      "cart": "購物車"
+    },
+    "contact": {
+      "form": {
+        "name": "名稱",
+        "email": "電子郵件",
+        "phone": "電話號碼",
+        "comment": "留言",
+        "send": "傳送",
+        "post_success": "感謝您聯絡我們。我們會盡快回覆您。",
+        "error_heading": "請調整以下內容：",
+        "title": "聯絡表單"
+      }
+    },
+    "404": {
+      "title": "找不到頁面",
+      "subtext": "404"
+    }
+  },
+  "sections": {
+    "header": {
+      "announcement": "公告",
+      "menu": "選單",
+      "cart_count": {
+        "one": "{{ count }} 件商品",
+        "other": "{{ count }} 件商品"
+      }
+    },
+    "cart": {
+      "title": "您的購物車",
+      "caption": "購物車商品",
+      "remove_title": "移除 {{ title }}",
+      "note": "訂單特別指示",
+      "checkout": "結帳",
+      "empty": "您的購物車是空的",
+      "product_disclosure": "商品揭露資訊",
+      "product_disclosures": "商品揭露資訊",
+      "cart_error": "更新購物車時發生錯誤。請再試一次。",
+      "cart_quantity_error_html": "您只能將 {{ quantity }} 項商品加入您的購物車。",
+      "headings": {
+        "product": "產品",
+        "price": "價格",
+        "total": "總計",
+        "quantity": "數量",
+        "image": "商品圖片"
+      },
+      "update": "更新",
+      "login": {
+        "title": "是否有帳號？",
+        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">登入</a>以加速結帳。"
+      },
+      "estimated_total": "估計總金額",
+      "new_estimated_total": "新的估計總金額",
+      "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "已包含關稅和稅額。結帳時計算折扣和<a href=\"{{ link }}\">運費</a>。",
+      "duties_and_taxes_included_shipping_at_checkout_without_policy": "已包含關稅和稅額。結帳時計算折扣和運費。",
+      "taxes_included_shipping_at_checkout_with_policy_html": "已包含稅額。結帳時計算折扣和<a href=\"{{ link }}\">運費</a>。",
+      "taxes_included_shipping_at_checkout_without_policy": "已包含稅額。結帳時計算折扣和運費。",
+      "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "已包含關稅。結帳時計算稅額、折扣和<a href=\"{{ link }}\">運費</a>。",
+      "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "已包含關稅。結帳時計算稅額、折扣和運費。",
+      "taxes_at_checkout_shipping_at_checkout_with_policy_html": "結帳時計算稅額、折扣和<a href=\"{{ link }}\">運費</a>。",
+      "taxes_at_checkout_shipping_at_checkout_without_policy": "結帳時計算稅額、折扣和運費。"
+    },
+    "footer": {
+      "payment": "付款方式"
+    },
+    "featured_blog": {
+      "view_all": "檢視全部",
+      "onboarding_title": "網誌文章",
+      "onboarding_content": "提供網誌文章摘要給顧客"
+    },
+    "featured_collection": {
+      "view_all": "檢視全部",
+      "view_all_label": "檢視 {{ collection_name }} 商品系列的全部產品"
+    },
+    "collection_list": {
+      "view_all": "檢視全部"
+    },
+    "collection_template": {
+      "title": "收藏",
+      "empty": "找不到任何產品",
+      "use_fewer_filters_html": "使用較少篩選條件或<a class=\"{{ class }}\" href=\"{{ link }}\">全部移除</a>"
+    },
+    "video": {
+      "load_video": "載入影片：{{ description }}"
+    },
+    "slideshow": {
+      "load_slide": "載入投影片",
+      "previous_slideshow": "上一張投影片",
+      "next_slideshow": "下一張投影片",
+      "pause_slideshow": "暫停素材輪播",
+      "play_slideshow": "播放素材輪播",
+      "carousel": "輪播廣告",
+      "slide": "投影片"
+    },
+    "page": {
+      "title": "頁面標題"
+    },
+    "announcements": {
+      "previous_announcement": "前一則公告",
+      "next_announcement": "下一則公告",
+      "carousel": "輪播",
+      "announcement": "公告",
+      "announcement_bar": "公告列"
+    },
+    "quick_order_list": {
+      "product_total": "商品小計",
+      "view_cart": "檢視購物車",
+      "each": "{{ money }}/每項",
+      "product": "商品",
+      "variant": "子類",
+      "variant_total": "子類總計",
+      "items_added": {
+        "one": "已新增 {{ quantity }} 個品項",
+        "other": "已新增 {{ quantity }} 個品項"
+      },
+      "items_removed": {
+        "one": "已移除 {{ quantity }} 個品項",
+        "other": "已移除 {{ quantity }} 個品項"
+      },
+      "product_variants": "商品子類",
+      "total_items": "品項總數",
+      "remove_all_items_confirmation": "是否要從購物車移除全部 {{ quantity }} 個品項？",
+      "remove_all": "全部移除",
+      "cancel": "取消",
+      "remove_all_single_item_confirmation": "是否要從您的購物車移除 1 個品項？",
+      "min_error": "此品項下限為 {{ min }}",
+      "max_error": "此品項上限為 {{ max }}",
+      "step_error": "只能以 {{ step }} 為增量新增此品項"
+    },
+    "main-blog": {
+      "all_posts": "所有貼文"
+    }
+  },
+  "localization": {
+    "country_label": "國家/地區",
+    "language_label": "語言",
+    "update_language": "更新語言",
+    "update_country": "更新國家/地區",
+    "search": "搜尋",
+    "popular_countries_regions": "常見國家/地區",
+    "country_results_count": "找到 {{ count }} 個國家/地區"
+  },
+  "customer": {
+    "account": {
+      "title": "帳號",
+      "details": "帳號詳細資訊",
+      "view_addresses": "查看地址",
+      "return": "返回帳號詳細資訊"
+    },
+    "activate_account": {
+      "title": "啟用帳號",
+      "subtext": "建立密碼以啟用帳戶。",
+      "password": "密碼",
+      "password_confirm": "確認密碼",
+      "submit": "啟用帳號",
+      "cancel": "拒絕邀請"
+    },
+    "addresses": {
+      "title": "地址",
+      "default": "預設",
+      "add_new": "新增地址",
+      "edit_address": "編輯地址",
+      "first_name": "名字",
+      "last_name": "姓氏",
+      "company": "公司",
+      "address1": "地址 1",
+      "address2": "地址 2",
+      "city": "市",
+      "country": "國家/地區",
+      "province": "省",
+      "zip": "郵政/郵遞區號",
+      "phone": "電話",
+      "set_default": "設為預設地址",
+      "add": "新增地址",
+      "update": "更新地址",
+      "cancel": "取消",
+      "edit": "編輯",
+      "delete": "刪除",
+      "delete_confirm": "是否確定要刪除此地址？"
+    },
+    "log_in": "登入",
+    "log_out": "登出",
+    "login_page": {
+      "cancel": "取消",
+      "create_account": "建立帳號",
+      "email": "電子郵件",
+      "forgot_password": "忘記密碼了嗎？",
+      "guest_continue": "繼續",
+      "guest_title": "以訪客身分繼續操作",
+      "password": "密碼",
+      "title": "登入",
+      "sign_in": "登入",
+      "submit": "提交",
+      "alternate_provider_separator": "或者"
+    },
+    "orders": {
+      "title": "訂單記錄",
+      "order_number": "訂單",
+      "order_number_link": "訂單編號 {{ number }}",
+      "date": "日期",
+      "payment_status": "付款狀態",
+      "fulfillment_status": "出貨狀態",
+      "total": "總計",
+      "none": "您尚未下訂任何商品。"
+    },
+    "recover_password": {
+      "title": "重設密碼",
+      "subtext": "我們會傳送重設密碼的電子郵件給您",
+      "success": "我們已傳送一封電子郵件給您，內有連結，可讓您更新密碼。"
+    },
+    "register": {
+      "title": "建立帳號",
+      "first_name": "名字",
+      "last_name": "姓氏",
+      "email": "電子郵件",
+      "password": "密碼",
+      "submit": "建立"
+    },
+    "reset_password": {
+      "title": "重設帳號密碼",
+      "subtext": "輸入新密碼",
+      "password": "密碼",
+      "password_confirm": "確認密碼",
+      "submit": "重設密碼"
+    },
+    "order": {
+      "title": "訂單 {{ name }}",
+      "date_html": "已於 {{ date }} 下單",
+      "cancelled_html": "已於 {{ date }} 取消訂單",
+      "cancelled_reason": "原因：{{ reason }}",
+      "billing_address": "帳單地址",
+      "payment_status": "付款狀態",
+      "shipping_address": "運送地址",
+      "fulfillment_status": "訂單出貨狀態",
+      "discount": "折扣",
+      "shipping": "運送",
+      "tax": "稅金",
+      "product": "產品",
+      "sku": "存貨單位 (SKU)",
+      "price": "價格",
+      "quantity": "數量",
+      "total": "總計",
+      "fulfilled_at_html": "已於 {{ date }} 出貨",
+      "track_shipment": "追蹤貨件",
+      "tracking_url": "追蹤連結",
+      "tracking_company": "貨運業者",
+      "tracking_number": "追蹤編號",
+      "subtotal": "小計",
+      "total_duties": "關稅",
+      "total_refunded": "已退款"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "這是您在 {{ shop }} 餘額為 {{ value }} 的禮品卡！",
+      "subtext": "您的禮品卡",
+      "gift_card_code": "禮品卡代碼",
+      "shop_link": "造訪網路商店",
+      "add_to_apple_wallet": "加入 Apple 錢包",
+      "qr_image_alt": "QR 碼 — 掃描以兌換禮品卡",
+      "copy_code": "複製禮品卡代碼",
+      "expired": "已到期",
+      "copy_code_success": "代碼已成功複製",
+      "how_to_use_gift_card": "請在網路商店使用禮品卡代碼或在實體商店使用 QR 碼",
+      "expiration_date": "於 {{ expires_on }}到期"
+    }
+  },
+  "recipient": {
+    "form": {
+      "checkbox": "我要將此作為禮物傳送",
+      "email_label": "收件者電子郵件",
+      "email": "電子郵件",
+      "name_label": "收件者姓名 (選填)",
+      "name": "姓名",
+      "message_label": "訊息 (選填)",
+      "message": "訊息",
+      "max_characters": "最多 {{ max_chars }} 個字元",
+      "email_label_optional_for_no_js_behavior": "收件者電子郵件 (選填)",
+      "send_on": "YYYY-MM-DD",
+      "send_on_label": "發送時間 (選填)",
+      "expanded": "禮品卡收件人表單已展開",
+      "collapsed": "禮品卡收件人表單已收合"
+    }
+  },
   "storefront": {
     "cart_drawer": {
       "welcome_discount_applied": "WELCOME 優惠已成功套用！",
@@ -56,647 +610,6 @@
       "contact_us": "聯絡我們",
       "track_order": "追蹤訂單",
       "blog": "部落格"
-    }
-  },
-  "general": {
-    "password_page": {
-      "login_form_heading": "使用密碼進入商店：",
-      "login_password_button": "使用密碼輸入",
-      "login_form_password_label": "密碼",
-      "login_form_password_placeholder": "你的密碼",
-      "login_form_error": "密碼錯誤！",
-      "login_form_submit": "進入",
-      "admin_link_html": "您是店主嗎？ <a href=\"/admin\" class=\"btn--link\">在此登入</a>",
-      "powered_by_shopify_html": "這家商店將由 {{ shopify }} 提供支持"
-    },
-    "social": {
-      "alt_text": {
-        "share_on_facebook": "在臉書上分享",
-        "share_on_twitter": "分享到 X",
-        "share_on_pinterest": "固定在 Pinterest 上"
-      },
-      "links": {
-        "twitter": "X（推特）",
-        "facebook": "Facebook",
-        "pinterest": "興趣",
-        "instagram": "Instagram",
-        "tumblr": "豆瓣",
-        "snapchat": "快照",
-        "youtube": "Youtube",
-        "vimeo": "維梅奧",
-        "tiktok": "抖音"
-      }
-    },
-    "continue_shopping": "繼續購物",
-    "pagination": {
-      "label": "分頁",
-      "page": "第 {{ number }} 頁",
-      "next": "下一個",
-      "previous": "上一篇",
-      "show_more": "展示更多"
-    },
-    "breadcrumbs": {
-      "home": "家",
-      "collections": "收藏"
-    },
-    "search": {
-      "search": "搜尋",
-      "reset": "清除搜尋詞"
-    },
-    "cart": {
-      "title": "你的購物車",
-      "view": "看看購物車 ({{ count }})",
-      "view_empty_cart": "查看購物車",
-      "item_added": "項目加入您的購物車",
-      "remove": "消除",
-      "continue_shopping": "繼續購物",
-      "note": {
-        "title": "訂單備註",
-        "caption": "訂購特別說明",
-        "button": "申請"
-      },
-      "free_shipping": {
-        "remaining_html": "再消費 {{ remaining_amount }} 即可享免運服務！",
-        "congratulations_html": "您有資格享受免費送貨。"
-      },
-      "shipping_calculator": {
-        "title": "預計運輸",
-        "tooltip": "運費和稅金將在結帳時計算",
-        "button": "計算",
-        "error": "檢索運費時發生一個或多個錯誤：",
-        "not_found": "抱歉，我們不會運送到您的地址。",
-        "one_result": "您的地址有一種運費：",
-        "multiple_results": "您的地址有多種運費："
-      },
-      "cart_count": {
-        "one": "{{ count }} 項",
-        "other": "{{ count }} 項"
-      },
-      "gift_wrapping": {
-        "message_html": "對於{{ price }}，請依此順序包裝產品。",
-        "note_placeholder": "禮物留言（免費且可選）"
-      }
-    },
-    "share": {
-      "close": "關閉分享",
-      "copy": "複製",
-      "share_url": "關聯",
-      "copied": "已複製"
-    },
-    "slider": {
-      "of": "的",
-      "next_slide": "向右滑動",
-      "previous_slide": "向左滑動",
-      "name": "滑桿"
-    },
-    "meta": {
-      "tags": "標記為“{{ tags }}”",
-      "page": "第 {{ page }} 頁"
-    }
-  },
-  "newsletter": {
-    "label": "電子郵件",
-    "success": "感謝您的訂閱",
-    "already_subscribed": "您已經訂閱了！",
-    "button_label": "訂閱"
-  },
-  "accessibility": {
-    "skip_to_text": "跳至內容",
-    "skip_to_product_info": "跳轉至產品訊息",
-    "close": "關閉",
-    "unit_price_separator": "每",
-    "vendor": "小販：",
-    "product_type": "類型：",
-    "error": "錯誤",
-    "refresh_page": "選擇一個選項會導致整個頁面刷新。",
-    "link_messages": {
-      "new_window": "在新視窗中開啟。",
-      "external": "開啟外部網站。"
-    },
-    "loading": "載入中...",
-    "total_reviews": "總評論數",
-    "star_reviews_info": "{{ rating_value }} 顆星，共 {{ rating_max }} 顆星",
-    "collapsible_content_title": "可折疊內容",
-    "complementary_products": "配套產品",
-    "menu_drawer": "切換選單",
-    "layout_switcher": "{{ col }} 欄",
-    "play_video": "播放影片",
-    "load_video": "載入影片：{{ description }}",
-    "store_announcements": "店鋪公告",
-    "breadcrumbs": "麵包屑",
-    "tabs": "選項卡",
-    "image_comparison": "圖片對比",
-    "select_variant": "選擇變體",
-    "primary_navigation": "主要導航",
-    "create_store_with_shopify": "使用 Shopify 建立您自己的線上商店",
-    "shopify_logo": "Shopify 標誌"
-  },
-  "blogs": {
-    "article": {
-      "blog": "部落格",
-      "read_more_title": "了解更多：{{ title }}",
-      "comments": {
-        "one": "{{ count }} 則評論",
-        "other": "{{ count }} 則評論"
-      },
-      "moderated": "請注意，評論在發布之前需要獲得批准。",
-      "comment_form_title": "發表評論",
-      "name": "姓名",
-      "email": "電子郵件",
-      "message": "評論",
-      "post": "發表評論",
-      "back_to_blog": "返回博客",
-      "share": "分享此文章",
-      "success": "您的評論已成功發布！謝謝你！",
-      "success_moderated": "您的評論已成功發布。由於我們的部落格正在審核中，我們將稍後發布。",
-      "article_button_label": "了解更多",
-      "by": "經過",
-      "in": "在",
-      "tags": "標籤：",
-      "previous_post": "上一篇文章",
-      "next_post": "下一篇文章",
-      "related_posts_title": "相關文章"
-    }
-  },
-  "onboarding": {
-    "product_title": "產品標題範例",
-    "product_description": "該區域用於描述您產品的詳細資訊。告訴客戶您產品的外觀、感覺和風格。添加有關顏色、使用的材料、尺寸以及製造地點的詳細資訊。",
-    "collection_title": "集合名稱",
-    "collection_description": "此處的集合描述提供了有關該集合的詳細資訊。",
-    "no_script_alert": "請啟用JavaScript使用此功能。"
-  },
-  "products": {
-    "product": {
-      "add_to_cart": "加入購物車",
-      "add_all_to_cart": "全部加入購物車",
-      "buy_it_now": "現在購買",
-      "choose_options": "選擇選項",
-      "choose_product_options": "選擇 {{ product_name }} 的選項",
-      "quick_view": "快速瀏覽",
-      "view_more_options": "看更多",
-      "view_product_list": "查看產品列表",
-      "description": "描述",
-      "inventory_in_stock": "有存貨",
-      "inventory_in_stock_show_count_html": "<strong>{{ quantity }}</strong> 有庫存",
-      "inventory_low_stock": "低庫存",
-      "inventory_low_stock_one_item_html": "快點吧，庫存僅剩 <strong>{{ quantity }}</strong> 件。",
-      "inventory_low_stock_many_items_html": "快點吧，庫存僅剩 <strong>{{ quantity }}</strong> 件。",
-      "inventory_out_of_stock": "缺貨",
-      "inventory_out_of_stock_continue_selling": "有存貨",
-      "sku": "存貨單位",
-      "on_sale": "銷售",
-      "product_variants": "產品型號",
-      "open_size_chart": "尺寸表",
-      "media": {
-        "gallery_viewer": "畫廊檢視器",
-        "load_image": "在圖庫視圖中載入圖片 {{ index }}",
-        "load_model": "在圖庫視圖中載入 3D 模型 {{ index }}",
-        "load_video": "在圖庫視圖中播放影片 {{ index }}",
-        "image_available": "圖片 {{ index }} 現在可在圖庫視圖中查看",
-        "open_media": "在模式中開啟媒體 {{ index }}",
-        "play_model": "播放 3D 檢視器",
-        "play_video": "播放影片"
-      },
-      "quantity": {
-        "label": "數量",
-        "input_label": "{{ product }} 的數量",
-        "increase": "增加{{ product }}的數量",
-        "decrease": "減少{{ product }}的數量",
-        "minimum_of": "最少 {{ quantity }}",
-        "maximum_of": "最多 {{ quantity }}",
-        "multiples_of": "增量為 {{ quantity }}",
-        "min_of": "分鐘 {{ quantity }}",
-        "max_of": "最大{{ quantity }}",
-        "in_cart_html": "購物車中的 <span class=\"quantity-cart\">{{ quantity }}</span>",
-        "note": "查看數量規則"
-      },
-      "volume_pricing": {
-        "title": "批量定價",
-        "note": "提供批量定價",
-        "minimum": "{{ quantity }}+",
-        "price_at_each": "每張 {{ price }}",
-        "price_at_each_html": "每張 {{ price }}",
-        "price_range": "{{ minimum }} - {{ maximum }}",
-        "each": "{{ money }}/件",
-        "each_html": "{{ money }}/件"
-      },
-      "pickup_availability": {
-        "view_store_info": "查看店面資訊",
-        "check_other_stores": "檢查其他商店的庫存狀況",
-        "pick_up_available": "提供接送服務",
-        "pick_up_available_at_html": "可在 <span class=\"color-foreground\">​​{{ location_name }}</span> 取貨",
-        "pick_up_unavailable_at_html": "目前無法在 <span class=\"color-foreground\">​​{{ location_name }}</span> 取貨",
-        "unavailable": "無法載入取貨情況",
-        "refresh": "重新整理"
-      },
-      "price": {
-        "from_price_html": "來自{{ price }}",
-        "regular_price": "正常價格",
-        "sale_price": "銷售價格",
-        "unit_price": "單價",
-        "save_price_html": "儲存<span data-sale-value>{{ amount }}</span>",
-        "label": "價格"
-      },
-      "share": "分享該產品",
-      "share_label": "分享",
-      "question_form": {
-        "label": "問一個問題",
-        "form_title": "問一個問題",
-        "field_name": "你的名字",
-        "field_email": "你的郵件",
-        "field_phone": "您的手機",
-        "field_message": "您的留言",
-        "submit_button": "發送問題",
-        "note": "標示 * 的欄位為必填欄位。",
-        "success_message": "謝謝您聯絡我們。我們會盡快回覆您。"
-      },
-      "sold_out": "售罄",
-      "unavailable": "不可用",
-      "vendor": "小販",
-      "type": "類型",
-      "value_unavailable": "{{ option_value }} - 不可用",
-      "variant_sold_out_or_unavailable": "版本已售完或無法使用",
-      "video_exit_message": "{{ title }} 在同一視窗中開啟全螢幕影片。",
-      "view_full_details": "查看完整詳細信息",
-      "xr_button": "在您的空間中查看",
-      "xr_button_label": "在您的空間中查看，在擴增實境視窗中載入項目",
-      "include_taxes": "含稅。",
-      "shipping_policy_html": "<a href=\"{{ link }}\">運費</a>結帳時計算。"
-    },
-    "modal": {
-      "label": "媒體庫"
-    },
-    "facets": {
-      "filter_and_operator_subtitle": "匹配所有",
-      "apply": "申請",
-      "clear": "清除",
-      "clear_all": "移除所有",
-      "from": "從",
-      "filter_and_sort": "過濾和排序",
-      "filter_by_label": "篩選：",
-      "filter_button": "篩選",
-      "filters_selected": {
-        "one": "已選{{ count }}",
-        "other": "已選{{ count }}"
-      },
-      "filter_selected_accessibility": "{{ type }}（已選擇 {{ count }} 個過濾器）",
-      "show_more": "展示更多",
-      "show_less": "顯示較少",
-      "max_price": "最高價為{{ price }}",
-      "product_count": {
-        "one": "{{ product_count }} 個產品（共 {{ count }} 個）",
-        "other": "{{ product_count }} 個產品（共 {{ count }} 個）"
-      },
-      "product_count_simple": {
-        "one": "{{ count }} 產品",
-        "other": "{{ count }} 個產品"
-      },
-      "reset": "重置",
-      "sort_button": "種類",
-      "sort_by_label": "排序方式：",
-      "to": "到",
-      "clear_filter": "移除過濾器"
-    }
-  },
-  "collections": {
-    "general": {
-      "collection_items": "{{ title }} 項",
-      "empty": "抱歉，該系列中沒有產品。",
-      "continue_shopping": "繼續購物",
-      "no_results": "沒有產品符合這些過濾器。",
-      "use_fewer_filters": "使用更少的過濾器或"
-    }
-  },
-  "templates": {
-    "404": {
-      "title": "404頁面不存在",
-      "subtext": "您請求的頁面不存在。"
-    },
-    "search": {
-      "no_results_text": "未找到“{{ terms }}”的結果。",
-      "no_results_message": "檢查拼字或使用不同的單字或短語。",
-      "page": "頁",
-      "products": "產品",
-      "results_pages_with_count": {
-        "one": "{{ count }}頁",
-        "other": "{{ count }} 頁"
-      },
-      "results_suggestions_with_count": {
-        "one": "{{ count }}建議",
-        "other": "{{ count }}條建議"
-      },
-      "results_products_with_count": {
-        "one": "{{ count }} 產品",
-        "other": "{{ count }} 個產品"
-      },
-      "results_with_count": {
-        "one": "{{ count }} 結果",
-        "other": "{{ count }} 個結果"
-      },
-      "results_with_count_and_term": {
-        "one": "求「{{ terms }}」的 {{ count }} 個結果",
-        "other": "求「{{ terms }}」的 {{ count }} 個結果"
-      },
-      "title": "搜尋結果",
-      "search_for": "看看“{{ terms }}”的所有結果",
-      "suggestions": "建議",
-      "articles_pages": "文章和頁面",
-      "collections": "收藏",
-      "clear": "清除",
-      "most_searched_keywords": "搜尋次數最多的關鍵字",
-      "most_searched_products": "搜尋最多的產品"
-    },
-    "cart": {
-      "cart": "大車"
-    },
-    "contact": {
-      "form": {
-        "title": "聯絡表",
-        "name": "姓名",
-        "email": "電子郵件",
-        "phone": "電話號碼",
-        "comment": "您的留言",
-        "send": "現在提交",
-        "post_success": "謝謝您聯絡我們。我們會盡快回覆您。",
-        "error_heading": "請調整以下內容："
-      }
-    }
-  },
-  "sections": {
-    "announcements": {
-      "previous_announcement": "先前公告",
-      "next_announcement": "下一個公告",
-      "carousel": "輪播",
-      "announcement": "公告",
-      "announcement_bar": "公告欄"
-    },
-    "header": {
-      "announcement": "公告",
-      "menu": "選單",
-      "cart_count": {
-        "one": "{{ count }} 項",
-        "other": "{{ count }} 項"
-      }
-    },
-    "cart": {
-      "title": "你的購物車",
-      "caption": "購物車商品",
-      "remove_title": "刪除{{ title }}",
-      "estimated_total": "預計總數",
-      "new_estimated_total": "新的估計總數",
-      "note": "訂購特別說明",
-      "checkout": "查看",
-      "empty": "您的購物車目前是空的。",
-      "cart_error": "更新您的購物車時出錯。請再試一次。",
-      "cart_quantity_error_html": "您只能將 {{ quantity }} 件商品加入您的購物車。",
-      "taxes_and_shipping_policy_at_checkout_html": "結帳時計算的稅費和<a href=\"{{ link }}\" class=\"btn--link\">運費</a>",
-      "taxes_included_but_shipping_at_checkout": "含稅和運費在結帳時計算",
-      "taxes_included_and_shipping_policy_html": "含稅。 <a href=\"{{ link }}\" class=\"btn--link\">運費</a>和結帳時計算的折扣。",
-      "taxes_and_shipping_at_checkout": "結帳時計算的稅金和運費",
-      "headings": {
-        "product": "產品",
-        "price": "價格",
-        "total": "全部的",
-        "quantity": "數量",
-        "image": "產品圖片"
-      },
-      "update": "更新",
-      "login": {
-        "title": "有一個帳戶？",
-        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">登入</a>可以更快結帳。"
-      }
-    },
-    "footer": {
-      "payment": "支付方式"
-    },
-    "featured_blog": {
-      "view_all": "看全部",
-      "onboarding_date": "2024 年 5 月 27 日",
-      "onboarding_title": "部落格文章",
-      "onboarding_content": "向您的客戶提供您的部落格文章的摘要"
-    },
-    "featured_collection": {
-      "view_all": "看全部",
-      "view_all_label": "查看 {{ collection_name }} 系列中的所有產品"
-    },
-    "collection_list": {
-      "view_all": "看全部"
-    },
-    "collection_template": {
-      "empty": "沒有找到產品",
-      "title": "收藏",
-      "use_fewer_filters_html": "使用更少的過濾器或<a class=\"{{ class }}\" href=\"{{ link }}\">全部刪除</a>"
-    },
-    "video": {
-      "load_video": "載入影片：{{ description }}"
-    },
-    "slideshow": {
-      "load_slide": "載入滑桿",
-      "previous_slideshow": "上一張投影片",
-      "next_slideshow": "下一張投影片",
-      "pause_slideshow": "暫停投影片放映",
-      "play_slideshow": "播放幻燈片",
-      "carousel": "輪播",
-      "slide": "滑動",
-      "of": "的"
-    },
-    "page": {
-      "title": "頁面標題"
-    },
-    "main-blog": {
-      "all_posts": "所有貼文"
-    },
-    "mobile-sticky-bar": {
-      "home": "家",
-      "products": "產品",
-      "search": "搜尋",
-      "cart": "大車"
-    },
-    "countdown-timer": {
-      "days": "天",
-      "hours": "小時",
-      "minutes": "分分鐘",
-      "seconds": "秒"
-    },
-    "quick_order_list": {
-      "product_total": "產品小計",
-      "view_cart": "查看購物車",
-      "each": "{{ money }}/件",
-      "each_html": "{{ money }}/件",
-      "product": "產品",
-      "variant": "變體",
-      "variant_total": "變體總數",
-      "items_added": {
-        "one": "新增了 {{ quantity }} 項",
-        "other": "新增了 {{ quantity }} 項"
-      },
-      "items_removed": {
-        "one": "{{ quantity }} 項目已刪除",
-        "other": "已刪除 {{ quantity }} 項"
-      },
-      "product_variants": "產品型號",
-      "total_items": "總項目",
-      "remove_all_single_item_confirmation": "從您的購物車中刪除 1 件商品？",
-      "remove_all_items_confirmation": "要從您的購物車中刪除所有 {{ quantity }} 件商品嗎？",
-      "remove_all": "全部刪除",
-      "cancel": "取消",
-      "min_error": "該商品至少有 {{ min }}",
-      "max_error": "此項目最多有 {{ max }} 個",
-      "step_error": "您只能以 {{ step }} 為增量新增此項目"
-    }
-  },
-  "localization": {
-    "country_label": "國家/地區",
-    "language_label": "語言",
-    "update_language": "更新語言",
-    "update_country": "更新國家/地區",
-    "search": "搜尋",
-    "popular_countries_regions": "熱門國家/地區",
-    "country_results_count": "找到 {{ count }} 個國家/地區"
-  },
-  "customer": {
-    "account": {
-      "title": "帳戶",
-      "details": "帳號詳細資料",
-      "view_addresses": "查看地址",
-      "return": "返回帳戶詳細信息"
-    },
-    "account_fallback": "帳戶",
-    "activate_account": {
-      "title": "啟動帳戶",
-      "subtext": "建立您的密碼以啟動您的帳戶。",
-      "password": "密碼",
-      "password_confirm": "確認密碼",
-      "submit": "啟動帳戶",
-      "cancel": "拒絕邀請"
-    },
-    "addresses": {
-      "title": "地址",
-      "default": "預設",
-      "add_new": "增加一個新地址",
-      "edit_address": "編輯地址",
-      "first_name": "名",
-      "last_name": "姓",
-      "company": "公司",
-      "address1": "地址1",
-      "address2": "地址2",
-      "city": "城市",
-      "country": "國家/地區",
-      "province": "省",
-      "zip": "郵遞區號",
-      "phone": "電話",
-      "set_default": "設定為預設地址",
-      "add": "新增地址",
-      "update": "更新地址",
-      "cancel": "取消",
-      "edit": "編輯",
-      "delete": "刪除",
-      "delete_confirm": "您確定要刪除該地址嗎？"
-    },
-    "log_in": "登入",
-    "log_out": "登出",
-    "login_page": {
-      "cancel": "取消",
-      "create_account": "建立帳戶",
-      "email": "電子郵件",
-      "forgot_password": "忘記密碼了嗎？",
-      "guest_continue": "繼續",
-      "guest_title": "繼續以訪客身份",
-      "password": "密碼",
-      "title": "登入",
-      "sign_in": "登入",
-      "submit": "提交",
-      "alternate_provider_separator": "或者"
-    },
-    "order": {
-      "title": "訂單{{ name }}",
-      "date_html": "放置在{{ date }}",
-      "cancelled_html": "訂單於 {{ date }} 取消",
-      "cancelled_reason": "原因：{{ reason }}",
-      "billing_address": "帳單地址",
-      "payment_status": "支付狀態",
-      "shipping_address": "收件地址",
-      "fulfillment_status": "履行狀態",
-      "discount": "折扣",
-      "shipping": "船運",
-      "tax": "稅",
-      "product": "產品",
-      "sku": "存貨單位",
-      "price": "價格",
-      "quantity": "數量",
-      "total": "全部的",
-      "total_refunded": "已退款",
-      "fulfilled_at_html": "已完成{{ date }}",
-      "track_shipment": "追蹤出貨",
-      "tracking_url": "追蹤連結",
-      "tracking_company": "載體",
-      "tracking_number": "追蹤號碼",
-      "subtotal": "小計",
-      "total_duties": "職責"
-    },
-    "orders": {
-      "title": "訂單歷史",
-      "order_number": "命令",
-      "order_number_link": "訂單編號{{ number }}",
-      "date": "日期",
-      "payment_status": "支付狀態",
-      "fulfillment_status": "履行狀態",
-      "total": "全部的",
-      "none": "您還沒有下任何訂單。"
-    },
-    "recover_password": {
-      "title": "重置你的密碼",
-      "subtext": "我們將向您發送一封電子郵件以重設您的密碼",
-      "success": "我們已向您發送了一封電子郵件，其中包含用於更新密碼的連結。"
-    },
-    "register": {
-      "title": "建立帳戶",
-      "first_name": "名",
-      "last_name": "姓",
-      "email": "電子郵件",
-      "password": "密碼",
-      "submit": "創造"
-    },
-    "reset_password": {
-      "title": "重設帳戶密碼",
-      "subtext": "輸入新的密碼",
-      "password": "密碼",
-      "password_confirm": "確認密碼",
-      "submit": "重新設密碼"
-    }
-  },
-  "gift_cards": {
-    "issued": {
-      "how_to_use_gift_card": "在線使用禮品卡代碼或店內二維碼",
-      "title": "這是您為 {{ shop }} 準備的 {{ value }} 禮品卡！",
-      "subtext": "您的禮品卡",
-      "gift_card_code": "禮品卡代碼",
-      "shop_link": "造訪線上商店",
-      "remaining_html": "剩餘{{ balance }}",
-      "add_to_apple_wallet": "加入蘋果錢包",
-      "qr_image_alt": "二維碼 — 掃描即可兌換禮品卡",
-      "copy_code": "複製禮品卡代碼",
-      "expired": "已到期",
-      "copy_code_success": "程式碼複製成功",
-      "print_gift_card": "列印",
-      "expiration_date": "過期時間：{{ expires_on }}"
-    }
-  },
-  "recipient": {
-    "form": {
-      "checkbox": "我想將此作為禮物發送",
-      "expanded": "禮品卡接收表格已擴展",
-      "collapsed": "禮品卡收件人表格已折疊",
-      "email_label": "收件者電子郵件",
-      "email_label_optional_for_no_js_behavior": "收件者電子郵件（可選）",
-      "email": "電子郵件",
-      "name_label": "收件人姓名（可選）",
-      "name": "姓名",
-      "message_label": "留言（可選）",
-      "message": "訊息",
-      "max_characters": "最多 {{ max_chars }} 個字符",
-      "send_on": "年-月-日",
-      "send_on_label": "發送（可選）"
     }
   },
   "altaeron_comparison": {
@@ -1855,50 +1768,6 @@
     "reviews_eyebrow": "客戶評價",
     "faq_eyebrow": "常見問題解答"
   },
-  "research_evidence": {
-    "study_1": {
-      "title": "更好的腳趾對齊",
-      "meta": "系統回顧·9項研究",
-      "body": "对 9 项临床研究的回顾发现，脚趾对齐有积极作用，其中脚趾分离设计显示出最强的效果。",
-      "citation": "Kwan 等人，BMJ 公開賽 (2021)"
-    },
-    "study_2": {
-      "title": "減少拇囊炎角度和疼痛",
-      "meta": "RCT · 90 位參與者 · 12 個月",
-      "body": "使用客製化腳趾分離器的參與者的拇趾外翻角度平均減少 3.3°，而對照組則增加 1.9°。治療組的疼痛也減輕了。",
-      "citation": "Chadchavalpanichaya 等人。 (2018)"
-    },
-    "study_3": {
-      "title": "短期疼痛緩解",
-      "meta": "隨機對照試驗 · 209 位參與者",
-      "body": "一項隨機對照試驗發現，與觀察等待相比，矯形治療可以短期改善行走疼痛。",
-      "citation": "Torkki 等人，《美國醫學會雜誌》(2001)"
-    },
-    "study_4": {
-      "title": "支持+鍛煉",
-      "body": "運動與矯正器支撐相結合比單獨運動更能改善拇趾外翻角度和疼痛。",
-      "citation": "朱等人。 (2026)"
-    },
-    "study_5": {
-      "title": "力量與功能",
-      "body": "腳趾分離器結合有針對性的足部運動可以改善疼痛、腳趾握力以及大腳趾的力量和功能。",
-      "citation": "阿卜杜勒巴里 (2018)"
-    },
-    "eyebrow": "研究",
-    "heading": "保守性拇囊炎支持背後的研究",
-    "intro": "保守性拇囊炎支撐、矯正器和腳趾定位方法的研究報告稱，某些研究人群的疼痛、壓力或腳趾對齊等措施有所改善。",
-    "more_research": "更多研究",
-    "view_study": "查看研究",
-    "disclaimer": "上述研究評估了拇趾外翻矯正器、腳趾分離器和組合保守方案。結果並不能為每台設備或每個人建立相同的結果。",
-    "view_all_sources": "查看所有來源",
-    "sources_heading": "研究來源",
-    "view_source": "查看原始碼",
-    "source_1": "拇外翻矯正器的特性與效度：統合分析的系統性回顧－Mei-Ying Kwan、Kit-Lun Yick、Joanne Yip 和 Chi-Yung Tse；BMJ 公開賽，2021 年。",
-    "source_2": "客製化模具室溫硫化矽膠腳趾分離器對拇趾外翻的有效性 — Navaporn Chadchavalpanichaya 等人；國際義肢和矯正器，2018。",
-    "source_3": "手術與矯正器與觀察等待拇趾外翻：一項隨機對照試驗 — M. Torkki 等人； 《美國醫學會雜誌》，2001 年。",
-    "source_4": "運動結合外部支撐對拇外翻角度和疼痛的影響 — Zhitao Zhu 等人；足踝外科，2026 年。",
-    "source_5": "足部活動和運動計畫與腳趾分離器相結合可改善中度拇趾外翻女性的治療效果 — Sahar Ahmed Abdalbary；美國足病醫學協會雜誌，2018 年。"
-  },
   "altaeron_pdp_dialfit": {
     "common": {
       "save": "儲存",
@@ -2146,13 +2015,6 @@
   "altaeron_pdp_reels_v4": {
     "hero_review_quote": "“感覺很舒服，做工也很好👍”"
   },
-  "shopify": {
-    "checkout": {
-      "general": {
-        "pay_now_button_label": "完成訂單"
-      }
-    }
-  },
   "altaeron_pdp_massager": {
     "expert": {
       "quote": "對於足底筋膜炎不適、腳跟疼痛、腳踝腫脹和活動後酸痛等常見症狀，我尋找能夠同時解決緊張、僵硬和沈重問題的緩解方法。空氣壓縮、熱和振動可以相互補充，促進血液循環、放鬆緊繃的組織並幫助疲勞的雙腳恢復。",
@@ -2367,5 +2229,14 @@
     "close_image_viewer": "關閉影像檢視器",
     "previous_image": "上一張圖片",
     "next_image": "下一張圖片"
+  },
+  "collections": {
+    "general": {
+      "collection_items": "{{ title }} 項",
+      "empty": "抱歉，該系列中沒有產品。",
+      "no_results": "沒有產品符合這些過濾器。",
+      "use_fewer_filters": "使用更少的過濾器或",
+      "continue_shopping": "繼續購物"
+    }
   }
 }

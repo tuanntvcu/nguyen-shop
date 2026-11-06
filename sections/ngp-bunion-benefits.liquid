@@ -1,0 +1,362 @@
+{%- liquid
+  assign ngp_progression_blocks = section.blocks | where: 'type', 'progression'
+  assign ngp_benefit_blocks = section.blocks | where: 'type', 'benefit'
+  assign ngp_eyebrow = section.settings.eyebrow
+  assign ngp_heading = section.settings.heading
+  assign ngp_subheading = section.settings.subheading
+  assign ngp_reassurance = section.settings.reassurance
+  assign ngp_how_it_works_video = section.settings.how_it_works_video
+  assign ngp_mobile_gallery_images = ''
+  for ngp_image_index in (1..5)
+    assign ngp_image_setting_id = 'mobile_gallery_image_' | append: ngp_image_index
+    if section.settings[ngp_image_setting_id] != blank
+      assign ngp_mobile_gallery_images = ngp_mobile_gallery_images | append: '1'
+    endif
+  endfor
+  assign ngp_translated_subheading = true
+  for ngp_paragraph_index in (1..6)
+    assign ngp_paragraph_key = 'altaeron_pdp_reels_v3.bunion.subheading_' | append: ngp_paragraph_index
+    if ngp_paragraph_index == 1 or ngp_paragraph_index == 4
+      assign ngp_paragraph_key = ngp_paragraph_key | append: '_before'
+    endif
+    assign ngp_paragraph_copy = ngp_paragraph_key | t
+    if ngp_paragraph_copy contains 'Translation missing:'
+      assign ngp_translated_subheading = false
+      break
+    endif
+  endfor
+  unless request.locale.iso_code == 'en'
+    assign ngp_eyebrow = 'altaeron_pdp_reels_v3.bunion.eyebrow' | t
+    assign ngp_heading = 'altaeron_pdp_reels_v3.bunion.heading' | t
+    assign ngp_reassurance = 'altaeron_pdp_reels_v3.bunion.reassurance' | t | replace: '&lt;', '<' | replace: '&gt;', '>'
+  endunless
+-%}
+
+<style>
+  #AltaeronBunion-{{ section.id }} {
+    --ngp-alta-custom-ink: var(--ngp-altaeron-navy, #102a43);
+    --ngp-alta-custom-body: var(--ngp-altaeron-body, #344054);
+    --ngp-alta-custom-accent: var(--ngp-altaeron-primary, #006b5e);
+    --ngp-alta-custom-soft: var(--ngp-altaeron-soft-teal, #eaf5f2);
+    --ngp-alta-custom-line: var(--ngp-altaeron-border, #e4e7ec);
+    background: #fff;
+    color: var(--ngp-alta-custom-body);
+    padding: 72px 0 36px;
+  }
+  #AltaeronBunion-{{ section.id }} * { box-sizing: border-box; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__shell { margin-inline: auto; width: min(1360px, calc(100% - 80px)); }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__header { margin-bottom: 24px; max-width: 1080px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__eyebrow { align-items: center; color: var(--ngp-alta-custom-accent); display: flex; font-size: 12px; font-weight: 750; gap: 12px; letter-spacing: .24em; line-height: 1.3; margin: 0 0 10px; text-transform: uppercase; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__heading { color: var(--ngp-alta-custom-ink); font-family: var(--ngp-alta-font-family, var(--font-heading-family)); font-size: clamp(30px, 3vw, 46px); font-weight: 750; letter-spacing: -.035em; line-height: 1.08; margin: 0; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { color: var(--ngp-alta-custom-body); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; margin: 10px 0 0; max-width: 1050px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading p { margin: 0 0 .85em; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading p:last-child { margin-bottom: 0; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading strong { color: #9b2525; font-weight: 750; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__progression { background: #f7f9f9; border: 1px solid var(--ngp-alta-custom-line); border-radius: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: hidden; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step { background: #fff; min-width: 0; position: relative; text-align: center; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step + .ngp-alta-bunion__step { border-left: 1px solid rgba(228, 231, 236, .75); }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step:not(:last-child)::after { align-items: center; background: rgba(255,255,255,.94); border: 1px solid rgba(0,107,94,.18); border-radius: 50%; color: var(--ngp-alta-custom-accent); content: '\2192'; display: flex; font-size: 25px; font-weight: 500; height: 42px; justify-content: center; position: absolute; right: -21px; top: calc(50% - 42px); width: 42px; z-index: 2; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step-media { aspect-ratio: 4 / 3; background: #eef2f3; overflow: hidden; }
+  #AltaeronBunion-{{ section.id }} :is(.ngp-alta-bunion__step-media, .ngp-alta-custom-card__media) :is(img, svg) { display: block; height: 100%; object-fit: cover; width: 100%; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step-copy { background: rgba(255,255,255,.92); min-height: 94px; padding: 16px 12px 18px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step h3 { background: var(--ngp-alta-custom-soft); border-radius: 999px; color: var(--ngp-alta-custom-accent); display: inline-block; font-family: inherit; font-size: 15px; font-weight: 750; line-height: 1.2; margin: 0 0 7px; padding: 6px 18px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step:first-child h3 { background: #f8e8e8; color: #9b2525; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step p { color: var(--ngp-alta-custom-body); font-size: 14px; line-height: 1.4; margin: 0; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__cards { display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 20px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card { background: #fff; border: 1px solid var(--ngp-alta-custom-line); border-radius: 15px; min-width: 0; overflow: hidden; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card__media { aspect-ratio: 16 / 8.4; background: #eef2f3; overflow: hidden; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card__copy { padding: 18px 20px 22px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card h3 { color: var(--ngp-alta-custom-ink); font-family: var(--ngp-alta-font-family, var(--font-heading-family)); font-size: 19px; font-weight: 750; letter-spacing: -.02em; line-height: 1.25; margin: 0 0 5px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card p { color: var(--ngp-alta-custom-body); font-size: 15px; line-height: 1.45; margin: 0; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__reassurance { align-items: center; background: linear-gradient(90deg, #edf8f7, #e4f4f2, #edf8f7); border-radius: 13px; color: #0b6270; display: flex; flex-direction: column; font-size: 16px; font-weight: 500; gap: 0; justify-content: center; line-height: 1.5; margin: 20px 0 0; padding: 22px; text-align: center; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__reassurance strong { color: var(--ngp-altaeron-primary,#006B5E); font-weight: 750; }
+  #AltaeronBunion-{{ section.id }} .alta-custom__reassurance-title { font-size: 18px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__reassurance svg { flex: 0 0 29px; height: 29px; stroke-width: 1.8; width: 29px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery { display: none; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__how-layout { display: grid; gap: 24px; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__copy { display: contents; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__header,
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { grid-column: 1; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__header { grid-row: 1; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { grid-row: 2; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__video { aspect-ratio: 1 / 1; background: #eef2f3; border-radius: 12px; overflow: hidden; width: 100%; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__video { grid-column: 2; grid-row: 1; }
+  #AltaeronBunion-{{ section.id }} .ngp-alta-custom__video video { display: block; height: 100%; object-fit: cover; width: 100%; }
+  @media (min-width: 750px) {
+    #AltaeronBunion-{{ section.id }} { padding: clamp(64px, 6vw, 88px) 0 40px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__copy { display: flex; flex-direction: column; grid-column: 1; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__header { margin-bottom: 0; max-width: 850px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { max-width: none; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__how-layout { align-items: start; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__progression { box-shadow: 0 18px 50px rgba(16,42,67,.06); }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__cards { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card:hover { border-color: rgba(0,107,94,.3); box-shadow: 0 14px 34px rgba(16,42,67,.08); transform: translateY(-2px); }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__shell { width: min(1240px, calc(100% - 80px)); }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step-media { aspect-ratio: 16 / 10; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card__media { aspect-ratio: 16 / 7.8; }
+  }
+  @media (max-width: 749px) {
+    #AltaeronBunion-{{ section.id }} { padding: 24px 0 12px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__shell { width: calc(100% - 30px); }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__header { margin-bottom: 12px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__eyebrow { font-size: 10px; gap: 9px; letter-spacing: .2em; margin-bottom: 8px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__eyebrow::before { flex-basis: 28px; height: 2px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__heading { font-size: 29px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { font-size: 15px; line-height: 1.45; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__how-layout { gap: 0; grid-template-columns: minmax(0, 1fr); }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__header { grid-column: 1; grid-row: 1; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__video { grid-column: 1; grid-row: 2; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { grid-column: 1; grid-row: 3; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__video { margin: 0 0 16px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__progression { border-radius: 13px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step:not(:last-child)::after { font-size: 16px; height: 28px; right: -14px; top: calc(50% - 32px); width: 28px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step-media { aspect-ratio: 4 / 5; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step-copy { min-height: 100px; padding: 10px 4px 12px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step h3 { border-radius: 8px; font-size: 10px; margin-bottom: 5px; max-width: calc(100% - 8px); padding: 5px 6px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step p { font-size: 10px; line-height: 1.3; padding-inline: 3px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__cards { gap: 12px; grid-template-columns: 1fr; margin-top: 14px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card { border-radius: 12px; display: grid; grid-template-columns: minmax(120px, 42%) 1fr; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card__media { aspect-ratio: auto; min-height: 132px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card__copy { align-self: center; padding: 16px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card h3 { font-size: 16px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom-card p { font-size: 13px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__reassurance { font-size: 14px; gap: 10px; margin-top: 14px; min-height: 58px; padding: 12px 14px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__reassurance svg { flex-basis: 24px; height: 24px; width: 24px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery { display: block; margin: 0 0 14px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-track { overflow: hidden; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-slide { aspect-ratio: 1.22 / 1; background: #fff; border-radius: 12px; overflow: hidden; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-slide img { display: block; height: 100%; object-fit: contain; width: 100%; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery .swiper-pagination { display: flex; gap: 6px; justify-content: center; margin-top: 9px; position: static; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery .swiper-pagination-bullet { background: #c8cece; height: 5px; margin: 0 !important; opacity: 1; width: 5px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery .swiper-pagination-bullet-active { background: #152c2b; }
+  }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    {% render 'ngp-reels-v3-responsive-section', section_kind: 'bunion', section_id: section.id %}
+  {%- endif -%}
+</style>
+
+<section id="AltaeronBunion-{{ section.id }}" class="ngp-alta-custom ngp-alta-bunion" aria-labelledby="AltaeronBunionHeading-{{ section.id }}">
+  <div class="ngp-alta-custom__shell">
+    <div class="ngp-alta-custom__how-layout">
+      <div class="ngp-alta-custom__copy">
+        <header class="ngp-alta-custom__header">
+          {%- if ngp_eyebrow != blank -%}<p class="ngp-alta-custom__eyebrow">{{ ngp_eyebrow | escape }}</p>{%- endif -%}
+          <h2 id="AltaeronBunionHeading-{{ section.id }}" class="ngp-alta-custom__heading">{{ ngp_heading | escape }}</h2>
+        </header>
+      {%- if ngp_translated_subheading or ngp_subheading != blank -%}
+        <div class="ngp-alta-custom__subheading">
+          {%- if ngp_translated_subheading -%}
+            {%- for ngp_paragraph_index in (1..6) -%}
+              {%- capture ngp_paragraph_key -%}altaeron_pdp_reels_v3.bunion.subheading_{{ ngp_paragraph_index }}{%- endcapture -%}
+              {%- if ngp_paragraph_index == 1 or ngp_paragraph_index == 4 -%}
+                {%- assign ngp_before_key = ngp_paragraph_key | append: '_before' -%}
+                {%- assign ngp_emphasis_key = ngp_paragraph_key | append: '_emphasis' -%}
+                {%- assign ngp_after_key = ngp_paragraph_key | append: '_after' -%}
+                <p>{{ ngp_before_key | t }}<strong>{{ ngp_emphasis_key | t }}</strong>{{ ngp_after_key | t }}</p>
+              {%- else -%}
+                <p>{{ ngp_paragraph_key | t }}</p>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {{ ngp_subheading | newline_to_br }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      </div>
+      {%- if ngp_how_it_works_video != blank -%}
+        <div class="ngp-alta-custom__video">
+          {%- capture ngp_how_video_markup -%}{{ ngp_how_it_works_video | video_tag: loop: true, muted: true, controls: false, playsinline: true, preload: 'none', loading: 'lazy' }}{%- endcapture -%}
+          {{- ngp_how_video_markup | replace: '<video ', '<video data-ngp-lazy-play ' -}}
+        </div>
+        <script>
+          (() => {
+            const root = document.getElementById('AltaeronBunion-{{ section.id }}');
+            const video = root?.querySelector('[data-ngp-lazy-play]');
+            if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const observer = new IntersectionObserver(([entry]) => {
+              if (entry.isIntersecting) video.play().catch(() => {});
+              else video.pause();
+            }, { rootMargin: '300px 0px' });
+            observer.observe(video);
+          })();
+        </script>
+      {%- endif -%}
+    </div>
+
+    {%- if ngp_progression_blocks.size > 0 -%}
+      <div class="ngp-alta-bunion__progression" aria-label="{{ ngp_eyebrow | escape }}">
+        {%- for block in ngp_progression_blocks -%}
+          {%- liquid
+            assign ngp_block_title = block.settings.title
+            assign ngp_block_caption = block.settings.caption
+            unless request.locale.iso_code == 'en'
+              capture ngp_title_key
+                echo 'altaeron_pdp_reels_v3.bunion.progression_' | append: forloop.index | append: '_title'
+              endcapture
+              capture ngp_caption_key
+                echo 'altaeron_pdp_reels_v3.bunion.progression_' | append: forloop.index | append: '_caption'
+              endcapture
+              assign ngp_block_title = ngp_title_key | t
+              assign ngp_block_caption = ngp_caption_key | t
+            endunless
+            assign ngp_image_alt = block.settings.image.alt | default: ngp_block_title
+          -%}
+          <article class="ngp-alta-bunion__step" {{ block.shopify_attributes }}>
+            <div class="ngp-alta-bunion__step-media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '180, 280, 420, 600, 900', sizes: '(min-width: 750px) 32vw, 33vw', alt: ngp_image_alt }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="ngp-alta-bunion__step-copy"><h3>{{ ngp_block_title | escape }}</h3><p>{{ ngp_block_caption | escape }}</p></div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if ngp_benefit_blocks.size > 0 -%}
+      <div class="ngp-alta-custom__cards">
+        {%- for block in ngp_benefit_blocks -%}
+          {%- liquid
+            assign ngp_block_title = block.settings.title
+            assign ngp_block_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture ngp_title_key
+                echo 'altaeron_pdp_reels_v3.bunion.benefit_' | append: forloop.index | append: '_title'
+              endcapture
+              capture ngp_body_key
+                echo 'altaeron_pdp_reels_v3.bunion.benefit_' | append: forloop.index | append: '_body'
+              endcapture
+              assign ngp_block_title = ngp_title_key | t
+              assign ngp_block_body = ngp_body_key | t
+            endunless
+            assign ngp_image_alt = block.settings.image.alt | default: ngp_block_title
+          -%}
+          <article class="ngp-alta-custom-card" {{ block.shopify_attributes }}>
+            <div class="ngp-alta-custom-card__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240, 360, 520, 700, 900', sizes: '(min-width: 750px) 32vw, 42vw', alt: ngp_image_alt }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="ngp-alta-custom-card__copy"><h3>{{ ngp_block_title | escape }}</h3><p>{{ ngp_block_body | escape }}</p></div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if ngp_reassurance != blank -%}
+      <p class="ngp-alta-custom__reassurance">
+        <span>{{ ngp_reassurance }}</span>
+      </p>
+    {%- endif -%}
+
+    {%- if ngp_mobile_gallery_images != blank -%}
+      <div class="ngp-alta-bunion__mobile-gallery" data-mobile-gallery>
+        <div class="ngp-alta-bunion__mobile-gallery-track swiper" data-gallery-track>
+          <div class="swiper-wrapper">
+            {%- for ngp_image_index in (1..5) -%}
+              {%- assign ngp_image_setting_id = 'mobile_gallery_image_' | append: ngp_image_index -%}
+              {%- assign ngp_gallery_image = section.settings[ngp_image_setting_id] -%}
+              {%- if ngp_gallery_image != blank -%}
+                <div class="ngp-alta-bunion__mobile-gallery-slide swiper-slide" data-gallery-slide>
+                  {{ ngp_gallery_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360, 540, 750, 1000, 1200', sizes: '(max-width: 749px) 88vw', alt: ngp_gallery_image.alt }}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- if ngp_mobile_gallery_images.size > 1 -%}
+          <div class="swiper-pagination" aria-label="Gallery slides"></div>
+        {%- endif -%}
+      </div>
+      <script>
+        (() => {
+          const initializeGallery = () => {
+            const slider = document.querySelector('#AltaeronBunion-{{ section.id }} [data-gallery-track]');
+            if (!slider || slider.dataset.initialized || !window.ScaloraTheme?.Carousel) return;
+            slider.dataset.initialized = 'true';
+            const options = {
+              slidesPerView: 1.12,
+              spaceBetween: 10,
+              watchOverflow: true,
+              breakpoints: { 750: { enabled: false } },
+            };
+            const pagination = slider.parentElement.querySelector('.swiper-pagination');
+            if (pagination) options.pagination = { el: pagination, clickable: true };
+            const carousel = new window.ScaloraTheme.Carousel(slider, options);
+            carousel.init();
+          };
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeGallery, { once: true });
+          } else {
+            initializeGallery();
+          }
+        })();
+      </script>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron: Bunion Help",
+  "tag": "section",
+  "class": "section-altaeron-custom",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "video", "id": "how_it_works_video", "label": "How it works video" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WHAT IT DOES FOR YOUR BUNION" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Support your big toe in a more natural position." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "As a bunion develops, the big toe moves inward toward the second toe. Altaeron works in the opposite direction with controlled outward tension." },
+    { "type": "textarea", "id": "reassurance", "label": "Reassurance", "default": "Gentle support should feel controlled — never painful." },
+    { "type": "header", "content": "Mobile image slider" },
+    { "type": "image_picker", "id": "mobile_gallery_image_1", "label": "Image 1" },
+    { "type": "image_picker", "id": "mobile_gallery_image_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "mobile_gallery_image_3", "label": "Image 3" },
+    { "type": "image_picker", "id": "mobile_gallery_image_4", "label": "Image 4" },
+    { "type": "image_picker", "id": "mobile_gallery_image_5", "label": "Image 5" }
+  ],
+  "blocks": [
+    {
+      "type": "progression",
+      "name": "Progression step",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Progression step" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "Short explanation" }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit card",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Benefit title" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Short benefit explanation." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{
+    "name": "Altaeron: Bunion Help",
+    "blocks": [
+      { "type": "progression", "settings": { "title": "Bunion position", "caption": "Big toe shifted inward" } },
+      { "type": "progression", "settings": { "title": "Product support", "caption": "Guides the toe outward" } },
+      { "type": "progression", "settings": { "title": "Supported position", "caption": "Big toe sits more naturally" } },
+      { "type": "benefit", "settings": { "title": "Progress at Your Pace", "body": "Start gently and increase the correction as your foot adapts." } },
+      { "type": "benefit", "settings": { "title": "Less Crowding & Pressure", "body": "Creates more space around the bunion area." } },
+      { "type": "benefit", "settings": { "title": "Less Rubbing", "body": "Helps reduce friction between toes." } }
+    ]
+  }]
+}
+{% endschema %}

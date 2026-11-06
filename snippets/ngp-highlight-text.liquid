@@ -1,0 +1,24 @@
+{%- liquid
+  assign ngp_text = ngp_text | default: ''
+  assign ngp_style = ngp_style | default: 'none'
+
+  if ngp_style == 'none'
+    echo ngp_text
+  else
+    assign ngp_base_css_class = 'ngp-highlight-text'
+    assign ngp_svg = ''
+
+    case ngp_style
+      when 'underline'
+        assign ngp_css_class = ngp_base_css_class | append: ' highlight-text--underline'
+    endcase
+
+    assign ngp_em_open_tag = '<em is="ngp-highlight-text" class="' | append: ngp_css_class | append: '">'
+    assign ngp_em_close_tag = ngp_svg | append: '</em>'
+
+    assign ngp_highlight_text = ngp_text | replace: '<em>', ngp_em_open_tag
+    assign ngp_highlight_text = ngp_highlight_text | replace: '</em>', ngp_em_close_tag
+
+    echo ngp_highlight_text
+  endif
+-%}

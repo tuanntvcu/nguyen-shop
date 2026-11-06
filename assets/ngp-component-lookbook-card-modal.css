@@ -1,0 +1,70 @@
+/**
+ * Lookbook card modal using in Lookbook cards section.
+ */
+.ngp-lbcard {
+  box-sizing: border-box;
+}
+.ngp-lbcard__popup {
+  position: absolute;
+  align-items: flex-end;
+  padding: 2rem;
+}
+.ngp-lbcard__popup .ngp-fixed-overlay {
+  opacity: 0 !important;
+}
+.ngp-lbcard__popup .ngp-drawer__inner {
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0.4rem 0 2rem;
+}
+.ngp-lbcard__popup-header {
+  position: relative;
+  padding: 1.6rem 0;
+  padding-inline-end: 3rem;
+  margin: 0 2rem;
+  border-bottom: 0.1rem solid rgb(var(--color-border));
+  min-height: 2rem;
+}
+.ngp-lbcard__popup-btn-close {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 0;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+}
+.ngp-lbcard__popup-btn-close:before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: -1rem;
+  width: 4rem;
+  height: 4rem;
+}
+.ngp-lbcard__popup-btn-trigger {
+  position: absolute !important;
+  bottom: 2rem;
+  inset-inline-end: 2rem;
+}
+.ngp-lbcard__popup-body {
+  padding: 0 2rem;
+}
+.ngp-lbcard.is-open .ngp-lbcard__popup-btn-trigger {
+  opacity: 0;
+}
+.ngp-lbcard__product-thumbnail {
+  width: 7.5rem;
+  max-width: 25%;
+  margin-inline-end: 0.8rem;
+}
+.ngp-lbcard__product .ngp-btn {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.ngp-full-col-height .ngp-lbcard {
+  height: 100%;
+}
+.ngp-full-col-height .ngp-lbcard .ngp-media-wrapper {
+  min-height: 100%;
+}

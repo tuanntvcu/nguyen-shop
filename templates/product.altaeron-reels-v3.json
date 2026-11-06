@@ -1,16 +1,7 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "altaeron_pdp_reels_v3": {
-      "type": "altaeron-pdp-reels-v3",
+      "type": "ngp-pdp-reels-v3",
       "blocks": {
         "support_demo": {
           "type": "education_media",
@@ -68,7 +59,7 @@
       }
     },
     "altaeron_bunion_benefits": {
-      "type": "altaeron-bunion-benefits",
+      "type": "ngp-bunion-benefits",
       "blocks": {
         "progression_1": {
           "type": "progression",
@@ -112,7 +103,7 @@
       }
     },
     "altaeron_right_fit": {
-      "type": "altaeron-right-fit",
+      "type": "ngp-right-fit",
       "blocks": {
         "fit_1": {
           "type": "fit_card",
@@ -167,7 +158,7 @@
       }
     },
     "altaeron_reasons_8": {
-      "type": "altaeron-reels-v3-reasons",
+      "type": "ngp-reels-v3-reasons",
       "blocks": {
         "reason_1": {
           "type": "point",
@@ -233,75 +224,8 @@
         "heading": "8 Reasons Why You'll Love Altaeron™"
       }
     },
-    "altaeron_comparison": {
-      "type": "altaeron-product-comparison",
-      "blocks": {
-        "guarantee": {
-          "type": "feature",
-          "settings": {
-            "feature": "30-Day Money-Back Guarantee"
-          }
-        },
-        "comfort": {
-          "type": "feature",
-          "settings": {
-            "feature": "Helps Alleviate Discomfort"
-          }
-        },
-        "growth": {
-          "type": "feature",
-          "settings": {
-            "feature": "Designed to Help Address Bunion Progression"
-          }
-        },
-        "alignment": {
-          "type": "feature",
-          "settings": {
-            "feature": "Supports Better Toe Alignment Over Time"
-          }
-        },
-        "walking": {
-          "type": "feature",
-          "settings": {
-            "feature": "Adjustable Correction Tension"
-          }
-        },
-        "durable": {
-          "type": "feature",
-          "settings": {
-            "feature": "Designed for Comfortable At-Home Use"
-          }
-        },
-        "durable_design": {
-          "type": "feature",
-          "settings": {
-            "feature": "Durable, Structured Design"
-          }
-        }
-      },
-      "block_order": [
-        "guarantee",
-        "comfort",
-        "growth",
-        "alignment",
-        "walking",
-        "durable",
-        "durable_design"
-      ],
-      "disabled": true,
-      "settings": {
-        "heading": "Why Choose Us?",
-        "claim_before": "Don't fall for",
-        "claim_accent": "cheap knock-offs",
-        "intro": "How [product] compares to others:",
-        "other_label": "Other brands",
-        "yes_label": "Included",
-        "no_label": "Not included",
-        "color_scheme": "scheme-1"
-      }
-    },
     "altaeron_results": {
-      "type": "altaeron-reels-v3-results",
+      "type": "ngp-reels-v3-results",
       "blocks": {
         "result_1": {
           "type": "result",
@@ -336,25 +260,8 @@
         "animation_duration": 3
       }
     },
-    "altaeron_customer_proof_RtL9nR": {
-      "type": "altaeron-customer-proof",
-      "disabled": true,
-      "name": "Altaeron Customer Proof",
-      "settings": {
-        "eyebrow": "Customer proof",
-        "title": "Real People. Real At-Home Routines.",
-        "avatar_1": "shopify://shop_images/760341870_122093094465430024_1430747234869843375_n.jpg",
-        "avatar_url_1": "https://review-images.judgeme.com/altaeron/1789753655__orisllcal12293__original.png?quality=80&width=160",
-        "reviewer_name_1": "Linda",
-        "review_content_1": "<p>my right bunion has been bugging me forever especially after work or if i wear the wrong shoes. first time i put this thing on i turned it way too much lol had to take it off and start over 😅 now i just use it when im sitting on the couch at night, maybe 20-30 mins. feels weird at first but i actually like the little stretch now. keeps my big toe from feeling so jammed up against the other one</p>",
-        "avatar_2": "shopify://shop_images/558312976_10111481540078518_146096806356904784_n.jpg",
-        "avatar_url_2": "https://review-images.judgeme.com/altaeron/1789792345__a1f6c4391f1d34e6998ceec28c924062fnjpg_96__original.png?quality=80&width=160",
-        "reviewer_name_2": "debbie",
-        "review_content_2": "<p>Ive been wearing it around 30 mins a day, mostly after being on my feet, and it helps with the tension and discomfort. for me its more of a comfortable support/immobilizing brace than a “corrector” and im totally fine with that. feels well made and comfortable to wear ❤️‍🔥</p>"
-      }
-    },
     "altaeron_try_at_home": {
-      "type": "altaeron-try-at-home",
+      "type": "ngp-try-at-home",
       "blocks": {
         "trust_1": {
           "type": "trust",
@@ -383,7 +290,7 @@
       }
     },
     "altaeron_support_timeline": {
-      "type": "altaeron-support-timeline",
+      "type": "ngp-support-timeline",
       "blocks": {
         "stage_1": {
           "type": "stage",
@@ -416,98 +323,12 @@
         "reassurance_text": "Progressively Reinforce Better Alignment\n\nRealignment is cumulative. Repeated corrective positioning gives the muscles and soft tissues around the big toe time to adapt toward a healthier anatomical position.\n\nCorrect. Adapt. Repeat."
       }
     },
-    "altaeron_adjustable_support": {
-      "type": "altaeron-adjustable-support",
-      "blocks": {
-        "benefit_1": {
-          "type": "benefit",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_41_34_PM.png",
-            "title": "Start Light",
-            "body": "Begin with gentle tension while your foot becomes familiar with the position."
-          }
-        },
-        "benefit_2": {
-          "type": "benefit",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_47_44_PM.png",
-            "title": "Dial It In",
-            "body": "Increase until you clearly feel the big toe moving outward. Fine-tune or release the tension whenever you need."
-          }
-        },
-        "benefit_3": {
-          "type": "benefit",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_07_48_44_PM.png",
-            "title": "Progress Gradually",
-            "body": "Add correction as the stretch becomes easier to tolerate."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3"
-      ],
-      "disabled": true,
-      "settings": {
-        "eyebrow": "ADJUSTABLE SUPPORT",
-        "heading": "A Fixed Spacer Stays the Same. Your Foot Doesn't.",
-        "subheading": "Your foot can tolerate more correction as it adapts.\n\nThat's why Altaeron doesn't lock you into one fixed amount of separation.",
-        "hero_image": "shopify://shop_images/4a15bd95-dedd-4c76-8c25-03f7c4aa70dd.png",
-        "reassurance": "Your correction progresses with your foot."
-      }
-    },
-    "altaeron_muscle_support": {
-      "type": "altaeron-muscle-support",
-      "blocks": {
-        "benefit_1": {
-          "type": "support_card",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_02_10_PM.png",
-            "title": "Restore Alignment",
-            "body": "Altaeron guides the big toe back toward its natural anatomical position."
-          }
-        },
-        "benefit_2": {
-          "type": "support_card",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_40_PM.png",
-            "title": "Strengthen What Holds It",
-            "body": "Targeted foot exercises help strengthen the muscles responsible for toe control and arch stability."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2"
-      ],
-      "disabled": true,
-      "settings": {
-        "eyebrow": "SUPPORT + MOVEMENT",
-        "heading": "Align the Toe. Strengthen the Foot.",
-        "subheading": "Better alignment doesn't stop at the brace.\n\nThe muscles around the big toe and arch also help control how the forefoot moves and stabilizes.\n\nYour big toe contributes to balance, forefoot stability, push-off, pressure distribution and arch function. Better alignment gives the forefoot a more natural foundation to work from.",
-        "anatomy_image": "shopify://shop_images/ChatGPT_Image_Sep_10_2026_08_03_36_PM.png",
-        "reassurance": "Choose footwear with enough room for the toes to spread instead of being pushed inward again. Altaeron positions. Exercise strengthens. Better footwear protects the progress."
-      }
-    },
     "altaeron_reviews_faq": {
-      "type": "altaeron-reels-v3-reviews-faq",
+      "type": "ngp-reels-v3-reviews-faq",
       "settings": {}
     },
-    "altaeron_research_evidence": {
-      "type": "altaeron-research-evidence",
-      "disabled": true,
-      "settings": {
-        "show_section": true,
-        "eyebrow": "The Research Behind Conservative Bunion Care",
-        "heading": "Conservative Bunion Correction Can Change More Than Pain.",
-        "intro": "Clinical research on hallux-valgus orthoses, toe separators and combined exercise programs has reported improvements in pain, alignment, strength and function.",
-        "study_1_image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_05_47_28_PM.png"
-      }
-    },
     "altaeron_story_cta": {
-      "type": "altaeron-reels-v3-final",
+      "type": "ngp-reels-v3-final",
       "settings": {
         "product_image": "shopify://shop_images/Physician-Endorsed_Bunion_Relief_Ad.png",
         "cta_label": "START YOUR CORRECTION"
@@ -519,15 +340,10 @@
     "altaeron_bunion_benefits",
     "altaeron_right_fit",
     "altaeron_reasons_8",
-    "altaeron_comparison",
     "altaeron_results",
-    "altaeron_customer_proof_RtL9nR",
     "altaeron_try_at_home",
     "altaeron_support_timeline",
-    "altaeron_adjustable_support",
-    "altaeron_muscle_support",
     "altaeron_reviews_faq",
-    "altaeron_research_evidence",
     "altaeron_story_cta"
   ]
 }

@@ -1,155 +1,70 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "name": "t:sections.footer.name",
+  "name": "Altaeron footer",
   "type": "footer",
   "sections": {
-    "footer": {
+    "ngp-footer": {
       "type": "footer",
       "blocks": {
-        "brand_altaeron": {
-          "type": "image_text",
+        "ngp-brand": {
+          "type": "text",
           "settings": {
-            "block_width": 27,
             "heading": "",
-            "heading_size": "h4",
-            "image_width": 50,
-            "text": "<h2>ALTAERON</h2><p>Thoughtfully selected support for everyday foot comfort.</p>",
-            "button_label": "",
-            "button_link": "",
-            "open_default": true,
-            "show_divider": false
+            "subtext": "<h2>ALTAERON</h2><p>Thoughtfully selected support for everyday foot comfort.</p>"
           }
         },
-        "shop_concern": {
-          "type": "menu",
+        "ngp-menu-2": {
+          "type": "link_list",
           "settings": {
-            "block_width": 18,
             "heading": "Shop by Concern",
-            "heading_size": "h4",
-            "menu": "footer-shop",
-            "open_default": false,
-            "show_divider": false
+            "menu": "footer-shop"
           }
         },
-        "menu_DEKGYP": {
-          "type": "menu",
+        "ngp-menu-3": {
+          "type": "link_list",
           "settings": {
-            "block_width": 15,
             "heading": "Help",
-            "heading_size": "h4",
-            "menu": "footer-support",
-            "open_default": false,
-            "show_divider": false
+            "menu": "footer-support"
           }
         },
-        "menu_4eCrBB": {
-          "type": "menu",
+        "ngp-menu-4": {
+          "type": "link_list",
           "settings": {
-            "block_width": 16,
             "heading": "Company",
-            "heading_size": "h4",
-            "menu": "footer-company",
-            "open_default": false,
-            "show_divider": false
+            "menu": "footer-company"
           }
         },
-        "customer_care": {
-          "type": "contact_information",
+        "ngp-contact": {
+          "type": "text",
           "settings": {
-            "block_width": 24,
             "heading": "Customer Care",
-            "heading_size": "h4",
-            "address": "",
-            "working_hours": "",
-            "email": "support@altaeron.com",
-            "phone": "",
-            "open_default": false,
-            "show_divider": false
+            "subtext": "<p><a href=\"mailto:support@altaeron.com\">support@altaeron.com</a></p>"
           }
         }
       },
       "block_order": [
-        "brand_altaeron",
-        "shop_concern",
-        "menu_DEKGYP",
-        "menu_4eCrBB",
-        "customer_care"
-      ],
-      "custom_css": [
-        ".form-control {--color-border: var(--color-field);}"
+        "ngp-brand",
+        "ngp-menu-2",
+        "ngp-menu-3",
+        "ngp-menu-4",
+        "ngp-contact"
       ],
       "settings": {
-        "color_scheme": "scheme-inverse",
+        "color_scheme": "scheme-5",
+        "newsletter_enable": false,
+        "newsletter_heading": "",
         "enable_follow_on_shop": true,
         "show_social": false,
         "enable_country_selector": false,
         "enable_language_selector": false,
         "payment_enable": true,
-        "footer_bottom_menu": "",
-        "show_section_divider": false,
-        "divider_width": "full"
-      }
-    },
-    "mobile_sticky_bar_aYhgJK": {
-      "type": "mobile-sticky-bar",
-      "blocks": {
-        "home_AP8mmy": {
-          "type": "home",
-          "settings": {
-            "text": "Home"
-          }
-        },
-        "search_n3h4zT": {
-          "type": "search",
-          "settings": {
-            "text": "Search"
-          }
-        },
-        "cart_gnnwxQ": {
-          "type": "cart",
-          "settings": {
-            "text": "Cart"
-          }
-        },
-        "products_eYYkE8": {
-          "type": "products",
-          "settings": {
-            "text": "Products",
-            "collection": ""
-          }
-        },
-        "link_mJ6QMc": {
-          "type": "link",
-          "settings": {
-            "text": "About",
-            "url": "shopify://pages/about",
-            "icon": "map-pin"
-          }
-        }
-      },
-      "block_order": [
-        "home_AP8mmy",
-        "search_n3h4zT",
-        "cart_gnnwxQ",
-        "products_eYYkE8",
-        "link_mJ6QMc"
-      ],
-      "settings": {
-        "enable_sticky_bar": false,
-        "show_text": true
+        "show_policy": false,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 0
       }
     }
   },
   "order": [
-    "footer",
-    "mobile_sticky_bar_aYhgJK"
+    "ngp-footer"
   ]
 }

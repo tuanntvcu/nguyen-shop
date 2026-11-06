@@ -1,0 +1,11 @@
+<div class="{% if class %}{{ class }}{% else %}ngp-loading__spinner hidden{% endif %}">
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    class="ngp-spinner ngp-icon ngp-icon--{{ size | default: 'extra-medium' }}"
+    viewBox="0 0 66 66"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle class="ngp-path" fill="none" stroke-width="4" cx="33" cy="33" r="30"></circle>
+  </svg>
+</div>

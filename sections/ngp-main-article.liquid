@@ -1,0 +1,722 @@
+{{ 'ngp-component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'ngp-section-main-article.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign ngp_article = article
+  assign ngp_loading = 'lazy'
+  assign ngp_fetchpriority = 'low'
+  if section.index < 3
+    assign ngp_loading = 'eager'
+    assign ngp_fetchpriority = 'high'
+  endif
+
+  assign ngp_current_id = ngp_article.id
+  assign ngp_related_posts_size = 0
+
+  for ngp_article in blog.articles limit: 4
+    if ngp_related_posts_size > 2
+      break
+    endif
+
+    if ngp_article.id == ngp_current_id
+      continue
+    endif
+    assign ngp_related_posts_size = ngp_related_posts_size | plus: 1
+  endfor
+%}
+<article
+  class="ngp-article{% if ngp_article.image %} ngp-article--has-media{% endif %}"
+  itemscope
+  itemtype="http://schema.org/BlogPosting"
+>
+  <div class="ngp-article__main-info ngp-section--padding" style="--section-padding-bottom: 10rem;">
+    {%- if ngp_article.image -%}
+      {% liquid
+        assign ngp_image_alt = ngp_article.image.alt | escape
+        assign ngp_image_ratio = ngp_article.image.aspect_ratio
+      %}
+      <div class="ngp-hero ngp-hero--{{ section.settings.image_height }} ngp-overflow-hidden">
+        <ngp-motion-element
+          data-motion="zoom-out"
+          class="ngp-hero__media ngp-block"
+          {% if section.settings.image_height == 'adapt' %}
+            style="--aspect-ratio: {{ ngp_image_ratio }};"
+          {% endif %}
+        >
+          {%- capture ngp_sizes -%}min({{ settings.page_width }}, 100vw){%- endcapture -%}
+          {{-
+            ngp_article.image
+            | image_url: width: ngp_article.image.width
+            | image_tag:
+              ngp_loading: ngp_loading,
+              ngp_fetchpriority: ngp_fetchpriority,
+              ngp_sizes: ngp_sizes,
+              width: ngp_article.image.width,
+              height: ngp_article.image.height,
+              widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200',
+              alt: ngp_image_alt
+          -}}
+        </ngp-motion-element>
+      </div>
+    {%- endif -%}
+    <div class="ngp-article__wrapper">
+      {%- for ngp_block in section.blocks -%}
+        {%- case ngp_block.type -%}
+          {%- when '@app' -%}
+            <div class="ngp-article__block ngp-article__app-block">
+              {% render ngp_block %}
+            </div>
+          {%- when 'title' -%}
+            <header class="ngp-article__block ngp-article__header ngp-text-center" {{ ngp_block.shopify_attributes }}>
+              {% if ngp_block.settings.show_date %}
+                <div class="ngp-article__date ngp-text-subheading">{{ ngp_article.published_at | time_tag: format: 'date' }}</div>
+              {% endif %}
+              <h1 class="ngp-article__title {{ ngp_block.settings.heading_size }}">{{ ngp_article.title }}</h1>
+              {% if ngp_block.settings.show_author or ngp_block.settings.show_blog %}
+                <div class="ngp-article__metas ngp-inline-flex ngp-items-center ngp-justify-center">
+                  {% if ngp_block.settings.show_author %}
+                    <span class="ngp-article__meta ngp-article__auto">
+                      {{ 'blogs.article.by' | t }}
+                      {{ ngp_article.author -}}
+                    </span>
+                  {% endif %}
+                  {% if ngp_block.settings.show_blog %}
+                    <span class="ngp-article__meta ngp-article__blog">
+                      {{ 'blogs.article.in' | t }}
+                      <a href="{{ blog.url }}" class="ngp-btn--link">{{ blog.title }}</a>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </header>
+          {%- when 'content' -%}
+            <div class="ngp-article__block ngp-article__content ngp-rte" {{ ngp_block.shopify_attributes }}>{{ ngp_article.content }}</div>
+          {%- when 'share' -%}
+            <div
+              class="ngp-article__block ngp-article__footer ngp-flex ngp-flex-col ngp-md:ngp-flex-row ngp-md:ngp-items-center ngp-justify-between ngp-gap-4"
+              {{ ngp_block.shopify_attributes }}
+            >
+              {%- if ngp_article.tags.size > 0 and ngp_block.settings.show_tags -%}
+                <div class="ngp-article-tags ngp-article-tags ngp-flex ngp-flex-wrap ngp-items-center ngp-gap-x-3 ngp-gap-y-2">
+                  <span class="ngp-article-tags__heading">{{ 'blogs.article.tags' | t }}</span>
+                  {%- for ngp_tag in ngp_article.tags -%}
+                    <a href="{{ blog.url }}/tagged/{{ ngp_tag | handle }}" class="ngp-text-sm">
+                      {{ ngp_tag }}
+                    </a>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              {%- if ngp_block.settings.show_share -%}
+                <div class="ngp-article__share">
+                  {% assign ngp_share_modal_id = 'PopupModal-Sharing-' | append: section.id %}
+                  {% assign ngp_share_url = request.origin | append: ngp_article.url %}
+                  <script src="{{ 'ngp-product-share.js' | asset_url }}" defer="defer"></script>
+                  <button
+                    class="ngp-btn ngp-btn--with-icon ngp-btn--plain"
+                    aria-controls="{{ ngp_share_modal_id }}"
+                    aria-haspopup="dialog"
+                  >
+                    {% render 'ngp-icon-share' %}
+                    <span class="ngp-font-body ngp-text-normal ngp-tracking-normal">
+                      {{- 'products.product.share_label' | t -}}
+                    </span>
+                  </button>
+                  <ngp-basic-modal id="{{ ngp_share_modal_id }}" class="ngp-drawer ngp-modal">
+                    <div class="ngp-fixed-overlay" aria-controls="{{ ngp_share_modal_id }}"></div>
+                    <div class="ngp-drawer__inner">
+                      <button
+                        class="ngp-drawer__close-btn"
+                        aria-controls="{{ ngp_share_modal_id }}"
+                        aria-label="{{ 'accessibility.close' | t }}"
+                      >
+                        {% render 'ngp-icon-close' %}
+                      </button>
+                      <div class="ngp-drawer__body ngp-v-scrollable ngp-h-full">
+                        <div class="ngp-product__sharing">
+                          <h3 class="ngp-product__sharing--title ngp-h5">{{ 'blogs.article.share' | t }}</h3>
+                          <ngp-product-share class="ngp-product__sharing--inputs">
+                            <input
+                              type="text"
+                              class="ngp-form-control"
+                              value="{{ ngp_share_url }}"
+                              readonly
+                            >
+                            <button class="ngp-btn ngp-btn-copy" data-copied-text="{{ 'general.share.copied' | t }}">
+                              {{ 'general.share.copy' | t }}
+                            </button>
+                          </ngp-product-share>
+                          {% render 'ngp-social-sharing',
+                            url: ngp_article.url,
+                            share_image: ngp_article.featured_media.preview_image
+                          %}
+                        </div>
+                      </div>
+                    </div>
+                  </ngp-basic-modal>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- when 'navigation' -%}
+            {%- if blog.previous_article != null and blog.next_article != null -%}
+              <div
+                class="ngp-article__block ngp-article-navigation ngp-f-grid ngp-f-grid-2-cols ngp-f-grid--gap-medium"
+                {{ ngp_block.shopify_attributes }}
+              >
+                {%- if blog.previous_article != null -%}
+                  <a href="{{ blog.previous_article.url }}" class="ngp-article-navigation__prev ngp-f-column">
+                    <span class="ngp-inline-flex ngp-items-center ngp-gap-1">
+                      {% render 'ngp-icon-caret', size: 'extra-small' %}
+                      <span>{{ 'blogs.article.previous_post' | t }}</span>
+                    </span>
+                    <div class="ngp-article-navigation__heading ngp-h4 hidden ngp-md:ngp-block">{{ blog.previous_article.title }}</div>
+                  </a>
+                {%- endif -%}
+                {%- if blog.next_article != null -%}
+                  <a href="{{ blog.next_article.url }}" class="ngp-article-navigation__next ngp-f-column ngp-text-right">
+                    <span class="ngp-inline-flex ngp-items-center ngp-gap-1">
+                      <span>{{ 'blogs.article.next_post' | t }}</span>
+                      {% render 'ngp-icon-caret', size: 'extra-small' %}
+                    </span>
+                    <div class="ngp-article-navigation__heading ngp-h4 hidden ngp-md:ngp-block">{{ blog.next_article.title }}</div>
+                  </a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- if section.settings.show_related_posts and ngp_related_posts_size > 0 -%}
+    {%- liquid
+      assign ngp_show_date = section.settings.show_date
+      assign ngp_show_excerpt = section.settings.show_excerpt
+      assign ngp_show_button = section.settings.show_button
+    -%}
+    <div class="ngp-related-posts ngp-section ngp-section--padding" style="--section-padding-bottom: 10rem;">
+      <div class="ngp-page-width">
+        <div class="ngp-section__header ngp-text-center">
+          <h2 class="{{ section.settings.related_heading_size }}">{{ 'blogs.article.related_posts_title' | t }}</h2>
+        </div>
+        <div class="ngp-related-posts__wrapper ngp-f-grid--gap-{{ section.settings.column_gap }}">
+          <ngp-grid-list class="ngp-related-posts__items ngp-f-grid ngp-f-grid-1-cols ngp-md:ngp-f-grid-3-cols">
+            {%- liquid
+              assign ngp_counter = 0
+
+              for ngp_article in blog.articles limit: 4
+                if ngp_counter > 2
+                  break
+                endif
+
+                if ngp_article.id == ngp_current_id
+                  continue
+                endif
+
+                echo '<div class="ngp-f-column">'
+                render 'ngp-card-article', article: ngp_article, show_date: ngp_show_date, show_excerpt: ngp_show_excerpt, show_button: ngp_show_button, index: forloop.index
+                echo '</div>'
+                assign ngp_counter = ngp_counter | plus: 1
+              endfor
+            -%}
+          </ngp-grid-list>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if blog.comments_enabled? -%}
+    <div class="ngp-article-comment ngp-section ngp-section--padding" style="--section-padding-bottom: 10rem;">
+      <div
+        id="comments"
+        class="ngp-page-width ngp-page-width--narrow"
+      >
+        <div class="ngp-article-comment__wrapper">
+          <div class="ngp-article-comment__comment-area ngp-section ngp-section--padding" style="--section-padding-bottom: 10rem;">
+            {%- if ngp_article.comments_count > 0 -%}
+              {%- assign ngp_anchor_id = '#Comments-' | append: ngp_article.id -%}
+
+              <h2
+                id="Comments-{{ ngp_article.id }}"
+                tabindex="-1"
+                class="ngp-article-comment__title ngp-text-center ngp-h1"
+              >
+                {{ 'blogs.article.comments' | t: count: ngp_article.comments_count }}
+              </h2>
+              {% paginate ngp_article.comments by 5 %}
+                <div class="ngp-article-comment__list">
+                  {%- if ngp_comment.status == 'pending' and ngp_comment.content -%}
+                    <article id="{{ ngp_comment.id }}" class="ngp-comment">
+                      {{ ngp_comment.content }}
+                      <footer class="ngp-comment__meta ngp-text-subtext">
+                        <span class="ngp-comment__author">{{ ngp_comment.author }}</span>
+                      </footer>
+                    </article>
+                  {%- endif -%}
+
+                  {%- for ngp_comment in ngp_article.comments -%}
+                    <article id="{{ ngp_comment.id }}" class="ngp-comment">
+                      {{ ngp_comment.content }}
+                      <footer class="ngp-comment__meta ngp-text-subtext">
+                        <span class="ngp-comment__author">{{ ngp_comment.author }}</span>
+                        <span class="ngp-comment__date">
+                          {{- ngp_comment.created_at | time_tag: format: 'date' -}}
+                        </span>
+                      </footer>
+                    </article>
+                  {%- endfor -%}
+                  {% render 'ngp-pagination', paginate: paginate, anchor: ngp_anchor_id %}
+                </div>
+              {% endpaginate %}
+            {%- endif -%}
+          </div>
+
+          {% form 'new_comment', ngp_article, class: 'comment-form' %}
+            {%- liquid
+              assign ngp_post_message = 'blogs.article.success'
+              if blog.moderated? and ngp_comment.status == 'unapproved'
+                assign ngp_post_message = 'blogs.article.success_moderated'
+              endif
+            -%}
+            <h2 class="ngp-article-comment__form-title {{ section.settings.comments_heading_size }} ngp-text-center">
+              {{ 'blogs.article.comment_form_title' | t }}
+            </h2>
+            {%- if form.errors -%}
+              <div class="ngp-form-error ngp-alert ngp-alert--error ngp-blocks-radius" role="alert">
+                <h3 class="ngp-form-message ngp-form-message--error ngp-h6 ngp-m-0" tabindex="-1" autofocus>
+                  {% render 'ngp-icon-error' %}
+                  {{ 'templates.contact.form.error_heading' | t }}
+                </h3>
+              </div>
+              <ul>
+                {%- for ngp_field in form.errors -%}
+                  <li>
+                    <a href="#CommentForm-{{ ngp_field }}" class="ngp-link">
+                      {%- if form.errors.translated_fields[ngp_field] contains 'author' -%}
+                        {{ 'blogs.article.name' | t }}
+                      {%- elsif form.errors.translated_fields[ngp_field] contains 'body' -%}
+                        {{ 'blogs.article.message' | t }}
+                      {%- else -%}
+                        {{ form.errors.translated_fields[ngp_field] }}
+                      {%- endif -%}
+                      {{ form.errors.messages[ngp_field] }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- elsif form.posted_successfully? -%}
+              <div class="ngp-form-status-list" role="status">
+                <h3 class="ngp-form-message ngp-alert ngp-alert--success ngp-h6 ngp-blocks-radius" tabindex="-1" autofocus>
+                  {% render 'ngp-icon-success' %}
+                  {{ ngp_post_message | t }}
+                </h3>
+              </div>
+            {%- endif -%}
+
+            <div
+              {% if blog.moderated? == false %}
+                class="ngp-form-comment__comments-fields"
+              {% endif %}
+            >
+              <div class="ngp-form-row ngp-form-field">
+                <div class="ngp-form-field">
+                  <label class="ngp-form-label" for="CommentForm-author">
+                    {{- 'blogs.article.name' | t }}
+                    <span aria-hidden="true">*</span></label
+                  >
+                  <input
+                    type="text"
+                    name="comment[author]"
+                    id="CommentForm-author"
+                    class="ngp-form-control"
+                    autocomplete="name"
+                    value="{{ form.author }}"
+                    aria-required="true"
+                    required
+                    {% if form.errors contains 'author' %}
+                      aria-invalid="true"
+                      aria-describedby="CommentForm-author-error"
+                    {% endif %}
+                    placeholder="{{ 'blogs.article.name' | t }}"
+                  >
+                  {%- if form.errors contains 'author' -%}
+                    <span id="CommentForm-author-error" class="ngp-form-message ngp-form-message--small ngp-form-message--error">
+                      {%- render 'ngp-icon-error' -%}
+                      {{- 'blogs.article.name' | t }}
+                      {{ form.errors.messages.author }}.
+                    </span>
+                  {%- endif -%}
+                </div>
+                <div class="ngp-form-field">
+                  <label class="ngp-form-label" for="CommentForm-email">
+                    {{- 'blogs.article.email' | t }}
+                    <span aria-hidden="true">*</span></label
+                  >
+                  <input
+                    type="email"
+                    name="comment[email]"
+                    id="CommentForm-email"
+                    autocomplete="email"
+                    class="ngp-form-control"
+                    value="{{ form.email }}"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    aria-required="true"
+                    required
+                    {% if form.errors contains 'email' %}
+                      aria-invalid="true"
+                      aria-describedby="CommentForm-email-error"
+                    {% endif %}
+                    placeholder="{{ 'blogs.article.email' | t }}"
+                  >
+                  {%- if form.errors contains 'email' -%}
+                    <span id="CommentForm-email-error" class="ngp-form-message ngp-form-message--small ngp-form-message--error">
+                      {%- render 'ngp-icon-error' -%}
+                      {{- 'blogs.article.email' | t }}
+                      {{ form.errors.messages.email }}.
+                    </span>
+                  {%- endif -%}
+                </div>
+              </div>
+              <div class="ngp-form-field">
+                <label class="ngp-form-label" for="CommentForm-body">
+                  {{- 'blogs.article.message' | t }}
+                  <span aria-hidden="true">*</span></label
+                >
+                <textarea
+                  rows="7"
+                  name="comment[body]"
+                  id="CommentForm-body"
+                  class="ngp-form-control ngp-form-control--textarea"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'body' %}
+                    aria-invalid="true"
+                    aria-describedby="CommentForm-body-error"
+                  {% endif %}
+                  placeholder="{{ 'blogs.article.message' | t }}"
+                >{{ form.body }}</textarea>
+              </div>
+              {%- if form.errors contains 'body' -%}
+                <span id="CommentForm-body-error" class="ngp-form-message ngp-form-message--small ngp-form-message--error">
+                  {%- render 'ngp-icon-error' -%}
+                  {{- 'blogs.article.message' | t }}
+                  {{ form.errors.messages.body }}.
+                </span>
+              {%- endif -%}
+            </div>
+            {%- if blog.moderated? -%}
+              <p class="ngp-comment-form__warning">{{ 'blogs.article.moderated' | t }}</p>
+            {%- endif -%}
+            <div class="ngp-form-footer ngp-text-center">
+              <input type="submit" class="ngp-btn ngp-btn--primary" value="{{ 'blogs.article.post' | t }}">
+            </div>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</article>
+
+<script type="application/ld+json">
+  {{  ngp_article | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.ngp-main-article.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.ngp-main-article.settings.featured_image.name"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.hero.settings.image_height.options__1.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.hero.settings.image_height.options__2.label"
+        },
+        {
+          "value": "extra-medium",
+          "label": "t:sections.hero.settings.image_height.options__3.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.hero.settings.image_height.options__4.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.hero.settings.image_height.options__5.label"
+        },
+        {
+          "value": "extra-small",
+          "label": "t:sections.hero.settings.image_height.options__6.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.hero.settings.image_height.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.ngp-main-article.settings.related_posts.name"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_related_posts",
+      "default": true,
+      "label": "t:sections.ngp-main-article.settings.related_posts.show_related_posts.label"
+    },
+    {
+      "type": "select",
+      "id": "related_heading_size",
+      "label": "t:sections.all.text_size.heading.label",
+      "default": "h1",
+      "options": [
+        {
+          "value": "h6",
+          "label": "t:sections.all.text_size.options__h6.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.text_size.options__h5.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.text_size.options__h4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.text_size.options__h3.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.text_size.options__h2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.text_size.options__h1.label"
+        },
+        {
+          "value": "hd3",
+          "label": "t:sections.all.text_size.options__hd3.label"
+        },
+        {
+          "value": "hd2",
+          "label": "t:sections.all.text_size.options__hd2.label"
+        },
+        {
+          "value": "hd1",
+          "label": "t:sections.all.text_size.options__hd1.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "column_gap",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.all.grid.column_gap.options__none.label"
+        },
+        {
+          "value": "extra-small",
+          "label": "t:sections.all.grid.column_gap.options__xs.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.all.grid.column_gap.options__sm.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.grid.column_gap.options__md.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.all.grid.column_gap.options__lg.label"
+        },
+        {
+          "value": "extra-large",
+          "label": "t:sections.all.grid.column_gap.options__xl.label"
+        }
+      ],
+      "default": "extra-large",
+      "label": "t:sections.all.grid.column_gap.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.featured-blog.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "default": true,
+      "label": "t:sections.featured-blog.settings.show_excerpt.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "default": true,
+      "label": "t:sections.featured-blog.settings.show_button.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.ngp-main-article.settings.comments.label"
+    },
+    {
+      "type": "select",
+      "id": "comments_heading_size",
+      "label": "t:sections.all.text_size.heading.label",
+      "default": "h1",
+      "options": [
+        {
+          "value": "h6",
+          "label": "t:sections.all.text_size.options__h6.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.text_size.options__h5.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.text_size.options__h4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.text_size.options__h3.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.text_size.options__h2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.text_size.options__h1.label"
+        },
+        {
+          "value": "hd3",
+          "label": "t:sections.all.text_size.options__hd3.label"
+        },
+        {
+          "value": "hd2",
+          "label": "t:sections.all.text_size.options__hd2.label"
+        },
+        {
+          "value": "hd1",
+          "label": "t:sections.all.text_size.options__hd1.label"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "t:sections.ngp-main-article.blocks.title.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_date",
+          "default": true,
+          "label": "t:sections.ngp-main-article.blocks.title.settings.show_date.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_author",
+          "default": true,
+          "label": "t:sections.ngp-main-article.blocks.title.settings.show_author.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_blog",
+          "default": true,
+          "label": "t:sections.ngp-main-article.blocks.title.settings.show_blog.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "t:sections.all.text_size.heading.label",
+          "default": "hd2",
+          "options": [
+            {
+              "value": "h6",
+              "label": "t:sections.all.text_size.options__h6.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:sections.all.text_size.options__h5.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.all.text_size.options__h4.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:sections.all.text_size.options__h3.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:sections.all.text_size.options__h2.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.text_size.options__h1.label"
+            },
+            {
+              "value": "hd3",
+              "label": "t:sections.all.text_size.options__hd3.label"
+            },
+            {
+              "value": "hd2",
+              "label": "t:sections.all.text_size.options__hd2.label"
+            },
+            {
+              "value": "hd1",
+              "label": "t:sections.all.text_size.options__hd1.label"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "t:sections.ngp-main-article.blocks.content.name",
+      "limit": 1
+    },
+    {
+      "type": "share",
+      "name": "t:sections.ngp-main-article.blocks.share.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_tags",
+          "default": true,
+          "label": "t:sections.ngp-main-article.blocks.share.settings.show_tags.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_share",
+          "default": true,
+          "label": "t:sections.ngp-main-article.blocks.share.settings.show_share.label"
+        }
+      ]
+    },
+    {
+      "type": "navigation",
+      "name": "t:sections.ngp-main-article.blocks.navigation.name",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}

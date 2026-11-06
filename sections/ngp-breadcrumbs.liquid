@@ -1,0 +1,126 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+  {% liquid
+    assign ngp_justify = section.settings.text_alignment | default: 'start'
+  %}
+  <div
+    id="{{ section.id }}"
+    class="ngp-section--breadcrumb"
+    data-section-type="breadcrumb"
+    data-section-id="{{ section.id }}"
+  >
+    {% capture ngp_separator_icon %}
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="ngp-rtl-flip-x">
+      <path d="M4.5 2.25L8.25 6L4.5 9.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    {% endcapture %}
+    <div class="ngp-page-width">
+      <nav
+        class="ngp-breadcrumbs ngp-justify-center ngp-md:justify-{{ ngp_justify }}"
+        role="navigation"
+        aria-label="{{ 'accessibility.breadcrumbs' | t | escape }}"
+      >
+        <a href="{{ routes.root_url }}" title="{{ 'general.breadcrumbs.home' | t | escape }}">{{ 'general.breadcrumbs.home' | t }}</a>
+        {% if template contains 'page' %}
+          <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+          <span>{{ page.title }}</span>
+        {% elsif template contains 'product' %}
+          {% liquid
+            assign ngp_primary_collection = product.metafields.breadcrumb.primary_collection
+          %}
+          {% if collection.url != blank %}
+            <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+            {% if ngp_primary_collection != blank %}
+              {{ ngp_primary_collection.value.title | link_to: ngp_primary_collection.value.url }}
+            {% else %}
+              {{ collection.title | link_to: collection.url }}
+            {% endif %}
+          {% else %}
+            {% assign ngp_current_collection = product.collections | first %}
+            <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+            {% if ngp_primary_collection != blank %}
+              <a href="{{ ngp_primary_collection.value.url }}">{{ ngp_primary_collection.value.title }}</a>
+            {% elsif ngp_current_collection != blank %}
+              <a href="{{ ngp_current_collection.url }}">{{ ngp_current_collection.title }}</a>
+            {% else %}
+              <a href="{{ routes.all_products_collection_url }}">{{ 'general.breadcrumbs.collections' | t }}</a>
+            {% endif %}
+          {% endif %}
+          <span aria-hidden="true" class="ngp-breadcrumbs--sep ngp-breadcrumbs--sep-last">{{ ngp_separator_icon }}</span>
+          <span class="ngp-breadcrumbs--last">{{ product.title }}</span>
+        {% elsif template contains 'collection' and collection.handle %}
+          {% if collection.handle != 'all' %}
+            <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+            <a href="{{ routes.all_products_collection_url }}">{{ 'general.breadcrumbs.collections' | t }}</a>
+          {% endif %}
+          <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+          {% if current_tags %}
+            {% capture ngp_url %}{{ routes.collections_url }}/{{ collection.handle }}{% endcapture %}
+            {{ collection.title | link_to: ngp_url }}
+            <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+            <span class="ngp-breadcrumbs--last">{{ current_tags | join: ' + ' }}</span>
+          {% else %}
+            <span class="ngp-breadcrumbs--last">{{ collection.title }}</span>
+          {% endif %}
+        {% elsif template == 'blog' %}
+          <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+          {% if current_tags %}
+            {{ blog.title | link_to: blog.url }}
+            <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+            <span class="ngp-breadcrumbs--last">{{ current_tags | join: ' + ' }}</span>
+          {% else %}
+            <span>{{ blog.title }}</span>
+          {% endif %}
+        {% elsif template == 'article' %}
+          <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+          {{ blog.title | link_to: blog.url }}
+          <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+          <span class="ngp-breadcrumbs--last">{{ article.title }}</span>
+        {% else %}
+          <span aria-hidden="true" class="ngp-breadcrumbs--sep">{{ ngp_separator_icon }}</span>
+          <span class="ngp-breadcrumbs--last">{{ page_title }}</span>
+        {% endif %}
+      </nav>
+    </div>
+  </div>
+{% endunless %}
+{% schema %}
+{
+  "name": "t:sections.ngp-breadcrumbs.name",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"],
+    "templates": ["index", "cart", "list-collections"]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "[Read How-to](https://scalora.link/HE4PzP6)"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:settings_schema.global.settings.text_alignment.label",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:settings_schema.global.settings.text_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:settings_schema.global.settings.text_alignment.options__2.label"
+        },
+        {
+          "value": "end",
+          "label": "t:settings_schema.global.settings.text_alignment.options__3.label"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.ngp-breadcrumbs.name"
+    }
+  ]
+}
+{% endschema %}

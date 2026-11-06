@@ -1,0 +1,150 @@
+{%- liquid
+  assign ngp_modal_id = 'lbcard__popup-' | append: block_id
+  assign ngp_image_ratio = ngp_image_ratio | default: '3/4'
+  assign ngp_alt = image.alt | default: shop.name | escape
+  assign ngp_loading = 'lazy'
+  assign ngp_fetchpriority = 'low'
+
+  assign ngp_heading_size = ngp_heading_size | default: 'ngp-h5'
+
+  if ngp_pcard_image_ratio == blank
+    assign ngp_pcard_image_ratio = settings.pcard_image_ratio | default: '1'
+  endif
+
+  assign ngp_color_scheme = ngp_color_scheme | default: 'scheme-1'
+  assign ngp_popup_color_scheme = ngp_popup_color_scheme | default: 'scheme-1'
+-%}
+<div class="ngp-lbcard ngp-block ngp-relative ngp-z-0 ngp-blocks-radius ngp-color-{{ ngp_color_scheme }}">
+  {%- if image != blank -%}
+    <div
+      class="ngp-media-wrapper ngp-blocks-radius"
+      style="--aspect-ratio:{{ ngp_image_ratio }};"
+    >
+      {{
+        image
+        | image_url: width: 1500
+        | image_tag:
+          ngp_loading: ngp_loading,
+          ngp_fetchpriority: ngp_fetchpriority,
+          class: 'motion-reduce w-full',
+          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+          is: 'ngp-image-lazy',
+          ngp_alt: ngp_alt
+      }}
+    </div>
+  {%- else -%}
+    <div
+      class="ngp-media-wrapper ngp-blocks-radius ngp-bg-none"
+      style="--aspect-ratio:{{ ngp_image_ratio }};"
+    >
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+  <button
+    class="ngp-lbcard__popup-btn-trigger ngp-z-1 ngp-btn ngp-btn--icon-circle ngp-btn--primary"
+    aria-label="{{ 'products.product.view_product_list' | t }}"
+    aria-controls="{{ ngp_modal_id }}"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+  >
+    {%- render 'ngp-icon-cart', name: settings.cart_icon -%}
+  </button>
+  <ngp-lookbook-card id="{{ ngp_modal_id }}" class="ngp-lbcard__popup ngp-z-2 ngp-drawer ngp-modal">
+    <div class="ngp-fixed-overlay" aria-controls="{{ ngp_modal_id }}"></div>
+    <div class="ngp-drawer__inner ngp-flex ngp-flex-col ngp-gap-4 ngp-color-{{ ngp_popup_color_scheme }}">
+      <div class="ngp-lbcard__popup-header ngp-shrink-0">
+        <h3 class="ngp-lbcard__popup-heading {{ ngp_heading_size }}">{{ heading }}</h3>
+        <button
+          class="ngp-lbcard__popup-btn-close ngp-btn--inherit ngp-drawer__close-btn"
+          aria-controls="{{ ngp_modal_id }}"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          {%- render 'ngp-icon-close' -%}
+        </button>
+      </div>
+      <div class="ngp-lbcard__popup-body ngp-v-scrollable ngp-flex ngp-flex-col ngp-gap-4">
+        {%- if product_list != blank -%}
+          {%- for ngp_prod in product_list -%}
+            {%- liquid
+              assign ngp_prod_image_ratio = ngp_pcard_image_ratio
+              if ngp_prod_image_ratio == 'adapt'
+                if ngp_prod.featured_media != blank
+                  assign ngp_prod_image_ratio = ngp_prod.featured_media.aspect_ratio
+                else
+                  assign ngp_prod_image_ratio = '1'
+                endif
+              endif
+            -%}
+            <div class="ngp-lbcard__product ngp-flex ngp-items-center ngp-gap-2">
+              <a
+                class="ngp-lbcard__product-thumbnail ngp-shrink-0"
+                href="{{ product.url }}"
+                aria-label="{{ product.title | escape }}"
+                tabindex="-1"
+              >
+                <div
+                  class="ngp-media-wrapper ngp-blocks-radius-md ngp-bg-none"
+                  style="--aspect-ratio: {{ ngp_prod_image_ratio }};"
+                >
+                  {%- if ngp_prod.featured_media != blank -%}
+                    {%- liquid
+                      assign ngp_alt = ngp_prod.featured_media.alt | default: ngp_prod.title | escape
+                    -%}
+                    {{
+                      ngp_prod
+                      | image_url: width: 150
+                      | image_tag:
+                        ngp_loading: 'lazy',
+                        ngp_fetchpriority: 'low',
+                        class: 'motion-reduce',
+                        widths: '60, 75, 120, 150',
+                        is: 'ngp-image-lazy',
+                        ngp_alt: ngp_alt
+                    }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+              </a>
+              <div class="ngp-lbcard__product-info ngp-flex-1">
+                <h3 class="ngp-lbcard__product-title ngp-text-pcard-title ngp-text-limit-2-lines ngp-m-0">
+                  <a href="{{ ngp_prod.url }}" class="ngp-reversed-link">
+                    {{- ngp_prod.title -}}
+                  </a>
+                </h3>
+                <div class="ngp-lbcard__product-price">{% render 'ngp-price', product: ngp_prod %}</div>
+              </div>
+              <a href="{{ ngp_prod.url }}" class="ngp-btn ngp-btn--icon-circle ngp-btn--secondary">
+                {% render 'ngp-icon-caret-right', size: 'extra-small icon--thick' %}
+              </a>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- liquid
+            if ngp_pcard_image_ratio == 'adapt'
+              assign ngp_pcard_image_ratio = '1'
+            endif
+          -%}
+          {%- for ngp_i in (1..2) -%}
+            <div class="ngp-lbcard__product ngp-flex ngp-items-center ngp-gap-2">
+              <div class="ngp-lbcard__product-thumbnail ngp-shrink-0">
+                <div
+                  class="ngp-media-wrapper ngp-blocks-radius-md ngp-bg-none"
+                  style="--aspect-ratio: {{ ngp_pcard_image_ratio }};"
+                >
+                  {{ 'product-' | append: ngp_i | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              </div>
+              <div class="ngp-lbcard__product-info ngp-flex-1">
+                <h3 class="ngp-lbcard__product-title ngp-text-pcard-title ngp-text-limit-2-lines ngp-m-0">
+                  {{- 'onboarding.product_title' | t -}}
+                </h3>
+                <div class="ngp-lbcard__product-price">{% render 'ngp-price' %}</div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </ngp-lookbook-card>
+</div>

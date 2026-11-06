@@ -1,29 +1,20 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "name": "t:sections.header.name",
+  "name": "Altaeron header",
   "type": "header",
   "sections": {
-    "announcement_bar_P4MRmx": {
-      "type": "announcement-bar",
+    "ngp-announcement": {
+      "type": "ngp-announcement-bar",
       "blocks": {
-        "announcement_bar_yELyjf": {
-          "type": "announcement_bar",
+        "ngp-announcement-1": {
+          "type": "announcement",
           "settings": {
             "text": "30-DAY COMFORT GUARANTEE",
             "link": "",
             "icon": "shield"
           }
         },
-        "announcement_bar_tracking": {
-          "type": "announcement_bar",
+        "ngp-announcement-2": {
+          "type": "announcement",
           "settings": {
             "text": "free shipping",
             "link": "/account/orders",
@@ -32,114 +23,36 @@
         }
       },
       "block_order": [
-        "announcement_bar_yELyjf",
-        "announcement_bar_tracking"
+        "ngp-announcement-1",
+        "ngp-announcement-2"
       ],
-      "name": "t:sections.announcement-bar.name",
       "settings": {
-        "color_scheme": "scheme-inverse",
+        "change_slides_speed": 5,
         "promise_layout": true,
-        "content_width": 30,
-        "autoplay": true,
-        "autoplay_speed": 5,
-        "padding_top": 12,
-        "padding_bottom": 12
+        "color_scheme": "scheme-5"
       }
     },
-    "scrolling_promotion_KhdTdc": {
-      "type": "scrolling-promotion",
-      "blocks": {
-        "text_niHbzP": {
-          "type": "text",
-          "settings": {
-            "text": "FREE SHIPPING ON ORDERS $39+",
-            "text_link": "",
-            "text_size": "text-base",
-            "font_weight": "font-heading",
-            "font_style": "normal",
-            "letter_spacing": 0,
-            "text_opacity": 100,
-            "text_style": "normal",
-            "use_custom_color": false,
-            "custom_color": "#000000"
-          }
-        },
-        "text_t3BcT4": {
-          "type": "text",
-          "settings": {
-            "text": "30-DAY COMFORT GUARANTEE",
-            "text_link": "",
-            "text_size": "text-base",
-            "font_weight": "font-heading",
-            "font_style": "normal",
-            "letter_spacing": 0,
-            "text_opacity": 100,
-            "text_style": "normal",
-            "use_custom_color": false,
-            "custom_color": "#000000"
-          }
-        },
-        "text_QCAxbn": {
-          "type": "text",
-          "settings": {
-            "text": "FREE SHIPPING ON ORDERS $39+",
-            "text_link": "",
-            "text_size": "text-base",
-            "font_weight": "font-heading",
-            "font_style": "normal",
-            "letter_spacing": 0,
-            "text_opacity": 100,
-            "text_style": "normal",
-            "use_custom_color": false,
-            "custom_color": "#000000"
-          }
-        }
-      },
-      "block_order": [
-        "text_niHbzP",
-        "text_t3BcT4",
-        "text_QCAxbn"
-      ],
-      "disabled": true,
-      "settings": {
-        "color_scheme": "scheme-inverse",
-        "vertical_alignment": "center",
-        "direction": "left",
-        "pause_on_hover": false,
-        "speed": 0.5,
-        "h_spacing": 60,
-        "v_spacing": 0,
-        "padding_top": 12,
-        "padding_bottom": 12,
-        "show_divider": false,
-        "divider_layout": "vertical"
-      }
-    },
-    "header": {
+    "ngp-header": {
       "type": "header",
       "settings": {
-        "container": "fixed",
-        "color_scheme": "scheme-1",
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
         "menu": "main-menu",
-        "menu_mobile": "main-menu",
-        "header_layout": "left-center",
-        "sticky_header": "on-scroll-up",
-        "menu_trigger": "hover",
-        "show_sperator_line": false,
-        "enable_transparent_header": false,
-        "transparent_header_color": "#ffffff",
-        "logo_mobile_position": "center",
-        "show_social_media_icons": true,
-        "enable_language_selector": true,
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": false,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
         "enable_country_selector": true,
-        "padding_top": 14,
-        "padding_bottom": 14
+        "enable_language_selector": true,
+        "margin_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 16
       }
     }
   },
   "order": [
-    "announcement_bar_P4MRmx",
-    "scrolling_promotion_KhdTdc",
-    "header"
+    "ngp-announcement",
+    "ngp-header"
   ]
 }

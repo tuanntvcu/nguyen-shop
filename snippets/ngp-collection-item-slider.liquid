@@ -1,0 +1,118 @@
+{%- liquid
+  assign ngp_collection_title = 'onboarding.collection_title' | t
+  assign ngp_products_to_display = block.settings.limit
+
+  assign ngp_button_style = block.settings.button_style
+  assign ngp_button_label = block.settings.button_label
+
+  if collection != blank
+    assign ngp_collection_title = collection.title
+    assign ngp_button_link = collection.url
+
+    if collection.all_products_count < ngp_products_to_display
+      assign ngp_products_to_display = collection.all_products_count
+    endif
+  endif
+
+  assign ngp_columns = block.settings.columns
+  assign ngp_columns_mobile = block.settings.columns_mobile | plus: 0
+  assign ngp_enable_slider_desktop = block.settings.enable_slider
+  assign ngp_enable_slider_mobile = false
+  assign ngp_enable_swipe_mobile = block.settings.swipe_on_mobile
+
+  if ngp_products_to_display <= ngp_columns
+    assign ngp_enable_slider_desktop = false
+  endif
+
+  if ngp_enable_slider_desktop == true and ngp_enable_swipe_mobile == false and ngp_products_to_display > ngp_columns_mobile
+    assign ngp_enable_slider_mobile = true
+  endif
+
+  if ngp_products_to_display <= ngp_columns_mobile
+    assign ngp_enable_swipe_mobile = false
+  endif
+-%}
+{%- capture ngp_image_sizes -%}
+(max-width: 767px) calc((100vw - 30px) / {{ ngp_columns_mobile }}), (max-width: 1023px) calc((58vw - 60px) / {{ ngp_columns }}), 345px
+{%- endcapture -%}
+<ngp-collection-item-slider
+  class="ngp-collection-item-slider ngp-flex ngp-flex-col"
+  data-block-id="{{ block.id }}"
+  data-enable-slider-desktop="{{ ngp_enable_slider_desktop }}"
+  data-enable-slider-mobile="{{ ngp_enable_slider_mobile }}"
+  data-items="{{ ngp_columns }}"
+  data-items-mobile="{{ ngp_columns_mobile }}"
+>
+  {%- if block.settings.hide_collection_name == blank or ngp_enable_slider_desktop or ngp_enable_slider_mobile -%}
+    <div class="ngp-collection-item-slider__header">
+      <ngp-motion-element
+        class="ngp-flex ngp-items-start ngp-justify-end ngp-gap-2 ngp-slider-controls--grouped-mobile"
+        data-motion="fade-up"
+      >
+        {%- if block.settings.hide_collection_name == blank -%}
+          <h2 class="ngp-h2 ngp-flex-grow">{{ ngp_collection_title }}</h2>
+        {%- endif -%}
+        {%- if ngp_enable_slider_desktop or ngp_enable_slider_mobile -%}
+          <div class="ngp-slider-controls--group{% if ngp_enable_slider_desktop == true and ngp_enable_slider_mobile == false %} hidden ngp-md:ngp-block{% elsif ngp_enable_slider_desktop == false and ngp_enable_slider_mobile == true %} ngp-md:hidden{% endif %}">
+            <div class="ngp-slider-controls ngp-flex ngp-items-center ngp-justify-start ngp-gap-2">
+              <button
+                class="swiper-button-prev ngp-btn"
+                name="previous"
+                aria-label="{{ 'general.slider.previous_slide' | t }}"
+              >
+                {% render 'ngp-icon-slider-prev' %}
+              </button>
+              <button
+                class="swiper-button-next ngp-btn"
+                name="next"
+                aria-label="{{ 'general.slider.next_slide' | t }}"
+              >
+                {% render 'ngp-icon-slider-next' %}
+              </button>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        {%- endif -%}
+      </ngp-motion-element>
+    </div>
+  {%- endif -%}
+  <ngp-grid-list class="ngp-block ngp-w-full">
+    <div class="ngp-collection-item-slider__products-wrap swiper ngp-swiper-equal-height{% if ngp_enable_swipe_mobile %} ngp-swipe-mobile ngp-swipe-mobile--{{ ngp_columns_mobile }}-cols{% endif %}">
+      <div class="ngp-collection-item-slider__products swiper-wrapper ngp-f-grid ngp-f-grid-{{ ngp_columns_mobile }}-cols ngp-md:ngp-f-grid-{{ ngp_columns }}-cols ngp-f-grid--gap-{{ block.settings.column_gap }} ngp-f-grid--row-gap-{{ block.settings.row_gap }}{% if ngp_enable_swipe_mobile %} ngp-swipe-mobile__inner{% endif %}">
+        {%- for ngp_product in collection.products limit: ngp_products_to_display -%}
+          <div class="ngp-f-column swiper-slide">
+            {% render 'ngp-card-product',
+              product: ngp_product,
+              ngp_image_sizes: ngp_image_sizes,
+              ngp_image_ratio: block.settings.pcard_image_ratio,
+              ngp_quick_view_suffix: collection.handle,
+              section_index: section.index,
+              index: forloop.index
+            %}
+          </div>
+        {%- else -%}
+          {%- for ngp_i in (1..products_to_display) -%}
+            <div class="ngp-f-column swiper-slide">
+              {% render 'ngp-card-product-placeholder', image_ratio: block.settings.pcard_image_ratio %}
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </ngp-grid-list>
+  {%- if ngp_button_label != blank -%}
+    <div class="ngp-collection-item-slider__footer ngp-flex ngp-items-center ngp-justify-center">
+      <a
+        class="ngp-btn {{ ngp_button_style }}"
+        {% if ngp_button_link != blank %}
+          href="{{ ngp_button_link }}"
+        {% else %}
+          aria-disabled="true"
+          disabled
+        {% endif %}
+      >
+        {{- ngp_button_label -}}
+      </a>
+    </div>
+  {%- endif -%}
+</ngp-collection-item-slider>

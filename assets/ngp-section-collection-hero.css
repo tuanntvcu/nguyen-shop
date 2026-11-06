@@ -1,0 +1,47 @@
+.ngp-collection-hero .ngp-empty-space {
+  min-height: var(--spacing-height-mobile);
+}
+@media (min-width: 768px) {
+  .ngp-collection-hero .ngp-empty-space {
+    min-height: var(--spacing-height);
+  }
+}
+.ngp-collection-hero .ngp-hero__media {
+  min-height: 100%;
+}
+.ngp-collection-hero__text {
+  --padding-x: 8rem;
+}
+@media (max-width: 1023.98px) {
+  .ngp-collection-hero__text {
+    --padding-x: 4rem;
+  }
+}
+@media (max-width: 767.98px) {
+  .ngp-collection-hero__text {
+    --padding-x: 2.4rem;
+  }
+}
+.ngp-collection-hero__description {
+  margin-top: 1.2rem;
+  max-width: clamp(0rem, 75rem, 90%);
+}
+.ngp-text-center .ngp-collection-hero__description {
+  margin-inline: auto;
+}
+.ngp-text-right .ngp-collection-hero__description {
+  margin-inline-start: auto;
+}
+.ngp-collection-hero:not(.ngp-color-inherit) .ngp-collection-hero__text {
+  padding-inline: var(--padding-x);
+}
+@media (min-width: 768px) {
+  .ngp-collection-hero--image-left .ngp-collection-hero__text {
+    padding-inline-start: var(--padding-x);
+  }
+}
+@media (min-width: 768px) {
+  .ngp-collection-hero--image-right .ngp-collection-hero__text {
+    padding-inline-end: var(--padding-x);
+  }
+}

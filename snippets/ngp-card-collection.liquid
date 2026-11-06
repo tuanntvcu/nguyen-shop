@@ -1,0 +1,113 @@
+{%- liquid
+  assign ngp_card_style = ngp_card_style | default: settings.collection_card_style
+  assign ngp_color_scheme = ngp_color_scheme | default: settings.collection_card_color_scheme
+  if ngp_show_product_count != null
+    assign ngp_show_product_count = ngp_show_product_count
+  else
+    assign ngp_show_product_count = settings.collection_card_show_product_count
+  endif
+  if ngp_show_icon != null
+    assign ngp_show_icon = ngp_show_icon
+  else
+    assign ngp_show_icon = true
+  endif
+  assign ngp_heading_size = ngp_heading_size | default: 'ngp-h4'
+
+  assign ngp_all_products_count = collection.all_products_count
+  if collection == blank
+    assign ngp_all_products_count = 12
+  endif
+
+  assign ngp_collection_title = title | default: collection.title
+  assign ngp_default_label = 'onboarding.collection_title' | t
+
+  unless ngp_featured_image
+    if collection.image
+      assign ngp_featured_image = collection.image
+    else
+      assign ngp_featured_image = collection.products.first.featured_media.preview_image
+    endif
+  endunless
+
+  assign ngp_image_ratio = ngp_image_ratio | default: 'adapt'
+  if ngp_image_ratio == 'adapt'
+    if ngp_featured_image != blank
+      assign ngp_image_ratio = ngp_featured_image.aspect_ratio
+    else
+      assign ngp_image_ratio = '1'
+    endif
+  endif
+-%}
+<div class="ngp-collection-card ngp-collection-card--{{ ngp_card_style }}{% if has_bg %} ngp-collection-card--has-bg ngp-blocks-radius{% endif %} ngp-color-{{ ngp_color_scheme }}">
+  <a
+    {% if collection != blank %}
+      href="{{ collection.url }}"
+    {% else %}
+      role="link" aria-disabled="true"
+    {% endif %}
+    class="ngp-collection-card__wrapper ngp-relative ngp-flex ngp-flex-col ngp-gap-6 ngp-focus-inset"
+    aria-label="{{ ngp_collection_title | default: ngp_default_label }}"
+  >
+    <div class="ngp-collection-card__image ngp-media-wrapper ngp-hover-wrapper{% unless has_bg %} ngp-blocks-radius{% endunless %}">
+      <ngp-motion-element data-motion="zoom-out-sm" class="ngp-block" style="--aspect-ratio: {{ ngp_image_ratio }};">
+        {%- if ngp_featured_image != blank -%}
+          {%- liquid
+            assign ngp_image_sizes = ngp_image_sizes | default: '450px'
+            assign ngp_image_widths = '165, 355, 450, 535, 710, 900, 1070, 1400, ' | append: ngp_featured_image.width
+          -%}
+          {{
+            ngp_featured_image
+            | image_url: width: ngp_featured_image.width
+            | image_tag:
+              loading: 'lazy',
+              class: 'motion-reduce hover-scale-up',
+              widths: ngp_image_widths,
+              sizes: ngp_image_sizes,
+              is: 'ngp-image-lazy'
+          }}
+        {%- else -%}
+          <div class="ngp-collection-card__placeholder ngp-hover-scale-up">
+            {% capture ngp_current %}{% cycle 1, 2, 3 %}{% endcapture %}
+            {{ 'collection-' | append: ngp_current | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </ngp-motion-element>
+    </div>
+    <div class="ngp-collection-card__inner{% if ngp_card_style == 'style-2' %} ngp-content-overlay ngp-content-overlay--bottom-left{% endif %} ngp-pointer-events-none">
+      <div class="ngp-collection-card__info ngp-flex ngp-items-center ngp-gap-2 ngp-w-full">
+        <div class="ngp-collection-card__summary ngp-flex-1 ngp-flex ngp-flex-col ngp-gap-1 ngp-text-{{ content_alignment | default: 'left' }}">
+          <h3 class="ngp-collection-card__title {{ ngp_heading_size }}">{{ ngp_collection_title | default: ngp_default_label }}</h3>
+          {%- if ngp_show_product_count -%}
+            <div class="ngp-collection-card__count ngp-text-subtext">
+              {{ 'collections.general.collection_items' | t: title: ngp_all_products_count }}
+            </div>
+          {%- endif -%}
+          {%- if description != blank -%}
+            <div class="ngp-rte ngp-text-subtext">{{ description }}</div>
+          {%- endif -%}
+        </div>
+        {%- if ngp_show_icon -%}
+          <button
+            class="ngp-btn ngp-btn--icon-circle ngp-btn--secondary ngp-shrink-0"
+            aria-label="{{ ngp_collection_title | default: ngp_default_label }}"
+            {% unless collection %}
+              disabled
+            {% endunless %}
+          >
+            <svg
+              class="ngp-icon ngp-icon--medium ngp-rtl-flip-x"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M5 15L15 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6.875 5H15V13.125" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        {%- endif -%}
+      </div>
+    </div>
+  </a>
+</div>

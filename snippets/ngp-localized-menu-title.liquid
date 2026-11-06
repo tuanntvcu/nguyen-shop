@@ -1,0 +1,43 @@
+{%- liquid
+  assign ngp_menu_title_key = blank
+  assign ngp_menu_url = ngp_menu_link.url | downcase
+  assign ngp_menu_title = ngp_menu_link.title | handle
+  if ngp_menu_url contains '#altaeronconcerns' or ngp_menu_title == 'shop-by-concern'
+    assign ngp_menu_title_key = 'storefront.navigation.shop_by_concern'
+  elsif ngp_menu_url contains '/collections/bunion-toe-alignment'
+    assign ngp_menu_title_key = 'storefront.navigation.bunion_toe_alignment'
+  elsif ngp_menu_url contains '/collections/heel-plantar-fascia'
+    assign ngp_menu_title_key = 'storefront.navigation.heel_plantar_fascia'
+  elsif ngp_menu_url contains '/collections/ankle-support'
+    assign ngp_menu_title_key = 'storefront.navigation.ankle_support'
+  elsif ngp_menu_url contains '/collections/recovery-massage'
+    assign ngp_menu_title_key = 'storefront.navigation.recovery_massage'
+  elsif ngp_menu_title == 'shop-all' or ngp_menu_title == 'all-products'
+    assign ngp_menu_title_key = 'storefront.navigation.shop_all'
+  elsif ngp_menu_title == 'our-story'
+    assign ngp_menu_title_key = 'storefront.navigation.our_story'
+  elsif ngp_menu_url contains '#altaeron-values' or ngp_menu_title == 'about-us'
+    assign ngp_menu_title_key = 'storefront.navigation.about_us'
+  elsif ngp_menu_url contains '#altaeron-reviews' or ngp_menu_title == 'reviews'
+    assign ngp_menu_title_key = 'storefront.navigation.reviews'
+  elsif ngp_menu_url contains '#altaeron-faq' or ngp_menu_title == 'faq'
+    assign ngp_menu_title_key = 'storefront.navigation.faq'
+  elsif ngp_menu_url contains '/policies/shipping-policy' or ngp_menu_title == 'shipping'
+    assign ngp_menu_title_key = 'storefront.navigation.shipping'
+  elsif ngp_menu_url contains '/policies/refund-policy' or ngp_menu_title == 'returns'
+    assign ngp_menu_title_key = 'storefront.navigation.returns'
+  elsif ngp_menu_title == 'contact-us'
+    assign ngp_menu_title_key = 'storefront.navigation.contact_us'
+  elsif ngp_menu_url contains '/pages/contact' or ngp_menu_title == 'support'
+    assign ngp_menu_title_key = 'storefront.navigation.support'
+  elsif ngp_menu_url contains '/account/orders' or ngp_menu_title == 'track-order'
+    assign ngp_menu_title_key = 'storefront.navigation.track_order'
+  elsif ngp_menu_title == 'blog'
+    assign ngp_menu_title_key = 'storefront.navigation.blog'
+  endif
+  if request.locale.iso_code == 'en' or ngp_menu_title_key == blank
+    echo ngp_menu_link.title | escape
+  else
+    echo ngp_menu_title_key | t | escape
+  endif
+-%}

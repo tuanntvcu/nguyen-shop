@@ -1,0 +1,73 @@
+{%- liquid
+  assign ngp_active_values_count = 0
+
+  for ngp_filter in results.filters
+    if ngp_filter.type == 'price_range'
+      if ngp_filter.max_value.value != blank or ngp_filter.min_value.value != blank
+        assign ngp_active_values_count = ngp_active_values_count | plus: 1
+      endif
+    else
+      for ngp_active_value in ngp_filter.active_values
+        assign ngp_active_values_count = ngp_active_values_count | plus: 1
+      endfor
+    endif
+  endfor
+-%}
+
+<div class="ngp-facet-drawer-wrapper">
+  <button
+    class="ngp-btn ngp-btn--secondary ngp-flex ngp-items-center ngp-gap-2 ngp-facet-drawer-button"
+    type="button"
+    aria-controls="FacetDrawer"
+    aria-expanded="false"
+    data-facet-loading
+  >
+    {%- render 'ngp-icon-filters' -%}
+    <span>
+      {{ 'products.facets.filter_button' | t }}
+      <ngp-facet-count
+        {% if ngp_active_values_count == 0 %}
+          hidden
+        {% endif %}
+        >({{ ngp_active_values_count }})</ngp-facet-count
+      >
+    </span>
+    {%- render 'ngp-loading-spinner', size: 'small' -%}
+  </button>
+  <ngp-drawer-component id="FacetDrawer" role="dialog" class="ngp-drawer ngp-drawer--left" hidden>
+    <div class="ngp-fixed-overlay" aria-controls="FacetDrawer"></div>
+    <div class="ngp-drawer__inner">
+      <button class="ngp-drawer__close-btn ngp-z-1" aria-controls="FacetDrawer" type="button">
+        {% render 'ngp-icon-close', size: 'large' %}
+      </button>
+      <div class="ngp-drawer__content ngp-flex ngp-flex-col ngp-h-full ngp-w-full">
+        <div class="ngp-drawer__header ngp-facet-drawer__header ngp-flex ngp-items-center">
+          <h2 class="ngp-drawer__heading ngp-h3 ngp-flex ngp-items-center ngp-gap-3">
+            <span>{{ 'products.facets.filter_button' | t }}</span>
+          </h2>
+        </div>
+        <div class="ngp-drawer__body ngp-flex-grow ngp-v-scrollable" id="FacetFiltersContainer">
+          {%- if enable_sorting -%}
+            <div class="ngp-flex ngp-items-center ngp-gap-3 ngp-md:hidden ngp-facet-short-drawer" id="SortByContainerMobile">
+              {%- render 'ngp-facet-short', results: results, label_class: 'h4' -%}
+            </div>
+          {%- endif -%}
+          {%- render 'ngp-facets', context: 'drawer', results: results -%}
+          <div class="ngp-drawer__sticky ngp-drawer__sticky--bottom ngp-w-full ngp-z-1">
+            <button class="ngp-btn ngp-btn--primary ngp-w-full" type="button" aria-controls="FacetDrawer" aria-expanded="false">
+              <span>
+                {{ 'products.facets.apply' | t }}
+                <ngp-facet-count
+                  {% if ngp_active_values_count == 0 %}
+                    hidden
+                  {% endif %}
+                  >({{ ngp_active_values_count }})</ngp-facet-count
+                >
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ngp-drawer-component>
+</div>

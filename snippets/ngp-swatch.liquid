@@ -1,0 +1,92 @@
+{%- liquid
+  if ngp_swatch == blank
+    assign ngp_file_extension = ngp_file_extension | default: 'png'
+    assign ngp_file_name = value | handle | append: '.' | append: ngp_file_extension
+    assign ngp_swatch_fallback = value | split: ' ' | last | handle
+    assign ngp_swatch_fallback_override = false
+
+    assign ngp_value_downcase = value | downcase
+    assign ngp_swatch_config = settings.swatch_list | newline_to_br | split: '<br />'
+    for ngp_swatch in ngp_swatch_config
+      assign ngp_swatch_parts = ngp_swatch | strip | split: ':'
+      assign ngp_swatch_name = ngp_swatch_parts.first | downcase | strip
+
+      if ngp_swatch_name == ngp_value_downcase
+        assign ngp_swatch_value = ngp_swatch_parts.last | strip
+        if ngp_swatch_value contains '#'
+          assign ngp_swatch_fallback = ngp_swatch_value
+          assign ngp_swatch_fallback_override = true
+        else
+          assign ngp_file_name = ngp_swatch_value
+        endif
+        break
+      endif
+    endfor
+
+    assign ngp_swatch_image = blank
+    if images[ngp_file_name] != blank
+      assign ngp_swatch_image = images[ngp_file_name] | image_url: width: 72
+    elsif ngp_file_name contains '//cdn.shopify.com/'
+      assign ngp_swatch_image = ngp_file_name
+    endif
+  else
+    assign ngp_swatch_image = blank
+    assign ngp_swatch_fallback = value | split: ' ' | last | handle
+    assign ngp_swatch_focal_point = null
+    if ngp_swatch.image
+      assign ngp_swatch_image = ngp_swatch.image | image_url: width: 72
+      assign ngp_swatch_fallback_override = false
+      assign ngp_swatch_focal_point = ngp_swatch.image.presentation.focal_point
+    elsif ngp_swatch.color
+      assign ngp_swatch_fallback = ngp_swatch.color
+    endif
+  endif
+-%}
+
+{%- if href -%}
+  <a
+    href="{{ href }}"
+    class="ngp-swatch-color ngp-block ngp-relative"
+    title="{{ title | escape }}"
+    aria-label="{{ title | escape }}"
+    {% if class != blank %}
+      {{ class -}}
+    {% endif %}
+    style="--swatch-background: {{ ngp_swatch_fallback }};{% if ngp_swatch_fallback_override == false and ngp_swatch_image != blank %} background-image: url({{ ngp_swatch_image }});{% endif %}{% if ngp_swatch_focal_point %} --swatch-focal-point: {{ ngp_swatch_focal_point }}{% endif %}"
+  >
+    {%- if tooltip != blank -%}
+      <span class="ngp-tooltip ngp-pointer-events-none">{{ tooltip | escape }}</span>
+    {%- else -%}
+      <span class="ngp-visually-hidden">{{ value | escape }}</span>
+    {%- endif -%}
+  </a>
+{%- else -%}
+  <input
+    class="ngp-visually-hidden"
+    name="{{ name }}"
+    value="{{ value | escape }}"
+    type="{% if allow_multiple %}checkbox{% else %}radio{% endif %}"
+    {% if form %}
+      form="{{ form | escape }}"
+    {% endif %}
+    id="{{ id | escape }}"
+    {% if disabled %}
+      disabled
+    {% endif -%}
+    {% if selected %}
+      checked
+    {% endif %}
+  >
+  <label
+    class="ngp-swatch-color ngp-block ngp-relative{% if class != blank %} {{ class }}{% endif %}"
+    for="{{ id | escape }}"
+    style="--swatch-background: {{ ngp_swatch_fallback }};{% if ngp_swatch_fallback_override == false and ngp_swatch_image != blank %} background-image: url({{ ngp_swatch_image }});{% endif %}{% if ngp_swatch_focal_point %} --swatch-focal-point: {{ ngp_swatch_focal_point }}{% endif %}"
+    data-tooltip
+  >
+    {%- if tooltip != blank -%}
+      <span class="ngp-tooltip ngp-pointer-events-none">{{ tooltip | escape }}</span>
+    {%- else -%}
+      <span class="ngp-visually-hidden">{{ value | escape }}</span>
+    {%- endif -%}
+  </label>
+{%- endif -%}

@@ -1,0 +1,24 @@
+/* Same Altaeron stylesheet and actual DialFit component rules are loaded by the section.
+   These exceptions handle AirRelief's existing content shape; no separate type/color scale. */
+.ngp-altaeron-pdp--massager .ngp-apdp-massager-comparison-scroll{overflow-x:auto;margin-top:24px}
+.ngp-altaeron-pdp--massager .ngp-apdp-massager-compare{min-width:630px}
+.ngp-altaeron-pdp--massager .ngp-apdp-sticky__product>span{font-size:11px;line-height:1.3;text-overflow:ellipsis;white-space:nowrap}
+.ngp-altaeron-pdp--massager .ngp-apdp-sticky__product .ngp-apdp-sticky__prices{align-items:baseline;display:flex;flex-wrap:wrap;gap:2px 6px;overflow:visible;white-space:normal}
+.ngp-altaeron-pdp--massager .ngp-apdp-sticky__prices :where(b,s){flex:none;white-space:nowrap}
+.ngp-altaeron-pdp--massager .ngp-apdp-sticky__prices s{color:var(--ngp-altaeron-muted,#667085);font-size:12px;text-decoration:line-through}
+.ngp-altaeron-pdp--massager .ngp-apdp-hero__grid:not(:has(.ngp-apdp-gallery)){grid-template-columns:1fr 1fr}
+.ngp-altaeron-pdp--massager .ngp-apdp-hero__grid:not(:has(.ngp-apdp-gallery)) .ngp-apdp-narrative{grid-column:1}
+.ngp-altaeron-pdp--massager .ngp-apdp-hero__grid:not(:has(.ngp-apdp-gallery)) .ngp-apdp-buy{grid-column:2}
+
+/* Product-specific supporting content uses existing DialFit components. */
+.ngp-altaeron-pdp--massager .ngp-apdp-massager-comparison-media{display:none;border-radius:16px;margin:24px auto 0;max-width:720px}
+.ngp-altaeron-pdp--massager .ngp-apdp-massager-support{margin-top:24px}
+.ngp-altaeron-pdp--massager .ngp-apdp-massager-support__body{padding:0 0 24px}
+.ngp-altaeron-pdp--massager .ngp-apdp-massager-support__body .ngp-apdp-dialfit-steps{margin-top:24px}
+.ngp-altaeron-pdp--massager .ngp-apdp-dialfit-proof{margin-top:34px}
+.ngp-altaeron-pdp--massager .ngp-apdp-massager-methods>span{font-size:14px;letter-spacing:.04em}
+.ngp-altaeron-pdp--massager .ngp-apdp-massager-guarantee-badge{background:var(--ngp-altaeron-primary,#006B5E);border-radius:50%;margin:auto;width:108px}
+.ngp-altaeron-pdp--massager .ngp-apdp-dialfit-benefits.ngp-apdp-massager-practical{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:34px}
+@media(max-width:767px){
+ .ngp-altaeron-pdp--massager .ngp-apdp-dialfit-benefits.ngp-apdp-massager-practical{grid-template-columns:1fr}
+}

@@ -1,0 +1,39 @@
+{%- liquid
+  assign ngp_media_alt = media.alt | default: product.title
+  assign ngp_image_loading = loading | default: 'lazy'
+  assign ngp_image_priority = fetchpriority | default: 'auto'
+  assign ngp_video_autoplay = false
+  assign ngp_video_loop = false
+  assign ngp_video_muted = false
+  assign ngp_video_controls = true
+  if loading == true
+    assign ngp_image_loading = 'eager'
+  endif
+  if fetchpriority == true
+    assign ngp_image_priority = 'high'
+  endif
+  if autoplay == true
+    assign ngp_video_autoplay = true
+  endif
+  if loop == true
+    assign ngp_video_loop = true
+  endif
+  if muted == true
+    assign ngp_video_muted = true
+  endif
+  if controls == false
+    assign ngp_video_controls = false
+  endif
+-%}
+{%- case media.media_type -%}
+  {%- when 'image' -%}
+    {{ media.preview_image | image_url: width: 1600 | image_tag: loading: ngp_image_loading, fetchpriority: ngp_image_priority, widths: '320, 480, 640, 900, 1200, 1600', sizes: sizes, alt: ngp_media_alt }}
+  {%- when 'video' -%}
+    {%- capture ngp_video_markup -%}{{ media | video_tag: autoplay: ngp_video_autoplay, loop: ngp_video_loop, controls: ngp_video_controls, preload: 'none', playsinline: true, muted: ngp_video_muted, image_size: '1200x' }}{%- endcapture -%}
+    {{- ngp_video_markup | replace: '<video ', '<video data-apdp-lazy-video ' | replace: '<source src="', '<source data-src="' -}}
+  {%- when 'external_video' -%}
+    {%- capture ngp_external_video_markup -%}{{ media | external_video_tag: loading: 'lazy' }}{%- endcapture -%}
+    {{- ngp_external_video_markup | replace: '<iframe ', '<iframe data-apdp-lazy-video ' | replace: ' src="', ' data-src="' -}}
+  {%- when 'model' -%}
+    {{ media | model_viewer_tag: reveal: 'interaction', toggleable: true }}
+{%- endcase -%}

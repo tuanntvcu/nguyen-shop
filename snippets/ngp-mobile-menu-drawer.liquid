@@ -1,0 +1,100 @@
+{% doc %}
+  Renders the full-screen mobile storefront menu and locale controls.
+  @param {string} ngp_menu_id - The storefront menu drawer ID.
+  @param {linklist} ngp_menu - The navigation menu to render.
+  @param {boolean} ngp_show_country_selector - Whether to show country and currency selection.
+  @param {boolean} ngp_show_language_selector - Whether to show language selection.
+{% enddoc %}
+<div
+  id="NgpMobileMenu-{{ ngp_menu_id }}"
+  class="ngp-mobile-menu"
+  data-ngp-mobile-menu
+  data-ngp-menu-source="{{ ngp_menu_id }}"
+  hidden
+>
+  <div class="ngp-mobile-menu__panel" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t | escape }}" tabindex="-1">
+    <div class="ngp-mobile-menu__header">
+      <a class="ngp-mobile-menu__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+        {%- if settings.logo != blank -%}
+          {{ settings.logo | image_url: width: 220 | image_tag: class: 'ngp-mobile-menu__logo', alt: shop.name, loading: 'eager' }}
+        {%- else -%}
+          <span>{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      <button class="ngp-mobile-menu__close" type="button" data-ngp-menu-close aria-label="{{ 'accessibility.close' | t }}">
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </button>
+    </div>
+    <nav class="ngp-mobile-menu__navigation" aria-label="{{ 'sections.header.menu' | t | escape }}">
+      <ul class="ngp-mobile-menu__list" role="list">
+        {%- for ngp_primary_link in ngp_menu.links -%}
+          <li class="ngp-mobile-menu__entry">
+            {%- if ngp_primary_link.links != blank -%}
+              <details class="ngp-mobile-menu__group">
+                <summary class="ngp-mobile-menu__link ngp-mobile-menu__link--group">
+                  {% render 'ngp-localized-menu-title', ngp_menu_link: ngp_primary_link %}
+                  <span class="ngp-mobile-menu__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 4 8 8-8 8"/></svg></span>
+                </summary>
+                <ul class="ngp-mobile-menu__sublist" role="list">
+                  {%- for ngp_secondary_link in ngp_primary_link.links -%}
+                    <li>
+                      {%- if ngp_secondary_link.links != blank -%}
+                        <details class="ngp-mobile-menu__group ngp-mobile-menu__group--nested">
+                          <summary class="ngp-mobile-menu__link ngp-mobile-menu__link--nested">
+                            {% render 'ngp-localized-menu-title', ngp_menu_link: ngp_secondary_link %}
+                            <span class="ngp-mobile-menu__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 4 8 8-8 8"/></svg></span>
+                          </summary>
+                          <ul class="ngp-mobile-menu__sublist" role="list">
+                            {%- for ngp_tertiary_link in ngp_secondary_link.links -%}
+                              <li><a class="ngp-mobile-menu__link ngp-mobile-menu__link--child" href="{{ ngp_tertiary_link.url }}">{% render 'ngp-localized-menu-title', ngp_menu_link: ngp_tertiary_link %}</a></li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      {%- else -%}
+                        <a class="ngp-mobile-menu__link ngp-mobile-menu__link--child" href="{{ ngp_secondary_link.url }}">{% render 'ngp-localized-menu-title', ngp_menu_link: ngp_secondary_link %}</a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            {%- else -%}
+              <a class="ngp-mobile-menu__link" href="{{ ngp_primary_link.url }}">{% render 'ngp-localized-menu-title', ngp_menu_link: ngp_primary_link %}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+    <div class="ngp-mobile-menu__footer">
+      {%- if ngp_show_country_selector or ngp_show_language_selector -%}
+        <div class="ngp-mobile-menu__localization">
+          {%- if ngp_show_country_selector -%}
+            <localization-form>
+              {%- form 'localization', id: 'NgpMobileCountryForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="visually-hidden" id="NgpMobileCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                  {%- render 'country-localization', localPosition: 'NgpMobileCountry' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {%- endif -%}
+          {%- if ngp_show_language_selector -%}
+            <localization-form>
+              {%- form 'localization', id: 'NgpMobileLanguageForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="visually-hidden" id="NgpMobileLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                  {%- render 'language-localization', localPosition: 'NgpMobileLanguage' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="ngp-mobile-menu__login" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+          {%- if customer -%}{{ 'customer.account_fallback' | t }}{%- else -%}{{ 'customer.log_in' | t }}{%- endif -%}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+<script src="{{ 'ngp-mobile-menu.js' | asset_url }}" defer="defer"></script>

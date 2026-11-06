@@ -1,0 +1,14 @@
+{%- if name != blank and name != 'none' -%}
+  <span class="ngp-button-icon">
+    {%- liquid
+      case name
+        when 'facebook'
+          render 'ngp-icon-facebook', size: 'large'
+        when 'twitter'
+          render 'ngp-icon-twitter', size: 'large'
+        when 'instagram'
+          render 'icon-instagram', size: 'large'
+      endcase
+    -%}
+  </span>
+{%- endif -%}

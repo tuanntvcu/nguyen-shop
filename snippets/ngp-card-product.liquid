@@ -1,0 +1,319 @@
+{%- liquid
+  assign ngp_variant = product.selected_or_first_available_variant
+  assign ngp_compare_at_price = ngp_variant.compare_at_price
+  assign ngp_price = ngp_variant.price
+  assign ngp_on_sale = false
+  if ngp_compare_at_price > ngp_price
+    assign ngp_on_sale = true
+  endif
+
+  assign ngp_show_soldout = settings.pcard_show_badge_soldout
+  assign ngp_show_on_sale_badge = settings.pcard_show_sale_badge
+  assign ngp_show_color_swatches = settings.pcard_enable_color_swatches
+
+  unless ngp_on_sale
+    assign ngp_show_on_sale_badge = false
+  endunless
+
+  if ngp_show_vendor == null
+    assign ngp_show_vendor = settings.pcard_show_vendor
+  endif
+
+  if ngp_show_type == null
+    assign ngp_show_type = settings.pcard_show_type
+  endif
+
+  if ngp_show_product_option == null
+    assign ngp_show_product_option = settings.pcard_show_color_swatch
+  endif
+
+  assign ngp_first_media_type = product.featured_media.media_type
+  assign ngp_featured_media = product.featured_media
+
+  if ngp_first_media_type == 'model' or ngp_first_media_type == 'video'
+    assign ngp_featured_media = product.featured_media.preview_image
+  endif
+
+  if ngp_image_ratio == blank
+    assign ngp_image_ratio = settings.pcard_image_ratio | default: '1'
+  endif
+  if ngp_image_ratio == 'adapt'
+    if ngp_featured_media != blank
+      assign ngp_image_ratio = ngp_featured_media.aspect_ratio
+    else
+      assign ngp_image_ratio = '1'
+    endif
+  endif
+
+  assign ngp_second_image = ''
+  if settings.pcard_show_second_img and product.images.size > 1 and product.images[1] != blank
+    assign ngp_second_image = product.images[1]
+  endif
+
+  if ngp_enable_quick_add == null
+    assign ngp_enable_quick_add = settings.pcard_show_cart_button
+  endif
+
+  if ngp_enable_quick_view == null
+    assign ngp_enable_quick_view = settings.pcard_show_quickview_button
+  endif
+
+  assign ngp_mobile_hide_quick_add = settings.pcard_mobile_hide_quick_add
+
+  assign ngp_custom_tags = product.tags | where: 'tag__'
+
+  assign ngp_atc_button_tag = 'a'
+  unless settings.pcard_choose_options_actions == 'product_page'
+    assign ngp_atc_button_tag = 'button'
+  endunless
+
+  assign ngp_product_url = product.url
+
+  if remove_params
+    assign ngp_product_url = ngp_product_url | split: '?' | first
+  endif
+
+  assign ngp_card_wrapper_class = ''
+  if custom_class != blank
+    assign ngp_card_wrapper_class = ngp_card_wrapper_class | append: ' ' | append: custom_class
+  endif
+  if ngp_mobile_hide_quick_add
+    assign ngp_card_wrapper_class = ngp_card_wrapper_class | append: ' ngp-mobile-hide-quick-add'
+  endif
+
+  assign ngp_quick_view_suffix = ngp_quick_view_suffix | default: ''
+  assign ngp_quick_view_modal_id = 'QuickView-' | append: product.id | append: '-' | append: section.id | append: ngp_quick_view_suffix
+
+  assign ngp_loading = 'lazy'
+  assign ngp_fetchpriority = 'low'
+  if section_index < 3 and index == 1
+    assign ngp_loading = 'eager'
+    assign ngp_fetchpriority = 'high'
+  endif
+
+  assign ngp_image_sizes = ngp_image_sizes | default: '450px'
+  assign ngp_image_widths = '70, 140, 165, 355, 450, 535, 710, 900, 1070, 1420'
+-%}
+<div
+  class="ngp-product-card ngp-product-card-style-{{ settings.pcard_style }}{% if settings.pcard_style == 'card' %} ngp-color-{{ settings.pcard_color_scheme }}{% endif %}{{ ngp_card_wrapper_class }}{% if list_on_mobile %} ngp-product-card-list-on-mobile{% endif %}"
+>
+  <div class="ngp-product-card__wrapper ngp-h-full">
+    <div class="ngp-product-card__image-wrapper{% if ngp_second_image == blank %} ngp-product-card__image-wrapper--main-only{% endif %} {% if list_on_mobile %}ngp-desktop-{% endif %}ngp-color-{{ settings.pcard_overlay_color_scheme }} ngp-bg-none">
+      <a href="{{ product.url }}" aria-label="{{ product.title | escape }}" tabindex="-1">
+        <ngp-motion-element data-motion="zoom-out-sm" class="ngp-block">
+          {%- if ngp_featured_media -%}
+            {%- unless ngp_first_media_type == 'video' or ngp_first_media_type == 'external_video' -%}
+              <div
+                class="ngp-media-wrapper ngp-product-card__image ngp-product-card__image--main"
+                style="--aspect-ratio: {{ ngp_image_ratio }}"
+              >
+                {%- assign ngp_first_image_widths = ngp_image_widths | append: ', ' | append: ngp_featured_media.width -%}
+                {{
+                  ngp_featured_media
+                  | image_url: width: ngp_featured_media.width
+                  | image_tag:
+                    ngp_loading: ngp_loading,
+                    ngp_fetchpriority: ngp_fetchpriority,
+                    class: 'motion-reduce',
+                    widths: ngp_first_image_widths,
+                    sizes: ngp_image_sizes,
+                    is: 'ngp-image-lazy'
+                }}
+              </div>
+              {%- unless ngp_second_image == blank -%}
+                <div
+                  class="ngp-media-wrapper ngp-product-card__image ngp-product-card__image--second ngp-inset-full hidden ngp-md:ngp-block"
+                  style="--aspect-ratio: {{ ngp_image_ratio }}"
+                >
+                  {%- assign ngp_second_image_widths = ngp_image_widths | append: ', ' | append: ngp_second_image.width -%}
+                  {{
+                    ngp_second_image
+                    | image_url: width: ngp_second_image.width
+                    | image_tag:
+                      ngp_loading: 'lazy',
+                      class: 'motion-reduce',
+                      widths: ngp_second_image_widths,
+                      sizes: ngp_image_sizes,
+                      is: 'ngp-image-lazy'
+                  }}
+                </div>
+              {%- endunless -%}
+            {%- else -%}
+              <div class="ngp-media ngp-media--adapt" style="--media-ratio: {{ ngp_image_ratio }};">
+                {% render 'ngp-video',
+                  video: product.featured_media,
+                  muted: true,
+                  autoplay: true,
+                  loop: true,
+                  cover_image: ngp_featured_media,
+                  show_play_button: false
+                %}
+              </div>
+            {%- endunless -%}
+          {%- else -%}
+            <div class="ngp-product-card__image ngp-product-card__image--main" style="--aspect-ratio: {{ ngp_image_ratio }};">
+              {{- 'product-1' | placeholder_svg_tag: 'placeholder-svg' -}}
+            </div>
+          {%- endif -%}
+        </ngp-motion-element>
+      </a>
+      {%- if product.available == false or ngp_on_sale or ngp_custom_tags.size > 0 -%}
+        <div class="ngp-product-card__badge">
+          {%- if product.available == false and ngp_show_soldout -%}
+            <span class="ngp-f-badge ngp-f-badge--soldout" aria-hidden="true">
+              {{- 'products.product.sold_out' | t -}}
+            </span>
+          {%- endif -%}
+          {%- if ngp_show_on_sale_badge and product.available -%}
+            {%- liquid
+              assign ngp_sale_badge = ''
+              assign ngp_amount = 0
+              case settings.pcard_sale_badge_type
+                when 'show_percentage'
+                  if ngp_compare_at_price > ngp_price
+                    assign ngp_amount = ngp_compare_at_price | minus: ngp_price | times: 100 | divided_by: ngp_compare_at_price
+                  endif
+                  assign ngp_sale_badge = ngp_amount | times: -1 | append: '%'
+                when 'show_amount'
+                  if ngp_compare_at_price > ngp_price
+                    assign ngp_amount = ngp_compare_at_price | minus: ngp_price | money
+                  endif
+                  assign ngp_sale_badge = 'products.product.price.save_price_html' | t: ngp_amount: ngp_amount
+                else
+                  assign ngp_sale_badge = 'products.product.on_sale' | t
+              endcase
+            -%}
+            <span class="ngp-f-badge ngp-f-badge--sale" aria-hidden="true">{{- ngp_sale_badge -}}</span>
+          {%- endif -%}
+          {%- for ngp_tag in ngp_custom_tags -%}
+            {%- liquid
+              assign ngp_tag_content = ngp_tag | split: '__' | last
+              assign ngp_type = ngp_tag_content | split: '_' | first
+              assign ngp_tag_name = ngp_tag_content | split: '_' | last
+            -%}
+            <span class="ngp-f-badge ngp-f-badge--{{ ngp_type }}">{{ ngp_tag_name }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if ngp_enable_quick_view -%}
+        <button
+          class="ngp-product-card__quickview ngp-btn ngp-btn--icon-circle {{ settings.quickview_button_style }} ngp-no-js-hidden"
+          aria-label="{{ 'products.product.quick_view' | t }}"
+          aria-controls="{{ ngp_quick_view_modal_id }}"
+          aria-haspopup="dialog"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="ngp-icon ngp-icon-magnifying-glass ngp-icon--large"
+          >
+            <path d="M10.875 18.75C15.2242 18.75 18.75 15.2242 18.75 10.875C18.75 6.52576 15.2242 3 10.875 3C6.52576 3 3 6.52576 3 10.875C3 15.2242 6.52576 18.75 10.875 18.75Z"/>
+            <path d="M16.4434 16.4453L20.9997 21.0016"/>
+          </svg>
+        </button>
+      {%- endif -%}
+      {%- if ngp_enable_quick_add -%}
+        {%- liquid
+          assign ngp_product_form_id = 'quick-add-' | append: section.id | append: product.id
+          assign ngp_qty_rules = false
+          if ngp_variant.quantity_rule.min > 1 or ngp_variant.quantity_rule.max != null or ngp_variant.quantity_rule.increment > 1
+            assign ngp_qty_rules = true
+          endif
+        -%}
+        {%- if product.variants.size > 1 or ngp_qty_rules -%}
+          <div class="ngp-product-card__actions ngp-product-card__main-actions">
+            <{{ ngp_atc_button_tag }}
+              {% if settings.pcard_choose_options_actions == 'product_page' %}
+                href="{{- ngp_product_url -}}"
+              {% else %}
+                aria-controls="{{ ngp_quick_view_modal_id }}"
+                aria-haspopup="dialog"
+              {% endif %}
+              class="ngp-product-card__atc ngp-product-card__action-button ngp-btn {{ settings.pcard_button_style }}"
+            >
+              <span class="ngp-product-card__atc-icon ngp-product-card__action-icon ngp-inline-flex ngp-md:hidden">
+                {%- render 'ngp-icon-cart', name: settings.cart_icon -%}
+              </span>
+              <span class="ngp-product-card__atc-text ngp-product-card__action-text">
+                {{- 'products.product.choose_options' | t -}}
+              </span>
+            </{{ ngp_atc_button_tag }}>
+          </div>
+        {%- else -%}
+          {%- form 'product',
+            product,
+            id: ngp_product_form_id,
+            class: 'product-card__actions product-card__main-actions',
+            novalidate: 'novalidate',
+            data-type: 'add-to-cart-form',
+            is: 'ngp-product-form'
+          -%}
+            <input
+              type="hidden"
+              name="id"
+              value="{{- ngp_variant.id -}}"
+              class="ngp-product-variant-id"
+              {% if ngp_variant.available == false %}
+                disabled
+              {% endif %}
+            >
+            <button
+              id="{{ ngp_product_form_id }}-submit"
+              type="submit"
+              name="add"
+              {% if ngp_variant.available == false %}
+                disabled
+              {% endif %}
+              aria-label="{{ 'products.product.add_to_cart' | t }}"
+              class="ngp-product-card__atc ngp-product-card__action-button ngp-btn {{ settings.pcard_button_style }}"
+            >
+              <span class="ngp-product-card__atc-icon ngp-product-card__action-icon ngp-inline-flex ngp-md:hidden">
+                {%- render 'ngp-icon-cart', name: settings.cart_icon -%}
+              </span>
+              <span class="ngp-product-card__atc-text ngp-product-card__action-text">
+                {%- if ngp_variant.available -%}
+                  {{- 'products.product.add_to_cart' | t -}}
+                {%- else -%}
+                  {{- 'products.product.sold_out' | t -}}
+                {%- endif -%}
+              </span>
+              {% render 'ngp-loading-spinner' %}
+            </button>
+          {%- endform -%}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    <div class="ngp-product-card__info ngp-text-{{ settings.pcard_content_alignment }}">
+      {%- if ngp_show_vendor -%}
+        <p class="ngp-product-card__vendor ngp-text-sm ngp-m-0">
+          <span class="ngp-visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+          {{ product.vendor }}
+        </p>
+      {%- endif -%}
+      {%- if ngp_show_type -%}
+        <p class="ngp-product-card__type ngp-text-sm ngp-m-0">
+          <span class="ngp-visually-hidden">{{ 'accessibility.product_type' | t }}</span>
+          {{ product.type }}
+        </p>
+      {%- endif -%}
+      <h3 class="ngp-product-card__title ngp-text-pcard-title">
+        <a class="ngp-reversed-link" href="{{ product.url }}">{{- product.title -}}</a>
+      </h3>
+      {% render 'ngp-price', product: product, alignment: settings.pcard_content_alignment %}
+      {%- if ngp_show_color_swatches -%}
+        {%- render 'ngp-pcard-color-swatch', product: product -%}
+      {%- endif -%}
+    </div>
+  </div>
+  {%- if settings.pcard_choose_options_actions == 'open_popup' or ngp_enable_quick_view -%}
+    {% render 'ngp-quick-view-modal', modal_id: ngp_quick_view_modal_id, product: product %}
+  {%- endif -%}
+</div>

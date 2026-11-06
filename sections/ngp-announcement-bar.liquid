@@ -1,0 +1,70 @@
+{{ 'ngp-section-announcement.css' | asset_url | stylesheet_tag }}
+
+<div class="ngp-announcement color-{{ section.settings.color_scheme }}" data-ngp-announcement>
+  {%- if section.settings.promise_layout -%}
+    <div class="ngp-announcement__marquee" aria-label="{{ 'sections.announcements.announcement_bar' | t | escape }}">
+      <div class="ngp-announcement__track">
+        {%- for ngp_copy in (1..2) -%}
+          <div class="ngp-announcement__group" role="list"{% if forloop.last %} aria-hidden="true"{% endif %}>
+            {%- for ngp_block in section.blocks -%}
+              {%- if ngp_block.settings.text != blank -%}
+                <div class="ngp-announcement__item" role="listitem"{% unless forloop.parentloop.last %} {{ ngp_block.shopify_attributes }}{% endunless %}>
+                  {%- if ngp_block.settings.icon != 'none' -%}
+                    <span class="ngp-announcement__icon" aria-hidden="true">
+                      {%- render 'ngp-icon', ngp_icon_type: ngp_block.settings.icon, ngp_icon_class: 'ngp-announcement__icon-svg' -%}
+                    </span>
+                  {%- endif -%}
+                  {%- if ngp_block.settings.link != blank -%}<a href="{{ ngp_block.settings.link }}">{%- endif -%}
+                    {%- render 'ngp-localized-marketing-text', ngp_text: ngp_block.settings.text -%}
+                  {%- if ngp_block.settings.link != blank -%}</a>{%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- else -%}
+    <div class="ngp-announcement__rotator" role="region" aria-label="{{ 'sections.announcements.announcement_bar' | t | escape }}" data-ngp-announcement-rotator data-interval="{{ section.settings.change_slides_speed | times: 1000 }}">
+      {%- for ngp_block in section.blocks -%}
+        {%- if ngp_block.settings.text != blank -%}
+          <div class="ngp-announcement__slide{% if forloop.first %} is-active{% endif %}"{% unless forloop.first %} hidden{% endunless %} {{ ngp_block.shopify_attributes }}>
+            {%- if ngp_block.settings.icon != 'none' -%}<span class="ngp-announcement__icon" aria-hidden="true">{% render 'ngp-icon', ngp_icon_type: ngp_block.settings.icon, ngp_icon_class: 'ngp-announcement__icon-svg' %}</span>{%- endif -%}
+            {%- if ngp_block.settings.link != blank -%}<a href="{{ ngp_block.settings.link }}">{%- endif -%}
+              {%- render 'ngp-localized-marketing-text', ngp_text: ngp_block.settings.text -%}
+            {%- if ngp_block.settings.link != blank -%}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+{%- unless section.settings.promise_layout -%}<script src="{{ 'ngp-announcement-bar.js' | asset_url }}" defer></script>{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "ngp-announcement-section",
+  "enabled_on": { "groups": ["header"] },
+  "max_blocks": 12,
+  "settings": [
+    { "type": "checkbox", "id": "promise_layout", "label": "Show announcements as promise columns", "default": true },
+    { "type": "range", "id": "change_slides_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Change slides every", "default": 5 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" }
+  ],
+  "blocks": [{
+    "type": "announcement",
+    "name": "Announcement",
+    "settings": [
+      { "type": "text", "id": "text", "label": "Text", "default": "30-DAY COMFORT GUARANTEE" },
+      { "type": "url", "id": "link", "label": "Link" },
+      { "type": "select", "id": "icon", "label": "Icon", "default": "shield", "options": [
+        { "value": "shield", "label": "Guarantee" },
+        { "value": "shipping", "label": "Shipping" },
+        { "value": "none", "label": "None" }
+      ] }
+    ]
+  }],
+  "presets": [{ "name": "Announcement bar" }]
+}
+{% endschema %}

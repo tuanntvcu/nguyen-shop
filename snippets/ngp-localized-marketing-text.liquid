@@ -1,0 +1,19 @@
+{%- liquid
+  assign ngp_marketing_key = blank
+  assign ngp_marketing_normalized = ngp_text | strip | downcase
+  case ngp_marketing_normalized
+    when 'first order: 10% off'
+      assign ngp_marketing_key = 'storefront.announcement.first_order_discount'
+    when '30-day comfort guarantee'
+      assign ngp_marketing_key = 'storefront.announcement.comfort_guarantee'
+    when 'free shipping worldwide'
+      assign ngp_marketing_key = 'storefront.announcement.free_shipping_worldwide'
+    when 'free shipping on orders $39+'
+      assign ngp_marketing_key = 'storefront.announcement.free_shipping_threshold'
+  endcase
+  if request.locale.iso_code == 'en' or ngp_marketing_key == blank
+    echo ngp_text
+  else
+    echo ngp_marketing_key | t
+  endif
+-%}

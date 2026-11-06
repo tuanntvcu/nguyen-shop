@@ -1,0 +1,90 @@
+{%- liquid
+  assign ngp_loading = ngp_loading | default: 'lazy'
+  assign ngp_fetchpriority = ngp_fetchpriority | default: 'auto'
+  assign ngp_sizes = ngp_sizes | default: 'min(100vw, var(--page-width))'
+  assign ngp_widths = '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200'
+
+  # Allow override video url type and id
+  if video_url != blank
+    assign ngp_video_url_type = ngp_video_url_type | default: video_url.type
+    assign ngp_video_url_id = ngp_video_url_id | default: video_url.id
+  else
+    assign ngp_video_url_type = video.host
+  endif
+
+  assign ngp_video_id = video.id | default: ngp_video_url_id
+  assign ngp_video_alt = video.alt | default: description
+  assign ngp_alt = 'accessibility.load_video' | t: description: ngp_video_alt | escape
+  if cover_image != blank
+    assign ngp_preview_image = cover_image
+  elsif video != blank
+    assign ngp_preview_image = video.preview_image
+  endif
+
+  capture ngp_poster
+    if ngp_preview_image != blank
+      echo ngp_preview_image | image_url: width: ngp_preview_image.width | image_tag: ngp_loading: ngp_loading, ngp_fetchpriority: ngp_fetchpriority, ngp_sizes: ngp_sizes, ngp_widths: ngp_widths, is: 'ngp-image-lazy', ngp_alt: ngp_alt
+    else
+      echo 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg'
+    endif
+  endcapture
+-%}
+{{ ngp_video_url_type }}
+{%- if video != blank or video_url != blank -%}
+  <ngp-video-element
+    class="ngp-media-wrapper"
+    {%- if ngp_video_url_type and video == blank %}
+      source="{{ ngp_video_url_type }}"
+    {% endif -%}
+    {%- if autoplay %}
+      autoplay
+    {% endif -%}
+  >
+    {{- ngp_poster -}}
+    <template>
+      {%- if video != blank -%}
+        {{-
+          video
+          | video_tag:
+            playsinline: true,
+            muted: muted,
+            autoplay: true,
+            loop: loop,
+            controls: controls,
+            preload: 'none',
+            image_size: '800x'
+        -}}
+      {%- else -%}
+        {%- if ngp_video_url_type == 'youtube' -%}
+          <iframe
+            src="https://www.youtube.com/embed/{{ ngp_video_url_id }}?playsinline=1{% if controls %}&controls=1{% else %}&controls=0{% endif %}{% if autoplay %}&autoplay=1{% endif %}{% if muted %}&mute=1{% endif %}{% if loop %}&loop=1{% endif %}&playlist={{ ngp_video_url_id }}&enablejsapi=1&rel=0&modestbranding=1&origin={{ 'https://' | append: request.host | url_encode }}"
+            allow="autoplay; encrypted-media"
+            allowfullscreen="allowfullscreen"
+          ></iframe>
+        {%- elsif ngp_video_url_type == 'vimeo' -%}
+          <iframe
+            src="https://player.vimeo.com/video/{{ ngp_video_url_id }}?autopause=1{% if controls %}&background=0{% else %}&background=1{% endif %}{% if autoplay %}&autoplay=1{% endif %}{% if muted %}&muted=1{% endif %}{% if loop %}&loop=1{% endif %}&transparent=0&responsive=1&portrait=0&title=0&byline=0"
+            allow="autoplay; encrypted-media;"
+            allowfullscreen="allowfullscreen"
+          ></iframe>
+        {%- endif -%}
+      {%- endif -%}
+    </template>
+    {%- if show_play_button -%}
+      <button
+        type="button"
+        id="DeferredPoster-{{ ngp_video_id }}"
+        class="ngp-media__poster ngp-absolute ngp-top-0 ngp-left-0 ngp-w-full ngp-h-full"
+        aria-label="{{ 'accessibility.play_video' | t | escape }}"
+      >
+        <span class="ngp-media__play-button ngp-absolute ngp-flex ngp-items-center ngp-justify-center ngp-rounded-full ngp-pointer-events-auto ngp-z-10 ngp-motion-reduce">
+          {%- render 'ngp-icon-play', size: '2xl' -%}
+        </span>
+      </button>
+    {%- endif -%}
+  </ngp-video-element>
+{%- else -%}
+  <div class="ngp-media-wrapper">
+    {{- ngp_poster -}}
+  </div>
+{%- endif -%}

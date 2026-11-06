@@ -1,0 +1,56 @@
+{%- liquid
+  assign ngp_rating = product.metafields.reviews.rating.value.rating
+  assign ngp_rating_count = product.metafields.reviews.rating_count.value
+  assign ngp_concern = product.metafields.custom.concern.value
+  assign ngp_badge = product.metafields.custom.product_badge.value
+  assign ngp_card_image = product.metafields.custom.homepage_card_image.value | default: product.featured_image
+  assign ngp_short_title = product.metafields.custom.short_title.value | default: product.title
+  assign ngp_selected_variant = product.selected_or_first_available_variant
+  assign ngp_is_best_seller = false
+  for ngp_product_tag in product.tags
+    assign ngp_normalized_tag = ngp_product_tag | strip | downcase
+    if ngp_normalized_tag == 'best-seller'
+      assign ngp_is_best_seller = true
+      break
+    endif
+  endfor
+  assign ngp_is_on_sale = false
+  if product.compare_at_price > product.price
+    assign ngp_is_on_sale = true
+  endif
+-%}
+{%- if product != blank -%}
+  <article class="ngp-ah-product" data-product-card>
+    {%- if ngp_is_best_seller or ngp_is_on_sale or ngp_badge != blank or ngp_concern != blank -%}
+      <div class="ngp-ah-product__badges" aria-label="{{ 'altaeron_home.accessibility.product_badges' | t | escape }}">
+        {%- if ngp_is_best_seller -%}<span class="ngp-ah-product__badge ngp-ah-product__badge--best-seller">{{ 'altaeron_home.product.best_seller' | t }}</span>{%- endif -%}
+        {%- if ngp_is_on_sale -%}<span class="ngp-ah-product__badge ngp-ah-product__badge--sale">{{ 'products.product.on_sale' | t }}</span>{%- endif -%}
+        {%- if ngp_badge != blank -%}<span class="ngp-ah-product__badge">{{ ngp_badge }}</span>{%- elsif ngp_concern != blank -%}<span class="ngp-ah-product__badge">{{ ngp_concern }}</span>{%- endif -%}
+      </div>
+    {%- endif -%}
+    <a class="ngp-ah-product__image ngp-ah-media" href="{{ product.url }}" tabindex="-1" data-track="popular_product_click">
+      {%- if ngp_card_image -%}
+        {{ ngp_card_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '220, 360, 520, 700', sizes: '(min-width: 990px) 25vw, 44vw', alt: ngp_short_title }}
+      {%- endif -%}
+    </a>
+    <div class="ngp-ah-product__body">
+      <h3 class="ngp-ah-product__title"><a href="{{ product.url }}" data-track="popular_product_click">{{ ngp_short_title }}</a></h3>
+      {%- if ngp_rating != blank and ngp_rating_count > 0 -%}
+        <div class="ngp-ah-product__rating" aria-label="{{ 'altaeron_home.product.rating' | t: ngp_rating: ngp_rating, count: ngp_rating_count | escape }}">
+          <span class="ngp-ah-stars" aria-hidden="true">★★★★★</span><span>{{ ngp_rating | round: 1 }} ({{ ngp_rating_count }})</span>
+        </div>
+      {%- endif -%}
+      <div class="ngp-ah-product__footer">
+        <span class="ngp-ah-product__price">{{ product.price | money }}{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}</span>
+        {%- if product.available -%}
+          {%- form 'product', product, is: 'ngp-product-form', class: 'ngp-ah-quick-add', data-quick-add: '' -%}
+            <input type="hidden" name="id" value="{{ ngp_selected_variant.id }}">
+            <button class="ngp-ah-cart-button" type="submit" name="add" aria-label="{{ 'altaeron_home.product.add_to_cart' | t: product: product.title | escape }}" data-track="quick_add">{% render 'ngp-icon-cart', name: settings.cart_icon %}{% render 'ngp-loading-spinner', size: 'small' %}</button>
+          {%- endform -%}
+        {%- else -%}
+          <a class="ngp-ah-cart-button" href="{{ product.url }}" aria-label="{{ 'altaeron_home.product.view' | t: product: product.title | escape }}">{% render 'ngp-icon-cart', name: settings.cart_icon %}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </article>
+{%- endif -%}

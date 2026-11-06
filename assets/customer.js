@@ -1,14 +1,19 @@
+const selectors = {
+  customerAddresses: '[data-customer-addresses]',
+  addressCountrySelect: '[data-address-country-select]',
+  addressContainer: '[data-address]',
+  toggleAddressButton: 'button[aria-expanded]',
+  cancelAddressButton: 'button[type="reset"]',
+  deleteAddressButton: 'button[data-confirm-message]',
+};
+
+const attributes = {
+  expanded: 'aria-expanded',
+  confirmMessage: 'data-confirm-message',
+};
+
 class CustomerAddresses {
   constructor() {
-    this.selectors = {
-      customerAddresses: '[data-customer-addresses]',
-      addressCountrySelect: '[data-address-country-select]',
-      toggleAddressButton: '[data-toggle-target]',
-      deleteAddressButton: 'button[data-confirm-message]',
-    };
-    this.attributes = {
-      confirmMessage: 'data-confirm-message',
-    };
     this.elements = this._getElements();
     if (Object.keys(this.elements).length === 0) return;
     this._setupCountries();
@@ -16,14 +21,15 @@ class CustomerAddresses {
   }
 
   _getElements() {
-    const container = document.querySelector(this.selectors.customerAddresses);
+    const container = document.querySelector(selectors.customerAddresses);
     return container
       ? {
           container,
-          addressContainer: container.querySelector(this.selectors.addressContainer),
-          toggleButtons: document.querySelectorAll(this.selectors.toggleAddressButton),
-          deleteButtons: container.querySelectorAll(this.selectors.deleteAddressButton),
-          countrySelects: container.querySelectorAll(this.selectors.addressCountrySelect),
+          addressContainer: container.querySelector(selectors.addressContainer),
+          toggleButtons: document.querySelectorAll(selectors.toggleAddressButton),
+          cancelButtons: container.querySelectorAll(selectors.cancelAddressButton),
+          deleteButtons: container.querySelectorAll(selectors.deleteAddressButton),
+          countrySelects: container.querySelectorAll(selectors.addressCountrySelect),
         }
       : {};
   }
@@ -46,21 +52,31 @@ class CustomerAddresses {
 
   _setupEventListeners() {
     this.elements.toggleButtons.forEach((element) => {
-      element.addEventListener('click', (e) => {
-        const {target} = e;
-        const toggleTarget = document.getElementById(`${target.dataset.toggleTarget}`);
-        toggleTarget.classList.toggle('hidden');
-        // toggleTarget.classList.toggle('active');
-      });
+      element.addEventListener('click', this._handleAddEditButtonClick);
+    });
+    this.elements.cancelButtons.forEach((element) => {
+      element.addEventListener('click', this._handleCancelButtonClick);
     });
     this.elements.deleteButtons.forEach((element) => {
       element.addEventListener('click', this._handleDeleteButtonClick);
     });
   }
 
+  _toggleExpanded(target) {
+    target.setAttribute(attributes.expanded, (target.getAttribute(attributes.expanded) === 'false').toString());
+  }
+
+  _handleAddEditButtonClick = ({ currentTarget }) => {
+    this._toggleExpanded(currentTarget);
+  };
+
+  _handleCancelButtonClick = ({ currentTarget }) => {
+    this._toggleExpanded(currentTarget.closest(selectors.addressContainer).querySelector(`[${attributes.expanded}]`));
+  };
+
   _handleDeleteButtonClick = ({ currentTarget }) => {
     // eslint-disable-next-line no-alert
-    if (confirm(currentTarget.getAttribute(this.attributes.confirmMessage))) {
+    if (confirm(currentTarget.getAttribute(attributes.confirmMessage))) {
       Shopify.postLink(currentTarget.dataset.target, {
         parameters: { _method: 'delete' },
       });

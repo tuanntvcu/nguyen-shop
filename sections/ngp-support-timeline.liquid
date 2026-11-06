@@ -1,0 +1,217 @@
+{%- liquid
+  assign ngp_eyebrow = section.settings.eyebrow
+  assign ngp_heading = section.settings.heading
+  assign ngp_subheading = section.settings.subheading
+  assign ngp_reassurance_heading = section.settings.reassurance_heading
+  assign ngp_reassurance_text = section.settings.reassurance_text
+  unless request.locale.iso_code == 'en'
+    assign ngp_eyebrow = 'altaeron_pdp_reels_v3.timeline.eyebrow' | t
+    assign ngp_heading = 'altaeron_pdp_reels_v3.timeline.heading' | t
+    assign ngp_subheading = 'altaeron_pdp_reels_v3.timeline.subheading' | t
+    assign ngp_reassurance_heading = 'altaeron_pdp_reels_v3.timeline.reassurance_heading' | t
+    assign ngp_reassurance_text = 'altaeron_pdp_reels_v3.timeline.reassurance_text' | t
+  endunless
+-%}
+
+<style>
+  #AltaeronTimeline-{{ section.id }} {
+    --ngp-alta-timeline-ink: var(--ngp-altaeron-navy, #102a43);
+    --ngp-alta-timeline-body: var(--ngp-altaeron-body, #344054);
+    --ngp-alta-timeline-accent: var(--ngp-altaeron-primary, #006b5e);
+    --ngp-alta-timeline-line: var(--ngp-altaeron-border, #e4e7ec);
+    background: #fff;
+    color: var(--ngp-alta-timeline-body);
+    padding: 36px 0 80px;
+  }
+  #AltaeronTimeline-{{ section.id }} * { box-sizing: border-box; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__shell { margin-inline: auto; width: min(1360px, calc(100% - 80px)); }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__header { margin-bottom: 24px; max-width: 1120px; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__eyebrow { align-items: center; color: var(--ngp-alta-timeline-accent); display: flex; font-size: 12px; font-weight: 750; gap: 12px; letter-spacing: .24em; line-height: 1.3; margin: 0 0 10px; text-transform: uppercase; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__eyebrow::before { background: currentColor; content: ''; flex: 0 0 40px; height: 3px; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__heading { color: var(--ngp-alta-timeline-ink); font-family: var(--ngp-alta-font-family, var(--font-heading-family)); font-size: clamp(30px, 3vw, 46px); font-weight: 750; letter-spacing: -.035em; line-height: 1.08; margin: 0; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__subheading { color: var(--ngp-alta-timeline-body); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; margin: 10px 0 0; max-width: 1050px; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__stages { counter-reset: alta-stage; display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card { background: #fff; border: 1px solid var(--ngp-alta-timeline-line); border-radius: 16px; min-width: 0; overflow: visible; position: relative; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card:not(:last-child)::after { align-items: center; background: #fff; border: 1px solid #d8e2e4; border-radius: 50%; color: #577286; content: '›'; display: flex; font-family: Arial, sans-serif; font-size: 34px; font-weight: 400; height: 48px; justify-content: center; line-height: 1; position: absolute; right: -34px; top: calc(50% - 24px); width: 48px; z-index: 2; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__copy { min-height: 176px; padding: 20px 22px 22px; text-align: center; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__label { background: #edf2f6; border-radius: 999px; color: #274b64; display: inline-block; font-size: 12px; font-weight: 750; letter-spacing: .16em; line-height: 1.2; margin: 0 0 10px; padding: 6px 18px; text-transform: uppercase; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card h3 { color: var(--ngp-alta-timeline-ink); font-family: var(--ngp-alta-font-family, var(--font-heading-family)); font-size: 28px; font-weight: 750; letter-spacing: -.025em; line-height: 1.1; margin: 0 0 7px; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__body { color: var(--ngp-alta-timeline-body); font-size: 16px; line-height: 1.4; margin: 0 auto; max-width: 330px; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__media { aspect-ratio: 4 / 3; background: #eef2f3; border-radius: 0 0 15px 15px; overflow: hidden; }
+  #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__media :is(img, video, svg) { display: block; height: 100%; object-fit: cover; width: 100%; }
+  #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance { align-items: center; background: linear-gradient(90deg, #edf8f7, #e4f4f2, #edf8f7); border-radius: 13px; color: #0b6270; display: grid; gap: 2px 18px; grid-template-columns: auto auto; justify-content: center; margin-top: 20px; min-height: 78px; padding: 14px 22px; }
+  #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance svg { grid-row: 1 / 3; height: 34px; stroke-width: 1.7; width: 34px; }
+  #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance strong { color: #0b5663; font-size: 18px; line-height: 1.25; }
+  #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance span { color: #226375; font-size: 15px; line-height: 1.35; }
+  @media (min-width: 750px) {
+    #AltaeronTimeline-{{ section.id }} { padding: 40px 0 clamp(64px, 6vw, 88px); }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__shell { width: min(1240px, calc(100% - 48px)); }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__header { margin-bottom: 32px; max-width: 850px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__subheading { max-width: 780px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__stages { gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card { box-shadow: 0 14px 38px rgba(16,42,67,.055); }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card:not(:last-child)::after { height: 42px; right: -34px; top: calc(50% - 21px); width: 42px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__copy { align-items: center; display: flex; flex-direction: column; justify-content: center; }
+  }
+  @media (min-width: 1100px) {
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__shell { width: min(1240px, calc(100% - 80px)); }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__media { aspect-ratio: 16 / 10; }
+  }
+  @media (max-width: 749px) {
+    #AltaeronTimeline-{{ section.id }} { padding: 12px 0 28px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__shell { width: calc(100% - 30px); }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__header { margin-bottom: 18px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__eyebrow { font-size: 10px; gap: 9px; letter-spacing: .2em; margin-bottom: 8px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__eyebrow::before { flex-basis: 28px; height: 2px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__heading { font-size: 29px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__subheading { font-size: 15px; line-height: 1.45; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__stages { gap: 12px; grid-template-columns: 1fr; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card { border-radius: 13px; display: grid; grid-template-columns: minmax(132px, 50.4%) 1fr; overflow: hidden; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card:not(:last-child)::after { display: none; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__copy { align-self: center; min-height: 0; padding: 16px 12px; text-align: left; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__label { font-size: 9px; letter-spacing: .11em; margin-bottom: 7px; padding: 5px 9px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card h3 { font-size: 22px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__body { font-size: 13px; margin: 0; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__media { aspect-ratio: auto; border-radius: 0; grid-column: 1; grid-row: 1; min-height: 174px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline-card__copy { grid-column: 2; grid-row: 1; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance { gap: 3px 11px; grid-template-columns: auto 1fr; margin-top: 14px; min-height: 72px; padding: 13px 15px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance svg { height: 28px; width: 28px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance strong { font-size: 14px; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance span { font-size: 12px; }
+  }
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    /* Reel V3: lightweight editorial treatment for the OVER TIME block only. */
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance--editorial { align-items: start; background: var(--ngp-altaeron-off-white, #fbfcfb); border: 0; border-radius: 13px; box-shadow: none; display: grid; gap: 0; grid-template-columns: minmax(0, 1fr); justify-content: stretch; margin: 16px auto 0; min-height: 0; padding: 23px 22px; text-align: left; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance--editorial > strong { color: var(--ngp-alta-timeline-accent); font-size: 11px; font-weight: 700; grid-column: 1; letter-spacing: .06em; line-height: 1.2; margin: 0; text-transform: uppercase; }
+    #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance--editorial > svg { display: none; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__reassurance-copy { display: contents; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__reassurance-copy p { margin-bottom: 0; max-width: none; text-align: left; width: 100%; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__reassurance-subtitle { color: var(--ngp-alta-timeline-ink); font-size: 16px; font-weight: 450; grid-column: 1; line-height: 1.4; margin-top: 5px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__reassurance-body { color: var(--ngp-alta-timeline-body); font-size: 16px; font-weight: 400; grid-column: 1; grid-row: 3; line-height: 1.58; margin-top: 21px; }
+    #AltaeronTimeline-{{ section.id }} .ngp-alta-timeline__reassurance-closing { color: var(--ngp-alta-timeline-ink); font-size: 15px; font-weight: 600; grid-column: 1; grid-row: 4; line-height: 1.35; margin-top: 17px; }
+    @media (min-width: 900px) {
+      #AltaeronTimeline-{{ section.id }} .alta-timeline__reassurance--editorial { max-width: 904px; width: 100%; }
+    }
+    {% render 'ngp-reels-v3-responsive-section', section_kind: 'timeline', section_id: section.id %}
+  {%- endif -%}
+</style>
+
+<section id="AltaeronTimeline-{{ section.id }}" class="ngp-alta-support-timeline" aria-labelledby="AltaeronTimelineHeading-{{ section.id }}">
+  <div class="ngp-alta-timeline__shell">
+    <header class="ngp-alta-timeline__header">
+      {%- if ngp_eyebrow != blank -%}<p class="ngp-alta-timeline__eyebrow">{{ ngp_eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="AltaeronTimelineHeading-{{ section.id }}" class="ngp-alta-timeline__heading">{{ ngp_heading | escape }}</h2>
+      {%- if ngp_subheading != blank -%}<p class="ngp-alta-timeline__subheading">{{ ngp_subheading | escape | newline_to_br }}</p>{%- endif -%}
+    </header>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ngp-alta-timeline__stages">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign ngp_stage_label = block.settings.label
+            assign ngp_stage_title = block.settings.title
+            assign ngp_stage_body = block.settings.body
+            unless request.locale.iso_code == 'en'
+              capture ngp_label_key
+                echo 'altaeron_pdp_reels_v3.timeline.stage_' | append: forloop.index | append: '_label'
+              endcapture
+              capture ngp_title_key
+                echo 'altaeron_pdp_reels_v3.timeline.stage_' | append: forloop.index | append: '_title'
+              endcapture
+              capture ngp_body_key
+                echo 'altaeron_pdp_reels_v3.timeline.stage_' | append: forloop.index | append: '_body'
+              endcapture
+              assign ngp_stage_label = ngp_label_key | t
+              assign ngp_stage_title = ngp_title_key | t
+              assign ngp_stage_body = ngp_body_key | t
+            endunless
+            assign ngp_stage_alt = block.settings.image.alt | default: ngp_stage_title
+          -%}
+          <article class="ngp-alta-timeline-card" {{ block.shopify_attributes }}>
+            <div class="ngp-alta-timeline-card__copy">
+              <p class="ngp-alta-timeline-card__label">{{ ngp_stage_label | escape }}</p>
+              <h3>{{ ngp_stage_title | escape }}</h3>
+              <p class="ngp-alta-timeline-card__body">{{ ngp_stage_body | escape | newline_to_br }}</p>
+            </div>
+            <div class="ngp-alta-timeline-card__media">
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', loading: 'lazy', image_size: '1000x' }}
+              {%- elsif block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '260, 400, 560, 760, 1000', sizes: '(min-width: 750px) 32vw, 42vw', alt: ngp_stage_alt }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if ngp_reassurance_heading != blank or ngp_reassurance_text != blank -%}
+      <div class="ngp-alta-timeline__reassurance{% if template.suffix == 'altaeron-reels-v3' %} alta-timeline__reassurance--editorial{% endif %}">
+        <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor"><rect x="4.5" y="7.5" width="23" height="20" rx="2"/><path d="M10 4v7M22 4v7M4.5 13h23M9 18h3M15 18h3M21 18h3M9 23h3M15 23h3M21 23h3"/></svg>
+        {%- if ngp_reassurance_heading != blank -%}<strong>{{ ngp_reassurance_heading | escape }}</strong>{%- endif -%}
+        {%- if ngp_reassurance_text != blank -%}
+          {%- if template.suffix == 'altaeron-reels-v3' -%}
+            {%- assign ngp_reassurance_parts = ngp_reassurance_text | newline_to_br | split: '<br />' -%}
+            {%- assign ngp_reassurance_part_index = 0 -%}
+            <div class="ngp-alta-timeline__reassurance-copy">
+              {%- for ngp_reassurance_part in ngp_reassurance_parts -%}
+                {%- assign ngp_reassurance_part = ngp_reassurance_part | strip -%}
+                {%- if ngp_reassurance_part != blank -%}
+                  {%- case ngp_reassurance_part_index -%}
+                    {%- when 0 -%}<p class="ngp-alta-timeline__reassurance-subtitle">{{ ngp_reassurance_part | escape }}</p>
+                    {%- when 1 -%}<p class="ngp-alta-timeline__reassurance-body">{{ ngp_reassurance_part | escape }}</p>
+                    {%- else -%}<p class="ngp-alta-timeline__reassurance-closing">{{ ngp_reassurance_part | escape }}</p>
+                  {%- endcase -%}
+                  {%- assign ngp_reassurance_part_index = ngp_reassurance_part_index | plus: 1 -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <span>{{ ngp_reassurance_text | escape | newline_to_br }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Altaeron: Timeline",
+  "tag": "section",
+  "class": "section-altaeron-custom",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WHAT TO EXPECT OVER TIME" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What consistent support can look like over time." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Altaeron is designed to move from comfortable relief toward regular alignment support as part of your routine." },
+    { "type": "text", "id": "reassurance_heading", "label": "Reassurance heading", "default": "Consistency matters more than force." },
+    { "type": "text", "id": "reassurance_text", "label": "Reassurance secondary text", "default": "Start gently. Adjust gradually. Use regularly." }
+  ],
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Timeline stage",
+      "limit": 3,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Stage label", "default": "STAGE" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Stage title" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Short stage explanation." },
+        { "type": "video", "id": "video", "label": "Video", "info": "Video is shown instead of the image when both are selected." },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [{
+    "name": "Altaeron: Timeline",
+    "blocks": [
+      { "type": "stage", "settings": { "label": "FIRST SESSION", "title": "Feel the Outward Pull", "body": "Feel the big toe being guided away from the second toe." } },
+      { "type": "stage", "settings": { "label": "WEEKS 1–2", "title": "Realign", "body": "Support a straighter big-toe position with regular sessions." } },
+      { "type": "stage", "settings": { "label": "CONTINUED USE", "title": "Reinforce", "body": "Encourage more balanced positioning over time." } }
+    ]
+  }]
+}
+{% endschema %}

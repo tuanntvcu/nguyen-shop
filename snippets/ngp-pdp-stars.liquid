@@ -1,0 +1,14 @@
+{%- liquid
+  assign ngp_normalized_rating = rating | default: 0 | plus: 0
+  if ngp_normalized_rating < 0
+    assign ngp_normalized_rating = 0
+  elsif ngp_normalized_rating > 5
+    assign ngp_normalized_rating = 5
+  endif
+  assign ngp_fill_percentage = ngp_normalized_rating | times: 20
+  assign ngp_rating_label = 'altaeron_pdp.review_summary.rating' | t: rating: ngp_normalized_rating
+-%}
+<span class="ngp-apdp-stars ngp-apdp-stars--meter" role="img" aria-label="{{ ngp_rating_label | escape }}">
+  <span class="ngp-apdp-stars__base" aria-hidden="true">★★★★★</span>
+  <span class="ngp-apdp-stars__fill" aria-hidden="true" style="width: {{ ngp_fill_percentage }}%">★★★★★</span>
+</span>

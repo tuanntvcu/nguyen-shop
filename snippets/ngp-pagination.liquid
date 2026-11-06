@@ -1,0 +1,77 @@
+{%- if paginate.parts.size > 0 -%}
+  <div class="ngp-pagination-wrapper">
+    <nav
+      class="ngp-pagination{% unless type == 'number' %} ngp-text-center{% endunless %}"
+      role="navigation"
+      aria-label="{{ 'general.pagination.label' | t }}"
+    >
+      {%- if type == 'infinite' or type == 'load_more' -%}
+        {%- if paginate.next -%}
+          <button
+            class="ngp-btn ngp-btn--primary"
+            action="{{ shop.url }}{{ paginate.next.url }}"
+            type="{{ type }}"
+            is="ngp-load-more-button"
+          >
+            <span>{{ 'general.pagination.show_more' | t }}</span>
+            {%- render 'ngp-loading-spinner' -%}
+          </button>
+        {%- endif -%}
+      {%- else -%}
+        <ul class="ngp-pagination__list ngp-list-unstyled ngp-flex ngp-items-center ngp-flex-wrap ngp-justify-center" role="list">
+          {%- if paginate.previous -%}
+            <li>
+              <a
+                href="{{ paginate.previous.url }}{{ anchor }}"
+                class="ngp-pagination__item ngp-pagination__item--previous ngp-pagination__item-arrow ngp-motion-reduce"
+              >
+                {% render 'ngp-icon-caret', size: 'extra-small' %}
+                <span>{{ 'general.pagination.previous' | t }}</span>
+              </a>
+            </li>
+          {%- endif -%}
+
+          {%- for ngp_part in paginate.parts -%}
+            <li>
+              {%- if ngp_part.is_link -%}
+                <a
+                  href="{{ ngp_part.url }}{{ anchor }}"
+                  class="ngp-pagination__item"
+                  aria-label="{{ 'general.pagination.page' | t: number: ngp_part.title }}"
+                >
+                  {{- ngp_part.title -}}
+                </a>
+              {%- else -%}
+                {%- if ngp_part.title == paginate.current_page -%}
+                  <a
+                    role="link"
+                    aria-disabled="true"
+                    class="ngp-pagination__item ngp-pagination__item--current ngp-background-2"
+                    aria-current="page"
+                    aria-label="{{ 'general.pagination.page' | t: number: ngp_part.title }}"
+                  >
+                    {{- ngp_part.title -}}
+                  </a>
+                {%- else -%}
+                  <span class="ngp-pagination__item">{{ ngp_part.title }}</span>
+                {%- endif -%}
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+
+          {%- if paginate.next -%}
+            <li>
+              <a
+                href="{{ paginate.next.url }}{{ anchor }}"
+                class="ngp-pagination__item ngp-pagination__item--next ngp-pagination__item-arrow ngp-motion-reduce"
+              >
+                <span>{{ 'general.pagination.next' | t }}</span>
+                {% render 'ngp-icon-caret', size: 'extra-small' %}
+              </a>
+            </li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+    </nav>
+  </div>
+{%- endif -%}

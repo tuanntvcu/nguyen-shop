@@ -1,0 +1,61 @@
+{%- if article and article != empty -%}
+  <div class="ngp-article-card">
+    {% if article.image != blank %}
+      {% liquid
+        assign ngp_alt = article.image.alt | default: article.title | escape
+        assign ngp_aspect_ratio = settings.blog_cards_image_ratio
+        if ngp_aspect_ratio == 'adapt'
+          assign ngp_aspect_ratio = article.image.aspect_ratio
+        endif
+      %}
+      {%- capture ngp_sizes -%}
+      (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw
+      {%- endcapture -%}
+      <div class="ngp-article-card__media ngp-blocks-radius">
+        <a
+          href="{{ article.url }}"
+          class="ngp-block ngp-media-wrapper ngp-hover-wrapper"
+        >
+          <ngp-motion-element class="ngp-block" data-motion="zoom-out-sm" style="--aspect-ratio: {{ ngp_aspect_ratio }};">
+            {{
+              article.image
+              | image_url: width: 1100
+              | image_tag:
+                width: article.image.width,
+                height: article.image.height,
+                loading: 'lazy',
+                fetchpriority: 'auto',
+                class: 'motion-reduce hover-scale-up',
+                widths: '165, 360, 535, 750, 940, 1100',
+                ngp_sizes: ngp_sizes,
+                ngp_alt: ngp_alt,
+                is: 'ngp-image-lazy'
+            }}
+          </ngp-motion-element>
+        </a>
+      </div>
+    {% endif %}
+    <div class="ngp-article-card__content">
+      {% if show_date %}
+        <div class="ngp-article-card__date ngp-text-sm">{{ article.published_at | time_tag: format: 'date' }}</div>
+      {% endif %}
+      <h3 class="ngp-article-card__title{% if title_size %} {{ title_size }}{% endif %}">
+        <a class="ngp-reversed-link" href="{{ article.url }}">{{ article.title }}</a>
+      </h3>
+      {%- if show_excerpt and article.excerpt.size > 0 or article.content.size > 0 -%}
+        <p class="ngp-article-card__excerpt ngp-text-limit-2-lines">
+          {%- if article.excerpt.size > 0 -%}
+            {{ article.excerpt | strip_html }}
+          {%- else -%}
+            {{ article.content | strip_html }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+      {% if show_button %}
+        <a href="{{ article.url }}" class="ngp-btn ngp-btn--underline ngp-article-card__button">
+          {{- 'blogs.article.article_button_label' | t -}}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+{%- endif -%}

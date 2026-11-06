@@ -1,0 +1,16 @@
+{% doc %}
+  Renders the mobile storefront menu trigger.
+  @param {string} ngp_menu_id - The storefront menu drawer ID.
+{% enddoc %}
+<button
+  type="button"
+  class="header__icon header__icon--menu link focus-inset ngp-mobile-menu-trigger"
+  data-ngp-mobile-menu-trigger
+  aria-controls="NgpMobileMenu-{{ ngp_menu_id }}"
+  aria-expanded="false"
+  aria-label="{{ 'sections.header.menu' | t }}"
+>
+  <span class="svg-wrapper">
+    {{- 'icon-hamburger.svg' | inline_asset_content -}}
+  </span>
+</button>

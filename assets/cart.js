@@ -1,171 +1,74 @@
-class CartDrawer extends DrawerComponent {
+class CartRemoveButton extends HTMLElement {
   constructor() {
     super();
-    window.ScaloraKitSections = ScaloraTheme.utils.getSectionId(this);
 
-    this.onCartRefreshListener = this.onCartRefresh.bind(this);
-    this.getSectionToRenderListener = this.getSectionToRender.bind(this);
-  }
-
-  get requiresBodyAppended() {
-    return false;
-  }
-
-  get sectionId() {
-    return this.getAttribute('data-section-id');
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    document.addEventListener('cart:grouped-sections', this.getSectionToRenderListener);
-    document.addEventListener('cart:refresh', this.onCartRefreshListener);
-    this.addEventListener('click', this.onDrawerAction);
-    this.addEventListener('change', this.onCareVariantChange);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    document.removeEventListener('cart:grouped-sections', this.getSectionToRenderListener);
-    document.removeEventListener('cart:refresh', this.onCartRefreshListener);
-    this.removeEventListener('click', this.onDrawerAction);
-    this.removeEventListener('change', this.onCareVariantChange);
-  }
-
-  onDrawerAction = (event) => {
-    if (event.target.closest('[data-cart-drawer-close]')) this.hide();
-  };
-
-  onCareVariantChange = (event) => {
-    const select = event.target.closest('[data-complete-care-variant]');
-    if (!select) return;
-
-    const care = select.closest('.cart-drawer__care');
-    const option = select.selectedOptions[0];
-    const price = care?.querySelector('[data-care-price]');
-    const compare = care?.querySelector('[data-care-compare]');
-    const image = care?.querySelector('[data-care-image]');
-
-    if (price) price.textContent = option.dataset.price;
-    if (compare) {
-      compare.textContent = option.dataset.compare;
-      compare.toggleAttribute('hidden', !option.dataset.compare);
-    }
-    if (image && option.dataset.image) {
-      image.removeAttribute('srcset');
-      image.src = option.dataset.image;
-    }
-  };
-
-  getSectionToRender(event) {
-    event.detail.sections.push(ScaloraTheme.utils.getSectionId(this));
-  }
-
-  show(focusElement = null, animate = true) {
-    super.show(focusElement, animate);
-
-    if (this.open) {
-      ScaloraTheme.a11y.trapFocus(this, this.focusElement);
-    }
-  }
-
-  async onCartRefresh(event) {
-    const cartId = `CartDrawer-${this.sectionId}`;
-
-    const cartElement = document.getElementById(cartId);
-    if (!cartElement) return;
-
-    try {
-      const response = await fetch(`${ScaloraTheme.routes.root_url}?section_id=${this.sectionId}`);
-      const responseText = await response.text();
-
-      const parser = new DOMParser();
-      const parsedHTML = parser.parseFromString(responseText, 'text/html');
-
-      const newCartContent = parsedHTML.getElementById(cartId).innerHTML;
-      cartElement.innerHTML = newCartContent;
-
-      if (event.detail.open === true) {
-        this.show();
-      }
-    } catch (error) {
-      console.error('Error refreshing cart:', error);
-    }
+    this.addEventListener('click', (event) => {
+      event.preventDefault();
+      const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
+      cartItems.updateQuantity(this.dataset.index, 0, event);
+    });
   }
 }
-customElements.define('cart-drawer', CartDrawer);
 
-class CartItems extends HTMLElement {
+customElements.define('cart-remove-button', CartRemoveButton);
+
+class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement) {
   constructor() {
     super();
+    this.lineItemStatusElement =
+      document.getElementById('shopping-cart-line-item-status') || document.getElementById('CartDrawer-LineItemStatus');
 
-    this.addEventListener('change', ScaloraTheme.utils.debounce(this.onChange.bind(this), 300));
-    this.cartUpdateUnsubscriber = ScaloraTheme.pubsub.subscribe(
-      ScaloraTheme.pubsub.PUB_SUB_EVENTS.cartUpdate,
-      this.onCartUpdate.bind(this)
-    );
+    this.debouncedOnChange = debounce((event) => {
+      this.onChange(event);
+    }, ON_CHANGE_DEBOUNCE_TIMER);
 
-    this.cartItemProducts = this.querySelectorAll('.cart-item__product');
-    this.cartItemQuantitys = this.querySelectorAll('.cart-item__quantity');
+    this.addEventListener('change', this.debouncedOnChange);
+    this.addEventListener('submit', (event) => this.waitForQuantitySave(event));
+    this.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' || !event.target.matches('.quantity__input')) return;
 
-    const loadTemplateContent = (elements, parentSelector) => {
-      elements.forEach((element) => {
-        const template = element.querySelector('template');
-        const templateContent = template && document.importNode(template.content, true);
-        const parent = element.querySelector(parentSelector);
-
-        if (parent && template && !parent.querySelector('.template-content')) {
-          const contentWrapper = document.createElement('div');
-          contentWrapper.classList.add('template-content', 'w-full');
-          contentWrapper.appendChild(templateContent);
-          parent.appendChild(contentWrapper);
-        }
-      });
-    };
-
-    const removeTemplateContent = (elements, parentSelector) => {
-      elements.forEach((element) => {
-        const parent = element.querySelector(parentSelector);
-        const templateContent = parent?.querySelector('.template-content');
-
-        if (templateContent) {
-          parent.removeChild(templateContent);
-        }
-      });
-    };
-
-    const handleTabletMatch = () => {
-      loadTemplateContent(this.cartItemProducts, '.cart-item__product--info');
-      removeTemplateContent(this.cartItemQuantitys, '.cart-item__quantity-wrapper');
-    };
-
-    const handleTabletUnmatch = () => {
-      removeTemplateContent(this.cartItemProducts, '.cart-item__product--info');
-      loadTemplateContent(this.cartItemQuantitys, '.cart-item__quantity-wrapper');
-    };
-
-    const mqlTablet = window.matchMedia(ScaloraTheme.config.mediaQueryTablet);
-    ScaloraTheme.config.mqlTablet = mqlTablet.matches;
-
-    if (ScaloraTheme.config.mqlTablet) {
-      handleTabletMatch();
-    } else {
-      handleTabletUnmatch();
-    }
-
-    mqlTablet.onchange = (event) => {
-      if (event.matches) {
-        handleTabletMatch();
-      } else {
-        ScaloraTheme.config.mqlTablet = false;
-        handleTabletUnmatch();
-      }
-    };
-
-    window.ScaloraKitSections = ScaloraTheme.utils.getSectionId(this);
+      event.preventDefault();
+      const input = event.target;
+      const onChange = () => (this.enterPressedInput = input);
+      input.addEventListener('change', onChange, { once: true });
+      input.blur();
+      input.removeEventListener('change', onChange);
+      if (this.enterPressedInput !== input) input.focus();
+    });
   }
 
   cartUpdateUnsubscriber = undefined;
+
+  static pendingCartDataPromise = null;
+
+  connectedCallback() {
+    // The factory base class auto-dispatches cart:view from the
+    // `view-event-payload` attribute (Liquid filter output). The drawer
+    // sets `view-event-trigger="manual"` to skip auto-dispatch.
+    super.connectedCallback();
+
+    this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
+      if (event.source === 'cart-items') return;
+      return this.onCartUpdate();
+    });
+  }
+
+  // Fetches the full cart shape (used to resolve the cart:lines-update event
+  // promise after /cart/add.js, which only returns the added line — not the
+  // post-mutation cart aggregates). De-duplicated across concurrent callers.
+  static fetchCartData() {
+    if (!CartItems.pendingCartDataPromise) {
+      const pendingCartDataPromise = fetch(`${routes.cart_url}.json`)
+        .then((response) => response.json())
+        .catch(() => null)
+        .finally(() => {
+          if (CartItems.pendingCartDataPromise === pendingCartDataPromise) CartItems.pendingCartDataPromise = null;
+        });
+
+      CartItems.pendingCartDataPromise = pendingCartDataPromise;
+    }
+    return CartItems.pendingCartDataPromise;
+  }
 
   disconnectedCallback() {
     if (this.cartUpdateUnsubscriber) {
@@ -173,563 +76,424 @@ class CartItems extends HTMLElement {
     }
   }
 
+  // Check out waits for a pending quantity save. A quantity edit saves through Ajax after a short wait. A form post
+  // at the same time makes iOS Safari cancel the save, and the store answers the post with no page and no message.
+  // This flushes the wait, cancels the post, and awaits the save. A saved quantity resumes the post. A rejected one
+  // shows its error on the line (updateQuantity), and the buyer stays on the cart. The cart page and the drawer share
+  // one wait, also after a re-render replaces the drawer, so a second tap does not post the form twice.
+  static pendingQuantitySaves = new Set();
+  static waitingForQuantitySave = false;
+  // Counts the saves that the store did not accept, also a save that ends while the wait awaits another one.
+  static failedQuantitySaves = 0;
+
+  async waitForQuantitySave(event) {
+    const { submitter } = event;
+    if (!submitter || event.defaultPrevented) return;
+    this.debouncedOnChange.flush();
+    if (!CartItems.pendingQuantitySaves.size) return;
+    event.preventDefault();
+    if (CartItems.waitingForQuantitySave) return;
+    CartItems.waitingForQuantitySave = true;
+    submitter.setAttribute('aria-disabled', 'true');
+
+    const failedSaves = CartItems.failedQuantitySaves;
+    try {
+      while (CartItems.pendingQuantitySaves.size) {
+        await Promise.all(CartItems.pendingQuantitySaves);
+        this.debouncedOnChange.flush();
+      }
+    } finally {
+      CartItems.waitingForQuantitySave = false;
+      submitter.removeAttribute('aria-disabled');
+    }
+    if (CartItems.failedQuantitySaves !== failedSaves) return;
+
+    // The save re-rendered the section, so the submitter can be a detached element.
+    const button = submitter.isConnected ? submitter : document.getElementById(submitter.id);
+    button?.click();
+  }
+
+  resetQuantityInput(id) {
+    const input = this.querySelector(`#Quantity-${id}`);
+    input.value = input.getAttribute('value');
+    this.isEnterPressed = false;
+  }
+
+  setValidity(event, index, message) {
+    event.target.setCustomValidity(message);
+    event.target.reportValidity();
+    this.resetQuantityInput(index);
+    event.target.select();
+  }
+
+  validateQuantity(event) {
+    const name =
+      this.enterPressedInput === event.target ? event.target.name : document.activeElement.getAttribute('name');
+    this.enterPressedInput = null;
+    const inputValue = parseInt(event.target.value);
+    const index = event.target.dataset.index;
+    let message = '';
+
+    if (inputValue < event.target.dataset.min) {
+      message = window.quickOrderListStrings.min_error.replace('[min]', event.target.dataset.min);
+    } else if (inputValue > parseInt(event.target.max)) {
+      message = window.quickOrderListStrings.max_error.replace('[max]', event.target.max);
+    } else if (inputValue % parseInt(event.target.step) !== 0) {
+      message = window.quickOrderListStrings.step_error.replace('[step]', event.target.step);
+    }
+
+    if (message) {
+      this.setValidity(event, index, message);
+    } else {
+      event.target.setCustomValidity('');
+      event.target.reportValidity();
+      this.updateQuantity(
+        index,
+        inputValue,
+        event,
+        name,
+        event.target.dataset.quantityVariantId
+      );
+    }
+  }
+
   onChange(event) {
     this.validateQuantity(event);
   }
 
-  setValidity(target, message) {
-    target.setCustomValidity(message);
-    target.reportValidity();
-    target.value = target.defaultValue;
-    target.select();
-  }
-
-  validateQuantity(event) {
-    const target = event.target;
-    const inputValue = parseInt(target.value);
-    const index = target.getAttribute('data-index');
-    let message = '';
-
-    if (inputValue < parseInt(target.getAttribute('data-min'))) {
-      message = ScaloraTheme.quickOrderListStrings.min_error.replace('[min]', target.getAttribute('data-min'));
-    } else if (inputValue > parseInt(target.max)) {
-      message = ScaloraTheme.quickOrderListStrings.max_error.replace('[max]', target.max);
-    } else if (inputValue % parseInt(target.step) !== 0) {
-      message = ScaloraTheme.quickOrderListStrings.step_error.replace('[step]', target.step);
-    }
-
-    if (message) {
-      this.setValidity(target, message);
-    } else {
-      target.setCustomValidity('');
-      target.reportValidity();
-      this.updateQuantity(index, inputValue, document.activeElement.getAttribute('name'), target);
-    }
-  }
-
-  onCartUpdate(event) {
-    if (event.cart.errors) {
-      this.onCartError(event.cart.errors, event.target);
-      return;
-    }
-
-    const sectionId = ScaloraTheme.utils.getSectionId(this);
-    const sectionToRender = new DOMParser().parseFromString(event.cart.sections[sectionId], 'text/html');
-
-    const cartDrawer = document.querySelector(`#CartDrawer-${sectionId}`);
-    const cartDrawerBody = document.querySelector(`#CartDrawerBody-${sectionId}`);
-    const cartDrawerFooter = document.querySelector(`#CartDrawerFooter-${sectionId}`);
-    const cartDrawerEmpty = document.querySelector(`#CartDrawerEmpty-${sectionId}`);
-    const cartDrawerRewards = document.querySelector(`#CartDrawerRewards-${sectionId}`);
-    const cartDrawerScrollTop = cartDrawerBody?.scrollTop || 0;
-    if (cartDrawer) {
-      // const updatedElement = sectionToRender.querySelector(`#CartDrawer-${sectionId}`);
-      // if (updatedElement) {
-      //   cartDrawer.innerHTML = updatedElement.innerHTML;
-      // }
-      const cartDrawerBodyUpdate = sectionToRender.querySelector(`#CartDrawerBody-${sectionId}`);
-      const cartDrawerFooterUpdate = sectionToRender.querySelector(`#CartDrawerFooter-${sectionId}`);
-      const cartDrawerEmptyUpdate = sectionToRender.querySelector(`#CartDrawerEmpty-${sectionId}`);
-
-      if (cartDrawerBodyUpdate) {
-        cartDrawerBody.innerHTML = cartDrawerBodyUpdate.innerHTML;
-      }
-      if (cartDrawerFooterUpdate) {
-        cartDrawerFooter.innerHTML = cartDrawerFooterUpdate.innerHTML;
-      }
-
-      if (cartDrawerEmptyUpdate) {
-        cartDrawerEmpty.innerHTML = cartDrawerEmptyUpdate.innerHTML;
-      }
-
-      if (cartDrawerBody) {
-        requestAnimationFrame(() => {
-          const maximumScroll = Math.max(cartDrawerBody.scrollHeight - cartDrawerBody.clientHeight, 0);
-          cartDrawerBody.scrollTop = Math.min(cartDrawerScrollTop, maximumScroll);
+  onCartUpdate() {
+    if (this.tagName === 'CART-DRAWER-ITEMS') {
+      return fetch(`${routes.cart_url}?section_id=cart-drawer`)
+        .then((response) => response.text())
+        .then((responseText) => {
+          const html = new DOMParser().parseFromString(responseText, 'text/html');
+          const drawerWrapper = document.querySelector('cart-drawer');
+          const sourceDrawer = html.querySelector('cart-drawer');
+          const drawerInner = drawerWrapper?.querySelector('.drawer__inner');
+          const wasEmpty = drawerWrapper?.classList.contains('is-empty');
+          const selectors = ['cart-drawer-items', '.cart-drawer__footer'];
+          for (const selector of selectors) {
+            const targetElement = document.querySelector(selector);
+            const sourceElement = html.querySelector(selector);
+            if (targetElement && sourceElement) {
+              targetElement.replaceWith(sourceElement);
+            }
+          }
+          if (drawerWrapper && sourceDrawer && drawerInner) {
+            const isEmpty = sourceDrawer.classList.contains('is-empty');
+            drawerWrapper.classList.toggle('is-empty', isEmpty);
+            const checkoutButton = document.getElementById('CartDrawer-Checkout');
+            if (checkoutButton) checkoutButton.disabled = isEmpty;
+            const sourceEmpty = sourceDrawer.querySelector('.drawer__inner-empty');
+            const liveEmpty = drawerInner.querySelector('.drawer__inner-empty');
+            if (liveEmpty && !sourceEmpty) liveEmpty.remove();
+            if (!liveEmpty && sourceEmpty) drawerInner.prepend(sourceEmpty);
+            if (drawerWrapper.classList.contains('active') && wasEmpty !== isEmpty) {
+              const container = isEmpty ? drawerInner.querySelector('.drawer__inner-empty') : drawerInner;
+              if (container) trapFocus(container, container.querySelector('.drawer__close') || container);
+            }
+          }
+        })
+        .catch((e) => {
+          console.error(e);
         });
-      }
-
-      if (event.cart.item_count > 0) {
-        cartDrawerBody.classList.remove('hidden');
-        cartDrawerFooter.classList.remove('hidden');
-        cartDrawerEmpty.classList.add('hidden');
-        cartDrawerRewards?.removeAttribute('hidden');
-      } else {
-        cartDrawerBody.classList.add('hidden');
-        cartDrawerFooter.classList.add('hidden');
-        cartDrawerEmpty.classList.remove('hidden');
-        cartDrawerRewards?.setAttribute('hidden', '');
-      }
-    }
-
-    const mainCart = document.querySelector(`#MainCart-${sectionId}`);
-    if (mainCart) {
-      const updatedElement = sectionToRender.querySelector(`#MainCart-${sectionId}`);
-      if (updatedElement) {
-        mainCart.innerHTML = updatedElement.innerHTML;
-      } else {
-        mainCart.closest('.cart').classList.add('is-empty');
-        mainCart.remove();
-      }
-    }
-
-    const lineItem =
-      document.getElementById(`CartItem-${event.line}`) || document.getElementById(`CartDrawer-Item-${event.line}`);
-
-    if (lineItem && lineItem.querySelector(`[name="${event.name}"]`)) {
-      ScaloraTheme.a11y.trapFocus(mainCart || cartDrawer, lineItem.querySelector(`[name="${event.name}"]`));
-    } else if (event.cart.item_count === 0) {
-      cartDrawer
-        ? ScaloraTheme.a11y.trapFocus(cartDrawer, cartDrawer.querySelector('a'))
-        : ScaloraTheme.a11y.trapFocus(document.querySelector('.cart__empty'), document.querySelector('a'));
     } else {
-      cartDrawer
-        ? ScaloraTheme.a11y.trapFocus(cartDrawer, cartDrawer.querySelector('.cart-item__title'))
-        : ScaloraTheme.a11y.trapFocus(mainCart, mainCart.querySelector('.cart-item__title'));
+      return fetch(`${routes.cart_url}?section_id=main-cart-items`)
+        .then((response) => response.text())
+        .then((responseText) => {
+          const html = new DOMParser().parseFromString(responseText, 'text/html');
+          const sourceQty = html.querySelector('cart-items');
+          this.innerHTML = sourceQty.innerHTML;
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     }
-
-    document.dispatchEvent(
-      new CustomEvent('cart:updated', {
-        detail: {
-          cart: event.cart,
-        },
-      })
-    );
   }
 
-  onCartError(errors, target) {
-    if (target) {
-      this.hideLoader(target.getAttribute('data-index'));
-      this.setValidity(target, errors);
-      return;
-    } else {
-      window.location.href = ScaloraTheme.routes.cart_url;
-    }
-
-    alert(errors);
+  getSectionsToRender() {
+    return [
+      {
+        id: 'main-cart-items',
+        section: document.getElementById('main-cart-items').dataset.id,
+        selector: '.js-contents',
+      },
+      {
+        id: 'cart-icon-bubble',
+        section: 'cart-icon-bubble',
+        selector: '.shopify-section',
+      },
+      {
+        id: 'cart-live-region-text',
+        section: 'cart-live-region-text',
+        selector: '.shopify-section',
+      },
+      {
+        id: 'main-cart-footer',
+        section: document.getElementById('main-cart-footer').dataset.id,
+        selector: '.js-contents',
+      },
+    ];
   }
 
-  updateQuantity(line, quantity, name, target) {
-    this.showLoader(line);
+  updateQuantity(line, quantity, event, name, variantId) {
+    const eventTarget = event.currentTarget instanceof CartRemoveButton ? 'clear' : 'change';
+    const cartPerformanceUpdateMarker = CartPerformance.createStartingMarker(`${eventTarget}:user-action`);
 
-    let sectionsToBundle = [];
-    document.documentElement.dispatchEvent(
-      new CustomEvent('cart:grouped-sections', { bubbles: true, detail: { sections: sectionsToBundle } })
-    );
+    this.enableLoading(line);
+
+    const action = quantity === 0 ? 'remove' : 'update';
+    const quantityInput = this.querySelector(`#Quantity-${line}`) || this.querySelector(`#Drawer-quantity-${line}`);
+    const lineVariantId = variantId || quantityInput?.dataset.quantityVariantId;
+    const lineKey = quantityInput?.dataset.quantityLineKey;
+    const linesUpdateDeferred = this.createCartLinesUpdateEvent(action, lineVariantId, quantity, lineKey);
+    let saved = false;
+
+    // Cache sections before the fetch so we read dataset.id while elements still exist in the DOM
+    const sectionsToRender = this.getSectionsToRender();
 
     const body = JSON.stringify({
       line,
       quantity,
-      sections: sectionsToBundle,
+      sections: sectionsToRender.map((section) => section.section),
+      sections_url: window.location.pathname,
     });
 
-    fetch(`${ScaloraTheme.routes.cart_change_url}`, { ...ScaloraTheme.utils.fetchConfig(), ...{ body } })
-      .then((response) => response.json())
-      .then((parsedState) => {
-        ScaloraTheme.pubsub.publish(ScaloraTheme.pubsub.PUB_SUB_EVENTS.cartUpdate, {
-          sources: 'cart-items',
-          cart: parsedState,
-          target,
-          line,
-          name,
-        });
+    const save = fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+      .then((response) => {
+        saved = response.ok;
+        return response.text();
       })
-      .catch((error) => {
-        console.log(error);
+      .then((state) => {
+        const parsedState = JSON.parse(state);
+
+        if (parsedState.errors) {
+          saved = false;
+          this.dispatchCartErrorEvent(parsedState.errors, 'INVALID');
+          linesUpdateDeferred?.reject(new Error(parsedState.errors));
+        } else {
+          this.resolveCartLinesUpdate(linesUpdateDeferred, parsedState);
+        }
+
+        CartPerformance.measure(`${eventTarget}:paint-updated-sections`, () => {
+          const quantityElement =
+            document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
+          const items = document.querySelectorAll('.cart-item');
+
+          if (parsedState.errors) {
+            quantityElement.value = quantityElement.getAttribute('value');
+            this.updateLiveRegions(line, parsedState.errors);
+            this.querySelector(`#CartItem-${line}, #CartDrawer-Item-${line}`)
+              ?.querySelector(`[name="${name}"]`)
+              ?.focus();
+            return;
+          }
+
+          this.classList.toggle('is-empty', parsedState.item_count === 0);
+          const cartDrawerWrapper = document.querySelector('cart-drawer');
+          const cartFooter = document.getElementById('main-cart-footer');
+
+          if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
+          if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
+
+          sectionsToRender.forEach((section) => {
+            const elementToReplace =
+              document.getElementById(section.id).querySelector(section.selector) ||
+              document.getElementById(section.id);
+            elementToReplace.innerHTML = this.getSectionInnerHTML(
+              parsedState.sections[section.section],
+              section.selector
+            );
+          });
+          const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
+          let message = '';
+          if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
+            if (typeof updatedValue === 'undefined') {
+              message = window.cartStrings.error;
+            } else {
+              message = window.cartStrings.quantityError.replace('[quantity]', updatedValue);
+            }
+          }
+          this.updateLiveRegions(line, message);
+
+          const lineItem =
+            document.getElementById(`CartItem-${line}`) || document.getElementById(`CartDrawer-Item-${line}`);
+          if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
+            cartDrawerWrapper
+              ? trapFocus(cartDrawerWrapper, lineItem.querySelector(`[name="${name}"]`))
+              : lineItem.querySelector(`[name="${name}"]`).focus();
+          } else if (parsedState.item_count === 0 && cartDrawerWrapper?.querySelector('.drawer__inner-empty')) {
+            trapFocus(cartDrawerWrapper.querySelector('.drawer__inner-empty'), cartDrawerWrapper.querySelector('a'));
+          } else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
+            trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'));
+          }
+        });
+
+        publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
+      })
+      .catch((e) => {
+        this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
+        const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
+        if (errors) errors.textContent = window.cartStrings.error;
+        this.dispatchCartErrorEvent(window.cartStrings.error, 'SERVICE_UNAVAILABLE');
+        linesUpdateDeferred?.reject(e);
+      })
+      .finally(() => {
+        CartItems.pendingQuantitySaves.delete(save);
+        // Only the store's answer decides the save. An error in the theme code around it does not.
+        if (!saved) CartItems.failedQuantitySaves++;
+        this.disableLoading(line);
+        CartPerformance.measureFromMarker(`${eventTarget}:user-action`, cartPerformanceUpdateMarker);
+      })
+      .catch((e) => {
+        // An error in the theme code above must not stop the Check out wait.
+        console.error(e);
       });
+    CartItems.pendingQuantitySaves.add(save);
   }
 
-  showLoader(line) {
-    const sectionId = ScaloraTheme.utils.getSectionId(this);
-    const loaders = document.querySelectorAll(`#Loader-${sectionId}-${line}`);
-    if (loaders) {
-      loaders.forEach((loader) => {
-        loader.classList.add('btn--loading');
-      });
-    }
+  createCartLinesUpdateEvent(action, variantId, quantity, lineKey) {
+    const { CartLinesUpdateEvent } = window.StandardEvents || {};
+    if (!CartLinesUpdateEvent || !variantId) return null;
+    // No AJAX line key on the row — likely cached HTML rendered before this
+    // attribute landed. Skip dispatch rather than emit an event with id: ''.
+    if (!lineKey) return null;
+
+    const deferred = CartLinesUpdateEvent.createPromise();
+    this.dispatchEvent(
+      new CartLinesUpdateEvent({
+        action,
+        context: 'cart',
+        lines: [{ id: lineKey, quantity }],
+        promise: deferred.promise,
+      })
+    );
+    return deferred;
   }
 
-  hideLoader(line) {
-    const sectionId = ScaloraTheme.utils.getSectionId(this);
-    const loaders = document.querySelectorAll(`#Loader-${sectionId}-${line}`);
-    if (loaders) {
-      loaders.forEach((loader) => {
-        loader.classList.remove('btn--loading');
-      });
-    }
+  resolveCartLinesUpdate(deferred, parsedState) {
+    if (!deferred) return;
+    const { CartLinesUpdateEvent } = window.StandardEvents || {};
+    if (!CartLinesUpdateEvent) return;
+
+    deferred.resolve({ cart: CartLinesUpdateEvent.createCartFromAjaxResponse(parsedState) });
   }
 
-  setValidity(target, message) {
-    target.setCustomValidity(message);
-    target.reportValidity();
-    target.value = target.defaultValue;
-    target.select();
+  dispatchCartErrorEvent(message, code) {
+    const { CartErrorEvent } = window.StandardEvents || {};
+    if (!CartErrorEvent) return;
+    this.dispatchEvent(new CartErrorEvent({ error: message, code }));
+  }
+
+  updateLiveRegions(line, message) {
+    const lineItemError =
+      document.getElementById(`Line-item-error-${line}`) || document.getElementById(`CartDrawer-LineItemError-${line}`);
+    if (lineItemError) lineItemError.querySelector('.cart-item__error-text').textContent = message;
+
+    this.lineItemStatusElement.setAttribute('aria-hidden', true);
+
+    const cartStatus =
+      document.getElementById('cart-live-region-text') || document.getElementById('CartDrawer-LiveRegionText');
+    cartStatus.setAttribute('aria-hidden', false);
+
+    setTimeout(() => {
+      cartStatus.setAttribute('aria-hidden', true);
+    }, 1000);
+  }
+
+  getSectionInnerHTML(html, selector) {
+    return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
+  }
+
+  enableLoading(line) {
+    const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems');
+    mainCartItems.classList.add('cart__items--disabled');
+
+    const cartItemElements = this.querySelectorAll(`#CartItem-${line} .loading__spinner`);
+    const cartDrawerItemElements = this.querySelectorAll(`#CartDrawer-Item-${line} .loading__spinner`);
+
+    [...cartItemElements, ...cartDrawerItemElements].forEach((overlay) => overlay.classList.remove('hidden'));
+
+    document.activeElement.blur();
+    this.lineItemStatusElement.setAttribute('aria-hidden', false);
+  }
+
+  disableLoading(line) {
+    const mainCartItems = document.getElementById('main-cart-items') || document.getElementById('CartDrawer-CartItems');
+    mainCartItems.classList.remove('cart__items--disabled');
+
+    const cartItemElements = this.querySelectorAll(`#CartItem-${line} .loading__spinner`);
+    const cartDrawerItemElements = this.querySelectorAll(`#CartDrawer-Item-${line} .loading__spinner`);
+
+    cartItemElements.forEach((overlay) => overlay.classList.add('hidden'));
+    cartDrawerItemElements.forEach((overlay) => overlay.classList.add('hidden'));
   }
 }
 
 customElements.define('cart-items', CartItems);
 
-class CartRemoveItem extends HTMLAnchorElement {
-  constructor() {
-    super();
+if (!customElements.get('cart-note')) {
+  customElements.define(
+    'cart-note',
+    class CartNote extends HTMLElement {
+      constructor() {
+        super();
 
-    this.addEventListener('click', (event) => {
-      event.preventDefault();
+        this.addEventListener(
+          'input',
+          debounce((event) => {
+            const newNote = event.target.value;
+            const noteDeferred = this.dispatchNoteUpdateEvent(newNote);
 
-      const cartItems = this.closest('cart-items');
-      cartItems.updateQuantity(this.dataset.index, 0);
-    });
-  }
-}
-customElements.define('cart-remove-item', CartRemoveItem, { extends: 'a' });
-class CartNote extends HTMLElement {
-  constructor() {
-    super();
+            const body = JSON.stringify({ note: newNote });
+            fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } })
+              .then((r) => r.json())
+              .then((cart) => {
+                if (!cart || cart.errors) {
+                  throw Object.assign(new Error(cart?.errors), { code: 'INVALID' });
+                }
 
-    this.addEventListener('change', ScaloraTheme.utils.debounce(this.onChange.bind(this), 300));
+                if (noteDeferred) {
+                  const { CartNoteUpdateEvent } = window.StandardEvents || {};
+                  if (CartNoteUpdateEvent) {
+                    noteDeferred.resolve({ cart: CartNoteUpdateEvent.createCartFromAjaxResponse(cart) });
+                  }
+                }
+                CartPerformance.measureFromEvent('note-update:user-action', event);
+              })
+              .catch((e) => {
+                noteDeferred?.reject(e);
+                const { CartErrorEvent } = window.StandardEvents || {};
+                if (CartErrorEvent) {
+                  this.dispatchEvent(
+                    new CartErrorEvent({
+                      error: e.message || 'Note update failed',
+                      code: e.code || 'SERVICE_UNAVAILABLE',
+                    })
+                  );
+                }
+              });
+          }, ON_CHANGE_DEBOUNCE_TIMER)
+        );
+      }
 
-    if (this.button && this.cartNoteDetailsSummary) {
-      this.button.addEventListener('click', () => {
-        this.cartNoteDetailsSummary.close();
-      });
-    }
-  }
+      dispatchNoteUpdateEvent(newNote) {
+        const { CartNoteUpdateEvent } = window.StandardEvents || {};
+        if (!CartNoteUpdateEvent) return null;
 
-  get cartNoteDetailsSummary() {
-    return this.closest('[is="accordion-details"]');
-  }
+        const context = this.closest('dialog') || this.closest('cart-drawer') ? 'dialog' : 'cart';
+        const deferred = CartNoteUpdateEvent.createPromise();
 
-  get button() {
-    return this.querySelector('[type="button"]');
-  }
+        this.dispatchEvent(
+          new CartNoteUpdateEvent({
+            context,
+            note: newNote,
+            promise: deferred.promise,
+          })
+        );
 
-  onChange(event) {
-    const body = JSON.stringify({ note: event.target.value });
-    fetch(`${ScaloraTheme.routes.cart_update_url}`, { ...ScaloraTheme.utils.fetchConfig(), ...{ body } });
-  }
-}
-customElements.define('cart-note', CartNote);
-
-class CalculateShipping extends ModalComponent {
-  constructor() {
-    super();
-    this.countryProvince = this.querySelector('country-province');
-    this.isCountrySetup = false;
-  }
-  static get observedAttributes() {
-    return [...super.observedAttributes, 'data-show'];
-  }
-  show() {
-    super.show();
-    this.setAttribute('data-show', true);
-  }
-
-  hide() {
-    super.hide();
-    this.setAttribute('data-show', false);
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    super.attributeChangedCallback(name, oldValue, newValue);
-    if (name === 'data-show' && newValue === 'true' && !this.isCountrySetup && this.countryProvince) {
-      const template = this.countryProvince.querySelector('template');
-      const templateContent = document.importNode(template.content, true);
-      this.countryProvince.countryElement.appendChild(templateContent);
-      this.countryProvince.init();
-      this.isCountrySetup = true;
-    }
-  }
-}
-customElements.define('calculate-shipping', CalculateShipping);
-class CountryProvinceForm extends HTMLElement {
-  constructor() {
-    super();
-    this.provinceElement = this.querySelector('[name="address[province]"]');
-    this.countryElement = this.querySelector('[name="address[country]"]');
-    this.template = this.dataset.template;
-    this.countryElement.addEventListener('change', this.handleCountryChange.bind(this));
-    if (this.template && this.template === 'cart') {
-      this.init();
-    }
-  }
-
-  init() {
-    if (this.getAttribute('country') !== '') {
-      this.countryElement.selectedIndex = Math.max(
-        0,
-        Array.from(this.countryElement.options).findIndex((option) => option.textContent === this.dataset.country)
-      );
-      this.countryElement.dispatchEvent(new Event('change'));
-    } else {
-      this.handleCountryChange();
-    }
-  }
-
-  handleCountryChange() {
-    const option = this.countryElement.options[this.countryElement.selectedIndex],
-      provinces = JSON.parse(option.dataset.provinces);
-
-    this.provinceElement.closest('.form-field').hidden = provinces.length === 0;
-
-    if (provinces.length === 0) {
-      return;
-    }
-
-    this.provinceElement.innerHTML = '';
-
-    provinces.forEach((data) => {
-      const selected = data[1] === this.dataset.province;
-      this.provinceElement.options.add(new Option(data[1], data[0], selected, selected));
-    });
-  }
-}
-customElements.define('country-province', CountryProvinceForm);
-
-class ShippingCalculator extends HTMLFormElement {
-  constructor() {
-    super();
-
-    this.submitButton = this.querySelector('[type="submit"]');
-    this.resultsElement = this.lastElementChild;
-
-    this.submitButton.addEventListener('click', this.handleFormSubmit.bind(this));
-  }
-
-  handleFormSubmit(event) {
-    event.preventDefault();
-
-    const zip = this.querySelector('[name="address[zip]"]').value,
-      country = this.querySelector('[name="address[country]"]').value,
-      province = this.querySelector('[name="address[province]"]').value;
-
-    this.submitButton.classList.add('btn--loading');
-
-    const body = JSON.stringify({
-      shipping_address: { zip, country, province },
-    });
-    let sectionUrl = `${ScaloraTheme.routes.cart_url}/shipping_rates.json`;
-
-    sectionUrl = sectionUrl.replace('//', '/');
-
-    fetch(sectionUrl, { ...ScaloraTheme.utils.fetchConfig('javascript'), ...{ body } })
-      .then((response) => response.json())
-      .then((parsedState) => {
-        if (parsedState.shipping_rates) {
-          this.formatShippingRates(parsedState.shipping_rates);
-        } else {
-          this.formatError(parsedState);
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      })
-      .finally(() => {
-        this.resultsElement.hidden = false;
-        this.submitButton.classList.remove('btn--loading');
-      });
-  }
-
-  formatError(errors) {
-    const shippingRatesList = Object.keys(errors).map((errorKey) => {
-      return `<li>${errors[errorKey]}</li>`;
-    });
-    this.resultsElement.innerHTML = `
-      <div class="alert alert--error blocks-radius grid gap-2">
-        <p class="font-body-bolder m-0">${ScaloraTheme.shippingCalculatorStrings.error}</p>
-        <ul class="list-disc grid gap-1 text-sm" role="list">${shippingRatesList.join('')}</ul>
-      </div>
-    `;
-  }
-
-  formatShippingRates(shippingRates) {
-    const shippingRatesList = shippingRates.map(({ presentment_name, currency, price }) => {
-      return `<li>${presentment_name}: ${currency} ${price}</li>`;
-    });
-    this.resultsElement.innerHTML = `
-      <div class="alert blocks-radius alert--${
-        shippingRates.length === 0 ? 'error' : 'success'
-      } grid gap-2 leading-tight">
-        <p class="font-body-bolder m-0">${
-          shippingRates.length === 0
-            ? ScaloraTheme.shippingCalculatorStrings.notFound
-            : shippingRates.length === 1
-            ? ScaloraTheme.shippingCalculatorStrings.oneResult
-            : ScaloraTheme.shippingCalculatorStrings.multipleResults
-        }</p>
-        ${
-          shippingRatesList === ''
-            ? ''
-            : `<ul class="list-disc grid gap-1 text-sm" role="list">${shippingRatesList.join('')}</ul>`
-        }
-      </div>
-    `;
-  }
-}
-customElements.define('shipping-calculator', ShippingCalculator, { extends: 'form' });
-
-class CartDrawerProductsRecommendation extends HTMLElement {
-  constructor() {
-    super();
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(this.init.bind(this), { timeout: 1500 });
-    } else {
-      const userAgent = navigator.userAgent;
-      const isSafari = userAgent.includes('Safari') && !userAgent.includes('Chrome');
-      if (isSafari) {
-        this.init();
-      } else {
-        ScaloraTheme.Motion.inView(this, this.init.bind(this), { margin: '600px 0px 600px 0px' });
+        return deferred;
       }
     }
-  }
-
-  get slideContainer() {
-    return this.querySelector('.swiper');
-  }
-
-  get sliderPagination() {
-    return this.querySelector('.swiper-pagination');
-  }
-
-  get sliderNext() {
-    return this.querySelector('.swiper-button-next');
-  }
-
-  get sliderPrev() {
-    return this.querySelector('.swiper-button-prev');
-  }
-
-  init() {
-    fetch(this.dataset.url)
-      .then((response) => response.text())
-      .then((responseText) => {
-        const sectionInnerHTML = new DOMParser()
-          .parseFromString(responseText, 'text/html')
-          .querySelector('.shopify-section');
-
-        if (sectionInnerHTML === null) return;
-
-        const recommendations = sectionInnerHTML.querySelector('cart-drawer-products-recommendation');
-        if (recommendations && recommendations.innerHTML.trim().length) {
-          const productCount = recommendations.querySelectorAll('.product-card');
-          this.innerHTML = recommendations.innerHTML;
-          this.initCarousel();
-          if (productCount.length > 0) this.classList.remove('hidden');
-          this.dispatchEvent(new CustomEvent('recommendations:loaded'));
-        } else {
-          this.closest('.shopify-section').remove();
-          this.classList.add('hidden');
-          this.dispatchEvent(new CustomEvent('is-empty'));
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }
-
-  initCarousel() {
-    this.carousel = new ScaloraTheme.Carousel(this.slideContainer, {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      loop: false,
-      pagination: {
-        el: this.sliderPagination,
-        type: 'fraction',
-      },
-      navigation: {
-        nextEl: this.sliderNext,
-        prevEl: this.sliderPrev,
-      },
-    });
-
-    this.carousel && this.carousel.init();
-  }
-}
-
-customElements.define('cart-drawer-products-recommendation', CartDrawerProductsRecommendation);
-
-class MainCart extends HTMLElement {
-  constructor() {
-    super();
-
-    document.addEventListener('cart:grouped-sections', this.getSectionToRender.bind(this));
-  }
-
-  getSectionToRender(event) {
-    event.detail.sections.push(ScaloraTheme.utils.getSectionId(this));
-  }
-}
-customElements.define('main-cart', MainCart);
-
-class FreeShippingGoal extends HTMLElement {
-  constructor() {
-    super();
-    this.selectors = {
-      leftToSpend: '[data-left-to-spend]',
-    };
-    this.goal = Number(this.dataset.minimumAmount) * Number(window.Shopify.currency.rate || 1) || 0;
-    this.progress = this.querySelector('progress-bar');
-    this.money_format = window.ScaloraTheme.settings.moneyFormat;
-  }
-
-  connectedCallback() {
-    this.updateShippingGloal(Number(this.dataset.cartTotal));
-    document.addEventListener('cart:updated', (event) => {
-      this.updateShippingGloal(event.detail.cart.items_subtotal_price);
-    });
-  }
-
-  updateShippingGloal(amount) {
-    if (amount > 0) {
-      this.classList.remove('hidden');
-    } else {
-      this.classList.add('hidden');
-    }
-
-    this.cartTotal = amount / 100;
-    this.goalLeft = this.goal - this.cartTotal;
-    this.goalDone = this.goalLeft <= 0;
-
-    this.percent = (this.cartTotal * 100) / this.goal;
-
-    if (this.percent >= 100) this.percent = 100;
-
-    if (this.cartTotal >= this.goal) {
-      this.progress.style.setProperty('--percent', `${this.percent}%`);
-      this.classList.add('free-shipping-goal--done');
-      this.progress.dataset.value = this.cartTotal;
-      this.progress.dataset.max = this.goal;
-    } else {
-      let spend = (this.goal - this.cartTotal) * 100;
-      this.querySelector(this.selectors.leftToSpend).innerHTML = ScaloraTheme.Currency.formatMoney(
-        spend,
-        this.money_format
-      );
-      this.classList.remove('free-shipping-goal--done');
-      this.progress.style.setProperty('--percent', `${this.percent}%`);
-      this.progress.dataset.value = this.cartTotal;
-      this.progress.dataset.max = this.goal;
-    }
-  }
-}
-customElements.define('free-shipping-goal', FreeShippingGoal);
-
-window.ScaloraKitAddToCart = async (payload) => {
-  if (!payload?.properties?.['_ScaloraKit offer']) return;
-
-  const cartJson = await (
-    await fetch(`${ScaloraTheme.routes.cart_url}`, {
-      ...ScaloraTheme.utils.fetchConfig(),
-    })
-  ).json();
-  cartJson['sections'] = payload['sections'];
-  ScaloraTheme.pubsub.publish(ScaloraTheme.pubsub.PUB_SUB_EVENTS.cartUpdate, { cart: cartJson });
-
-  document.dispatchEvent(
-    new CustomEvent('product-ajax:added', {
-      detail: {
-        product: payload,
-      },
-    })
   );
-};
+}

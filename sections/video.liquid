@@ -1,83 +1,173 @@
-{%- liquid
-  assign poster = section.settings.video.preview_image | default: section.settings.cover_image
--%}
-<style>
-  #shopify-section-{{ section.id }} {
-    --section-padding-top: {{ section.settings.padding_top }}px;
-    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
-    {%- if section.settings.video_ratio == 'adapt' %}
-      {%- if poster != null -%}
-      --media-ratio: {{ poster.aspect_ratio }};
-      {%- else -%}
-      --media-ratio: 16/9;
-      {%- endif -%}
-    {% else -%}
-      --media-ratio: {{ section.settings.video_ratio }};
-    {%- endif -%}
+{{ 'video-section.css' | asset_url | stylesheet_tag }}
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
-</style>
 
-{% render 'divider',
-  show_divider: section.settings.show_section_divider,
-  divider_width: section.settings.divider_width
-%}
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
 
-<div class="section-video section--padding">
-  <div class="relative{% if section.settings.container == 'fixed' %} page-width{% endif %}">
-    <div class="blocks-radius">
-      <parallax-element
-        class="block overflow-hidden"
-        {% if section.settings.enable_parallax %}
-          data-parallax="0.3" data-parallax-direction="{{ section.settings.parallax_direction }}"
-        {% endif %}
-      >
-        <motion-element data-motion="zoom-out" class="relative block media media--adapt">
-          {%- capture sizes -%}{% if section.settings.container == 'full' %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
-          {%- render 'video',
-            sizes: sizes,
-            video: section.settings.video,
-            video_url: section.settings.video_url,
-            muted: section.settings.enable_video_autoplay,
-            autoplay: section.settings.enable_video_autoplay,
-            controls: true,
-            loop: section.settings.enable_video_looping,
-            description: section.settings.description,
-            cover_image: section.settings.cover_image,
-            show_play_button: true
-          -%}
-        </motion-element>
-      </parallax-element>
+{%- liquid
+  assign video_id = section.settings.video.id | default: section.settings.video_url.id
+  assign video_alt = section.settings.video.alt | default: section.settings.description
+  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+  assign poster = section.settings.video.preview_image | default: section.settings.cover_image
+
+  if section.settings.video != null
+    assign ratio_diff = section.settings.video.aspect_ratio | minus: poster.aspect_ratio | abs
+    if ratio_diff < 0.01 and ratio_diff > 0
+      assign fix_ratio = true
+    endif
+  endif
+-%}
+
+{%- capture sizes -%}
+  {% if section.settings.full_width -%}
+    100vw
+  {%- else -%}
+    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px)
+    calc(100vw - 10rem), 100vw
+  {%- endif %}
+{%- endcapture -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="video-section isolate{% unless section.settings.full_width %} page-width{% endunless %} section-{{ section.id }}-padding">
+    <div
+      {% if section.settings.full_width %}
+        class="page-width"
+      {% endif %}
+    >
+      {%- unless section.settings.heading == blank -%}
+        <div class="title-wrapper title-wrapper--no-top-margin{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          <h2 class="title inline-richtext {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+        </div>
+      {%- endunless -%}
     </div>
+    <deferred-media
+      class="video-section__media deferred-media gradient global-media-settings{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      data-media-id="{{ video_id }}"
+      {% if poster != null %}
+        style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
+      {% endif %}
+    >
+      <button
+        id="Deferred-Poster-Modal-{{ video_id }}"
+        class="video-section__poster media deferred-media__poster media--landscape"
+        type="button"
+        aria-label="{{ alt }}"
+      >
+        {%- if poster != null -%}
+          {{
+            poster
+            | image_url: width: 3840
+            | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+          }}
+        {%- else -%}
+          {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        {%- endif -%}
+        <span class="deferred-media__poster-button motion-reduce">
+          <span class="svg-wrapper">
+            {{- 'icon-play.svg' | inline_asset_content -}}
+          </span>
+        </span>
+      </button>
+      <template>
+        {%- if section.settings.video == null and section.settings.video_url != null -%}
+          {%- liquid
+            assign loop = ''
+            if section.settings.enable_video_looping
+              assign loop = '&loop=1&playlist=' | append: video_id
+            endif
+          -%}
+          {%- if section.settings.video_url.type == 'youtube' -%}
+            <iframe
+              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+              class="js-youtube"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="{{ section.settings.description | escape }}"
+            ></iframe>
+          {%- else -%}
+            <iframe
+              src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+              class="js-vimeo"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="{{ section.settings.description | escape }}"
+            ></iframe>
+          {%- endif -%}
+        {%- else -%}
+          {{
+            section.settings.video
+            | video_tag:
+              image_size: '1100x',
+              autoplay: true,
+              loop: section.settings.enable_video_looping,
+              controls: true,
+              muted: false
+          }}
+        {%- endif -%}
+      </template>
+    </deferred-media>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Video",
+  "name": "t:sections.video.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
-      "type": "paragraph",
-      "content": "[Read How-to](https://scalora.link/534ZYP9)"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.general.name"
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "t:sections.video.settings.heading.default",
+      "label": "t:sections.video.settings.heading.label"
     },
     {
       "type": "select",
-      "id": "container",
+      "id": "heading_size",
       "options": [
         {
-          "value": "full",
-          "label": "t:sections.all.container.options__full.label"
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
         },
         {
-          "value": "fixed",
-          "label": "t:sections.all.container.options__fixed.label"
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
         }
       ],
-      "default": "fixed",
-      "label": "t:sections.all.container.label"
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "t:sections.video.settings.enable_video_looping.label",
+      "default": false
     },
     {
       "type": "header",
@@ -85,18 +175,21 @@
     },
     {
       "type": "video",
-      "label": "t:sections.video.settings.video.label",
-      "id": "video"
+      "id": "video",
+      "label": "t:sections.video.settings.video.label"
     },
     {
       "type": "header",
-      "content": "t:sections.video.settings.header__2.content",
-      "info": "t:sections.video.settings.paragraph.content"
+      "content": "t:sections.video.settings.header__2.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.video.settings.paragraph.content"
     },
     {
       "type": "video_url",
       "id": "video_url",
-      "accept": ["vimeo", "youtube"],
+      "accept": ["youtube", "vimeo"],
       "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
       "label": "t:sections.video.settings.video_url.label",
       "info": "t:sections.video.settings.video_url.info"
@@ -107,79 +200,26 @@
       "label": "t:sections.video.settings.cover_image.label"
     },
     {
-      "type": "select",
-      "id": "video_ratio",
-      "label": "t:sections.video.settings.video_ratio.label",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.video.settings.video_ratio.options__1.label"
-        },
-        {
-          "value": "1/1",
-          "label": "t:sections.video.settings.video_ratio.options__2.label"
-        },
-        {
-          "value": "4/3",
-          "label": "t:sections.video.settings.video_ratio.options__3.label"
-        },
-        {
-          "value": "4/5",
-          "label": "t:sections.video.settings.video_ratio.options__4.label"
-        },
-        {
-          "value": "16/9",
-          "label": "t:sections.video.settings.video_ratio.options__5.label"
-        },
-        {
-          "value": "9/16",
-          "label": "t:sections.video.settings.video_ratio.options__6.label"
-        }
-      ],
-      "default": "adapt"
-    },
-    {
       "type": "text",
       "id": "description",
       "label": "t:sections.video.settings.description.label",
       "info": "t:sections.video.settings.description.info"
     },
     {
+      "type": "header",
+      "content": "t:sections.video.settings.header__3.content"
+    },
+    {
       "type": "checkbox",
-      "id": "enable_video_autoplay",
-      "label": "t:sections.video.settings.enable_video_autoplay.label",
-      "info": "t:sections.video.settings.enable_video_autoplay.info",
+      "id": "full_width",
+      "label": "t:sections.video.settings.full_width.label",
       "default": false
     },
     {
-      "type": "checkbox",
-      "id": "enable_video_looping",
-      "label": "t:sections.video.settings.enable_video_looping.label",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_parallax",
-      "label": "t:sections.all.enable_parallax_effect.label"
-    },
-    {
-      "type": "select",
-      "id": "parallax_direction",
-      "label": "t:sections.all.parallax_direction.label",
-      "options": [
-        {
-          "value": "vertical",
-          "label": "t:sections.all.parallax_direction.options__1.label"
-        },
-        {
-          "value": "horizontal",
-          "label": "t:sections.all.parallax_direction.options__2.label"
-        },
-        {
-          "value": "zoom",
-          "label": "t:sections.all.parallax_direction.options__3.label"
-        }
-      ]
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     },
     {
       "type": "header",
@@ -188,57 +228,28 @@
     {
       "type": "range",
       "id": "padding_top",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 50,
       "min": 0,
       "max": 100,
-      "step": 2,
-      "unit": "px"
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 50,
       "min": 0,
       "max": 100,
-      "step": 2,
-      "unit": "px"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.divider.content"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_section_divider",
-      "default": false,
-      "label": "t:sections.all.divider.settings.show_divider.label"
-    },
-    {
-      "type": "select",
-      "id": "divider_width",
-      "options": [
-        {
-          "value": "fixed",
-          "label": "t:sections.all.container.options__fixed.label"
-        },
-        {
-          "value": "full",
-          "label": "t:sections.all.container.options__full.label"
-        }
-      ],
-      "default": "fixed",
-      "label": "t:sections.all.divider.settings.divider_width.label"
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
     }
   ],
   "presets": [
     {
-      "name": "t:sections.video.name"
+      "name": "t:sections.video.presets.name"
     }
-  ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.overlay"]
-  }
+  ]
 }
 {% endschema %}

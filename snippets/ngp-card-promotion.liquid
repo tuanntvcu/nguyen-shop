@@ -1,0 +1,98 @@
+{%- liquid
+  assign ngp_layout = ngp_layout | default: 'space-between'
+  assign ngp_image_ratio = ngp_image_ratio | default: '1/1'
+  if ngp_image_ratio == 'adapt'
+    if image == blank
+      assign ngp_image_ratio = '1/1'
+    else
+      assign ngp_image_ratio = image.aspect_ratio
+    endif
+
+    if image_mobile == blank
+      assign ngp_image_mobile_ratio = ngp_image_ratio
+    else
+      assign ngp_image_mobile_ratio = image_mobile.aspect_ratio
+    endif
+  endif
+
+  assign ngp_description_size = ngp_description_size | default: 'ngp-text-base'
+-%}
+
+<div class="ngp-card-promotion ngp-card-promotion--layout-{{ ngp_layout }} ngp-card-media--{{ content_spacing }} ngp-blocks-radius ngp-relative ngp-overflow-hidden ngp-color-{{ color_scheme }} ngp-hover-wrapper">
+  {%- if link -%}
+    <a
+      href="{{ link }}"
+      class="ngp-card-promotion__link ngp-focus-inset ngp-w-full ngp-h-full ngp-block"
+      aria-label="{{ heading | default: shop.name }}"
+    >
+  {%- endif -%}
+  <div class="ngp-overflow-hidden ngp-w-full ngp-h-full">
+    <ngp-motion-element class="ngp-block ngp-h-full" data-motion="zoom-out">
+      <picture
+        class="ngp-card-promotion__media ngp-media-wrapper{% if image == blank %} ngp-bg-none{% endif %}"
+        style="--aspect-ratio: {{ ngp_image_ratio }};{% if ngp_image_mobile_ratio %}--aspect-ratio-mobile: {{ ngp_image_mobile_ratio }};{% endif %}"
+      >
+        {%- if image != blank -%}
+          {%- if image_mobile -%}
+            <source
+              media="(max-width: 767px)"
+              srcset="{{ image_mobile | image_url: width: '400x' }} 400w, {{ image_mobile | image_url: width: '600x' }} 600w, {{ image_mobile | image_url: width: '800x' }} 800w, {{ image_mobile | image_url: width: '1000x' }} 1000w"
+              width="{{ image_mobile.width }}"
+              height="{{ image_mobile.height }}"
+            >
+          {%- endif -%}
+          {{
+            image
+            | image_url: width: 1100
+            | image_tag:
+              loading: 'lazy',
+              class: 'motion-reduce absolute inset-0 w-full h-full hover-scale-up',
+              widths: '165, 360, 535, 750, 940, 1100',
+              is: 'ngp-image-lazy'
+          }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg hover-scale-up' }}
+        {%- endif -%}
+
+        {% if image_overlay_opacity and image_overlay_opacity > 0 %}
+          <div
+            class="ngp-bg-overlay"
+            style="--color-overlay-alpha: {{ image_overlay_opacity }};"
+          ></div>
+        {% endif %}
+      </picture>
+    </ngp-motion-element>
+  </div>
+  {%- if heading != blank or description != blank or button_label != blank or subheading != blank -%}
+    <div class="ngp-card-promotion__content ngp-content-overlay ngp-text-{{ content_alignment }} ngp-items-{{ content_alignment | replace: 'left', 'start' | replace: 'right', 'end' }}{% if ngp_layout == 'space-between' %} ngp-justify-between{% endif %}">
+      {%- if subheading != blank -%}
+        <p class="ngp-m-0 ngp-text-subheading ngp-card-promotion__subheading">{{ subheading }}</p>
+      {%- endif -%}
+      <div class="ngp-card-promotion__text">
+        {%- if heading != blank -%}
+          <h3 class="ngp-card-promotion__heading {{ heading_size }}">
+            {% render 'ngp-highlight-text', text: heading, style: heading_highlight_style %}
+          </h3>
+        {%- endif -%}
+        {%- if description != blank -%}
+          <div class="ngp-card-promotion__description ngp-rte {{ ngp_description_size }}">{{ description }}</div>
+        {%- endif -%}
+      </div>
+      {%- if button_label != blank -%}
+        <div class="ngp-card-promotion__button{% if ngp_layout == 'vertical-split' %} ngp-flex-1 ngp-flex ngp-items-end{% endif %}">
+          <button
+            class="ngp-btn {{ button_style }}"
+            {% unless link %}
+              disabled
+            {% endunless %}
+          >
+            {{ button_label }}
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  {%- if link -%}
+    </a>
+  {%- endif -%}
+</div>
