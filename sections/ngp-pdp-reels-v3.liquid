@@ -115,9 +115,7 @@
   #AltaeronPdp-{{ section.id }}:has(.ngp-apdp-delivery-option--ship input:checked) .ngp-apdp-delivery-estimate{display:flex}
   @media(max-width:480px){#AltaeronPdp-{{ section.id }} .ngp-apdp-delivery-option{gap:8px;grid-template-columns:18px 22px minmax(0,1fr);padding:8px 9px}#AltaeronPdp-{{ section.id }} .ngp-apdp-delivery-option__icon{height:21px;width:21px}#AltaeronPdp-{{ section.id }} .ngp-apdp-delivery-option__badge{font-size:10px;padding:4px 7px}#AltaeronPdp-{{ section.id }} .ngp-apdp-delivery-option__copy strong{font-size:14px}}
   #AltaeronPdp-{{ section.id }} .ngp-apdp-payment-options{border:0;margin:11px 0 0;text-align:center}
-  #AltaeronPdp-{{ section.id }} .ngp-apdp-payment-options summary{color:var(--ngp-altaeron-body,#344054);cursor:pointer;font-size:12px;list-style:none;text-decoration:underline;text-underline-offset:3px}
-  #AltaeronPdp-{{ section.id }} .ngp-apdp-payment-options summary::-webkit-details-marker{display:none}
-  #AltaeronPdp-{{ section.id }} .ngp-apdp-payment-options .ngp-apdp-payment-icons{border-top:0;gap:3px;margin:7px 0 0;padding:0}
+  #AltaeronPdp-{{ section.id }} .ngp-apdp-payment-options .ngp-apdp-payment-icons{border-top:0;gap:3px;margin:0;padding:0}
   #AltaeronPdp-{{ section.id }} .ngp-apdp-payment-options .list-payment__item{filter:none;opacity:1;padding:1px}
   #AltaeronPdp-{{ section.id }} .ngp-apdp-buy__trust{border-top:1px solid var(--ngp-altaeron-border,#E4E7EC);gap:0;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:16px;padding:15px 0 0}
   #AltaeronPdp-{{ section.id }} .ngp-apdp-buy__trust>a{gap:6px;padding:0 5px}
@@ -398,15 +396,14 @@
               assign ngp_mobile_payment_url = 'url(#' | append: ngp_mobile_payment_prefix
               assign ngp_mobile_payment_href = 'href="#' | append: ngp_mobile_payment_prefix
             -%}
-            <details class="ngp-apdp-payment-options">
-              <summary>{{ 'altaeron_pdp_reels_v2.buy.more_payment_options' | t: default: 'More payment options' }}</summary>
+            <div class="ngp-apdp-payment-options">
               <ul class="ngp-apdp-payment-icons list list-payment" role="list" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.payment_methods' | t | escape }}">
               {%- for ngp_type in shop.enabled_payment_types -%}
                 {%- capture ngp_payment_svg -%}{{ ngp_type | payment_type_svg_tag: class: 'icon icon--full-color' }}{%- endcapture -%}
                 <li class="list-payment__item">{{ ngp_payment_svg | replace: ' id="', ngp_mobile_payment_id | replace: 'aria-labelledby="', ngp_mobile_payment_labelledby | replace: 'url(#', ngp_mobile_payment_url | replace: 'href="#', ngp_mobile_payment_href }}</li>
               {%- endfor -%}
               </ul>
-            </details>
+            </div>
           {%- endif -%}
         {%- endform -%}
         <div class="ngp-apdp-buy__trust ngp-apdp-buy__trust--three">
