@@ -108,11 +108,12 @@
     #AltaeronBunion-{{ section.id }} .ngp-alta-custom__eyebrow::before { flex-basis: 28px; height: 2px; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-custom__heading { font-size: 29px; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { font-size: 15px; line-height: 1.45; }
-    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__how-layout { gap: 0; grid-template-columns: minmax(0, 1fr); }
-    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__header { grid-column: 1; grid-row: 1; }
-    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__video { grid-column: 1; grid-row: 2; }
-    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { grid-column: 1; grid-row: 3; }
-    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__video { margin: 0 0 16px; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__how-layout { display: flex; flex-direction: column; gap: 0; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__header { order: 1; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__video { margin: 0 0 16px; order: 2; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__reassurance { margin-top: 0; order: 3; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery { order: 4; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-custom__subheading { order: 5; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__progression { border-radius: 13px; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step:not(:last-child)::after { font-size: 16px; height: 28px; right: -14px; top: calc(50% - 32px); width: 28px; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__step-media { aspect-ratio: 4 / 5; }
@@ -310,6 +311,7 @@
 
         const reassurance = root.querySelector('.ngp-alta-custom__reassurance');
         const gallery = root.querySelector('[data-mobile-gallery]');
+        const video = root.querySelector('.ngp-alta-custom__video');
         const reassuranceMarker = reassurance ? document.createComment('reassurance position') : null;
         const galleryMarker = gallery ? document.createComment('gallery position') : null;
         reassurance?.before(reassuranceMarker);
@@ -318,7 +320,8 @@
         const mobileLayout = window.matchMedia('(max-width: 749px)');
         const updateMobileOrder = () => {
           if (mobileLayout.matches) {
-            subheading.before(...[reassurance, gallery].filter(Boolean));
+            if (video) video.after(...[reassurance, gallery].filter(Boolean));
+            else subheading.before(...[reassurance, gallery].filter(Boolean));
           } else {
             reassuranceMarker?.before(reassurance);
             galleryMarker?.before(gallery);
