@@ -128,8 +128,10 @@
     #AltaeronBunion-{{ section.id }} .ngp-alta-custom__reassurance { font-size: 14px; gap: 10px; margin-top: 14px; min-height: 58px; padding: 12px 14px; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-custom__reassurance svg { flex-basis: 24px; height: 24px; width: 24px; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery { display: block; margin: 0 0 14px; }
-    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-track { overflow: hidden; }
-    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-slide { aspect-ratio: 1.22 / 1; background: #fff; border-radius: 12px; overflow: hidden; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; scroll-snap-type: x mandatory; touch-action: pan-x; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-track::-webkit-scrollbar { display: none; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-track .swiper-wrapper { display: flex; gap: 10px; transform: none !important; width: 100%; }
+    #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-slide { aspect-ratio: 1.22 / 1; background: #fff; border-radius: 12px; flex: 0 0 88%; max-width: 88%; overflow: hidden; scroll-snap-align: center; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery-slide img { display: block; height: 100%; object-fit: contain; width: 100%; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery .swiper-pagination { display: flex; gap: 6px; justify-content: center; margin-top: 9px; position: static; }
     #AltaeronBunion-{{ section.id }} .ngp-alta-bunion__mobile-gallery .swiper-pagination-bullet { background: #c8cece; height: 5px; margin: 0 !important; opacity: 1; width: 5px; }
@@ -281,18 +283,40 @@
         (() => {
           const initializeGallery = () => {
             const slider = document.querySelector('#AltaeronBunion-{{ section.id }} [data-gallery-track]');
-            if (!slider || slider.dataset.initialized || !window.ScaloraTheme?.Carousel) return;
+            if (!slider || slider.dataset.initialized) return;
             slider.dataset.initialized = 'true';
-            const options = {
-              slidesPerView: 1.12,
-              spaceBetween: 10,
-              watchOverflow: true,
-              breakpoints: { 750: { enabled: false } },
-            };
+            const slides = [...slider.querySelectorAll('[data-gallery-slide]')];
             const pagination = slider.parentElement.querySelector('.swiper-pagination');
-            if (pagination) options.pagination = { el: pagination, clickable: true };
-            const carousel = new window.ScaloraTheme.Carousel(slider, options);
-            carousel.init();
+            if (!pagination || slides.length < 2) return;
+
+            const buttons = slides.map((slide, index) => {
+              const button = document.createElement('button');
+              button.type = 'button';
+              button.className = `swiper-pagination-bullet${index === 0 ? ' swiper-pagination-bullet-active' : ''}`;
+              button.setAttribute('aria-label', `Go to image ${index + 1}`);
+              button.setAttribute('aria-current', index === 0 ? 'true' : 'false');
+              button.addEventListener('click', () => {
+                slider.scrollTo({ left: slide.offsetLeft - slides[0].offsetLeft, behavior: 'smooth' });
+              });
+              pagination.append(button);
+              return button;
+            });
+
+            let frame;
+            slider.addEventListener('scroll', () => {
+              window.cancelAnimationFrame(frame);
+              frame = window.requestAnimationFrame(() => {
+                const activeIndex = slides.reduce((closestIndex, slide, index) => {
+                  const closestDistance = Math.abs(slides[closestIndex].offsetLeft - slides[0].offsetLeft - slider.scrollLeft);
+                  const distance = Math.abs(slide.offsetLeft - slides[0].offsetLeft - slider.scrollLeft);
+                  return distance < closestDistance ? index : closestIndex;
+                }, 0);
+                buttons.forEach((button, index) => {
+                  button.classList.toggle('swiper-pagination-bullet-active', index === activeIndex);
+                  button.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
+                });
+              });
+            }, { passive: true });
           };
           if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initializeGallery, { once: true });
