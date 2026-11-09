@@ -710,6 +710,44 @@
         ngp_setText(ngp_tier.querySelector('.bd-tier__compare'), ngp_originalTotal > 0 ? ngp_money(ngp_originalTotal, ngp_format) : '');
       });
     };
+    const ngp_translateReelsV3Bundle = ngp_widgetRoot => {
+      if (!ngp_root.classList.contains('ngp-altaeron-pdp--reels-v3')) return;
+      const ngp_locale = String(window.Shopify?.locale || document.documentElement.lang || 'en').toLowerCase();
+      const ngp_language = ngp_locale.split('-')[0];
+      const ngp_copy = {
+        fr: ['Achetez plus, économisez plus', 'Correcteur d’oignon', 'Correcteurs d’oignon', 'Utilisable sur le pied gauche ou droit', 'Un pour chaque pied – portez-les aux deux pieds', 'Commencer avec 1', 'Le plus populaire'],
+        de: ['Mehr kaufen, mehr sparen', 'Ballenzehkorrektor', 'Ballenzehkorrektoren', 'Für den linken oder rechten Fuß geeignet', 'Je einer pro Fuß – an beiden Füßen tragen', 'Mit 1 starten', 'Am beliebtesten'],
+        es: ['Compra más y ahorra más', 'Corrector de juanete', 'Correctores de juanetes', 'Se puede usar en el pie izquierdo o derecho', 'Uno para cada pie: úsalos en ambos pies', 'Empieza con 1', 'Más popular'],
+        it: ['Acquista di più, risparmia di più', 'Correttore per alluce valgo', 'Correttori per alluce valgo', 'Utilizzabile sul piede sinistro o destro', 'Uno per piede: indossali entrambi', 'Inizia con 1', 'Più popolare'],
+        nl: ['Koop meer, bespaar meer', 'Halluxvalguscorrector', 'Halluxvalguscorrectoren', 'Geschikt voor de linker- of rechtervoet', 'Eén voor elke voet – draag ze allebei', 'Begin met 1', 'Meest populair'],
+        pt: ['Compre mais, poupe mais', 'Corretor de joanetes', 'Corretores de joanetes', 'Pode ser usado no pé esquerdo ou direito', 'Um para cada pé – use nos dois', 'Comece com 1', 'Mais popular'],
+        ja: ['まとめ買いでさらにお得', '外反母趾矯正器', '外反母趾矯正器', '左右どちらの足にも使用できます', '左右それぞれに1つずつ、両足に装着', '1個から始める', '人気商品'],
+        ko: ['더 많이 구매하고 더 많이 할인받으세요', '무지외반증 교정기', '무지외반증 교정기', '왼발 또는 오른발 모두 사용 가능', '양쪽 발에 하나씩 착용하세요', '1개부터 시작', '가장 인기'],
+        ru: ['Покупайте больше — экономьте больше', 'Корректор косточки', 'Корректоры косточки', 'Подходит для левой или правой ноги', 'По одному на каждую ногу — носите на обеих', 'Начните с 1', 'Популярный выбор'],
+        'zh': ['买得越多，省得越多', '拇外翻矫正器', '拇外翻矫正器', '左右脚均可使用', '左右脚各一个，同时穿戴', '从 1 个开始', '最受欢迎'],
+        vi: ['Mua nhiều, tiết kiệm nhiều', 'Đai chỉnh ngón chân cái', 'Đai chỉnh ngón chân cái', 'Dùng được cho chân trái hoặc chân phải', 'Mỗi chân một chiếc – đeo cả hai bên', 'Bắt đầu với 1 chiếc', 'Phổ biến nhất'],
+      }[ngp_language];
+      if (!ngp_copy) return;
+      const [ngp_heading, ngp_single, ngp_plural, ngp_descOne, ngp_descTwo, ngp_start, ngp_popular] = ngp_copy;
+      const ngp_replacements = new Map([
+        ['Buy More, Save More', ngp_heading], ['Buy More Save More', ngp_heading],
+        ['1 Bunion Corrector', `1 ${ngp_single}`], ['2 Bunion Correctors', `2 ${ngp_plural}`],
+        ['Works on either the left or right foot', ngp_descOne],
+        ['One for Each Foot – Wear Both Together', ngp_descTwo], ['One for Each Foot - Wear Both Together', ngp_descTwo],
+        ['START WITH 1', ngp_start], ['MOST POPULAR', ngp_popular],
+      ]);
+      const ngp_walk = ngp_node => {
+        if (ngp_node.nodeType === Node.TEXT_NODE) {
+          const ngp_original = ngp_node.nodeValue.trim().replace(/\s+/g, ' ');
+          const ngp_translation = ngp_replacements.get(ngp_original);
+          if (ngp_translation) ngp_node.nodeValue = ngp_node.nodeValue.replace(ngp_original, ngp_translation);
+          return;
+        }
+        if (ngp_node.nodeType === Node.ELEMENT_NODE && ngp_node.matches('script,style')) return;
+        ngp_node.childNodes.forEach(ngp_walk);
+      };
+      ngp_walk(ngp_widgetRoot);
+    };
     const ngp_syncReelsV3FirstTierLabel = ngp_widgetRoot => {
       if (!ngp_root.classList.contains('ngp-altaeron-pdp--reels-v3')) return;
       const ngp_firstTier = ngp_widgetRoot.querySelector('[data-tier-index="0"]');
@@ -747,6 +785,7 @@
       const ngp_baseCompare = Number(ngp_control.dataset.compare || 0);
       if (ngp_bundleWidget) {
         const ngp_widgetRoot = ngp_bundleWidget.shadowRoot || ngp_bundleWidget;
+        ngp_translateReelsV3Bundle(ngp_widgetRoot);
         ngp_syncBundleTierPrices(ngp_widgetRoot, ngp_baseCompare, ngp_basePrice);
         ngp_syncReelsV3FirstTierLabel(ngp_widgetRoot);
       }
