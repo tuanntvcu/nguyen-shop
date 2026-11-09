@@ -1038,6 +1038,18 @@
       });
     });
   }
+  function ngp_initRatingReviewLink(ngp_root) {
+    if (!ngp_root.classList.contains('ngp-altaeron-pdp--reels-v3')) return;
+    const ngp_link = ngp_root.querySelector('[data-apdp-rating-link]');
+    const ngp_target = ngp_link ? document.querySelector(ngp_link.hash) : null;
+    if (!ngp_link || !ngp_target) return;
+    ngp_link.addEventListener('click', ngp_event => {
+      if (ngp_event.button !== 0 || ngp_event.metaKey || ngp_event.ctrlKey || ngp_event.shiftKey || ngp_event.altKey) return;
+      ngp_event.preventDefault();
+      const ngp_reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      ngp_target.scrollIntoView({ behavior: ngp_reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
   function ngp_initStepTimelines(ngp_root) {
     ngp_root.querySelectorAll('[data-apdp-step-timeline]').forEach(ngp_timeline => {
       if (ngp_timeline.dataset.timelineReady === 'true') return;
@@ -1140,6 +1152,7 @@
     ngp_initVariants(ngp_root, ngp_activateMedia);
     ngp_initSticky(ngp_root);
     ngp_initMedicalReviewLink(ngp_root);
+    ngp_initRatingReviewLink(ngp_root);
     ngp_initLazyVideos(ngp_root);
     ngp_initReviewSliders(ngp_root);
     ngp_initStepTimelines(ngp_root);

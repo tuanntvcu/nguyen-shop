@@ -346,7 +346,7 @@
 
       <div class="ngp-apdp-narrative">
         {%- if ngp_review_count > 0 and ngp_review_rating > 0 -%}
-          <a class="ngp-apdp-rating" href="#AltaeronV3Reviews" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.rating' | t: rating: ngp_review_rating_display, count: ngp_review_count | escape }}">
+          <a class="ngp-apdp-rating" href="#AltaeronV3Reviews" data-apdp-rating-link aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.rating' | t: rating: ngp_review_rating_display, count: ngp_review_count | escape }}">
             {% render 'ngp-pdp-stars', rating: ngp_review_rating %}<strong>{{ 'altaeron_pdp_reels_v2.common.atf_rating' | t: rating: ngp_review_rating_display, count: ngp_review_count }}</strong>
           </a>
         {%- endif -%}
