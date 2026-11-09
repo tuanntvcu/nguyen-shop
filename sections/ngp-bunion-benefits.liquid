@@ -302,6 +302,32 @@
         })();
       </script>
     {%- endif -%}
+    <script>
+      (() => {
+        const root = document.getElementById('AltaeronBunion-{{ section.id }}');
+        const subheading = root?.querySelector('.ngp-alta-custom__subheading');
+        if (!root || !subheading) return;
+
+        const reassurance = root.querySelector('.ngp-alta-custom__reassurance');
+        const gallery = root.querySelector('[data-mobile-gallery]');
+        const reassuranceMarker = reassurance ? document.createComment('reassurance position') : null;
+        const galleryMarker = gallery ? document.createComment('gallery position') : null;
+        reassurance?.before(reassuranceMarker);
+        gallery?.before(galleryMarker);
+
+        const mobileLayout = window.matchMedia('(max-width: 749px)');
+        const updateMobileOrder = () => {
+          if (mobileLayout.matches) {
+            subheading.before(...[reassurance, gallery].filter(Boolean));
+          } else {
+            reassuranceMarker?.before(reassurance);
+            galleryMarker?.before(gallery);
+          }
+        };
+        updateMobileOrder();
+        mobileLayout.addEventListener('change', updateMobileOrder);
+      })();
+    </script>
   </div>
 </section>
 
