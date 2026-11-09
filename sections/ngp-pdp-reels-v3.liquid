@@ -40,6 +40,17 @@
   assign ngp_support_demo_alt = 'altaeron_pdp_reels_v2.accessibility.support_demo' | t
 -%}
 
+{%- capture ngp_reel_hero_copy -%}
+  <p class="ngp-apdp-narrative__subheadline">{{ ngp_reel_subheadline | newline_to_br }}</p>
+  <ul class="ngp-apdp-narrative__benefits" role="list">
+    {%- for ngp_i in (1..4) -%}
+      {%- capture ngp_benefit_key -%}altaeron_pdp_reels_v3.hero.benefit_{{ ngp_i }}{%- endcapture -%}
+      {%- assign ngp_benefit_text = ngp_benefit_key | t | replace: '&lt;', '<' | replace: '&gt;', '>' -%}
+      <li>{% render 'ngp-pdp-icon', icon: 'check' %}<span>{{ ngp_benefit_text }}</span></li>
+    {%- endfor -%}
+  </ul>
+{%- endcapture -%}
+
 <script src="{{ 'ngp-altaeron-pdp.js' | asset_url }}" defer="defer"></script>
 
 <style>
@@ -86,6 +97,7 @@
   #AltaeronPdp-{{ section.id }} .ngp-apdp-hero-review blockquote p{margin:0}
   #AltaeronPdp-{{ section.id }} .ngp-apdp-hero-review blockquote strong{color:var(--ngp-altaeron-primary,#006B5E)}
   #AltaeronPdp-{{ section.id }} .ngp-apdp-hero-review figcaption{font-size:14px;margin-top:9px}
+  #AltaeronPdp-{{ section.id }} .ngp-apdp-mobile-copy{display:none}
   #AltaeronPdp-{{ section.id }} .ngp-apdp-button--primary,
   #AltaeronPdp-{{ section.id }} .ngp-apdp-button--primary *{text-transform:uppercase!important}
   #AltaeronPdp-{{ section.id }} .ngp-apdp-delivery-estimate{align-items:center;color:var(--ngp-altaeron-navy,#102A43);display:flex;font-size:14px;font-weight:450;gap:6px;justify-content:center;line-height:1.4;margin:10px 0 8px;min-height:17px;text-align:center}
@@ -213,6 +225,10 @@
     #AltaeronPdp-{{ section.id }} .ngp-apdp-hero-review .ngp-apdp-tail-avatar{height:50px;width:50px}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-buy{padding-top:13px}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-buy__trust>:first-child{display:flex}
+    #AltaeronPdp-{{ section.id }} .ngp-apdp-narrative-copy{display:none}
+    #AltaeronPdp-{{ section.id }} .ngp-apdp-mobile-copy{display:block;margin-top:18px}
+    #AltaeronPdp-{{ section.id }} .ngp-apdp-mobile-copy .ngp-apdp-narrative__subheadline{margin-bottom:0}
+    #AltaeronPdp-{{ section.id }} .ngp-apdp-mobile-copy .ngp-apdp-narrative__benefits{margin-top:10px}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-support__features{background:#f4faf8;border:1px solid #e4e7e2;border-radius:13px;display:block;overflow:hidden;padding:0 12px}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-support__features article{align-items:center;background:transparent;border:0;border-radius:0;display:grid;gap:2px 11px;grid-template-columns:40px minmax(0,1fr);grid-template-rows:auto auto;min-height:0;padding:14px 0;text-align:left}
     #AltaeronPdp-{{ section.id }} .ngp-apdp-support__features article+article{border-top:1px solid #dfe9e5;margin:0}
@@ -352,14 +368,7 @@
         {%- endif -%}
         <p class="ngp-apdp-narrative__product">{{ ngp_reel_product_name }}</p>
         <h1 id="AltaeronTitle-{{ section.id }}"><span class="ngp-apdp-title-lines">{{ ngp_reel_headline }}</span></h1>
-        <p class="ngp-apdp-narrative__subheadline">{{ ngp_reel_subheadline | newline_to_br }}</p>
-        <ul class="ngp-apdp-narrative__benefits" role="list">
-          {%- for ngp_i in (1..4) -%}
-            {%- capture ngp_benefit_key -%}altaeron_pdp_reels_v3.hero.benefit_{{ ngp_i }}{%- endcapture -%}
-            {%- assign ngp_benefit_text = ngp_benefit_key | t | replace: '&lt;', '<' | replace: '&gt;', '>' -%}
-            <li>{% render 'ngp-pdp-icon', icon: 'check' %}<span>{{ ngp_benefit_text }}</span></li>
-          {%- endfor -%}
-        </ul>
+        <div class="ngp-apdp-narrative-copy">{{ ngp_reel_hero_copy }}</div>
       </div>
 
       <aside id="AltaeronBuy-{{ section.id }}" class="ngp-apdp-buy" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.purchase' | t: product: product.title | escape }}" data-apdp-primary-purchase>
@@ -411,6 +420,7 @@
           <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">{% render 'ngp-pdp-icon', icon: 'return' %}<b>{{ 'altaeron_pdp_reels_v2.buy.returns_30' | t: default: '30-Day Returns' }}</b></a>
           <a href="/pages/contact">{% render 'ngp-pdp-icon', icon: 'medical-cross' %}<b>{{ 'storefront.pdp.clinically_proven' | t: default: 'Clinically Proven' | escape }}</b></a>
         </div>
+        <div class="ngp-apdp-mobile-copy">{{ ngp_reel_hero_copy }}</div>
         <figure class="ngp-apdp-hero-review">
           <div class="ngp-apdp-tail-avatar">
             {%- if section.settings.review_avatar != blank -%}
