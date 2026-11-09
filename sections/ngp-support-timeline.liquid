@@ -14,6 +14,9 @@
 -%}
 
 <style>
+  {%- if template.suffix == 'altaeron-reels-v3' -%}
+    #shopify-section-{{ section.id }} { display: none !important; }
+  {%- endif -%}
   #AltaeronTimeline-{{ section.id }} {
     --ngp-alta-timeline-ink: var(--ngp-altaeron-navy, #102a43);
     --ngp-alta-timeline-body: var(--ngp-altaeron-body, #344054);
