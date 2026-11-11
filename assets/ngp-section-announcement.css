@@ -6,15 +6,16 @@
 .ngp-announcement__marquee { width: 100%; overflow: hidden; }
 .ngp-announcement__track {
   display: flex;
-  width: 200%;
-  min-width: 200%;
+  width: max-content;
+  min-width: 100%;
   animation: ngp-announcement-scroll 24s linear infinite;
   will-change: transform;
 }
 .ngp-announcement__group {
   display: flex;
-  flex: 0 0 50%;
-  min-width: 50%;
+  flex: 0 0 auto;
+  width: max-content;
+  min-width: 100vw;
   align-items: center;
   justify-content: space-around;
 }
@@ -49,7 +50,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .ngp-announcement__marquee { overflow-x: auto; }
-  .ngp-announcement__track { width: 100%; min-width: 100%; animation: none; }
-  .ngp-announcement__group { flex-basis: 100%; min-width: 100%; }
+  .ngp-announcement__track { animation: none; }
   .ngp-announcement__group[aria-hidden="true"] { display: none; }
 }
