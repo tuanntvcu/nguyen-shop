@@ -32,6 +32,7 @@
         },
         "announcement_688pKV": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "🔥 EARLY BLACK FRIDAY SALE — UP TO 50% OFF",
             "link": "",
