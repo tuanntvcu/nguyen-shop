@@ -559,7 +559,9 @@
       "first_order_discount": "Erste Bestellung: 10 % Rabatt",
       "comfort_guarantee": "30-TAGE-KOMFORTGARANTIE",
       "free_shipping_worldwide": "KOSTENLOSER WELTWEITER VERSAND",
-      "free_shipping_threshold": "KOSTENLOSER VERSAND AB 39 $"
+      "free_shipping_threshold": "KOSTENLOSER VERSAND AB 39 $",
+      "free_shipping": "KOSTENLOSER VERSAND",
+      "early_black_friday_sale": "🔥 FRÜHE BLACK-FRIDAY-AKTION — BIS ZU 50 % RABATT"
     },
     "cart_drawer": {
       "intro": "Sie sind angenehmerer Bewegung einen Schritt näher.",

@@ -567,7 +567,9 @@
       "first_order_discount": "Première commande : 10 % de réduction",
       "comfort_guarantee": "GARANTIE CONFORT DE 30 JOURS",
       "free_shipping_worldwide": "LIVRAISON GRATUITE DANS LE MONDE ENTIER",
-      "free_shipping_threshold": "LIVRAISON GRATUITE DÈS 39 $ D’ACHAT"
+      "free_shipping_threshold": "LIVRAISON GRATUITE DÈS 39 $ D’ACHAT",
+      "free_shipping": "LIVRAISON GRATUITE",
+      "early_black_friday_sale": "🔥 PROMO BLACK FRIDAY EN AVANCE — JUSQU’À 50 % DE RÉDUCTION"
     },
     "cart_drawer": {
       "intro": "Vous êtes sur le point de retrouver plus de confort dans vos mouvements.",

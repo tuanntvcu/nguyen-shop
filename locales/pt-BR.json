@@ -567,7 +567,9 @@
       "first_order_discount": "Primeiro pedido: 10% de desconto",
       "comfort_guarantee": "GARANTIA DE CONFORTO DE 30 DIAS",
       "free_shipping_worldwide": "FRETE GRÁTIS PARA TODO O MUNDO",
-      "free_shipping_threshold": "FRETE GRÁTIS EM PEDIDOS DE US$ 39 OU MAIS"
+      "free_shipping_threshold": "FRETE GRÁTIS EM PEDIDOS DE US$ 39 OU MAIS",
+      "free_shipping": "FRETE GRÁTIS",
+      "early_black_friday_sale": "🔥 OFERTAS ANTECIPADAS DE BLACK FRIDAY — ATÉ 50% DE DESCONTO"
     },
     "cart_drawer": {
       "intro": "Você está a um passo de se movimentar com mais conforto.",

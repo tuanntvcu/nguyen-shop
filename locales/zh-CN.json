@@ -554,6 +554,14 @@
     }
   },
   "storefront": {
+    "announcement": {
+      "first_order_discount": "首单享九折优惠",
+      "comfort_guarantee": "30天舒适保障",
+      "free_shipping_worldwide": "全球免费配送",
+      "free_shipping_threshold": "订单满39美元免运费",
+      "free_shipping": "免费配送",
+      "early_black_friday_sale": "🔥 黑色星期五提前开售 — 最高五折"
+    },
     "cart_drawer": {
       "welcome_discount_applied": "WELCOME 优惠已成功应用！"
     }

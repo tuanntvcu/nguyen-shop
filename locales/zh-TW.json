@@ -576,7 +576,9 @@
       "first_order_discount": "首單：10% 折扣",
       "comfort_guarantee": "30 天舒適保證",
       "free_shipping_worldwide": "全球免費送貨",
-      "free_shipping_threshold": "訂單滿 39 美元免運費"
+      "free_shipping_threshold": "訂單滿 39 美元免運費",
+      "free_shipping": "免運費",
+      "early_black_friday_sale": "🔥 黑色星期五提前開跑 — 最高 5 折優惠"
     },
     "home": {
       "review_placeholder": "新增後，客戶評論內容將顯示在此。",

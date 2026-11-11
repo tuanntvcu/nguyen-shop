@@ -567,7 +567,9 @@
       "first_order_discount": "Primeira encomenda: 10% de desconto",
       "comfort_guarantee": "GARANTIA DE CONFORTO DE 30 DIAS",
       "free_shipping_worldwide": "PORTES GRÁTIS PARA TODO O MUNDO",
-      "free_shipping_threshold": "PORTES GRÁTIS EM ENCOMENDAS DE 39 $ OU MAIS"
+      "free_shipping_threshold": "PORTES GRÁTIS EM ENCOMENDAS DE 39 $ OU MAIS",
+      "free_shipping": "PORTES GRÁTIS",
+      "early_black_friday_sale": "🔥 PROMOÇÕES ANTECIPADAS DA BLACK FRIDAY — ATÉ 50% DE DESCONTO"
     },
     "cart_drawer": {
       "intro": "Está a um passo de se movimentar com mais conforto.",

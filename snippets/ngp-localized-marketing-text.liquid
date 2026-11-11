@@ -10,6 +10,10 @@
       assign ngp_marketing_key = 'storefront.announcement.free_shipping_worldwide'
     when 'free shipping on orders $39+'
       assign ngp_marketing_key = 'storefront.announcement.free_shipping_threshold'
+    when 'free shipping'
+      assign ngp_marketing_key = 'storefront.announcement.free_shipping'
+    when '🔥 early black friday sale — up to 50% off'
+      assign ngp_marketing_key = 'storefront.announcement.early_black_friday_sale'
   endcase
   if request.locale.iso_code == 'en' or ngp_marketing_key == blank
     echo ngp_text

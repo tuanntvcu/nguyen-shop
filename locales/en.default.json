@@ -559,7 +559,9 @@
       "first_order_discount": "First order: 10% off",
       "comfort_guarantee": "30-DAY COMFORT GUARANTEE",
       "free_shipping_worldwide": "FREE SHIPPING WORLDWIDE",
-      "free_shipping_threshold": "FREE SHIPPING ON ORDERS $39+"
+      "free_shipping_threshold": "FREE SHIPPING ON ORDERS $39+",
+      "free_shipping": "FREE SHIPPING",
+      "early_black_friday_sale": "🔥 EARLY BLACK FRIDAY SALE — UP TO 50% OFF"
     },
     "cart_drawer": {
       "intro": "You’re one step closer to more comfortable movement.",
