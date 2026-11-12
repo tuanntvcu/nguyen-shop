@@ -29,20 +29,11 @@
             "link": "",
             "icon": "shipping"
           }
-        },
-        "announcement_688pKV": {
-          "type": "announcement",
-          "settings": {
-            "text": "🔥 EARLY BLACK FRIDAY SALE — UP TO 50% OFF",
-            "link": "",
-            "icon": "none"
-          }
         }
       },
       "block_order": [
         "ngp-announcement-1",
-        "ngp-announcement-2",
-        "announcement_688pKV"
+        "ngp-announcement-2"
       ],
       "settings": {
         "promise_layout": true,
