@@ -710,6 +710,15 @@
         ngp_setText(ngp_tier.querySelector('.bd-tier__compare'), ngp_originalTotal > 0 ? ngp_money(ngp_originalTotal, ngp_format) : '');
       });
     };
+    const ngp_reelsV3SaveThirty = () => {
+      const ngp_language = String(window.Shopify?.locale || document.documentElement.lang || 'en').toLowerCase().split('-')[0];
+      return {
+        fr: 'Économisez 30 %', de: '30 % sparen', es: 'Ahorra un 30 %',
+        it: 'Risparmia il 30%', nl: 'Bespaar 30%', pt: 'Poupe 30%',
+        ja: '30% OFF', ko: '30% 할인', ru: 'Скидка 30%', zh: '省30%',
+        vi: 'Tiết kiệm 30%',
+      }[ngp_language] || 'SAVE 30%';
+    };
     const ngp_translateReelsV3Bundle = ngp_widgetRoot => {
       if (!ngp_root.classList.contains('ngp-altaeron-pdp--reels-v3')) return;
       const ngp_locale = String(window.Shopify?.locale || document.documentElement.lang || 'en').toLowerCase();
@@ -736,6 +745,11 @@
         ['One for Each Foot – Wear Both Together', ngp_descTwo], ['One for Each Foot - Wear Both Together', ngp_descTwo],
         ['START WITH 1', ngp_start], ['MOST POPULAR', ngp_popular],
       ]);
+      ngp_widgetRoot.querySelectorAll('[data-tier-index="1"] .bd-tier__sub').forEach(ngp_description => {
+        const ngp_text = ngp_description.textContent.trim().replace(/\s+/g, ' ');
+        const ngp_match = ngp_text.match(/^(One for Each Foot [–-] Wear Both Together)\s+[–-]\s+Save 30%$/);
+        if (ngp_match) ngp_description.textContent = ngp_replacements.get(ngp_match[1]);
+      });
       const ngp_walk = ngp_node => {
         if (ngp_node.nodeType === Node.TEXT_NODE) {
           const ngp_original = ngp_node.nodeValue.trim().replace(/\s+/g, ' ');
@@ -747,6 +761,22 @@
         ngp_node.childNodes.forEach(ngp_walk);
       };
       ngp_walk(ngp_widgetRoot);
+    };
+    const ngp_syncReelsV3SavingsLabel = ngp_widgetRoot => {
+      if (!ngp_root.classList.contains('ngp-altaeron-pdp--reels-v3')) return;
+      const ngp_nameRow = ngp_widgetRoot.querySelector('[data-tier-index="1"] .bd-tier__name-row');
+      const ngp_popularLabel = ngp_nameRow?.querySelector('.bd-tier__label:not([data-altaeron-savings-label])');
+      if (!ngp_popularLabel) return;
+      let ngp_label = ngp_nameRow.querySelector('[data-altaeron-savings-label]');
+      if (!ngp_label) {
+        ngp_label = ngp_popularLabel.cloneNode(false);
+        ngp_label.removeAttribute('id');
+        ngp_label.dataset.altaeronSavingsLabel = '30';
+        ngp_label.style.color = 'var(--ngp-alta-text-negative, #c9362c)';
+        ngp_popularLabel.after(ngp_label);
+      }
+      const ngp_text = ngp_reelsV3SaveThirty();
+      if (ngp_label.textContent !== ngp_text) ngp_label.textContent = ngp_text;
     };
     const ngp_syncReelsV3FirstTierLabel = ngp_widgetRoot => {
       if (!ngp_root.classList.contains('ngp-altaeron-pdp--reels-v3')) return;
@@ -788,6 +818,7 @@
         ngp_translateReelsV3Bundle(ngp_widgetRoot);
         ngp_syncBundleTierPrices(ngp_widgetRoot, ngp_baseCompare, ngp_basePrice);
         ngp_syncReelsV3FirstTierLabel(ngp_widgetRoot);
+        ngp_syncReelsV3SavingsLabel(ngp_widgetRoot);
       }
       const ngp_bundle = ngp_selectedBundle();
       if (!ngp_bundle?.price) return;
