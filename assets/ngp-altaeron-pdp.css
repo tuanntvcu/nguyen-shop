@@ -883,6 +883,12 @@ bundle-deals-widget input[type="radio"]{
   .ngp-altaeron-pdp--cro-hero .ngp-apdp-narrative .ngp-apdp-rating{max-width:none}
 }
 
+.ngp-pdp .bd-tier__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* Let long localized purchase copy shrink and wrap throughout mobile. */
 @media(max-width:767px){
   .ngp-pdp .ngp-apdp-sticky .ngp-apdp-button{flex:0 0 40%;font-size:14px;font-weight:700;gap:7px;max-width:45%;min-height:52px;padding:8px;width:45%}
@@ -904,7 +910,6 @@ bundle-deals-widget input[type="radio"]{
 /* Reflow dense controls instead of clipping them below 345px. */
 @media(max-width:344px){
   .ngp-pdp .bd-tier{--bd-tier-pad:10px 10px}
-  .ngp-pdp .bd-tier__main{gap:8px}
   .ngp-pdp.ngp-pdp .ngp-apdp-buy__price-line{grid-template-columns:minmax(0,1fr)}
   .ngp-pdp.ngp-pdp .ngp-apdp-price__save{grid-column:1;grid-row:1;white-space:normal}
   .ngp-pdp.ngp-pdp .ngp-apdp-buy__price-line>div{grid-column:1;grid-row:2}
