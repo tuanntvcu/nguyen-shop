@@ -965,17 +965,22 @@ bundle-deals-widget input[type="radio"]{
 
 .ngp-altaeron-pdp--reels-v3 .ngp-apdp-black-friday-tag{
   background:#b82016;
-  border-radius:5px;
+  border-radius:4px;
   color:#fff;
   display:block;
-  font-size:14px;
+  font-size:12px;
   font-weight:750;
   line-height:1.25;
-  margin:0 0 14px;
-  max-width:100%;
-  padding:8px 20px;
+  margin:0;
+  max-width:calc(100% - 24px);
+  padding:6px 10px;
+  pointer-events:none;
+  position:absolute;
+  right:12px;
   text-align:center;
+  top:12px;
   width:fit-content;
+  z-index:11;
 }
 
 @media (max-width:749px){
