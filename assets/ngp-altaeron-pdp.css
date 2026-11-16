@@ -963,11 +963,26 @@ bundle-deals-widget input[type="radio"]{
 .ngp-pdp .ngp-apdp-sticky{border-color:var(--ngp-altaeron-border,#E4E7EC)}
 .ngp-pdp :where(select,input,textarea):focus-visible{border-color:var(--ngp-altaeron-primary,#006B5E);outline:2px solid rgba(0,107,94,.22);outline-offset:1px}
 
+.ngp-altaeron-pdp--reels-v3 .ngp-apdp-black-friday-tag{
+  background:#b82016;
+  border-radius:5px;
+  color:#fff;
+  display:block;
+  font-size:14px;
+  font-weight:750;
+  line-height:1.25;
+  margin:0 0 14px;
+  max-width:100%;
+  padding:8px 20px;
+  text-align:center;
+  width:fit-content;
+}
+
 @media (max-width:749px){
   body:has(.ngp-altaeron-pdp--reels-v3 .ngp-apdp-sticky:not([hidden])) .Avada-Faqs_Button.bottom{bottom:100px!important}
 }
-.ngp-apdp-button.loading{color:transparent;position:relative}
-.ngp-apdp-button.loading>*:not(.loading__spinner){opacity:0}
-.ngp-apdp-button.loading>.loading__spinner{align-items:center;display:flex!important;height:100%;left:50%;opacity:1!important;position:absolute;top:50%;transform:translate(-50%,-50%)}
-.ngp-apdp-button.loading>.loading__spinner .ngp-loading__spinner{display:inline-flex!important;opacity:1}
-.ngp-apdp-button.loading>.loading__spinner .ngp-path{stroke:#fff}
+:is(.ngp-apdp-button,.ngp-altaeron-relief-closing__cta).loading{color:transparent;position:relative}
+:is(.ngp-apdp-button,.ngp-altaeron-relief-closing__cta).loading>*:not(.loading__spinner){opacity:0}
+:is(.ngp-apdp-button,.ngp-altaeron-relief-closing__cta).loading>.loading__spinner{align-items:center;display:flex!important;height:100%;justify-content:center;left:50%;opacity:1!important;position:absolute;top:50%;transform:translate(-50%,-50%);width:var(--loading-size,2rem)}
+:is(.ngp-apdp-button,.ngp-altaeron-relief-closing__cta).loading>.loading__spinner .ngp-loading__spinner{display:inline-flex!important;opacity:1}
+:is(.ngp-apdp-button,.ngp-altaeron-relief-closing__cta).loading>.loading__spinner .ngp-path{stroke:#fff}

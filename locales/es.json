@@ -1327,7 +1327,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "Oferta de confort de otoño",
+      "eyebrow": "Ofertas de Black Friday",
       "title": "Más alivio. Paga menos.",
       "offer": "15 % de descuento adicional",
       "automatically_applied": "",
@@ -1338,9 +1338,9 @@
       "hours": "Horas",
       "minutes": "Minutos",
       "seconds": "Segundos",
-      "cta": "Conseguir mi oferta de confort de otoño",
-      "announcement_desktop": "🍂 Oferta de confort de otoño — 15 % de descuento adicional",
-      "announcement_mobile": "Oferta de confort de otoño — 15 % de descuento adicional"
+      "cta": "Conseguir mi oferta de Black Friday",
+      "announcement_desktop": "🔥 Ofertas de Black Friday — 15 % de descuento adicional",
+      "announcement_mobile": "Ofertas de Black Friday — 15 % de descuento adicional"
     },
     "common": {
       "save": "Ahorra",

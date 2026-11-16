@@ -366,6 +366,7 @@
             {% render 'ngp-pdp-stars', rating: ngp_review_rating %}<strong>{{ 'altaeron_pdp_reels_v2.common.atf_rating' | t: rating: ngp_review_rating_display, count: ngp_review_count }}</strong>
           </a>
         {%- endif -%}
+        <p class="ngp-apdp-black-friday-tag">{{ 'altaeron_pdp_reels_v3.hero.black_friday_sale' | t | escape }}</p>
         <p class="ngp-apdp-narrative__product">{{ ngp_reel_product_name }}</p>
         <h1 id="AltaeronTitle-{{ section.id }}"><span class="ngp-apdp-title-lines">{{ ngp_reel_headline }}</span></h1>
         <div class="ngp-apdp-narrative-copy">{{ ngp_reel_hero_copy }}</div>
@@ -439,7 +440,7 @@
   </section>
 
 
-  <div class="ngp-apdp-sticky" data-apdp-sticky hidden><div class="ngp-apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small><span>{{ ngp_reel_price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if ngp_savings <= 0 %} hidden{% endif %}>{{ ngp_compare_price | money }}</s></small><em data-apdp-sticky-savings{% if ngp_savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp_reels_v2.common.save_amount' | t: amount: ngp_savings_money }}</em><small class="ngp-apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="ngp-apdp-button ngp-apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-sticky-text>{% if current_variant.available %}{{ ngp_reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span></button></div>
+  <div class="ngp-apdp-sticky" data-apdp-sticky hidden><div class="ngp-apdp-sticky__product">{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '52px', alt: product.featured_image.alt | default: product.title }}{%- endif -%}<span><small><span>{{ ngp_reel_price_label }}</span> <b data-apdp-sticky-price>{{ current_variant.price | money }}</b> <s data-apdp-sticky-compare{% if ngp_savings <= 0 %} hidden{% endif %}>{{ ngp_compare_price | money }}</s></small><em data-apdp-sticky-savings{% if ngp_savings <= 0 %} hidden{% endif %}>{{ 'altaeron_pdp_reels_v2.common.save_amount' | t: amount: ngp_savings_money }}</em><small class="ngp-apdp-sticky__bundle-title" data-apdp-sticky-bundle-title hidden></small></span></div><button type="button" class="ngp-apdp-button ngp-apdp-button--primary" data-apdp-sticky-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span data-apdp-sticky-text>{% if current_variant.available %}{{ ngp_reel_cta_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span><span class="loading__spinner hidden">{% render 'ngp-loading-spinner' %}</span></button></div>
   <script type="application/json" data-apdp-product-json>{{ product.variants | json }}</script>
   <script>
     (() => {

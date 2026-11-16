@@ -926,14 +926,29 @@
       ngp_finalCtaObserver.observe(ngp_finalCta);
     }
     ngp_mobile.addEventListener?.('change', ngp_updateVisibility);
-    ngp_stickyButton.addEventListener('click', () => {
-      if (!ngp_stickyButton.disabled) ngp_form.requestSubmit();
-    });
-    ngp_finalButton?.addEventListener('click', () => {
-      if (!ngp_finalButton.disabled) ngp_form.requestSubmit(ngp_purchaseButton);
-    });
-    ngp_tryButton?.addEventListener('click', () => {
-      if (!ngp_tryButton.disabled) ngp_form.requestSubmit(ngp_purchaseButton);
+    if (ngp_root.classList.contains('ngp-altaeron-pdp--reels-v3')) {
+      const ngp_syncLoading = () => {
+        const ngp_loading = ngp_purchaseButton.classList.contains('loading');
+        const ngp_disabled = ngp_loading || ngp_purchaseButton.disabled || ngp_purchaseButton.getAttribute('aria-disabled') === 'true';
+        [ngp_stickyButton, ngp_finalButton].forEach(ngp_button => {
+          if (!ngp_button) return;
+          ngp_button.classList.toggle('loading', ngp_loading);
+          ngp_button.setAttribute('aria-busy', String(ngp_loading));
+          if (ngp_disabled) ngp_button.setAttribute('aria-disabled', 'true');else ngp_button.removeAttribute('aria-disabled');
+          ngp_button.querySelector('.loading__spinner')?.classList.toggle('hidden', !ngp_loading);
+        });
+      };
+      new MutationObserver(ngp_syncLoading).observe(ngp_purchaseButton, {
+        attributes: true,
+        attributeFilter: ['class', 'aria-disabled', 'disabled']
+      });
+      ngp_syncLoading();
+    }
+    [ngp_stickyButton, ngp_finalButton, ngp_tryButton].forEach(ngp_button => {
+      ngp_button?.addEventListener('click', () => {
+        if (ngp_button.disabled || ngp_button.getAttribute('aria-disabled') === 'true' || ngp_purchaseButton.disabled || ngp_purchaseButton.hasAttribute('aria-disabled') || ngp_purchaseButton.classList.contains('loading')) return;
+        ngp_form.requestSubmit(ngp_purchaseButton);
+      });
     });
   }
   function ngp_initLazyVideos(ngp_root) {

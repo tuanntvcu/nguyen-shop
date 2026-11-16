@@ -984,7 +984,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "秋の快適セール",
+      "eyebrow": "ブラックフライデーセール",
       "title": "もっと快適に。もっとお得に。",
       "offer": "さらに15%オフ",
       "automatically_applied": "",
@@ -995,9 +995,9 @@
       "hours": "時間",
       "minutes": "分",
       "seconds": "秒",
-      "cta": "秋の快適セールを利用する",
-      "announcement_desktop": "🍂 秋の快適セール — さらに15%オフ",
-      "announcement_mobile": "秋の快適セール — さらに15%オフ"
+      "cta": "ブラックフライデーセールを利用する",
+      "announcement_desktop": "🔥 ブラックフライデーセール — さらに15%オフ",
+      "announcement_mobile": "ブラックフライデーセール — さらに15%オフ"
     },
     "common": {
       "save": "割引",

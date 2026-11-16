@@ -1341,7 +1341,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "秋季舒適特賣",
+      "eyebrow": "黑色星期五特賣",
       "title": "獲得更多救濟。少付錢。",
       "offer": "額外 15% 折扣",
       "automatically_applied": "",
@@ -1352,9 +1352,9 @@
       "hours": "時間",
       "minutes": "分分鐘",
       "seconds": "秒數",
-      "cta": "獲得秋季舒適優惠",
-      "announcement_desktop": "🍂 秋季舒適促銷 — 額外 15% 折扣",
-      "announcement_mobile": "秋季舒適特賣 — 額外 15% 折扣"
+      "cta": "獲得黑色星期五優惠",
+      "announcement_desktop": "🔥 黑色星期五特賣 — 額外 15% 折扣",
+      "announcement_mobile": "黑色星期五特賣 — 額外 15% 折扣"
     },
     "common": {
       "save": "儲存",

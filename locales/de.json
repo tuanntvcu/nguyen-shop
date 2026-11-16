@@ -1319,7 +1319,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "Herbst-Komfort-Angebot",
+      "eyebrow": "Black Friday Sale",
       "title": "Mehr Entlastung. Weniger bezahlen.",
       "offer": "Zusätzlich 15 % Rabatt",
       "automatically_applied": "",
@@ -1330,9 +1330,9 @@
       "hours": "Stunden",
       "minutes": "Minuten",
       "seconds": "Sekunden",
-      "cta": "Herbst-Komfort-Angebot sichern",
-      "announcement_desktop": "🍂 Herbst-Komfort-Angebot — Zusätzlich 15 % Rabatt",
-      "announcement_mobile": "Herbst-Komfort-Angebot — Zusätzlich 15 % Rabatt"
+      "cta": "Black-Friday-Angebot sichern",
+      "announcement_desktop": "🔥 Black Friday Sale — Zusätzlich 15 % Rabatt",
+      "announcement_mobile": "Black Friday Sale — Zusätzlich 15 % Rabatt"
     },
     "common": {
       "save": "Sparen",

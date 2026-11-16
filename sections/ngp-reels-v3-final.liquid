@@ -86,7 +86,7 @@
           <li class="ngp-altaeron-relief-closing__benefit">{{ 'altaeron_pdp_reels_v3.final_cta.benefit_3' | t }}</li>
         </ul>
 
-        <button type="button" class="ngp-altaeron-relief-closing__cta" data-apdp-final-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}>{{ ngp_cta_label }}</button>
+        <button type="button" class="ngp-altaeron-relief-closing__cta" data-apdp-final-submit{% unless current_variant.available %} disabled aria-disabled="true"{% endunless %}><span>{{ ngp_cta_label }}</span><span class="loading__spinner hidden">{% render 'ngp-loading-spinner' %}</span></button>
 
         <div class="ngp-altaeron-relief-closing__trust" role="list" aria-label="{{ 'altaeron_pdp_reels_v2.accessibility.final_cta' | t | escape }}">
           <div class="ngp-altaeron-relief-closing__trust-item" role="listitem">{% render 'ngp-pdp-icon', icon: 'shield' %}<span>{{ 'altaeron_pdp_reels_v2.buy.guarantee' | t }}</span></div>

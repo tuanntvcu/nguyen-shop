@@ -1318,7 +1318,7 @@
   },
   "altaeron_pdp_reels_v2": {
     "promotion": {
-      "eyebrow": "Fall Comfort Sale",
+      "eyebrow": "Black Friday Sale",
       "title": "Get More Relief. Pay Less.",
       "offer": "Extra 15% Off",
       "automatically_applied": "",
@@ -1329,9 +1329,9 @@
       "hours": "Hours",
       "minutes": "Minutes",
       "seconds": "Seconds",
-      "cta": "Get My Fall Comfort Deal",
-      "announcement_desktop": "🍂 Fall Comfort Sale — Extra 15% Off",
-      "announcement_mobile": "Fall Comfort Sale — Extra 15% Off"
+      "cta": "Get My Black Friday Deal",
+      "announcement_desktop": "🔥 Black Friday Sale — Extra 15% Off",
+      "announcement_mobile": "Black Friday Sale — Extra 15% Off"
     },
     "common": {
       "save": "Save",
@@ -1520,6 +1520,7 @@
       "pickup_address": "550 N Detroit St, Warsaw, IN 46582, USA"
     },
     "hero": {
+      "black_friday_sale": "BLACK FRIDAY SALE",
       "product_name": "Altaeron™ Adjustable Bunion Corrector",
       "headline": "Straighten Your Big Toe. Reduce the Bunion Bump.",
       "headline_html": "<strong>Straighten</strong> Your <strong>Big Toe</strong>. <strong>Reduce</strong> the <strong>Bunion Bump</strong>.",
